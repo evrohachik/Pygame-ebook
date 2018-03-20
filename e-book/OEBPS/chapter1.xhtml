@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Content-Type"/>
+<link href="styles/zstylesheet.css" rel="stylesheet" type="text/css"/>
+<title>Chapter 1</title>
+</head>
+
+<body>
+	<h1 class="heading">Chapter 1 – Installing Python and Pygame</h1>
+	<hr class="heading"/>
+
+	<h1 class="subheading" id="before-you-begin">What You Should Know Before You Begin</h1>
+	<p class="noindent">It might help if you know a bit about Python programming (or how to program in another language besides Python) before you read through this book; however even if you haven’t you can still read this book anyway. Programming isn’t nearly as hard as people think it is. If you ever run into some trouble, you can read the free book <i>“Invent Your Own Computer Games with Python”</i> online at <a href="https://inventwithpython.com/wiki">https://inventwithpython.com</a> or look up a topic that you find confusing on the Invent with Python wiki at <a href="https://inventwithpython.com/wiki">https://inventwithpython.com/wiki</a>.</p>
+	<p>You don’t need to know how to use the Pygame library before reading this book. The next chapter is a brief tutorial on all of Pygame’s major features and functions.</p>
+	<p>Just in case you haven’t read the first book and already installed Python and Pygame on your computer, the installation instructions are in this chapter. If you already have installed both of these then you can skip this chapter.</p>
+
+	<h1 class="subheading" id="download-and-install">Downloading and Installing Python</h1>
+	<p class="noindent">Before we can begin programming you'll need to install software called the Python interpreter on your computer. (You may need to ask an adult for help here.) The <b>interpreter</b> is a program that understands the instructions that you’ll write (or rather, type out) in the Python language. Without the interpreter, your computer won't be able to run your Python programs. We'll just refer to “the Python interpreter” as “Python” from now on.</p>
+	<p>The Python interpreter software can be downloaded from the official website of the Python programming language, <a href="https://www.python.org">https://www.python.org</a>. You might want the help of someone else to download and install the Python software. The installation is a little different depending on if your computer’s operating system is Windows, Mac OS X, or a Linux OS such as Ubuntu. You can also find videos online of people installing the Python software on their computers at <a href="https://invpy.com/installing">https://invpy.com/installing</a>.</p>
+
+	<h1 class="subheading" id="windows-install">Windows Instructions</h1>
+	<p class="noindent">When you get to <a href="https://www.python.org">https://www.python.org</a>, you should see a list of links on the left (such as “About”, “News”, “Documentation”, “Download”, and so on). Click on the Download link to go to the download page, then look for the file called “Python 3.2 Windows Installer (Windows binary -- does not include source)” and click on its link to download Python for Windows.</p>
+	<p>Double-click on the <i>python-3.2.msi</i> file that you've just downloaded to start the Python installer. (If it doesn’t start, try right-clicking the file and choosing Install.) Once the installer starts up, just keep clicking the Next button and just accept the choices in the installer as you go (no need to make any changes). When the install is finished, click Finish.</p>
+
+	<h1 class="subheading" id="mac-install">Mac OS X Instructions</h1>
+	<p class="noindent">Mac OS X 10.5 comes with Python 2.5.1 pre-installed by Apple. Currently, Pygame only supports Python 2 and not Python 3. However, the programs in this book work with both Python 2 and 3.</p>
+	<p>The Python website also has some additional information about using Python on a Mac at <a href="https://docs.python.org/dev/using/mac.html">https://docs.python.org/dev/using/mac.html</a>.</p>
+
+	<h1 class="subheading" id="linux-install">Ubuntu and Linux Instructions</h1>
+	<p class="noindent">Pygame for Linux also only supports Python 2, not Python 3. If your operating system is Ubuntu, you can install Python by opening a terminal window (from the desktop click on Applications > Accessories > Terminal) and entering “<span class="mono">sudo apt-get install python2.7</span>” then pressing Enter. You will need to enter the root password to install Python, so ask the person who owns the computer to type in this password if you do not know it.</p>
+	<p>You also need to install the IDLE software. From the terminal, type in “<span class="mono">sudo apt-get install idle</span>”. The root password is also needed to install IDLE (ask the owner of your computer to type in this password for you).</p>
+
+	<h1 class="subheading" id="start-python">Starting Python</h1>
+	<p class="noindent">We will be using the IDLE software to type in our programs and run them. IDLE stands for <b>I</b>nteractive <b>D</b>eve<b>L</b>opment <b>E</b>nvironment. The development environment is software that makes it easy to write Python programs, just like word processor software makes it easy to write books.</p>
+	<p>If your operating system is Windows XP, you should be able to run Python by clicking the Start button, then selecting Programs, Python 3.1, IDLE (Python GUI). For Windows Vista or Windows 7, just click the Windows button in the lower left corner, type “IDLE” and select “IDLE (Python GUI)”.</p>
+	<p>If your operating system is Max OS X, start IDLE by opening the Finder window and click on Applications, then click Python 3.2, then click the IDLE icon.</p>
+
+	<p>If your operating system is Ubuntu or Linux, start IDLE by opening a terminal window and then type “<span class="mono">idle3</span>” and press Enter. You may also be able to click on Applications at the top of the screen, and then select Programming, then IDLE 3.</p>
+	<p>The window that appears when you first run IDLE is called the <b>interactive shell</b>. A <b>shell</b> is a program that lets you type instructions into the computer. The Python shell lets you type Python instructions, and the shell sends these instructions to the Python interpreter to perform.</p>
+
+	<h1 class="subheading" id="pygame-install">Installing Pygame</h1>
+	<p class="noindent">Pygame does not come with Python. Like Python, Pygame is available for free. You will have to download and install Pygame, which is as easy as downloading and installing the Python interpreter. In a web browser, go to the URL <a href="https://pygame.org">https://pygame.org</a> and click on the ―Downloads‖ link on the left side of the web site. This book assumes you have the Windows operating system, but Pygame works the same for every operating system. You need to download the Pygame installer for your operating system and the version of Python you have installed.</p>
+	<p>You do not want to download the “source” for Pygame, but rather the Pygame “binary” for your operating system. For Windows, download the <i>pygame-1.9.1.win32-py3.2.msi</i> file. (This is Pygame for Python 3.2 on Windows. If you installed a different version of Python (such as 2.7 or 2.6) download the .msi file for your version of Python.) The current version of Pygame at the time this book was written is 1.9.1. If you see a newer version on the website, download and install the newer Pygame.</p>
+	<p>For Mac OS X, download the .zip or .dmg file for the version of Python you have and run it.</p>
+	<p>For Linux, open a terminal and run “<span class="mono">sudo apt-get install python-pygame</span>”.</p>
+	<p>On Windows, double click on the downloaded file to install Pygame. To check that Pygame is installed correctly, type the following into the interactive shell:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; import pygame</p>
+	</div>
+
+	<p>If nothing appears after you hit the Enter key, then you know Pygame has successfully been installed. If the error <span class="mono">ImportError: No module named pygame</span> appears, then try to install Pygame again (and make sure you typed <span class="mono">import pygame</span> correctly).</p>
+	<p>This chapter has five small programs that demonstrate how to use the different features that Pygame provides. In the last chapter, you will use these features for a complete game written in Python with Pygame.</p>
+	<p>A video tutorial of how to install Pygame is available from this book's website at <a href="https://invpy.com/videos">https://invpy.com/videos</a>.</p>
+
+	<h1 class="subheading" id="how-to-use">How to Use This Book</h1>
+	<p class="noindent">“Making Games with Python &amp; Pygame” is different from other programming books because it focuses on the complete source code for several game programs. Instead of teaching you programming concepts and leaving it up to you to figure out how to make programs with those concepts, this book shows you some programs and then explains how they are put together.</p>
+	<p>In general, you should read these chapters in order. There are many concepts that are used over and over in these games, and they are only explained in detail in the first game they appear in. But if there is a game you think is interesting, go ahead and jump to that chapter. You can always read the previous chapters later if you got ahead of yourself.</p>
+
+	<h1 class="subheading" id="featured-programs">The Featured Programs</h1>
+	<p class="noindent">Each chapter focuses on a single game program and explain how different parts of the code work. It is very helpful to copy these programs by typing in the code line by line from this book.</p>
+	<p>However, you can also download the source code file from this book's website. In a web browser, go to the URL <a href="https://invpy.com/source">https://invpy.com/source</a> and follow the instructions to download the source code file. But typing in the code yourself really helps you learn the code better.</p>
+
+	<h1 class="subheading" id="downloading-sound-and-graphics">Downloading Graphics and Sound Files</h1>
+	<p class="noindent">While you can just type in the code you read out of this book, you will need to download the graphics and sound files used by the games in this book from http://invpy.com/downloads. Make sure that these image and sound files are located in the same folder as the .py Python file otherwise your Python program will not be able to find these files.</p>
+
+	<h1 class="subheading" id="line-numbers-spaces">Line Numbers and Spaces</h1>
+	<p class="noindent">When entering the source code yourself, do not type the line numbers that appear at the beginning of each line. For example, if you see this in the book:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="gray">1.</span> number = random.randint(1, 20)</p>
+		<p class="noindent mono"><span class="gray">2.</span> spam = 42</p>
+		<p class="noindent mono"><span class="gray">3.</span> print('Hello world!')</p>
+	</div>
+
+	<p>You do not need to type the “1.” on the left side, or the space that immediately follows it. Just type it like this:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">number = random.randint(1, 20)</p>
+		<p class="noindent mono">spam = 42</p>
+		<p class="noindent mono">print('Hello world!')</p>
+	</div>
+
+	<p>Those numbers are only used so that this book can refer to specific lines in the code. They are not a part of the actual program.</p>
+	<p>Aside from the line numbers, be sure to enter the code exactly as it appears. Notice that some of the lines don’t begin at the leftmost edge of the page, but are indented by four or eight or more spaces. Be sure to put in the correct number of spaces at the start of each line. (Since each character in IDLE is the same width, you can count the number of spaces by counting the number of characters above or below the line you're looking at.)</p>
+	<p>For example in the code below, you can see that the second line is indented by four spaces because the four characters (―whil‖) on the line above are over the indented space. The third line is indented by another four spaces (the four characters, ―if n‖ are above the third line's indented space):</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">while spam &lt; 10:</p>
+		<p class="noindent mono">&#160;&#160;if number == 42:2</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;print('Hello')</p>
+	</div>
+
+	<h1 class="subheading" id="text-wrapping">Text Wrapping in This Book</h1>
+	<p class="noindent">Some lines of code are too long to fit on one line on the pages in this book, and the text of the code will wrap around to the next line. When you type these lines into the file editor, enter the code all on one line without pressing Enter.</p>
+	<p>You can tell when a new line starts by looking at the line numbers on the left side of the code. For example, the code below has only two lines of code, even though the first line wraps around:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="gray">1.</span> print('This is the first line! xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx’)</p>
+		<p class="noindent mono"><span class="gray">2.</span> print('This is the second line, not the third line.')</p>
+	</div>
+
+	<h1 class="subheading" id="check-code">Checking Your Code Online</h1>
+	<p class="noindent">Some of the programs in this book are a little long. Although it is very helpful to learn Python by typing out the source code for these programs, you may accidentally make typos that cause your programs to crash. It may not be obvious where the typo is.</p>
+	<p>You can copy and paste the text of your source code to the online diff tool on the book’s website. The diff tool will show any differences between the source code in the book and the source code you’ve typed. This is an easy way of finding any typos in your program.</p>
+	<p>Copying and pasting text is a very useful computer skill, especially for computer programming. There is a video tutorial on copying and pasting at this book’s website at <a href="https://invpy.com/copypaste">https://invpy.com/copypaste</a>.</p>
+	<p>The online diff tool is at this web page: <a href="https://invpy.com/diff/pygame">https://invpy.com/diff/pygame</a>. There is also a video tutorial on how to use this tool on the book’s website.</p>
+
+	<h1 class="subheading" id="more-links">More Info Links on <a href="https://invpy.com">https://invpy.com</a></h1>
+	<p class="noindent">There is a lot that you can learn about programming. But you don’t need to learn all of it now. There are several times in this book where you might like to learn these additional details and explanations, but if I included them in this book then it would add many more pages. If this larger, heavier book accidentally fell on you the weight of these many additional pages would crush you, resulting in death. Instead, I have included ―more info‖ links in this book that you can follow on this book’s website. You do not have to read this additional information to understand anything in this book, but it is there if you are curious. These (and other) links have been shortened and begin with <a href="https://invpy.com">https://invpy.com</a>.</p>
+	<p>All of the information from these ―more info‖ links can also be downloaded from <a href="https://invpy.com/pygamemoreinfo">https://invpy.com/pygamemoreinfo</a>.</p>
+	<p>Even though this book is not dangerously heavy, please do not let it fall on you anyway.</p>
+
+
+
+</body>
+</html>

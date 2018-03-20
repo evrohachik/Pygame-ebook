@@ -1,0 +1,193 @@
+{
+		"comment0": "Metadata.json - Insert the e-book's metadata here, so that the content.opf and toc.ncx files can be filled. May use data for ONIX3 too. WIP",
+
+		"comment1": "Folder metadata - This contains the names of the technical folders, if you change the default names please update them here.",
+		"containerFolder": "OEBPS",
+		"cssFolder": "styles",
+		"imagesFolder": "images",
+		"fontsFolder": "fonts",
+
+		"comment2": "Technical metadata - This is the where the cover image is specified. Recommended to use ePub V2.0.1 over 3.0 for epubVersion and Reflowable rather than Fixed for textPresentation (unless doing a project that requires a specific layout). mobiCover and generateKindle are currently unused but added for futureproofing.",
+		"epubCover": "cover.jpg",
+		"mobiCover": "cover.jpg",
+		"fileName": "MakingGames",
+		"epubVersion": "2.0.1",
+		"textPresentation": "Reflowable",
+		"generateKindle": "no",
+		"generateGoogle": "yes",
+
+		"comment3": "Book metadata - Information about the e-book itself. Language is specified with ISO 639-1. ISBN number can be declared, as well as the Amazon ASIN. Rights can be worldwide, country specific or under a permissable license such as Creative-Commons SA",
+		"title": "Making Games with Python &amp; Pygame",
+		"titleShort": "Making Games with Python &amp; Pygame",
+		"creator": "Al Sweigart",
+		"subject": "Academic",
+		"publisher": "Invent with Python",
+		"ISBN": "978-1469901732",
+		"ASIN": "1469901730",
+		"language": "en",
+		"rights": "Creative Commons BY-NC-SA 4.0",
+
+		"comment4": "This is the page order that the e-book has. The first number before the colon is the page order, the second is the indentation (default is 1, allowed upto 4), third is the page name and fourth is file itself.",
+		"pages": [
+					{
+						"pageNumber": "0",
+						"indentation": "1",
+						"pageName": "Front Cover",
+						"fileName": "bookcover.xhtml"
+					},
+					{
+						"pageNumber": "1",
+						"indentation": "1",
+						"pageName": "Title",
+						"fileName": "title.xhtml"
+					},
+					{
+						"pageNumber": "2",
+						"indentation": "1",
+						"pageName": "Indicia",
+						"fileName": "indicia.xhtml"
+					},
+					{
+						"pageNumber": "3",
+						"indentation": "1",
+						"pageName": "License",
+						"fileName": "license.xhtml",
+						"anchorNames": {
+							"anchorName0": "Content license",
+							"anchorName1": "E-book license"
+						},
+						"anchorLinks": {
+							"anchorLink0": "#content-license",
+							"anchorLink1": "#ebook-license"
+						}
+					},
+					{
+						"pageNumber": "4",
+						"indentation": "1",
+						"pageName": "Dedication",
+						"fileName": "dedication.xhtml"
+					},
+					{
+						"pageNumber": "5",
+						"indentation": "1",
+						"pageName": "Who is this book for?",
+						"fileName": "whoisthisbookfor.xhtml"
+					},
+					{
+						"pageNumber": "6",
+						"indentation": "1",
+						"pageName": "About this Book",
+						"fileName": "aboutthisbook.xhtml"
+					},
+					{
+						"pageNumber": "7",
+						"indentation": "1",
+						"pageName": "Table of Contents",
+						"fileName": "toc.xhtml"
+					},
+					{
+						"pageNumber": "8",
+						"indentation": "1",
+						"pageName": "Chapter 1 - Installing Python and Pygame",
+						"fileName": "chapter1.xhtml",
+						"anchorNames": {
+							"anchorName0": "What You Should Know Before You Begin",
+							"anchorName1": "Downloading and Installing Python",
+							"anchorName2": "Windows Instructions",
+							"anchorName3": "Mac OS X Instructions",
+							"anchorName4": "Ubuntu and Linux Instructions",
+							"anchorName5": "Starting Python",
+							"anchorName6": "Installing Pygame",
+							"anchorName7": "How to Use This Book",
+							"anchorName8": "The Featured Programs",
+							"anchorName9": "Downloading Graphics and Sound Files",
+							"anchorName10": "Line Numbers and Spaces",
+							"anchorName11": "Text Wrapping in This Book",
+							"anchorName12": "Checking Your Code Online",
+							"anchorName13": "More Info Links on https://invpy.com"
+						},
+						"anchorLinks": {
+							"anchorLink0": "#before-you-begin",
+							"anchorLink1": "#download-and-install",
+							"anchorLink2": "#windows-install",
+							"anchorLink3": "#mac-install",
+							"anchorLink4": "#linux-install",
+							"anchorLink5": "#start-python",
+							"anchorLink6": "#pygame-install",
+							"anchorLink7": "#how-to-use",
+							"anchorLink8": "#featured-programs",
+							"anchorLink9": "#downloading-sound-and-graphics",
+							"anchorLink10": "#line-numbers-spaces",
+							"anchorLink11": "#text-wrapping",
+							"anchorLink12": "#check-code",
+							"anchorLink13": "#more-links"
+						}
+					},
+					{
+						"pageNumber": "9",
+						"indentation": "1",
+						"pageName": "Chapter 2 - Pygame Basics",
+						"fileName": "chapter2.xhtml"
+					},
+					{
+						"pageNumber": "10",
+						"indentation": "1",
+						"pageName": "Chapter 3 - Memory Puzzle",
+						"fileName": "chapter3.xhtml"
+					},
+					{
+						"pageNumber": "11",
+						"indentation": "1",
+						"pageName": "Chapter 4 - Slide Puzzle",
+						"fileName": "chapter4.xhtml"
+					},
+					{
+						"pageNumber": "12",
+						"indentation": "1",
+						"pageName": "Chapter 5 - Simulate",
+						"fileName": "chapter5.xhtml"
+					},
+					{
+						"pageNumber": "13",
+						"indentation": "1",
+						"pageName": "Chapter 6 - Wormy",
+						"fileName": "chapter6.xhtml"
+					},
+					{
+						"pageNumber": "14",
+						"indentation": "1",
+						"pageName": "Chapter 7 - Tetronimo",
+						"fileName": "chapter7.xhtml"
+					},
+					{
+						"pageNumber": "15",
+						"indentation": "1",
+						"pageName": "Chapter 8 - Squirrel Eat Squirrel",
+						"fileName": "chapter8.xhtml"
+					},
+					{
+						"pageNumber": "16",
+						"indentation": "1",
+						"pageName": "Chapter 9 - Star Pusher",
+						"fileName": "chapter9.xhtml"
+					},
+					{
+						"pageNumber": "17",
+						"indentation": "1",
+						"pageName": "Chapter 10 - Four Extra Games",
+						"fileName": "chapter10.xhtml"
+					},
+					{
+						"pageNumber": "18",
+						"indentation": "1",
+						"pageName": "Glossary",
+						"fileName": "glossary.xhtml"
+					},
+					{
+						"pageNumber": "19",
+						"indentation": "1",
+						"pageName": "About the Author",
+						"fileName": "abouttheauthor.xhtml"
+					}
+				]
+}

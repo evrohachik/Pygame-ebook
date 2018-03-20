@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+<head>
+	<meta name="dtb:uid" content="978-1469901732" />
+	<meta name="dtb:depth" content="1" />
+	<meta name="dtb:totalPageCount" content="0" />
+	<meta name="dtb:maxPageNumber" content="0" />
+</head>
+<docTitle>
+	<text>Making Games with Python &amp; Pygame</text>
+</docTitle>
+<navMap>
+	<navPoint id="navpoint-1" playOrder="1">
+		<navLabel>
+			<text>Front Cover</text>
+		</navLabel>
+		<content src="bookcover.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-2" playOrder="2">
+		<navLabel>
+			<text>Title</text>
+		</navLabel>
+		<content src="title.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-3" playOrder="3">
+		<navLabel>
+			<text>Indicia</text>
+		</navLabel>
+		<content src="indicia.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-4" playOrder="4">
+		<navLabel>
+			<text>License</text>
+		</navLabel>
+		<content src="license.xhtml" />
+		<navPoint id="navpoint-5" playOrder="5">
+				<navLabel>
+					<text>Content license</text>
+				</navLabel>
+				<content src="license.xhtml#content-license" />
+		</navPoint>
+		<navPoint id="navpoint-6" playOrder="6">
+				<navLabel>
+					<text>E-book license</text>
+				</navLabel>
+				<content src="license.xhtml#ebook-license" />
+		</navPoint>
+	</navPoint>
+	<navPoint id="navpoint-7" playOrder="7">
+		<navLabel>
+			<text>Dedication</text>
+		</navLabel>
+		<content src="dedication.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-8" playOrder="8">
+		<navLabel>
+			<text>Who is this book for?</text>
+		</navLabel>
+		<content src="whoisthisbookfor.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-9" playOrder="9">
+		<navLabel>
+			<text>About this Book</text>
+		</navLabel>
+		<content src="aboutthisbook.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-10" playOrder="10">
+		<navLabel>
+			<text>Table of Contents</text>
+		</navLabel>
+		<content src="toc.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-11" playOrder="11">
+		<navLabel>
+			<text>Chapter 1 - Installing Python and Pygame</text>
+		</navLabel>
+		<content src="chapter1.xhtml" />
+		<navPoint id="navpoint-12" playOrder="12">
+				<navLabel>
+					<text>What You Should Know Before You Begin</text>
+				</navLabel>
+				<content src="chapter1.xhtml#before-you-begin" />
+		</navPoint>
+		<navPoint id="navpoint-13" playOrder="13">
+				<navLabel>
+					<text>Downloading and Installing Python</text>
+				</navLabel>
+				<content src="chapter1.xhtml#download-and-install" />
+		</navPoint>
+		<navPoint id="navpoint-14" playOrder="14">
+				<navLabel>
+					<text>Windows Instructions</text>
+				</navLabel>
+				<content src="chapter1.xhtml#windows-install" />
+		</navPoint>
+		<navPoint id="navpoint-15" playOrder="15">
+				<navLabel>
+					<text>Mac OS X Instructions</text>
+				</navLabel>
+				<content src="chapter1.xhtml#mac-install" />
+		</navPoint>
+		<navPoint id="navpoint-16" playOrder="16">
+				<navLabel>
+					<text>Ubuntu and Linux Instructions</text>
+				</navLabel>
+				<content src="chapter1.xhtml#linux-install" />
+		</navPoint>
+		<navPoint id="navpoint-17" playOrder="17">
+				<navLabel>
+					<text>Starting Python</text>
+				</navLabel>
+				<content src="chapter1.xhtml#start-python" />
+		</navPoint>
+		<navPoint id="navpoint-18" playOrder="18">
+				<navLabel>
+					<text>Installing Pygame</text>
+				</navLabel>
+				<content src="chapter1.xhtml#pygame-install" />
+		</navPoint>
+		<navPoint id="navpoint-19" playOrder="19">
+				<navLabel>
+					<text>How to Use This Book</text>
+				</navLabel>
+				<content src="chapter1.xhtml#how-to-use" />
+		</navPoint>
+		<navPoint id="navpoint-20" playOrder="20">
+				<navLabel>
+					<text>The Featured Programs</text>
+				</navLabel>
+				<content src="chapter1.xhtml#featured-programs" />
+		</navPoint>
+		<navPoint id="navpoint-21" playOrder="21">
+				<navLabel>
+					<text>Downloading Graphics and Sound Files</text>
+				</navLabel>
+				<content src="chapter1.xhtml#downloading-sound-and-graphics" />
+		</navPoint>
+		<navPoint id="navpoint-22" playOrder="22">
+				<navLabel>
+					<text>Line Numbers and Spaces</text>
+				</navLabel>
+				<content src="chapter1.xhtml#line-numbers-spaces" />
+		</navPoint>
+		<navPoint id="navpoint-23" playOrder="23">
+				<navLabel>
+					<text>Text Wrapping in This Book</text>
+				</navLabel>
+				<content src="chapter1.xhtml#text-wrapping" />
+		</navPoint>
+		<navPoint id="navpoint-24" playOrder="24">
+				<navLabel>
+					<text>Checking Your Code Online</text>
+				</navLabel>
+				<content src="chapter1.xhtml#check-code" />
+		</navPoint>
+		<navPoint id="navpoint-25" playOrder="25">
+				<navLabel>
+					<text>More Info Links on https://invpy.com</text>
+				</navLabel>
+				<content src="chapter1.xhtml#more-links" />
+		</navPoint>
+	</navPoint>
+	<navPoint id="navpoint-26" playOrder="26">
+		<navLabel>
+			<text>Chapter 2 - Pygame Basics</text>
+		</navLabel>
+		<content src="chapter2.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-27" playOrder="27">
+		<navLabel>
+			<text>Chapter 3 - Memory Puzzle</text>
+		</navLabel>
+		<content src="chapter3.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-28" playOrder="28">
+		<navLabel>
+			<text>Chapter 4 - Slide Puzzle</text>
+		</navLabel>
+		<content src="chapter4.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-29" playOrder="29">
+		<navLabel>
+			<text>Chapter 5 - Simulate</text>
+		</navLabel>
+		<content src="chapter5.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-30" playOrder="30">
+		<navLabel>
+			<text>Chapter 6 - Wormy</text>
+		</navLabel>
+		<content src="chapter6.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-31" playOrder="31">
+		<navLabel>
+			<text>Chapter 7 - Tetronimo</text>
+		</navLabel>
+		<content src="chapter7.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-32" playOrder="32">
+		<navLabel>
+			<text>Chapter 8 - Squirrel Eat Squirrel</text>
+		</navLabel>
+		<content src="chapter8.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-33" playOrder="33">
+		<navLabel>
+			<text>Chapter 9 - Star Pusher</text>
+		</navLabel>
+		<content src="chapter9.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-34" playOrder="34">
+		<navLabel>
+			<text>Chapter 10 - Four Extra Games</text>
+		</navLabel>
+		<content src="chapter10.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-35" playOrder="35">
+		<navLabel>
+			<text>Glossary</text>
+		</navLabel>
+		<content src="glossary.xhtml" />
+	</navPoint>
+	<navPoint id="navpoint-36" playOrder="36">
+		<navLabel>
+			<text>About the Author</text>
+		</navLabel>
+		<content src="abouttheauthor.xhtml" />
+	</navPoint>
+</navMap>
+</ncx>
