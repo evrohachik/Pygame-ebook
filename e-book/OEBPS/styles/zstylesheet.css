@@ -47,7 +47,7 @@ h4.title
 hr.title
 {
 	border-color: #007BA7;
-	border-width: 0.125em;
+	border-width: 2px;
 	border-style: solid;
 	width: 100%;
 }
@@ -78,7 +78,7 @@ h1.heading
 hr.heading
 {
 	border-color: #007BA7;
-	border-width: 0.125em;
+	border-width: 2px;
 	border-style: solid;
 	width: 100%;
 	margin-bottom: 1em;
@@ -387,7 +387,7 @@ td, th
 	/*border: solid 1px;*/
 }
 
-/*Book specific divs*/
+/*Book specific divs and spans*/
 
 div.xkcd-image, .xkcd-image
 {
@@ -403,11 +403,28 @@ div.python-shell
 	margin-bottom: 1em;
 }
 
-/*Colors*/
-
-.gray
+span.line-number
 {
+	font-family: monospace;
 	color: #808080;
+}
+
+span.comment
+{
+	font-family: monospace;
+	color: #F00;
+}
+
+span.keyword
+{
+	font-family: monospace;
+	/*color: orange;*/
+}
+
+span.string
+{
+	font-family: monospace;
+	/*color: green;*/
 }
 
 /*RTL (Right-to-Left) - For Arabic, Persian, Hebrew, etc...*/
