@@ -15,11 +15,11 @@
 	<p>The <i>“Invent with Python“</i> book also has a few chapters covering Pygame. You can read them online at <a href="https://invpy.com/chap17">https://invpy.com/chap17</a>.</p>
 	<p>Once you learn more about Pygame, you can view the other modules that Pygame provides from the online documentation at <a href="https://pygame.org/docs">https://pygame.org/docs</a>.</p>
 
-	<h1 class="subheading">GUI vs. CLI</h1>
+	<h1 class="subheading" id="gui-vs-cli">GUI vs. CLI</h1>
 	<p class="noindent">The Python programs that you can write with Python’s built-in functions only deal with text through the <span class="mono">print()</span> and <span class="mono">input()</span> functions. Your program can display text on the screen and let the user type in text from the keyboard. This type of program has a command line interface, or CLI (which is pronounced like the first part of “climb“ and rhymes with “sky“). These programs are somewhat limited because they can’t display graphics, have colors, or use the mouse. These CLI programs only get input from the keyboard with the <span class="mono">input()</span> function and even then user must press Enter before the program can respond to the input. This means real-time (that is, continuing to run code without waiting for the user) action games are impossible to make.</p>
 	<p>Pygame provides functions for creating programs with a graphical user interface, or GUI (pronounced, “gooey”). Instead of a text-based CLI, programs with a graphics-based GUI can show a window with images and colors.</p>
 
-	<h1 class="subheading">Source Code for Hello World with Pygame</h1>
+	<h1 class="subheading" id="pygame-hello-world">Source Code for Hello World with Pygame</h1>
 	<p class="noindent">Our first program made with Pygame is a small program that makes a window that says “Hello World!” appear on the screen. Open a new file editor window by clicking on IDLE’s <b>File</b> menu, then New Window. Type in the following code into IDLE’s file editor and save it as <i>blankpygame.py</i>. Then run the program by pressing <b>F5</b> or selecting <b>Run > Run Module</b> from the menu at the top of the file editor.</p>
 	<p>Remember, do not type the numbers or the periods at the beginning of each line (that’s just for reference in this book).</p>
 
@@ -43,7 +43,7 @@
 	<p>Yay! You’ve just made the world’s most boring video game! It’s just a blank window with “Hello World!” at the top of the window (in what is called the window’s title bar, which holds the caption text). But creating a window is the first step to making graphical games. When you click on the X button in the corner of the window, the program will end and the window will disappear.</p>
 	<p>Calling the <span class="mono">print()</span> function to make text appear in the window won’t work because <span class="mono">print()</span> is a function for CLI programs. The same goes for <span class="mono">input()</span> to get keyboard input from the user. Pygame uses other functions for input and output which are explained later in this chapter. For now, let’s look at each line in our “Hello World” program in more detail.</p>
 
-	<h1 class="subheading">Setting Up a Pygame Program</h1>
+	<h1 class="subheading" id="setting-up-a-pygame-program">Setting Up a Pygame Program</h1>
 	<p class="noindent">The first few lines of code in the Hello World program are lines that will begin almost every program you write that uses Pygame.</p>
 
 	<div class="python-shell">
@@ -80,7 +80,7 @@
 
 	<p>Line 6 sets the caption text that will appear at the top of the window by calling the <span class="mono">pygame.display.set_caption()</span> function. The string value <span class="mono">'Hello World!'</span> is passed in this function call to make that text appear as the caption:</p>
 
-	<h1 class="subheading">Game Loops and Game States</h1>
+	<h1 class="subheading" id="game-loops-game-states">Game Loops and Game States</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">7.</span> <span class="keyword">while True</span>: <span class="comment"># main game loop</span></p>
@@ -88,7 +88,7 @@
 	</div>
 
 	<p>Line 7 is a <span class="mono">while</span> loop that has a condition of simply the value <span class="mono">True</span>. This means that it never exits due to its condition evaluating to <span class="mono">False</span>. The only way the program execution will ever exit the loop is if a break statement is executed (which moves execution to the first line after the loop) or <span class="mono">sys.exit()</span> (which terminates the program). If a loop like this was inside a function, a <span class="mono">return</span> statement will also move execution out of the loop (as well as the function too).</p>
-	<p>The games in this book all have these while True loops in them along with a comment calling it the “main game loop”. A <b>game loop</b> (also called a <b>main loop</b>) is a loop where the code does three things:</p>
+	<p>The games in this book all have these while True loops in them along with a comment calling it the “main game loop”. A <a href="glossary.xhtml#game-loop"><b>game loop</b></a> (also called a <a href="glossary.xhtml#main-loop"><b>main loop</b></a>) is a loop where the code does three things:</p>
 
 	<ol>
 		<li>Handles events.</li>
@@ -98,9 +98,9 @@
 
 	<p>The game state is simply a way of referring to a set of values for all the variables in a game program. In many games, the game state includes the values in the variables that tracks the player’s health and position, the health and position of any enemies, which marks have been made on a board, the score, or whose turn it is. Whenever something happens like the player taking damage (which lowers their health value), or an enemy moves somewhere, or something happens in the game world we say that the game state has changed.</p>
 	<p>If you’ve ever played a game that let you saved, the “save state” is the game state at the point that you’ve saved it. In most games, pausing the game will prevent the game state from changing.</p>
-	<p>Since the game state is usually updated in response to events (such as mouse clicks or keyboard presses) or the passage of time, the game loop is constantly checking and re-checking many times a second for any new events that have happened. Inside the main loop is code that looks at which events have been created (with Pygame, this is done by calling the <span class="mono">pygame.event.get()</span> function). The main loop also has code that updates the game state based on which events have been created. This is usually called <b>event handling</b>.</p>
+	<p>Since the game state is usually updated in response to events (such as mouse clicks or keyboard presses) or the passage of time, the game loop is constantly checking and re-checking many times a second for any new events that have happened. Inside the main loop is code that looks at which events have been created (with Pygame, this is done by calling the <span class="mono">pygame.event.get()</span> function). The main loop also has code that updates the game state based on which events have been created. This is usually called <a href="glossary.xhtml#event-handling"><b>event handling</b></a>.</p>
 
-	<h1 class="subheading"><span class="mono">pygame.event.Event</span> Objects</h1>
+	<h1 class="subheading" id="pygame-event-objects"><span class="mono">pygame.event.Event</span> Objects</h1>
 	<p class="noindent">Any time the user does one of several actions (they are listed later in this chapter) such as pressing a keyboard key or moving the mouse on the program’s window, a pygame.event.Event object is created by the Pygame library to record this “event”. (This is a type of object called Event that exists in the <span class="mono">event</span> module, which itself is in the <span class="mono">pygame</span> module.) We can find out which events have happened by calling the <span class="mono">pygame.event.get()</span> function, which returns a list of <span class="mono">pygame.event.Event</span> objects (which we will just call Event objects for short).</p>
 	<p>The list of Event objects will be for each event that has happened since the last time the <span class="mono">pygame.event.get()</span> function was called. (Or, if <span class="mono">pygame.event.get()</span> has never been called, the events that have happened since the start of the program.)</p>
 
@@ -111,7 +111,8 @@
 
 	<p>Line 8 is a for loop that will iterate over the list of Event objects that was returned by <span class="mono">pygame.event.get()</span>. On each iteration through the for loop, a variable named event will be assigned the value of the next event object in this list. The list of Event objects returned from <span class="mono">pygame.event.get()</span> will be in the order that the events happened. If the user clicked the mouse and then pressed a keyboard key, the Event object for the mouse click would be the first item in the list and the Event object for the keyboard press would be second. If no events have happened, then <span class="mono">pygame.event.get()</span> will return a blank list.</p>
 
-	<h1 class="subheading">The <span class="mono">QUIT</span> Event and <span class="mono">pygame.quit()</span> Function</h1>
+	<h1 class="subheading" id="pygame-quit">The <span class="mono">QUIT</span> Event and <span class="mono">pygame.quit()</span> Function</h1>
+
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="keyword">if</span> event.type == QUIT:</p>
 		<p class="noindent mono"><span class="line-number">10.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
@@ -125,6 +126,429 @@
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">12.</span> &#160;&#160;&#160;pygame.display.update()</p>
 	</div>
+
+	<p>Line 12 calls the <span class="mono">pygame.display.update()</span> function, which draws the Surface object returned by <span class="mono">pygame.display.set_mode()</span> to the screen (remember we stored this object in the <span class="mono">DISPLAYSURF</span> variable). Since the Surface object hasn’t changed (for example, by some of the drawing functions that are explained later in this chapter), the same black image is redrawn to the screen each time <span class="mono">pygame.display.update()</span> is called.</p>
+	<p>That is the entire program. After line 12 is done, the infinite <span class="mono">while</span> loop starts again from the beginning. This program does nothing besides make a black window appear on the screen, constantly check for a <span class="mono">QUIT</span> event, and then redraws the unchanged black window to the screen over and over again. Let’s learn how to make interesting things appear on this window instead of just blackness by learning about pixels, Surface objects, Color objects, Rect objects, and the Pygame drawing functions.</p>
+
+	<h1 class="subheading" id="pixel-coordinates"><a>Pixel Coordinates</a></h1>
+	<p class="noindent">The window that the “Hello World” program creates is just composed of little square dots on your screen called <a href="glossary.xhtml#pixels"><b>pixels</b></a>. Each pixel starts off as black but can be set to a different color. Imagine that instead of a Surface object that is 400 pixels wide and 300 pixels tall, we just had a Surface object that was 8 pixels by 8 pixels. If that tiny 8x8 Surface was enlarged so that each pixel looks like a square in a grid, and we added numbers for the X and Y axis, then a good representation of it could look something like this:</p>
+
+	<p>We can refer to a specific pixel by using a Cartesian Coordinate system. Each column of the <a href="glossary.xhtml#x-axis"><b>X-axis</b></a> and each row of the <a href="glossary.xhtml#y-axis"><b>Y-axis</b></a> will have an “address” that is an integer from 0 to 7 so that we can locate any pixel by specifying the X and Y axis integers.</p>
+
+	<p>For example, in the above 8x8 image, we can see that the pixels at the XY coordinates (4, 0), (2, 2), (0, 5), and (5, 6) have been painted black, the pixel at (2, 4) has been painted gray, while all the other pixels are painted white. XY coordinates are also called <a href="glossary.xhtml#points"><b>points</b></a>. If you’ve taken a math class and learned about Cartesian Coordinates, you might notice that the Y-axis starts at 0 at the <i>top</i> and then increases going <i>down</i>, rather than increasing as it goes up. This is just how Cartesian Coordinates work in Pygame (and almost every programming language).</p>
+
+	<p>The Pygame framework often represents Cartesian Coordinates as a tuple of two integers, such as (4, 0) or (2, 2). The first integer is the X coordinate and the second is the Y coordinate. (Cartesian Coordinates are covered in more detail in chapter 12 of <i>“Invent Your Own Computer Games with Python”</i> at <a href="https://invpy.com/chap12">https://invpy.com/chap12</a>)</p>
+
+	<h1 class="subheading" id="function-differences">A Reminder About Functions, Methods, Constructor Functions, and Functions in Modules (and the Difference Between Them)</h1>
+	<p class="noindent">Functions and methods are almost the same thing. They can both be called to execute the code in them. The difference between a function and a method is that a method will always be attached to an object. Usually methods change something about that particular object (you can think of the attached object as a sort of permanent argument passed to the method).</p>
+
+	<p>This is a function call of a function named <span class="mono">foo()</span>:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">foo()</p>
+	</div>
+
+	<p>This is a method call of a method also named <span class="mono">foo()</span>, which is attached to an object stored in a variable named <span class="mono">duckie</span>:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">duckie.foo()</p>
+	</div>
+
+	<p>A call to a function inside of a module may look like a method call. To tell the difference, you need to look at the first name and see if it is the name of a module or the name of a variable that contains an object. You can tell that <span class="mono">sys.exit()</span> is a call to function inside of a module, because at the top of the program will be an <span class="mono">import</span> statement like <span class="mono">import sys</span>.</p>
+	<p>A <a href="glossary.xhtml#constructor-function"><b>constructor function</b></a> is the same thing as a normal function call, except that its return value is a new object. Just by looking at source code, a function and constructor function look the same. Constructor functions (also called simply a “constructor” or sometimes “ctor” (“see-tor”) for short) are just a name given to functions that return a new object. But usually ctors start with a capital letter. This is why when you write your own programs, your function names should only begin with a lowercase letter.</p>
+	<p>For example, <span class="mono">pygame.Rect()</span> and <span class="mono">pygame.Surface()</span> are both constructor functions inside the <span class="mono">pygame</span> module that return new Rect and Surface objects. (These objects are described later.)</p>
+	<p>Here’s an example of a function call, a method call, and a call to a function inside a module:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">import whammy</p>
+		<p class="noindent mono">fizzy()</p>
+		<p class="noindent mono">egg = Wombat()</p>
+		<p class="noindent mono">egg.bluhbluh()</p>
+		<p class="noindent mono">whammy.spam()</p>
+	</div>
+
+	<p>Even though these names are all made up, you can tell which is a function call, a method call, and a call to a function inside a method. The name <span class="mono">whammy</span> refers to a module, since you can see it is being imported on the first line. The <span class="mono">fizzy</span> name has nothing before it and parentheses after it, so you know it is a function call.</p>
+	<p><span class="mono">Wombat()</span> is also a function call, in this case it is a constructor function that returns an object. (The capital letter that it starts with isn’t a guarantee that it’s a constructor function rather than a regular function, but it is a safe bet.) The object is stored in a variable named <span class="mono">egg</span>. The <span class="mono">egg.bluhbluh()</span> call is a method call, which you can tell because <span class="mono">bluhbluh</span> is attached to a variable with an object in it.</p>
+	<p>Meanwhile, <span class="mono">whammy.spam()</span> is a function call, not a method call. You can tell it is not a method because the name <span class="mono">whammy</span> was imported as a module earlier.</p>
+
+	<h1 class="subheading" id="surface-objects-window">Surface Objects and The Window</h1>
+	<p class="noindent">Surface objects are objects that represent a rectangular 2D image. The pixels of the Surface object can be changed by calling the Pygame drawing functions (described later in this chapter) and then displayed on the screen. The window border, title bar, and buttons are not part of the display Surface object.</p>
+	<p>In particular, the Surface object returned by <span class="mono">pygame.display.set_mode()</span> is called the <a href="glossary.xhtml#display-surface"><b>display Surface</b></a>. Anything that is drawn on the display Surface object will be displayed on the window when the <span class="mono">pygame.display.update()</span> function is called. It is a lot faster to draw on a Surface object (which only exists in the computer’s memory) than it is to draw a Surface object to the computer screen. Computer memory is much faster to change than pixels on a monitor.</p>
+	<p>Often your program will draw several different things to a Surface object. Once you are done drawing everything on the display Surface object for this iteration of the game loop (called a <a href="glossary.xhtml#frame"><b>frame</b></a>, just like a still image on a paused DVD is called) on a Surface object, it can be drawn to the screen. The computer can draw frames very quickly, and our programs will often run around 30 frames per second (that is, 30 FPS). This is called the “frame rate” and is explained later in this chapter.</p>
+	<p>Drawing on Surface objects will be covered in the “Primitive Drawing Functions” and “Drawing Images” sections later this chapter.</p>
+
+	<h1 class="subheading" id="colors">Colors</h1>
+	<p class="noindent">There are three primary colors of light: red, green and blue. (Red, blue, and yellow are the primary colors for paints and pigments, but the computer monitor uses light, not paint.) By combining different amounts of these three colors you can form any other color. In Pygame, we represent colors with tuples of three integers. The first value in the tuple is how much red is in the color. An integer value of <span class="mono">0</span> means there is no red in this color, and a value of <span class="mono">255</span> means there is the maximum amount of red in the color. The second value is for green and the third value is for blue. These tuples of three integers used to represent a color are often called <a href="glossary.xhtml#rgb-values"><b>RGB values</b></a>.</p>
+	<p>Because you can use any combination of <span class="mono">0</span> to <span class="mono">255</span> for each of the three primary colors, this means Pygame can draw 16,777,216 different colors (that is, 256 x 256 x 256 colors). However, if try to use a number larger than <span class="mono">255</span> or a negative number, you will get an error that looks like “<span class="mono">ValueError: invalid color argument</span>”.</p>
+	<p>For example, we will create the tuple <span class="mono">(0, 0, 0)</span> and store it in a variable named <span class="mono">BLACK</span>. With no amount of red, green, or blue, the resulting color is completely black. The color black is the absence of any color. The tuple <span class="mono">(255, 255, 255)</span> for a maximum amount of red, green, and blue to result in white. The color white is the full combination of red, green, and blue. The tuple <span class="mono">(255, 0, 0)</span> represents the maximum amount of red but no amount of green and blue, so the resulting color is red. Similarly, <span class="mono">(0, 255, 0)</span> is green and <span class="mono">(0, 0, 255)</span> is blue.</p>
+	<p>You can mix the amount of red, green, and blue to form other colors. Here are the RGB values for a few common colors:</p>
+
+	<table>
+		<tr><th>Color</th><th>RGB Values</th></tr>
+		<tr><td>Aqua</td><td class="mono">(0, 255, 255)</td></tr>
+		<tr><td>Black</td><td class="mono">(0, 0, 0)</td></tr>
+		<tr><td>Blue</td><td class="mono">(0, 0, 255)</td></tr>
+		<tr><td>Fuchsia</td><td class="mono">(255, 0, 255)</td></tr>
+		<tr><td>Gray</td><td class="mono">(128, 128, 128)</td></tr>
+		<tr><td>Green</td><td class="mono">(0, 128, 0)</td></tr>
+		<tr><td>Lime</td><td class="mono">(0, 255, 0)</td></tr>
+		<tr><td>Maroon</td><td class="mono">(128, 0, 0)</td></tr>
+		<tr><td>Navy Blue</td><td class="mono">( 0, 0, 128)</td></tr>
+		<tr><td>Olive</td><td class="mono">(128, 128, 0)</td></tr>
+		<tr><td>Purple</td><td class="mono">(128, 0, 128)</td></tr>
+		<tr><td>Red</td><td class="mono">(255, 0, 0)</td></tr>
+		<tr><td>Silver</td><td class="mono">(192, 192, 192)</td></tr>
+		<tr><td>Teal</td><td class="mono">(0, 128, 128)</td></tr>
+		<tr><td>White</td><td class="mono">(255, 255, 255)</td></tr>
+		<tr><td>Yellow</td><td class="mono">(255, 255, 0)</td></tr>
+	</table>
+
+	<h1 class="subheading" id="transparent-colors">Transparent Colors</h1>
+	<p class="noindent">When you look through a glass window that has a deep red tint, all of the colors behind it have a red shade added to them. You can mimic this effect by adding a fourth <span class="mono">0</span> to <span class="mono">255</span> integer value to your color values.</p>
+	<p>This value is known as the <a href="glossary.xhtml#alpha-value"><b>alpha value</b></a>. It is a measure of how opaque (that is, not transparent) a color is. Normally when you draw a pixel onto a surface object, the new color completely replaces whatever color was already there. But with colors that have an alpha value, you can instead just add a colored tint to the color that is already there.</p>
+	<p>For example, this tuple of three integers is for the color green: <span class="mono">(0, 255, 0)</span>. But if we add a fourth integer for the alpha value, we can make this a half transparent green color: <span class="mono">(0, 255, 0, 128)</span>. An alpha value of <span class="mono">255</span> is completely opaque (that is, not transparency at all). The colors <span class="mono">(0, 255, 0)</span> and<span class="mono"> (0, 255, 0, 255)</span> look exactly the same. An alpha value of <span class="mono">0</span> means the color is completely transparent. If you draw any color that has an alpha value of <span class="mono">0</span> to a surface object, it will have no effect, because this color is completely transparent and invisible.</p>
+	<p>In order to draw using transparent colors, you must create a Surface object with the <span class="mono">convert_alpha()</span> method. For example, the following code creates a Surface object that transparent colors can be drawn on:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">anotherSurface = DISPLAYSURF.convert_alpha()</p>
+	</div>
+
+	<p>Once things have been drawn on the Surface object stored in <span class="mono">anotherSurface</span>, then <span class="mono">anotherSurface</span> can be “blitted” (that is, copied) to <span class="mono">DISPLAYSURF</span> so it will appear on the screen. (See the “Drawing Images with <span class="mono">pygame.image.load()</span> and <span class="mono">blit()</span>” section later in this chapter.)</p>
+	<p>It’s important to note that you cannot use transparent colors on Surface objects not returned from a <span class="mono">convert_alpha()</span> call, including the display Surface that was returned from <span class="mono">pygame.display.set_mode()</span>.</p>
+	<p>If we were to create a color tuple to draw the legendary Invisible Pink Unicorn, we would use <span class="mono">(255, 192, 192, 0)</span>, which ends up looking completely invisible just like any other color that has a <span class="mono">0</span> for its alpha value. It is, after all, invisible.</p>
+
+
+	<p class="figure-caption">(Above is a screenshot of a drawing of the Invisible Pink Unicorn.)</p>
+
+	<h1 class="subheading" id="pygame-color-objects"><span class="mono">pygame.Color</span> Objects</h1>
+	<p class="noindent">You need to know how to represent a color because Pygame’s drawing functions need a way to know what color you want to draw with. A tuple of three or four integers is one way. Another way is as a <span class="mono">pygame.Color</span> object. You can create Color objects by calling the <span class="mono">pygame.Color()</span> constructor function and passing either three or four integers. You can store this <span class="mono">Color</span> object in variables just like you can store tuples in variables. Try typing the following into the interactive shell:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; import pygame</p>
+		<p class="noindent mono">&gt;&gt;&gt; pygame.Color(255, 0, 0)</p>
+		<p class="noindent mono">(255, 0, 0, 255)</p>
+		<p class="noindent mono">&gt;&gt;&gt; myColor = pygame.Color(255, 0, 0, 128)</p>
+		<p class="noindent mono">&gt;&gt;&gt; myColor == (255, 0, 0, 128)</p>
+		<p class="noindent mono">True</p>
+		<p class="noindent mono">&gt;&gt;&gt;&#160;</p>
+	</div>
+
+	<p>Any drawing function in Pygame (which we will learn about in a bit) that has a parameter for color can have either the tuple form or Color object form of a color passed for it. Even though they are different data types, a Color object is equal to a tuple of four integers if they both represent the same color (just like how <span class="mono">42 == 42.0</span> will evaluate to <span class="mono">True</span>).</p>
+	<p>Now that you know how to represent colors (as a <span class="mono">pygame.Color</span> object or a tuple of three or four integers for red, green, blue, and optionally alpha) and coordinates (as a tuple of two integers for X and Y), let’s learn about <span class="mono">pygame.Rect</span> objects so we can start using Pygame’s drawing functions.</p>
+
+	<h1 class="subheading" id="rect-objects">Rect Objects</h1>
+	<p class="noindent">Pygame has two ways to represent rectangular areas (just like there are two ways to represent colors). The first is a tuple of four integers: </p>
+
+	<ol>
+		<li>The X coordinate of the top left corner.</li>
+		<li>The Y coordinate of the top left corner.</li>
+		<li>The width (in pixels) of the rectangle.</li>
+		<li>Then height (in pixels) of the rectangle.</li>
+	</ol>
+
+	<p>The second way is as a <span class="mono">pygame.Rect</span> object, which we will call Rect objects for short. For example, the code below creates a Rect object with a top left corner at (10, 20) that is 200 pixels wide and 300 pixels tall:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; import pygame</p>
+		<p class="noindent mono">&gt;&gt;&gt; spamRect = pygame.Rect(10, 20, 200, 300)</p>
+		<p class="noindent mono">&gt;&gt;&gt; spamRect == (10, 20, 200, 300)</p>
+		<p class="noindent mono">True</p>
+	</div>
+
+	<p>The handy thing about this is that the Rect object automatically calculates the coordinates for other features of the rectangle. For example, if you need to know the X coordinate of the right edge of the <span class="mono">pygame.Rect</span> object we stored in the <span class="mono">spamRect</span> variable, you can just access the Rect object’s <span class="mono">right</span> attribute:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; spamRect.right</p>
+		<p class="noindent mono">210</p>
+	</div>
+
+	<p>The Pygame code for the Rect object automatically calculated that if the left edge is at the X coordinate 10 and the rectangle is 200 pixels wide, then the right edge must be at the X coordinate 210. If you reassign the <span class="mono">right</span> attribute, all the other attributes are automatically recalculated:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; spamRect.right = 350</p>
+		<p class="noindent mono">&gt;&gt;&gt; spamRect.left</p>
+		<p class="noindent mono">150</p>
+	</div>
+
+	<p>Here’s a list of all the attributes that <span class="mono">pygame.Rect</span> objects provide (in our example, the variable where the Rect object is stored in a variable named <span class="mono">spamRect</span>):</p>
+
+	<table>
+		<tr><th>Attribute Name</th><th>Description</th></tr>
+		<tr><td class="mono">myRect.left</td><td class="mono">The int value of the X-coordinate of the left side of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.right</td><td class="mono">The int value of the X-coordinate of the right side of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.top</td><td class="mono">The int value of the Y-coordinate of the top side of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.bottom</td><td class="mono">The int value of the Y-coordinate of the bottom side.</td></tr>
+		<tr><td class="mono">myRect.centerx</td><td class="mono">The int value of the X-coordinate of the center of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.centery</td><td class="mono">The int value of the Y-coordinate of the center of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.width</td><td class="mono">The int value of the width of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.height</td><td class="mono">The int value of the height of the rectangle.</td></tr>
+		<tr><td class="mono">myRect.size</td><td class="mono">A tuple of two ints: (width, height)</td></tr>
+		<tr><td class="mono">myRect.topleft</td><td class="mono">A tuple of two ints: (left, top)</td></tr>
+		<tr><td class="mono">myRect.topright</td><td class="mono">A tuple of two ints: (right, top)</td></tr>
+		<tr><td class="mono">myRect.bottomleft</td><td class="mono">A tuple of two ints: (left, bottom)</td></tr>
+		<tr><td class="mono">myRect.bottomright</td><td class="mono">A tuple of two ints: (right, bottom)</td></tr>
+		<tr><td class="mono">myRect.midleft</td><td class="mono">A tuple of two ints: (left, centery)</td></tr>
+		<tr><td class="mono">myRect.midright</td><td class="mono">A tuple of two ints: (right, centery)</td></tr>
+		<tr><td class="mono">myRect.midtop</td><td class="mono">A tuple of two ints: (centerx, top)</td></tr>
+		<tr><td class="mono">myRect.midbottom</td><td class="mono">A tuple of two ints: (centerx, bottom)</td></tr>
+	</table>
+
+	<h1 class="subheading" id="primitive-drawing-functions">Primitive Drawing Functions</h1>
+	<p class="noindent">Pygame provides several different functions for drawing different shapes onto a surface object. These shapes such as rectangles, circles, ellipses, lines, or individual pixels are often called <a href="glossary.xhtml#drawing-primitives"><b>drawing primitives</b></a>. Open IDLE’s file editor and type in the following program, and save it as <i>drawing.py</i>.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">3.</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">6.</span> <span class="comment"># set up the window</span></p>
+		<p class="noindent mono"><span class="line-number">7.</span> DISPLAYSURF = pygame.display.set_mode((500, 400), 0, 32)</p>
+		<p class="noindent mono"><span class="line-number">8.</span> pygame.display.set_caption('Drawing')</p>
+		<p class="noindent mono"><span class="line-number">9.</span></p>
+		<p class="noindent mono"><span class="line-number">10.</span> <span class="comment"># set up the colors</span></p>
+		<p class="noindent mono"><span class="line-number">11.</span> BLACK = (0, 0, 0)</p>
+		<p class="noindent mono"><span class="line-number">12.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">13.</span> RED = (255, 0, 0)</p>
+		<p class="noindent mono"><span class="line-number">14.</span> GREEN = (0, 255, 0)</p>
+		<p class="noindent mono"><span class="line-number">15.</span> BLUE = (0, 0, 255)</p>
+		<p class="noindent mono"><span class="line-number">16.</span></p>
+		<p class="noindent mono"><span class="line-number">17.</span> <span class="comment"># draw on the surface object</span></p>
+		<p class="noindent mono"><span class="line-number">18.</span> DISPLAYSURF.fill(WHITE)</p>
+		<p class="noindent mono"><span class="line-number">19.</span> pygame.draw.polygon(DISPLAYSURF, GREEN, ((146, 0), (291, 106), (236, 277), (56, 277), (0, 106)))</p>
+		<p class="noindent mono"><span class="line-number">20.</span> pygame.draw.line(DISPLAYSURF, BLUE, (60, 60), (120, 60), 4)</p>
+		<p class="noindent mono"><span class="line-number">21.</span> pygame.draw.line(DISPLAYSURF, BLUE, (120, 60), (60, 120))</p>
+		<p class="noindent mono"><span class="line-number">22.</span> pygame.draw.line(DISPLAYSURF, BLUE, (60, 120), (120, 120), 4)</p>
+		<p class="noindent mono"><span class="line-number">23.</span> pygame.draw.circle(DISPLAYSURF, BLUE, (300, 50), 20, 0)</p>
+		<p class="noindent mono"><span class="line-number">24.</span> pygame.draw.ellipse(DISPLAYSURF, RED, (300, 250, 40, 80), 1)</p>
+		<p class="noindent mono"><span class="line-number">25.</span> pygame.draw.rect(DISPLAYSURF, RED, (200, 150, 100, 50))</p>
+		<p class="noindent mono"><span class="line-number">26.</span></p>
+		<p class="noindent mono"><span class="line-number">27.</span> pixObj = pygame.PixelArray(DISPLAYSURF)</p>
+		<p class="noindent mono"><span class="line-number">28.</span> pixObj[480][380] = BLACK</p>
+		<p class="noindent mono"><span class="line-number">29.</span> pixObj[482][382] = BLACK</p>
+		<p class="noindent mono"><span class="line-number">30.</span> pixObj[484][384] = BLACK</p>
+		<p class="noindent mono"><span class="line-number">31.</span> pixObj[486][386] = BLACK</p>
+		<p class="noindent mono"><span class="line-number">32.</span> pixObj[488][388] = BLACK</p>
+		<p class="noindent mono"><span class="line-number">33.</span> del pixObj</p>
+		<p class="noindent mono"><span class="line-number">34.</span></p>
+		<p class="noindent mono"><span class="line-number">35.</span> <span class="comment"># run the game loop</span></p>
+		<p class="noindent mono"><span class="line-number">36.</span> while True:</p>
+		<p class="noindent mono"><span class="line-number">37.</span> &#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">38.</span> &#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">39.</span> &#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">40.</span> &#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">41.</span> &#160;&#160;pygame.display.update()</p>
+	</div>
+
+	<p>When this program is run, the following window is displayed until the user closes the window:</p>
+	<p>Notice how we make constant variables for each of the colors. Doing this makes our code more readable, because seeing <span class="mono">GREEN</span> in the source code is much easier to understand as representing the color green than <span class="mono">(0, 255, 0)</span> is.</p>
+	<p>The drawing functions are named after the shapes they draw. The parameters you pass these functions tell them which Surface object to draw on, where to draw the shape (and what size), in what color, and how wide to make the lines. You can see how these functions are called in the <i>drawing.py</i> program, but here is a short description of each function:</p>
+
+	<ul>
+		<li><b>fill(color)</b> – The <span class="mono">fill()</span> method is not a function but a method of <span class="mono">pygame.Surface</span> objects. It will completely fill in the entire Surface object with whatever color value you pass as for the <span class="mono">color</span> parameter.</li>
+		<li><b>pygame.draw.polygon(surface, color, pointlist, width)</b> – A polygon is shape made up of only flat sides. The <span class="mono">surface</span> and <span class="mono">color</span> parameters tell the function on what surface to draw the polygon, and what color to make it.</li>
+		<li>The <span class="mono">pointlist</span> parameter is a tuple or list of points (that is, tuple or list of two-integer tuples for XY coordinates). The polygon is drawn by drawing lines between each point and the point that comes after it in the tuple. Then a line is drawn from the last point to the first point. You can also pass a list of points instead of a tuple of points.</li>
+		<li>The <span class="mono">width</span> parameter is optional. If you leave it out, the polygon that is drawn will be filled in, just like our green polygon on the screen is filled in with color. If you do pass an integer value for the <span class="mono">width</span> parameter, only the outline of the polygon will be drawn. The integer represents how many pixels width the polygon’s outline will be. Passing <span class="mono">1</span> for the <span class="mono">width</span> parameter will make a skinny polygon, while passing <span class="mono">4</span> or <span class="mono">10</span> or <span class="mono">20</span> will make thicker polygons. If you pass the integer <span class="mono">0</span> for the <span class="mono">width</span> parameter, the polygon will be filled in (just like if you left the <span class="mono">width</span> parameter out entirely).</li>
+		<li>All of the <span class="mono">pygame.draw</span> drawing functions have optional <span class="mono">width</span> parameters at the end, and they work the same way as <span class="mono">pygame.draw.polygon()</span>’s <span class="mono">width</span> parameter. Probably a better name for the <span class="mono">width</span> parameter would have been <span class="mono">thickness</span>, since that parameter controls how thick the lines you draw are.</li>
+		<li><b>pygame.draw.line(surface, color, start_point, end_point, width)</b> – This function draws a line between the <span class="mono">start_point</span> and <span class="mono">end_point</span> parameters.</li>
+		<li><b>pygame.draw.lines(surface, color, closed, pointlist, width)</b> – This function draws a series of lines from one point to the next, much like <span class="mono">pygame.draw.polygon()</span>. The only difference is that if you pass <span class="mono">False</span> for the <span class="mono">closed</span> parameter, there will not be a line from the last point in the <span class="mono">pointlist</span> parameter to the first point. If you pass <span class="mono">True</span>, then it will draw a line from the last point to the first.</li>
+		<li><b>pygame.draw.circle(surface, color, center_point, radius, width)</b> – This function draws a circle. The center of the circle is at the <span class="mono">center_point</span> parameter. The integer passed for the <span class="mono">radius</span> parameter sets the size of the circle.</li>
+		<li>The radius of a circle is the distance from the center to the edge. (The radius of a circle is always half of the diameter.) Passing <span class="mono">20</span> for the <span class="mono">radius</span> parameter will draw a circle that has a radius of 20 pixels.</li>
+		<li><b>pygame.draw.ellipse(surface, color, bounding_rectangle, width)</b> – This function draws an ellipse (which is like a squashed or stretched circle). This function has all the usual parameters, but in order to tell the function how large and where to draw the ellipse, you must specify the bounding rectangle of the ellipse. A <b>bounding rectangle</b> is the smallest rectangle that can be drawn around a shape. Here’s an example of an ellipse and its bounding rectangle:</li>
+		<li>The <span class="mono">bounding_rectangle</span> parameter can be a <span class="mono">pygame.Rect</span> object or a tuple of four integers. Note that you do not specify the center point for the ellipse like you do for the <span class="mono">pygame.draw.circle()</span> function.</li>
+		<li><b>pygame.draw.rect(surface, color, rectangle_tuple, width)</b> – This function draws a rectangle. The <span class="mono">rectangle_tuple</span> is either a tuple of four integers (for the XY coordinates of the top left corner, and the width and height) or a <span class="mono">pygame.Rect</span> object can be passed instead. If the <span class="mono">rectangle_tuple</span> has the same size for the width and height, a square will be drawn.</li>
+	</ul>
+
+	<h1 class="subheading" id="pygame-pixel-array"><span class="mono">pygame.PixelArray</span> Objects</h1>
+	<p class="noindent">Unfortunately, there isn’t a single function you can call that will set a single pixel to a color (unless you call <span class="mono">pygame.draw.line()</span> with the same start and end point). The Pygame framework needs to run some code behind the scenes before and after drawing to a Surface object. If it had to do this for every single pixel you wanted to set, your program would run much slower. (By my quick testing, drawing pixels this way is two or three times slower.)</p>
+	<p>Instead, you should create a <span class="mono">pygame.PixelArray</span> object (we’ll call them PixelArray objects for short) of a Surface object and then set individual pixels. Creating a PixelArray object of a Surface object will “lock” the Surface object. While a Surface object is locked, the drawing functions can still be called on it, but it cannot have images like PNG or JPG images drawn on it with the <span class="mono">blit()</span> method. (The <span class="mono">blit()</span> method is explained later in this chapter.)</p>
+	<p>If you want to see if a Surface object is locked, the <span class="mono">get_locked()</span> Surface method will return <span class="mono">True</span> if it is locked and <span class="mono">False</span> if it is not.</p>
+	<p>The PixelArray object that is returned from <span class="mono">pygame.PixelArray()</span> can have individual pixels set by accessing them with two indexes. For example, line 28’s <span class="mono">pixObj[480][380] = BLACK</span> will set the pixel at X coordinate 480 and Y coordinate 380 to be black (remember that the <span class="mono">BLACK</span> variable stores the color tuple <span class="mono">(0, 0, 0)</span>).</p>
+	<p>To tell Pygame that you are finished drawing individual pixels, delete the PixelArray object with a <span class="mono">del</span> statement. This is what line 33 does. Deleting the PixelArray object will “unlock” the Surface object so that you can once again draw images on it. If you forget to delete the PixelArray object, the next time you try to blit (that is, draw) an image to the Surface the program will raise an error that says, “<span class="mono">pygame.error: Surfaces must not be locked during blit</span>”.</p>
+
+	<h1 class="subheading" id="pygame-display-update">The <span class="mono">pygame.display.update()</span> Function</h1>
+	<p class="noindent">After you are done calling the drawing functions to make the display Surface object look the way you want, you must call <span class="mono">pygame.display.update()</span> to make the display Surface actually appear on the user’s monitor.</p>
+	<p>The one thing that you must remember is that <span class="mono">pygame.display.update()</span> will only make the display Surface (that is, the Surface object that was returned from the call to <span class="mono">pygame.display.set_mode()</span>) appear on the screen. If you want the images on other Surface objects to appear on the screen, you must “blit” them (that is, copy them) to the display Surface object with the <span class="mono">blit()</span> method (which is explained next in the “Drawing Images” section).</p>
+
+	<h1 class="subheading" id="animation">Animation</h1>
+	<p class="noindent">Now that we know how to get the Pygame framework to draw to the screen, let’s learn how to make animated pictures. A game with only still, unmoving images would be fairly dull. (Sales of my game “Look At This Rock” have been disappointing.) Animated images are the result of drawing an image on the screen, then a split second later drawing a slightly different image on the screen. Imagine the program’s window was 6 pixels wide and 1 pixel tall, with all the pixels white except for a black pixel at 4, 0. It would look like this:</p>
+	<p>If you changed the window so that 3, 0 was black and 4,0 was white, it would look like this:</p>
+	<p>To the user, it looks like the black pixel has “moved” over to the left. If you redrew the window to have the black pixel at 2, 0, it would continue to look like the black pixel is moving left:</p>
+	<p>It may look like the black pixel is moving, but this is just an illusion. To the computer, it is just showing three different images that each just happen to have one black pixel. Consider if the three following images were rapidly shown on the screen:</p>
+	<p>To the user, it would look like the cat is moving towards the squirrel. But to the computer, they’re just a bunch of pixels. The trick to making believable looking animation is to have your program draw a picture to the window, wait a fraction of a second, and then draw a <i>slightly</i> different picture.</p>
+	<p>Here is an example program demonstrating a simple animation. Type this code into IDLE’s file editor and save it as <i>catanimation.py</i>. It will also require the image file cat.png to be in the same folder as the <i>catanimation.py</i> file. You can download this image from <a href="https://invpy.com/cat.png">https://invpy.com/cat.png</a>. This code is available at <a href="https://invpy.com/catanimation.py">https://invpy.com/catanimation.py</a>.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">3.</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">6.</span> FPS = 30 <span class="comment"># frames per second setting</span></p>
+		<p class="noindent mono"><span class="line-number">7.</span> fpsClock = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+		<p class="noindent mono"><span class="line-number">9.</span> <span class="comment"># set up the window</span></p>
+		<p class="noindent mono"><span class="line-number">10.</span> DISPLAYSURF = pygame.display.set_mode((400, 300), 0, 32)</p>
+		<p class="noindent mono"><span class="line-number">11.</span> pygame.display.set_caption('Animation')</p>
+		<p class="noindent mono"><span class="line-number">12.</span></p>
+		<p class="noindent mono"><span class="line-number">13.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">14.</span> catImg = pygame.image.load('cat.png')</p>
+		<p class="noindent mono"><span class="line-number">15.</span> catx = 10</p>
+		<p class="noindent mono"><span class="line-number">16.</span> caty = 10</p>
+		<p class="noindent mono"><span class="line-number">17.</span> direction = 'right'</p>
+		<p class="noindent mono"><span class="line-number">18.</span></p>
+		<p class="noindent mono"><span class="line-number">19.</span> while True: <span class="comment"># the main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">20.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.fill(WHITE)</p>
+		<p class="noindent mono"><span class="line-number">21.</span></p>
+		<p class="noindent mono"><span class="line-number">22.</span> &#160;&#160;&#160;&#160;if direction == 'right':</p>
+		<p class="noindent mono"><span class="line-number">23.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catx += 5</p>
+		<p class="noindent mono"><span class="line-number">24.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if catx == 280:</p>
+		<p class="noindent mono"><span class="line-number">25.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;direction = 'down'</p>
+		<p class="noindent mono"><span class="line-number">26.</span> &#160;&#160;&#160;&#160;elif direction == 'down':</p>
+		<p class="noindent mono"><span class="line-number">27.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;caty += 5</p>
+		<p class="noindent mono"><span class="line-number">28.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if caty == 220:</p>
+		<p class="noindent mono"><span class="line-number">29.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;direction = 'left'</p>
+		<p class="noindent mono"><span class="line-number">30.</span> &#160;&#160;&#160;&#160;elif direction == 'left':</p>
+		<p class="noindent mono"><span class="line-number">31.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catx -= 5</p>
+		<p class="noindent mono"><span class="line-number">32.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if catx == 10:</p>
+		<p class="noindent mono"><span class="line-number">33.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;direction = 'up'</p>
+		<p class="noindent mono"><span class="line-number">34.</span> &#160;&#160;&#160;&#160;elif direction == 'up':</p>
+		<p class="noindent mono"><span class="line-number">35.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;caty -= 5</p>
+		<p class="noindent mono"><span class="line-number">36.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if caty == 10:</p>
+		<p class="noindent mono"><span class="line-number">37.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;direction = 'right'</p>
+		<p class="noindent mono"><span class="line-number">38.</span></p>
+		<p class="noindent mono"><span class="line-number">39.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.blit(catImg, (catx, caty))</p>
+		<p class="noindent mono"><span class="line-number">40.</span></p>
+		<p class="noindent mono"><span class="line-number">41.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">42.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">43.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">44.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">45.</span></p>
+		<p class="noindent mono"><span class="line-number">46.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">47.</span> &#160;&#160;&#160;&#160;fpsClock.tick(FPS)</p>
+	</div>
+
+	<p>Look at that animated cat go! This program will be much more of a commercial success than my game, “Look At This Rock 2: A Different Rock”.</p>
+
+	<h1 class="subheading" id="fps-and-clock">Frames Per Second and <span class="mono">pygame.time.Clock</span> Objects</h1>
+	<p class="noindent">The <a href="glossary.xhtml#frame-rate"><b>frame rate</b></a> or <a href="glossary.xhtml#refresh-rate"><b>refresh rate</b></a> is the number of pictures that the program draws per second, and is measured in <a href="glossary.xhtml#fps"><b>FPS</b></a> or <a href="glossary.xhtml#frames-per-second"><b>frames per second</b></a>. (On computer monitors, the common name for FPS is hertz. Many monitors have a frame rate of 60 hertz, or 60 frames per second.) A low frame rate in video games can make the game look choppy or jumpy. If the program has too much code to run to draw to the screen frequently enough, then the FPS goes down. But the games in this book are simple enough that this won’t be issue even on old computers.</p>
+	<p>A <span class="mono">pygame.time.Clock</span> object can help us make sure our program runs at a certain maximum FPS. This <span class="mono">Clock</span> object will ensure that our game programs don’t run too fast by putting in small pauses on each iteration of the game loop. If we didn’t have these pauses, our game program would run as fast as the computer could run it. This is often too fast for the player, and as computers get faster they would run the game faster too. A call to the <span class="mono">tick()</span> method of a <span class="mono">Clock</span> object in the game loop can make sure the game runs at the same speed no matter how fast of a computer it runs on. The <span class="mono">Clock</span> object is created on line 7 of the <i>catanimation.py</i> program.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">7.</span> fpsClock = pygame.time.Clock()</p>
+	</div>
+
+	<p>The <span class="mono">Clock</span> object’s <span class="mono">tick()</span> method should be called at the very end of the game loop, after the call to <span class="mono">pygame.display.update()</span>. The length of the pause is calculated based on how long it has been since the previous call to <span class="mono">tick()</span>, which would have taken place at the end of the previous iteration of the game loop. (The first time the <span class="mono">tick()</span> method is called, it doesn’t pause at all.) In the animation program, is it run on line 47 as the last instruction in the game loop.</p>
+	<p>All you need to know is that you should call the <span class="mono">tick()</span> method once per iteration through the game loop at the end of the loop. Usually this is right after the call to <span class="mono">pygame.display.update()</span>.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">47.</span> &#160;&#160;&#160;&#160;fpsClock.tick(FPS)</p>
+	</div>
+
+	<p>Try modifying the <span class="mono">FPS</span> constant variable to run the same program at different frame rates. Setting it to a lower value would make the program run slower. Setting it to a higher value would make the program run faster.</p>
+
+	<h1 class="subheading" id="drawing-images">Drawing Images with <span class="mono">pygame.image.load()</span> and <span class="mono">blit()</span></h1>
+	<p class="noindent">The drawing functions are fine if you want to draw simple shapes on the screen, but many games have images (also called <a href="glossary.xhtml#sprites"><b>sprites</b></a>). Pygame is able to load images onto Surface objects from PNG, JPG, GIF, and BMP image files. The differences between these image file formats is described at <a href="https://invpy.com/formats">https://invpy.com/formats</a>.</p>
+	<p>The image of the cat was stored in a file named <i>cat.png</i>. To load this file’s image, the string <span class="mono">'cat.png'</span> is passed to the <span class="mono">pygame.image.load()</span> function. The <span class="mono">pygame.image.load()</span> function call will return a Surface object that has the image drawn on it. This Surface object will be a separate Surface object from the display Surface object, so we must blit (that is, copy) the image’s Surface object to the display Surface object. <a href="glossary.xhtml#blitting"><b>Blitting</b></a> is drawing the contents of one Surface onto another. It is done with the <span class="mono">blit()</span> Surface object method.</p>
+
+	<p>If you get an error message like “<span class="mono">pygame.error: Couldn't open cat.png</span>” when calling <span class="mono">pygame.image.load()</span>, then make sure the <i>cat.png</i> file is in the same folder as the <i>catanimation.py</i> file before you run the program.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">39.</span> DISPLAYSURF.blit(catImg, (catx, caty))</p>
+	</div>
+
+	<p>Line 39 of the animation program uses the <span class="mono">blit()</span> method to copy <span class="mono">catImg</span> to <span class="mono">DISPLAYSURF</span>. There are two parameters for <span class="mono">blit()</span>. The first is the source Surface object, which is what will be copied onto the <span class="mono">DISPLAYSURF</span> Surface object. The second parameter is a two-integer tuple for the X and Y values of the topleft corner where the image should be blitted to.</p>
+	<p>If <span class="mono">catx</span> and <span class="mono">caty</span> were set to <span class="mono">100</span> and <span class="mono">200</span> and the width of <span class="mono">catImg</span> was <span class="mono">125</span> and the height was <span class="mono">79</span>, this <span class="mono">blit()</span> call would copy this image onto <span class="mono">DISPLAYSURF</span> so that the top left corner of the <span class="mono">catImg</span> was at the XY coordinate (100, 200) and the bottom right corner’s XY coordinate was at (225, 279).</p>
+	<p>Note that you cannot blit to a Surface that is currently “locked” (such as when a PixelArray object has been made from it and not yet been deleted.)</p>
+	<p>The rest of the game loop is just changing the <span class="mono">catx</span>, <span class="mono">caty</span>, and <span class="mono">direction</span> variables so that the cat moves around the window. There is also a call to <span class="mono">pygame.event.get()</span> to handle the <span class="mono">QUIT</span> event.</p>
+
+	<h1 class="subheading" id="fonts">Fonts</h1>
+	<p class="noindent">If you want to draw text to the screen, you <i>could</i> write several calls to <span class="mono">pygame.draw.line()</span> to draw out the lines of each letter. This would be a headache to type out all those <span class="mono">pygame.draw.line()</span> calls and figure out all the XY coordinates, and probably wouldn’t look very good.</p>
+	<p>The above message would take forty one calls to the <span class="mono">pygame.draw.line()</span> function to make. Instead, Pygame provides some much simpler functions for fonts and creating text. Here is a small Hello World program using Pygame’s font functions. Type it into IDLE’s file editor and save it as <i>fonttext.py</i>:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">3.</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
+		<p class="noindent mono"><span class="line-number">6.</span> pygame.display.set_caption('Hello World!')</p>
+		<p class="noindent mono"><span class="line-number">7.</span></p>
+		<p class="noindent mono"><span class="line-number">8.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">9.</span> GREEN = (0, 255, 0)</p>
+		<p class="noindent mono"><span class="line-number">10.</span> BLUE = (0, 0, 128)</p>
+		<p class="noindent mono"><span class="line-number">11.</span></p>
+		<p class="noindent mono"><span class="line-number">12.</span> fontObj = pygame.font.Font('freesansbold.ttf', 32)</p>
+		<p class="noindent mono"><span class="line-number">13.</span> textSurfaceObj = fontObj.render('Hello world!', True, GREEN, BLUE)</p>
+		<p class="noindent mono"><span class="line-number">14.</span> textRectObj = textSurfaceObj.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">15.</span> textRectObj.center = (200, 150)</p>
+		<p class="noindent mono"><span class="line-number">16.</span></p>
+		<p class="noindent mono"><span class="line-number">17.</span> while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">18.</span> &#160;&#160;DISPLAYSURF.fill(WHITE)</p>
+		<p class="noindent mono"><span class="line-number">19.</span> &#160;&#160;DISPLAYSURF.blit(textSurfaceObj, textRectObj)</p>
+		<p class="noindent mono"><span class="line-number">20.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">21.</span> &#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">22.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">23.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">24.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
+	</div>
+
+	<p>There are six steps to making text appear on the screen:</p>
+
+	<ol>
+		<li>Create a <span class="mono">pygame.font.Font object</span>. (Like on line 12)</li>
+		<li>Create a Surface object with the text drawn on it by calling the Font object’s <span class="mono">render()</span> method. (Line 13)</li>
+		<li>Create a Rect object from the Surface object by calling the Surface object’s <span class="mono">get_rect()</span> method. (Line 14) This Rect object will have the width and height correctly set for the text that was rendered, but the top and left attributes will be <span class="mono">0</span>.</li>
+		<li>Set the position of the Rect object by changing one of its attributes. On line 15, we set the center of the Rect object to be at 200, 150.</li>
+		<li>Blit the Surface object with the text onto the Surface object returned by <span class="mono">pygame.display.set_mode()</span>. (Line 19)</li>
+		<li>Call <span class="mono">pygame.display.update()</span> to make the display Surface appear on the screen. (Line 24)</li>
+	</ol>
+
+	<p>The parameters to the <span class="mono">pygame.font.Font()</span> constructor function is a string of the font file to use, and an integer of the size of the font (in points, like how word processors measure font size). On line 12, we pass <span class="mono">'freesansbold.ttf'</span> (this is a font that comes with Pygame) and the integer <span class="mono">32</span> (for a 32-point sized font).</p>
+
+	<p>See <a href="https://invpy.com/usingotherfonts">https://invpy.com/usingotherfonts</a> for more info on using other fonts.</p>
+
+	<p>The parameters to the <span class="mono">render()</span> method call are a string of the text to render, a Boolean value to specify if we want anti-aliasing (explained later in this chapter), the color of the text, and the color of the background. If you want a transparent background, then simply leave off the background color parameter in the method call.</p>
+
+	<h1 class="subheading" id="anti-aliasing">Anti-Aliasing</h1>
+	<p class="noindent"><a href="glossary.xhtml#anti-aliasing"><b>Anti-aliasing</b></a> is a graphics technique for making text and shapes look less blocky by adding a little bit of blur to their edges. It takes a little more computation time to draw with anti-aliasing, so although the graphics may look better, your program may run slower (but only just a little).</p>
+	<p>If you zoom in on an aliased line and an anti-aliased line, they look like this:</p>
+	<p>To make Pygame’s text use anti-aliasing, just pass <span class="mono">True</span> for the second parameter of the <span class="mono">render()</span> method. The <span class="mono">pygame.draw.aaline()</span> and <span class="mono">pygame.draw.aalines()</span> functions have the same parameters as <span class="mono">pygame.draw.line()</span> and <span class="mono">pygame.draw.lines()</span>, except they will draw anti-aliased (smooth) lines instead of aliased (blocky) lines.</p>
+
+	<h1 class="subheading" id="playing-sounds">Playing Sounds</h1>
+	<p class="noindent">Playing sounds that are stored in sound files is even simpler than displaying images from image files. First, you must create a <span class="mono">pygame.mixer.Sound</span> object (which we will call Sound objects for short) by calling the <span class="mono">pygame.mixer.Sound()</span> constructor function. It takes one string parameter, which is the filename of the sound file. Pygame can load WAV, MP3, or OGG files. The difference between these audio file formats is explained at <a href="https://invpy.com/formats">https://invpy.com/formats</a>.</p>
+	<p>To play this sound, call the Sound object’s <span class="mono">play()</span> method. If you want to immediately stop the Sound object from playing call the <span class="mono">stop()</span> method. The <span class="mono">stop()</span> method has no arguments. Here is some sample code:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">soundObj = pygame.mixer.Sound('beeps.wav')</p>
+		<p class="noindent mono">soundObj.play()</p>
+		<p class="noindent mono">import time</p>
+		<p class="noindent mono">time.sleep(1) <span class="comment"># wait and let the sound play for 1 second</span></p>
+		<p class="noindent mono">soundObj.stop()</p>
+	</div>
+
+	<p>You can download the <i>beeps.wav</i> file from <a href="https://invpy.com/beeps.wav">http://invpy.com/beeps.wav</a>.</p>
+	<p>The program execution continues immediately after <span class="mono">play()</span> is called; it does not wait for the sound to finish playing before moving on to the next line of code.</p>
+	<p>The Sound objects are good for sound effects to play when the player takes damage, slashes a sword, or collects a coin. But your games might also be better if they had background music playing regardless of what was going on in the game. Pygame can only load one music file to play in the background at a time. To load a background music file, call the <span class="mono">pygame.mixer.music.load()</span> function and pass it a string argument of the sound file to load. This file can be WAV, MP3, or MIDI format.</p>
+	<p>To begin playing the loaded sound file as the background music, call the <span class="mono">pygame.mixer.music.play(-1, 0.0)</span> function. The <span class="mono">-1</span> argument makes the background music forever loop when it reaches the end of the sound file. If you set it to an integer <span class="mono">0</span> or larger, then the music will only loop that number of times instead of looping forever. The <span class="mono">0.0</span> means to start playing the sound file from the beginning. If you pass a larger integer or float, the music will begin playing that many seconds into the sound file. For example, if you pass <span class="mono">13.5</span> for the second parameter, the sound file with begin playing at the point 13.5 seconds in from the beginning.</p>
+	<p>To stop playing the background music immediately, call the <span class="mono">pygame.mixer.music.stop()</span> function. This function has no arguments.</p>
+	<p>Here is some example code of the sound methods and functions:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="comment"># Loading and playing a sound effect:</span></p>
+		<p class="noindent mono">soundObj = pygame.mixer.Sound('beepingsound.wav')</p>
+		<p class="noindent mono">soundObj.play()</p>
+		<p class="noindent mono">&#160;</p>
+		<p class="noindent mono"><span class="comment"># Loading and playing background music:</span></p>
+		<p class="noindent mono">pygame.mixer.music.load(backgroundmusic.mp3')</p>
+		<p class="noindent mono">pygame.mixer.music.play(-1, 0.0)</p>
+		<p class="noindent mono"><span class="comment"># ...some more of your code goes here...</span></p>
+		<p class="noindent mono">pygame.mixer.music.stop()</p>
+	</div>
+
+<h1 class="subheading" id="summary">Summary</h1>
+<p class="noindent">This covers the basics of making graphical games with the Pygame framework. Of course, just reading about these functions probably isn’t enough to help you learn how to make games using these functions. The rest of the chapters in this book each focus on the source code for a small, complete game. This will give you an idea of what complete game programs “look like”, so you can then get some ideas for how to code your own game programs.</p>
+<p>Unlike the <i>“Invent Your Own Computer Games with Python”</i> book, this book assumes that you know the basics of Python programming. If you have trouble remembering how variables, functions, loops, <span class="mono">if</span>-<span class="mono">else</span> statements, and conditions work, you can probably figure it out just by seeing what’s in the code and how the program behaves. But if you are still stuck, you can read the “Invent with Python” book (it’s for people who are completely new to programming) for free online at <a href="https://inventwithpython.com">https://inventwithpython.com</a>.</p>
 
 </body>
 </html>
