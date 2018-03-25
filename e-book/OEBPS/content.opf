@@ -14,10 +14,14 @@
 		<item href="styles/zstylesheet.css" id="css0" media-type="text/css"/>
 		<item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
 		<item href="images/author.jpg" id="image0" media-type="image/jpeg"/>
-		<item href="images/by-nc-sa.png" id="image1" media-type="image/png"/>
-		<item href="images/cc-zero.png" id="image2" media-type="image/png"/>
-		<item href="images/computer_problems.png" id="image3" media-type="image/png"/>
+		<item href="images/automate_cover.png" id="image1" media-type="image/png"/>
+		<item href="images/by-nc-sa.png" id="image2" media-type="image/png"/>
+		<item href="images/cc-zero.png" id="image3" media-type="image/png"/>
+		<item href="images/computer_problems.png" id="image4" media-type="image/png"/>
 		<item href="images/cover.jpg" id="cover" media-type="image/jpeg"/>
+		<item href="images/crackingcodes_cover.png" id="image5" media-type="image/png"/>
+		<item href="images/invent_cover.png" id="image6" media-type="image/png"/>
+		<item href="images/scratch_cover.jpg" id="image7" media-type="image/jpeg"/>
 		<item href="bookcover.xhtml" id="front_cover" media-type="application/xhtml+xml"/>
 		<item href="title.xhtml" id="title" media-type="application/xhtml+xml"/>
 		<item href="indicia.xhtml" id="indicia" media-type="application/xhtml+xml"/>
@@ -38,6 +42,7 @@
 		<item href="chapter10.xhtml" id="chapter_10_-_four_extra_games" media-type="application/xhtml+xml"/>
 		<item href="glossary.xhtml" id="glossary" media-type="application/xhtml+xml"/>
 		<item href="abouttheauthor.xhtml" id="about_the_author" media-type="application/xhtml+xml"/>
+		<item href="othertitles.xhtml" id="other_titles" media-type="application/xhtml+xml"/>
 	</manifest>
 	<spine toc="ncx">
 		<itemref idref="front_cover"/>
@@ -60,5 +65,6 @@
 		<itemref idref="chapter_10_-_four_extra_games"/>
 		<itemref idref="glossary"/>
 		<itemref idref="about_the_author"/>
+		<itemref idref="other_titles"/>
 	</spine>
 </package>

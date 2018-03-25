@@ -238,6 +238,12 @@
 						"indentation": "1",
 						"pageName": "About the Author",
 						"fileName": "abouttheauthor.xhtml"
+					},
+					{
+						"pageNumber": "20",
+						"indentation": "1",
+						"pageName": "Other Titles",
+						"fileName": "othertitles.xhtml"
 					}
 				]
 }

@@ -364,5 +364,11 @@
 		</navLabel>
 		<content src="abouttheauthor.xhtml" />
 	</navPoint>
+	<navPoint id="navpoint-60" playOrder="60">
+		<navLabel>
+			<text>Other Titles</text>
+		</navLabel>
+		<content src="othertitles.xhtml" />
+	</navPoint>
 </navMap>
 </ncx>
