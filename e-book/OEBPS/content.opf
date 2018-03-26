@@ -22,6 +22,7 @@
 		<item href="images/crackingcodes_cover.png" id="image5" media-type="image/png"/>
 		<item href="images/invent_cover.png" id="image6" media-type="image/png"/>
 		<item href="images/scratch_cover.jpg" id="image7" media-type="image/jpeg"/>
+		<item href="images/chapter1/mac-python.png" id="image8" media-type="image/png"/>
 		<item href="bookcover.xhtml" id="front_cover" media-type="application/xhtml+xml"/>
 		<item href="title.xhtml" id="title" media-type="application/xhtml+xml"/>
 		<item href="indicia.xhtml" id="indicia" media-type="application/xhtml+xml"/>

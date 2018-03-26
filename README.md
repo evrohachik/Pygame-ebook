@@ -4,11 +4,14 @@
 
 This is an ePub production of Al Sweigart's games programming book *Making Games with Python & Pygame* at (https://inventwithpython.com/pygame/), the only freely available ePub of the book to my knowledge. This isn't merely a copy of the source PDF and HTML, there are a few tweaks:
 
+* New cover [PLANNED] - There's going to be a new cover that has the spirit of the original, but to my taste and at a larger resolution.
 * Licenses page - There's a new license page that clearly lays out the book's licenses, as standard in all my sample book productions.
 * HTTPS links - All links direct to sites by using HTTPS unless the sites don't support it.
 * Better resolution XKCD comic - Used the original from the site and included a link back to XKCD and the tooltip caption.
 * New screenshots for operating systems in Chapter 1 - A lot has changed since 2012 and this e-book uses good resolution screenshots of the latest versions of Windows, macOS and Ubuntu. I may also include Raspbian with PIXEL too.
+* Added instructions in Chapter 1 - I have added an alternate way to start IDLE using Spotlight and plan to add more instructions to make the book more useful, such as information on the Raspberry Pi.
 
+Of course, you can suggest further tweaks. Go to the Issues tab and ask away. :-)
 
 ### E-book:
 
