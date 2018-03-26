@@ -985,596 +985,216 @@ __name__ == '__main__':</p>
 	<div class="python-shell">
 		<p class="noindent mono">&#160;&#160;&#160;&#160;if shape == DONUT:</p>
 	</div>
-	
-<!--
-<p>The shape variable will be set to one of the strings <span
-class="mono">'donut'</span>, <span class="mono">'square'</span>, <span
-class="mono">'diamond'</span>, <span class="mono">'lines'</span>, or <span
-class="mono">'oval'</span> and then compared to the <span class="mono">DONUT</span>
-constant. If we made a typo when writing line 187, for example, something like
-this:</p>
 
+	<p>The shape variable will be set to one of the strings <span class="mono">'donut'</span>, <span class="mono">'square'</span>, <span class="mono">'diamond'</span>, <span class="mono">'lines'</span>, or <span class="mono">'oval'</span> and then compared to the <span class="mono">DONUT</span> constant. If we made a typo when writing line 187, for example, something like this:</p>
 
+	<div class="python-shell">
+		<p class="noindent mono">&#160;&#160;&#160;&#160;if shape == DUNOT:</p>
+	</div>
 
-<p class="noindent mono">    if shape == DUNOT:</p>
+	<p>Then Python would crash, giving an error message saying that there is no variable named <span class="mono">DUNOT</span>. This is good. Since the program has crashed on line 187, when we check that line it will be easy to see that the bug was caused by a typo. However, if we were using strings instead of constant variables and made the same typo, line 187 would look like this:</p>
 
-</div>
+	<div class="python-shell">
+		<p class="noindent mono">&#160;&#160;&#160;if shape == 'dunot':</p>
+	</div>
 
-<p>Then Python would crash, giving an error message saying that
-there is no variable named <span class="mono">DUNOT</span>. This is good.
-Since the program has crashed on line 187, when we check that line it will be
-easy to see that the bug was caused by a typo. However, if we were using
-strings instead of constant variables and made the same typo, line 187 would
-look like this:</p>
-
-
-
-<p class="noindent mono">    if shape == 'dunot':</p>
-
-</div>
-
-<p>This is perfectly acceptable Python code, so it won’t crash
-at first when you run it. However, this will lead to weird bugs later on in our
-program. Because the code does not immediately crash where the problem is
-caused, it can be much harder to find it.</p>
+	<p>This is perfectly acceptable Python code, so it won’t crash at first when you run it. However, this will lead to weird bugs later on in our program. Because the code does not immediately crash where the problem is caused, it can be much harder to find it.</p>
 
 	<h1 class="subheading" id="">Making Sure We Have Enough Icons</h1>
 
-<div>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">44.</span> ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)</p>
+		<p class="noindent mono"><span class="line-number">45.</span> ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)</p>
+		<p class="noindent mono"><span class="line-number">46.</span> assert len(ALLCOLORS) * len(ALLSHAPES) * 2 &gt;= BOARDWIDTH * BOARDHEIGHT, &quot;Board is too big for the number of shapes/colors defined.&quot;</p>
+	</div>
 
-<p class="noindent mono"><span class="line-number">44.</span> ALLCOLORS
-= (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)</p>
-
-<p class="noindent mono"><span class="line-number">45.</span> ALLSHAPES
-= (DONUT, SQUARE, DIAMOND, LINES, OVAL)</p>
-
-<p class="noindent mono"><span class="line-number">46.</span> assert
-len(ALLCOLORS) * len(ALLSHAPES) * 2 &gt;= BOARDWIDTH * BOARDHEIGHT, &quot;Board
-is too big for the number of shapes/colors defined.&quot;</p>
-
-</div>
-
-<p>In order for our game program to be able to create icons of
-every possible color and shape combination, we need to make a tuple that holds
-all of these values. There is also another assertion on line 46 to make sure
-that there are enough color/shape combinations for the size of the board we
-have. If there isn’t, then the program will crash on line 46 and we will know
-that we either have to add more colors and shapes, or make the board width and
-height smaller. With 7 colors and 5 shapes, we can make 35 (that is, 7 x 5)
-different icons. And because we’ll have a pair of each icon, that means we can
-have a board with up to 70 (that is, 35 x 2, or 7 x 5 x 2) spaces.</p>
+	<p>In order for our game program to be able to create icons of every possible color and shape combination, we need to make a tuple that holds all of these values. There is also another assertion on line 46 to make sure that there are enough color/shape combinations for the size of the board we have. If there isn’t, then the program will crash on line 46 and we will know that we either have to add more colors and shapes, or make the board width and height smaller. With 7 colors and 5 shapes, we can make 35 (that is, 7 x 5) different icons. And because we’ll have a pair of each icon, that means we can have a board with up to 70 (that is, 35 x 2, or 7 x 5 x 2) spaces.</p>
 
 	<h1 class="subheading" id="">Tuples vs. Lists, Immutable vs. Mutable</h1>
+	<p class="noindent">You might have noticed that the <span class="mono">ALLCOLORS</span> and <span class="mono">ALLSHAPES</span> variables are tuples instead of lists. When do we want to use tuples and when do we want to use lists? And what’s the difference between them anyway?</p>
+	<p>Tuples and lists are the same in every way except two: tuples use parentheses instead of square brackets, and the items in tuples cannot be modified (but the items in lists can be modified). We often call lists <a href="glossary.xhtml#mutable"><b>mutable</b></a> (meaning they can be changed) and tuples <a href="glossary.xhtml#immutable"><b>immutable</b></a> (meaning they cannot be changed).</p>
+	<p>For an example of trying to change values in lists and tuples, look at the following code:</p>
 
-<p>You might have noticed that the <span class="mono">ALLCOLORS</span>
-and <span class="mono">ALLSHAPES</span> variables are tuples instead of lists.
-When do we want to use tuples and when do we want to use lists? And what’s the
-difference between them anyway?</p>
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; listVal = [1, 1, 2, 3, 5, 8]</p>
+		<p class="noindent mono">&gt;&gt;&gt; tupleVal = (1, 1, 2, 3, 5, 8)</p>
+		<p class="noindent mono">&gt;&gt;&gt; listVal[4] = 'hello!'</p>
+		<p class="noindent mono">&gt;&gt;&gt; listVal</p>
+		<p class="noindent mono">[1, 1, 2, 3, 'hello!', 8]</p>
+		<p class="noindent mono">&gt;&gt;&gt; tupleVal[4] = 'hello!'</p>
+		<p class="noindent mono">Traceback (most recent call last):</p>
+		<p class="noindent mono">&#160;&#160;File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</p>
+		<p class="noindent mono">TypeError: 'tuple' object does not support item assignment</p>
+		<p class="noindent mono">&gt;&gt;&gt; tupleVal</p>
+		<p class="noindent mono">(1, 1, 2, 3, 5, 8)</p>
+		<p class="noindent mono">&gt;&gt;&gt; tupleVal[4]</p>
+		<p class="noindent mono">5</p>
+	</div>
 
-<p>Tuples and lists are the same in every way except two:
-tuples use parentheses instead of square brackets, and the items in tuples
-cannot be modified (but the items in lists can be modified). We often call
-lists <a href="glossary.xhtml#mutable"><b>mutable</b></a> (meaning they can be changed) and
-tuples <a href="glossary.xhtml#immutable"><b>immutable</b></a> (meaning they cannot be
-changed).</p>
+	<p>Notice that when we try to change the item at index <span class="mono">2</span> in the tuple, Python gives us an error message saying that tuple objects do not support “item assignment”.</p>
+	<p>There is a silly benefit and an important benefit to tuple’s immutability. The silly benefit is that code that uses tuples is slightly faster than code that uses lists. (Python is able to make some optimizations knowing that the values in a tuple will never change.) But having your code run a few nanoseconds faster is not important.</p>
+	<p>The important benefit to using tuples is similar to the benefit of using constant variables: it’s a sign that the value in the tuple will never change, so anyone reading the code later will be able to say, “I can expect that this tuple will always be the same. Otherwise the programmer would have used a list.” This also lets a future programmer reading your code say, “If I see a list value, I know that it could be modified at some point in this program. Otherwise, the programmer who wrote this code would have used a tuple.”</p>
+	<p>You can still assign a new tuple value to a variable:</p>
 
-<p>For an example of trying to change values in lists and
-tuples, look at the following code:</p>
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; tupleVal = (1, 2, 3)</p>
+		<p class="noindent mono">&gt;&gt;&gt; tupleVal = (1, 2, 3, 4)</p>
+	</div>
 
+	<p>The reason this code works is because the code isn’t changing the <span class="mono">(1, 2, 3)</span> tuple on the second line. It is assigning an entirely new tuple <span class="mono">(1, 2, 3, 4)</span> to the <span class="mono">tupleVal</span>, and overwriting the old tuple value. You cannot however, use the square brackets to modify an item in the tuple.</p>
+	<p>Strings are also an immutable data type. You can use the square brackets to read a single character in a string, but you cannot change a single character in a string:</p>
 
-
-<p class="noindent mono">&gt;&gt;&gt;
-listVal = [1, 1, 2, 3, 5, 8]</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-tupleVal = (1, 1, 2, 3, 5, 8)</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-listVal[4] = 'hello!'</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-listVal</p>
-
-<p class="noindent mono">[1, 1, 2, 3, 'hello!',
-8]</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-tupleVal[4] = 'hello!'</p>
-
-<p class="noindent mono">Traceback (most
-recent call last):</p>
-
-<p class="noindent mono">  File
-&quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</p>
-
-<p class="noindent mono">TypeError:
-'tuple' object does not support item assignment</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-tupleVal</p>
-
-<p class="noindent mono">(1, 1, 2, 3, 5,
-8)</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-tupleVal[4]</p>
-
-<p class="noindent mono">5</p>
-
-</div>
-
-<p>Notice that when we try to change the item at index <span
-class="mono">2</span> in the tuple, Python gives us an error message saying
-that tuple objects do not support “item assignment”.</p>
-
-<p>There is a silly benefit and an important benefit to tuple’s
-immutability. The silly benefit is that code that uses tuples is slightly
-faster than code that uses lists. (Python is able to make some optimizations
-knowing that the values in a tuple will never change.) But having your code run
-a few nanoseconds faster is not important.</p>
-
-<p>The important benefit to using tuples is similar to the
-benefit of using constant variables: it’s a sign that the value in the tuple
-will never change, so anyone reading the code later will be able to say, “I can
-expect that this tuple will always be the same. Otherwise the programmer would
-have used a list.” This also lets a future programmer reading your code say,
-“If I see a list value, I know that it could be modified at some point in this
-program. Otherwise, the programmer who wrote this code would have used a
-tuple.”</p>
-
-<p>You can still assign a new tuple value to a variable:</p>
-
-
-
-<p class="noindent mono">&gt;&gt;&gt;
-tupleVal = (1, 2, 3)</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-tupleVal = (1, 2, 3, 4)</p>
-
-</div>
-
-<p>The reason this code works is because the code isn’t
-changing the <span class="mono">(1, 2, 3)</span> tuple on the second line. It
-is assigning an entirely new tuple <span class="mono">(1, 2, 3, 4)</span> to
-the <span class="mono">tupleVal</span>, and overwriting the old tuple value.
-You cannot however, use the square brackets to modify an item in the tuple.</p>
-
-<p>Strings are also an immutable data type. You can use the
-square brackets to read a single character in a string, but you cannot change a
-single character in a string:</p>
-
-
-
-<p class="noindent mono">&gt;&gt;&gt;
-strVal = 'Hello'</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-strVal[1]</p>
-
-<p class="noindent mono">'e'</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-strVal[1] = 'X'</p>
-
-<p class="noindent mono">Traceback (most
-recent call last):</p>
-
-<p class="noindent mono">  File
-&quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</p>
-
-<p class="noindent mono">TypeError: 'str'
-object does not support item assignment</p>
-
-</div>
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; strVal = 'Hello'</p>
+		<p class="noindent mono">&gt;&gt;&gt; strVal[1]</p>
+		<p class="noindent mono">'e'</p>
+		<p class="noindent mono">&gt;&gt;&gt; strVal[1] = 'X'</p>
+		<p class="noindent mono">Traceback (most recent call last):</p>
+		<p class="noindent mono">&#160;&#160;File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</p>
+		<p class="noindent mono">TypeError: 'str' object does not support item assignment</p>
+	</div>
 
 	<h1 class="subheading" id="">One Item Tuples Need a Trailing Comma</h1>
+	<p class="noindent">Also, one minor details about tuples: if you ever need to write code about a tuple that has one value in it, then it needs to have a trailing comma in it, such as this:</p>
 
-<p>Also, one minor details about tuples: if you ever need to
-write code about a tuple that has one value in it, then it needs to have a
-trailing comma in it, such as this:</p>
+	<div class="python-shell">
+		<p class="noindent mono">oneValueTuple = (42, )</p>
+	</div>
 
+	<p>If you forget this comma (and it is very easy to forget), then Python won’t be able to tell the difference between this and a set of parentheses that just change the order of operations. For example, look at the following two lines of code:</p>
 
+	<div class="python-shell">
+		<p class="noindent mono">variableA = (5 * 6)</p>
+		<p class="noindent mono">variableB = (5 * 6, )</p>
+	</div>
 
-<p class="noindent mono">oneValueTuple = (42, )</p>
-
-</div>
-
-<p>If you forget this comma (and it is very easy to forget),
-then Python won’t be able to tell the difference between this and a set of
-parentheses that just change the order of operations. For example, look at the
-following two lines of code:</p>
-
-
-
-<p class="noindent mono">variableA = (5 *
-6)</p>
-
-<p class="noindent mono">variableB = (5 *
-6, )</p>
-
-</div>
-
-<p>The value that is stored in <span class="mono">variableA</span>
-is just the integer <span class="mono">30</span>. However, the expression for <span
-class="mono">variableB</span>’s assignment statement is the single-item tuple
-value <span class="mono">(30, )</span>. Blank tuple values do not need a comma
-in them, they can just be a set of parentheses by themselves: <span
-class="mono">()</span>.</p>
+	<p>The value that is stored in <span class="mono">variableA</span> is just the integer <span class="mono">30</span>. However, the expression for <span class="mono">variableB</span>’s assignment statement is the single-item tuple value <span class="mono">(30, )</span>. Blank tuple values do not need a comma in them, they can just be a set of parentheses by themselves: <span class="mono">()</span>.</p>
 
 	<h1 class="subheading" id="">Converting Between Lists and Tuples</h1>
+	<p class="noindent">You can convert between list and tuple values just like you can convert between string and integer values. Just pass a tuple value to the <span class="mono">list()</span> function and it will return a list form of that tuple value. Or, pass a list value to the <span class="mono">tuple()</span> function and it will return a tuple form of that list value. Try typing the following into the interactive shell:</p>
 
-<p>You can convert between list and tuple values just like you
-can convert between string and integer values. Just pass a tuple value to the <span
-class="mono">list()</span> function and it will return a list form of that tuple
-value. Or, pass a list value to the <span class="mono">tuple()</span> function
-and it will return a tuple form of that list value. Try typing the following
-into the interactive shell:</p>
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; spam = (1, 2, 3, 4)</p>
+		<p class="noindent mono">&gt;&gt;&gt; spam = list(spam)</p>
+		<p class="noindent mono">&gt;&gt;&gt; spam</p>
+		<p class="noindent mono">[1, 2, 3, 4]</p>
+		<p class="noindent mono">&gt;&gt;&gt; spam = tuple(spam)</p>
+		<p class="noindent mono">&gt;&gt;&gt; spam</p>
+		<p class="noindent mono">(1, 2, 3, 4)</p>
+		<p class="noindent mono">&gt;&gt;&gt;</p>
+	</div>
 
+	<h1 class="subheading">The <span class="mono">global</span> statement, and Why Global Variables are Evil</h1>
 
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">48.</span> def main():</p>
+		<p class="noindent mono"><span class="line-number">49.</span> &#160;&#160;&#160;&#160;global FPSCLOCK, DISPLAYSURF</p>
+		<p class="noindent mono"><span class="line-number">50.</span> &#160;&#160;&#160;&#160;pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">51.</span> &#160;&#160;&#160;&#160;FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">52.</span> &#160;&#160;&#160;&#160;DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">53.</span></p>
+		<p class="noindent mono"><span class="line-number">54.</span> &#160;&#160;&#160;&#160;mousex = 0 <span class="comment"># used to store x coordinate of mouse event</span></p>
+		<p class="noindent mono"><span class="line-number">55.</span> &#160;&#160;&#160;&#160;mousey = 0 <span class="comment"># used to store y coordinate of mouse event</span></p>
+		<p class="noindent mono"><span class="line-number">56.</span> &#160;&#160;&#160;&#160;pygame.display.set_caption('Memory Game')</p>
+	</div>
 
-<p class="noindent mono">&gt;&gt;&gt; spam
-= (1, 2, 3, 4)</p>
+	<p>This is the start of the <span class="mono">main()</span> function, which is where (oddly enough) the main part of the game code is. The functions called in the <span class="mono">main()</span> function will be explained later in this chapter.</p>
+	<p>Line 49 is a <span class="mono">global</span> statement. The <span class="mono">global</span> statement is the <span class="mono">global</span> keyword followed by a comma-delimited list of variable names. These variable names are then marked as global variables. Inside the <span class="mono">main()</span> function, those names are not for local variables that might just happen to have the same name as global variables. They <i>are</i> the global variables. Any values assigned to them in the <span class="mono">main()</span> function will persist outside the <span class="mono">main()</span> function. We are marking the <span class="mono">FPSCLOCK</span> and <span class="mono">DISPLAYSURF</span> variables as global because they are used in several other functions in the program. (More info is at <a href="https://invpy.com/scope">https://invpy.com/scope</a>.)</p>
+	<p>There are four simple rules to determine if a variable is local or global:</p>
 
-<p class="noindent mono">&gt;&gt;&gt;
-spam = list(spam)</p>
+	<ol>
+		<li>If there is a global statement for a variable at the beginning of the function, then the variable is global.</li>
+		<li>If the name of a variable in a function has the same name as a global variable and the function never assigns the variable a value, then that variable is the global variable.</li>
+		<li>If the name of a variable in a function has the same name as a global variable and the function does assign the variable a value, then that variable is a local variable.</li>
+		<li>If there isn't a global variable with the same name as the variable in the function, then that variable is obviously a local variable.</li>
+	</ol>
 
-<p class="noindent mono">&gt;&gt;&gt;
-spam</p>
-
-<p class="noindent mono">[1, 2, 3, 4]</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-spam = tuple(spam)</p>
-
-<p class="noindent mono">&gt;&gt;&gt;
-spam</p>
-
-<p class="noindent mono">(1, 2, 3, 4)</p>
-
-<p class="noindent mono">&gt;&gt;&gt;&nbsp;</p>
-
-</div>
-
-<h1 class="subheading">T</h1>he </a><span class="mono">global</span>
-statement, and Why Global Variables are Evil</h2>
-
-<div>
-
-<p class="noindent mono"><span class="line-number">48.</span> def
-main():</p>
-
-<p class="noindent mono"><span class="line-number">49.</span>     global
-FPSCLOCK, DISPLAYSURF</p>
-
-<p class="noindent mono"><span class="line-number">50.</span>     pygame.init()</p>
-
-<p class="noindent mono"><span class="line-number">51.</span>     FPSCLOCK
-= pygame.time.Clock()</p>
-
-<p class="noindent mono"><span class="line-number">52.</span>     DISPLAYSURF
-= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
-
-<p class="noindent mono"><span class="line-number">53.</span> </p>
-
-<p class="noindent mono"><span class="line-number">54.</span>     mousex
-= 0 <span class="comment"># used to store x coordinate of mouse event</span></p>
-
-<p class="noindent mono"><span class="line-number">55.</span>     mousey
-= 0 <span class="comment"># used to store y coordinate of mouse event</span></p>
-
-<p class="noindent mono"><span class="line-number">56.</span>     pygame.display.set_caption('Memory
-Game')</p>
-
-</div>
-
-<p>This is the start of the <span class="mono">main()</span>
-function, which is where (oddly enough) the main part of the game code is. The
-functions called in the <span class="mono">main()</span> function will be
-explained later in this chapter.</p>
-
-<p>Line 49 is a <span class="mono">global</span> statement.
-The <span class="mono">global</span> statement is the <span class="mono">global</span>
-keyword followed by a comma-delimited list of variable names. These variable
-names are then marked as global variables. Inside the <span class="mono">main()</span>
-function, those names are not for local variables that might just happen to
-have the same name as global variables. They <i>are</i> the global variables.
-Any values assigned to them in the <span class="mono">main()</span> function
-will persist outside the <span class="mono">main()</span> function. We are
-marking the <span class="mono">FPSCLOCK</span> and <span class="mono">DISPLAYSURF</span>
-variables as global because they are used in several other functions in the
-program. (More info is at <a href="http://invpy.com/scope">http://invpy.com/scope</a>.)</p>
-
-<p>There are four simple rules to determine if a variable is
-local or global:</p>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>1.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>If
-there is a global statement for a variable at the beginning of the function,
-then the variable is global.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>2.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>If
-the name of a variable in a function has the same name as a global variable and
-the function never assigns the variable a value, then that variable is the
-global variable.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>3.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>If
-the name of a variable in a function has the same name as a global variable and
-the function does assign the variable a value, then that variable is a local
-variable.</p>
-
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'>4.<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>If
-there isn't a global variable with the same name as the variable in the
-function, then that variable is obviously a local variable.</p>
-
-<p>You generally want to avoid using global variables inside
-functions. A function is supposed to be like a mini-program inside your program
-with specific inputs (the parameters) and an output (the return value). But a
-function that reads and writes to global variables has additional inputs and
-output. Since the global variable could have been modified in many places
-before the function was called, it can be tricky to track down a bug involving
-a bad value set in the global variable.</p>
-
-<p>Having a function as a separate mini-program that doesn’t
-use global variables makes it easier to find bugs in your code, since the parameters
-of the function are clearly known. It also makes changing the code in a
-function easier, since if the new function works with the same parameters and
-gives the same return value, it will automatically work with the rest of the
-program just like the old function.</p>
-
-<p>Basically, using global variables might make it easier to
-write your program but they generally make it harder to debug.</p>
-
-<p>In the games in this book, global variables are mostly used
-for variables that would be global constants that never change, but need the <span
-class="mono">pygame.init()</span> function called first. Since this happens in
-the <span class="mono">main()</span> function, they are set in the <span
-class="mono">main()</span> function and must be global for other functions to
-see them. But the global variables are used as constants and don’t change, so
-they are less likely to cause confusing bugs.</p>
-
-<p>If you don’t understand this, don’t worry. Just write your
-code so that you pass in values to functions rather than have the functions
-read global variables as a general rule.</p>
+	<p>You generally want to avoid using global variables inside functions. A function is supposed to be like a mini-program inside your program with specific inputs (the parameters) and an output (the return value). But a function that reads and writes to global variables has additional inputs and output. Since the global variable could have been modified in many places before the function was called, it can be tricky to track down a bug involving a bad value set in the global variable.</p>
+	<p>Having a function as a separate mini-program that doesn’t use global variables makes it easier to find bugs in your code, since the parameters of the function are clearly known. It also makes changing the code in a function easier, since if the new function works with the same parameters and gives the same return value, it will automatically work with the rest of the program just like the old function.</p>
+	<p>Basically, using global variables might make it easier to write your program but they generally make it harder to debug.</p>
+	<p>In the games in this book, global variables are mostly used for variables that would be global constants that never change, but need the <span class="mono">pygame.init()</span> function called first. Since this happens in the <span class="mono">main()</span> function, they are set in the <span class="mono">main()</span> function and must be global for other functions to see them. But the global variables are used as constants and don’t change, so they are less likely to cause confusing bugs.</p>
+	<p>If you don’t understand this, don’t worry. Just write your code so that you pass in values to functions rather than have the functions read global variables as a general rule.</p>
 
 	<h1 class="subheading" id="">Data Structures and 2D Lists</h1>
 
-<div>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">58.</span> &#160;&#160;&#160;&#160;mainBoard = getRandomizedBoard()</p>
+		<p class="noindent mono"><span class="line-number">59.</span> &#160;&#160;&#160;&#160;revealedBoxes = generateRevealedBoxesData(False)</p>
+	</div>
 
-<p class="noindent mono"><span class="line-number">58.</span>     mainBoard
-= getRandomizedBoard()</p>
+	<p>The <span class="mono">getRandomizedBoard()</span> function returns a data structure that represents the state of the board. The <span class="mono">generateRevealedBoxesData()</span> function returns a data structure that represents which boxes are covered, respectively. The return values of these functions are two dimensional (2D) lists, or lists of lists. A list of lists of lists of values would be a 3D list. Another word for two or more dimensional lists is a <a href="glossary.xhtml#multidimensional"><b>multidimensional</b></a> list.</p>
+	<p>If we have a list value stored in a variable named <span class="mono">spam</span>, we could access a value in that list with the square brackets, such as <span class="mono">spam[2]</span> to retrieve the third value in the list. If the value at <span class="mono">spam[2]</span> is itself a list, then we could use another set of square brackets to retrieve a value <i>in that list</i>. This would look like, for example, <span class="mono">spam[2][4]</span>, which would retrieve the fifth value in the list that is the third value in <span class="mono">spam</span>. Using this notation of lists of lists makes it easy to map a 2D board to a 2D list value. Since the <span class="mono">mainBoard</span> variable will store icons in it, if we wanted to get the icon on the board at the position (4, 5) then we could just use the expression <span class="mono">mainBoard[4][5]</span>. Since the icons themselves are stored as two-item tuples with the shape and color, the complete data structure is a list of list of two-item tuples. Whew!</p>
+	<p>Here’s an small example. Say the board looked like this:</p>
+	<p>The corresponding data structure would be:</p>
 
-<p class="noindent mono"><span class="line-number">59.</span>     revealedBoxes
-= generateRevealedBoxesData(False)</p>
+	<div class="python-shell">
+		<p class="noindent mono">mainBoard = [[(DONUT, BLUE), (LINES, BLUE), (SQUARE, ORANGE)], [(SQUARE, GREEN), (DONUT, BLUE), (DIAMOND, YELLOW)], [(SQUARE, GREEN), (OVAL, YELLOW), (SQUARE, ORANGE)], [(DIAMOND, YELLOW), (LINES, BLUE), (OVAL, YELLOW)]]</p>
+	</div>
 
-</div>
-
-<p>The <span class="mono">getRandomizedBoard()</span> function
-returns a data structure that represents the state of the board. The <span
-class="mono">generateRevealedBoxesData()</span> function returns a data
-structure that represents which boxes are covered, respectively. The return
-values of these functions are two dimensional (2D) lists, or lists of lists. A
-list of lists of lists of values would be a 3D list. Another word for two or
-more dimensional lists is a <a href="glossary.xhtml#multidimensional"><b>multidimensional</b></a>
-list.</p>
-
-<p>If we have a list value stored in a variable named <span
-class="mono">spam</span>, we could access a value in that list with the square
-brackets, such as <span class="mono">spam[2]</span> to retrieve the third
-value in the list. If the value at <span class="mono">spam[2]</span> is itself
-a list, then we could use another set of square brackets to retrieve a value <em>in
-that list</em>. This would look like, for example, <span class="mono">spam[2][4]</span>,
-which would retrieve the fifth value in the list that is the third value in <span
-class="mono">spam</span>. Using this notation of lists of lists makes it
-easy to map a 2D board to a 2D list value. Since the <span class="mono">mainBoard</span>
-variable will store icons in it, if we wanted to get the icon on the board at
-the position (4, 5) then we could just use the expression <span class="mono">mainBoard[4][5]</span>.
-Since the icons themselves are stored as two-item tuples with the shape and
-color, the complete data structure is a list of list of two-item tuples. Whew!</p>
-
-<p>Here’s an small example. Say the board looked like this:</p>
-
-<p class=MsoNormal align=center style='text-align:center'><img width=206
-height=148 id="Picture 10" src="chapter3_files/image002.png"></p>
-
-<p>The corresponding data structure would be:</p>
-
-
-
-<p class="noindent mono">mainBoard = [[(DONUT,
-BLUE), (LINES, BLUE), (SQUARE, ORANGE)], [(SQUARE, GREEN), (DONUT, BLUE),
-(DIAMOND, YELLOW)], [(SQUARE, GREEN), (OVAL, YELLOW), (SQUARE, ORANGE)],
-[(DIAMOND, YELLOW), (LINES, BLUE), (OVAL, YELLOW)]]</p>
-
-</div>
-
-<p>(If your book is in black and white, you can see a color
-version of the above picture at <a href="http://invpy.com/memoryboard">http://invpy.com/memoryboard</a>.)
-You’ll notice that <span class="mono">mainBoard[x][y]</span> will correspond
-to the icon at the (x, y) coordinate on the board.</p>
-
-<p>Meanwhile, the “revealed boxes” data structure is also a 2D
-list, except instead of two-item tuples like the board data structure, it has
-Boolean values: <span class="mono">True</span> if the box at that x, y
-coordinate is revealed, and <span class="mono">False</span> if it is covered
-up. Passing <span class="mono">False</span> to the <span class="mono">generateRevealedBoxesData()</span>
-function sets all of the Boolean values to <span class="mono">False</span>.
-(This function is explained in detail later.)</p>
-
-<p>These two data structures are used to keep track of the
-state of the game board.</p>
+	<p>(If your book is in black and white, you can see a color version of the above picture at <a href="https://invpy.com/memoryboard">https://invpy.com/memoryboard</a>.) You’ll notice that <span class="mono">mainBoard[x][y]</span> will correspond to the icon at the (x, y) coordinate on the board.</p>
+	<p>Meanwhile, the “revealed boxes” data structure is also a 2D list, except instead of two-item tuples like the board data structure, it has Boolean values: <span class="mono">True</span> if the box at that x, y coordinate is revealed, and <span class="mono">False</span> if it is covered up. Passing <span class="mono">False</span> to the <span class="mono">generateRevealedBoxesData()</span> function sets all of the Boolean values to <span class="mono">False</span>. (This function is explained in detail later.)</p>
+	<p>These two data structures are used to keep track of the state of the game board.</p>
 
 	<h1 class="subheading" id="">The “Start Game” Animation</h1>
 
-<div>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">61.</span> &#160;&#160;&#160;&#160;firstSelection = None <span class="comment"># stores the (x, y) of the first box clicked.</span></p>
+		<p class="noindent mono"><span class="line-number">62.</span></p>
+		<p class="noindent mono"><span class="line-number">63.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.fill(BGCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">64.</span> &#160;&#160;&#160;&#160;startGameAnimation(mainBoard)</p>
+	</div>
 
-<p class="noindent mono"><span class="line-number">61.</span>     firstSelection
-= None <span class="comment"># stores the (x, y) of the first box clicked.</span></p>
-
-<p class="noindent mono"><span class="line-number">62.</span> </p>
-
-<p class="noindent mono"><span class="line-number">63.</span>     DISPLAYSURF.fill(BGCOLOR)</p>
-
-<p class="noindent mono"><span class="line-number">64.</span>     startGameAnimation(mainBoard)</p>
-
-</div>
-
-<p>Line 61 sets up a variable called <span class="mono">firstSelection</span>
-with the value <span class="mono">None</span>. (<span class="mono">None</span>
-is the value that represents a lack of a value. It is the only value of the
-data type, <span class="mono">NoneType</span>. More info at <a href="http://invpy.com/None">http://invpy.com/None</a>)
-When the player clicks on an icon on the board, the program needs to track if
-this was the first icon of the pair that was clicked on or the second icon. If <span
-class="mono">firstSelection</span> is <span class="mono">None</span>, the
-click was on the first icon and we store the XY coordinates in the <span
-class="mono">firstSelection</span> variable as a tuple of two integers (one
-for the X value, the other for Y). On the second click the value will be this
-tuple and not <span class="mono">None</span>, which is how the program tracks
-that it is the second icon click. Line 63 fills the entire surface with the
-background color. This will also paint over anything that used to be on the
-surface, which gives us a clean slate to start drawing graphics on.</p>
-
-<p>If you’ve played the Memory Puzzle game, you’ll notice that
-at the beginning of the game, all of the boxes are quickly covered and
-uncovered randomly to give the player a sneak peek at which icons are under
-which boxes. This all happens in the <span class="mono">startGameAnimation()</span>
-function, which is explained later in this chapter.</p>
-
-<p>It’s important to give the player this sneak peek (but not
-long enough of a peek to let the player easily memorize the icon locations),
-because otherwise they would have no clue where any icons are. Blindly clicking
-on the icons isn’t as much fun as having a little hint to go on.</p>
+	<p>Line 61 sets up a variable called <span class="mono">firstSelection</span> with the value <span class="mono">None</span>. (<span class="mono">None</span> is the value that represents a lack of a value. It is the only value of the data type, <span class="mono">NoneType</span>. More info at <a href="https://invpy.com/None">https://invpy.com/None</a>) When the player clicks on an icon on the board, the program needs to track if this was the first icon of the pair that was clicked on or the second icon. If <span class="mono">firstSelection</span> is <span class="mono">None</span>, the click was on the first icon and we store the XY coordinates in the <span class="mono">firstSelection</span> variable as a tuple of two integers (one for the X value, the other for Y). On the second click the value will be this tuple and not <span class="mono">None</span>, which is how the program tracks that it is the second icon click. Line 63 fills the entire surface with the background color. This will also paint over anything that used to be on the surface, which gives us a clean slate to start drawing graphics on.</p>
+	<p>If you’ve played the Memory Puzzle game, you’ll notice that at the beginning of the game, all of the boxes are quickly covered and uncovered randomly to give the player a sneak peek at which icons are under which boxes. This all happens in the <span class="mono">startGameAnimation()</span> function, which is explained later in this chapter.</p>
+	<p>It’s important to give the player this sneak peek (but not long enough of a peek to let the player easily memorize the icon locations), because otherwise they would have no clue where any icons are. Blindly clicking on the icons isn’t as much fun as having a little hint to go on.</p>
 
 	<h1 class="subheading" id="">The Game Loop</h1>
 
-<div>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">66.</span> &#160;&#160;&#160;&#160;while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">67.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mouseClicked = False</p>
+		<p class="noindent mono"><span class="line-number">68.</span></p>
+		<p class="noindent mono"><span class="line-number">69.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.fill(BGCOLOR) <span class="comment"># drawing the window</span></p>
+		<p class="noindent mono"><span class="line-number">70.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoard(mainBoard, revealedBoxes)</p>
+	</div>
 
-<p class="noindent mono"><span class="line-number">66.</span>     while
-True: <span class="comment"># main game loop</span></p>
+	<p>The game loop is an infinite loop that starts on line 66 that keeps iterating for as long as the game is in progress. Remember that the game loop handles events, updates the game state, and draws the game state to the screen.</p>
+	<p>The game state for the Memory Puzzle program is stored in the following variables:</p>
 
-<p class="noindent mono"><span class="line-number">67.</span>         mouseClicked
-= False</p>
+	<ul>
+		<li><span class="mono">mainBoard</span></li>
+		<li><span class="mono">revealedBoxes</span></li>
+		<li><span class="mono">firstSelection</span></li>
+		<li><span class="mono">mouseClicked</span></li>
+		<li><span class="mono">mousex</span></li>
+		<li><span class="mono">mousey</span></li>
+	</ul>
 
-<p class="noindent mono"><span class="line-number">68.</span> </p>
+	<p>On each iteration of the game loop in the Memory Puzzle program, the <span class="mono">mouseClicked</span> variable stores a Boolean value that is <span class="mono">True</span> if the player has clicked the mouse during this iteration through the game loop. (This is part of keeping track of the game state.)</p>
+	<p>On line 69, the surface is painted over with the background color to erase anything that was previously drawn on it. The program then calls <span class="mono">drawBoard()</span> to draw the current state of the board based on the board and “revealed boxes” data structures that we pass it. (These lines of code are part of drawing and updating the screen.)</p>
+	<p>Remember that our drawing functions only draw on the in-memory display Surface object. This Surface object will not actually appear on the screen until we call <span class="mono">pygame.display.update()</span>, which is done at the end of the game loop on line 121.</p>
 
-<p class="noindent mono"><span class="line-number">69.</span>         DISPLAYSURF.fill(BGCOLOR)
-<span class="comment"># drawing the window</span></p>
+	<h1 class="subheading">The Event Handling Loop</h1>
 
-<p class="noindent mono"><span class="line-number">70.</span>         drawBoard(mainBoard,
-revealedBoxes)</p>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">72.</span>        for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">73.</span>             if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
+		<p class="noindent mono"><span class="line-number">74.</span>                 pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">75.</span>                 sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">76.</span>             elif event.type == MOUSEMOTION:</p>
+		<p class="noindent mono"><span class="line-number">77.</span>                 mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">78.</span>             elif event.type == MOUSEBUTTONUP:</p>
+		<p class="noindent mono"><span class="line-number">79.</span>                 mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">80.</span>                 mouseClicked = True</p>
+	</div>
 
-</div>
-
-<p>The game loop is an infinite loop that starts on line 66
-that keeps iterating for as long as the game is in progress. Remember that the
-game loop handles events, updates the game state, and draws the game state to
-the screen.</p>
-
-<p>The game state for the Memory Puzzle program is stored in
-the following variables:</p>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-class="mono"><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><span class="mono">mainBoard</span></p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-class="mono"><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><span class="mono">revealedBoxes</span></p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-class="mono"><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><span class="mono">firstSelection</span></p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-class="mono"><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><span class="mono">mouseClicked</span></p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-class="mono"><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><span class="mono">mousex</span></p>
-
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-class="mono"><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span></span><span class="mono">mousey</span></p>
-
-<p>On each iteration of the game loop in the Memory Puzzle
-program, the <span class="mono">mouseClicked</span> variable stores a Boolean
-value that is <span class="mono">True</span> if the player has clicked the
-mouse during this iteration through the game loop. (This is part of keeping
-track of the game state.)</p>
-
-<p>On line 69, the surface is painted over with the background
-color to erase anything that was previously drawn on it. The program then calls
-<span class="mono">drawBoard()</span> to draw the current state of the board
-based on the board and “revealed boxes” data structures that we pass it. (These
-lines of code are part of drawing and updating the screen.)</p>
-
-<p>Remember that our drawing functions only draw on the
-in-memory display Surface object. This Surface object will not actually appear
-on the screen until we call <span class="mono">pygame.display.update()</span>,
-which is done at the end of the game loop on line 121.</p>
-
-<h1 class="subheading">T</h1>he Event Handling Loop</a>
-                                                  </h2>
-
-<div>
-
-<p class="noindent mono"><span class="line-number">72.</span>         for
-event in pygame.event.get(): <span class="comment"># event handling
-loop</span></p>
-
-<p class="noindent mono"><span class="line-number">73.</span>             if
-event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
-
-<p class="noindent mono"><span class="line-number">74.</span>                 pygame.quit()</p>
-
-<p class="noindent mono"><span class="line-number">75.</span>                 sys.exit()</p>
-
-<p class="noindent mono"><span class="line-number">76.</span>             elif
-event.type == MOUSEMOTION:</p>
-
-<p class="noindent mono"><span class="line-number">77.</span>                 mousex,
-mousey = event.pos</p>
-
-<p class="noindent mono"><span class="line-number">78.</span>             elif
-event.type == MOUSEBUTTONUP:</p>
-
-<p class="noindent mono"><span class="line-number">79.</span>                 mousex,
-mousey = event.pos</p>
-
-<p class="noindent mono"><span class="line-number">80.</span>                 mouseClicked
-= True</p>
-
-</div>
-
-<p>The <span class="mono">for</span> loop on line 72 executes
-code for every event that has happened since the last iteration of the game
-loop. This loop is called the <a href="glossary.xhtml#event handling loop"><b>event handling loop</b></a>
-(which is different from the game loop, although the event handling loop is
-inside of the game loop) and iterates over the list of <span class="mono">pygame.Event</span>
-objects returned by the <span class="mono">pygame.event.get()</span> call.</p>
-
-<p>If the event object was a either a <span class="mono">QUIT</span>
-event or a <span class="mono">KEYUP</span> event for the Esc key, then the
-program should terminate. Otherwise, in the event of a <span class="mono">MOUSEMOTION</span>
-event (that is, the mouse cursor has moved) or <span class="mono">MOUSEBUTTONUP</span>
-event (that is, a mouse button was pressed earlier and now the button was let
-up), the position of the mouse cursor should be stored in the <span
-class="mono">mousex</span> and <span class="mono">mousey</span> variables. If
-this was a <span class="mono">MOUSEBUTTONUP</span> event, <span class="mono">mouseClicked</span>
-should also be set to <span class="mono">True</span>.</p>
-
-<p>Once we have handled all of the events, the values stored in
-<span class="mono">mousex</span>, <span class="mono">mousey</span>, and <span
-class="mono">mouseClicked</span> will tell us any input that player has given
-us. Now we should update the game state and draw the results to the screen.</p>
+	<p>The <span class="mono">for</span> loop on line 72 executes code for every event that has happened since the last iteration of the game loop. This loop is called the <a href="glossary.xhtml#event-handling-loop"><b>event handling loop</b></a> (which is different from the game loop, although the event handling loop is inside of the game loop) and iterates over the list of <span class="mono">pygame.Event</span> objects returned by the <span class="mono">pygame.event.get()</span> call.</p>
+	<p>If the event object was a either a <span class="mono">QUIT</span> event or a <span class="mono">KEYUP</span> event for the Esc key, then the program should terminate. Otherwise, in the event of a <span class="mono">MOUSEMOTION</span> event (that is, the mouse cursor has moved) or <span class="mono">MOUSEBUTTONUP</span> event (that is, a mouse button was pressed earlier and now the button was let up), the position of the mouse cursor should be stored in the <span class="mono">mousex</span> and <span class="mono">mousey</span> variables. If this was a <span class="mono">MOUSEBUTTONUP</span> event, <span class="mono">mouseClicked</span> should also be set to <span class="mono">True</span>.</p>
+	<p>Once we have handled all of the events, the values stored in <span class="mono">mousex</span>, <span class="mono">mousey</span>, and <span class="mono">mouseClicked</span> will tell us any input that player has given us. Now we should update the game state and draw the results to the screen.</p>
 
 	<h1 class="subheading" id="">Checking Which Box The Mouse Cursor is Over</h1>
-
-<div>
+<!--
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">82.</span>         boxx,
 boxy = getBoxAtPixel(mousex, mousey)</p>
@@ -1623,7 +1243,7 @@ can click on it. This highlighting is not done for boxes that are already
 uncovered. The highlight drawing is handled by our <span class="mono">drawHighlightBox()</span>
 function, which is explained later.</p>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">87.</span>             if
 not revealedBoxes[boxx][boxy] and mouseClicked:</p>
@@ -1655,7 +1275,7 @@ an odd bug in our program.</p>
 
 	<h1 class="subheading" id="">Handling the First Clicked Box</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">90.</span>                 if
 firstSelection == None: <span class="comment"># the current box was the
@@ -1696,7 +1316,7 @@ and <span class="mono">ALLSHAPES</span> tuples.)</p>
 
 	<h1 class="subheading" id="">Handling a Mismatched Pair of Icons</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">97.</span>                     if
 icon1shape != icon2shape or icon1color != icon2color:</p>
@@ -1728,7 +1348,7 @@ state to mark these boxes as not revealed (that is, covered up).</p>
 
 	<h1 class="subheading" id="">Handling If the Player Won</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">103. </span>                     elif
 hasWon(revealedBoxes): <span class="comment"># check if all pairs found</span></p>
@@ -1798,7 +1418,7 @@ possibly matching icons.</p>
 
 	<h1 class="subheading" id="">Drawing the Game State to the Screen</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">120. </span>         <span
 class="comment"># Redraw the screen and wait a clock tick.</span></p>
@@ -1847,7 +1467,7 @@ class="mono">main()</span>.</p>
 
 	<h1 class="subheading" id="">Creating the “Revealed Boxes” Data Structure</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">125. </span> def
 generateRevealedBoxesData(val):</p>
@@ -1887,7 +1507,7 @@ dictates.</p>
 <h1 class="subheading">C</h1>reating the Board Data Structure: Step 1 – Get All
 Possible Icons</a></h2>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">132. </span> def
 getRandomizedBoard():</p>
@@ -1927,7 +1547,7 @@ variable on line 137.</p>
 <h1 class="subheading">S</h1>tep 2 – Shuffling and Truncating the List of All
 Icons</a></h2>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">139. </span>     random.shuffle(icons)
 <span class="comment"># randomize the order of the icons list</span></p>
@@ -1963,7 +1583,7 @@ order of the icons.</p>
 
 	<h1 class="subheading" id="">Step 3 – Placing the Icons on the Board</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">144. </span>     <span
 class="comment"># Create the board data structure, with randomly placed
@@ -2055,7 +1675,7 @@ the other items shift forward so that the next item in the list becomes the new
 
 	<h1 class="subheading" id="">Splitting a List into a List of Lists</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">155. </span> def
 splitIntoGroupsOf(groupSize, theList):</p>
@@ -2123,7 +1743,7 @@ function, we are returning a list of lists.</p>
 
 	<h1 class="subheading" id="">Different Coordinate Systems</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">164. </span> def
 leftTopCoordsOfBox(boxx, boxy):</p>
@@ -2171,7 +1791,7 @@ when we need pixel coordinates for drawing these boxes.</p>
 <h1 class="subheading">C</h1>onverting from Pixel Coordinates to Box
 Coordinates</a></h2>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">171. </span> def
 getBoxAtPixel(x, y):</p>
@@ -2219,7 +1839,7 @@ tuple of two values to be returned.</p>
 
 	<h1 class="subheading" id="">Drawing the Icon, and Syntactic Sugar</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">181. </span> def
 drawIcon(shape, color, boxx, boxy):</p>
@@ -2271,7 +1891,7 @@ need to have the extra <span class="mono">quarter</span> and <span
 class="mono">half</span> variables, but having them makes the code easier to
 read. Code that is easy to read is easy to debug and upgrade in the future.</p>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">186. </span>     <span
 class="comment"># Draw the shapes</span></p>
@@ -2324,7 +1944,7 @@ functions require different drawing primitive function calls to make. </p>
 <h1 class="subheading">S</h1>yntactic Sugar with Getting a Board Space’s Icon’s
 Shape and Color</a></h2>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">202. </span> def
 getShapeAndColor(board, boxx, boxy):</p>
@@ -2352,7 +1972,7 @@ board[boxx][boxy][1]</span>, it would be a bit more difficult to figure out.</p>
 
 	<h1 class="subheading" id="">Drawing the Box Cover</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">208. </span> def
 drawBoxCovers(board, boxes, coverage):</p>
@@ -2428,7 +2048,7 @@ take a second or so to play.)</p>
 
 	<h1 class="subheading" id="">Handling the Revealing and Covering Animation</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">222. </span> def
 revealBoxesAnimation(board, boxesToReveal):</p>
@@ -2494,7 +2114,7 @@ climb the entire staircase 8 times as fast.</p>
 
 	<h1 class="subheading" id="">Drawing the Entire Board</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">234. </span> def
 drawBoard(board, revealed):</p>
@@ -2543,7 +2163,7 @@ represent a covered up box).</p>
 
 	<h1 class="subheading" id="">Drawing the Highlight</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">248. </span> def
 drawHighlightBox(boxx, boxy):</p>
@@ -2563,7 +2183,7 @@ to make a rectangle with a width of 4 pixels.</p>
 
 	<h1 class="subheading" id="">The “Start Game” Animation</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">253. </span> def
 startGameAnimation(board):</p>
@@ -2619,7 +2239,7 @@ function returns will be stored in a variable named <span class="mono">boxGroups
 
 	<h1 class="subheading" id="">Revealing and Covering the Groups of Boxes</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">263.</span>
 drawBoard(board, coveredBoxes)</p>
@@ -2653,7 +2273,7 @@ set of 8 boxes.</p>
 
 	<h1 class="subheading" id="">The “Game Won” Animation</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">269. </span> def
 gameWonAnimation(board):</p>
@@ -2705,7 +2325,7 @@ class="mono">DISPLAYSURF</span> surface appear on the screen.</p>
 
 	<h1 class="subheading" id="">Telling if the Player Has Won</h1>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">283. </span> def
 hasWon(revealedBoxes):</p>
@@ -2762,7 +2382,7 @@ False</p>
 <h1 class="subheading">W</h1>hy Bother Having a </a><span class="mono">main()</span>
 Function?</h2>
 
-<div>
+<div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">291. </span> if
 __name__ == '__main__':</p>
@@ -3325,41 +2945,15 @@ return False</p>
 
 </div>
 
-<p>Never write code like this. If you program like this while
-facing the mirror in a bathroom with the lights turned off, the ghost of Ada
-Lovelace will come out of the mirror and throw you into the jaws of a Jacquard
-loom.</p>
+	<p>Never write code like this. If you program like this while facing the mirror in a bathroom with the lights turned off, the ghost of Ada Lovelace will come out of the mirror and throw you into the jaws of a Jacquard loom.</p>
 
-	<h1 class="subheading" id="">Summary, and a Hacking Suggestion</h1>
+	<h1 class="subheading" id="summary">Summary, and a Hacking Suggestion</h1>
 
-<p>This chapter covers the entire explanation of how the Memory
-Puzzle program works. Read over the chapter and the source code again to
-understand it better. Many of the other game programs in this book make use of
-the same programming concepts (like nested <span class="mono">for</span> loops,
-syntactic sugar, and different coordinate systems in the same program) so they
-won’t be explained again to keep this book short.</p>
+	<p>This chapter covers the entire explanation of how the Memory Puzzle program works. Read over the chapter and the source code again to understand it better. Many of the other game programs in this book make use of the same programming concepts (like nested <span class="mono">for</span> loops, syntactic sugar, and different coordinate systems in the same program) so they won’t be explained again to keep this book short.</p>
+	<p>One idea to try out to understand how the code works is to intentionally break it by commenting out random lines. Doing this to some of the lines will probably cause a syntactic error that will prevent the script from running at all. But commenting out other lines will result in weird bugs and other cool effects. Try doing this and then figure out why a program has the bugs it does.</p>
+	<p>This is also the first step in being able to add your own secret cheats or hacks to the program. By breaking the program from what it normally does, you can learn how to change it to do something neat effect (like secretly giving you hints on how to solve the puzzle). Feel free to experiment. You can always save a copy of the unchanged source code in a different file if you want to play the regular game again.</p>
+	<p>In fact, if you’d like some practice fixing bugs, there are several versions of this game’s source code that have small bugs in them. You can download these buggy versions from <a href="https://invpy.com/buggy/memorypuzzle">https://invpy.com/buggy/memorypuzzle</a>. Try running the program to figure out what the bug is, and why the program is acting that way.</p>
 
-<p>One idea to try out to understand how the code works is to
-intentionally break it by commenting out random lines. Doing this to some of
-the lines will probably cause a syntactic error that will prevent the script
-from running at all. But commenting out other lines will result in weird bugs
-and other cool effects. Try doing this and then figure out why a program has
-the bugs it does.</p>
-
-<p>This is also the first step in being able to add your own secret
-cheats or hacks to the program. By breaking the program from what it normally
-does, you can learn how to change it to do something neat effect (like secretly
-giving you hints on how to solve the puzzle). Feel free to experiment. You can
-always save a copy of the unchanged source code in a different file if you want
-to play the regular game again.</p>
-
-<p>In fact, if you’d like some practice fixing bugs, there are
-several versions of this game’s source code that have small bugs in them. You
-can download these buggy versions from <a href="http://invpy.com/buggy/memorypuzzle">http://invpy.com/buggy/memorypuzzle</a>.
-Try running the program to figure out what the bug is, and why the program is
-acting that way.</p>
-
-</div>
 -->
 </body>
 </html>
