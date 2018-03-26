@@ -30,7 +30,7 @@
 	</navPoint>
 	<navPoint id="navpoint-4" playOrder="4">
 		<navLabel>
-			<text>License</text>
+			<text>Licenses</text>
 		</navLabel>
 		<content src="license.xhtml" />
 		<navPoint id="navpoint-5" playOrder="5">

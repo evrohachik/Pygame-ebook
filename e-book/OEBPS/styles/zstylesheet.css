@@ -387,6 +387,12 @@ td, th
 	width: 100%;
 }
 
+.image
+{
+	display: block;
+	width: 100%;
+}
+
 .book
 {
 	display: block;

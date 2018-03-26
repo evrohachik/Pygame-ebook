@@ -1177,8 +1177,8 @@ __name__ == '__main__':</p>
 	<h1 class="subheading">The Event Handling Loop</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">72.</span>        for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
-		<p class="noindent mono"><span class="line-number">73.</span>             if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
+		<p class="noindent mono"><span class="line-number">72.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">73.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
 		<p class="noindent mono"><span class="line-number">74.</span>                 pygame.quit()</p>
 		<p class="noindent mono"><span class="line-number">75.</span>                 sys.exit()</p>
 		<p class="noindent mono"><span class="line-number">76.</span>             elif event.type == MOUSEMOTION:</p>
@@ -1193,88 +1193,30 @@ __name__ == '__main__':</p>
 	<p>Once we have handled all of the events, the values stored in <span class="mono">mousex</span>, <span class="mono">mousey</span>, and <span class="mono">mouseClicked</span> will tell us any input that player has given us. Now we should update the game state and draw the results to the screen.</p>
 
 	<h1 class="subheading" id="">Checking Which Box The Mouse Cursor is Over</h1>
-<!--
-<div class="python-shell">
 
-<p class="noindent mono"><span class="line-number">82.</span>         boxx,
-boxy = getBoxAtPixel(mousex, mousey)</p>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;boxx, boxy = getBoxAtPixel(mousex, mousey)</p>
+		<p class="noindent mono"><span class="line-number">83.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if boxx != None and boxy != None:</p>
+		<p class="noindent mono"><span class="line-number">84.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># The mouse is currently over a box.</span></p>
+		<p class="noindent mono"><span class="line-number">85.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not revealedBoxes[boxx][boxy]:</p>
+		<p class="noindent mono"><span class="line-number"> 86.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawHighlightBox(boxx, boxy)</p>
+	</div>
 
-<p class="noindent mono"><span class="line-number">83.</span>         if
-boxx != None and boxy != None:</p>
+	<p>The <span class="mono">getBoxAtPixel()</span> function will return a tuple of two integers. The integers represent the XY board coordinates of the box that the mouse coordinates are over. How <span class="mono">getBoxAtPixel()</span> does this is explained later. All we have to know for now is that if the <span class="mono">mousex</span> and <span class="mono">mousey</span> coordinates were over a box, a tuple of the XY board coordinates are returned by the function and stored in <span class="mono">boxx</span> and <span class="mono">boxy</span>. If the mouse cursor was not over any box (for example, if it was off to the side of the board or in a gap in between boxes) then the tuple <span class="mono">(None, None)</span> is returned by the function and <span class="mono">boxx</span> and <span class="mono">boxy</span> will both have <span class="mono">None</span> stored in them.</p>
+	<p>We are only interested in the case where <span class="mono">boxx</span> and <span class="mono">boxy</span> do not have <span class="mono">None</span> in them, so the next several lines of code are in the block following the <span class="mono">if</span> statement on line 83 that checks for this case. If execution has come inside this block, we know the user has the mouse cursor over a box (and maybe has also clicked the mouse, depending on the value stored in <span class="mono">mouseClicked</span>).</p>
+	<p>The <span class="mono">if</span> statement on line 85 checks if the box is covered up or not by reading the value stored in <span class="mono">revealedBoxes[boxx][boxy]</span>. If it is <span class="mono">False</span>, then we know the box is covered. Whenever the mouse is over a covered up box, we want to draw a blue highlight around the box to inform the player that they can click on it. This highlighting is not done for boxes that are already uncovered. The highlight drawing is handled by our <span class="mono">drawHighlightBox()</span> function, which is explained later.</p>
 
-<p class="noindent mono"><span class="line-number">84.</span>             <span
-class="comment"># The mouse is currently over a box.</span></p>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">87.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not revealedBoxes[boxx][boxy] and mouseClicked:</p>
+		<p class="noindent mono"><span class="line-number">88.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealBoxesAnimation(mainBoard, [(boxx, boxy)])</p>
+		<p class="noindent mono"><span class="line-number">89.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes[boxx][boxy] = True <span class="comment"># set the box as &quot;revealed&quot;</span></p>
+	</div>
 
-<p class="noindent mono"><span class="line-number">85.</span>             if
-not revealedBoxes[boxx][boxy]:</p>
-
-<p class="noindent mono"><span class="line-number"> 86.</span>
-drawHighlightBox(boxx, boxy)</p>
-
-</div>
-
-<p>The <span class="mono">getBoxAtPixel()</span> function will
-return a tuple of two integers. The integers represent the XY board coordinates
-of the box that the mouse coordinates are over. How <span class="mono">getBoxAtPixel()</span>
-does this is explained later. All we have to know for now is that if the <span
-class="mono">mousex</span> and <span class="mono">mousey</span> coordinates
-were over a box, a tuple of the XY board coordinates are returned by the
-function and stored in <span class="mono">boxx</span> and <span class="mono">boxy</span>.
-If the mouse cursor was not over any box (for example, if it was off to the
-side of the board or in a gap in between boxes) then the tuple <span
-class="mono">(None, None)</span> is returned by the function and <span
-class="mono">boxx</span> and <span class="mono">boxy</span> will both have <span
-class="mono">None</span> stored in them.</p>
-
-<p>We are only interested in the case where <span
-class="mono">boxx</span> and <span class="mono">boxy</span> do not have <span
-class="mono">None</span> in them, so the next several lines of code are in the
-block following the <span class="mono">if</span> statement on line 83 that
-checks for this case. If execution has come inside this block, we know the user
-has the mouse cursor over a box (and maybe has also clicked the mouse,
-depending on the value stored in <span class="mono">mouseClicked</span>).</p>
-
-<p>The <span class="mono">if</span> statement on line 85
-checks if the box is covered up or not by reading the value stored in <span
-class="mono">revealedBoxes[boxx][boxy]</span>. If it is <span class="mono">False</span>,
-then we know the box is covered. Whenever the mouse is over a covered up box,
-we want to draw a blue highlight around the box to inform the player that they
-can click on it. This highlighting is not done for boxes that are already
-uncovered. The highlight drawing is handled by our <span class="mono">drawHighlightBox()</span>
-function, which is explained later.</p>
-
-<div class="python-shell">
-
-<p class="noindent mono"><span class="line-number">87.</span>             if
-not revealedBoxes[boxx][boxy] and mouseClicked:</p>
-
-<p class="noindent mono"><span class="line-number">88.</span>                 revealBoxesAnimation(mainBoard,
-[(boxx, boxy)])</p>
-
-<p class="noindent mono"><span class="line-number">89.</span>                 revealedBoxes[boxx][boxy]
-= True <span class="comment"># set the box as &quot;revealed&quot;</span></p>
-
-</div>
-
-<p>On line 87, we check if the mouse cursor is not only over a
-covered up box but if the mouse has also been clicked. In that case, we want to
-play the “reveal” animation for that box by calling our <span class="mono">revealBoxesAnimation()</span>
-function (which is, as with all the other functions <span class="mono">main()</span>
-calls, explained later in this chapter). You should note that calling this
-function only draws the animation of the box being uncovered. It isn’t until
-line 89 when we set <span class="mono">revealedBoxes[boxx][boxy] = True</span>
-that the data structure that tracks the game state is updated.</p>
-
-<p>If you comment out line 89 and then run the program, you’ll
-notice that after clicking on a box the reveal animation is played, but then
-the box immediately appears covered up again. This is because <span
-class="mono">revealedBoxes[boxx][boxy]</span> is still set to <span
-class="mono">False</span>, so on the next iteration of the game loop, the
-board is drawn with this box covered up. Not having line 89 would cause quite
-an odd bug in our program.</p>
+	<p>On line 87, we check if the mouse cursor is not only over a covered up box but if the mouse has also been clicked. In that case, we want to play the “reveal” animation for that box by calling our <span class="mono">revealBoxesAnimation()</span> function (which is, as with all the other functions <span class="mono">main()</span> calls, explained later in this chapter). You should note that calling this function only draws the animation of the box being uncovered. It isn’t until line 89 when we set <span class="mono">revealedBoxes[boxx][boxy] = True</span> that the data structure that tracks the game state is updated.</p>
+	<p>If you comment out line 89 and then run the program, you’ll notice that after clicking on a box the reveal animation is played, but then the box immediately appears covered up again. This is because <span class="mono">revealedBoxes[boxx][boxy]</span> is still set to <span class="mono">False</span>, so on the next iteration of the game loop, the board is drawn with this box covered up. Not having line 89 would cause quite an odd bug in our program.</p>
 
 	<h1 class="subheading" id="">Handling the First Clicked Box</h1>
-
+<!--
 <div class="python-shell">
 
 <p class="noindent mono"><span class="line-number">90.</span>                 if
