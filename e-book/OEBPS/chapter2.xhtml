@@ -24,18 +24,18 @@
 	<p>Remember, do not type the numbers or the periods at the beginning of each line (that’s just for reference in this book).</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> <span class="keyword">import</span> pygame, sys</p>
-		<p class="noindent mono"><span class="line-number">2.</span> <span class="keyword">from</span> pygame.locals <span class="keyword">import</span> *</p>
+		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
 		<p class="noindent mono"><span class="line-number">3.</span></p>
 		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
 		<p class="noindent mono"><span class="line-number">5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
 		<p class="noindent mono"><span class="line-number">6.</span> pygame.display.set_caption(<span class="string">'Hello World!'</span>)</p>
-		<p class="noindent mono"><span class="line-number">7.</span> <span class="keyword">while True</span>: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;<span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</p>
-		<p class="noindent mono"><span class="line-number">9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="keyword">if</span> event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">7.</span> while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
 		<p class="noindent mono"><span class="line-number">10.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
 		<p class="noindent mono"><span class="line-number">11.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
-		<p class="noindent mono"><span class="line-number">12.</span> &#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">12.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
 	</div>
 
 	<p>When you run this program, a black window like this will appear:</p>
@@ -83,8 +83,8 @@
 	<h1 class="subheading" id="game-loops-game-states">Game Loops and Game States</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">7.</span> <span class="keyword">while True</span>: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;<span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">7.</span> while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
 	</div>
 
 	<p>Line 7 is a <span class="mono">while</span> loop that has a condition of simply the value <span class="mono">True</span>. This means that it never exits due to its condition evaluating to <span class="mono">False</span>. The only way the program execution will ever exit the loop is if a break statement is executed (which moves execution to the first line after the loop) or <span class="mono">sys.exit()</span> (which terminates the program). If a loop like this was inside a function, a <span class="mono">return</span> statement will also move execution out of the loop (as well as the function too).</p>
@@ -333,11 +333,11 @@
 		<p class="noindent mono"><span class="line-number">34.</span></p>
 		<p class="noindent mono"><span class="line-number">35.</span> <span class="comment"># run the game loop</span></p>
 		<p class="noindent mono"><span class="line-number">36.</span> while True:</p>
-		<p class="noindent mono"><span class="line-number">37.</span> &#160;&#160;for event in pygame.event.get():</p>
-		<p class="noindent mono"><span class="line-number">38.</span> &#160;&#160;&#160;&#160;if event.type == QUIT:</p>
-		<p class="noindent mono"><span class="line-number">39.</span> &#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
-		<p class="noindent mono"><span class="line-number">40.</span> &#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
-		<p class="noindent mono"><span class="line-number">41.</span> &#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">37.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">38.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">39.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">40.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">41.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
 	</div>
 
 	<p>When this program is run, the following window is displayed until the user closes the window:</p>
@@ -484,12 +484,12 @@
 		<p class="noindent mono"><span class="line-number">15.</span> textRectObj.center = (200, 150)</p>
 		<p class="noindent mono"><span class="line-number">16.</span></p>
 		<p class="noindent mono"><span class="line-number">17.</span> while True: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"><span class="line-number">18.</span> &#160;&#160;DISPLAYSURF.fill(WHITE)</p>
-		<p class="noindent mono"><span class="line-number">19.</span> &#160;&#160;DISPLAYSURF.blit(textSurfaceObj, textRectObj)</p>
+		<p class="noindent mono"><span class="line-number">18.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.fill(WHITE)</p>
+		<p class="noindent mono"><span class="line-number">19.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.blit(textSurfaceObj, textRectObj)</p>
 		<p class="noindent mono"><span class="line-number">20.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
-		<p class="noindent mono"><span class="line-number">21.</span> &#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
-		<p class="noindent mono"><span class="line-number">22.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
-		<p class="noindent mono"><span class="line-number">23.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">21.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">22.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">23.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
 		<p class="noindent mono"><span class="line-number">24.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
 	</div>
 
@@ -527,7 +527,7 @@
 		<p class="noindent mono">soundObj.stop()</p>
 	</div>
 
-	<p>You can download the <i>beeps.wav</i> file from <a href="https://invpy.com/beeps.wav">http://invpy.com/beeps.wav</a>.</p>
+	<p>You can download the <i>beeps.wav</i> file from <a href="https://invpy.com/beeps.wav">https://invpy.com/beeps.wav</a>.</p>
 	<p>The program execution continues immediately after <span class="mono">play()</span> is called; it does not wait for the sound to finish playing before moving on to the next line of code.</p>
 	<p>The Sound objects are good for sound effects to play when the player takes damage, slashes a sword, or collects a coin. But your games might also be better if they had background music playing regardless of what was going on in the game. Pygame can only load one music file to play in the background at a time. To load a background music file, call the <span class="mono">pygame.mixer.music.load()</span> function and pass it a string argument of the sound file to load. This file can be WAV, MP3, or MIDI format.</p>
 	<p>To begin playing the loaded sound file as the background music, call the <span class="mono">pygame.mixer.music.play(-1, 0.0)</span> function. The <span class="mono">-1</span> argument makes the background music forever loop when it reaches the end of the sound file. If you set it to an integer <span class="mono">0</span> or larger, then the music will only loop that number of times instead of looping forever. The <span class="mono">0.0</span> means to start playing the sound file from the beginning. If you pass a larger integer or float, the music will begin playing that many seconds into the sound file. For example, if you pass <span class="mono">13.5</span> for the second parameter, the sound file with begin playing at the point 13.5 seconds in from the beginning.</p>
@@ -548,7 +548,7 @@
 
 <h1 class="subheading" id="summary">Summary</h1>
 <p class="noindent">This covers the basics of making graphical games with the Pygame framework. Of course, just reading about these functions probably isn’t enough to help you learn how to make games using these functions. The rest of the chapters in this book each focus on the source code for a small, complete game. This will give you an idea of what complete game programs “look like”, so you can then get some ideas for how to code your own game programs.</p>
-<p>Unlike the <i>“Invent Your Own Computer Games with Python”</i> book, this book assumes that you know the basics of Python programming. If you have trouble remembering how variables, functions, loops, <span class="mono">if</span>-<span class="mono">else</span> statements, and conditions work, you can probably figure it out just by seeing what’s in the code and how the program behaves. But if you are still stuck, you can read the “Invent with Python” book (it’s for people who are completely new to programming) for free online at <a href="https://inventwithpython.com">https://inventwithpython.com</a>.</p>
+<p>Unlike the <i>“Invent Your Own Computer Games with Python”</i> book, this book assumes that you know the basics of Python programming. If you have trouble remembering how variables, functions, loops, <span class="mono">if</span>-<span class="mono">else</span> statements, and conditions work, you can probably figure it out just by seeing what’s in the code and how the program behaves. But if you are still stuck, you can read the <i>“Invent with Python”</i> book (it’s for people who are completely new to programming) for free online at <a href="https://inventwithpython.com">https://inventwithpython.com</a>.</p>
 
 </body>
 </html>
