@@ -1892,7 +1892,7 @@ return the correct return values:</p>
 	<p>That’s why the code is in a separate function that we have named <span class="mono">main()</span>. Then we check the built-in Python variable <span class="mono">__name__</span> to see if we should call the <span class="mono">main()</span> function or not. This variable is automatically set by the Python interpreter to the string <span class="mono">'__main__'</span> if the program itself is being run and <span class="mono">'memorypuzzle'</span> if it is being imported. This is why the <span class="mono">main()</span> function is not run when we executed the <span class="mono">import memorypuzzle</span> statement in the interactive shell.</p>
 	<p>This is a handy technique for being able to import the program you are working on from the interactive shell and make sure individual functions are returning the correct values by testing them one call at a time.</p>
 
-	<h1 class="subheading" id="">Why Bother With Readability?</h1>
+	<h1 class="subheading" id="bother-readibility">Why Bother With Readability?</h1>
 	<p class="noindent">A lot of the suggestions in this chapter haven’t been about how to write programs that computers can run so much as how to write programs that programmers can read. You might not understand why this is important. After all, as long as the code works, who cares if it is hard or easy for human programmers to read?</p>
 	<p>However, the important thing to realize about software is that it is rarely ever left alone. When you are creating your own games, you will rarely be “done” with the program. You will always get new ideas for game features you want add, or find new bugs with the program. Because of this, it is important that your program is readable so that you can look at the code and understand it. And understanding the code is the first step to changing it to add more code or fix bugs.</p>
 	<p>As an example, here is an obfuscated version of the Memory Puzzle program that was made entirely unreadable. If you type it in (or download it from <a href="https://invpy.com/memorypuzzle_obfuscated.py">https://invpy.com/memorypuzzle_obfuscated.py</a>) and run it you will find it runs exactly the same as the code at the beginning of this chapter. But if there was a bug with this code, it would be impossible to read the code and understand what’s going on, much less fix the bug.</p>
@@ -1934,289 +1934,140 @@ return the correct return values:</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not hh[bb][ee] and e:</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;o(i, [(bb, ee)])</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;hh[bb][ee] = True</p>
-		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if h == None:</p>
-		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h = (bb, ee)</p>
-		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</p>
-		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;q, fff = s(i, h[0], h[1])</p>
-		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;r, ggg = s(i, bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if h == None:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h = (bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;q, fff = s(i, h[0], h[1])</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;r, ggg = s(i, bb, ee)</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if q != r or fff != ggg:</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(1000)</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;p(i, [(h[0], h[1]), (bb, ee)])</p>
-		<p class="noindent mono">hh[h[0]][h[1]] = False</p>
-		<p class="noindent mono">hh[bb][ee] = False</p>
-		<p class="noindent mono">elif ii(hh):</p>
-		<p class="noindent mono">jj(i)</p>
-		<p class="noindent mono">pygame.time.wait(2000)</p>
-		<p class="noindent mono">                      i = c()</p>
-		<p class="noindent mono">hh = d(False)</p>
-		<p class="noindent mono">f(i, hh)</p>
-		<p class="noindent mono">pygame.display.update()</p>
-		<p class="noindent mono">pygame.time.wait(1000)</p>
-		<p class="noindent mono">g(i)</p>
-		<p class="noindent mono">h = None</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;hh[h[0]][h[1]] = False</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;hh[bb][ee] = False</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif ii(hh):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;jj(i)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(2000)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;i = c()</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;hh = d(False)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;f(i, hh)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(1000)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;g(i)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h = None</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
-		<p class="noindent mono">a.tick(30)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;a.tick(30)</p>
 		<p class="noindent mono">def d(ccc):</p>
-		<p class="noindent mono">  hh = []</p>
-		<p class="noindent mono">  for i in range(10):</p>
-		<p class="noindent mono">hh.append([ccc] * 7)</p>
-		<p class="noindent mono">  return hh</p>
-		<p class="noindent mono">def c():</p>
-		<p class="noindent mono">  rr = []</p>
-		<p class="noindent mono">  for tt in ((255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 128, 0), (255, 0, 255), (0, 255, 255)):</p>
-		<p class="noindent mono">      for ss in ('a', 'b', 'c', 'd', 'e'):</p>
-		<p class="noindent mono">rr.append( (ss, tt) )</p>
-		<p class="noindent mono">random.shuffle(rr)</p>
-		<p class="noindent mono">  rr = rr[:35] * 2</p>
-		<p class="noindent mono">random.shuffle(rr)</p>
-		<p class="noindent mono">  bbb = []</p>
-		<p class="noindent mono">  for x in range(10):</p>
-		<p class="noindent mono">      v = []</p>
-		<p class="noindent mono">      for y in range(7):</p>
-		<p class="noindent mono">          v.append(rr[0])</p>
-		<p class="noindent mono">          del rr[0]</p>
-		<p class="noindent mono">bbb.append(v)</p>
-		<p class="noindent mono">  return bbb</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;hh = []</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for i in range(10):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;hh.append([ccc] * 7)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return hh</p>
+		<p class="noindent mono"> def c():</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;rr = []</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for tt in ((255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 128, 0), (255, 0, 255), (0, 255, 255)):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for ss in ('a', 'b', 'c', 'd', 'e'):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;rr.append( (ss, tt) )</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;random.shuffle(rr)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;rr = rr[:35] * 2</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;random.shuffle(rr)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;bbb = []</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for x in range(10):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;v = []</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(7):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;v.append(rr[0])</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;del rr[0]</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;bbb.append(v)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return bbb</p>
 		<p class="noindent mono">def t(vv, uu):</p>
-		<p class="noindent mono">  ww = []</p>
-		<p class="noindent mono">  for i in range(0, len(uu), vv):</p>
-		<p class="noindent mono">ww.append(uu[i:i + vv])</p>
-		<p class="noindent mono">  return ww</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;ww = []</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for i in range(0, len(uu), vv):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ww.append(uu[i:i + vv])</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return ww</p>
 		<p class="noindent mono">def aa(bb, ee):</p>
-		<p class="noindent mono">  return (bb * 50 + 70, ee * 50 + 65)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return (bb * 50 + 70, ee * 50 + 65)</p>
 		<p class="noindent mono">def m(x, y):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for bb in range(10):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for ee in range(7):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oo, ddd = aa(bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;aaa = pygame.Rect(oo, ddd, 40, 40)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if aaa.collidepoint(x, y):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return (bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return (None, None)</p>
+		<p class="noindent mono">def w(ss, tt, bb, ee):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;oo, ddd = aa(bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;if ss == 'a':</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.circle(b, tt, (oo + 20, ddd + 20), 15)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.circle(b, (60, 60, 100), (oo + 20, ddd + 20), 5)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;elif ss == 'b':</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(b, tt, (oo + 10, ddd + 10, 20, 20))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;elif ss == 'c':</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.polygon(b, tt, ((oo + 20, ddd), (oo + 40 - 1, ddd + 20), (oo + 20, ddd + 40 - 1), (oo, ddd + 20)))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;elif ss == 'd':</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for i in range(0, 40, 4):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.line(b, tt, (oo, ddd + i), (oo + i, ddd))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.line(b, tt, (oo + i, ddd + 39), (oo + 39, ddd + i))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;elif ss == 'e':</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.ellipse(b, tt, (oo, ddd + 10, 40, 20))</p>
+		<p class="noindent mono">def s(bbb, bb, ee):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return bbb[bb][ee][0], bbb[bb][ee][1]</p>
+		<p class="noindent mono">def dd(bbb, boxes, gg):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for box in boxes:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oo, ddd = aa(box[0], box[1])</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(b, (60, 60, 100), (oo, ddd, 40, 40))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ss, tt = s(bbb, box[0], box[1])</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;w(ss, tt, box[0], box[1])</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if gg &gt; 0:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(b, (255, 255, 255), (oo, ddd, gg, 40))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;a.tick(30)</p>
+		<p class="noindent mono">def o(bbb, cc):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for gg in range(40, (-8) - 1, -8):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;dd(bbb, cc, gg)</p>
+		<p class="noindent mono">def p(bbb, ff):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for gg in range(0, 48, 8):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;dd(bbb, ff, gg)</p>
+		<p class="noindent mono">def f(bbb, pp):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for bb in range(10):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for ee in range(7):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oo, ddd = aa(bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not pp[bb][ee]:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(b, (255, 255, 255), (oo, ddd, 40, 40))</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ss, tt = s(bbb, bb, ee)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;w(ss, tt, bb, ee)</p>
+		<p class="noindent mono">def n(bb, ee):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;oo, ddd = aa(bb, ee)</p>
+		<p class="noindent mono">pygame.draw.rect(b, (0, 0, 255), (oo - 5, ddd - 5, 50, 50), 4)</p>
+		<p class="noindent mono">def g(bbb):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;mm = d(False)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;boxes = []</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for x in range(10):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(7):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;boxes.append( (x, y) )</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;random.shuffle(boxes)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;kk = t(8, boxes)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;f(bbb, mm)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for nn in kk:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;o(bbb, nn)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;p(bbb, nn)</p>
+		<p class="noindent mono">def jj(bbb):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;mm = d(True)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;tt1 = (100, 100, 100)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;tt2 = (60, 60, 100)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for i in range(13):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tt1, tt2 = tt2, tt1</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;b.fill(tt1)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;f(bbb, mm)</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(300)</p>
+		<p class="noindent mono">def ii(hh):</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;for i in hh:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if False in i:</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return False</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;return True</p>
+		<p class="noindent mono">if __name__ == '__main__':</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;hhh()</p>
 	</div>
-<!--
-		<p class="noindent mono">  for bb in
-range(10):</p>
 
-		<p class="noindent mono">      for ee
-in range(7):</p>
-
-		<p class="noindent mono">          oo,
-ddd = aa(bb, ee)</p>
-
-		<p class="noindent mono">          aaa
-= pygame.Rect(oo, ddd, 40, 40)</p>
-
-		<p class="noindent mono">          if
-aaa.collidepoint(x, y):</p>
-
-<p class="noindent mono">
-return (bb, ee)</p>
-
-		<p class="noindent mono">  return
-(None, None)</p>
-
-<p class="noindent mono">def w(ss, tt,
-bb, ee):</p>
-
-		<p class="noindent mono">  oo, ddd =
-aa(bb, ee)</p>
-
-		<p class="noindent mono">  if ss ==
-'a':</p>
-
-<p class="noindent mono">
-pygame.draw.circle(b, tt, (oo + 20, ddd + 20), 15)</p>
-
-<p class="noindent mono">
-pygame.draw.circle(b, (60, 60, 100), (oo + 20, ddd + 20), 5)</p>
-
-		<p class="noindent mono">  elif ss ==
-'b':</p>
-
-<p class="noindent mono">
-pygame.draw.rect(b, tt, (oo + 10, ddd + 10, 20, 20))</p>
-
-		<p class="noindent mono">  elif ss ==
-'c':</p>
-
-<p class="noindent mono">
-pygame.draw.polygon(b, tt, ((oo + 20, ddd), (oo + 40 - 1, ddd + 20), (oo + 20,
-ddd + 40 - 1), (oo, ddd + 20)))</p>
-
-		<p class="noindent mono">  elif ss ==
-'d':</p>
-
-		<p class="noindent mono">      for i in
-range(0, 40, 4):</p>
-
-<p class="noindent mono">
-pygame.draw.line(b, tt, (oo, ddd + i), (oo + i, ddd))</p>
-
-		<p class="noindent mono">          pygame.draw.line(b,
-tt, (oo + i, ddd + 39), (oo + 39, ddd + i))</p>
-
-		<p class="noindent mono">  elif ss ==
-'e':</p>
-
-<p class="noindent mono">
-pygame.draw.ellipse(b, tt, (oo, ddd + 10, 40, 20))</p>
-
-<p class="noindent mono">def s(bbb, bb,
-ee):</p>
-
-		<p class="noindent mono">  return
-bbb[bb][ee][0], bbb[bb][ee][1]</p>
-
-<p class="noindent mono">def dd(bbb,
-boxes, gg):</p>
-
-		<p class="noindent mono">  for box in
-boxes:</p>
-
-		<p class="noindent mono">      oo, ddd
-= aa(box[0], box[1])</p>
-
-<p class="noindent mono">
-pygame.draw.rect(b, (60, 60, 100), (oo, ddd, 40, 40))</p>
-
-		<p class="noindent mono">      ss, tt =
-s(bbb, box[0], box[1])</p>
-
-		<p class="noindent mono">      w(ss,
-tt, box[0], box[1])</p>
-
-		<p class="noindent mono">      if gg
-&gt; 0:</p>
-
-<p class="noindent mono">
-pygame.draw.rect(b, (255, 255, 255), (oo, ddd, gg, 40))</p>
-
-<p class="noindent mono">
-pygame.display.update()</p>
-
-		<p class="noindent mono">  a.tick(30)</p>
-
-<p class="noindent mono">def o(bbb, cc):</p>
-
-		<p class="noindent mono">  for gg in
-range(40, (-8) - 1, -8):</p>
-
-		<p class="noindent mono">      dd(bbb,
-cc, gg)</p>
-
-<p class="noindent mono">def p(bbb, ff):</p>
-
-		<p class="noindent mono">  for gg in
-range(0, 48, 8):</p>
-
-		<p class="noindent mono">      dd(bbb,
-ff, gg)</p>
-
-<p class="noindent mono">def f(bbb, pp):</p>
-
-		<p class="noindent mono">  for bb in
-range(10):</p>
-
-		<p class="noindent mono">      for ee
-in range(7):</p>
-
-		<p class="noindent mono">          oo,
-ddd = aa(bb, ee)</p>
-
-		<p class="noindent mono">          if
-not pp[bb][ee]:</p>
-
-<p class="noindent mono">
-pygame.draw.rect(b, (255, 255, 255), (oo, ddd, 40, 40))</p>
-
-<p class="noindent mono">
-else:</p>
-
-<p class="noindent mono">
-ss, tt = s(bbb, bb, ee)</p>
-
-<p class="noindent mono">
-w(ss, tt, bb, ee)</p>
-
-<p class="noindent mono">def n(bb, ee):</p>
-
-		<p class="noindent mono">  oo, ddd =
-aa(bb, ee)</p>
-
-<p class="noindent mono">
-pygame.draw.rect(b, (0, 0, 255), (oo - 5, ddd - 5, 50, 50), 4)</p>
-
-<p class="noindent mono">def g(bbb):</p>
-
-		<p class="noindent mono">  mm =
-d(False)</p>
-
-		<p class="noindent mono">  boxes = []</p>
-
-		<p class="noindent mono">  for x in
-range(10):</p>
-
-		<p class="noindent mono">      for y in
-range(7):</p>
-
-<p class="noindent mono">
-boxes.append( (x, y) )</p>
-
-<p class="noindent mono">
-random.shuffle(boxes)</p>
-
-		<p class="noindent mono">  kk = t(8, boxes)</p>
-
-		<p class="noindent mono">  f(bbb, mm)</p>
-
-		<p class="noindent mono">  for nn in
-kk:</p>
-
-		<p class="noindent mono">      o(bbb,
-nn)</p>
-
-		<p class="noindent mono">      p(bbb,
-nn)</p>
-
-<p class="noindent mono">def jj(bbb):</p>
-
-		<p class="noindent mono">  mm = d(True)</p>
-
-		<p class="noindent mono">  tt1 = (100,
-100, 100)</p>
-
-		<p class="noindent mono">  tt2 = (60,
-60, 100)</p>
-
-		<p class="noindent mono">  for i in
-range(13):</p>
-
-		<p class="noindent mono">      tt1, tt2
-= tt2, tt1</p>
-
-<p class="noindent mono">
-b.fill(tt1)</p>
-
-		<p class="noindent mono">      f(bbb,
-mm)</p>
-
-		<p class="noindent mono">      pygame.display.update()</p>
-
-<p class="noindent mono">
-pygame.time.wait(300)</p>
-
-<p class="noindent mono">def ii(hh):</p>
-
-		<p class="noindent mono">  for i in hh:</p>
-
-		<p class="noindent mono">      if False
-in i:</p>
-
-<p class="noindent mono">
-return False</p>
-
-		<p class="noindent mono">  return True</p>
-
-<p class="noindent mono">if __name__ ==
-'__main__':</p>
-
-		<p class="noindent mono">  hhh()</p>
-
-</div>
--->
 	<p>Never write code like this. If you program like this while facing the mirror in a bathroom with the lights turned off, the ghost of Ada Lovelace will come out of the mirror and throw you into the jaws of a Jacquard loom.</p>
 
 	<h1 class="subheading" id="summary">Summary, and a Hacking Suggestion</h1>
