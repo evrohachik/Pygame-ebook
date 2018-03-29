@@ -416,6 +416,12 @@ td, th
 	/*border: solid 1px;*/
 }
 
+/*Colours*/
+.red
+{
+	color: #F00;
+}
+
 /*Book specific divs and spans*/
 
 div.python-shell

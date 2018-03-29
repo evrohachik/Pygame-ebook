@@ -88,6 +88,12 @@
 					{
 						"pageNumber": "8",
 						"indentation": "1",
+						"pageName": "Blank Page",
+						"fileName": "blankpage.xhtml"
+					},
+					{
+						"pageNumber": "9",
+						"indentation": "1",
 						"pageName": "Chapter 1 - Installing Python and Pygame",
 						"fileName": "chapter1.xhtml",
 						"anchorNames": {
@@ -124,7 +130,7 @@
 						}
 					},
 					{
-						"pageNumber": "9",
+						"pageNumber": "10",
 						"indentation": "1",
 						"pageName": "Chapter 2 - Pygame Basics",
 						"fileName": "chapter2.xhtml",
@@ -180,67 +186,67 @@
 						}
 					},
 					{
-						"pageNumber": "10",
+						"pageNumber": "11",
 						"indentation": "1",
 						"pageName": "Chapter 3 - Memory Puzzle",
 						"fileName": "chapter3.xhtml"
 					},
 					{
-						"pageNumber": "11",
+						"pageNumber": "12",
 						"indentation": "1",
 						"pageName": "Chapter 4 - Slide Puzzle",
 						"fileName": "chapter4.xhtml"
 					},
 					{
-						"pageNumber": "12",
+						"pageNumber": "13",
 						"indentation": "1",
 						"pageName": "Chapter 5 - Simulate",
 						"fileName": "chapter5.xhtml"
 					},
 					{
-						"pageNumber": "13",
+						"pageNumber": "14",
 						"indentation": "1",
 						"pageName": "Chapter 6 - Wormy",
 						"fileName": "chapter6.xhtml"
 					},
 					{
-						"pageNumber": "14",
+						"pageNumber": "15",
 						"indentation": "1",
 						"pageName": "Chapter 7 - Tetronimo",
 						"fileName": "chapter7.xhtml"
 					},
 					{
-						"pageNumber": "15",
+						"pageNumber": "16",
 						"indentation": "1",
 						"pageName": "Chapter 8 - Squirrel Eat Squirrel",
 						"fileName": "chapter8.xhtml"
 					},
 					{
-						"pageNumber": "16",
+						"pageNumber": "17",
 						"indentation": "1",
 						"pageName": "Chapter 9 - Star Pusher",
 						"fileName": "chapter9.xhtml"
 					},
 					{
-						"pageNumber": "17",
+						"pageNumber": "18",
 						"indentation": "1",
 						"pageName": "Chapter 10 - Four Extra Games",
 						"fileName": "chapter10.xhtml"
 					},
 					{
-						"pageNumber": "18",
+						"pageNumber": "19",
 						"indentation": "1",
 						"pageName": "Glossary",
 						"fileName": "glossary.xhtml"
 					},
 					{
-						"pageNumber": "19",
+						"pageNumber": "20",
 						"indentation": "1",
 						"pageName": "About the Author",
 						"fileName": "abouttheauthor.xhtml"
 					},
 					{
-						"pageNumber": "20",
+						"pageNumber": "21",
 						"indentation": "1",
 						"pageName": "Other Titles",
 						"fileName": "othertitles.xhtml"
