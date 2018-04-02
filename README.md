@@ -18,7 +18,7 @@ Of course, you can suggest further tweaks. Go to the Issues tab and ask away. :-
 
 I have provided an ePub and the code needed to recreate it, feel free to use the code for your own projects as per the licenses stated below.
 
-The e-book currently passes [epubcheck 4.0.2](https://github.com/IDPF/epubcheck) with `No errors or warnings detected.` and looks pretty good in Google Books, iBooks and Adobe Digital Editions.
+The e-book currently throws a few errors and warnings in [epubcheck 4.0.2](https://github.com/IDPF/epubcheck), though I am working to iron those out and end with the desired `No errors or warnings detected.` output. The ePub already ooks pretty good in Google Books, iBooks and Adobe Digital Editions.
 
 #### Compiling:
 
