@@ -113,588 +113,594 @@
 		</navPoint>
 		<navPoint id="navpoint-18" playOrder="18">
 				<navLabel>
+					<text>Raspberry Pi Instructions</text>
+				</navLabel>
+				<content src="chapter1.xhtml#rpi-install" />
+		</navPoint>
+		<navPoint id="navpoint-19" playOrder="19">
+				<navLabel>
 					<text>Starting Python</text>
 				</navLabel>
 				<content src="chapter1.xhtml#start-python" />
 		</navPoint>
-		<navPoint id="navpoint-19" playOrder="19">
+		<navPoint id="navpoint-20" playOrder="20">
 				<navLabel>
 					<text>Installing Pygame</text>
 				</navLabel>
 				<content src="chapter1.xhtml#pygame-install" />
 		</navPoint>
-		<navPoint id="navpoint-20" playOrder="20">
+		<navPoint id="navpoint-21" playOrder="21">
 				<navLabel>
 					<text>How to Use This Book</text>
 				</navLabel>
 				<content src="chapter1.xhtml#how-to-use" />
 		</navPoint>
-		<navPoint id="navpoint-21" playOrder="21">
+		<navPoint id="navpoint-22" playOrder="22">
 				<navLabel>
 					<text>The Featured Programs</text>
 				</navLabel>
 				<content src="chapter1.xhtml#featured-programs" />
 		</navPoint>
-		<navPoint id="navpoint-22" playOrder="22">
+		<navPoint id="navpoint-23" playOrder="23">
 				<navLabel>
 					<text>Downloading Graphics and Sound Files</text>
 				</navLabel>
 				<content src="chapter1.xhtml#downloading-sound-and-graphics" />
 		</navPoint>
-		<navPoint id="navpoint-23" playOrder="23">
+		<navPoint id="navpoint-24" playOrder="24">
 				<navLabel>
 					<text>Line Numbers and Spaces</text>
 				</navLabel>
 				<content src="chapter1.xhtml#line-numbers-spaces" />
 		</navPoint>
-		<navPoint id="navpoint-24" playOrder="24">
+		<navPoint id="navpoint-25" playOrder="25">
 				<navLabel>
 					<text>Text Wrapping in This Book</text>
 				</navLabel>
 				<content src="chapter1.xhtml#text-wrapping" />
 		</navPoint>
-		<navPoint id="navpoint-25" playOrder="25">
+		<navPoint id="navpoint-26" playOrder="26">
 				<navLabel>
 					<text>Checking Your Code Online</text>
 				</navLabel>
 				<content src="chapter1.xhtml#check-code" />
 		</navPoint>
-		<navPoint id="navpoint-26" playOrder="26">
+		<navPoint id="navpoint-27" playOrder="27">
 				<navLabel>
 					<text>More Info Links on https://invpy.com</text>
 				</navLabel>
 				<content src="chapter1.xhtml#more-links" />
 		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-27" playOrder="27">
+	<navPoint id="navpoint-28" playOrder="28">
 		<navLabel>
 			<text>Chapter 2 - Pygame Basics</text>
 		</navLabel>
 		<content src="chapter2.xhtml" />
-		<navPoint id="navpoint-28" playOrder="28">
+		<navPoint id="navpoint-29" playOrder="29">
 				<navLabel>
 					<text>GUI vs. CLI</text>
 				</navLabel>
 				<content src="chapter2.xhtml#gui-vs-cli" />
 		</navPoint>
-		<navPoint id="navpoint-29" playOrder="29">
+		<navPoint id="navpoint-30" playOrder="30">
 				<navLabel>
 					<text>Source Code for Hello World with Pygame</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pygame-hello-world" />
 		</navPoint>
-		<navPoint id="navpoint-30" playOrder="30">
+		<navPoint id="navpoint-31" playOrder="31">
 				<navLabel>
 					<text>Setting Up a Pygame Program</text>
 				</navLabel>
 				<content src="chapter2.xhtml#setting-up-a-pygame-program" />
 		</navPoint>
-		<navPoint id="navpoint-31" playOrder="31">
+		<navPoint id="navpoint-32" playOrder="32">
 				<navLabel>
 					<text>Game Loops and Game States</text>
 				</navLabel>
 				<content src="chapter2.xhtml#game-loops-game-states" />
 		</navPoint>
-		<navPoint id="navpoint-32" playOrder="32">
+		<navPoint id="navpoint-33" playOrder="33">
 				<navLabel>
 					<text>pygame.event.Event Objects</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pygame-event-objects" />
 		</navPoint>
-		<navPoint id="navpoint-33" playOrder="33">
+		<navPoint id="navpoint-34" playOrder="34">
 				<navLabel>
 					<text>The QUIT Event and pygame.quit() Function</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pygame-quit" />
 		</navPoint>
-		<navPoint id="navpoint-34" playOrder="34">
+		<navPoint id="navpoint-35" playOrder="35">
 				<navLabel>
 					<text>Pixel Coordinates</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pixel-coordinates" />
 		</navPoint>
-		<navPoint id="navpoint-35" playOrder="35">
+		<navPoint id="navpoint-36" playOrder="36">
 				<navLabel>
 					<text>A Reminder About Functions, Methods, Constructor Functions, and Functions in Modules (and the Difference Between Them)</text>
 				</navLabel>
 				<content src="chapter2.xhtml#function-differences" />
 		</navPoint>
-		<navPoint id="navpoint-36" playOrder="36">
+		<navPoint id="navpoint-37" playOrder="37">
 				<navLabel>
 					<text>Surface Objects and The Window</text>
 				</navLabel>
 				<content src="chapter2.xhtml#surface-objects-window" />
 		</navPoint>
-		<navPoint id="navpoint-37" playOrder="37">
+		<navPoint id="navpoint-38" playOrder="38">
 				<navLabel>
 					<text>Colors</text>
 				</navLabel>
 				<content src="chapter2.xhtml#colors" />
 		</navPoint>
-		<navPoint id="navpoint-38" playOrder="38">
+		<navPoint id="navpoint-39" playOrder="39">
 				<navLabel>
 					<text>Transparent Colors</text>
 				</navLabel>
 				<content src="chapter2.xhtml#transparent-colors" />
 		</navPoint>
-		<navPoint id="navpoint-39" playOrder="39">
+		<navPoint id="navpoint-40" playOrder="40">
 				<navLabel>
 					<text>pygame.Color Objects</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pygame-color-objects" />
 		</navPoint>
-		<navPoint id="navpoint-40" playOrder="40">
+		<navPoint id="navpoint-41" playOrder="41">
 				<navLabel>
 					<text>Rect Objects</text>
 				</navLabel>
 				<content src="chapter2.xhtml#rect-objects" />
 		</navPoint>
-		<navPoint id="navpoint-41" playOrder="41">
+		<navPoint id="navpoint-42" playOrder="42">
 				<navLabel>
 					<text>Primitive Drawing Functions</text>
 				</navLabel>
 				<content src="chapter2.xhtml#primitive-drawing-functions" />
 		</navPoint>
-		<navPoint id="navpoint-42" playOrder="42">
+		<navPoint id="navpoint-43" playOrder="43">
 				<navLabel>
 					<text>pygame.PixelArray Objects</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pygame-pixel-array" />
 		</navPoint>
-		<navPoint id="navpoint-43" playOrder="43">
+		<navPoint id="navpoint-44" playOrder="44">
 				<navLabel>
 					<text>pygame.display.update() Objects</text>
 				</navLabel>
 				<content src="chapter2.xhtml#pygame-display-update" />
 		</navPoint>
-		<navPoint id="navpoint-44" playOrder="44">
+		<navPoint id="navpoint-45" playOrder="45">
 				<navLabel>
 					<text>Animation</text>
 				</navLabel>
 				<content src="chapter2.xhtml#animation" />
 		</navPoint>
-		<navPoint id="navpoint-45" playOrder="45">
+		<navPoint id="navpoint-46" playOrder="46">
 				<navLabel>
 					<text>Frames Per Second and pygame.time.Clock Objects</text>
 				</navLabel>
 				<content src="chapter2.xhtml#fps-and-clock" />
 		</navPoint>
-		<navPoint id="navpoint-46" playOrder="46">
+		<navPoint id="navpoint-47" playOrder="47">
 				<navLabel>
 					<text>Drawing Images with pygame.image.load() and blit()</text>
 				</navLabel>
 				<content src="chapter2.xhtml#drawing-images" />
 		</navPoint>
-		<navPoint id="navpoint-47" playOrder="47">
+		<navPoint id="navpoint-48" playOrder="48">
 				<navLabel>
 					<text>Fonts</text>
 				</navLabel>
 				<content src="chapter2.xhtml#fonts" />
 		</navPoint>
-		<navPoint id="navpoint-48" playOrder="48">
+		<navPoint id="navpoint-49" playOrder="49">
 				<navLabel>
 					<text>Anti-Aliasing</text>
 				</navLabel>
 				<content src="chapter2.xhtml#anti-aliasing" />
 		</navPoint>
-		<navPoint id="navpoint-49" playOrder="49">
+		<navPoint id="navpoint-50" playOrder="50">
 				<navLabel>
 					<text>Playing Sounds</text>
 				</navLabel>
 				<content src="chapter2.xhtml#playing-sounds" />
 		</navPoint>
-		<navPoint id="navpoint-50" playOrder="50">
+		<navPoint id="navpoint-51" playOrder="51">
 				<navLabel>
 					<text>Summary</text>
 				</navLabel>
 				<content src="chapter2.xhtml#summary" />
 		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-51" playOrder="51">
+	<navPoint id="navpoint-52" playOrder="52">
 		<navLabel>
 			<text>Chapter 3 - Memory Puzzle</text>
 		</navLabel>
 		<content src="chapter3.xhtml" />
-		<navPoint id="navpoint-52" playOrder="52">
+		<navPoint id="navpoint-53" playOrder="53">
 				<navLabel>
 					<text>How to Play Memory Puzzle</text>
 				</navLabel>
 				<content src="chapter3.xhtml#how-to-play" />
 		</navPoint>
-		<navPoint id="navpoint-53" playOrder="53">
+		<navPoint id="navpoint-54" playOrder="54">
 				<navLabel>
 					<text>Nested for Loops</text>
 				</navLabel>
 				<content src="chapter3.xhtml#nested-for-loops" />
 		</navPoint>
-		<navPoint id="navpoint-54" playOrder="54">
+		<navPoint id="navpoint-55" playOrder="55">
 				<navLabel>
 					<text>Source Code of Memory Puzzle</text>
 				</navLabel>
 				<content src="chapter3.xhtml#source-code" />
 		</navPoint>
-		<navPoint id="navpoint-55" playOrder="55">
+		<navPoint id="navpoint-56" playOrder="56">
 				<navLabel>
 					<text>Credits and Imports</text>
 				</navLabel>
 				<content src="chapter3.xhtml#credits-imports" />
 		</navPoint>
-		<navPoint id="navpoint-56" playOrder="56">
+		<navPoint id="navpoint-57" playOrder="57">
 				<navLabel>
 					<text>Magic Numbers are Bad</text>
 				</navLabel>
 				<content src="chapter3.xhtml#magic-numbers-bad" />
 		</navPoint>
-		<navPoint id="navpoint-57" playOrder="57">
+		<navPoint id="navpoint-58" playOrder="58">
 				<navLabel>
 					<text>Sanity Checks with assert Statements</text>
 				</navLabel>
 				<content src="chapter3.xhtml#sanity-checks" />
 		</navPoint>
-		<navPoint id="navpoint-58" playOrder="58">
+		<navPoint id="navpoint-59" playOrder="59">
 				<navLabel>
 					<text>Telling If a Number is Even or Odd</text>
 				</navLabel>
 				<content src="chapter3.xhtml#odd-even" />
 		</navPoint>
-		<navPoint id="navpoint-59" playOrder="59">
+		<navPoint id="navpoint-60" playOrder="60">
 				<navLabel>
 					<text>Crash Early and Crash Often!</text>
 				</navLabel>
 				<content src="chapter3.xhtml#crash" />
 		</navPoint>
-		<navPoint id="navpoint-60" playOrder="60">
+		<navPoint id="navpoint-61" playOrder="61">
 				<navLabel>
 					<text>Making the Source Code Look Pretty!</text>
 				</navLabel>
 				<content src="chapter3.xhtml#source-pretty" />
 		</navPoint>
-		<navPoint id="navpoint-61" playOrder="61">
+		<navPoint id="navpoint-62" playOrder="62">
 				<navLabel>
 					<text>Using Constant Variables Instead of Strings</text>
 				</navLabel>
 				<content src="chapter3.xhtml#constant-variables" />
 		</navPoint>
-		<navPoint id="navpoint-62" playOrder="62">
+		<navPoint id="navpoint-63" playOrder="63">
 				<navLabel>
 					<text>Making Sure We Have Enough Icons</text>
 				</navLabel>
 				<content src="chapter3.xhtml#enough-icons" />
 		</navPoint>
-		<navPoint id="navpoint-63" playOrder="63">
+		<navPoint id="navpoint-64" playOrder="64">
 				<navLabel>
 					<text>Tuples vs. Lists, Immutable vs. Mutable</text>
 				</navLabel>
 				<content src="chapter3.xhtml#tuples-lists-mutables" />
 		</navPoint>
-		<navPoint id="navpoint-64" playOrder="64">
+		<navPoint id="navpoint-65" playOrder="65">
 				<navLabel>
 					<text>One Item Tuples Need a Trailing Comma</text>
 				</navLabel>
 				<content src="chapter3.xhtml#one-item-tuples" />
 		</navPoint>
-		<navPoint id="navpoint-65" playOrder="65">
+		<navPoint id="navpoint-66" playOrder="66">
 				<navLabel>
 					<text>Converting Between Lists and Tuples</text>
 				</navLabel>
 				<content src="chapter3.xhtml#convert-list-tuples" />
 		</navPoint>
-		<navPoint id="navpoint-66" playOrder="66">
+		<navPoint id="navpoint-67" playOrder="67">
 				<navLabel>
 					<text>One Item Tuples Need a Trailing Comma</text>
 				</navLabel>
 				<content src="chapter3.xhtml#global-statement" />
 		</navPoint>
-		<navPoint id="navpoint-67" playOrder="67">
+		<navPoint id="navpoint-68" playOrder="68">
 				<navLabel>
 					<text>Converting Between Lists and Tuples</text>
 				</navLabel>
 				<content src="chapter3.xhtml#data-structures" />
 		</navPoint>
-		<navPoint id="navpoint-68" playOrder="68">
+		<navPoint id="navpoint-69" playOrder="69">
 				<navLabel>
 					<text>The global statement, and Why Global Variables are Evil</text>
 				</navLabel>
 				<content src="chapter3.xhtml#start-game-animation" />
 		</navPoint>
-		<navPoint id="navpoint-69" playOrder="69">
+		<navPoint id="navpoint-70" playOrder="70">
 				<navLabel>
 					<text>Data Structures and 2D Lists</text>
 				</navLabel>
 				<content src="chapter3.xhtml#game-loop" />
 		</navPoint>
-		<navPoint id="navpoint-70" playOrder="70">
+		<navPoint id="navpoint-71" playOrder="71">
 				<navLabel>
 					<text>The Start Game Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#event-handling-loop" />
 		</navPoint>
-		<navPoint id="navpoint-71" playOrder="71">
+		<navPoint id="navpoint-72" playOrder="72">
 				<navLabel>
 					<text>The Game Loop</text>
 				</navLabel>
 				<content src="chapter3.xhtml#checking-cursor-box" />
 		</navPoint>
-		<navPoint id="navpoint-72" playOrder="72">
+		<navPoint id="navpoint-73" playOrder="73">
 				<navLabel>
 					<text>The Event Handling Loop</text>
 				</navLabel>
 				<content src="chapter3.xhtml#handling-first-box" />
 		</navPoint>
-		<navPoint id="navpoint-73" playOrder="73">
+		<navPoint id="navpoint-74" playOrder="74">
 				<navLabel>
 					<text>Checking Which Box The Mouse Cursor is Over</text>
 				</navLabel>
 				<content src="chapter3.xhtml#handling-mismatched-icons" />
 		</navPoint>
-		<navPoint id="navpoint-74" playOrder="74">
+		<navPoint id="navpoint-75" playOrder="75">
 				<navLabel>
 					<text>Handling the First Clicked Box</text>
 				</navLabel>
 				<content src="chapter3.xhtml#handling-player-win" />
 		</navPoint>
-		<navPoint id="navpoint-75" playOrder="75">
+		<navPoint id="navpoint-76" playOrder="76">
 				<navLabel>
 					<text>Handling a Mismatched Pair of Icons</text>
 				</navLabel>
 				<content src="chapter3.xhtml#drawing-game-screen" />
 		</navPoint>
-		<navPoint id="navpoint-76" playOrder="76">
+		<navPoint id="navpoint-77" playOrder="77">
 				<navLabel>
 					<text>Handling If the Player Won</text>
 				</navLabel>
 				<content src="chapter3.xhtml#creating-revealed-boxes" />
 		</navPoint>
-		<navPoint id="navpoint-77" playOrder="77">
+		<navPoint id="navpoint-78" playOrder="78">
 				<navLabel>
 					<text>Drawing the Game State to the Screen</text>
 				</navLabel>
 				<content src="chapter3.xhtml#creating-board-structure" />
 		</navPoint>
-		<navPoint id="navpoint-78" playOrder="78">
+		<navPoint id="navpoint-79" playOrder="79">
 				<navLabel>
 					<text>Creating the Revealed Boxes Data Structure</text>
 				</navLabel>
 				<content src="chapter3.xhtml#shuffling-truncating-icons" />
 		</navPoint>
-		<navPoint id="navpoint-79" playOrder="79">
+		<navPoint id="navpoint-80" playOrder="80">
 				<navLabel>
 					<text>Creating the Board Data Structure: Step 1 – Get All Possible Icons</text>
 				</navLabel>
 				<content src="chapter3.xhtml#placing-icons-board" />
 		</navPoint>
-		<navPoint id="navpoint-80" playOrder="80">
+		<navPoint id="navpoint-81" playOrder="81">
 				<navLabel>
 					<text>Step 2 – Shuffling and Truncating the List of All Icons</text>
 				</navLabel>
 				<content src="chapter3.xhtml#splitting-lists" />
 		</navPoint>
-		<navPoint id="navpoint-81" playOrder="81">
+		<navPoint id="navpoint-82" playOrder="82">
 				<navLabel>
 					<text>Step 3 – Placing the Icons on the Board</text>
 				</navLabel>
 				<content src="chapter3.xhtml#different-coordinate-systems" />
 		</navPoint>
-		<navPoint id="navpoint-82" playOrder="82">
+		<navPoint id="navpoint-83" playOrder="83">
 				<navLabel>
 					<text>Splitting a List into a List of Lists</text>
 				</navLabel>
 				<content src="chapter3.xhtml#converting-coordinates" />
 		</navPoint>
-		<navPoint id="navpoint-83" playOrder="83">
+		<navPoint id="navpoint-84" playOrder="84">
 				<navLabel>
 					<text>Different Coordinate Systems</text>
 				</navLabel>
 				<content src="chapter3.xhtml#drawing-icon" />
 		</navPoint>
-		<navPoint id="navpoint-84" playOrder="84">
+		<navPoint id="navpoint-85" playOrder="85">
 				<navLabel>
 					<text>Converting from Pixel Coordinates to Box Coordinates</text>
 				</navLabel>
 				<content src="chapter3.xhtml#icon-shape-color" />
 		</navPoint>
-		<navPoint id="navpoint-85" playOrder="85">
+		<navPoint id="navpoint-86" playOrder="86">
 				<navLabel>
 					<text>Drawing the Icon, and Syntactic Sugar</text>
 				</navLabel>
 				<content src="chapter3.xhtml#drawing-box-cover" />
 		</navPoint>
-		<navPoint id="navpoint-86" playOrder="86">
+		<navPoint id="navpoint-87" playOrder="87">
 				<navLabel>
 					<text>Syntactic Sugar with Getting a Board Space’s Icon’s Shape and Color</text>
 				</navLabel>
 				<content src="chapter3.xhtml#handling-cover-animation" />
 		</navPoint>
-		<navPoint id="navpoint-87" playOrder="87">
+		<navPoint id="navpoint-88" playOrder="88">
 				<navLabel>
 					<text>Drawing the Box Cover</text>
 				</navLabel>
 				<content src="chapter3.xhtml#drawing-entire-board" />
 		</navPoint>
-		<navPoint id="navpoint-88" playOrder="88">
+		<navPoint id="navpoint-89" playOrder="89">
 				<navLabel>
 					<text>Handling the Revealing and Covering Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#drawing-highlight" />
 		</navPoint>
-		<navPoint id="navpoint-89" playOrder="89">
+		<navPoint id="navpoint-90" playOrder="90">
 				<navLabel>
 					<text>Drawing the Entire Board</text>
 				</navLabel>
 				<content src="chapter3.xhtml#drawing-box-icon" />
 		</navPoint>
-		<navPoint id="navpoint-90" playOrder="90">
+		<navPoint id="navpoint-91" playOrder="91">
 				<navLabel>
 					<text>Drawing the Highlight</text>
 				</navLabel>
 				<content src="chapter3.xhtml#start-game-animation-2" />
 		</navPoint>
-		<navPoint id="navpoint-91" playOrder="91">
+		<navPoint id="navpoint-92" playOrder="92">
 				<navLabel>
 					<text>The Start Game Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#reveal-cover-boxes" />
 		</navPoint>
-		<navPoint id="navpoint-92" playOrder="92">
+		<navPoint id="navpoint-93" playOrder="93">
 				<navLabel>
 					<text>Revealing and Covering the Groups of Boxes</text>
 				</navLabel>
 				<content src="chapter3.xhtml#game-won-animation-2" />
 		</navPoint>
-		<navPoint id="navpoint-93" playOrder="93">
+		<navPoint id="navpoint-94" playOrder="94">
 				<navLabel>
 					<text>The Game Won Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#telling-player-won" />
 		</navPoint>
-		<navPoint id="navpoint-94" playOrder="94">
+		<navPoint id="navpoint-95" playOrder="95">
 				<navLabel>
 					<text>Telling if the Player Has Won</text>
 				</navLabel>
 				<content src="chapter3.xhtml#why-main" />
 		</navPoint>
-		<navPoint id="navpoint-95" playOrder="95">
+		<navPoint id="navpoint-96" playOrder="96">
 				<navLabel>
 					<text>Why Bother Having a main() Function?</text>
 				</navLabel>
 				<content src="chapter3.xhtml#bother-reliability" />
 		</navPoint>
-		<navPoint id="navpoint-96" playOrder="96">
+		<navPoint id="navpoint-97" playOrder="97">
 				<navLabel>
 					<text>Summary, and a Hacking Suggestion</text>
 				</navLabel>
 				<content src="chapter3.xhtml#summary" />
 		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-97" playOrder="97">
+	<navPoint id="navpoint-98" playOrder="98">
 		<navLabel>
 			<text>Chapter 4 - Slide Puzzle</text>
 		</navLabel>
 		<content src="chapter4.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-98" playOrder="98">
+	<navPoint id="navpoint-99" playOrder="99">
 		<navLabel>
 			<text>Chapter 5 - Simulate</text>
 		</navLabel>
 		<content src="chapter5.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-99" playOrder="99">
+	<navPoint id="navpoint-100" playOrder="100">
 		<navLabel>
 			<text>Chapter 6 - Wormy</text>
 		</navLabel>
 		<content src="chapter6.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-100" playOrder="100">
+	<navPoint id="navpoint-101" playOrder="101">
 		<navLabel>
 			<text>Chapter 7 - Tetronimo</text>
 		</navLabel>
 		<content src="chapter7.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-101" playOrder="101">
+	<navPoint id="navpoint-102" playOrder="102">
 		<navLabel>
 			<text>Chapter 8 - Squirrel Eat Squirrel</text>
 		</navLabel>
 		<content src="chapter8.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-102" playOrder="102">
+	<navPoint id="navpoint-103" playOrder="103">
 		<navLabel>
 			<text>Chapter 9 - Star Pusher</text>
 		</navLabel>
 		<content src="chapter9.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-103" playOrder="103">
+	<navPoint id="navpoint-104" playOrder="104">
 		<navLabel>
 			<text>Chapter 10 - Four Extra Games</text>
 		</navLabel>
 		<content src="chapter10.xhtml" />
-		<navPoint id="navpoint-104" playOrder="104">
+		<navPoint id="navpoint-105" playOrder="105">
 				<navLabel>
 					<text>Flippy, an Othello Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy" />
 		</navPoint>
-		<navPoint id="navpoint-105" playOrder="105">
+		<navPoint id="navpoint-106" playOrder="106">
 				<navLabel>
 					<text>Source Code for Flippy</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy-source" />
 		</navPoint>
-		<navPoint id="navpoint-106" playOrder="106">
+		<navPoint id="navpoint-107" playOrder="107">
 				<navLabel>
 					<text>Ink Spill, a Flood It Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill" />
 		</navPoint>
-		<navPoint id="navpoint-107" playOrder="107">
+		<navPoint id="navpoint-108" playOrder="108">
 				<navLabel>
 					<text>Source Code for Ink Spill</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill-source" />
 		</navPoint>
-		<navPoint id="navpoint-108" playOrder="108">
+		<navPoint id="navpoint-109" playOrder="109">
 				<navLabel>
 					<text>Four-In-A-Row, a Connect Four Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four" />
 		</navPoint>
-		<navPoint id="navpoint-109" playOrder="109">
+		<navPoint id="navpoint-110" playOrder="110">
 				<navLabel>
 					<text>Source Code for Four-In-A-Row</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four-source" />
 		</navPoint>
-		<navPoint id="navpoint-110" playOrder="110">
+		<navPoint id="navpoint-111" playOrder="111">
 				<navLabel>
 					<text>Gemgem, a Bejeweled Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem" />
 		</navPoint>
-		<navPoint id="navpoint-111" playOrder="111">
+		<navPoint id="navpoint-112" playOrder="112">
 				<navLabel>
 					<text>Source Code for Gemgem</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem-source" />
 		</navPoint>
-		<navPoint id="navpoint-112" playOrder="112">
+		<navPoint id="navpoint-113" playOrder="113">
 				<navLabel>
 					<text>Summary</text>
 				</navLabel>
 				<content src="chapter10.xhtml#summary" />
 		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-113" playOrder="113">
+	<navPoint id="navpoint-114" playOrder="114">
 		<navLabel>
 			<text>Glossary</text>
 		</navLabel>
 		<content src="glossary.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-114" playOrder="114">
+	<navPoint id="navpoint-115" playOrder="115">
 		<navLabel>
 			<text>About the Author</text>
 		</navLabel>
 		<content src="abouttheauthor.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-115" playOrder="115">
+	<navPoint id="navpoint-116" playOrder="116">
 		<navLabel>
 			<text>Other Titles</text>
 		</navLabel>
