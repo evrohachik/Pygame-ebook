@@ -2,34 +2,126 @@
 <head>
 <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Content-Type"/>
 <link href="styles/zstylesheet.css" rel="stylesheet" type="text/css"/>
-<title>Page 7</title>
+<title>Chapter 10</title>
 </head>
 
 <body>
 
+	<h1 class="heading">Chapter 10 – Four Extra Games</h1>
+	<hr class="heading"/>
+
+	<p class="noindent">Included in this chapter is the source code for four extra games. Unfortunately, only the source code (including comments) is in this chapter without any detailed explanation of the code. By now, you can play these games and figure out how the code works by looking at the source code and comments.</p>
+	<p>The games are:</p>
+
+	<ul>
+		<li><b>Flippy</b> – An <i>“Othello”</i> clone where the player tries to flip the computer AI player’s tiles.</li>
+		<li><b>Ink Spill</b> – A <i>“Flood It”</i> clone that makes use of the flood fill algorithm.</li>
+		<li><b>Four in a Row</b> – A <i>“Connect Four”</i> clone against the computer AI player.</li>
+		<li><b>Gemgem</b> – A <i>“Bejeweled”</i> clone where the player swaps gems to try to get three identical gems in a row.</li>
+	</ul>
+
+	<p>If you have any questions about the source code in this book, feel free to email the author at <a href="mailto:al@inventwithpython.com">al@inventwithpython.com</a></p>
+	<p>Buggy versions of these programs are also available if you want to practice fixing bugs:</p>
+
+	<ul>
+		<li><a href="https://invpy.com/buggy/flippy">https://invpy.com/buggy/flippy</a></li>
+		<li><a href="https://invpy.com/buggy/inkspill">https://invpy.com/buggy/inkspill</a></li>
+		<li><a href="https://invpy.com/buggy/fourinarow">https://invpy.com/buggy/fourinarow</a></li>
+		<li><a href="https://invpy.com/buggy/gemgem">https://invpy.com/buggy/gemgem</a></li>
+	</ul>
+
+	<h1 class="subheading" id="flippy">Flippy, an “Othello” Clone</h1>
+	<p class="noindent"><i>“Othello”</i>, also known by the generic name Reversi, has an 8 x 8 board with tiles that are black on one side and white on the other. The starting board looks like Figure 10-1. Each player takes turn placing down a new tile of their color. Any of the opponent's tiles that are between the new tile and the other tiles of that color is flipped. The goal of the game is to have as many of the tiles with your color as possible. For example, Figure 10-2 is what it looks like if the white player places a new white tile on space 5, 6.</p>
+
 	<div class="image-center">
-		<img class="image" src="images/page7/img1.jpg" alt=""/>
+		<img class="half-image" src="images/chapter10/fig10-1.jpg" alt=""/>
+		<p class="figure-caption">Figure 10-1: The starting Reversi board has two white tiles and two black tiles.</p>
 	</div>
 
 	<div class="image-center">
-		<img class="image" src="images/page7/img2.jpg" alt=""/>
+		<img class="half-image" src="images/chapter10/fig10-2.jpg" alt=""/>
+		<p class="figure-caption">Figure 10-2: White places a new tile.</p>
+	</div>
+
+	<p>The black tile at 5, 5 is in between the new white tile and the existing white tile at 5, 4. That black tile is flipped over and becomes a new white tile, making the board look like Figure 10-3. Black makes a similar move next, placing a black tile on 4, 6 which flips the white tile at 4, 5. This results in a board that looks like Figure 10-4.</p>
+
+	<div class="image-center">
+		<img class="half-image" src="images/chapter10/fig10-3.jpg" alt=""/>
+		<p class="figure-caption">Figure 10-3: White's move will flip over one of black's tiles.</p>
 	</div>
 
 	<div class="image-center">
-		<img class="image" src="images/page7/img3.jpg" alt=""/>
+		<img class="half-image" src="images/chapter10/fig10-4.jpg" alt=""/>
+		<p class="figure-caption">Figure 10-4: Black places a new tile, which flips over one of white's tiles.</p>
+	</div>
+
+	<p>Tiles in all directions are flipped as long as they are in between the player's new tile and existing tile. In Figure 10-5, the white player places a tile at 3, 6 and flips black tiles in both directions (marked by the lines). The result is in Figure 10-6.</p>
+
+	<div class="image-center">
+		<img class="half-image" src="images/chapter10/fig10-5.jpg" alt=""/>
+		<p class="figure-caption">Figure 10-5: White's second move at 3, 6 will flip two of black's tiles.</p>
 	</div>
 
 	<div class="image-center">
-		<img class="image" src="images/page7/img4.jpg" alt=""/>
+		<img class="half-image" src="images/chapter10/fig10-6.jpg" alt=""/>
+		<p class="figure-caption">Figure 10-6: The board after white's second move.</p>
 	</div>
 
-	<div class="image-center">
-		<img class="image" src="images/page7/img5.jpg" alt=""/>
-	</div>
+	<p>As you can see, each player can quickly grab a majority of the tiles on the board in just one or two moves. Players must always make a move that captures at least one tile. The game ends when a player either cannot make a move, or the board is completely full. The player with the most tiles of their color wins.</p>
+	<p>You can learn more about Reversi from Wikipedia: <a href="https://en.wikipedia.org/wiki/Reversi">https://en.wikipedia.org/wiki/Reversi</a></p>
+	<p>A text version of this game that uses <span class="mono">print()</span> and <span class="mono">input()</span> instead of Pygame is featured in Chapter 15 of <i>“Invent Your Own Computer Games with Python”</i>. You can read that chapter for details about how the computer AI’s algorithm was put together. <a href="https://inventwithpython.com/chapter15.html">https://inventwithpython.com/chapter15.html</a></p>
+	<p>The computer AI for this game is pretty good, because it is easy for a computer to simulate every possible move and take the one that flips over the most tiles. It usually beats me whenever I play it.</p>
 
-	<div class="image-center">
-		<img class="image" src="images/page7/img6.jpg" alt=""/>
-	</div>
+	<h1 class="subheading" id="flippy-source">Source Code for Flippy</h1>
+	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/flippy.py">https://invpy.com/flippy.py</a>.</p>
+	<p>The image files that Flippy uses can be downloaded from <a href="https://invpy.com/flippyimages.zip">https://invpy.com/flippyimages.zip</a>.</p>
+
+	<h1 class="subheading" id="ink-spill">Ink Spill, a “Flood It” Clone</h1>
+	<p class="noindent">The game <i>“Flood It”</i> begins with a board filled with colored tiles. On each turn the player chooses a new color to paint the top left tile and any tiles adjacent to it of that same color. This game makes use of the flood fill algorithm (described in the <a href="chapter9.xhtml#flood-fill">Star Pusher</a> chapter). The goal of the game is to turn the entire board into a single color before running out of turns.</p>
+	<p>This game also has a Settings screen where the player can change the size of the board and the difficulty of the game. If the player gets board of the colors, there are a few other color schemes they can switch to as well.</p>
+
+	<h1 class="subheading" id="ink-spill-source">Source Code for Ink Spill</h1>
+	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/inkspill.py">https://invpy.com/inkspill.py</a>.</p>
+	<p>The image files that Ink Spill uses can be downloaded from <a href="https://invpy.com/inkspillimages.zip">https://invpy.com/inkspillimages.zip</a>.</p>
+
+	<h1 class="subheading" id="four">Four-In-A-Row, a “Connect Four” Clone</h1>
+	<p class="noindent">The game <i>“Connect Four”</i> has a 7 x 6 board where the players take turns dropping tokens from the top of the board. The tokens will fall from the top of each column and come to rest on the bottom of the board or on top of the topmost token in that column. A player wins when four of their tokens line up in a row either horizontally, vertically, or diagonally.</p>
+	<p>The AI for this game is pretty good. It simulates every possible move it can make, then simulates every possible move the human player can make in response to each of those moves, and then simulates every possible move it can make <i>in response to that</i>, and then simulates every possible move the human player could make <i>in response to each of those moves!</i> After all that thinking, the computer determines which move is most likely to lead to it winning.</p>
+	<p>So the computer is kind of tough to beat. I usually lose to it.</p>
+	<p>Since there are seven possible moves you can make on your turn (unless some columns are full), and seven possible moves the opponent could make, and seven moves in response to that, and seven moves in response to that, that means that on each turn the computer is considering 7 x 7 x 7 x 7 = 2,401 possible moves. You can make the computer consider the game even further by setting the <span class="mono">DIFFICULTY</span> constant to a higher number, but when I set to a value larger than <span class="mono">2</span>, the computer takes a long time to calculate its turn.</p>
+	<p>You can also make the computer easier by setting <span class="mono">DIFFICULTY</span> to <span class="mono">1</span>. Then the computer only considers each of its moves and the player’s possible responses to those moves. If you set the <span class="mono">DIFFICULTY</span> to <span class="mono">0</span>, then the computer loses all intelligence and simply makes random moves.</p>
+
+	<h1 class="subheading" id="four-source">Source Code for Four-In-A-Row</h1>
+	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/fourinarow.py">https://invpy.com/fourinarow.py</a>.</p>
+	<p>The image files that Four-In-A-Row uses can be downloaded from <a href="https://invpy.com/fourinarowimages.zip">https://invpy.com/fourinarowimages.zip</a>.</p>
+
+	<h1 class="subheading" id="gemgem">Gemgem, a “Bejeweled” Clone</h1>
+	<p class="noindent"><i>“Bejeweled”</i> is a game where gems fall to fill up a board. The player can swap any two adjacent gems to try to match three gems in a row (vertically or horizontally, but not diagonally). The matched gems then disappear, making way for new gems to fall from the top. Matching more than three gems, or causing a chain reaction of gem matches will result in more points. The player’s score slowly drops over time, so the player must constantly be making new matches. The game ends when no possible match can be made on the board.</p>
+
+	<h1 class="subheading" id="gemgem-source">Source Code for Gemgem</h1>
+	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/gemgem.py">https://invpy.com/gemgem.py</a>.</p>
+	<p>The image files that Gemgem uses can be downloaded from <a href="https://invpy.com/gemgemimages.zip">https://invpy.com/gemgemimages.zip</a>.</p>
+
+	<h1 class="subheading" id="summary">Summary</h1>
+	<p class="noindent">I hope these game programs have given you your own ideas about what games you’d like to make and how you can write the code for them. Even if you don’t have any ideas of your own, it’s great practice to try to program clones of other games you’ve played.</p>
+	<p>Here are several websites that can teach you more about programming Python:</p>
+
+	<ul>
+		<li><a href="https://pygame.org">https://pygame.org</a> – The official Pygame website has the source code to hundreds of games that people have written that make use of the Pygame library. You can learn a lot by downloading and reading other people’s source code.</li>
+		<li><a href="https://python.org/doc/">https://python.org/doc/</a> – More Python tutorials and the documentation of all the Python modules and functions.</li>
+		<li><a href="https://pygame.org/docs/">https://pygame.org/docs/</a> – Complete documentation on the modules and functions for Pygame.</li>
+		<li><a href="https://reddit.com/r/learnpython">https://reddit.com/r/learnpython</a> and <a href="https://reddit.com/r/learnprogramming">https://reddit.com/r/learnprogramming</a> have several users that could help you with finding resources to learn programming.</li>
+		<li><a href="https://inventwithpython.com/pygame">https://inventwithpython.com/pygame</a> – This book's website, which includes all the source code for these programs and additional information. This site also has the image and sound files used in the Pygame programs.</li>
+		<li><a href="https://inventwithpython.com">https://inventwithpython.com</a> – The website for the book ―Invent Your Own Computer Games with Python‖, which covers basic Python programming.</li>
+		<li><a href="https://invpy.com/wiki">https://invpy.com/wiki</a> – A wiki that covers individual Python programming concepts that you can look up if you need to learn about something specific.</li>
+		<li><a href="https://invpy.com/traces">https://invpy.com/traces</a> – A web application that helps you trace through the execution of the programs in this book, step by step.</li>
+		<li><a href="https://invpy.com/videos">https://invpy.com/videos</a> – Videos that accompany the programs in this book.</li>
+		<li><a href="https://gamedevlessons.com">https://gamedevlessons.com</a> – A helpful website about how to design and program video games.</li>
+		<li><a href="mailto:al@inventwithpython.com">al@inventwithpython.com</a> – My email address. Feel free to email me your questions about this book or about Python programming.</li>
+	</ul>
+
+	<p>Or you can find out more about Python by searching the World Wide Web. Go to the search website <a href="https://google.com">https://google.com</a> and search for “Python programming” or “Python tutorials” to find web sites that can teach you more about Python programming.</p>
+	<p>Now get going and invent your own games. And good luck!</p>
 
 </body>
 </html>

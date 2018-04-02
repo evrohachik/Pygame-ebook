@@ -9,10 +9,10 @@
 	<h1 class="heading">Chapter 3 – Memory Puzzle</h1>
 	<hr class="heading"/>
 
-	<h1 class="subheading" id="">How to Play Memory Puzzle</h1>
+	<h1 class="subheading" id="how-to-play">How to Play Memory Puzzle</h1>
 	<p class="noindent">In the Memory Puzzle game, several icons are covered up by white boxes. There are two of each icon. The player can click on two boxes to see what icon is behind them. If the icons match, then those boxes remain uncovered. The player wins when all the boxes on the board are uncovered. To give the player a hint, the boxes are quickly uncovered once at the beginning of the game.</p>
 
-	<h1 class="subheading" id="">Nested <span class="mono">for</span> Loops</h1>
+	<h1 class="subheading" id="nested-for-loops">Nested <span class="mono">for</span> Loops</h1>
 	<p class="noindent">One concept that you will see in Memory Puzzle (and most of the games in this book) is the use of a for loop inside of another <span class="mono">for</span> loop. These are called nested <span class="mono">for</span> loops. Nested <span class="mono">for</span> loops are handy for going through every possible combination of two lists. Type the following into the interactive shell:</p>
 
 	<div class="python-shell">
@@ -63,7 +63,7 @@
 		<p class="noindent mono">&gt;&gt;&gt;</p>
 	</div>
 
-	<h1 class="subheading" id="">Source Code of Memory Puzzle</h1>
+	<h1 class="subheading" id="source-code">Source Code of Memory Puzzle</h1>
 	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/memorypuzzle.py">https://invpy.com/memorypuzzle.py</a>.</p>
 	<p>Go ahead and first type in the entire program into IDLE’s file editor, save it as <i>memorypuzzle.py</i>, and run it. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/memorypuzzle">https://invpy.com/diff/memorypuzzle</a> to see if the differences between your code and the code in the book.</p>
 	<p>You’ll probably pick up a few ideas about how the program works just by typing it in once. And when you’re done typing it in, you can then play the game for yourself.</p>
@@ -73,10 +73,10 @@
 		<p class="noindent mono"><span class="line-number">2.</span>  <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
 		<p class="noindent mono"><span class="line-number">3.</span>  <span class="comment"># http://inventwithpython.com/pygame</span></p>
 		<p class="noindent mono"><span class="line-number">4.</span>  <span class="comment"># Released under a &quot;Simplified BSD&quot; license</span></p>
-		<p class="noindent mono"><span class="line-number">5.</span> </p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
 		<p class="noindent mono"><span class="line-number">6.</span>  import random, pygame, sys</p>
 		<p class="noindent mono"><span class="line-number">7.</span>  from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">8.</span> </p>
+		<p class="noindent mono"><span class="line-number">8.</span></p>
 		<p class="noindent mono"><span class="line-number">9.</span>  FPS = 30 <span class="comment"># frames per second, the general speed of the program</span></p>
 		<p class="noindent mono"><span class="line-number">10.</span>  WINDOWWIDTH = 640 <span class="comment"># size of window's width in pixels</span></p>
 		<p class="noindent mono"><span class="line-number">11.</span>  WINDOWHEIGHT = 480 <span class="comment"># size of windows' height in pixels</span></p>
@@ -86,772 +86,285 @@
 		<p class="noindent mono"><span class="line-number">15.</span>  BOARDWIDTH = 10 <span class="comment"># number of columns of icons</span></p>
 		<p class="noindent mono"><span class="line-number">16.</span>  BOARDHEIGHT = 7 <span class="comment"># number of rows of icons</span></p>
 		<p class="noindent mono"><span class="line-number">17.</span>  assert (BOARDWIDTH * BOARDHEIGHT) % 2 == 0, 'Board needs to have an even number of boxes for pairs of matches.'</p>
-
-<p class="noindent mono"><span class="line-number">18.</span>  XMARGIN
-= int((WINDOWWIDTH - (BOARDWIDTH * (BOXSIZE + GAPSIZE))) / 2)</p>
-
-<p class="noindent mono"><span class="line-number">19.</span>  YMARGIN
-= int((WINDOWHEIGHT - (BOARDHEIGHT * (BOXSIZE + GAPSIZE))) / 2)</p>
-
-<p class="noindent mono"><span class="line-number">20.</span> </p>
-
-<p class="noindent mono"><span class="line-number">21.</span> <span
-class="comment">#            R    G    B</span></p>
-
-<p class="noindent mono"><span class="line-number">22.</span> GRAY
-= (100, 100, 100)</p>
-
-<p class="noindent mono"><span class="line-number">23.</span> NAVYBLUE
-= ( 60,  60, 100)</p>
-
-<p class="noindent mono"><span class="line-number">24.</span> WHITE
-= (255, 255, 255)</p>
-
-<p class="noindent mono"><span class="line-number">25.</span> RED
-= (255,   0,   0)</p>
-
-<p class="noindent mono"><span class="line-number">26.</span> GREEN
-= (  0, 255,   0)</p>
-
-<p class="noindent mono"><span class="line-number">27.</span> BLUE
-= (  0,   0, 255)</p>
-
-<p class="noindent mono"><span class="line-number">28.</span> YELLOW
-= (255, 255,   0)</p>
-
-<p class="noindent mono"><span class="line-number">29.</span> ORANGE
-= (255, 128,   0)</p>
-
-<p class="noindent mono"><span class="line-number">30.</span> PURPLE
-= (255,   0, 255)</p>
-
-<p class="noindent mono"><span class="line-number">31.</span> CYAN
-= (  0, 255, 255)</p>
-
-<p class="noindent mono"><span class="line-number">32.</span> </p>
-
-<p class="noindent mono"><span class="line-number">33.</span> BGCOLOR
-= NAVYBLUE</p>
-
-<p class="noindent mono"><span class="line-number">34.</span> LIGHTBGCOLOR
-= GRAY</p>
-
-<p class="noindent mono"><span class="line-number">35.</span> BOXCOLOR
-= WHITE</p>
-
-<p class="noindent mono"><span class="line-number">36.</span> HIGHLIGHTCOLOR
-= BLUE</p>
-
-<p class="noindent mono"><span class="line-number">37.</span> </p>
-
-<p class="noindent mono"><span class="line-number">38.</span> DONUT
-= 'donut'</p>
-
-<p class="noindent mono"><span class="line-number">39.</span> SQUARE
-= 'square'</p>
-
-<p class="noindent mono"><span class="line-number">40.</span> DIAMOND
-= 'diamond'</p>
-
-<p class="noindent mono"><span class="line-number">41.</span> LINES
-= 'lines'</p>
-
-<p class="noindent mono"><span class="line-number">42.</span> OVAL
-= 'oval'</p>
-
-<p class="noindent mono"><span class="line-number">43.</span> </p>
-
-<p class="noindent mono"><span class="line-number">44.</span> ALLCOLORS
-= (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)</p>
-
-<p class="noindent mono"><span class="line-number">45.</span> ALLSHAPES
-= (DONUT, SQUARE, DIAMOND, LINES, OVAL)</p>
-
-<p class="noindent mono"><span class="line-number">46.</span> assert
-len(ALLCOLORS) * len(ALLSHAPES) * 2 &gt;= BOARDWIDTH * BOARDHEIGHT, &quot;Board
-is too big for the number of shapes/colors defined.&quot;</p>
-
-<p class="noindent mono"><span class="line-number">47.</span> </p>
-
-<p class="noindent mono"><span class="line-number">48.</span> def
-main():</p>
-
-<p class="noindent mono"><span class="line-number">49.</span>     global
-FPSCLOCK, DISPLAYSURF</p>
-
-<p class="noindent mono"><span class="line-number">50.</span>     pygame.init()</p>
-
-<p class="noindent mono"><span class="line-number">51.</span>     FPSCLOCK
-= pygame.time.Clock()</p>
-
-<p class="noindent mono"><span class="line-number">52.</span>     DISPLAYSURF
-= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
-
-<p class="noindent mono"><span class="line-number">53.</span> </p>
-
-<p class="noindent mono"><span class="line-number">54.</span>     mousex
-= 0 <span class="comment"># used to store x coordinate of mouse event</span></p>
-
-<p class="noindent mono"><span class="line-number">55.</span>     mousey
-= 0 <span class="comment"># used to store y coordinate of mouse event</span></p>
-
-<p class="noindent mono"><span class="line-number">56.</span>     pygame.display.set_caption('Memory
-Game')</p>
-
-<p class="noindent mono"><span class="line-number">57.</span> </p>
-
-<p class="noindent mono"><span class="line-number">58.</span>     mainBoard
-= getRandomizedBoard()</p>
-
-<p class="noindent mono"><span class="line-number">59.</span>     revealedBoxes
-= generateRevealedBoxesData(False)</p>
-
-<p class="noindent mono"><span class="line-number">60.</span> </p>
-
-<p class="noindent mono"><span class="line-number">61.</span>     firstSelection
-= None <span class="comment"># stores the (x, y) of the first box
-clicked.</span></p>
-
-<p class="noindent mono"><span class="line-number">62.</span> </p>
-
-<p class="noindent mono"><span class="line-number">63.</span>     DISPLAYSURF.fill(BGCOLOR)</p>
-
-<p class="noindent mono"><span class="line-number">64.</span>     startGameAnimation(mainBoard)</p>
-
-<p class="noindent mono"><span class="line-number">65.</span> </p>
-
-<p class="noindent mono"><span class="line-number">66.</span>     while
-True: <span class="comment"># main game loop</span></p>
-
-<p class="noindent mono"><span class="line-number">67.</span>         mouseClicked
-= False</p>
-
-<p class="noindent mono"><span class="line-number">68.</span> </p>
-
-<p class="noindent mono"><span class="line-number">69.</span>         DISPLAYSURF.fill(BGCOLOR)
-<span class="comment"># drawing the window</span></p>
-
-<p class="noindent mono"><span class="line-number">70.</span>         drawBoard(mainBoard,
-revealedBoxes)</p>
-
-<p class="noindent mono"><span class="line-number">71.</span> </p>
-
-<p class="noindent mono"><span class="line-number">72.</span>         for
-event in pygame.event.get(): <span class="comment"># event handling
-loop</span></p>
-
-<p class="noindent mono"><span class="line-number">73.</span>             if
-event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
-
-<p class="noindent mono"><span class="line-number">74.</span>                 pygame.quit()</p>
-
-<p class="noindent mono"><span class="line-number">75.</span>                 sys.exit()</p>
-
-<p class="noindent mono"><span class="line-number">76.</span>             elif
-event.type == MOUSEMOTION:</p>
-
-<p class="noindent mono"><span class="line-number">77.</span>                 mousex,
-mousey = event.pos</p>
-
-<p class="noindent mono"><span class="line-number">78.</span>             elif
-event.type == MOUSEBUTTONUP:</p>
-
-<p class="noindent mono"><span class="line-number">79.</span>                 mousex,
-mousey = event.pos</p>
-
-<p class="noindent mono"><span class="line-number">80.</span>                 mouseClicked
-= True</p>
-
-<p class="noindent mono"><span class="line-number">81.</span> </p>
-
-<p class="noindent mono"><span class="line-number">82.</span>         boxx,
-boxy = getBoxAtPixel(mousex, mousey)</p>
-
-<p class="noindent mono"><span class="line-number">83.</span>         if
-boxx != None and boxy != None:</p>
-
-<p class="noindent mono"><span class="line-number">84.</span>             <span
-class="comment"># The mouse is currently over a box.</span></p>
-
-<p class="noindent mono"><span class="line-number">85.</span>             if
-not revealedBoxes[boxx][boxy]:</p>
-
-<p class="noindent mono"><span class="line-number"> 86.</span>
-drawHighlightBox(boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">87.</span>             if
-not revealedBoxes[boxx][boxy] and mouseClicked:</p>
-
-<p class="noindent mono"><span class="line-number">88.</span>                 revealBoxesAnimation(mainBoard,
-[(boxx, boxy)])</p>
-
-<p class="noindent mono"><span class="line-number">89.</span>                 revealedBoxes[boxx][boxy]
-= True <span class="comment"># set the box as &quot;revealed&quot;</span></p>
-
-<p class="noindent mono"><span class="line-number">90.</span>                 if
-firstSelection == None: <span class="comment"># the current box was the
-first box clicked</span></p>
-
-<p class="noindent mono"><span class="line-number">91.</span>                     firstSelection
-= (boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">92.</span>                 else:
-<span class="comment"># the current box was the second box clicked</span></p>
-
-<p class="noindent mono"><span class="line-number">93.</span>                     <span
-class="comment"># Check if there is a match between the two icons.</span></p>
-
-<p class="noindent mono"><span class="line-number">94.</span>                     icon1shape,
-icon1color = getShapeAndColor(mainBoard, firstSelection[0], firstSelection[1])</p>
-
-<p class="noindent mono"><span class="line-number">95.</span>                     icon2shape,
-icon2color = getShapeAndColor(mainBoard, boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">96.</span> </p>
-
-<p class="noindent mono"><span class="line-number">97.</span>                     if
-icon1shape != icon2shape or icon1color != icon2color:</p>
-
-<p class="noindent mono"><span class="line-number">98.</span>                         <span
-class="comment"># Icons don't match. Re-cover up both selections.</span></p>
-
-<p class="noindent mono"><span class="line-number">99.</span>                         pygame.time.wait(1000)
-<span class="comment"># 1000 milliseconds = 1 sec</span></p>
-
-<p class="noindent mono"><span class="line-number">100.</span>                         coverBoxesAnimation(mainBoard,
-[(firstSelection[0], firstSelection[1]), (boxx, boxy)])</p>
-
-<p class="noindent mono"><span class="line-number">101.</span>                         revealedBoxes[firstSelection[0]][firstSelection
-[1]] = False</p>
-
-<p class="noindent mono"><span class="line-number">102.</span>                         revealedBoxes[boxx][boxy]
-= False</p>
-
-<p class="noindent mono"><span class="line-number">103.</span>                     elif
-hasWon(revealedBoxes): <span class="comment"># check if all pairs found</span></p>
-
-<p class="noindent mono"><span class="line-number">104.</span>                         gameWonAnimation(mainBoard)</p>
-
-<p class="noindent mono"><span class="line-number">105.</span>                         pygame.time.wait(2000)</p>
-
-<p class="noindent mono"><span class="line-number">106.</span> </p>
-
-<p class="noindent mono"><span class="line-number">107.</span>                         <span
-class="comment"># Reset the board</span></p>
-
-<p class="noindent mono"><span class="line-number">108.</span>                         mainBoard
-= getRandomizedBoard()</p>
-
-<p class="noindent mono"><span class="line-number">109.</span>                         revealedBoxes
-= generateRevealedBoxesData(False)</p>
-
-<p class="noindent mono"><span class="line-number">110.</span> </p>
-
-<p class="noindent mono"><span class="line-number">111.</span>                         <span
-class="comment"># Show the fully unrevealed board for a second.</span></p>
-
-<p class="noindent mono"><span class="line-number">112.</span>                         drawBoard(mainBoard,
-revealedBoxes)</p>
-
-<p class="noindent mono"><span class="line-number">113.</span>                         pygame.display.update()</p>
-
-<p class="noindent mono"><span class="line-number">114.</span>                         pygame.time.wait(1000)</p>
-
-<p class="noindent mono"><span class="line-number">115.</span> </p>
-
-<p class="noindent mono"><span class="line-number">116.</span>                         <span
-class="comment"># Replay the start game animation.</span></p>
-
-<p class="noindent mono"><span class="line-number">117.</span>                         startGameAnimation(mainBoard)            </p>
-
-<p class="noindent mono"><span class="line-number">118.</span>                     firstSelection
-= None <span class="comment"># reset firstSelection variable</span></p>
-
-<p class="noindent mono"><span class="line-number">119.</span> </p>
-
-<p class="noindent mono"><span class="line-number">120.</span>         <span
-class="comment"># Redraw the screen and wait a clock tick.</span></p>
-
-<p class="noindent mono"><span class="line-number">121.</span>         pygame.display.update()</p>
-
-<p class="noindent mono"><span class="line-number">122.</span>         FPSCLOCK.tick(FPS)</p>
-
-<p class="noindent mono"><span class="line-number">123.</span> </p>
-
-<p class="noindent mono"><span class="line-number">124.</span> </p>
-
-<p class="noindent mono"><span class="line-number">125.</span> def
-generateRevealedBoxesData(val):</p>
-
-<p class="noindent mono"><span class="line-number">126.</span>     revealedBoxes
-= []</p>
-
-<p class="noindent mono"><span class="line-number">127.</span>     for
-i in range(BOARDWIDTH):</p>
-
-<p class="noindent mono"><span class="line-number">128.</span>         revealedBoxes.append([val]
-* BOARDHEIGHT)</p>
-
-<p class="noindent mono"><span class="line-number">129.</span>     return
-revealedBoxes</p>
-
-<p class="noindent mono"><span class="line-number">130.</span> </p>
-
-<p class="noindent mono"><span class="line-number">131.</span> </p>
-
-<p class="noindent mono"><span class="line-number">132.</span> def
-getRandomizedBoard():</p>
-
-<p class="noindent mono"><span class="line-number">133.</span>     <span
-class="comment"># Get a list of every possible shape in every possible
-color.</span></p>
-
-<p class="noindent mono"><span class="line-number">134.</span>     icons
-= []</p>
-
-<p class="noindent mono"><span class="line-number">135.</span>     for
-color in ALLCOLORS:</p>
-
-<p class="noindent mono"><span class="line-number">136.</span>         for
-shape in ALLSHAPES:</p>
-
-<p class="noindent mono"><span class="line-number">137.</span>             icons.append(
-(shape, color) )</p>
-
-<p class="noindent mono"><span class="line-number">138.</span> </p>
-
-<p class="noindent mono"><span class="line-number">139.</span>     random.shuffle(icons)
-<span class="comment"># randomize the order of the icons list</span></p>
-
-<p class="noindent mono"><span class="line-number">140.</span>     numIconsUsed
-= int(BOARDWIDTH * BOARDHEIGHT / 2) <span class="comment"># calculate
-how many icons are needed</span></p>
-
-<p class="noindent mono"><span class="line-number">141.</span>     icons
-= icons[:numIconsUsed] * 2 <span class="comment"># make two of each</span></p>
-
-<p class="noindent mono"><span class="line-number">142.</span>     random.shuffle(icons)</p>
-
-<p class="noindent mono"><span class="line-number">143.</span> </p>
-
-<p class="noindent mono"><span class="line-number">144.</span>     <span
-class="comment"># Create the board data structure, with randomly placed
-icons.</span></p>
-
-<p class="noindent mono"><span class="line-number">145.</span>     board
-= []</p>
-
-<p class="noindent mono"><span class="line-number">146.</span>     for
-x in range(BOARDWIDTH):</p>
-
-<p class="noindent mono"><span class="line-number">147.</span>         column
-= []</p>
-
-<p class="noindent mono"><span class="line-number">148.</span>         for
-y in range(BOARDHEIGHT):</p>
-
-<p class="noindent mono"><span class="line-number">149.</span>             column.append(icons[0])</p>
-
-<p class="noindent mono"><span class="line-number">150.</span>             del
-icons[0] <span class="comment"># remove the icons as we assign them</span></p>
-
-<p class="noindent mono"><span class="line-number">151.</span>         board.append(column)</p>
-
-<p class="noindent mono"><span class="line-number">152.</span>     return
-board</p>
-
-<p class="noindent mono"><span class="line-number">153.</span> </p>
-
-<p class="noindent mono"><span class="line-number">154.</span> </p>
-
-<p class="noindent mono"><span class="line-number">155.</span> def
-splitIntoGroupsOf(groupSize, theList):</p>
-
-<p class="noindent mono"><span class="line-number">156.</span>     <span
-class="comment"># splits a list into a list of lists, where the inner
-lists have at</span></p>
-
-<p class="noindent mono"><span class="line-number">157.</span>     <span
-class="comment"># most groupSize number of items.</span></p>
-
-<p class="noindent mono"><span class="line-number">158.</span>     result
-= []</p>
-
-<p class="noindent mono"><span class="line-number">159.</span>     for
-i in range(0, len(theList), groupSize):</p>
-
-<p class="noindent mono"><span class="line-number">160.</span>         result.append(theList[i:i
-+ groupSize])</p>
-
-<p class="noindent mono"><span class="line-number">161.</span>     return
-result</p>
-
-<p class="noindent mono"><span class="line-number">162.</span> </p>
-
-<p class="noindent mono"><span class="line-number">163.</span> </p>
-
-<p class="noindent mono"><span class="line-number">164.</span> def
-leftTopCoordsOfBox(boxx, boxy):</p>
-
-<p class="noindent mono"><span class="line-number">165.</span>     <span
-class="comment"># Convert board coordinates to pixel coordinates</span></p>
-
-<p class="noindent mono"><span class="line-number">166.</span>     left
-= boxx * (BOXSIZE + GAPSIZE) + XMARGIN</p>
-
-<p class="noindent mono"><span class="line-number">167.</span>     top
-= boxy * (BOXSIZE + GAPSIZE) + YMARGIN</p>
-
-<p class="noindent mono"><span class="line-number">168.</span>     return
-(left, top)</p>
-
-<p class="noindent mono"><span class="line-number">169.</span> </p>
-
-<p class="noindent mono"><span class="line-number">170.</span> </p>
-
-<p class="noindent mono"><span class="line-number">171.</span> def
-getBoxAtPixel(x, y):</p>
-
-<p class="noindent mono"><span class="line-number">172.</span>     for
-boxx in range(BOARDWIDTH):</p>
-
-<p class="noindent mono"><span class="line-number">173.</span>         for
-boxy in range(BOARDHEIGHT):</p>
-
-<p class="noindent mono"><span class="line-number">174.</span>             left,
-top = leftTopCoordsOfBox(boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">175.</span>             boxRect
-= pygame.Rect(left, top, BOXSIZE, BOXSIZE)</p>
-
-<p class="noindent mono"><span class="line-number">176.</span>             if
-boxRect.collidepoint(x, y):</p>
-
-<p class="noindent mono"><span class="line-number">177.</span>                 return
-(boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">178.</span>     return
-(None, None)</p>
-
-<p class="noindent mono"><span class="line-number">179.</span> </p>
-
-<p class="noindent mono"><span class="line-number">180.</span> </p>
-
-<p class="noindent mono"><span class="line-number">181.</span> def
-drawIcon(shape, color, boxx, boxy):</p>
-
-<p class="noindent mono"><span class="line-number">182.</span>     quarter
-= int(BOXSIZE * 0.25) <span class="comment"># syntactic sugar</span></p>
-
-<p class="noindent mono"><span class="line-number">183.</span>     half
-=    int(BOXSIZE * 0.5)  <span class="comment"># syntactic sugar</span></p>
-
-<p class="noindent mono"><span class="line-number">184.</span> </p>
-
-<p class="noindent mono"><span class="line-number">185.</span>     left,
-top = leftTopCoordsOfBox(boxx, boxy) <span class="comment"># get pixel
-coords from board coords</span></p>
-
-<p class="noindent mono"><span class="line-number">186.</span>     <span
-class="comment"># Draw the shapes</span></p>
-
-<p class="noindent mono"><span class="line-number">187.</span>     if
-shape == DONUT:</p>
-
-<p class="noindent mono"><span class="line-number">188.</span>         pygame.draw.circle(DISPLAYSURF,
-color, (left + half, top + half), half - 5)</p>
-
-<p class="noindent mono"><span class="line-number">189.</span>         pygame.draw.circle(DISPLAYSURF,
-BGCOLOR, (left + half, top + half), quarter - 5)</p>
-
-<p class="noindent mono"><span class="line-number">190.</span>     elif
-shape == SQUARE:</p>
-
-<p class="noindent mono"><span class="line-number">191.</span>         pygame.draw.rect(DISPLAYSURF,
-color, (left + quarter, top + quarter, BOXSIZE - half, BOXSIZE - half))</p>
-
-<p class="noindent mono"><span class="line-number">192.</span>     elif
-shape == DIAMOND:</p>
-
-<p class="noindent mono"><span class="line-number">193.</span>         pygame.draw.polygon(DISPLAYSURF,
-color, ((left + half, top), (left + BOXSIZE - 1, top + half), (left + half, top
-+ BOXSIZE - 1), (left, top + half)))</p>
-
-<p class="noindent mono"><span class="line-number">194.</span>     elif
-shape == LINES:</p>
-
-<p class="noindent mono"><span class="line-number">195.</span>         for
-i in range(0, BOXSIZE, 4):</p>
-
-<p class="noindent mono"><span class="line-number">196.</span>             pygame.draw.line(DISPLAYSURF,
-color, (left, top + i), (left + i, top))</p>
-
-<p class="noindent mono"><span class="line-number">197.</span>             pygame.draw.line(DISPLAYSURF,
-color, (left + i, top + BOXSIZE - 1), (left + BOXSIZE - 1, top + i))</p>
-
-<p class="noindent mono"><span class="line-number">198.</span>     elif
-shape == OVAL:</p>
-
-<p class="noindent mono"><span class="line-number">199.</span>         pygame.draw.ellipse(DISPLAYSURF,
-color, (left, top + quarter, BOXSIZE, half))</p>
-
-<p class="noindent mono"><span class="line-number">200.</span> </p>
-
-<p class="noindent mono"><span class="line-number">201.</span> </p>
-
-<p class="noindent mono"><span class="line-number">202.</span> def
-getShapeAndColor(board, boxx, boxy):</p>
-
-<p class="noindent mono"><span class="line-number">203.</span>     <span
-class="comment"># shape value for x, y spot is stored in board[x][y][0]</span></p>
-
-<p class="noindent mono"><span class="line-number">204.</span>     <span
-class="comment"># color value for x, y spot is stored in board[x][y][1]</span></p>
-
-<p class="noindent mono"><span class="line-number">205.</span>     return
-board[boxx][boxy][0], board[boxx][boxy][1]</p>
-
-<p class="noindent mono"><span class="line-number">206.</span> </p>
-
-<p class="noindent mono"><span class="line-number">207.</span> </p>
-
-<p class="noindent mono"><span class="line-number">208.</span> def
-drawBoxCovers(board, boxes, coverage):</p>
-
-<p class="noindent mono"><span class="line-number">209.</span>     <span
-class="comment"># Draws boxes being covered/revealed. &quot;boxes&quot;
-is a list</span></p>
-
-<p class="noindent mono"><span class="line-number">210.</span>     <span
-class="comment"># of two-item lists, which have the x &amp; y spot of
-the box.</span></p>
-
-<p class="noindent mono"><span class="line-number">211.</span>     for
-box in boxes:</p>
-
-<p class="noindent mono"><span class="line-number">212.</span>         left,
-top = leftTopCoordsOfBox(box[0], box[1])</p>
-
-<p class="noindent mono"><span class="line-number">213.</span>         pygame.draw.rect(DISPLAYSURF,
-BGCOLOR, (left, top, BOXSIZE, BOXSIZE))</p>
-
-<p class="noindent mono"><span class="line-number">214.</span>         shape,
-color = getShapeAndColor(board, box[0], box[1])</p>
-
-<p class="noindent mono"><span class="line-number">215.</span>         drawIcon(shape,
-color, box[0], box[1])</p>
-
-<p class="noindent mono"><span class="line-number">216.</span>         if
-coverage &gt; 0: <span class="comment"># only draw the cover if there
-is an coverage</span></p>
-
-<p class="noindent mono"><span class="line-number">217.</span>             pygame.draw.rect(DISPLAYSURF,
-BOXCOLOR, (left, top, coverage, BOXSIZE))</p>
-
-<p class="noindent mono"><span class="line-number">218.</span>     pygame.display.update()</p>
-
-<p class="noindent mono"><span class="line-number">219.</span>     FPSCLOCK.tick(FPS)</p>
-
-<p class="noindent mono"><span class="line-number">220.</span> </p>
-
-<p class="noindent mono"><span class="line-number">221.</span> </p>
-
-<p class="noindent mono"><span class="line-number">222.</span> def
-revealBoxesAnimation(board, boxesToReveal):</p>
-
-<p class="noindent mono"><span class="line-number">223.</span>     <span
-class="comment"># Do the &quot;box reveal&quot; animation.</span></p>
-
-<p class="noindent mono"><span class="line-number">224.</span>     for
-coverage in range(BOXSIZE, (-REVEALSPEED) - 1, - REVEALSPEED):</p>
-
-<p class="noindent mono"><span class="line-number">225.</span>         drawBoxCovers(board,
-boxesToReveal, coverage)</p>
-
-<p class="noindent mono"><span class="line-number">226.</span> </p>
-
-<p class="noindent mono"><span class="line-number">227.</span> </p>
-
-<p class="noindent mono"><span class="line-number">228.</span> def
-coverBoxesAnimation(board, boxesToCover):</p>
-
-<p class="noindent mono"><span class="line-number">229.</span>     <span
-class="comment"># Do the &quot;box cover&quot; animation.</span></p>
-
-<p class="noindent mono"><span class="line-number">230.</span>     for
-coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED):</p>
-
-<p class="noindent mono"><span class="line-number">231.</span>         drawBoxCovers(board,
-boxesToCover, coverage)</p>
-
-<p class="noindent mono"><span class="line-number">232.</span> </p>
-
-<p class="noindent mono"><span class="line-number">233.</span> </p>
-
-<p class="noindent mono"><span class="line-number">234.</span> def
-drawBoard(board, revealed):</p>
-
-<p class="noindent mono"><span class="line-number">235.</span>     <span
-class="comment"># Draws all of the boxes in their covered or revealed
-state.</span></p>
-
-<p class="noindent mono"><span class="line-number">236.</span>     for
-boxx in range(BOARDWIDTH):</p>
-
-<p class="noindent mono"><span class="line-number">237.</span>         for
-boxy in range(BOARDHEIGHT):</p>
-
-<p class="noindent mono"><span class="line-number">238.</span>             left,
-top = leftTopCoordsOfBox(boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">239.</span>             if
-not revealed[boxx][boxy]:</p>
-
-<p class="noindent mono"><span class="line-number">240.</span>                 <span
-class="comment"># Draw a covered box.</span></p>
-
-<p class="noindent mono"><span class="line-number">241.</span>                 pygame.draw.rect(DISPLAYSURF,
-BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))</p>
-
-<p class="noindent mono"><span class="line-number">242.</span>             else:</p>
-
-<p class="noindent mono"><span class="line-number">243.</span>                 <span
-class="comment"># Draw the (revealed) icon.</span></p>
-
-<p class="noindent mono"><span class="line-number">244.</span>                 shape,
-color = getShapeAndColor(board, boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">245.</span>                 drawIcon(shape,
-color, boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">246.</span> </p>
-
-<p class="noindent mono"><span class="line-number">247.</span> </p>
-
-<p class="noindent mono"><span class="line-number">248.</span> def
-drawHighlightBox(boxx, boxy):</p>
-
-<p class="noindent mono"><span class="line-number">249.</span>     left,
-top = leftTopCoordsOfBox(boxx, boxy)</p>
-
-<p class="noindent mono"><span class="line-number">250.</span>     pygame.draw.rect(DISPLAYSURF,
-HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4)</p>
-
-<p class="noindent mono"><span class="line-number">251.</span> </p>
-
-<p class="noindent mono"><span class="line-number">252.</span> </p>
-
-<p class="noindent mono"><span class="line-number">253.</span> def
-startGameAnimation(board):</p>
-
-<p class="noindent mono"><span class="line-number">254.</span>     <span
-class="comment"># Randomly reveal the boxes 8 at a time.</span></p>
-
-<p class="noindent mono"><span class="line-number">255.</span>     coveredBoxes
-= generateRevealedBoxesData(False)</p>
-
-<p class="noindent mono"><span class="line-number">256.</span>     boxes
-= []</p>
-
-<p class="noindent mono"><span class="line-number">257.</span>     for
-x in range(BOARDWIDTH):</p>
-
-<p class="noindent mono"><span class="line-number">258.</span>         for
-y in range(BOARDHEIGHT):</p>
-
-<p class="noindent mono"><span class="line-number">259.</span>             boxes.append(
-(x, y) )</p>
-
-<p class="noindent mono"><span class="line-number">260.</span>     random.shuffle(boxes)</p>
-
-<p class="noindent mono"><span class="line-number">261.</span>     boxGroups
-= splitIntoGroupsOf(8, boxes)</p>
-
-<p class="noindent mono"><span class="line-number">262.</span> </p>
-
-<p class="noindent mono"><span class="line-number">263.</span>
-drawBoard(board, coveredBoxes)</p>
-
-<p class="noindent mono"><span class="line-number">264.</span>     for
-boxGroup in boxGroups:</p>
-
-<p class="noindent mono"><span class="line-number">265.</span>         revealBoxesAnimation(board,
-boxGroup)</p>
-
-<p class="noindent mono"><span class="line-number">266.</span>         coverBoxesAnimation(board,
-boxGroup)</p>
-
-<p class="noindent mono"><span class="line-number">267.</span> </p>
-
-<p class="noindent mono"><span class="line-number">268.</span> </p>
-
-<p class="noindent mono"><span class="line-number">269.</span> def
-gameWonAnimation(board):</p>
-
-<p class="noindent mono"><span class="line-number">270.</span>     <span
-class="comment"># flash the background color when the player has won</span></p>
-
-<p class="noindent mono"><span class="line-number">271.</span>     coveredBoxes
-= generateRevealedBoxesData(True)</p>
-
-<p class="noindent mono"><span class="line-number">272.</span>     color1
-= LIGHTBGCOLOR</p>
-
-<p class="noindent mono"><span class="line-number">273.</span>     color2
-= BGCOLOR</p>
-
-<p class="noindent mono"><span class="line-number">274.</span> </p>
-
-<p class="noindent mono"><span class="line-number">275.</span>     for
-i in range(13):</p>
-
-<p class="noindent mono"><span class="line-number">276.</span>         color1,
-color2 = color2, color1 <span class="comment"># swap colors</span></p>
-
-<p class="noindent mono"><span class="line-number">277.</span>         DISPLAYSURF.fill(color1)</p>
-
-<p class="noindent mono"><span class="line-number">278.</span>         drawBoard(board,
-coveredBoxes)</p>
-
-<p class="noindent mono"><span class="line-number">279.</span>         pygame.display.update()</p>
-
-<p class="noindent mono"><span class="line-number">280.</span>         pygame.time.wait(300)</p>
-
-<p class="noindent mono"><span class="line-number">281.</span> </p>
-
-<p class="noindent mono"><span class="line-number">282.</span> </p>
-
-<p class="noindent mono"><span class="line-number">283.</span> def
-hasWon(revealedBoxes):</p>
-
-<p class="noindent mono"><span class="line-number">284.</span>     <span
-class="comment"># Returns True if all the boxes have been revealed,
-otherwise False</span></p>
-
-<p class="noindent mono"><span class="line-number">285.</span>     for
-i in revealedBoxes:</p>
-
-<p class="noindent mono"><span class="line-number">286.</span>         if
-False in i:</p>
-
-<p class="noindent mono"><span class="line-number">287.</span>             return
-False <span class="comment"># return False if any boxes are covered.</span></p>
-
-<p class="noindent mono"><span class="line-number">288.</span>     return
-True</p>
-
-<p class="noindent mono"><span class="line-number">289.</span> </p>
-
-<p class="noindent mono"><span class="line-number">290.</span> </p>
-
-<p class="noindent mono"><span class="line-number">291.</span> if
-__name__ == '__main__':</p>
-
-<p class="noindent mono"><span class="line-number">292.</span>     main()</p>
-
-</div>
-
-	<h1 class="subheading" id="">Credits and Imports</h1>
+		<p class="noindent mono"><span class="line-number">18.</span>  XMARGIN = int((WINDOWWIDTH - (BOARDWIDTH * (BOXSIZE + GAPSIZE))) / 2)</p>
+		<p class="noindent mono"><span class="line-number">19.</span>  YMARGIN = int((WINDOWHEIGHT - (BOARDHEIGHT * (BOXSIZE + GAPSIZE))) / 2)</p>
+		<p class="noindent mono"><span class="line-number">20.</span></p>
+		<p class="noindent mono"><span class="line-number">21.</span><span class="comment">#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;R&#160;&#160;&#160;&#160;G&#160;&#160;&#160;&#160;B</span></p>
+		<p class="noindent mono"><span class="line-number">22.</span> GRAY&#160;&#160;&#160;&#160;&#160;= (100, 100, 100)</p>
+		<p class="noindent mono"><span class="line-number">23.</span> NAVYBLUE = ( 60,&#160;&#160;60, 100)</p>
+		<p class="noindent mono"><span class="line-number">24.</span> WHITE&#160;&#160;&#160;&#160;= (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">25.</span> RED&#160;&#160;&#160;&#160;&#160;&#160;= (255,&#160;&#160;&#160;0,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">26.</span> GREEN&#160;&#160;&#160;&#160;= (&#160;&#160;0,&#160;255,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">27.</span> BLUE&#160;&#160;&#160;&#160;&#160;= (&#160;&#160;0,&#160;&#160;&#160;0, 255)</p>
+		<p class="noindent mono"><span class="line-number">28.</span> YELLOW&#160;&#160;&#160;= (255, 255,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">29.</span> ORANGE&#160;&#160;&#160;= (255, 128,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">30.</span> PURPLE&#160;&#160;&#160;= (255,&#160;&#160;&#160;0, 255)</p>
+		<p class="noindent mono"><span class="line-number">31.</span> CYAN&#160;&#160;&#160;&#160;&#160;= (&#160;&#160;0, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">32.</span></p>
+		<p class="noindent mono"><span class="line-number">33.</span> BGCOLOR	= NAVYBLUE</p>
+		<p class="noindent mono"><span class="line-number">34.</span> LIGHTBGCOLOR	= GRAY</p>
+		<p class="noindent mono"><span class="line-number">35.</span> BOXCOLOR	= WHITE</p>
+		<p class="noindent mono"><span class="line-number">36.</span> HIGHLIGHTCOLOR	= BLUE</p>
+		<p class="noindent mono"><span class="line-number">37.</span></p>
+		<p class="noindent mono"><span class="line-number">38.</span> DONUT = 'donut'</p>
+		<p class="noindent mono"><span class="line-number">38.</span> DONUT = 'donut'</p>
+		<p class="noindent mono"><span class="line-number">39.</span> SQUARE = 'square'</p>
+		<p class="noindent mono"><span class="line-number">40.</span> DIAMOND = 'diamond'</p>
+		<p class="noindent mono"><span class="line-number">41.</span> LINES = 'lines'</p>
+		<p class="noindent mono"><span class="line-number">42.</span> OVAL = 'oval'</p>
+		<p class="noindent mono"><span class="line-number">43.</span></p>
+		<p class="noindent mono"><span class="line-number">44.</span> ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)</p>
+		<p class="noindent mono"><span class="line-number">45.</span> ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)</p>
+		<p class="noindent mono"><span class="line-number">46.</span> assert len(ALLCOLORS) * len(ALLSHAPES) * 2 &gt;= BOARDWIDTH * BOARDHEIGHT, &quot;Board is too big for the number of shapes/colors defined.&quot;</p>
+		<p class="noindent mono"><span class="line-number">47.</span></p>
+		<p class="noindent mono"><span class="line-number">48.</span> def main():</p>
+		<p class="noindent mono"><span class="line-number">49.</span> &#160;&#160;&#160;&#160;global FPSCLOCK, DISPLAYSURF</p>
+		<p class="noindent mono"><span class="line-number">50.</span> &#160;&#160;&#160;&#160;pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">51.</span> &#160;&#160;&#160;&#160;FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">52.</span> &#160;&#160;&#160;&#160;DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">53.</span></p>
+		<p class="noindent mono"><span class="line-number">54.</span> &#160;&#160;&#160;&#160;mousex = 0 <span class="comment"># used to store x coordinate of mouse event</span></p>
+		<p class="noindent mono"><span class="line-number">55.</span> &#160;&#160;&#160;&#160;mousey = 0 <span class="comment"># used to store y coordinate of mouse event</span></p>
+		<p class="noindent mono"><span class="line-number">56.</span> &#160;&#160;&#160;&#160;pygame.display.set_caption('Memory Game')</p>
+		<p class="noindent mono"><span class="line-number">57.</span></p>
+		<p class="noindent mono"><span class="line-number">58.</span> &#160;&#160;&#160;&#160;mainBoard = getRandomizedBoard()</p>
+		<p class="noindent mono"><span class="line-number">59.</span> &#160;&#160;&#160;&#160;revealedBoxes = generateRevealedBoxesData(False)</p>
+		<p class="noindent mono"><span class="line-number">60.</span></p>
+		<p class="noindent mono"><span class="line-number">61.</span> &#160;&#160;&#160;&#160;firstSelection = None <span class="comment"># stores the (x, y) of the first box clicked.</span></p>
+		<p class="noindent mono"><span class="line-number">62.</span></p>
+		<p class="noindent mono"><span class="line-number">63.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.fill(BGCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">64.</span> &#160;&#160;&#160;&#160;startGameAnimation(mainBoard)</p>
+		<p class="noindent mono"><span class="line-number">65.</span></p>
+		<p class="noindent mono"><span class="line-number">66.</span> &#160;&#160;&#160;&#160;while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">67.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mouseClicked = False</p>
+		<p class="noindent mono"><span class="line-number">68.</span></p>
+		<p class="noindent mono"><span class="line-number">69.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.fill(BGCOLOR) <span class="comment"># drawing the window</span></p>
+		<p class="noindent mono"><span class="line-number">70.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoard(mainBoard, revealedBoxes)</p>
+		<p class="noindent mono"><span class="line-number">71.</span></p>
+		<p class="noindent mono"><span class="line-number">72.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">73.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
+		<p class="noindent mono"><span class="line-number">74.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">75.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">76.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == MOUSEMOTION:</p>
+		<p class="noindent mono"><span class="line-number">77.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == MOUSEBUTTONUP:</p>
+		<p class="noindent mono"><span class="line-number">79.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">80.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mouseClicked = True</p>
+		<p class="noindent mono"><span class="line-number">81.</span></p>
+		<p class="noindent mono"><span class="line-number">82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;boxx, boxy = getBoxAtPixel(mousex, mousey)</p>
+		<p class="noindent mono"><span class="line-number">83.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if boxx != None and boxy != None:</p>
+		<p class="noindent mono"><span class="line-number">84.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># The mouse is currently over a box.</span></p>
+		<p class="noindent mono"><span class="line-number">85.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not revealedBoxes[boxx][boxy]:</p>
+		<p class="noindent mono"><span class="line-number">86.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawHighlightBox(boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">87.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not revealedBoxes[boxx][boxy] and mouseClicked:</p>
+		<p class="noindent mono"><span class="line-number">88.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealBoxesAnimation(mainBoard, [(boxx, boxy)])</p>
+		<p class="noindent mono"><span class="line-number">89.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes[boxx][boxy] = True <span class="comment"># set the box as &quot;revealed&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">90.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if firstSelection == None: <span class="comment"># the current box was the first box clicked</span></p>
+		<p class="noindent mono"><span class="line-number">91.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;firstSelection = (boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">92.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else: <span class="comment"># the current box was the second box clicked</span></p>
+		<p class="noindent mono"><span class="line-number">93.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Check if there is a match between the two icons.</span></p>
+		<p class="noindent mono"><span class="line-number">94.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;icon1shape, icon1color = getShapeAndColor(mainBoard, firstSelection[0], firstSelection[1])</p>
+		<p class="noindent mono"><span class="line-number">95.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;icon2shape, icon2color = getShapeAndColor(mainBoard, boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">96.</span></p>
+		<p class="noindent mono"><span class="line-number">97.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if icon1shape != icon2shape or icon1color != icon2color:</p>
+		<p class="noindent mono"><span class="line-number">98.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Icons don't match. Re-cover up both selections.</span></p>
+		<p class="noindent mono"><span class="line-number">99.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(1000) <span class="comment"># 1000 milliseconds = 1 sec</span></p>
+		<p class="noindent mono"><span class="line-number">100.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])</p>
+		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes[firstSelection[0]][firstSelection [1]] = False</p>
+		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes[boxx][boxy] = False</p>
+		<p class="noindent mono"><span class="line-number">103.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif hasWon(revealedBoxes): <span class="comment"># check if all pairs found</span></p>
+		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;gameWonAnimation(mainBoard)</p>
+		<p class="noindent mono"><span class="line-number">105.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(2000)</p>
+		<p class="noindent mono"><span class="line-number">106.</span></p>
+		<p class="noindent mono"><span class="line-number">107.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Reset the board</span></p>
+		<p class="noindent mono"><span class="line-number">108.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mainBoard = getRandomizedBoard()</p>
+		<p class="noindent mono"><span class="line-number">109.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes = generateRevealedBoxesData(False)</p>
+		<p class="noindent mono"><span class="line-number">110.</span></p>
+		<p class="noindent mono"><span class="line-number">111.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Show the fully unrevealed board for a second.</span></p>
+		<p class="noindent mono"><span class="line-number">112.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoard(mainBoard, revealedBoxes)</p>
+		<p class="noindent mono"><span class="line-number">113.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">114.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(1000)</p>
+		<p class="noindent mono"><span class="line-number">115.</span></p>
+		<p class="noindent mono"><span class="line-number">116.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Replay the start game animation.</span></p>
+		<p class="noindent mono"><span class="line-number">117.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;startGameAnimation(mainBoard)</p>
+		<p class="noindent mono"><span class="line-number">118.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;firstSelection = None <span class="comment"># reset firstSelection variable</span></p>
+		<p class="noindent mono"><span class="line-number">119.</span></p>
+		<p class="noindent mono"><span class="line-number">120.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Redraw the screen and wait a clock tick.</span></p>
+		<p class="noindent mono"><span class="line-number">121.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">122.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">123.</span></p>
+		<p class="noindent mono"><span class="line-number">124.</span></p>
+		<p class="noindent mono"><span class="line-number">125.</span> def generateRevealedBoxesData(val):</p>
+		<p class="noindent mono"><span class="line-number">126.</span> &#160;&#160;&#160;&#160;revealedBoxes = []</p>
+		<p class="noindent mono"><span class="line-number">127.</span> &#160;&#160;&#160;&#160;for i in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">128.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes.append([val] * BOARDHEIGHT)</p>
+		<p class="noindent mono"><span class="line-number">129.</span> &#160;&#160;&#160;&#160;return revealedBoxes</p>
+		<p class="noindent mono"><span class="line-number">130.</span></p>
+		<p class="noindent mono"><span class="line-number">131.</span></p>
+		<p class="noindent mono"><span class="line-number">132.</span> def getRandomizedBoard():</p>
+		<p class="noindent mono"><span class="line-number">133.</span> &#160;&#160;&#160;&#160;<span class="comment"># Get a list of every possible shape in every possible color.</span></p>
+		<p class="noindent mono"><span class="line-number">134.</span> &#160;&#160;&#160;&#160;icons = []</p>
+		<p class="noindent mono"><span class="line-number">135.</span> &#160;&#160;&#160;&#160;for color in ALLCOLORS:</p>
+		<p class="noindent mono"><span class="line-number">136.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for shape in ALLSHAPES:</p>
+		<p class="noindent mono"><span class="line-number">137.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;icons.append( (shape, color) )</p>
+		<p class="noindent mono"><span class="line-number">138.</span></p>
+		<p class="noindent mono"><span class="line-number">139.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;random.shuffle(icons) <span class="comment"># randomize the order of the icons list</span></p>
+		<p class="noindent mono"><span class="line-number">140.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;numIconsUsed = int(BOARDWIDTH * BOARDHEIGHT / 2) <span class="comment"># calculate how many icons are needed</span></p>
+		<p class="noindent mono"><span class="line-number">141.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;icons = icons[:numIconsUsed] * 2 <span class="comment"># make two of each</span></p>
+		<p class="noindent mono"><span class="line-number">142.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;random.shuffle(icons)</p>
+		<p class="noindent mono"><span class="line-number">143.</span></p>
+		<p class="noindent mono"><span class="line-number">144.</span> &#160;&#160;&#160;&#160;<span class="comment"># Create the board data structure, with randomly placed icons.</span></p>
+		<p class="noindent mono"><span class="line-number">145.</span> &#160;&#160;&#160;&#160;board = []</p>
+		<p class="noindent mono"><span class="line-number">146.</span> &#160;&#160;&#160;&#160;for x in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">147.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column = []</p>
+		<p class="noindent mono"><span class="line-number">148.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(BOARDHEIGHT):</p>
+		<p class="noindent mono"><span class="line-number">149.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column.append(icons[0])</p>
+		<p class="noindent mono"><span class="line-number">150.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;del icons[0] <span class="comment"># remove the icons as we assign them</span></p>
+		<p class="noindent mono"><span class="line-number">151.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;board.append(column)</p>
+		<p class="noindent mono"><span class="line-number">152.</span> &#160;&#160;&#160;&#160;return board</p>
+		<p class="noindent mono"><span class="line-number">153.</span></p>
+		<p class="noindent mono"><span class="line-number">154.</span></p>
+		<p class="noindent mono"><span class="line-number">155.</span> def splitIntoGroupsOf(groupSize, theList):</p>
+		<p class="noindent mono"><span class="line-number">156.</span> &#160;&#160;&#160;&#160;<span class="comment"># splits a list into a list of lists, where the inner lists have at</span></p>
+		<p class="noindent mono"><span class="line-number">157.</span> &#160;&#160;&#160;&#160;<span class="comment"># most groupSize number of items.</span></p>
+		<p class="noindent mono"><span class="line-number">158.</span> &#160;&#160;&#160;&#160;result = []</p>
+		<p class="noindent mono"><span class="line-number">159.</span> &#160;&#160;&#160;&#160;for i in range(0, len(theList), groupSize):</p>
+		<p class="noindent mono"><span class="line-number">160.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;result.append(theList[i:i + groupSize])</p>
+		<p class="noindent mono"><span class="line-number">161.</span> &#160;&#160;&#160;&#160;return result</p>
+		<p class="noindent mono"><span class="line-number">162.</span></p>
+		<p class="noindent mono"><span class="line-number">163.</span></p>
+		<p class="noindent mono"><span class="line-number">164.</span> def leftTopCoordsOfBox(boxx, boxy):</p>
+		<p class="noindent mono"><span class="line-number">165.</span> &#160;&#160;&#160;&#160;<span class="comment"># Convert board coordinates to pixel coordinates</span></p>
+		<p class="noindent mono"><span class="line-number">166.</span>     left = boxx * (BOXSIZE + GAPSIZE) + XMARGIN</p>
+		<p class="noindent mono"><span class="line-number">167.</span>     top = boxy * (BOXSIZE + GAPSIZE) + YMARGIN</p>
+		<p class="noindent mono"><span class="line-number">168.</span>     return (left, top)</p>
+		<p class="noindent mono"><span class="line-number">169.</span></p>
+		<p class="noindent mono"><span class="line-number">170.</span></p>
+		<p class="noindent mono"><span class="line-number">171.</span> def getBoxAtPixel(x, y):</p>
+		<p class="noindent mono"><span class="line-number">172.</span> &#160;&#160;&#160;&#160;for boxx in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">173.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for boxy in range(BOARDHEIGHT):</p>
+		<p class="noindent mono"><span class="line-number">174.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left, top = leftTopCoordsOfBox(boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">175.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;boxRect = pygame.Rect(left, top, BOXSIZE, BOXSIZE)</p>
+		<p class="noindent mono"><span class="line-number">176.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if boxRect.collidepoint(x, y):</p>
+		<p class="noindent mono"><span class="line-number">177.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return (boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">178.</span> &#160;&#160;&#160;&#160;return (None, None)</p>
+		<p class="noindent mono"><span class="line-number">179.</span></p>
+		<p class="noindent mono"><span class="line-number">180.</span></p>
+		<p class="noindent mono"><span class="line-number">181.</span> def drawIcon(shape, color, boxx, boxy):</p>
+		<p class="noindent mono"><span class="line-number">182.</span> &#160;&#160;&#160;&#160;quarter = int(BOXSIZE * 0.25) <span class="comment"># syntactic sugar</span></p>
+		<p class="noindent mono"><span class="line-number">183.</span> &#160;&#160;&#160;&#160;half = &#160;&#160;&#160;int(BOXSIZE * 0.5) <span class="comment"># syntactic sugar</span></p>
+		<p class="noindent mono"><span class="line-number">184.</span></p>
+		<p class="noindent mono"><span class="line-number">185.</span> &#160;&#160;&#160;&#160;left, top = leftTopCoordsOfBox(boxx, boxy) <span class="comment"># get pixel coords from board coords</span></p>
+		<p class="noindent mono"><span class="line-number">186.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draw the shapes</span></p>
+		<p class="noindent mono"><span class="line-number">187.</span> &#160;&#160;&#160;&#160;if shape == DONUT:</p>
+		<p class="noindent mono"><span class="line-number">188.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.circle(DISPLAYSURF, color, (left + half, top + half), half - 5)</p>
+		<p class="noindent mono"><span class="line-number">189.</span> &#160;&#160;&#160;&#160;pygame.draw.circle(DISPLAYSURF, BGCOLOR, (left + half, top + half), quarter - 5)</p>
+		<p class="noindent mono"><span class="line-number">190.</span> &#160;&#160;&#160;&#160;elif shape == SQUARE:</p>
+		<p class="noindent mono"><span class="line-number">191.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(DISPLAYSURF, color, (left + quarter, top + quarter, BOXSIZE - half, BOXSIZE - half))</p>
+		<p class="noindent mono"><span class="line-number">192.</span> &#160;&#160;&#160;&#160;elif shape == DIAMOND:</p>
+		<p class="noindent mono"><span class="line-number">193.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.polygon(DISPLAYSURF, color, ((left + half, top), (left + BOXSIZE - 1, top + half), (left + half, top + BOXSIZE - 1), (left, top + half)))</p>
+		<p class="noindent mono"><span class="line-number">194.</span> &#160;&#160;&#160;&#160;elif shape == LINES:</p>
+		<p class="noindent mono"><span class="line-number">195.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for i in range(0, BOXSIZE, 4):</p>
+		<p class="noindent mono"><span class="line-number">196.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.line(DISPLAYSURF, color, (left, top + i), (left + i, top))</p>
+		<p class="noindent mono"><span class="line-number">197.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.line(DISPLAYSURF, color, (left + i, top + BOXSIZE - 1), (left + BOXSIZE - 1, top + i))</p>
+		<p class="noindent mono"><span class="line-number">198.</span> &#160;&#160;&#160;&#160;elif shape == OVAL:</p>
+		<p class="noindent mono"><span class="line-number">199.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.ellipse(DISPLAYSURF, color, (left, top + quarter, BOXSIZE, half))</p>
+		<p class="noindent mono"><span class="line-number">200.</span></p>
+		<p class="noindent mono"><span class="line-number">201.</span></p>
+		<p class="noindent mono"><span class="line-number">202.</span> def getShapeAndColor(board, boxx, boxy):</p>
+		<p class="noindent mono"><span class="line-number">203.</span> &#160;&#160;&#160;&#160;<span class="comment"># shape value for x, y spot is stored in board[x][y][0]</span></p>
+		<p class="noindent mono"><span class="line-number">204.</span> &#160;&#160;&#160;&#160;<span class="comment"># color value for x, y spot is stored in board[x][y][1]</span></p>
+		<p class="noindent mono"><span class="line-number">205.</span> &#160;&#160;&#160;&#160;return board[boxx][boxy][0], board[boxx][boxy][1]</p>
+		<p class="noindent mono"><span class="line-number">206.</span></p>
+		<p class="noindent mono"><span class="line-number">207.</span></p>
+		<p class="noindent mono"><span class="line-number">208.</span> def drawBoxCovers(board, boxes, coverage):</p>
+		<p class="noindent mono"><span class="line-number">209.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draws boxes being covered/revealed. &quot;boxes&quot; is a list</span></p>
+		<p class="noindent mono"><span class="line-number">210.</span> &#160;&#160;&#160;&#160;<span class="comment"># of two-item lists, which have the x &amp; y spot of the box.</span></p>
+		<p class="noindent mono"><span class="line-number">211.</span> &#160;&#160;&#160;&#160;for box in boxes:</p>
+		<p class="noindent mono"><span class="line-number">212.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left, top = leftTopCoordsOfBox(box[0], box[1])</p>
+		<p class="noindent mono"><span class="line-number">213.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(DISPLAYSURF, BGCOLOR, (left, top, BOXSIZE, BOXSIZE))</p>
+		<p class="noindent mono"><span class="line-number">214.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;shape, color = getShapeAndColor(board, box[0], box[1])</p>
+		<p class="noindent mono"><span class="line-number">215.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawIcon(shape, color, box[0], box[1])</p>
+		<p class="noindent mono"><span class="line-number">216.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if coverage &gt; 0: <span class="comment"># only draw the cover if there is an coverage</span></p>
+		<p class="noindent mono"><span class="line-number">217.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, coverage, BOXSIZE))</p>
+		<p class="noindent mono"><span class="line-number">218.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">219.</span> &#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">220.</span></p>
+		<p class="noindent mono"><span class="line-number">221.</span></p>
+		<p class="noindent mono"><span class="line-number">222.</span> def revealBoxesAnimation(board, boxesToReveal):</p>
+		<p class="noindent mono"><span class="line-number">223.</span> &#160;&#160;&#160;&#160;<span class="comment"># Do the &quot;box reveal&quot; animation.</span></p>
+		<p class="noindent mono"><span class="line-number">224.</span> &#160;&#160;&#160;&#160;for coverage in range(BOXSIZE, (-REVEALSPEED) - 1, - REVEALSPEED):</p>
+		<p class="noindent mono"><span class="line-number">225.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoxCovers(board, boxesToReveal, coverage)</p>
+		<p class="noindent mono"><span class="line-number">226.</span></p>
+		<p class="noindent mono"><span class="line-number">227.</span></p>
+		<p class="noindent mono"><span class="line-number">228.</span> def coverBoxesAnimation(board, boxesToCover):</p>
+		<p class="noindent mono"><span class="line-number">229.</span> &#160;&#160;&#160;&#160;<span class="comment"># Do the &quot;box cover&quot; animation.</span></p>
+		<p class="noindent mono"><span class="line-number">230.</span> &#160;&#160;&#160;&#160;for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED):</p>
+		<p class="noindent mono"><span class="line-number">231.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoxCovers(board, boxesToCover, coverage)</p>
+		<p class="noindent mono"><span class="line-number">232.</span></p>
+		<p class="noindent mono"><span class="line-number">233.</span></p>
+		<p class="noindent mono"><span class="line-number">234.</span> def drawBoard(board, revealed):</p>
+		<p class="noindent mono"><span class="line-number">235.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draws all of the boxes in their covered or revealed state.</span></p>
+		<p class="noindent mono"><span class="line-number">236.</span> &#160;&#160;&#160;&#160;for boxx in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">237.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for boxy in range(BOARDHEIGHT):</p>
+		<p class="noindent mono"><span class="line-number">238.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left, top = leftTopCoordsOfBox(boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">239.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if not revealed[boxx][boxy]:</p>
+		<p class="noindent mono"><span class="line-number">240.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Draw a covered box.</span></p>
+		<p class="noindent mono"><span class="line-number">241.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))</p>
+		<p class="noindent mono"><span class="line-number">242.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</p>
+		<p class="noindent mono"><span class="line-number">243.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Draw the (revealed) icon.</span></p>
+		<p class="noindent mono"><span class="line-number">244.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;shape, color = getShapeAndColor(board, boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">245.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawIcon(shape, color, boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">246.</span></p>
+		<p class="noindent mono"><span class="line-number">247.</span></p>
+		<p class="noindent mono"><span class="line-number">248.</span> def drawHighlightBox(boxx, boxy):</p>
+		<p class="noindent mono"><span class="line-number">249.</span> &#160;&#160;&#160;&#160;left, top = leftTopCoordsOfBox(boxx, boxy)</p>
+		<p class="noindent mono"><span class="line-number">250.</span> &#160;&#160;&#160;&#160;pygame.draw.rect(DISPLAYSURF, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4)</p>
+		<p class="noindent mono"><span class="line-number">251.</span></p>
+		<p class="noindent mono"><span class="line-number">252.</span></p>
+		<p class="noindent mono"><span class="line-number">253.</span> def startGameAnimation(board):</p>
+		<p class="noindent mono"><span class="line-number">254.</span> &#160;&#160;&#160;&#160;<span class="comment"># Randomly reveal the boxes 8 at a time.</span></p>
+		<p class="noindent mono"><span class="line-number">255.</span> &#160;&#160;&#160;&#160;coveredBoxes = generateRevealedBoxesData(False)</p>
+		<p class="noindent mono"><span class="line-number">256.</span> &#160;&#160;&#160;&#160;boxes = []</p>
+		<p class="noindent mono"><span class="line-number">257.</span> &#160;&#160;&#160;&#160;for x in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">258.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(BOARDHEIGHT):</p>
+		<p class="noindent mono"><span class="line-number">259.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;boxes.append( (x, y) )</p>
+		<p class="noindent mono"><span class="line-number">260.</span> &#160;&#160;&#160;&#160;random.shuffle(boxes)</p>
+		<p class="noindent mono"><span class="line-number">261.</span> &#160;&#160;&#160;&#160;boxGroups = splitIntoGroupsOf(8, boxes)</p>
+		<p class="noindent mono"><span class="line-number">262.</span></p>
+		<p class="noindent mono"><span class="line-number">263.</span> &#160;&#160;&#160;&#160;drawBoard(board, coveredBoxes)</p>
+		<p class="noindent mono"><span class="line-number">264.</span> &#160;&#160;&#160;&#160;for boxGroup in boxGroups:</p>
+		<p class="noindent mono"><span class="line-number">265.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealBoxesAnimation(board, boxGroup)</p>
+		<p class="noindent mono"><span class="line-number">266.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coverBoxesAnimation(board, boxGroup)</p>
+		<p class="noindent mono"><span class="line-number">267.</span></p>
+		<p class="noindent mono"><span class="line-number">268.</span></p>
+		<p class="noindent mono"><span class="line-number">269.</span> def gameWonAnimation(board):</p>
+		<p class="noindent mono"><span class="line-number">270.</span> &#160;&#160;&#160;&#160;<span class="comment"># flash the background color when the player has won</span></p>
+		<p class="noindent mono"><span class="line-number">271.</span> &#160;&#160;&#160;&#160;coveredBoxes = generateRevealedBoxesData(True)</p>
+		<p class="noindent mono"><span class="line-number">272.</span> &#160;&#160;&#160;&#160;color1 = LIGHTBGCOLOR</p>
+		<p class="noindent mono"><span class="line-number">273.</span> &#160;&#160;&#160;&#160;color2 = BGCOLOR</p>
+		<p class="noindent mono"><span class="line-number">274.</span></p>
+		<p class="noindent mono"><span class="line-number">275.</span> &#160;&#160;&#160;&#160;for i in range(13):</p>
+		<p class="noindent mono"><span class="line-number">276.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;color1, color2 = color2, color1 <span class="comment"># swap colors</span></p>
+		<p class="noindent mono"><span class="line-number">277.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.fill(color1)</p>
+		<p class="noindent mono"><span class="line-number">278.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoard(board, coveredBoxes)</p>
+		<p class="noindent mono"><span class="line-number">279.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">280.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(300)</p>
+		<p class="noindent mono"><span class="line-number">281.</span></p>
+		<p class="noindent mono"><span class="line-number">282.</span></p>
+		<p class="noindent mono"><span class="line-number">283.</span> def hasWon(revealedBoxes):</p>
+		<p class="noindent mono"><span class="line-number">284.</span> &#160;&#160;&#160;&#160;<span class="comment"># Returns True if all the boxes have been revealed, otherwise False</span></p>
+		<p class="noindent mono"><span class="line-number">285.</span> &#160;&#160;&#160;&#160;for i in revealedBoxes:</p>
+		<p class="noindent mono"><span class="line-number">286.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if False in i:</p>
+		<p class="noindent mono"><span class="line-number">287.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return False <span class="comment"># return False if any boxes are covered.</span></p>
+		<p class="noindent mono"><span class="line-number">288.</span> &#160;&#160;&#160;&#160;return True</p>
+		<p class="noindent mono"><span class="line-number">289.</span></p>
+		<p class="noindent mono"><span class="line-number">290.</span></p>
+		<p class="noindent mono"><span class="line-number">291.</span> if __name__ == '__main__':</p>
+		<p class="noindent mono"><span class="line-number">292.</span> &#160;&#160;&#160;&#160;main()</p>
+	</div>
+
+	<h1 class="subheading" id="credits-imports">Credits and Imports</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Memory Puzzle</span></p>
@@ -866,7 +379,7 @@ __name__ == '__main__':</p>
 	<p>At the top of the program are comments about what the game is, who made it, and where the user could find more information. There’s also a note that the source code is freely copyable under a “Simplified BSD” license. The Simplified BSD license is more appropriate for software than the Creative Common license (which this book is released under), but they basically mean the same thing: People are free to copy and share this game. More info about licenses can be found at <a href="https://invpy.com/licenses">https://invpy.com/licenses</a>.</p>
 	<p>This program makes use of many functions in other modules, so it imports those modules on line 6. Line 7 is also an <span class="mono">import</span> statement in the <span class="mono">from (module name) import *</span> format, which means you do not have to type the module name in front of it. There are no functions in the <span class="mono">pygame.locals</span> module, but there are several constant variables in it that we want to use such as <span class="mono">MOUSEMOTION</span>, <span class="mono">KEYUP</span>, or <span class="mono">QUIT</span>. Using this style of <span class="mono">import</span> statement, we only have to type <span class="mono">MOUSEMOTION</span> rather than <span class="mono">pygame.locals.MOUSEMOTION</span>.</p>
 
-	<h1 class="subheading" id="">Magic Numbers are Bad</h1>
+	<h1 class="subheading" id="magic-numbers-bad">Magic Numbers are Bad</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">9.</span> FPS = 30 <span class="comment"># frames per second, the general speed of the program</span></p>
@@ -903,7 +416,7 @@ __name__ == '__main__':</p>
 
 	<p>Don’t write code like that. That’s just silly.</p>
 
-	<h1 class="subheading">Sanity Checks with <span class="mono">assert</span> Statements</h1>
+	<h1 class="subheading" id="sanity-checks">Sanity Checks with <span class="mono">assert</span> Statements</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">15.</span> BOARDWIDTH = 10 <span class="comment"># number of columns of icons</span></p>
@@ -916,7 +429,7 @@ __name__ == '__main__':</p>
 	<p>The <span class="mono">assert</span> statement on line 17 ensures that the board width and height we’ve selected will result in an even number of boxes (since we will have pairs of icons in this game). There are three parts to an <span class="mono">assert</span> statement: the <span class="mono">assert</span> keyword, an expression which, if <span class="mono">False</span>, results in crashing the program. The third part (after the comma after the expression) is a string that appears if the program crashes because of the assertion.</p>
 	<p>The <span class="mono">assert</span> statement with an expression basically says, “The programmer asserts that this expression must be <span class="mono">True</span>, otherwise crash the program.” This is a good way of adding a sanity check to your program to make sure that if the execution ever passes an assertion we can at least know that that code is working as expected.</p>
 
-	<h1 class="subheading" id="">Telling If a Number is Even or Odd</h1>
+	<h1 class="subheading" id="odd-even">Telling If a Number is Even or Odd</h1>
 	<p class="noindent">If the product of the board width and height is divided by two and has a remainder of 0 (the <span class="mono">%</span> <a href="glossary.xhtml#modulus-operator"><b>modulus operator</b></a> evaluates what the remainder is) then the number is even. Even numbers divided by two will always have a remainder of zero. Odd numbers divided by two will always have a remainder of one. This is a good trick to remember if you need your code to tell if a number is even or odd:</p>
 
 	<div class="python-shell">
@@ -926,7 +439,7 @@ __name__ == '__main__':</p>
 
 	<p>In the above case, if the integer in <span class="mono">someNumber</span> was even, then <span class="mono">isEven</span> will be <span class="mono">True</span>. If it was odd, then <span class="mono">isOdd</span> will be <span class="mono">True</span>.</p>
 
-	<h1 class="subheading" id="">Crash Early and Crash Often!</h1>
+	<h1 class="subheading" id="crash">Crash Early and Crash Often!</h1>
 	<p class="noindent">Having your program crash is a bad thing. It happens when your program has some mistake in the code and cannot continue. But there are some cases where crashing a program early can avoid worse bugs later.</p>
 	<p>If the values we chose for <span class="mono">BOARDWIDTH</span> and <span class="mono">BOARDHEIGHT</span> that we chose on line 15 and 16 result in a board with an odd number of boxes (such as if the width were 3 and the height were 5), then there would always be one left over icon that would not have a pair to be matched with. This would cause a bug later on in the program, and it could take a lot of debugging work to figure out that the real source of the bug is at the very beginning of the program. In fact, just for fun, try commenting out the assertion so it doesn’t run, and then setting the <span class="mono">BOARDWIDTH</span> and <span class="mono">BOARDHEIGHT</span> constants both to odd numbers. When you run the program, it will immediately show an error happening on a line 149 in <i>memorypuzzle.py</i>, which is in <span class="mono">getRandomizedBoard()</span> function!</p>
 
@@ -946,31 +459,31 @@ __name__ == '__main__':</p>
 	<p>You want to add <span class="mono">assert</span> statements whenever there is some condition in your program that must always, always, always be <span class="mono">True</span>. Crash often! You don’t have to go overboard and put <span class="mono">assert</span> statements everywhere, but crashing often with asserts goes a long way in detecting the true source of a bug. Crash early and crash often! </p>
 	<p>(In your code that is. Not, say, when riding a pony.)</p>
 
-	<h1 class="subheading" id="">Making the Source Code Look Pretty</h1>
+	<h1 class="subheading" id="source-pretty">Making the Source Code Look Pretty</h1>
 
 	<div class="python-shell">
-	<p class="noindent mono"><span class="line-number">21.</span><span class="comment">#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;R&#160;&#160;&#160;&#160;G&#160;&#160;&#160;&#160;B</span></p>
-	<p class="noindent mono"><span class="line-number">22.</span> GRAY&#160;&#160;&#160;&#160;&#160;= (100, 100, 100)</p>
-	<p class="noindent mono"><span class="line-number">23.</span> NAVYBLUE = ( 60,&#160;&#160;60, 100)</p>
-	<p class="noindent mono"><span class="line-number">24.</span> WHITE&#160;&#160;&#160;&#160;= (255, 255, 255)</p>
-	<p class="noindent mono"><span class="line-number">25.</span> RED&#160;&#160;&#160;&#160;&#160;&#160;= (255,&#160;&#160;&#160;0,&#160;&#160;&#160;0)</p>
-	<p class="noindent mono"><span class="line-number">26.</span> GREEN&#160;&#160;&#160;&#160;= (&#160;&#160;0,&#160;255,&#160;&#160;&#160;0)</p>
-	<p class="noindent mono"><span class="line-number">27.</span> BLUE&#160;&#160;&#160;&#160;&#160;= (&#160;&#160;0,&#160;&#160;&#160;0, 255)</p>
-	<p class="noindent mono"><span class="line-number">28.</span> YELLOW&#160;&#160;&#160;= (255, 255,&#160;&#160;&#160;0)</p>
-	<p class="noindent mono"><span class="line-number">29.</span> ORANGE&#160;&#160;&#160;= (255, 128,&#160;&#160;&#160;0)</p>
-	<p class="noindent mono"><span class="line-number">30.</span> PURPLE&#160;&#160;&#160;= (255,&#160;&#160;&#160;0, 255)</p>
-	<p class="noindent mono"><span class="line-number">31.</span> CYAN&#160;&#160;&#160;&#160;&#160;= (&#160;&#160;0, 255, 255)</p>
-	<p class="noindent mono"><span class="line-number">32.</span></p>
-	<p class="noindent mono"><span class="line-number">33.</span> BGCOLOR	= NAVYBLUE</p>
-	<p class="noindent mono"><span class="line-number">34.</span> LIGHTBGCOLOR	= GRAY</p>
-	<p class="noindent mono"><span class="line-number">35.</span> BOXCOLOR	= WHITE</p>
-	<p class="noindent mono"><span class="line-number">36.</span> HIGHLIGHTCOLOR	= BLUE</p>
+		<p class="noindent mono"><span class="line-number">21.</span><span class="comment">#&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;R&#160;&#160;&#160;&#160;G&#160;&#160;&#160;&#160;B</span></p>
+		<p class="noindent mono"><span class="line-number">22.</span> GRAY&#160;&#160;&#160;&#160;&#160;= (100, 100, 100)</p>
+		<p class="noindent mono"><span class="line-number">23.</span> NAVYBLUE = ( 60,&#160;&#160;60, 100)</p>
+		<p class="noindent mono"><span class="line-number">24.</span> WHITE&#160;&#160;&#160;&#160;= (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">25.</span> RED&#160;&#160;&#160;&#160;&#160;&#160;= (255,&#160;&#160;&#160;0,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">26.</span> GREEN&#160;&#160;&#160;&#160;= (&#160;&#160;0,&#160;255,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">27.</span> BLUE&#160;&#160;&#160;&#160;&#160;= (&#160;&#160;0,&#160;&#160;&#160;0, 255)</p>
+		<p class="noindent mono"><span class="line-number">28.</span> YELLOW&#160;&#160;&#160;= (255, 255,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">29.</span> ORANGE&#160;&#160;&#160;= (255, 128,&#160;&#160;&#160;0)</p>
+		<p class="noindent mono"><span class="line-number">30.</span> PURPLE&#160;&#160;&#160;= (255,&#160;&#160;&#160;0, 255)</p>
+		<p class="noindent mono"><span class="line-number">31.</span> CYAN&#160;&#160;&#160;&#160;&#160;= (&#160;&#160;0, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">32.</span></p>
+		<p class="noindent mono"><span class="line-number">33.</span> BGCOLOR	= NAVYBLUE</p>
+		<p class="noindent mono"><span class="line-number">34.</span> LIGHTBGCOLOR	= GRAY</p>
+		<p class="noindent mono"><span class="line-number">35.</span> BOXCOLOR	= WHITE</p>
+		<p class="noindent mono"><span class="line-number">36.</span> HIGHLIGHTCOLOR	= BLUE</p>
 	</div>
 
 	<p>Remember that colors in Pygame are represented by a tuple of three integers from <span class="mono">0</span> to <span class="mono">255</span>. These three integers represent the amount of red, green, and blue in the color which is why these tuples are called RGB values. Notice the spacing of the tuples on lines 22 to 31 are such that the R, G, and B integers line up. In Python the indentation (that is, the space at the beginning of the line) is needs to be exact, but the spacing in the rest of the line is not so strict. By spacing the integers in the tuple out, we can clearly see how the RGB values compare to each other. (More info on spacing and indentation is as <a href="https://invpy.com/whitespace">https://invpy.com/whitespace</a>.)</p>
 	<p>It is a nice thing to make your code more readable this way, but don’t bother spending too much time doing it. Code doesn’t have to be pretty to work. At a certain point, you’ll just be spending more time typing spaces than you would have saved by having readable tuple values.</p>
 
-	<h1 class="subheading" id="">Using Constant Variables Instead of Strings</h1>
+	<h1 class="subheading" id="constant-variables">Using Constant Variables Instead of Strings</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">38.</span> DONUT = 'donut'</p>
@@ -1000,7 +513,7 @@ __name__ == '__main__':</p>
 
 	<p>This is perfectly acceptable Python code, so it won’t crash at first when you run it. However, this will lead to weird bugs later on in our program. Because the code does not immediately crash where the problem is caused, it can be much harder to find it.</p>
 
-	<h1 class="subheading" id="">Making Sure We Have Enough Icons</h1>
+	<h1 class="subheading" id="enough-icons">Making Sure We Have Enough Icons</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">44.</span> ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)</p>
@@ -1010,7 +523,7 @@ __name__ == '__main__':</p>
 
 	<p>In order for our game program to be able to create icons of every possible color and shape combination, we need to make a tuple that holds all of these values. There is also another assertion on line 46 to make sure that there are enough color/shape combinations for the size of the board we have. If there isn’t, then the program will crash on line 46 and we will know that we either have to add more colors and shapes, or make the board width and height smaller. With 7 colors and 5 shapes, we can make 35 (that is, 7 x 5) different icons. And because we’ll have a pair of each icon, that means we can have a board with up to 70 (that is, 35 x 2, or 7 x 5 x 2) spaces.</p>
 
-	<h1 class="subheading" id="">Tuples vs. Lists, Immutable vs. Mutable</h1>
+	<h1 class="subheading" id="tuples-lists-mutables">Tuples vs. Lists, Immutable vs. Mutable</h1>
 	<p class="noindent">You might have noticed that the <span class="mono">ALLCOLORS</span> and <span class="mono">ALLSHAPES</span> variables are tuples instead of lists. When do we want to use tuples and when do we want to use lists? And what’s the difference between them anyway?</p>
 	<p>Tuples and lists are the same in every way except two: tuples use parentheses instead of square brackets, and the items in tuples cannot be modified (but the items in lists can be modified). We often call lists <a href="glossary.xhtml#mutable"><b>mutable</b></a> (meaning they can be changed) and tuples <a href="glossary.xhtml#immutable"><b>immutable</b></a> (meaning they cannot be changed).</p>
 	<p>For an example of trying to change values in lists and tuples, look at the following code:</p>
@@ -1054,7 +567,7 @@ __name__ == '__main__':</p>
 		<p class="noindent mono">TypeError: 'str' object does not support item assignment</p>
 	</div>
 
-	<h1 class="subheading" id="">One Item Tuples Need a Trailing Comma</h1>
+	<h1 class="subheading" id="one-item-tuples">One Item Tuples Need a Trailing Comma</h1>
 	<p class="noindent">Also, one minor details about tuples: if you ever need to write code about a tuple that has one value in it, then it needs to have a trailing comma in it, such as this:</p>
 
 	<div class="python-shell">
@@ -1070,7 +583,7 @@ __name__ == '__main__':</p>
 
 	<p>The value that is stored in <span class="mono">variableA</span> is just the integer <span class="mono">30</span>. However, the expression for <span class="mono">variableB</span>’s assignment statement is the single-item tuple value <span class="mono">(30, )</span>. Blank tuple values do not need a comma in them, they can just be a set of parentheses by themselves: <span class="mono">()</span>.</p>
 
-	<h1 class="subheading" id="">Converting Between Lists and Tuples</h1>
+	<h1 class="subheading" id="convert-list-tuples">Converting Between Lists and Tuples</h1>
 	<p class="noindent">You can convert between list and tuple values just like you can convert between string and integer values. Just pass a tuple value to the <span class="mono">list()</span> function and it will return a list form of that tuple value. Or, pass a list value to the <span class="mono">tuple()</span> function and it will return a tuple form of that list value. Try typing the following into the interactive shell:</p>
 
 	<div class="python-shell">
@@ -1084,7 +597,7 @@ __name__ == '__main__':</p>
 		<p class="noindent mono">&gt;&gt;&gt;</p>
 	</div>
 
-	<h1 class="subheading">The <span class="mono">global</span> statement, and Why Global Variables are Evil</h1>
+	<h1 class="subheading" id="global-statement">The <span class="mono">global</span> statement, and Why Global Variables are Evil</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">48.</span> def main():</p>
@@ -1115,7 +628,7 @@ __name__ == '__main__':</p>
 	<p>In the games in this book, global variables are mostly used for variables that would be global constants that never change, but need the <span class="mono">pygame.init()</span> function called first. Since this happens in the <span class="mono">main()</span> function, they are set in the <span class="mono">main()</span> function and must be global for other functions to see them. But the global variables are used as constants and don’t change, so they are less likely to cause confusing bugs.</p>
 	<p>If you don’t understand this, don’t worry. Just write your code so that you pass in values to functions rather than have the functions read global variables as a general rule.</p>
 
-	<h1 class="subheading" id="">Data Structures and 2D Lists</h1>
+	<h1 class="subheading" id="data-structures">Data Structures and 2D Lists</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">58.</span> &#160;&#160;&#160;&#160;mainBoard = getRandomizedBoard()</p>
@@ -1135,7 +648,7 @@ __name__ == '__main__':</p>
 	<p>Meanwhile, the “revealed boxes” data structure is also a 2D list, except instead of two-item tuples like the board data structure, it has Boolean values: <span class="mono">True</span> if the box at that x, y coordinate is revealed, and <span class="mono">False</span> if it is covered up. Passing <span class="mono">False</span> to the <span class="mono">generateRevealedBoxesData()</span> function sets all of the Boolean values to <span class="mono">False</span>. (This function is explained in detail later.)</p>
 	<p>These two data structures are used to keep track of the state of the game board.</p>
 
-	<h1 class="subheading" id="">The “Start Game” Animation</h1>
+	<h1 class="subheading" id="start-game-animation">The “Start Game” Animation</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">61.</span> &#160;&#160;&#160;&#160;firstSelection = None <span class="comment"># stores the (x, y) of the first box clicked.</span></p>
@@ -1148,7 +661,7 @@ __name__ == '__main__':</p>
 	<p>If you’ve played the Memory Puzzle game, you’ll notice that at the beginning of the game, all of the boxes are quickly covered and uncovered randomly to give the player a sneak peek at which icons are under which boxes. This all happens in the <span class="mono">startGameAnimation()</span> function, which is explained later in this chapter.</p>
 	<p>It’s important to give the player this sneak peek (but not long enough of a peek to let the player easily memorize the icon locations), because otherwise they would have no clue where any icons are. Blindly clicking on the icons isn’t as much fun as having a little hint to go on.</p>
 
-	<h1 class="subheading" id="">The Game Loop</h1>
+	<h1 class="subheading" id="game-loop">The Game Loop</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">66.</span> &#160;&#160;&#160;&#160;while True: <span class="comment"># main game loop</span></p>
@@ -1174,25 +687,25 @@ __name__ == '__main__':</p>
 	<p>On line 69, the surface is painted over with the background color to erase anything that was previously drawn on it. The program then calls <span class="mono">drawBoard()</span> to draw the current state of the board based on the board and “revealed boxes” data structures that we pass it. (These lines of code are part of drawing and updating the screen.)</p>
 	<p>Remember that our drawing functions only draw on the in-memory display Surface object. This Surface object will not actually appear on the screen until we call <span class="mono">pygame.display.update()</span>, which is done at the end of the game loop on line 121.</p>
 
-	<h1 class="subheading">The Event Handling Loop</h1>
+	<h1 class="subheading" id="event-handling-loop">The Event Handling Loop</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">72.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">72.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
 		<p class="noindent mono"><span class="line-number">73.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
-		<p class="noindent mono"><span class="line-number">74.</span>                 pygame.quit()</p>
-		<p class="noindent mono"><span class="line-number">75.</span>                 sys.exit()</p>
-		<p class="noindent mono"><span class="line-number">76.</span>             elif event.type == MOUSEMOTION:</p>
-		<p class="noindent mono"><span class="line-number">77.</span>                 mousex, mousey = event.pos</p>
-		<p class="noindent mono"><span class="line-number">78.</span>             elif event.type == MOUSEBUTTONUP:</p>
-		<p class="noindent mono"><span class="line-number">79.</span>                 mousex, mousey = event.pos</p>
-		<p class="noindent mono"><span class="line-number">80.</span>                 mouseClicked = True</p>
+		<p class="noindent mono"><span class="line-number">74.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">75.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">76.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == MOUSEMOTION:</p>
+		<p class="noindent mono"><span class="line-number">77.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == MOUSEBUTTONUP:</p>
+		<p class="noindent mono"><span class="line-number">79.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">80.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mouseClicked = True</p>
 	</div>
 
 	<p>The <span class="mono">for</span> loop on line 72 executes code for every event that has happened since the last iteration of the game loop. This loop is called the <a href="glossary.xhtml#event-handling-loop"><b>event handling loop</b></a> (which is different from the game loop, although the event handling loop is inside of the game loop) and iterates over the list of <span class="mono">pygame.Event</span> objects returned by the <span class="mono">pygame.event.get()</span> call.</p>
 	<p>If the event object was a either a <span class="mono">QUIT</span> event or a <span class="mono">KEYUP</span> event for the Esc key, then the program should terminate. Otherwise, in the event of a <span class="mono">MOUSEMOTION</span> event (that is, the mouse cursor has moved) or <span class="mono">MOUSEBUTTONUP</span> event (that is, a mouse button was pressed earlier and now the button was let up), the position of the mouse cursor should be stored in the <span class="mono">mousex</span> and <span class="mono">mousey</span> variables. If this was a <span class="mono">MOUSEBUTTONUP</span> event, <span class="mono">mouseClicked</span> should also be set to <span class="mono">True</span>.</p>
 	<p>Once we have handled all of the events, the values stored in <span class="mono">mousex</span>, <span class="mono">mousey</span>, and <span class="mono">mouseClicked</span> will tell us any input that player has given us. Now we should update the game state and draw the results to the screen.</p>
 
-	<h1 class="subheading" id="">Checking Which Box The Mouse Cursor is Over</h1>
+	<h1 class="subheading" id="checking-cursor-box">Checking Which Box The Mouse Cursor is Over</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;boxx, boxy = getBoxAtPixel(mousex, mousey)</p>
@@ -1215,7 +728,7 @@ __name__ == '__main__':</p>
 	<p>On line 87, we check if the mouse cursor is not only over a covered up box but if the mouse has also been clicked. In that case, we want to play the “reveal” animation for that box by calling our <span class="mono">revealBoxesAnimation()</span> function (which is, as with all the other functions <span class="mono">main()</span> calls, explained later in this chapter). You should note that calling this function only draws the animation of the box being uncovered. It isn’t until line 89 when we set <span class="mono">revealedBoxes[boxx][boxy] = True</span> that the data structure that tracks the game state is updated.</p>
 	<p>If you comment out line 89 and then run the program, you’ll notice that after clicking on a box the reveal animation is played, but then the box immediately appears covered up again. This is because <span class="mono">revealedBoxes[boxx][boxy]</span> is still set to <span class="mono">False</span>, so on the next iteration of the game loop, the board is drawn with this box covered up. Not having line 89 would cause quite an odd bug in our program.</p>
 
-	<h1 class="subheading" id="">Handling the First Clicked Box</h1>
+	<h1 class="subheading" id="handling-first-box">Handling the First Clicked Box</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">90.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if firstSelection == None: <span class="comment"># the current box was the first box clicked</span></p>
@@ -1229,7 +742,7 @@ __name__ == '__main__':</p>
 	<p>Before the execution entered the game loop, the <span class="mono">firstSelection</span> variable was set to <span class="mono">None</span>. Our program will interpret this to mean that no boxes have been clicked, so if line 90’s condition is <span class="mono">True</span>, that means this is the first of the two possibly matching boxes that was clicked. We want to play the reveal animation for the box and then keep that box uncovered. We also set the <span class="mono">firstSelection</span> variable to a tuple of the box coordinates for the box that was clicked.</p>
 	<p>If this is the second box the player has clicked on, we want to play the reveal animation for that box but then check if the two icons under the boxes are matching. The <span class="mono">getShapeAndColor()</span> function (explained later) will retrieve the shape and color values of the icons. (These values will be one of the values in the <span class="mono">ALLCOLORS</span> and <span class="mono">ALLSHAPES</span> tuples.)</p>
 
-	<h1 class="subheading" id="">Handling a Mismatched Pair of Icons</h1>
+	<h1 class="subheading" id="handling-mismatched-icons">Handling a Mismatched Pair of Icons</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">97.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if icon1shape != icon2shape or icon1color != icon2color:</p>
@@ -1242,25 +755,25 @@ __name__ == '__main__':</p>
 
 	<p>The <span class="mono">if</span> statement on line 97 checks if either the shapes or colors of the two icons don’t match. If this is the case, then we want to pause the game for 1000 milliseconds (which is the same as 1 second) by calling <span class="mono">pygame.time.wait(1000)</span> so that the player has a chance to see that the two icons don’t match. Then the “cover up” animation plays for both boxes. We also want to update the game state to mark these boxes as not revealed (that is, covered up).</p>
 
-	<h1 class="subheading" id="">Handling If the Player Won</h1>
+	<h1 class="subheading" id="handling-player-win">Handling If the Player Won</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">103.</span>                     elif hasWon(revealedBoxes): <span class="comment"># check if all pairs found</span></p>
-		<p class="noindent mono"><span class="line-number">104.</span>                         gameWonAnimation(mainBoard)</p>
-		<p class="noindent mono"><span class="line-number">105.</span>                         pygame.time.wait(2000)</p>
+		<p class="noindent mono"><span class="line-number">103.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif hasWon(revealedBoxes): <span class="comment"># check if all pairs found</span></p>
+		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;gameWonAnimation(mainBoard)</p>
+		<p class="noindent mono"><span class="line-number">105.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(2000)</p>
 		<p class="noindent mono"><span class="line-number">106.</span></p>
-		<p class="noindent mono"><span class="line-number">107.</span>                         <span class="comment"># Reset the board</span></p>
-		<p class="noindent mono"><span class="line-number">108.</span>                         mainBoard = getRandomizedBoard()</p>
-		<p class="noindent mono"><span class="line-number">109.</span>                         revealedBoxes = generateRevealedBoxesData(False)</p>
+		<p class="noindent mono"><span class="line-number">107.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Reset the board</span></p>
+		<p class="noindent mono"><span class="line-number">108.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mainBoard = getRandomizedBoard()</p>
+		<p class="noindent mono"><span class="line-number">109.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;revealedBoxes = generateRevealedBoxesData(False)</p>
 		<p class="noindent mono"><span class="line-number">110.</span></p>
-		<p class="noindent mono"><span class="line-number">111.</span>                         <span class="comment"># Show the fully unrevealed board for a second.</span></p>
-		<p class="noindent mono"><span class="line-number">112.</span>                         drawBoard(mainBoard, revealedBoxes)</p>
-		<p class="noindent mono"><span class="line-number">113.</span>                         pygame.display.update()</p>
-		<p class="noindent mono"><span class="line-number">114.</span>                         pygame.time.wait(1000)</p>
+		<p class="noindent mono"><span class="line-number">111.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Show the fully unrevealed board for a second.</span></p>
+		<p class="noindent mono"><span class="line-number">112.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoard(mainBoard, revealedBoxes)</p>
+		<p class="noindent mono"><span class="line-number">113.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">114.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(1000)</p>
 		<p class="noindent mono"><span class="line-number">115.</span></p>
-		<p class="noindent mono"><span class="line-number">116.</span>                         <span class="comment"># Replay the start game animation.</span></p>
-		<p class="noindent mono"><span class="line-number">117.</span>                         startGameAnimation(mainBoard)            </p>
-		<p class="noindent mono"><span class="line-number">118.</span>                     firstSelection = None <span class="comment"># reset firstSelection variable</span></p>
+		<p class="noindent mono"><span class="line-number">116.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Replay the start game animation.</span></p>
+		<p class="noindent mono"><span class="line-number">117.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;startGameAnimation(mainBoard)</p>
+		<p class="noindent mono"><span class="line-number">118.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;firstSelection = None <span class="comment"># reset firstSelection variable</span></p>
 	</div>
 
 	<p>Otherwise, if line 97’s condition was <span class="mono">False</span>, then the two icons must be a match. The program doesn’t really have to do anything else to the boxes at that point: it can just leave both boxes in the revealed state. However, the program should check if this was the last pair of icons on the board to be matched. This is done inside our <span class="mono">hasWon()</span> function, which returns <span class="mono">True</span> if the board is in a winning state (that is, all of the boxes are revealed). </p>
@@ -1268,7 +781,7 @@ __name__ == '__main__':</p>
 	<p>Line 117 plays the “start game” animation again. After that, the program execution will just loop through the game loop as usual, and the player can continue playing until they quit the program.</p>
 	<p>No matter if the two boxes were matching or not, after the second box was clicked line 118 will set the <span class="mono">firstSelection</span> variable back to <span class="mono">None</span> so that the next box the player clicks on will be interpreted as the first clicked box of a pair of possibly matching icons.</p>
 
-	<h1 class="subheading" id="">Drawing the Game State to the Screen</h1>
+	<h1 class="subheading" id="drawing-game-screen">Drawing the Game State to the Screen</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">120.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Redraw the screen and wait a clock tick.</span></p>
@@ -1276,43 +789,13 @@ __name__ == '__main__':</p>
 		<p class="noindent mono"><span class="line-number">122.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
 	</div>
 
-<p>At this point, the game state has been updated depending on
-the player’s input, and the latest game state has been drawn to the <span
-class="mono">DISPLAYSURF</span> display Surface object. We’ve reached the end
-of the game loop, so we call <span class="mono">pygame.display.update()</span>
-to draw the <span class="mono">DISPLAYSURF</span> Surface object to the computer
-screen.</p>
+	<p>At this point, the game state has been updated depending on the player’s input, and the latest game state has been drawn to the <span class="mono">DISPLAYSURF</span> display Surface object. We’ve reached the end of the game loop, so we call <span class="mono">pygame.display.update()</span> to draw the <span class="mono">DISPLAYSURF</span> Surface object to the computer screen.</p>
+	<p>Line 9 set the FPS constant to the integer value <span class="mono">30</span>, meaning we want the game to run (at most) at 30 frames per second. If we want the program to run faster, we can increase this number. If we want the program to run slower, we can decrease this number. It can even be set to a float value like <span class="mono">0.5</span>, which will run the program at half a frame per second, that is, one frame per two seconds.</p>
+	<p>In order to run at 30 frames per second, each frame must be drawn in 1/30<sup>th</sup> of a second. This means that <span class="mono">pygame.display.update()</span> and all the code in the game loop must execute in under 33.3 milliseconds. Any modern computer can do this easily with plenty of time left over. To prevent the program from running too fast, we call the <span class="mono">tick()</span> method of the <span class="mono">pygame.Clock</span> object in <span class="mono">FPSCLOCK</span> to have to it pause the program for the rest of the 33.3 milliseconds.</p>
+	<p>Since this is done at the very end of the game loop, it ensures that each iteration of the game loop takes (at least) 33.3 milliseconds. If for some reason the <span class="mono">pygame.display.update()</span> call and the code in the game loop takes longer than 33.3 milliseconds, then the <span class="mono">tick()</span> method will not wait at all and immediately return.</p>
+	<p>I’ve kept saying that the other functions would be explained later in the chapter. Now that we’ve gone over the <span class="mono">main()</span> function and you have an idea for how the general program works, let’s go into the details of all the other functions that are called from <span class="mono">main()</span>.</p>
 
-<p>Line 9 set the FPS constant to the integer value <span
-class="mono">30</span>, meaning we want the game to run (at most) at 30 frames
-per second. If we want the program to run faster, we can increase this number.
-If we want the program to run slower, we can decrease this number. It can even
-be set to a float value like <span class="mono">0.5</span>, which will run the
-program at half a frame per second, that is, one frame per two seconds.</p>
-
-<p>In order to run at 30 frames per second, each frame must be
-drawn in 1/30<sup>th</sup> of a second. This means that <span class="mono">pygame.display.update()</span>
-and all the code in the game loop must execute in under 33.3 milliseconds. Any
-modern computer can do this easily with plenty of time left over. To prevent
-the program from running too fast, we call the <span class="mono">tick()</span>
-method of the <span class="mono">pygame.Clock</span> object in <span
-class="mono">FPSCLOCK</span> to have to it pause the program for the rest of
-the 33.3 milliseconds.</p>
-
-<p>Since this is done at the very end of the game loop, it
-ensures that each iteration of the game loop takes (at least) 33.3
-milliseconds. If for some reason the <span class="mono">pygame.display.update()</span>
-call and the code in the game loop takes longer than 33.3 milliseconds, then
-the <span class="mono">tick()</span> method will not wait at all and
-immediately return.</p>
-
-<p>I’ve kept saying that the other functions would be explained
-later in the chapter. Now that we’ve gone over the <span class="mono">main()</span>
-function and you have an idea for how the general program works, let’s go into
-the details of all the other functions that are called from <span
-class="mono">main()</span>.</p>
-
-	<h1 class="subheading" id="">Creating the “Revealed Boxes” Data Structure</h1>
+	<h1 class="subheading" id="creating-revealed-boxes">Creating the “Revealed Boxes” Data Structure</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">125.</span> def generateRevealedBoxesData(val):</p>
@@ -1340,7 +823,7 @@ columns are created using list replication, so that the column list has as many
 <span class="mono">val</span> values as the <span class="mono">BOARDHEIGHT</span>
 dictates.</p>
 
-	<h1 class="subheading">Creating the Board Data Structure: Step 1 – Get All Possible Icons</h1>
+	<h1 class="subheading" id="creating-board-structure">Creating the Board Data Structure: Step 1 – Get All Possible Icons</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">132.</span> def getRandomizedBoard():</p>
@@ -1351,21 +834,10 @@ dictates.</p>
 		<p class="noindent mono"><span class="line-number">137.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;icons.append( (shape, color) )</p>
 	</div>
 
-<p>The board data structure is just a list of lists of tuples,
-where each tuple has a two values: one for the icon’s shape and one for the icon’s
-color. But creating this data structure is a little complicated. We need to be
-sure to have exactly as many icons for the number of boxes on the board and
-also be sure there are two and only two icons of each type.</p>
+	<p>The board data structure is just a list of lists of tuples, where each tuple has a two values: one for the icon’s shape and one for the icon’s color. But creating this data structure is a little complicated. We need to be sure to have exactly as many icons for the number of boxes on the board and also be sure there are two and only two icons of each type.</p>
+	<p>The first step to do this is to create a list with every possible combination of shape and color. Recall that we have a list of each color and shape in <span class="mono">ALLCOLORS</span> and <span class="mono">ALLSHAPES</span>, so nested <span class="mono">for</span> loops on lines 135 and 136 will go through every possible shape for every possible color. These are each added to the list in the <span class="mono">icons</span> variable on line 137.</p>
 
-<p>The first step to do this is to create a list with every
-possible combination of shape and color. Recall that we have a list of each
-color and shape in <span class="mono">ALLCOLORS</span> and <span
-class="mono">ALLSHAPES</span>, so nested <span class="mono">for</span> loops on
-lines 135 and 136 will go through every possible shape for every possible
-color. These are each added to the list in the <span class="mono">icons</span>
-variable on line 137.</p>
-
-	<h1 class="subheading">Step 2 – Shuffling and Truncating the List of All Icons</h1>
+	<h1 class="subheading" id="shuffling-truncating-icons">Step 2 – Shuffling and Truncating the List of All Icons</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">139.</span> &#160;&#160;&#160;&#160;random.shuffle(icons) <span class="comment"># randomize the order of the icons list</span></p>
@@ -1374,25 +846,10 @@ variable on line 137.</p>
 		<p class="noindent mono"><span class="line-number">142.</span> &#160;&#160;&#160;&#160;random.shuffle(icons)</p>
 	</div>
 
-<p>But remember, there may be more possible combinations than
-spaces on the board. We need to calculate the number of spaces on the board by
-multiplying <span class="mono">BOARDWIDTH</span> by <span class="mono">BOARDHEIGHT</span>.
-Then we divide that number by 2 because we will have pairs of icons. On a board
-with 70 spaces, we’d only need 35 different icons, since there will be two of
-each icon. This number will be stored in <span class="mono">numIconsUsed</span>.</p>
+	<p>But remember, there may be more possible combinations than spaces on the board. We need to calculate the number of spaces on the board by multiplying <span class="mono">BOARDWIDTH</span> by <span class="mono">BOARDHEIGHT</span>. Then we divide that number by 2 because we will have pairs of icons. On a board with 70 spaces, we’d only need 35 different icons, since there will be two of each icon. This number will be stored in <span class="mono">numIconsUsed</span>.</p>
+	<p>Line 141 uses list slicing to grab the first <span class="mono">numIconsUsed</span> number of icons in the list. (If you’ve forgotten how list slicing works, check out <a href="https://invpy.com/slicing">https://invpy.com/slicing</a>.) This list has been shuffled on line 139, so it won’t always be the same icons each game. Then this list is replicated by using the <span class="mono">*</span> operator so that there are two of each of the icons. This new doubled up list will overwrite the old list in the <span class="mono">icons</span> variable. Since the first half of this new list is identical to the last half, we call the <span class="mono">shuffle()</span> method again to randomly mix up the order of the icons.</p>
 
-<p>Line 141 uses list slicing to grab the first <span
-class="mono">numIconsUsed</span> number of icons in the list. (If you’ve
-forgotten how list slicing works, check out <a href="https://invpy.com/slicing">https://invpy.com/slicing</a>.)
-This list has been shuffled on line 139, so it won’t always be the same icons
-each game. Then this list is replicated by using the <span class="mono">*</span>
-operator so that there are two of each of the icons. This new doubled up list
-will overwrite the old list in the <span class="mono">icons</span> variable.
-Since the first half of this new list is identical to the last half, we call
-the <span class="mono">shuffle()</span> method again to randomly mix up the
-order of the icons.</p>
-
-	<h1 class="subheading" id="">Step 3 – Placing the Icons on the Board</h1>
+	<h1 class="subheading" id="placing-icons-board">Step 3 – Placing the Icons on the Board</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">144.</span> &#160;&#160;&#160;&#160;<span class="comment"># Create the board data structure, with randomly placed icons.</span></p>
@@ -1428,7 +885,7 @@ order of the icons.</p>
 
 	<p>Because we are deleting the item at the front of the list, the other items shift forward so that the next item in the list becomes the new “first” item. This is the same way line 150 works.</p>
 
-	<h1 class="subheading" id="">Splitting a List into a List of Lists</h1>
+	<h1 class="subheading" id="splitting-lists">Splitting a List into a List of Lists</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">155.</span> def splitIntoGroupsOf(groupSize, theList):</p>
@@ -1442,30 +899,10 @@ order of the icons.</p>
 
 	<p>The <span class="mono">splitIntoGroupsOf()</span> function (which will be called by the <span class="mono">startGameAnimation()</span> function) splits a list into a list of lists, where the inner lists have <span class="mono">groupSize</span> number of items in them. (The last list could have less if there are less than <span class="mono">groupSize</span> items left over.)</p>
 	<p>The call to <span class="mono">range()</span> on line 159 uses the three-parameter form of <span class="mono">range()</span>. (If you are unfamiliar with this form, take a look at <a href="https://invpy.com/range">https://invpy.com/range</a>.) Let’s use an example. If the length of the list is <span class="mono">20</span> and the <span class="mono">groupSize</span> parameter is <span class="mono">8</span>, then <span class="mono">range(0, len(theList), groupSize)</span> evaluates to <span class="mono">range(0, 20, 8)</span>. This will give the <span class="mono">i</span> variable the values <span class="mono">0</span>, <span class="mono">8</span>, and <span class="mono">16</span> for the three iterations of the <span class="mono">for</span> loop.</p>
+	<p>The list slicing on line 160 with <span class="mono">theList[i:i + groupSize]</span> creates the lists that are added to the <span class="mono">result</span> list. On each iteration where <span class="mono">i</span> is <span class="mono">0</span>, <span class="mono">8</span>, and <span class="mono">16</span> (and <span class="mono">groupSize</span> is <span class="mono">8</span>), this list slicing expression would be <span class="mono">theList[0:8]</span>, then <span class="mono">theList[8:16]</span> on the second iteration, and then <span class="mono">theList[16:24]</span> on the third iteration.</p>
+	<p>Note that even though the largest index of <span class="mono">theList</span> would be <span class="mono">19</span> in our example, <span class="mono">theList[16:24]</span> won’t raise an <span class="mono">IndexError</span> error even though <span class="mono">24</span> is larger than <span class="mono">19</span>. It will just create a list slice with the remaining items in the list. List slicing doesn’t destroy or change the original list stored in <span class="mono">theList</span>. It just copies a portion of it to evaluate to a new list value. This new list value is the list that is appended to the list in the <span class="mono">result</span> variable on line 160. So when we return <span class="mono">result</span> at the end of this function, we are returning a list of lists.</p>
 
-<p>The list slicing on line 160 with <span class="mono">theList[i:i
-+ groupSize]</span> creates the lists that are added to the <span
-class="mono">result</span> list. On each iteration where <span class="mono">i</span>
-is <span class="mono">0</span>, <span class="mono">8</span>, and <span
-class="mono">16</span> (and <span class="mono">groupSize</span> is <span
-class="mono">8</span>), this list slicing expression would be <span
-class="mono">theList[0:8]</span>, then <span class="mono">theList[8:16]</span>
-on the second iteration, and then <span class="mono">theList[16:24]</span> on
-the third iteration.</p>
-
-<p>Note that even though the largest index of <span
-class="mono">theList</span> would be <span class="mono">19</span> in our
-example, <span class="mono">theList[16:24]</span> won’t raise an <span
-class="mono">IndexError</span> error even though <span class="mono">24</span>
-is larger than <span class="mono">19</span>. It will just create a list slice
-with the remaining items in the list. List slicing doesn’t destroy or change the
-original list stored in <span class="mono">theList</span>. It just copies a portion
-of it to evaluate to a new list value. This new list value is the list that is
-appended to the list in the <span class="mono">result</span> variable on line
-160. So when we return <span class="mono">result</span> at the end of this
-function, we are returning a list of lists.</p>
-
-	<h1 class="subheading" id="">Different Coordinate Systems</h1>
+	<h1 class="subheading" id="different-coordinate-systems">Different Coordinate Systems</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">164.</span> def leftTopCoordsOfBox(boxx, boxy):</p>
@@ -1475,30 +912,11 @@ function, we are returning a list of lists.</p>
 		<p class="noindent mono"><span class="line-number">168.</span> &#160;&#160;&#160;&#160;return (left, top)</p>
 	</div>
 
-<p>You should be familiar with Cartesian Coordinate systems. (If
-you’d like a refresher on this topic, read <a href="https://invpy.com/coordinates">https://invpy.com/coordinates</a>.)
-In most of our games we will be using multiple Cartesian Coordinate systems.
-One system of coordinates that is used in the Memory Puzzle game is for the pixel
-or screen coordinates. But we will also be using another coordinate system for
-the boxes. This is because it will be easier to use (3, 2) to refer to the 4<sup>th</sup>
-box from the left and 3<sup>rd</sup> from the top (remember that the numbers
-start with 0, not 1) instead of using the pixel coordinate of the box’s top
-left corner, (220, 165). However, we need a way to translate between these two
-coordinate systems.</p>
+	<p>You should be familiar with Cartesian Coordinate systems. (If you’d like a refresher on this topic, read <a href="https://invpy.com/coordinates">https://invpy.com/coordinates</a>.) In most of our games we will be using multiple Cartesian Coordinate systems. One system of coordinates that is used in the Memory Puzzle game is for the pixel or screen coordinates. But we will also be using another coordinate system for the boxes. This is because it will be easier to use (3, 2) to refer to the 4<sup>th</sup> box from the left and 3<sup>rd</sup> from the top (remember that the numbers start with 0, not 1) instead of using the pixel coordinate of the box’s top left corner, (220, 165). However, we need a way to translate between these two coordinate systems.</p>
+	<p>Here’s a picture of the game and the two different coordinate systems. Remember that the window is 640 pixels wide and 480 pixels tall, so (639, 479) is the bottom right corner (because the top left corner’s pixel is (0, 0), and not (1, 1)).</p>
+	<p>The <span class="mono">leftTopCoordsOfBox()</span> function will take box coordinates and return pixel coordinates. Because a box takes up multiple pixels on the screen, we will always return the single pixel at the top left corner of the box. This value will be returned as a two-integer tuple. The <span class="mono">leftTopCoordsOfBox()</span> function will often be used when we need pixel coordinates for drawing these boxes.</p>
 
-<p>Here’s a picture of the game and the two different coordinate
-systems. Remember that the window is 640 pixels wide and 480 pixels tall, so
-(639, 479) is the bottom right corner (because the top left corner’s pixel is
-(0, 0), and not (1, 1)).</p>
-
-<p>The <span class="mono">leftTopCoordsOfBox()</span> function
-will take box coordinates and return pixel coordinates. Because a box takes up
-multiple pixels on the screen, we will always return the single pixel at the
-top left corner of the box. This value will be returned as a two-integer tuple.
-The <span class="mono">leftTopCoordsOfBox()</span> function will often be used
-when we need pixel coordinates for drawing these boxes.</p>
-
-	<h1 class="subheading">Converting from Pixel Coordinates to Box Coordinates</h1>
+	<h1 class="subheading" id="converting-coordinates">Converting from Pixel Coordinates to Box Coordinates</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">171.</span> def getBoxAtPixel(x, y):</p>
@@ -1514,7 +932,7 @@ when we need pixel coordinates for drawing these boxes.</p>
 	<p>We will also need a function to convert from pixel coordinates (which the mouse clicks and mouse movement events use) to box coordinates (so we can find out over which box the mouse event happened). Rect objects have a <span class="mono">collidepoint()</span> method that you can pass X and Y coordinates too and it will return <span class="mono">True</span> if the coordinates are inside (that is, collide with) the Rect object’s area.</p>
 	<p>In order to find which box the mouse coordinates are over, we will go through each box’s coordinates and call the <span class="mono">collidepoint()</span> method on a Rect object with those coordinates. When <span class="mono">collidepoint()</span> returns <span class="mono">True</span>, we know we have found the box that was clicked on or moved over and will return the box coordinates. If none of them return <span class="mono">True</span>, then the <span class="mono">getBoxAtPixel()</span> function will return the value <span class="mono">(None, None)</span>. This tuple is returned instead of simply returning <span class="mono">None</span> because the caller of <span class="mono">getBoxAtPixel()</span> is expecting a tuple of two values to be returned.</p>
 
-	<h1 class="subheading" id="">Drawing the Icon, and Syntactic Sugar</h1>
+	<h1 class="subheading" id="drawing-icon">Drawing the Icon, and Syntactic Sugar</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">181.</span> def drawIcon(shape, color, boxx, boxy):</p>
@@ -1524,37 +942,9 @@ when we need pixel coordinates for drawing these boxes.</p>
 		<p class="noindent mono"><span class="line-number">185.</span> &#160;&#160;&#160;&#160;left, top = leftTopCoordsOfBox(boxx, boxy) <span class="comment"># get pixel coords from board coords</span></p>
 	</div>
 
-<p>The <span class="mono">drawIcon()</span> function will draw
-an icon (with the specified <span class="mono">shape</span> and <span
-class="mono">color</span>) at the space whose coordinates are given in the <span
-class="mono">boxx</span> and <span class="mono">boxy</span> parameters. Each
-possible shape has a different set of Pygame drawing function calls for it, so
-we must have a large set of <span class="mono">if</span> and <span
-class="mono">elif</span> statements to differentiate between them. (These
-statements are on lines 187 to 198.)</p>
-
-<p>The X and Y coordinates of the left and top edge of the box
-can be obtained by calling the <span class="mono">leftTopCoordsOfBox()</span>
-function. The width and height of the box are both set in the <span
-class="mono">BOXSIZE</span> constant. However, many of the shape drawing
-function calls use the midpoint and quarter-point of the box as well. We can
-calculate this and store it in the variables <span class="mono">quarter</span>
-and <span class="mono">half</span>. We could just as easily have the code <span
-class="mono">int(BOXSIZE * 0.25)</span> instead of the variable <span
-class="mono">quarter</span>, but this way the code becomes easier to read
-since it is more obvious what <span class="mono">quarter</span> means rather
-than <span class="mono">int(BOXSIZE * 0.25)</span>.</p>
-
-<p>Such variables are an example of syntactic sugar. <a href="glossary.xhtml#syntactic-sugar"><b>Syntactic sugar</b></a> is when we add code that could have
-been written in another way (probably with less actual code and variables), but
-does make the source code easier to read. Constant variables are one form of
-syntactic sugar. Pre-calculating a value and storing it in a variable is
-another type of syntactic sugar. (For example, in the <span class="mono">getRandomizedBoard()</span>
-function, we could have easily made the code on lines 140 and line 141 into a
-single line of code. But it’s easier to read as two separate lines.) We don’t
-need to have the extra <span class="mono">quarter</span> and <span
-class="mono">half</span> variables, but having them makes the code easier to
-read. Code that is easy to read is easy to debug and upgrade in the future.</p>
+	<p>The <span class="mono">drawIcon()</span> function will draw an icon (with the specified <span class="mono">shape</span> and <span class="mono">color</span>) at the space whose coordinates are given in the <span class="mono">boxx</span> and <span class="mono">boxy</span> parameters. Each possible shape has a different set of Pygame drawing function calls for it, so we must have a large set of <span class="mono">if</span> and <span class="mono">elif</span> statements to differentiate between them. (These statements are on lines 187 to 198.)</p>
+	<p>The X and Y coordinates of the left and top edge of the box can be obtained by calling the <span class="mono">leftTopCoordsOfBox()</span> function. The width and height of the box are both set in the <span class="mono">BOXSIZE</span> constant. However, many of the shape drawing function calls use the midpoint and quarter-point of the box as well. We can calculate this and store it in the variables <span class="mono">quarter</span> and <span class="mono">half</span>. We could just as easily have the code <span class="mono">int(BOXSIZE * 0.25)</span> instead of the variable <span class="mono">quarter</span>, but this way the code becomes easier to read since it is more obvious what <span class="mono">quarter</span> means rather than <span class="mono">int(BOXSIZE * 0.25)</span>.</p>
+	<p>Such variables are an example of syntactic sugar. <a href="glossary.xhtml#syntactic-sugar"><b>Syntactic sugar</b></a> is when we add code that could have been written in another way (probably with less actual code and variables), but does make the source code easier to read. Constant variables are one form of syntactic sugar. Pre-calculating a value and storing it in a variable is another type of syntactic sugar. (For example, in the <span class="mono">getRandomizedBoard()</span> function, we could have easily made the code on lines 140 and line 141 into a single line of code. But it’s easier to read as two separate lines.) We don’t need to have the extra <span class="mono">quarter</span> and <span class="mono">half</span> variables, but having them makes the code easier to read. Code that is easy to read is easy to debug and upgrade in the future.</p>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">186.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draw the shapes</span></p>
@@ -1575,7 +965,7 @@ read. Code that is easy to read is easy to debug and upgrade in the future.</p>
 
 	<p>Each of the donut, square, diamond, lines, and oval functions require different drawing primitive function calls to make. </p>
 
-	<h1 class="subheading">Syntactic Sugar with Getting a Board Space’s Icon’s Shape and Color</h1>
+	<h1 class="subheading" id="icon-shape-color">Syntactic Sugar with Getting a Board Space’s Icon’s Shape and Color</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">202.</span> def getShapeAndColor(board, boxx, boxy):</p>
@@ -1584,17 +974,10 @@ read. Code that is easy to read is easy to debug and upgrade in the future.</p>
 		<p class="noindent mono"><span class="line-number">205.</span> &#160;&#160;&#160;&#160;return board[boxx][boxy][0], board[boxx][boxy][1]</p>
 	</div>
 
-<p>The <span class="mono">getShapeAndColor()</span> function
-only has one line. You might wonder why we would want a function instead of
-just typing in that one line of code whenever we need it. This is done for the
-same reason we use constant variables: it improves the readability of the code.</p>
+	<p>The <span class="mono">getShapeAndColor()</span> function only has one line. You might wonder why we would want a function instead of just typing in that one line of code whenever we need it. This is done for the same reason we use constant variables: it improves the readability of the code.</p>
+	<p>It’s easy to figure out what a code like <span class="mono">shape, color = getShapeAndColor()</span> does. But if you looked a code like <span class="mono">shape, color = board[boxx][boxy][0], board[boxx][boxy][1]</span>, it would be a bit more difficult to figure out.</p>
 
-<p>It’s easy to figure out what a code like <span
-class="mono">shape, color = getShapeAndColor()</span> does. But if you looked
-a code like <span class="mono">shape, color = board[boxx][boxy][0],
-board[boxx][boxy][1]</span>, it would be a bit more difficult to figure out.</p>
-
-	<h1 class="subheading" id="">Drawing the Box Cover</h1>
+	<h1 class="subheading" id="drawing-box-cover">Drawing the Box Cover</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">208.</span> def drawBoxCovers(board, boxes, coverage):</p>
@@ -1611,87 +994,31 @@ board[boxx][boxy][1]</span>, it would be a bit more difficult to figure out.</p>
 		<p class="noindent mono"><span class="line-number">219.</span> &#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
 	</div>
 
-<p>The <span class="mono">drawBoxCovers()</span> function has
-three parameters: the board data structure, a list of (X, Y) tuples for each
-box that should have the cover drawn, and then the amount of coverage to draw
-for the boxes.</p>
+	<p>The <span class="mono">drawBoxCovers()</span> function has three parameters: the board data structure, a list of (X, Y) tuples for each box that should have the cover drawn, and then the amount of coverage to draw for the boxes.</p>
+	<p>Since we want to use the same drawing code for each box in the <span class="mono">boxes</span> parameter, we will use a <span class="mono">for</span> loop on line 211 so we execute the same code on each box in the <span class="mono">boxes</span> list. Inside this <span class="mono">for</span> loop, the code should do three things: draw the background color (to paint over anything that was there before), draw the icon, then draw however much of the white box over the icon that is needed. The <span class="mono">leftTopCoordsOfBox()</span> function will return the pixel coordinates of the top left corner of the box. The <span class="mono">if</span> statement on line 216 makes sure that if the number in <span class="mono">coverage</span> happens to be less than <span class="mono">0</span>, we won’t call the <span class="mono">pygame.draw.rect()</span> function.</p>
+	<p>When the <span class="mono">coverage</span> parameter is <span class="mono">0</span>, there is no coverage at all. When the <span class="mono">coverage</span> is set to <span class="mono">20</span>, there is a 20 pixel wide white box covering the icon. The largest size we’ll want the <span class="mono">coverage</span> set to is the number in <span class="mono">BOXSIZE</span>, where the entire icon is completely covered.</p>
+	<p><span class="mono">drawBoxCovers()</span> is going to be called from a separate loop than the game loop. Because of this, it needs to have its own calls to <span class="mono">pygame.display.update()</span> and <span class="mono">FPSCLOCK.tick(FPS)</span> to display the animation. (This does mean that while inside this loop, there is no code being run to handle any events being generated. That’s fine, since the cover and reveal animations only take a second or so to play.)</p>
 
-<p>Since we want to use the same drawing code for each box in
-the <span class="mono">boxes</span> parameter, we will use a <span
-class="mono">for</span> loop on line 211 so we execute the same code on each
-box in the <span class="mono">boxes</span> list. Inside this <span
-class="mono">for</span> loop, the code should do three things: draw the
-background color (to paint over anything that was there before), draw the icon,
-then draw however much of the white box over the icon that is needed. The <span
-class="mono">leftTopCoordsOfBox()</span> function will return the pixel
-coordinates of the top left corner of the box. The <span class="mono">if</span>
-statement on line 216 makes sure that if the number in <span class="mono">coverage</span>
-happens to be less than <span class="mono">0</span>, we won’t call the <span
-class="mono">pygame.draw.rect()</span> function.</p>
-
-<p>When the <span class="mono">coverage</span> parameter is <span
-class="mono">0</span>, there is no coverage at all. When the <span
-class="mono">coverage</span> is set to <span class="mono">20</span>, there is
-a 20 pixel wide white box covering the icon. The largest size we’ll want the <span
-class="mono">coverage</span> set to is the number in <span class="mono">BOXSIZE</span>,
-where the entire icon is completely covered.</p>
-
-<p><span class="mono">drawBoxCovers()</span> is going to be
-called from a separate loop than the game loop. Because of this, it needs to
-have its own calls to <span class="mono">pygame.display.update()</span> and <span
-class="mono">FPSCLOCK.tick(FPS)</span> to display the animation. (This does
-mean that while inside this loop, there is no code being run to handle any
-events being generated. That’s fine, since the cover and reveal animations only
-take a second or so to play.)</p>
-
-	<h1 class="subheading" id="">Handling the Revealing and Covering Animation</h1>
+	<h1 class="subheading" id="handling-cover-animation">Handling the Revealing and Covering Animation</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">222.</span> def revealBoxesAnimation(board, boxesToReveal):</p>
 		<p class="noindent mono"><span class="line-number">223.</span> &#160;&#160;&#160;&#160;<span class="comment"># Do the &quot;box reveal&quot; animation.</span></p>
 		<p class="noindent mono"><span class="line-number">224.</span> &#160;&#160;&#160;&#160;for coverage in range(BOXSIZE, (-REVEALSPEED) - 1, - REVEALSPEED):</p>
 		<p class="noindent mono"><span class="line-number">225.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoxCovers(board, boxesToReveal, coverage)</p>
-		<p class="noindent mono"><span class="line-number">226.</span> </p>
-		<p class="noindent mono"><span class="line-number">227.</span> </p>
+		<p class="noindent mono"><span class="line-number">226.</span></p>
+		<p class="noindent mono"><span class="line-number">227.</span></p>
 		<p class="noindent mono"><span class="line-number">228.</span> def coverBoxesAnimation(board, boxesToCover):</p>
 		<p class="noindent mono"><span class="line-number">229.</span> &#160;&#160;&#160;&#160;<span class="comment"># Do the &quot;box cover&quot; animation.</span></p>
 		<p class="noindent mono"><span class="line-number">230.</span> &#160;&#160;&#160;&#160;for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED):</p>
 		<p class="noindent mono"><span class="line-number">231.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawBoxCovers(board, boxesToCover, coverage)</p>
 	</div>
 
-<p>Remember that an animation is simply just displaying
-different images for brief moments of time, and together they make it seem like
-things are moving on the screen. The <span class="mono">revealBoxesAnimation()</span>
-and <span class="mono">coverBoxesAnimation()</span> only need to draw an icon
-with a varying amount of coverage by the white box. We can write a single
-function called <span class="mono">drawBoxCovers()</span> which can do this,
-and then have our animation function call <span class="mono">drawBoxCovers()</span>
-for each frame of animation. As we saw in the last section, <span
-class="mono">drawBoxCovers()</span> makes a call to <span class="mono">pygame.display.update()</span>
-and <span class="mono">FPSCLOCK.tick(FPS)</span> itself.</p>
+	<p>Remember that an animation is simply just displaying different images for brief moments of time, and together they make it seem like things are moving on the screen. The <span class="mono">revealBoxesAnimation()</span> and <span class="mono">coverBoxesAnimation()</span> only need to draw an icon with a varying amount of coverage by the white box. We can write a single function called <span class="mono">drawBoxCovers()</span> which can do this, and then have our animation function call <span class="mono">drawBoxCovers()</span> for each frame of animation. As we saw in the last section, <span class="mono">drawBoxCovers()</span> makes a call to <span class="mono">pygame.display.update()</span> and <span class="mono">FPSCLOCK.tick(FPS)</span> itself.</p>
+	<p>To do this, we’ll set up a <span class="mono">for</span> loop to make decreasing (in the case of <span class="mono">revealBoxesAnimation()</span>) or increasing (in the case of <span class="mono">coverBoxesAnimation()</span>) numbers for the <span class="mono">converage</span> parameter. The amount that the <span class="mono">coverage</span> variable will decrease/increase by is the number in the <span class="mono">REVEALSPEED</span> constant. On line 12 we set this constant to <span class="mono">8</span>, meaning that on each call to <span class="mono">drawBoxCovers()</span>, the white box will decrease/increase by 8 pixels on each iteration. If we increase this number, then more pixels will be drawn on each call, meaning that the white box will decrease/increase in size faster. If we set it to <span class="mono">1</span>, then the white box will only appear to decrease or increase by 1 pixel on each iteration, making the entire reveal or cover animation take longer.</p>
+	<p>Think of it like climbing stairs. If on each step you take, you climbed one stair, then it would take a normal amount of time to climb the entire staircase. But if you climbed two stairs at a time on each step (and the steps took just as long as before), you could climb the entire staircase twice as fast. If you could climb the staircase 8 stairs at a time, then you would climb the entire staircase 8 times as fast.</p>
 
-<p>To do this, we’ll set up a <span class="mono">for</span>
-loop to make decreasing (in the case of <span class="mono">revealBoxesAnimation()</span>)
-or increasing (in the case of <span class="mono">coverBoxesAnimation()</span>)
-numbers for the <span class="mono">converage</span> parameter. The amount that
-the <span class="mono">coverage</span> variable will decrease/increase by is
-the number in the <span class="mono">REVEALSPEED</span> constant. On line 12
-we set this constant to <span class="mono">8</span>, meaning that on each call
-to <span class="mono">drawBoxCovers()</span>, the white box will
-decrease/increase by 8 pixels on each iteration. If we increase this number,
-then more pixels will be drawn on each call, meaning that the white box will
-decrease/increase in size faster. If we set it to <span class="mono">1</span>,
-then the white box will only appear to decrease or increase by 1 pixel on each
-iteration, making the entire reveal or cover animation take longer.</p>
-
-<p>Think of it like climbing stairs. If on each step you take,
-you climbed one stair, then it would take a normal amount of time to climb the
-entire staircase. But if you climbed two stairs at a time on each step (and the
-steps took just as long as before), you could climb the entire staircase twice
-as fast. If you could climb the staircase 8 stairs at a time, then you would
-climb the entire staircase 8 times as fast.</p>
-
-	<h1 class="subheading" id="">Drawing the Entire Board</h1>
+	<h1 class="subheading" id="drawing-entire-board">Drawing the Entire Board</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">234.</span> def drawBoard(board, revealed):</p>
@@ -1708,14 +1035,9 @@ climb the entire staircase 8 times as fast.</p>
 		<p class="noindent mono"><span class="line-number">245.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawIcon(shape, color, boxx, boxy)</p>
 	</div>
 
-<p>The <span class="mono">drawBoard()</span> function makes a
-call to <span class="mono">drawIcon()</span> for each of the boxes on the
-board. The nested <span class="mono">for</span> loops on lines 236 and 237
-will loop through every possible X and Y coordinate for the boxes, and will
-either draw the icon at that location or draw a white square instead (to
-represent a covered up box).</p>
+	<p>The <span class="mono">drawBoard()</span> function makes a call to <span class="mono">drawIcon()</span> for each of the boxes on the board. The nested <span class="mono">for</span> loops on lines 236 and 237 will loop through every possible X and Y coordinate for the boxes, and will either draw the icon at that location or draw a white square instead (to represent a covered up box).</p>
 
-	<h1 class="subheading" id="">Drawing the Highlight</h1>
+	<h1 class="subheading" id="drawing-highlight">Drawing the Highlight</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">248.</span> def drawHighlightBox(boxx, boxy):</p>
@@ -1725,7 +1047,7 @@ represent a covered up box).</p>
 
 	<p>To help the player recognize that they can click on a covered box to reveal it, we will make a blue outline appear around a box to highlight it. This outline is drawn with a call to <span class="mono">pygame.draw.rect()</span> to make a rectangle with a width of 4 pixels.</p>
 
-	<h1 class="subheading" id="">The “Start Game” Animation</h1>
+	<h1 class="subheading" id="start-game-animation-2">The “Start Game” Animation</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">253.</span> def startGameAnimation(board):</p>
@@ -1739,31 +1061,12 @@ represent a covered up box).</p>
 		<p class="noindent mono"><span class="line-number">261.</span> &#160;&#160;&#160;&#160;boxGroups = splitIntoGroupsOf(8, boxes)</p>
 	</div>
 
-<p>The animation that plays at the beginning of the game gives
-the player a quick hint as to where all the icons are located. In order to make
-this animation, we have to reveal and cover up groups of boxes one group after
-another. To do this, first we’ll create a list of every possible space on the
-board. The nested <span class="mono">for</span> loops on lines 257 and 258 will
-add (X, Y) tuples to a list in the <span class="mono">boxes</span> variable.</p>
+	<p>The animation that plays at the beginning of the game gives the player a quick hint as to where all the icons are located. In order to make this animation, we have to reveal and cover up groups of boxes one group after another. To do this, first we’ll create a list of every possible space on the board. The nested <span class="mono">for</span> loops on lines 257 and 258 will add (X, Y) tuples to a list in the <span class="mono">boxes</span> variable.</p>
+	<p>We will reveal and cover up the first 8 boxes in this list, then the next 8, then the next 8 after that, and so on. However, since the order of the (X, Y) tuples in boxes would be the same each time, then the same order of boxes would be displayed. (Try commenting out line 260 and then running to program a few times to see this effect.)</p>
+	<p>To change up the boxes each time a game starts, we will call the <span class="mono">random.shuffle()</span> function to randomly shuffle the order of the tuples in the boxes list. Then when we reveal and cover up the first 8 boxes in this list (and each group of 8 boxes afterwards), it will be random group of 8 boxes.</p>
+	<p>To get the lists of 8 boxes, we call our <span class="mono">splitIntoGroupsOf()</span> function, passing <span class="mono">8</span> and the list in <span class="mono">boxes</span>. The list of lists that the function returns will be stored in a variable named <span class="mono">boxGroups</span>.</p>
 
-<p>We will reveal and cover up the first 8 boxes in this list,
-then the next 8, then the next 8 after that, and so on. However, since the order
-of the (X, Y) tuples in boxes would be the same each time, then the same order
-of boxes would be displayed. (Try commenting out line 260 and then running to
-program a few times to see this effect.)</p>
-
-<p>To change up the boxes each time a game starts, we will call
-the <span class="mono">random.shuffle()</span> function to randomly shuffle
-the order of the tuples in the boxes list. Then when we reveal and cover up the
-first 8 boxes in this list (and each group of 8 boxes afterwards), it will be
-random group of 8 boxes.</p>
-
-<p>To get the lists of 8 boxes, we call our <span
-class="mono">splitIntoGroupsOf()</span> function, passing <span class="mono">8</span>
-and the list in <span class="mono">boxes</span>. The list of lists that the
-function returns will be stored in a variable named <span class="mono">boxGroups</span>.</p>
-
-	<h1 class="subheading" id="">Revealing and Covering the Groups of Boxes</h1>
+	<h1 class="subheading" id="reveal-cover-boxes">Revealing and Covering the Groups of Boxes</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">263.</span> drawBoard(board, coveredBoxes)</p>
@@ -1772,23 +1075,10 @@ function returns will be stored in a variable named <span class="mono">boxGroups
 		<p class="noindent mono"><span class="line-number">266.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;coverBoxesAnimation(board, boxGroup)</p>
 	</div>
 
-<p>First, we draw the board. Since every value in <span
-class="mono">coveredBoxes</span> is set to <span class="mono">False</span>,
-this call to <span class="mono">drawBoard()</span> will end up drawing only
-covered up white boxes. The <span class="mono">revealBoxesAnimation()</span>
-and <span class="mono">coverBoxesAnimation()</span> functions will draw over the
-spaces of these white boxes.</p>
+	<p>First, we draw the board. Since every value in <span class="mono">coveredBoxes</span> is set to <span class="mono">False</span>, this call to <span class="mono">drawBoard()</span> will end up drawing only covered up white boxes. The <span class="mono">revealBoxesAnimation()</span> and <span class="mono">coverBoxesAnimation()</span> functions will draw over the spaces of these white boxes.</p>
+	<p>The <span class="mono">for</span> loop will go through each of the inner lists in the <span class="mono">boxGroups</span> lists. We pass these to <span class="mono">revealBoxesAnimation()</span>, which will perform the animation of the white boxes being pulled away to reveal the icon underneath. Then the call to <span class="mono">coverBoxesAnimation()</span> will animate the white boxes expanding to cover up the icons. Then the <span class="mono">for</span> loop goes to the next iteration to animate the next set of 8 boxes.</p>
 
-<p>The <span class="mono">for</span> loop will go through each
-of the inner lists in the <span class="mono">boxGroups</span> lists. We pass
-these to <span class="mono">revealBoxesAnimation()</span>, which will perform
-the animation of the white boxes being pulled away to reveal the icon
-underneath. Then the call to <span class="mono">coverBoxesAnimation()</span>
-will animate the white boxes expanding to cover up the icons. Then the <span
-class="mono">for</span> loop goes to the next iteration to animate the next
-set of 8 boxes.</p>
-
-	<h1 class="subheading" id="">The “Game Won” Animation</h1>
+	<h1 class="subheading" id="game-won-animation-2">The “Game Won” Animation</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">269.</span> def gameWonAnimation(board):</p>
@@ -1805,21 +1095,10 @@ set of 8 boxes.</p>
 		<p class="noindent mono"><span class="line-number">280.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.time.wait(300)</p>
 	</div>
 
-<p>When the player has uncovered all of the boxes by matching
-every pair on the board, we want to congratulate them by flashing the
-background color. The <span class="mono">for</span> loop will draw the color
-in the <span class="mono">color1</span> variable for the background color and
-then draw the board over it. However, on each iteration of the <span
-class="mono">for</span> loop, the values in <span class="mono">color1</span>
-and <span class="mono">color2</span> will be swapped with each other on line
-276. This way the program will alternate between drawing two different
-background colors.</p>
+	<p>When the player has uncovered all of the boxes by matching every pair on the board, we want to congratulate them by flashing the background color. The <span class="mono">for</span> loop will draw the color in the <span class="mono">color1</span> variable for the background color and then draw the board over it. However, on each iteration of the <span class="mono">for</span> loop, the values in <span class="mono">color1</span> and <span class="mono">color2</span> will be swapped with each other on line 276. This way the program will alternate between drawing two different background colors.</p>
+	<p>Remember that this function needs to call <span class="mono">pygame.display.update()</span> to actually make the <span class="mono">DISPLAYSURF</span> surface appear on the screen.</p>
 
-<p>Remember that this function needs to call <span
-class="mono">pygame.display.update()</span> to actually make the <span
-class="mono">DISPLAYSURF</span> surface appear on the screen.</p>
-
-	<h1 class="subheading" id="">Telling if the Player Has Won</h1>
+	<h1 class="subheading" id="telling-player-won">Telling if the Player Has Won</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">283.</span> def hasWon(revealedBoxes):</p>
@@ -1828,22 +1107,10 @@ class="mono">DISPLAYSURF</span> surface appear on the screen.</p>
 		<p class="noindent mono"><span class="line-number">286.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if False in i:</p>
 		<p class="noindent mono"><span class="line-number">287.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return False <span class="comment"># return False if any boxes are covered.</span></p>
 		<p class="noindent mono"><span class="line-number">288.</span> &#160;&#160;&#160;&#160;return True</p>
-</div>
+	</div>
 
-<p>The player has won the game when all of the icon pairs have
-been matched. Since the “revealed” data structure gets values in it set to <span
-class="mono">True</span> as icons have been matched, we can simply loop
-through every space in <span class="mono">revealedBoxes</span> looking for a <span
-class="mono">False</span> value. If even one <span class="mono">False</span>
-value is in <span class="mono">revealedBoxes</span>, then we know there are
-still unmatched icons on the board.</p>
-
-<p>Note that because <span class="mono">revealedBoxes</span>
-is a list of lists, the <span class="mono">for</span> loop on line 285 will
-set the inner list as the values of <span class="mono">i</span>. But we can
-use the in operator to search for a <span class="mono">False</span> value in
-the entire inner list. This way we don’t need to write an additional line of
-code and have two nested <span class="mono">for</span> loops like this:</p>
+	<p>The player has won the game when all of the icon pairs have been matched. Since the “revealed” data structure gets values in it set to <span class="mono">True</span> as icons have been matched, we can simply loop through every space in <span class="mono">revealedBoxes</span> looking for a <span class="mono">False</span> value. If even one <span class="mono">False</span> value is in <span class="mono">revealedBoxes</span>, then we know there are still unmatched icons on the board.</p>
+	<p>Note that because <span class="mono">revealedBoxes</span> is a list of lists, the <span class="mono">for</span> loop on line 285 will set the inner list as the values of <span class="mono">i</span>. But we can use the in operator to search for a <span class="mono">False</span> value in the entire inner list. This way we don’t need to write an additional line of code and have two nested <span class="mono">for</span> loops like this:</p>
 
 	<div class="python-shell">
 		<p class="noindent mono">for x in revealedBoxes:</p>
@@ -1852,31 +1119,16 @@ code and have two nested <span class="mono">for</span> loops like this:</p>
 		<p class="noindent mono">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return False</p>
 	</div>
 
-<h1 class="subheading">Why Bother Having a <span class="mono">main()</span> Function?</h1>
+	<h1 class="subheading" id="why-main">Why Bother Having a <span class="mono">main()</span> Function?</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">291.</span> if __name__ == '__main__':</p>
 		<p class="noindent mono"><span class="line-number">292.</span> &#160;&#160;&#160;&#160;main()</p>
 	</div>
 
-<p>It may seem pointless to have a <span class="mono">main()</span>
-function, since you could just put that code in the global scope at the bottom
-of the program instead, and the code would run the exact same. However, there
-are two good reasons to put them inside of a <span class="mono">main()</span>
-function.</p>
-
-<p>First, this lets you have local variables whereas otherwise
-the local variables in the <span class="mono">main()</span> function would
-have to become global variables. Limiting the number of global variables is a
-good way to keep the code simple and easier to debug. (See the “Why Global
-Variables are Evil” section in this chapter.)</p>
-
-<p>Second, this also lets you import the program so that you
-can call and test individual functions. If the <i>memorypuzzle.py</i> file is
-in the C:\Python32 folder, then you can import it from the interactive shell.
-Type the following to test out the <span class="mono">splitIntoGroupsOf()</span>
-and <span class="mono">getBoxAtPixel()</span> functions to make sure they
-return the correct return values:</p>
+	<p>It may seem pointless to have a <span class="mono">main()</span> function, since you could just put that code in the global scope at the bottom of the program instead, and the code would run the exact same. However, there are two good reasons to put them inside of a <span class="mono">main()</span> function.</p>
+	<p>First, this lets you have local variables whereas otherwise the local variables in the <span class="mono">main()</span> function would have to become global variables. Limiting the number of global variables is a good way to keep the code simple and easier to debug. (See the <a href="#global-statement">“Why Global Variables are Evil”</a> section in this chapter.)</p>
+	<p>Second, this also lets you import the program so that you can call and test individual functions. If the <i>memorypuzzle.py</i> file is in the C:\Python32 folder, then you can import it from the interactive shell. Type the following to test out the <span class="mono">splitIntoGroupsOf()</span> and <span class="mono">getBoxAtPixel()</span> functions to make sure they return the correct return values:</p>
 
 	<div class="python-shell">
 		<p class="noindent mono">&gt;&gt;&gt; import memorypuzzle</p>

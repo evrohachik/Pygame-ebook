@@ -5,7 +5,7 @@
 		<dc:subject>Academic</dc:subject>
 		<dc:publisher>Invent with Python</dc:publisher>
 		<dc:identifier id="bookid">978-1469901732</dc:identifier>
-		<dc:date>2018-03-29</dc:date>
+		<dc:date>2018-04-02</dc:date>
 		<dc:language>en</dc:language>
 		<dc:rights>Creative Commons BY-NC-SA 4.0</dc:rights>
 		<meta content="cover" name="cover"/>
@@ -23,59 +23,66 @@
 		<item href="images/invent_cover.png" id="image6" media-type="image/png"/>
 		<item href="images/scratch_cover.jpg" id="image7" media-type="image/jpeg"/>
 		<item href="images/chapter1/mac-python.png" id="image8" media-type="image/png"/>
-		<item href="images/chapter2/anti-aliasing.jpg" id="image9" media-type="image/jpeg"/>
-		<item href="images/chapter2/game-loop.jpg" id="image10" media-type="image/jpeg"/>
-		<item href="images/chapter2/keyframes.jpg" id="image11" media-type="image/jpeg"/>
-		<item href="images/chapter2/pixel.jpg" id="image12" media-type="image/jpeg"/>
-		<item href="images/chapter2/python-draw.jpg" id="image13" media-type="image/jpeg"/>
-		<item href="images/chapter2/x2.jpg" id="image14" media-type="image/jpeg"/>
-		<item href="images/chapter2/x3.jpg" id="image15" media-type="image/jpeg"/>
-		<item href="images/chapter2/x4.jpg" id="image16" media-type="image/jpeg"/>
-		<item href="bookcover.xhtml" id="front_cover" media-type="application/xhtml+xml"/>
+		<item href="images/chapter10/fig10-1.jpg" id="image9" media-type="image/jpeg"/>
+		<item href="images/chapter10/fig10-2.jpg" id="image10" media-type="image/jpeg"/>
+		<item href="images/chapter10/fig10-3.jpg" id="image11" media-type="image/jpeg"/>
+		<item href="images/chapter10/fig10-4.jpg" id="image12" media-type="image/jpeg"/>
+		<item href="images/chapter10/fig10-5.jpg" id="image13" media-type="image/jpeg"/>
+		<item href="images/chapter10/fig10-6.jpg" id="image14" media-type="image/jpeg"/>
+		<item href="images/chapter2/anti-aliasing.jpg" id="image15" media-type="image/jpeg"/>
+		<item href="images/chapter2/game-loop.jpg" id="image16" media-type="image/jpeg"/>
+		<item href="images/chapter2/keyframes.jpg" id="image17" media-type="image/jpeg"/>
+		<item href="images/chapter2/pixel.jpg" id="image18" media-type="image/jpeg"/>
+		<item href="images/chapter2/python-draw.jpg" id="image19" media-type="image/jpeg"/>
+		<item href="images/chapter2/x2.jpg" id="image20" media-type="image/jpeg"/>
+		<item href="images/chapter2/x3.jpg" id="image21" media-type="image/jpeg"/>
+		<item href="images/chapter2/x4.jpg" id="image22" media-type="image/jpeg"/>
+		<item href="images/chapter4/wasd-arrows.jpg" id="image23" media-type="image/jpeg"/>
+		<item href="bookcover.xhtml" id="bookcover" media-type="application/xhtml+xml"/>
 		<item href="title.xhtml" id="title" media-type="application/xhtml+xml"/>
 		<item href="indicia.xhtml" id="indicia" media-type="application/xhtml+xml"/>
-		<item href="license.xhtml" id="licenses" media-type="application/xhtml+xml"/>
+		<item href="license.xhtml" id="license" media-type="application/xhtml+xml"/>
 		<item href="dedication.xhtml" id="dedication" media-type="application/xhtml+xml"/>
-		<item href="whoisthisbookfor.xhtml" id="who_is_this_book_for?" media-type="application/xhtml+xml"/>
-		<item href="aboutthisbook.xhtml" id="about_this_book" media-type="application/xhtml+xml"/>
-		<item href="toc.xhtml" id="table_of_contents" media-type="application/xhtml+xml"/>
-		<item href="blankpage.xhtml" id="blank_page" media-type="application/xhtml+xml"/>
-		<item href="chapter1.xhtml" id="chapter_1_-_installing_python_and_pygame" media-type="application/xhtml+xml"/>
-		<item href="chapter2.xhtml" id="chapter_2_-_pygame_basics" media-type="application/xhtml+xml"/>
-		<item href="chapter3.xhtml" id="chapter_3_-_memory_puzzle" media-type="application/xhtml+xml"/>
-		<item href="chapter4.xhtml" id="chapter_4_-_slide_puzzle" media-type="application/xhtml+xml"/>
-		<item href="chapter5.xhtml" id="chapter_5_-_simulate" media-type="application/xhtml+xml"/>
-		<item href="chapter6.xhtml" id="chapter_6_-_wormy" media-type="application/xhtml+xml"/>
-		<item href="chapter7.xhtml" id="chapter_7_-_tetronimo" media-type="application/xhtml+xml"/>
-		<item href="chapter8.xhtml" id="chapter_8_-_squirrel_eat_squirrel" media-type="application/xhtml+xml"/>
-		<item href="chapter9.xhtml" id="chapter_9_-_star_pusher" media-type="application/xhtml+xml"/>
-		<item href="chapter10.xhtml" id="chapter_10_-_four_extra_games" media-type="application/xhtml+xml"/>
+		<item href="whoisthisbookfor.xhtml" id="whoisthisbookfor" media-type="application/xhtml+xml"/>
+		<item href="aboutthisbook.xhtml" id="aboutthisbook" media-type="application/xhtml+xml"/>
+		<item href="toc.xhtml" id="toc" media-type="application/xhtml+xml"/>
+		<item href="blankpage.xhtml" id="blankpage" media-type="application/xhtml+xml"/>
+		<item href="chapter1.xhtml" id="chapter1" media-type="application/xhtml+xml"/>
+		<item href="chapter2.xhtml" id="chapter2" media-type="application/xhtml+xml"/>
+		<item href="chapter3.xhtml" id="chapter3" media-type="application/xhtml+xml"/>
+		<item href="chapter4.xhtml" id="chapter4" media-type="application/xhtml+xml"/>
+		<item href="chapter5.xhtml" id="chapter5" media-type="application/xhtml+xml"/>
+		<item href="chapter6.xhtml" id="chapter6" media-type="application/xhtml+xml"/>
+		<item href="chapter7.xhtml" id="chapter7" media-type="application/xhtml+xml"/>
+		<item href="chapter8.xhtml" id="chapter8" media-type="application/xhtml+xml"/>
+		<item href="chapter9.xhtml" id="chapter9" media-type="application/xhtml+xml"/>
+		<item href="chapter10.xhtml" id="chapter10" media-type="application/xhtml+xml"/>
 		<item href="glossary.xhtml" id="glossary" media-type="application/xhtml+xml"/>
-		<item href="abouttheauthor.xhtml" id="about_the_author" media-type="application/xhtml+xml"/>
-		<item href="othertitles.xhtml" id="other_titles" media-type="application/xhtml+xml"/>
+		<item href="abouttheauthor.xhtml" id="abouttheauthor" media-type="application/xhtml+xml"/>
+		<item href="othertitles.xhtml" id="othertitles" media-type="application/xhtml+xml"/>
 	</manifest>
 	<spine toc="ncx">
-		<itemref idref="front_cover"/>
+		<itemref idref="bookcover"/>
 		<itemref idref="title"/>
 		<itemref idref="indicia"/>
-		<itemref idref="licenses"/>
+		<itemref idref="license"/>
 		<itemref idref="dedication"/>
-		<itemref idref="who_is_this_book_for?"/>
-		<itemref idref="about_this_book"/>
-		<itemref idref="table_of_contents"/>
-		<itemref idref="blank_page"/>
-		<itemref idref="chapter_1_-_installing_python_and_pygame"/>
-		<itemref idref="chapter_2_-_pygame_basics"/>
-		<itemref idref="chapter_3_-_memory_puzzle"/>
-		<itemref idref="chapter_4_-_slide_puzzle"/>
-		<itemref idref="chapter_5_-_simulate"/>
-		<itemref idref="chapter_6_-_wormy"/>
-		<itemref idref="chapter_7_-_tetronimo"/>
-		<itemref idref="chapter_8_-_squirrel_eat_squirrel"/>
-		<itemref idref="chapter_9_-_star_pusher"/>
-		<itemref idref="chapter_10_-_four_extra_games"/>
+		<itemref idref="whoisthisbookfor"/>
+		<itemref idref="aboutthisbook"/>
+		<itemref idref="toc"/>
+		<itemref idref="blankpage"/>
+		<itemref idref="chapter1"/>
+		<itemref idref="chapter2"/>
+		<itemref idref="chapter3"/>
+		<itemref idref="chapter4"/>
+		<itemref idref="chapter5"/>
+		<itemref idref="chapter6"/>
+		<itemref idref="chapter7"/>
+		<itemref idref="chapter8"/>
+		<itemref idref="chapter9"/>
+		<itemref idref="chapter10"/>
 		<itemref idref="glossary"/>
-		<itemref idref="about_the_author"/>
-		<itemref idref="other_titles"/>
+		<itemref idref="abouttheauthor"/>
+		<itemref idref="othertitles"/>
 	</spine>
 </package>

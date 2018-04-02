@@ -101,7 +101,7 @@
 	<p>Since the game state is usually updated in response to events (such as mouse clicks or keyboard presses) or the passage of time, the game loop is constantly checking and re-checking many times a second for any new events that have happened. Inside the main loop is code that looks at which events have been created (with Pygame, this is done by calling the <span class="mono">pygame.event.get()</span> function). The main loop also has code that updates the game state based on which events have been created. This is usually called <a href="glossary.xhtml#event-handling"><b>event handling</b></a>.</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/game-loop.jpg"/>
+		<img class="half-image" src="images/chapter2/game-loop.jpg" alt=""/>
 	</div>
 
 	<h1 class="subheading" id="pygame-event-objects"><span class="mono">pygame.event.Event</span> Objects</h1>
@@ -138,7 +138,7 @@
 	<p class="noindent">The window that the “Hello World” program creates is just composed of little square dots on your screen called <a href="glossary.xhtml#pixels"><b>pixels</b></a>. Each pixel starts off as black but can be set to a different color. Imagine that instead of a Surface object that is 400 pixels wide and 300 pixels tall, we just had a Surface object that was 8 pixels by 8 pixels. If that tiny 8x8 Surface was enlarged so that each pixel looks like a square in a grid, and we added numbers for the X and Y axis, then a good representation of it could look something like this:</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/pixel.jpg"/>
+		<img class="half-image" src="images/chapter2/pixel.jpg" alt=""/>
 	</div>
 
 	<p>We can refer to a specific pixel by using a Cartesian Coordinate system. Each column of the <a href="glossary.xhtml#x-axis"><b>X-axis</b></a> and each row of the <a href="glossary.xhtml#y-axis"><b>Y-axis</b></a> will have an “address” that is an integer from 0 to 7 so that we can locate any pixel by specifying the X and Y axis integers.</p>
@@ -382,25 +382,25 @@
 	<p class="noindent">Now that we know how to get the Pygame framework to draw to the screen, let’s learn how to make animated pictures. A game with only still, unmoving images would be fairly dull. (Sales of my game “Look At This Rock” have been disappointing.) Animated images are the result of drawing an image on the screen, then a split second later drawing a slightly different image on the screen. Imagine the program’s window was 6 pixels wide and 1 pixel tall, with all the pixels white except for a black pixel at 4, 0. It would look like this:</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/x4.jpg"/>
+		<img class="half-image" src="images/chapter2/x4.jpg" alt=""/>
 	</div>
 
 	<p>If you changed the window so that 3, 0 was black and 4,0 was white, it would look like this:</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/x3.jpg"/>
+		<img class="half-image" src="images/chapter2/x3.jpg" alt=""/>
 	</div>
 
 	<p>To the user, it looks like the black pixel has “moved” over to the left. If you redrew the window to have the black pixel at 2, 0, it would continue to look like the black pixel is moving left:</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/x2.jpg"/>
+		<img class="half-image" src="images/chapter2/x2.jpg" alt=""/>
 	</div>
 
 	<p>It may look like the black pixel is moving, but this is just an illusion. To the computer, it is just showing three different images that each just happen to have one black pixel. Consider if the three following images were rapidly shown on the screen:</p>
 
 	<div class="image-center">
-		<img class="image" src="images/chapter2/keyframes.jpg"/>
+		<img class="image" src="images/chapter2/keyframes.jpg" alt=""/>
 	</div>
 
 	<p>To the user, it would look like the cat is moving towards the squirrel. But to the computer, they’re just a bunch of pixels. The trick to making believable looking animation is to have your program draw a picture to the window, wait a fraction of a second, and then draw a <i>slightly</i> different picture.</p>
@@ -494,7 +494,7 @@
 	<p class="noindent">If you want to draw text to the screen, you <i>could</i> write several calls to <span class="mono">pygame.draw.line()</span> to draw out the lines of each letter. This would be a headache to type out all those <span class="mono">pygame.draw.line()</span> calls and figure out all the XY coordinates, and probably wouldn’t look very good.</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/python-draw.jpg"/>
+		<img class="half-image" src="images/chapter2/python-draw.jpg" alt=""/>
 	</div>
 
 	<p>The above message would take forty one calls to the <span class="mono">pygame.draw.line()</span> function to make. Instead, Pygame provides some much simpler functions for fonts and creating text. Here is a small Hello World program using Pygame’s font functions. Type it into IDLE’s file editor and save it as <i>fonttext.py</i>:</p>
@@ -548,7 +548,7 @@
 	<p>If you zoom in on an aliased line and an anti-aliased line, they look like this:</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/anti-aliasing.jpg"/>
+		<img class="half-image" src="images/chapter2/anti-aliasing.jpg" alt=""/>
 	</div>
 
 	<p>To make Pygame’s text use anti-aliasing, just pass <span class="mono">True</span> for the second parameter of the <span class="mono">render()</span> method. The <span class="mono">pygame.draw.aaline()</span> and <span class="mono">pygame.draw.aalines()</span> functions have the same parameters as <span class="mono">pygame.draw.line()</span> and <span class="mono">pygame.draw.lines()</span>, except they will draw anti-aliased (smooth) lines instead of aliased (blocky) lines.</p>

@@ -161,6 +161,22 @@ p.indicia, .indicia
 	margin-right: 5%;
 }
 
+li.nobullet
+{
+	text-indent: 0em;
+	margin-left: 1em;
+	display:list;
+	list-style-type: none;
+}
+
+li.nobullet2
+{
+	text-indent: 0em;
+	margin-left: 2em;
+	display:list;
+	list-style-type: none;
+}
+
 p.small-text, .small-text /*For the indicia*/
 {
 	font-size: 0.7em; /*0.8em or small*/
