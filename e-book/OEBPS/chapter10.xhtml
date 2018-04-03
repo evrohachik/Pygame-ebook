@@ -114,192 +114,94 @@
 			<p class="noindent mono"><span class="line-number">42.</span></p>
 			<p class="noindent mono"><span class="line-number">43.</span></p>
 			<p class="noindent mono"><span class="line-number">44.</span> def main():</p>
-			<p class="noindent mono"><span class="line-number">45.</span> global MAINCLOCK, DISPLAYSURF, FONT, BIGFONT, BGIMAGE</p>
+			<p class="noindent mono"><span class="line-number">45.</span> &#160;&#160;&#160;&#160;global MAINCLOCK, DISPLAYSURF, FONT, BIGFONT, BGIMAGE</p>
 			<p class="noindent mono"><span class="line-number">46.</span></p>
-			<p class="noindent mono"><span class="line-number">47.</span> pygame.init()</p>
-			<p class="noindent mono"><span class="line-number">48.</span> MAINCLOCK = pygame.time.Clock()</p>
-			<p class="noindent mono"><span class="line-number">49.</span> DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
-			<p class="noindent mono"><span class="line-number">50.</span> pygame.display.set_caption('Flippy')</p>
-			<p class="noindent mono"><span class="line-number">51.</span> FONT = pygame.font.Font('freesansbold.ttf', 16)</p>
-			<p class="noindent mono"><span class="line-number">52.</span> BIGFONT = pygame.font.Font('freesansbold.ttf', 32)</p>
+			<p class="noindent mono"><span class="line-number">47.</span> &#160;&#160;&#160;&#160;pygame.init()</p>
+			<p class="noindent mono"><span class="line-number">48.</span> &#160;&#160;&#160;&#160;MAINCLOCK = pygame.time.Clock()</p>
+			<p class="noindent mono"><span class="line-number">49.</span> &#160;&#160;&#160;&#160;DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+			<p class="noindent mono"><span class="line-number">50.</span> &#160;&#160;&#160;&#160;pygame.display.set_caption('Flippy')</p>
+			<p class="noindent mono"><span class="line-number">51.</span> &#160;&#160;&#160;&#160;FONT = pygame.font.Font('freesansbold.ttf', 16)</p>
+			<p class="noindent mono"><span class="line-number">52.</span> &#160;&#160;&#160;&#160;BIGFONT = pygame.font.Font('freesansbold.ttf', 32)</p>
 			<p class="noindent mono"><span class="line-number">53.</span></p>
-			<p class="noindent mono"><span class="line-number">54.</span> <span class="comment"># Set up the background image.</span></p>
-			<p class="noindent mono"><span class="line-number">55.</span> boardImage = pygame.image.load('flippyboard.png')</p>
-			<p class="noindent mono"><span class="line-number">56.</span> <span class="comment"># Use smoothscale() to stretch the board image to fit the entire board:</span></p>
-			<p class="noindent mono"><span class="line-number">57.</span> boardImage = pygame.transform.smoothscale(boardImage, (BOARDWIDTH * SPACESIZE, BOARDHEIGHT * SPACESIZE))</p>
-			<p class="noindent mono"><span class="line-number">58.</span> boardImageRect = boardImage.get_rect()</p>
-			<p class="noindent mono"><span class="line-number">59.</span> boardImageRect.topleft = (XMARGIN, YMARGIN)</p>
-			<p class="noindent mono"><span class="line-number">60.</span> BGIMAGE = pygame.image.load('flippybackground.png')</p>
-			<p class="noindent mono"><span class="line-number">61.</span> <span class="comment"># Use smoothscale() to stretch the background image to fit the entire window:</span></p>
-			<p class="noindent mono"><span class="line-number">62.</span> BGIMAGE = pygame.transform.smoothscale(BGIMAGE, (WINDOWWIDTH, WINDOWHEIGHT))</p>
-			<p class="noindent mono"><span class="line-number">63.</span> BGIMAGE.blit(boardImage, boardImageRect)</p>
+			<p class="noindent mono"><span class="line-number">54.</span> &#160;&#160;&#160;&#160;<span class="comment"># Set up the background image.</span></p>
+			<p class="noindent mono"><span class="line-number">55.</span> &#160;&#160;&#160;&#160;boardImage = pygame.image.load('flippyboard.png')</p>
+			<p class="noindent mono"><span class="line-number">56.</span> &#160;&#160;&#160;&#160;<span class="comment"># Use smoothscale() to stretch the board image to fit the entire board:</span></p>
+			<p class="noindent mono"><span class="line-number">57.</span> &#160;&#160;&#160;&#160;boardImage = pygame.transform.smoothscale(boardImage, (BOARDWIDTH * SPACESIZE, BOARDHEIGHT * SPACESIZE))</p>
+			<p class="noindent mono"><span class="line-number">58.</span> &#160;&#160;&#160;&#160;boardImageRect = boardImage.get_rect()</p>
+			<p class="noindent mono"><span class="line-number">59.</span> &#160;&#160;&#160;&#160;boardImageRect.topleft = (XMARGIN, YMARGIN)</p>
+			<p class="noindent mono"><span class="line-number">60.</span> &#160;&#160;&#160;&#160;BGIMAGE = pygame.image.load('flippybackground.png')</p>
+			<p class="noindent mono"><span class="line-number">61.</span> &#160;&#160;&#160;&#160;<span class="comment"># Use smoothscale() to stretch the background image to fit the entire window:</span></p>
+			<p class="noindent mono"><span class="line-number">62.</span> &#160;&#160;&#160;&#160;BGIMAGE = pygame.transform.smoothscale(BGIMAGE, (WINDOWWIDTH, WINDOWHEIGHT))</p>
+			<p class="noindent mono"><span class="line-number">63.</span> &#160;&#160;&#160;&#160;BGIMAGE.blit(boardImage, boardImageRect)</p>
 			<p class="noindent mono"><span class="line-number">64.</span></p>
-			<p class="noindent mono"><span class="line-number">65.</span> <span class="comment"># Run the main game.</span></p>
-			<p class="noindent mono"><span class="line-number">66.</span> while True:</p>
-			<p class="noindent mono"><span class="line-number">67.</span> if runGame() == False:</p>
-			<p class="noindent mono"><span class="line-number">68.</span> break</p>
+			<p class="noindent mono"><span class="line-number">65.</span> &#160;&#160;&#160;&#160;<span class="comment"># Run the main game.</span></p>
+			<p class="noindent mono"><span class="line-number">66.</span> &#160;&#160;&#160;&#160;while True:</p>
+			<p class="noindent mono"><span class="line-number">67.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if runGame() == False:</p>
+			<p class="noindent mono"><span class="line-number">68.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;break</p>
 			<p class="noindent mono"><span class="line-number">69.</span></p>
 			<p class="noindent mono"><span class="line-number">70.</span></p>
 			<p class="noindent mono"><span class="line-number">71.</span> def runGame():</p>
-			<p class="noindent mono"><span class="line-number">72.</span> <span class="comment"># Plays a single game of reversi each time this function is called.</span></p>
+			<p class="noindent mono"><span class="line-number">72.</span> &#160;&#160;&#160;&#160;<span class="comment"># Plays a single game of reversi each time this function is called.</span></p>
 			<p class="noindent mono"><span class="line-number">73.</span></p>
-			<p class="noindent mono"><span class="line-number">74.</span> <span class="comment"># Reset the board and game.</span></p>
-			<p class="noindent mono"><span class="line-number">75.</span> mainBoard = getNewBoard()</p>
-			<p class="noindent mono"><span class="line-number">76.</span> resetBoard(mainBoard)</p>
-			<p class="noindent mono"><span class="line-number">77.</span> showHints = False</p>
-			<p class="noindent mono"><span class="line-number">78.</span> turn = random.choice(['computer', 'player'])</p>
+			<p class="noindent mono"><span class="line-number">74.</span> &#160;&#160;&#160;&#160;<span class="comment"># Reset the board and game.</span></p>
+			<p class="noindent mono"><span class="line-number">75.</span> &#160;&#160;&#160;&#160;mainBoard = getNewBoard()</p>
+			<p class="noindent mono"><span class="line-number">76.</span> &#160;&#160;&#160;&#160;resetBoard(mainBoard)</p>
+			<p class="noindent mono"><span class="line-number">77.</span> &#160;&#160;&#160;&#160;showHints = False</p>
+			<p class="noindent mono"><span class="line-number">78.</span> &#160;&#160;&#160;&#160;turn = random.choice(['computer', 'player'])</p>
 			<p class="noindent mono"><span class="line-number">79.</span></p>
-			<p class="noindent mono"><span class="line-number">80.</span> <span class="comment"># Draw the starting board and ask the player what color they want.</span></p>
-			<p class="noindent mono"><span class="line-number">81.</span> drawBoard(mainBoard)</p>
-			<p class="noindent mono"><span class="line-number">82.</span> playerTile, computerTile = enterPlayerTile()</p>
+			<p class="noindent mono"><span class="line-number">80.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draw the starting board and ask the player what color they want.</span></p>
+			<p class="noindent mono"><span class="line-number">81.</span> &#160;&#160;&#160;&#160;drawBoard(mainBoard)</p>
+			<p class="noindent mono"><span class="line-number">82.</span> &#160;&#160;&#160;&#160;playerTile, computerTile = enterPlayerTile()</p>
 			<p class="noindent mono"><span class="line-number">83.</span></p>
-			<p class="noindent mono"><span class="line-number">84.</span> <span class="comment"># Make the Surface and Rect objects for the &quot;New Game&quot; and &quot;Hints&quot; buttons</span></p>
-
-			<p class="noindent mono"><span class="line-number">85.</span>
-	newGameSurf = FONT.render('New Game', True, TEXTCOLOR, TEXTBGCOLOR2)</p>
-
-			<p class="noindent mono"><span class="line-number">86.</span>
-	newGameRect = newGameSurf.get_rect()</p>
-
-			<p class="noindent mono"><span class="line-number">87.</span>
-	newGameRect.topright = (WINDOWWIDTH - 8, 10)</p>
-
-			<p class="noindent mono"><span class="line-number">88.</span>
-	hintsSurf = FONT.render('Hints', True, TEXTCOLOR, TEXTBGCOLOR2)</p>
-
-			<p class="noindent mono"><span class="line-number">89.</span>
-	hintsRect = hintsSurf.get_rect()</p>
-
-			<p class="noindent mono"><span class="line-number">90.</span>
-	hintsRect.topright = (WINDOWWIDTH - 8, 40)</p>
-
+			<p class="noindent mono"><span class="line-number">84.</span> &#160;&#160;&#160;&#160;<span class="comment"># Make the Surface and Rect objects for the &quot;New Game&quot; and &quot;Hints&quot; buttons</span></p>
+			<p class="noindent mono"><span class="line-number">85.</span> newGameSurf = FONT.render('New Game', True, TEXTCOLOR, TEXTBGCOLOR2)</p>
+			<p class="noindent mono"><span class="line-number">86.</span> newGameRect = newGameSurf.get_rect()</p>
+			<p class="noindent mono"><span class="line-number">87.</span> newGameRect.topright = (WINDOWWIDTH - 8, 10)</p>
+			<p class="noindent mono"><span class="line-number">88.</span> hintsSurf = FONT.render('Hints', True, TEXTCOLOR, TEXTBGCOLOR2)</p>
+			<p class="noindent mono"><span class="line-number">89.</span> hintsRect = hintsSurf.get_rect()</p>
+			<p class="noindent mono"><span class="line-number">90.</span> hintsRect.topright = (WINDOWWIDTH - 8, 40)</p>
 			<p class="noindent mono"><span class="line-number">91.</span></p>
-
-			<p class="noindent mono"><span class="line-number">92.</span>
-	while True: <span class="comment"># main game loop</span></p>
-
-			<p class="noindent mono"><span class="line-number">93.</span>
-	<span class="comment"># Keep looping for player and computer's turns.</span></p>
-
-			<p class="noindent mono"><span class="line-number">94.</span>
-	if turn == 'player':</p>
-
-			<p class="noindent mono"><span class="line-number">95.</span>
-	<span class="comment"># Player's turn:</span></p>
-
-			<p class="noindent mono"><span class="line-number">96.</span>
-	if getValidMoves(mainBoard, playerTile) == []:</p>
-
-			<p class="noindent mono"><span class="line-number">97.</span>
-	<span class="comment"># If it's the player's turn but they</span></p>
-
-			<p class="noindent mono"><span class="line-number">98.</span>
-	<span class="comment"># can't move, then end the game.</span></p>
-
-			<p class="noindent mono"><span class="line-number">99.</span>
-	break</p>
-
-			<p class="noindent mono"><span class="line-number">100.</span>
-	movexy = None</p>
-
-			<p class="noindent mono"><span class="line-number">101.</span>
-	while movexy == None:</p>
-
-			<p class="noindent mono"><span class="line-number">102.</span>
-	<span class="comment"># Keep looping until the player clicks on a valid
-	space.</span></p>
-
+			<p class="noindent mono"><span class="line-number">92.</span> while True: <span class="comment"># main game loop</span></p>
+			<p class="noindent mono"><span class="line-number">93.</span> <span class="comment"># Keep looping for player and computer's turns.</span></p>
+			<p class="noindent mono"><span class="line-number">94.</span> if turn == 'player':</p>
+			<p class="noindent mono"><span class="line-number">95.</span> <span class="comment"># Player's turn:</span></p>
+			<p class="noindent mono"><span class="line-number">96.</span> if getValidMoves(mainBoard, playerTile) == []:</p>
+			<p class="noindent mono"><span class="line-number">97.</span> <span class="comment"># If it's the player's turn but they</span></p>
+			<p class="noindent mono"><span class="line-number">98.</span> <span class="comment"># can't move, then end the game.</span></p>
+			<p class="noindent mono"><span class="line-number">99.</span> break</p>
+			<p class="noindent mono"><span class="line-number">100.</span> movexy = None</p>
+			<p class="noindent mono"><span class="line-number">101.</span> while movexy == None:</p>
+			<p class="noindent mono"><span class="line-number">102.</span> <span class="comment"># Keep looping until the player clicks on a valid space.</span></p>
 			<p class="noindent mono"><span class="line-number">103.</span></p>
-
-			<p class="noindent mono"><span class="line-number">104.</span>
-	<span class="comment"># Determine which board data structure to use for
-	display.</span></p>
-
-			<p class="noindent mono"><span class="line-number">105.</span>
-	if showHints:</p>
-
-			<p class="noindent mono"><span class="line-number">106.</span>
-	boardToDraw = getBoardWithValidMoves(mainBoard, playerTile)</p>
-
-			<p class="noindent mono"><span class="line-number">107.</span>
-	else:</p>
-
-			<p class="noindent mono"><span class="line-number">108.</span>
-	boardToDraw = mainBoard</p>
-
+			<p class="noindent mono"><span class="line-number">104.</span> <span class="comment"># Determine which board data structure to use for display.</span></p>
+			<p class="noindent mono"><span class="line-number">105.</span> if showHints:</p>
+			<p class="noindent mono"><span class="line-number">106.</span> &#160;&#160;&#160;&#160;boardToDraw = getBoardWithValidMoves(mainBoard, playerTile)</p>
+			<p class="noindent mono"><span class="line-number">107.</span> else:</p>
+			<p class="noindent mono"><span class="line-number">108.</span> &#160;&#160;&#160;&#160;boardToDraw = mainBoard</p>
 			<p class="noindent mono"><span class="line-number">109.</span></p>
-
-			<p class="noindent mono"><span class="line-number">110.</span>
-	   checkForQuit()</p>
-
-			<p class="noindent mono"><span class="line-number">111.</span>
-	for event in pygame.event.get(): <span class="comment"># event handling
-	loop</span></p>
-
-			<p class="noindent mono"><span class="line-number">112.</span>
-	if event.type == MOUSEBUTTONUP:</p>
-
-			<p class="noindent mono"><span class="line-number">113.</span>
-	<span class="comment"># Handle mouse click events</span></p>
-
-			<p class="noindent mono"><span class="line-number">114.</span>
-	mousex, mousey = event.pos</p>
-
-			<p class="noindent mono"><span class="line-number">115.</span>
-	if newGameRect.collidepoint( (mousex, mousey) ):</p>
-
-			<p class="noindent mono"><span class="line-number">116.</span>
-	<span class="comment"># Start a new game</span></p>
-
-			<p class="noindent mono"><span class="line-number">117.</span>
-	return True</p>
-
-			<p class="noindent mono"><span class="line-number">118.</span>
-	elif hintsRect.collidepoint( (mousex, mousey) ):</p>
-
-			<p class="noindent mono"><span class="line-number">119.</span>
-	<span class="comment"># Toggle hints mode</span></p>
-
-			<p class="noindent mono"><span class="line-number">120.</span>
-	showHints = not showHints</p>
-
-			<p class="noindent mono"><span class="line-number">121.</span>
-	<span class="comment"># movexy is set to a two-item tuple XY
-	coordinate, or None value</span></p>
-
-			<p class="noindent mono"><span class="line-number">122.</span>
-	movexy = getSpaceClicked(mousex, mousey)</p>
-
-			<p class="noindent mono"><span class="line-number">123.</span>
-	if movexy != None and not isValidMove(mainBoard, playerTile, movexy[0],
-	movexy[1]):</p>
-
-			<p class="noindent mono"><span class="line-number">124.</span>
-	movexy = None</p>
-
+			<p class="noindent mono"><span class="line-number">110.</span> checkForQuit()</p>
+			<p class="noindent mono"><span class="line-number">111.</span> for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+			<p class="noindent mono"><span class="line-number">112.</span> if event.type == MOUSEBUTTONUP:</p>
+			<p class="noindent mono"><span class="line-number">113.</span> <span class="comment"># Handle mouse click events</span></p>
+			<p class="noindent mono"><span class="line-number">114.</span> mousex, mousey = event.pos</p>
+			<p class="noindent mono"><span class="line-number">115.</span> if newGameRect.collidepoint( (mousex, mousey) ):</p>
+			<p class="noindent mono"><span class="line-number">116.</span> <span class="comment"># Start a new game</span></p>
+			<p class="noindent mono"><span class="line-number">117.</span> return True</p>
+			<p class="noindent mono"><span class="line-number">118.</span> elif hintsRect.collidepoint( (mousex, mousey) ):</p>
+			<p class="noindent mono"><span class="line-number">119.</span> <span class="comment"># Toggle hints mode</span></p>
+			<p class="noindent mono"><span class="line-number">120.</span> showHints = not showHints</p>
+			<p class="noindent mono"><span class="line-number">121.</span> <span class="comment"># movexy is set to a two-item tuple XY coordinate, or None value</span></p>
+			<p class="noindent mono"><span class="line-number">122.</span> movexy = getSpaceClicked(mousex, mousey)</p>
+			<p class="noindent mono"><span class="line-number">123.</span> if movexy != None and not isValidMove(mainBoard, playerTile, movexy[0], movexy[1]):</p>
+			<p class="noindent mono"><span class="line-number">124.</span> movexy = None</p>
 			<p class="noindent mono"><span class="line-number">125.</span></p>
-
-			<p class="noindent mono"><span class="line-number">126.</span>
-	<span class="comment"># Draw the game board.</span></p>
-
-			<p class="noindent mono"><span class="line-number">127.</span>
-	drawBoard(boardToDraw)</p>
-
-			<p class="noindent mono"><span class="line-number">128.</span>
-	drawInfo(boardToDraw, playerTile, computerTile, turn)</p>
-
+			<p class="noindent mono"><span class="line-number">126.</span> <span class="comment"># Draw the game board.</span></p>
+			<p class="noindent mono"><span class="line-number">127.</span> drawBoard(boardToDraw)</p>
+			<p class="noindent mono"><span class="line-number">128.</span> drawInfo(boardToDraw, playerTile, computerTile, turn)</p>
 			<p class="noindent mono"><span class="line-number">129.</span></p>
-
-			<p class="noindent mono"><span class="line-number">130.</span>
-	<span class="comment"># Draw the &quot;New Game&quot; and
-	&quot;Hints&quot; buttons.</span></p>
-
-			<p class="noindent mono"><span class="line-number">131.</span>
-	DISPLAYSURF.blit(newGameSurf, newGameRect)</p>
-
-			<p class="noindent mono"><span class="line-number">132.</span>
-	DISPLAYSURF.blit(hintsSurf, hintsRect)</p>
-
+			<p class="noindent mono"><span class="line-number">130.</span> <span class="comment"># Draw the &quot;New Game&quot; and &quot;Hints&quot; buttons.</span></p>
+			<p class="noindent mono"><span class="line-number">131.</span> DISPLAYSURF.blit(newGameSurf, newGameRect)</p>
+			<p class="noindent mono"><span class="line-number">132.</span> DISPLAYSURF.blit(hintsSurf, hintsRect)</p>
 			<p class="noindent mono"><span class="line-number">133.</span></p>
 			<p class="noindent mono"><span class="line-number">134.</span> MAINCLOCK.tick(FPS)</p>
 			<p class="noindent mono"><span class="line-number">135.</span> pygame.display.update()</p>
@@ -307,28 +209,13 @@
 			<p class="noindent mono"><span class="line-number">137.</span> <span class="comment"># Make the move and end the turn.</span></p>
 			<p class="noindent mono"><span class="line-number">138.</span> makeMove(mainBoard, playerTile, movexy[0], movexy[1], True)</p>
 			<p class="noindent mono"><span class="line-number">139.</span> if getValidMoves(mainBoard, computerTile) != []:</p>
-
-			<p class="noindent mono"><span class="line-number">140.</span>
-	<span class="comment"># Only set for the computer's turn if it can make
-	a move.</span></p>
-
-			<p class="noindent mono"><span class="line-number">141.</span>
-	turn = 'computer'</p>
-
+			<p class="noindent mono"><span class="line-number">140.</span> <span class="comment"># Only set for the computer's turn if it can make a move.</span></p>
+			<p class="noindent mono"><span class="line-number">141.</span> turn = 'computer'</p>
 			<p class="noindent mono"><span class="line-number">142.</span></p>
-
-			<p class="noindent mono"><span class="line-number">143.</span>
-	else:</p>
-
-			<p class="noindent mono"><span class="line-number">144.</span>
-	<span class="comment"># Computer's turn:</span></p>
-
-			<p class="noindent mono"><span class="line-number">145.</span>             if
-	getValidMoves(mainBoard, computerTile) == []:</p>
-
-			<p class="noindent mono"><span class="line-number">146.</span>
-	<span class="comment"># If it was set to be the computer's turn but</span></p>
-
+			<p class="noindent mono"><span class="line-number">143.</span> else:</p>
+			<p class="noindent mono"><span class="line-number">144.</span> <span class="comment"># Computer's turn:</span></p>
+			<p class="noindent mono"><span class="line-number">145.</span>             if getValidMoves(mainBoard, computerTile) == []:</p>
+			<p class="noindent mono"><span class="line-number">146.</span> <span class="comment"># If it was set to be the computer's turn but</span></p>
 			<p class="noindent mono"><span class="line-number">147.</span>
 	<span class="comment"># they can't move, then end the game.</span></p>
 
@@ -1286,136 +1173,55 @@
 
 			<p class="noindent mono"><span class="line-number">472.</span>
 	for x, y in tilesToFlip:</p>
-
 			<p class="noindent mono"><span class="line-number">473.</span>
 	board[x][y] = tile</p>
-
 			<p class="noindent mono"><span class="line-number">474.</span>
 	return True</p>
-
 			<p class="noindent mono"><span class="line-number">475.</span></p>
-
 			<p class="noindent mono"><span class="line-number">476.</span></p>
-
 			<p class="noindent mono"><span class="line-number">477.</span>
 	def isOnCorner(x, y):</p>
-
-			<p class="noindent mono"><span class="line-number">478.</span>
-	<span class="comment"># Returns True if the position is in one of the
-	four corners.</span></p>
-
-			<p class="noindent mono"><span class="line-number">479.</span>
-	return (x == 0 and y == 0) or \</p>
-
-			<p class="noindent mono"><span class="line-number">480.</span>
-	(x == BOARDWIDTH and y == 0) or \</p>
-
-			<p class="noindent mono"><span class="line-number">481.</span>
-	(x == 0 and y == BOARDHEIGHT) or \</p>
-
-			<p class="noindent mono"><span class="line-number">482.</span>
-	(x == BOARDWIDTH and y == BOARDHEIGHT)</p>
-
+			<p class="noindent mono"><span class="line-number">478.</span> <span class="comment"># Returns True if the position is in one of the four corners.</span></p>
+			<p class="noindent mono"><span class="line-number">479.</span> return (x == 0 and y == 0) or \</p>
+			<p class="noindent mono"><span class="line-number">480.</span> (x == BOARDWIDTH and y == 0) or \</p>
+			<p class="noindent mono"><span class="line-number">481.</span> (x == 0 and y == BOARDHEIGHT) or \</p>
+			<p class="noindent mono"><span class="line-number">482.</span> (x == BOARDWIDTH and y == BOARDHEIGHT)</p>
 			<p class="noindent mono"><span class="line-number">483.</span></p>
-
 			<p class="noindent mono"><span class="line-number">484.</span></p>
-
-			<p class="noindent mono"><span class="line-number">485.</span>
-	def getComputerMove(board, computerTile):</p>
-
-			<p class="noindent mono"><span class="line-number">486.</span>
-	<span class="comment"># Given a board and the computer's tile,
-	determine where to</span></p>
-
-			<p class="noindent mono"><span class="line-number">487.</span>
-	<span class="comment"># move and return that move as a [x, y] list.</span></p>
-
-			<p class="noindent mono"><span class="line-number">488.</span>
-	possibleMoves = getValidMoves(board, computerTile)</p>
-
+			<p class="noindent mono"><span class="line-number">485.</span> def getComputerMove(board, computerTile):</p>
+			<p class="noindent mono"><span class="line-number">486.</span> &#160;&#160;&#160;&#160;<span class="comment"># Given a board and the computer's tile, determine where to</span></p>
+			<p class="noindent mono"><span class="line-number">487.</span> &#160;&#160;&#160;&#160;<span class="comment"># move and return that move as a [x, y] list.</span></p>
+			<p class="noindent mono"><span class="line-number">488.</span> &#160;&#160;&#160;&#160;possibleMoves = getValidMoves(board, computerTile)</p>
 			<p class="noindent mono"><span class="line-number">489.</span></p>
-
-			<p class="noindent mono"><span class="line-number">490.</span>
-	<span class="comment"># randomize the order of the possible moves</span></p>
-
-			<p class="noindent mono"><span class="line-number">491.</span>
-	random.shuffle(possibleMoves)</p>
-
+			<p class="noindent mono"><span class="line-number">490.</span> <span class="comment"># randomize the order of the possible moves</span></p>
+			<p class="noindent mono"><span class="line-number">491.</span> random.shuffle(possibleMoves)</p>
 			<p class="noindent mono"><span class="line-number">492.</span></p>
-
-			<p class="noindent mono"><span class="line-number">493.</span>
-	<span class="comment"># always go for a corner if available.</span></p>
-
-			<p class="noindent mono"><span class="line-number">494.</span>
-	for x, y in possibleMoves:</p>
-
-			<p class="noindent mono"><span class="line-number">495.</span>
-	if isOnCorner(x, y):</p>
-
-			<p class="noindent mono"><span class="line-number">496.</span>
-	return [x, y]</p>
-
+			<p class="noindent mono"><span class="line-number">493.</span> <span class="comment"># always go for a corner if available.</span></p>
+			<p class="noindent mono"><span class="line-number">494.</span> for x, y in possibleMoves:</p>
+			<p class="noindent mono"><span class="line-number">495.</span> if isOnCorner(x, y):</p>
+			<p class="noindent mono"><span class="line-number">496.</span> return [x, y]</p>
 			<p class="noindent mono"><span class="line-number">497.</span></p>
-
-			<p class="noindent mono"><span class="line-number">498.</span>
-	<span class="comment"># Go through all possible moves and remember the
-	best scoring move</span></p>
-
-			<p class="noindent mono"><span class="line-number">499.</span>
-	bestScore = -1</p>
-
-			<p class="noindent mono"><span class="line-number">500.</span>
-	for x, y in possibleMoves:</p>
-
-			<p class="noindent mono"><span class="line-number">501.</span>
-	dupeBoard = copy.deepcopy(board)</p>
-
-			<p class="noindent mono"><span class="line-number">502.</span>
-	makeMove(dupeBoard, computerTile, x, y)</p>
-
-			<p class="noindent mono"><span class="line-number">503.</span>
-	score = getScoreOfBoard(dupeBoard)[computerTile]</p>
-
-			<p class="noindent mono"><span class="line-number">504.</span>
-	if score &gt; bestScore:</p>
-
-			<p class="noindent mono"><span class="line-number">505.</span>
-	bestMove = [x, y]</p>
-
-			<p class="noindent mono"><span class="line-number">506.</span>
-	bestScore = score</p>
-
-			<p class="noindent mono"><span class="line-number">507.</span>
-	return bestMove</p>
-
+			<p class="noindent mono"><span class="line-number">498.</span> <span class="comment"># Go through all possible moves and remember the best scoring move</span></p>
+			<p class="noindent mono"><span class="line-number">499.</span> bestScore = -1</p>
+			<p class="noindent mono"><span class="line-number">500.</span> for x, y in possibleMoves:</p>
+			<p class="noindent mono"><span class="line-number">501.</span> dupeBoard = copy.deepcopy(board)</p>
+			<p class="noindent mono"><span class="line-number">502.</span> makeMove(dupeBoard, computerTile, x, y)</p>
+			<p class="noindent mono"><span class="line-number">503.</span> score = getScoreOfBoard(dupeBoard)[computerTile]</p>
+			<p class="noindent mono"><span class="line-number">504.</span> if score &gt; bestScore:</p>
+			<p class="noindent mono"><span class="line-number">505.</span> bestMove = [x, y]</p>
+			<p class="noindent mono"><span class="line-number">506.</span> bestScore = score</p>
+			<p class="noindent mono"><span class="line-number">507.</span> return bestMove</p>
 			<p class="noindent mono"><span class="line-number">508.</span></p>
-
 			<p class="noindent mono"><span class="line-number">509.</span></p>
-
-			<p class="noindent mono"><span class="line-number">510.</span>
-	def checkForQuit():</p>
-
-			<p class="noindent mono"><span class="line-number">511.</span>
-	for event in pygame.event.get((QUIT, KEYUP)): <span class="comment">#
-	event handling loop</span></p>
-
-			<p class="noindent mono"><span class="line-number">512.</span>
-	if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
-
-			<p class="noindent mono"><span class="line-number">513.</span>
-	pygame.quit()</p>
-
-			<p class="noindent mono"><span class="line-number">514.</span>
-	sys.exit()</p>
-
+			<p class="noindent mono"><span class="line-number">510.</span> def checkForQuit():</p>
+			<p class="noindent mono"><span class="line-number">511.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get((QUIT, KEYUP)): <span class="comment"># event handling loop</span></p>
+			<p class="noindent mono"><span class="line-number">512.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):</p>
+			<p class="noindent mono"><span class="line-number">513.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+			<p class="noindent mono"><span class="line-number">514.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
 			<p class="noindent mono"><span class="line-number">515.</span></p>
-
 			<p class="noindent mono"><span class="line-number">516.</span></p>
-
-			<p class="noindent mono"><span class="line-number">517.</span>
-	if __name__ == '__main__':</p>
-
-			<p class="noindent mono"><span class="line-number">518.</span> main()</p>
+			<p class="noindent mono"><span class="line-number">517.</span> if __name__ == '__main__':</p>
+			<p class="noindent mono"><span class="line-number">518.</span> &#160;&#160;&#160;&#160;main()</p>
 	</div>
 
 	<h1 class="subheading" id="ink-spill">Ink Spill, a “Flood It” Clone</h1>
