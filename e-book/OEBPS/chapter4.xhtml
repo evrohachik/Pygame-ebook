@@ -11,9 +11,9 @@
 	<hr class="heading"/>
 
 	<h1 class="subheading" id="how-to-play">How to Play Slide Puzzle</h1>
-	<p class="noindent">The board is a 4x4 grid with fifteen tiles (numbered 1 through 15 going left to right) and one blank space. The tiles start out in random positions, and the player must slide tiles around until the tiles are back in their original order.</p>
+	<p class="noindent">The board is a 4×4 grid with fifteen tiles (numbered 1 through 15 going left to right) and one blank space. The tiles start out in random positions, and the player must slide tiles around until the tiles are back in their original order.</p>
 
-	<h1 class="subheading" id="source-code">Source Code to Slide Puzzle</h1>
+	<h1 class="subheading" id="source-code">Source Code for Slide Puzzle</h1>
 	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/slidepuzzle.py">https://invpy.com/slidepuzzle.py</a>. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/slidepuzzle">https://invpy.com/diff/slidepuzzle</a> to see if the differences between your code and the code in the book.</p>
 
 	<div class="python-shell">
@@ -459,22 +459,22 @@
 	<h1 class="subheading" id="clicking-buttons">Clicking on the Buttons</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">69.</span>         checkForQuit()</p>
-		<p class="noindent mono"><span class="line-number">70.</span>         for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
-		<p class="noindent mono"><span class="line-number">71.</span>             if event.type == MOUSEBUTTONUP:</p>
-		<p class="noindent mono"><span class="line-number">72.</span>                 spotx, spoty = getSpotClicked(mainBoard, event.pos[0], event.pos[1])</p>
+		<p class="noindent mono"><span class="line-number">69.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;checkForQuit()</p>
+		<p class="noindent mono"><span class="line-number">70.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">71.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == MOUSEBUTTONUP:</p>
+		<p class="noindent mono"><span class="line-number">72.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spotx, spoty = getSpotClicked(mainBoard, event.pos[0], event.pos[1])</p>
 		<p class="noindent mono"><span class="line-number">73.</span></p>
-		<p class="noindent mono"><span class="line-number">74.</span>                 if (spotx, spoty) == (None, None):</p>
-		<p class="noindent mono"><span class="line-number">75.</span>                     <span class="comment"># check if the user clicked on an option button</span></p>
-		<p class="noindent mono"><span class="line-number">76.</span>                     if RESET_RECT.collidepoint(event.pos):</p>
-		<p class="noindent mono"><span class="line-number">77.</span>                         resetAnimation(mainBoard, allMoves) <span class="comment"># clicked on Reset button</span></p>
-		<p class="noindent mono"><span class="line-number">78.</span>                         allMoves = []</p>
-		<p class="noindent mono"><span class="line-number">79.</span>                     elif NEW_RECT.collidepoint(event.pos):</p>
-		<p class="noindent mono"><span class="line-number">80.</span>                         mainBoard, solutionSeq = generateNewPuzzle(80) <span class="comment"># clicked on New Game button</span></p>
-		<p class="noindent mono"><span class="line-number">81.</span>                         allMoves = []</p>
-		<p class="noindent mono"><span class="line-number">82.</span>                     elif SOLVE_RECT.collidepoint(event.pos):</p>
-		<p class="noindent mono"><span class="line-number">83.</span>                         resetAnimation(mainBoard, solutionSeq + allMoves) <span class="comment"># clicked on Solve button</span></p>
-		<p class="noindent mono"><span class="line-number">84.</span>                         allMoves = []</p>
+		<p class="noindent mono"><span class="line-number">74.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if (spotx, spoty) == (None, None):</p>
+		<p class="noindent mono"><span class="line-number">75.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># check if the user clicked on an option button</span></p>
+		<p class="noindent mono"><span class="line-number">76.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if RESET_RECT.collidepoint(event.pos):</p>
+		<p class="noindent mono"><span class="line-number">77.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;resetAnimation(mainBoard, allMoves) <span class="comment"># clicked on Reset button</span></p>
+		<p class="noindent mono"><span class="line-number">78.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;allMoves = []</p>
+		<p class="noindent mono"><span class="line-number">79.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif NEW_RECT.collidepoint(event.pos):</p>
+		<p class="noindent mono"><span class="line-number">80.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mainBoard, solutionSeq = generateNewPuzzle(80) <span class="comment"># clicked on New Game button</span></p>
+		<p class="noindent mono"><span class="line-number">81.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;allMoves = []</p>
+		<p class="noindent mono"><span class="line-number">82.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif SOLVE_RECT.collidepoint(event.pos):</p>
+		<p class="noindent mono"><span class="line-number">83.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;resetAnimation(mainBoard, solutionSeq + allMoves) <span class="comment"># clicked on Solve button</span></p>
+		<p class="noindent mono"><span class="line-number">84.</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;allMoves = []</p>
 	</div>
 
 	<p>Before going into the event loop, the program calls <span class="mono">checkForQuit()</span> on line 69 to see if any <span class="mono">QUIT</span> events have been created (and terminates the program if there have). Why we have a separate function (the <span class="mono">checkForQuit()</span> function) for handling the <span class="mono">QUIT</span> events will be explained later. The <span class="mono">for</span> loop on line 70 executes the event handling code for any other event created since the last time <span class="mono">pygame.event.get()</span> was called (or since the program started, if <span class="mono">pygame.event.get()</span> has never been called before).</p>
@@ -567,7 +567,7 @@
 
 	<p>This is a function that we can call that calls both the <span class="mono">pygame.quit()</span> and <span class="mono">sys.exit()</span> functions. This is a bit of syntactic sugar, so that instead of remembering to make both of these calls, there is just a single function we can call instead.</p>
 
-	<h1 class="subheading" id="">Checking for a Specific Event, and Posting Events to Pygame’s Event Queue</h1>
+	<h1 class="subheading" id="checking-specific-event">Checking for a Specific Event, and Posting Events to Pygame’s Event Queue</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">122.</span> def checkForQuit():</p>
@@ -586,7 +586,7 @@
 	<p>Line 125 pulls out all the <span class="mono">KEYUP</span> events from the event queue and checks if any of them are for the Esc key. If one of the events is, then the program terminates. However, there could be <span class="mono">KEYUP</span> events for keys other than the Esc key. In this case, we need to put the <span class="mono">KEYUP</span> event back into Pygame’s event queue. We can do this with the <span class="mono">pygame.event.post()</span> function, which adds the Event object passed to it to the end of the Pygame event queue. This way, when line 70 calls <span class="mono">pygame.event.get()</span> the non-Esc key <span class="mono">KEYUP</span> events will still be there. Otherwise calls to <span class="mono">checkForQuit()</span> would “consume” all of the <span class="mono">KEYUP</span> events and those events would never be handled.</p>
 	<p>The <span class="mono">pygame.event.post()</span> function is also handy if you ever want your program to add Event objects to the Pygame event queue.</p>
 
-	<h1 class="subheading" id="">Creating the Board Data Structure</h1>
+	<h1 class="subheading" id="creating-board-structure">Creating the Board Data Structure</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">131.</span> def getStartingBoard():</p>
@@ -610,7 +610,7 @@
 	<p>The <span class="mono">getStartingBoard()</span> data structure will create and return a data structure that represents a “solved” board, where all the numbered tiles are in order and the blank tile is in the lower right corner. This is done with nested <span class="mono">for</span> loops, just like the board data structure in the Memory Puzzle game was made.</p>
 	<p>However, notice that the first column isn’t going to be <span class="mono">[1, 2, 3]</span> but instead <span class="mono">[1, 4, 7]</span>. This is because the numbers on the tiles increase by 1 going across the row, not down the column. Going down the column, the numbers increase by the size of the board’s width (which is stored in the <span class="mono">BOARDWIDTH</span> constant). We will use the <span class="mono">counter</span> variable to keep track of the number that should go on the next tile. When the numbering of the tiles in the column is finished, then we need to set <span class="mono">counter</span> to the number at the start of the next column. </p>
 
-	<h1 class="subheading" id="">Not Tracking the Blank Position</h1>
+	<h1 class="subheading" id="not-tracking-blank">Not Tracking the Blank Position</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">149.</span> def getBlankPosition(board):</p>
@@ -623,278 +623,109 @@
 
 	<p>Whenever our code needs to find the XY coordinates of the blank space, instead of keeping track of where the blank space is after each slide, we can just create a function that goes through the entire board and finds the blank space coordinates. The <span class="mono">None</span> value is used in the board data structure to represent the blank space. The code in <span class="mono">getBlankPosition()</span> simply uses nested <span class="mono">for</span> loops to find which space on the board is the blank space.</p>
 
-	<h1 class="subheading" id="">Making a Move by Updating the Board Data Structure</h1>
+	<h1 class="subheading" id="updating-board-structure">Making a Move by Updating the Board Data Structure</h1>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">157.</span> def
-makeMove(board, move):</p>
-
-		<p class="noindent mono"><span class="line-number">158.</span>     <span
-class="comment"># This function does not check if the move is valid.</span></p>
-
-		<p class="noindent mono"><span class="line-number">159.</span>     blankx,
-blanky = getBlankPosition(board)</p>
-
+		<p class="noindent mono"><span class="line-number">157.</span> def makeMove(board, move):</p>
+		<p class="noindent mono"><span class="line-number">158.</span>     <span class="comment"># This function does not check if the move is valid.</span></p>
+		<p class="noindent mono"><span class="line-number">159.</span>     blankx, blanky = getBlankPosition(board)</p>
 		<p class="noindent mono"><span class="line-number">160.</span></p>
-
-		<p class="noindent mono"><span class="line-number">161.</span>     if
-move == UP:</p>
-
-		<p class="noindent mono"><span class="line-number">162.</span>         board[blankx][blanky],
-board[blankx][blanky + 1] = board[blankx][blanky + 1], board[blankx][blanky]</p>
-
-		<p class="noindent mono"><span class="line-number">163.</span>     elif
-move == DOWN:</p>
-
-		<p class="noindent mono"><span class="line-number">164.</span>         board[blankx][blanky],
-board[blankx][blanky - 1] = board[blankx][blanky - 1], board[blankx][blanky]</p>
-
-		<p class="noindent mono"><span class="line-number">165.</span>     elif
-move == LEFT:</p>
-
-		<p class="noindent mono"><span class="line-number">166.</span>         board[blankx][blanky],
-board[blankx + 1][blanky] = board[blankx + 1][blanky], board[blankx][blanky]</p>
-
-		<p class="noindent mono"><span class="line-number">167.</span>     elif
-move == RIGHT:</p>
-
-		<p class="noindent mono"><span class="line-number">168.</span>         board[blankx][blanky],
-board[blankx - 1][blanky] = board[blankx - 1][blanky], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">161.</span>     if move == UP:</p>
+		<p class="noindent mono"><span class="line-number">162.</span>         board[blankx][blanky], board[blankx][blanky + 1] = board[blankx][blanky + 1], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">163.</span>     elif move == DOWN:</p>
+		<p class="noindent mono"><span class="line-number">164.</span>         board[blankx][blanky], board[blankx][blanky - 1] = board[blankx][blanky - 1], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">165.</span>     elif move == LEFT:</p>
+		<p class="noindent mono"><span class="line-number">166.</span>         board[blankx][blanky], board[blankx + 1][blanky] = board[blankx + 1][blanky], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">167.</span>     elif move == RIGHT:</p>
+		<p class="noindent mono"><span class="line-number">168.</span>         board[blankx][blanky], board[blankx - 1][blanky] = board[blankx - 1][blanky], board[blankx][blanky]</p>
 	</div>
 
 	<p>The data structure in the board parameter is a 2D list that represents where all the tiles are. Whenever the player makes a move, the program needs to update this data structure. What happens is that the value for the tile is swapped with the value for the blank space.</p>
 	<p>The <span class="mono">makeMove()</span> function doesn’t have to return any values, because the <span class="mono">board</span> parameter has a list reference passed for its argument. This means that any changes we make to <span class="mono">board</span> in this function will be made to the list value that was passed to <span class="mono">makeMove()</span>. (You can review the concept of references at <a href="https://invpy.com/references">https://invpy.com/references</a>.)</p>
 
-	<h1 class="subheading" id="">When NOT to Use an Assertion</h1>
+	<h1 class="subheading" id="when-not-assertion">When NOT to Use an Assertion</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">171.</span> def
-isValidMove(board, move):</p>
+		<p class="noindent mono"><span class="line-number">171.</span> def isValidMove(board, move):</p>
+		<p class="noindent mono"><span class="line-number">172.</span>     blankx, blanky = getBlankPosition(board)</p>
+		<p class="noindent mono"><span class="line-number">173.</span>     return (move == UP and blanky != len(board[0]) - 1) or \</p>
+		<p class="noindent mono"><span class="line-number">174.</span>            (move == DOWN and blanky != 0) or \</p>
+		<p class="noindent mono"><span class="line-number">175.</span>            (move == LEFT and blankx != len(board) - 1) or \</p>
+		<p class="noindent mono"><span class="line-number">176.</span>            (move == RIGHT and blankx != 0)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">172.</span>     blankx,
-blanky = getBlankPosition(board)</p>
+	<p>The <span class="mono">isValidMove()</span> function is passed a board data structure and a move the player would want to make. The return value is <span class="mono">True</span> if this move is possible and <span class="mono">False</span> if it is not. For example, you cannot slide a tile to the left one hundred times in a row, because eventually the blank space will be at the edge and there are no more tiles to slide to the left.</p>
+	<p>Whether a move is valid or not depends on where the blank space is. This function makes a call to <span class="mono">getBlankPosition()</span> to find the X and Y coordinates of the blank spot. Lines 173 to 176 are a <span class="mono">return</span> statement with a single expression. The <span class="mono">\</span> slashes at the end of the first three lines tells the Python interpreter that that is not the end of the line of code (even though it is at the end of the line). This will let us split up a “line of code” across multiple lines to look pretty, rather than just have one very long unreadable line.</p>
+	<p>Because the parts of this expression in parentheses are joined by or operators, only one of them needs to be <span class="mono">True</span> for the entire expression to be <span class="mono">True</span>. Each of these parts checks what the intended move is and then sees if the coordinate of the blank space allows that move.</p>
 
-		<p class="noindent mono"><span class="line-number">173.</span>     return
-(move == UP and blanky != len(board[0]) - 1) or \</p>
+	<h1 class="subheading" id="a-random-move">Getting a Not-So-Random Move</h1>
 
-		<p class="noindent mono"><span class="line-number">174.</span>            (move
-== DOWN and blanky != 0) or \</p>
-
-		<p class="noindent mono"><span class="line-number">175.</span>            (move
-== LEFT and blankx != len(board) - 1) or \</p>
-
-		<p class="noindent mono"><span class="line-number">176.</span>            (move
-== RIGHT and blankx != 0)</p>
-
-</div>
-
-<p>The <span class="mono">isValidMove()</span> function is
-passed a board data structure and a move the player would want to make. The
-return value is <span class="mono">True</span> if this move is possible and <span
-class="mono">False</span> if it is not. For example, you cannot slide a tile
-to the left one hundred times in a row, because eventually the blank space will
-be at the edge and there are no more tiles to slide to the left.</p>
-
-<p>Whether a move is valid or not depends on where the blank
-space is. This function makes a call to <span class="mono">getBlankPosition()</span>
-to find the X and Y coordinates of the blank spot. Lines 173 to 176 are a <span
-class="mono">return</span> statement with a single expression. The <span
-class="mono">\</span> slashes at the end of the first three lines tells the
-Python interpreter that that is not the end of the line of code (even though it
-is at the end of the line). This will let us split up a “line of code” across
-multiple lines to look pretty, rather than just have one very long unreadable
-line.</p>
-
-<p>Because the parts of this expression in parentheses are
-joined by or operators, only one of them needs to be <span class="mono">True</span>
-for the entire expression to be <span class="mono">True</span>. Each of these
-parts checks what the intended move is and then sees if the coordinate of the
-blank space allows that move.</p>
-
-<h1 class="subheading" id="">Getting a Not-So-Random Move</h1>
-
-<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">179.</span> def
-getRandomMove(board, lastMove=None):</p>
-
-		<p class="noindent mono"><span class="line-number">180.</span>     <span
-class="comment"># start with a full list of all four moves</span></p>
-
-		<p class="noindent mono"><span class="line-number">181.</span>     validMoves
-= [UP, DOWN, LEFT, RIGHT]</p>
-
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">179.</span> def getRandomMove(board, lastMove=None):</p>
+		<p class="noindent mono"><span class="line-number">180.</span>     <span class="comment"># start with a full list of all four moves</span></p>
+		<p class="noindent mono"><span class="line-number">181.</span>     validMoves = [UP, DOWN, LEFT, RIGHT]</p>
 		<p class="noindent mono"><span class="line-number">182.</span></p>
-
-		<p class="noindent mono"><span class="line-number">183.</span>     <span
-class="comment"># remove moves from the list as they are disqualified</span></p>
-
-		<p class="noindent mono"><span class="line-number">184.</span>     if
-lastMove == UP or not isValidMove(board, DOWN):</p>
-
+		<p class="noindent mono"><span class="line-number">183.</span>     <span class="comment"># remove moves from the list as they are disqualified</span></p>
+		<p class="noindent mono"><span class="line-number">184.</span>     if lastMove == UP or not isValidMove(board, DOWN):</p>
 		<p class="noindent mono"><span class="line-number">185.</span>         validMoves.remove(DOWN)</p>
-
-		<p class="noindent mono"><span class="line-number">186.</span>     if
-lastMove == DOWN or not isValidMove(board, UP):</p>
-
+		<p class="noindent mono"><span class="line-number">186.</span>     if lastMove == DOWN or not isValidMove(board, UP):</p>
 		<p class="noindent mono"><span class="line-number">187.</span>         validMoves.remove(UP)</p>
-
-		<p class="noindent mono"><span class="line-number">188.</span>     if
-lastMove == LEFT or not isValidMove(board, RIGHT):</p>
-
+		<p class="noindent mono"><span class="line-number">188.</span>     if lastMove == LEFT or not isValidMove(board, RIGHT):</p>
 		<p class="noindent mono"><span class="line-number">189.</span>         validMoves.remove(RIGHT)</p>
-
-		<p class="noindent mono"><span class="line-number">190.</span>     if
-lastMove == RIGHT or not isValidMove(board, LEFT):</p>
-
+		<p class="noindent mono"><span class="line-number">190.</span>     if lastMove == RIGHT or not isValidMove(board, LEFT):</p>
 		<p class="noindent mono"><span class="line-number">191.</span>         validMoves.remove(LEFT)</p>
-
 		<p class="noindent mono"><span class="line-number">192.</span></p>
+		<p class="noindent mono"><span class="line-number">193.</span>     <span class="comment"># return a random move from the list of remaining moves</span></p>
+		<p class="noindent mono"><span class="line-number">194.</span>     return random.choice(validMoves)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">193.</span>     <span
-class="comment"># return a random move from the list of remaining moves</span></p>
+	<p>At the beginning of the game, we start with the board data structure in the solved, ordered state and create the puzzle by randomly sliding around tiles. To decide which of the four directions we should slide, we’ll call our <span class="mono">getRandomMove()</span> function. Normally we could just use the <span class="mono">random.choice()</span> function and pass it a tuple <span class="mono">(UP, DOWN, LEFT, RIGHT)</span> to have Python simply randomly choose a direction value for us. But the Sliding Puzzle game has a small restriction that prevents us from choosing a purely random number.</p>
+	<p>If you had a slide puzzle and slid a tile to left, and then slid a tile to the right, you would end up with the exact same board you had at the start. It’s pointless to make a slide followed by the opposite slide. Also, if the blank space is in the lower right corner than it is impossible to slide a tile up or to the left.</p>
+	<p>The code in <span class="mono">getRandomMove()</span> will take these factors into account. To prevent the function from selecting the last move that was made, the caller of the function can pass a directional value for the <span class="mono">lastMove</span> parameter. Line 181 starts with a list of all four directional values stored in the <span class="mono">validMoves</span> variable. The <span class="mono">lastMove</span> value (if not set to <span class="mono">None</span>) is removed from <span class="mono">validMoves</span>. Depending on if the blank space is at the edge of the board, lines 184 to 191 will remove other directional values from the <span class="mono">lastMove</span> list.</p>
+	<p>Of the values that are left in <span class="mono">lastMove</span>, one of them is randomly selected with a call to <span class="mono">random.choice()</span> and returned.</p>
 
-		<p class="noindent mono"><span class="line-number">194.</span>     return
-random.choice(validMoves)</p>
+	<h1 class="subheading" id="tile-to-pixel">Converting Tile Coordinates to Pixel Coordinates</h1>
 
-</div>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">197.</span> def getLeftTopOfTile(tileX, tileY):</p>
+		<p class="noindent mono"><span class="line-number">198.</span>     left = XMARGIN + (tileX * TILESIZE) + (tileX - 1)</p>
+		<p class="noindent mono"><span class="line-number">199.</span>     top = YMARGIN + (tileY * TILESIZE) + (tileY - 1)</p>
+		<p class="noindent mono"><span class="line-number">200.</span>     return (left, top)</p>
+	</div>
 
-<p>At the beginning of the game, we start with the board data
-structure in the solved, ordered state and create the puzzle by randomly
-sliding around tiles. To decide which of the four directions we should slide,
-we’ll call our <span class="mono">getRandomMove()</span> function. Normally we
-could just use the <span class="mono">random.choice()</span> function and pass
-it a tuple <span class="mono">(UP, DOWN, LEFT, RIGHT)</span> to have Python
-simply randomly choose a direction value for us. But the Sliding Puzzle game
-has a small restriction that prevents us from choosing a purely random number.</p>
+	<p>The <span class="mono">getLeftTopOfTile()</span> function converts board coordinates to pixel coordinates. For the board XY coordinates that are passed in, the function calculates and returns the pixel XY coordinates of the pixel at the top left of that board space.</p>
 
-<p>If you had a slide puzzle and slid a tile to left, and then
-slid a tile to the right, you would end up with the exact same board you had at
-the start. It’s pointless to make a slide followed by the opposite slide. Also,
-if the blank space is in the lower right corner than it is impossible to slide
-a tile up or to the left.</p>
+	<h1 class="subheading" id="pixel-to-board">Converting from Pixel Coordinates to Board Coordinates</h1>
 
-<p>The code in <span class="mono">getRandomMove()</span> will
-take these factors into account. To prevent the function from selecting the
-last move that was made, the caller of the function can pass a directional
-value for the <span class="mono">lastMove</span> parameter. Line 181 starts
-with a list of all four directional values stored in the <span class="mono">validMoves</span>
-variable. The <span class="mono">lastMove</span> value (if not set to <span
-class="mono">None</span>) is removed from <span class="mono">validMoves</span>.
-Depending on if the blank space is at the edge of the board, lines 184 to 191
-will remove other directional values from the <span class="mono">lastMove</span>
-list.</p>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">203.</span> def getSpotClicked(board, x, y):</p>
+		<p class="noindent mono"><span class="line-number">204.</span>     <span class="comment"># from the x &amp; y pixel coordinates, get the x &amp; y board coordinates</span></p>
+		<p class="noindent mono"><span class="line-number">205.</span>     for tileX in range(len(board)):</p>
+		<p class="noindent mono"><span class="line-number">206.</span>         for tileY in range(len(board[0])):</p>
+		<p class="noindent mono"><span class="line-number">207.</span>             left, top = getLeftTopOfTile(tileX, tileY)</p>
+		<p class="noindent mono"><span class="line-number">208.</span>             tileRect = pygame.Rect(left, top, TILESIZE, TILESIZE)</p>
+		<p class="noindent mono"><span class="line-number">209.</span>             if tileRect.collidepoint(x, y):</p>
+		<p class="noindent mono"><span class="line-number">210.</span>                 return (tileX, tileY)</p>
+		<p class="noindent mono"><span class="line-number">211.</span>     return (None, None)</p>
+	</div>
 
-<p>Of the values that are left in <span class="mono">lastMove</span>,
-one of them is randomly selected with a call to <span class="mono">random.choice()</span>
-and returned.</p>
+	<p>The <span class="mono">getSpotClicked()</span> function does the opposite of <span class="mono">getLeftTopOfTile()</span> and converts from pixel coordinates to board coordinates. The nested loops on lines 205 and 206 go through every possible XY board coordinate, and if the pixel coordinates that were passed in are within that space on the board, it returns those board coordinates. Since all of the tiles have a width and height that is set in the <span class="mono">TILESIZE</span> constant, we can create a Rect object that represents the space on the board by getting the pixel coordinates of the top left corner of the board space, and then use the <span class="mono">collidepoint()</span> Rect method to see if the pixel coordinates are inside that Rect object’s area.</p>
 
-<h1 class="subheading" id="">Converting Tile Coordinates to Pixel Coordinates</h1>
+	<p>If the pixel coordinates that were passed in were not over any board space, then the value <span class="mono">(None, None)</span> is returned.</p>
 
-<div class="python-shell">
+	<h1 class="subheading" id="drawing-a-tile">Drawing a Tile</h1>
 
-		<p class="noindent mono"><span class="line-number">197.</span> def
-getLeftTopOfTile(tileX, tileY):</p>
-
-		<p class="noindent mono"><span class="line-number">198.</span>     left
-= XMARGIN + (tileX * TILESIZE) + (tileX - 1)</p>
-
-		<p class="noindent mono"><span class="line-number">199.</span>     top
-= YMARGIN + (tileY * TILESIZE) + (tileY - 1)</p>
-
-		<p class="noindent mono"><span class="line-number">200.</span>     return
-(left, top)</p>
-
-</div>
-
-<p>The <span class="mono">getLeftTopOfTile()</span> function
-converts board coordinates to pixel coordinates. For the board XY coordinates
-that are passed in, the function calculates and returns the pixel XY
-coordinates of the pixel at the top left of that board space.</p>
-
-<h1 class="subheading" id="">Converting from Pixel Coordinates to Board Coordinates</h1>
-
-<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">203.</span> def
-getSpotClicked(board, x, y):</p>
-
-		<p class="noindent mono"><span class="line-number">204.</span>     <span
-class="comment"># from the x &amp; y pixel coordinates, get the x &amp;
-y board coordinates</span></p>
-
-		<p class="noindent mono"><span class="line-number">205.</span>     for
-tileX in range(len(board)):</p>
-
-		<p class="noindent mono"><span class="line-number">206.</span>         for
-tileY in range(len(board[0])):</p>
-
-		<p class="noindent mono"><span class="line-number">207.</span>             left,
-top = getLeftTopOfTile(tileX, tileY)</p>
-
-		<p class="noindent mono"><span class="line-number">208.</span>             tileRect
-= pygame.Rect(left, top, TILESIZE, TILESIZE)</p>
-
-		<p class="noindent mono"><span class="line-number">209.</span>             if
-tileRect.collidepoint(x, y):</p>
-
-		<p class="noindent mono"><span class="line-number">210.</span>                 return
-(tileX, tileY)</p>
-
-		<p class="noindent mono"><span class="line-number">211.</span>     return
-(None, None)</p>
-
-</div>
-
-<p>The <span class="mono">getSpotClicked()</span> function does
-the opposite of <span class="mono">getLeftTopOfTile()</span> and converts from
-pixel coordinates to board coordinates. The nested loops on lines 205 and 206 go
-through every possible XY board coordinate, and if the pixel coordinates that
-were passed in are within that space on the board, it returns those board
-coordinates. Since all of the tiles have a width and height that is set in the <span
-class="mono">TILESIZE</span> constant, we can create a Rect object that
-represents the space on the board by getting the pixel coordinates of the top
-left corner of the board space, and then use the <span class="mono">collidepoint()</span>
-Rect method to see if the pixel coordinates are inside that Rect object’s area.</p>
-
-<p>If the pixel coordinates that were passed in were not over
-any board space, then the value <span class="mono">(None, None)</span> is
-returned.</p>
-
-<h1 class="subheading" id="">Drawing a Tile</h1>
-
-<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">214.</span> def
-drawTile(tilex, tiley, number, adjx=0, adjy=0):</p>
-
-		<p class="noindent mono"><span class="line-number">215.</span>     <span
-class="comment"># draw a tile at board coordinates tilex and tiley,
-optionally a few</span></p>
-
-		<p class="noindent mono"><span class="line-number">216.</span>     <span
-class="comment"># pixels over (determined by adjx and adjy)</span></p>
-
-		<p class="noindent mono"><span class="line-number">217.</span>     left,
-top = getLeftTopOfTile(tilex, tiley)</p>
-
-		<p class="noindent mono"><span class="line-number">218.</span>     pygame.draw.rect(DISPLAYSURF,
-TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))</p>
-
-		<p class="noindent mono"><span class="line-number">219.</span>     textSurf
-= BASICFONT.render(str(number), True, TEXTCOLOR)</p>
-
-		<p class="noindent mono"><span class="line-number">220.</span>     textRect
-= textSurf.get_rect()</p>
-
-		<p class="noindent mono"><span class="line-number">221.</span>     textRect.center
-= left + int(TILESIZE / 2) + adjx, top + int(TILESIZE / 2) + adjy</p>
-
-		<p class="noindent mono"><span class="line-number">222.</span>     DISPLAYSURF.blit(textSurf,
-textRect)</p>
-
-</div>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">214.</span> def drawTile(tilex, tiley, number, adjx=0, adjy=0):</p>
+		<p class="noindent mono"><span class="line-number">215.</span>     <span class="comment"># draw a tile at board coordinates tilex and tiley, optionally a few</span></p>
+		<p class="noindent mono"><span class="line-number">216.</span>     <span class="comment"># pixels over (determined by adjx and adjy)</span></p>
+		<p class="noindent mono"><span class="line-number">217.</span>     left, top = getLeftTopOfTile(tilex, tiley)</p>
+		<p class="noindent mono"><span class="line-number">218.</span>     pygame.draw.rect(DISPLAYSURF, TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))</p>
+		<p class="noindent mono"><span class="line-number">219.</span>     textSurf = BASICFONT.render(str(number), True, TEXTCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">220.</span>     textRect = textSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">221.</span>     textRect.center = left + int(TILESIZE / 2) + adjx, top + int(TILESIZE / 2) + adjy</p>
+		<p class="noindent mono"><span class="line-number">222.</span>     DISPLAYSURF.blit(textSurf, textRect)</p>
+	</div>
 
 <p>The <span class="mono">drawTile()</span> function will draw
 a single numbered tile on the board. The <span class="mono">tilex</span> and <span
@@ -935,29 +766,22 @@ function, since the caller of <span class="mono">drawTile()</span> probably
 will want to draw more tiles for the rest of the board before making them
 appear on the screen.</p>
 
-<h1 class="subheading" id="">The Making Text Appear on the Screen</h1>
+	<h1 class="subheading" id="making-text-appear">The Making Text Appear on the Screen</h1>
 
-<div class="python-shell">
-
+	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">225.</span> def
 makeText(text, color, bgcolor, top, left):</p>
-
 		<p class="noindent mono"><span class="line-number">226.</span>     <span
 class="comment"># create the Surface and Rect objects for some text.</span></p>
-
 		<p class="noindent mono"><span class="line-number">227.</span>     textSurf
 = BASICFONT.render(text, True, color, bgcolor)</p>
-
 		<p class="noindent mono"><span class="line-number">228.</span>     textRect
 = textSurf.get_rect()</p>
-
 		<p class="noindent mono"><span class="line-number">229.</span>     textRect.topleft
 = (top, left)</p>
-
 		<p class="noindent mono"><span class="line-number">230.</span>     return
 (textSurf, textRect)</p>
-
-</div>
+	</div>
 
 <p>The <span class="mono">makeText()</span> function handles
 creating the Surface and Rect objects for positioning text on the screen.
@@ -969,7 +793,7 @@ and <span class="mono">get_rect()</span> itself because it positions the text
 Surface object by the center point rather than the topleft point and uses a
 transparent background color.)</p>
 
-<h1 class="subheading" id="">Drawing the Board</h1>
+<h1 class="subheading" id="drawing-the-board">Drawing the Board</h1>
 
 <div class="python-shell">
 
@@ -1016,129 +840,71 @@ statement conditions consider the blank string to be a <span class="mono">False<
 value, so if message is set to <span class="mono">''</span> then the condition
 is <span class="mono">False</span> and lines 236 and 237 are skipped.</p>
 
-<p>Next, nested <span class="mono">for</span> loops are used
-to draw each tile to the display Surface object by calling the <span
-class="mono">drawTile()</span> function.</p>
+	<p>Next, nested <span class="mono">for</span> loops are used to draw each tile to the display Surface object by calling the <span class="mono">drawTile()</span> function.</p>
 
-<h1 class="subheading" id="">Drawing the Border of the Board</h1>
+	<h1 class="subheading" id="drawing-border-board">Drawing the Border of the Board</h1>
 
-<div class="python-shell">
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">244.</span>     left, top = getLeftTopOfTile(0, 0)</p>
+		<p class="noindent mono"><span class="line-number">245.</span>     width = BOARDWIDTH * TILESIZE</p>
+		<p class="noindent mono"><span class="line-number">246.</span>     height = BOARDHEIGHT * TILESIZE</p>
+		<p class="noindent mono"><span class="line-number">247.</span>     pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (left - 5, top - 5, width + 11, height + 11), 4)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">244.</span>     left,
-top = getLeftTopOfTile(0, 0)</p>
+	<p>Lines 244 to 247 draw a border around the tiles. The top left corner of the boarder will be 5 pixels to the left and 5 pixels above the top left corner of the tile at board coordinates (0, 0). The width and height of the border are calculated from the number of tiles wide and high the board is (stored in the <span class="mono">BOARDWIDTH</span> and <span class="mono">BOARDHEIGHT</span> constants) multiplied by the size of the tiles (stored in the <span class="mono">TILESIZE</span> constant).</p>
+	<p>The rectangle we draw on line 247 will have a thickness of 4 pixels, so we will move the boarder 5 pixels to the left and above where the <span class="mono">top</span> and <span class="mono">left</span> variables point so the thickness of the line won’t overlap the tiles. We will also add <span class="mono">11</span> to the width and length (5 of those 11 pixels are to compensate for moving the rectangle to the left and up).</p>
 
-		<p class="noindent mono"><span class="line-number">245.</span>     width
-= BOARDWIDTH * TILESIZE</p>
+	<h1 class="subheading" id="">Drawing the Buttons</h1>
 
-		<p class="noindent mono"><span class="line-number">246.</span>     height
-= BOARDHEIGHT * TILESIZE</p>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">249.</span>     DISPLAYSURF.blit(RESET_SURF, RESET_RECT)</p>
+		<p class="noindent mono"><span class="line-number">250.</span>     DISPLAYSURF.blit(NEW_SURF, NEW_RECT)</p>
+		<p class="noindent mono"><span class="line-number">251.</span>     DISPLAYSURF.blit(SOLVE_SURF, SOLVE_RECT)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">247.</span>     pygame.draw.rect(DISPLAYSURF,
-BORDERCOLOR, (left - 5, top - 5, width + 11, height + 11), 4)</p>
+	<p>Finally, we draw the buttons off to the slide of the screen. The text and position of these buttons never changes, which is why they were stored in constant variables at the beginning of the <span class="mono">main()</span> function.</p>
 
-</div>
+	<h1 class="subheading" id="">Animating the Tile Slides</h1>
 
-<p>Lines 244 to 247 draw a border around the tiles. The top
-left corner of the boarder will be 5 pixels to the left and 5 pixels above the
-top left corner of the tile at board coordinates (0, 0). The width and height
-of the border are calculated from the number of tiles wide and high the board
-is (stored in the <span class="mono">BOARDWIDTH</span> and <span
-class="mono">BOARDHEIGHT</span> constants) multiplied by the size of the tiles
-(stored in the <span class="mono">TILESIZE</span> constant).</p>
-
-<p>The rectangle we draw on line 247 will have a thickness of 4
-pixels, so we will move the boarder 5 pixels to the left and above where the <span
-class="mono">top</span> and <span class="mono">left</span> variables point so
-the thickness of the line won’t overlap the tiles. We will also add <span
-class="mono">11</span> to the width and length (5 of those 11 pixels are to
-compensate for moving the rectangle to the left and up).</p>
-
-<h1 class="subheading" id="">Drawing the Buttons</h1>
-
-<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">249.</span>     DISPLAYSURF.blit(RESET_SURF,
-RESET_RECT)</p>
-
-		<p class="noindent mono"><span class="line-number">250.</span>     DISPLAYSURF.blit(NEW_SURF,
-NEW_RECT)</p>
-
-		<p class="noindent mono"><span class="line-number">251.</span>     DISPLAYSURF.blit(SOLVE_SURF,
-SOLVE_RECT)</p>
-
-</div>
-
-<p>Finally, we draw the buttons off to the slide of the screen.
-The text and position of these buttons never changes, which is why they were
-stored in constant variables at the beginning of the <span class="mono">main()</span>
-function.</p>
-
-<h1 class="subheading" id="">Animating the Tile Slides</h1>
-
-<div class="python-shell">
-
+	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">254.</span> def
 slideAnimation(board, direction, message, animationSpeed):</p>
-
 		<p class="noindent mono"><span class="line-number">255.</span>     <span
 class="comment"># Note: This function does not check if the move is
 valid.</span></p>
-
 		<p class="noindent mono"><span class="line-number">256.</span></p>
-
 		<p class="noindent mono"><span class="line-number">257.</span>     blankx,
 blanky = getBlankPosition(board)</p>
-
 		<p class="noindent mono"><span class="line-number">258.</span>     if
 direction == UP:</p>
-
 		<p class="noindent mono"><span class="line-number">259.</span>         movex
 = blankx</p>
-
 		<p class="noindent mono"><span class="line-number">260.</span>         movey
 = blanky + 1</p>
-
 		<p class="noindent mono"><span class="line-number">261.</span>     elif
 direction == DOWN:</p>
-
 		<p class="noindent mono"><span class="line-number">262.</span>         movex
 = blankx</p>
-
 		<p class="noindent mono"><span class="line-number">263.</span>         movey
 = blanky - 1</p>
-
 		<p class="noindent mono"><span class="line-number">264.</span>     elif
 direction == LEFT:</p>
-
 		<p class="noindent mono"><span class="line-number">265.</span>         movex
 = blankx + 1</p>
-
 		<p class="noindent mono"><span class="line-number">266.</span>         movey
 = blanky</p>
-
 		<p class="noindent mono"><span class="line-number">267.</span>     elif
 direction == RIGHT:</p>
-
 		<p class="noindent mono"><span class="line-number">268.</span>         movex
 = blankx - 1</p>
-
 		<p class="noindent mono"><span class="line-number">269.</span>         movey
 = blanky</p>
+	</div>
 
-</div>
+	<p>The first thing our tile sliding animation code needs to calculate is where the blank space is and where the moving tile is. The comment on line 255 reminds us that the code that calls <span class="mono">slideAnimation()</span> should make sure that the slide it passes for the direction parameter is a valid move to make.</p>
+	<p>The blank space’s coordinates come from a call to <span class="mono">getBlankPosition()</span>. From these coordinates and the direction of the slide, we can figure out the XY board coordinates of the tile that will slide. These coordinates will be stored in the <span class="mono">movex</span> and <span class="mono">movey</span> variables.</p>
 
-<p>The first thing our tile sliding animation code needs to
-calculate is where the blank space is and where the moving tile is. The comment
-on line 255 reminds us that the code that calls <span class="mono">slideAnimation()</span>
-should make sure that the slide it passes for the direction parameter is a
-valid move to make.</p>
-<p>The blank space’s coordinates come from a call to <span
-class="mono">getBlankPosition()</span>. From these coordinates and the
-direction of the slide, we can figure out the XY board coordinates of the tile
-that will slide. These coordinates will be stored in the <span class="mono">movex</span>
-and <span class="mono">movey</span> variables.</p>
-
-	<h1 class="subheading" id="">The <span class="mono">copy()</span> Surface Method</h1>
+	<h1 class="subheading" id="copy-surface-method">The <span class="mono">copy()</span> Surface Method</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">271.</span>     <span class="comment"># prepare the base surface</span></p>
@@ -1258,35 +1024,26 @@ not being handled. Those events will be handled the next time execution reaches
 line 70 in the <span class="mono">main()</span> function or the code in the <span
 class="mono">checkForQuit()</span> function.</p>
 
-<h1 class="subheading" id="">Creating a New Puzzle</h1>
+	<h1 class="subheading" id="create-new-puzzle">Creating a New Puzzle</h1>
 
-<div class="python-shell">
-
+	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">295.</span> def
 generateNewPuzzle(numSlides):</p>
-
 		<p class="noindent mono"><span class="line-number">296.</span>     <span
 class="comment"># From a starting configuration, make numSlides number
 of moves (and</span></p>
-
 		<p class="noindent mono"><span class="line-number">297.</span>     <span
 class="comment"># animate these moves).</span></p>
-
 		<p class="noindent mono"><span class="line-number">298.</span>     sequence
 = []</p>
-
 		<p class="noindent mono"><span class="line-number">299.</span>     board
 = getStartingBoard()</p>
-
 		<p class="noindent mono"><span class="line-number">300.</span>     drawBoard(board,
 '')</p>
-
 		<p class="noindent mono"><span class="line-number">301.</span>     pygame.display.update()</p>
-
 		<p class="noindent mono"><span class="line-number">302.</span>     pygame.time.wait(500)
 <span class="comment"># pause 500 milliseconds for effect</span></p>
-
-</div>
+	</div>
 
 <p>The <span class="mono">generateNewPuzzle()</span> function
 will be called at the start of each new game. It will create a new board data
@@ -1346,10 +1103,9 @@ number of times, so we put lines 305 to 309 inside a <span class="mono">for</spa
 loop. When the board is done being scrambled, then we return the board data
 structure and also the list of the random moves made on it.</p>
 
-<h1 class="subheading" id="">Animating the Board Reset</h1>
+	<h1 class="subheading" id="animating-board-reset">Animating the Board Reset</h1>
 
-<div class="python-shell">
-
+	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">313.</span> def
 resetAnimation(board, allMoves):</p>
 
@@ -1395,125 +1151,40 @@ oppositeMove, '', int(TILESIZE / 2))</p>
 
 		<p class="noindent mono"><span class="line-number">328.</span>         makeMove(board,
 oppositeMove)</p>
+	</div>
 
-</div>
+	<p>When the player clicks on “Reset” or “Solve”, the Slide Puzzle game program needs to undo all of the moves that were made to the board. The list of directional values for the slides will be passed as the argument for the <span class="mono">allMoves</span> parameter.</p>
+	<p>Line 315 uses list slicing to create a duplicate of the <span class="mono">allMoves</span> list. Remember that if you don’t specify a number before the <span class="mono">:</span>, then Python assumes the slice should start from the very beginning of the list. And if you don’t specify a number after the <span class="mono">:</span>, then Python assumes the slice should keep going to the very end of the list. So <span class="mono">allMoves[:]</span> creates a list slice of the entire <span class="mono">allMoves</span> list. This makes a copy of the actual list to store in <span class="mono">revAllMoves</span>, rather than just a copy of the list reference. (See <a href="https://invpy.com/references">https://invpy.com/references</a> for details.)</p>
+	<p>To undo all the moves in <span class="mono">allMoves</span>, we need to perform the opposite move of the moves in <span class="mono">allMoves</span>, and in reverse order. There is a list method called <span class="mono">reverse()</span> which will reverse the order of the items in a list. We call this on the <span class="mono">revAllMoves</span> list on line 316.</p>
+	<p>The <span class="mono">for</span> loop on line 318 iterates over the list of directional values. Remember, we want the opposite move, so the <span class="mono">if</span> and <span class="mono">elif</span> statements from line 319 to 326 set the correct directional value in the <span class="mono">oppositeMove</span> variable. Then we call <span class="mono">slideAnimation()</span> to perform the animation, and <span class="mono">makeMove()</span> to update the board data structure.</p>
 
-<p>When the player clicks on “Reset” or “Solve”, the Slide
-Puzzle game program needs to undo all of the moves that were made to the board.
-The list of directional values for the slides will be passed as the argument
-for the <span class="mono">allMoves</span> parameter.</p>
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">331.</span> if __name__ == '__main__':</p>
+		<p class="noindent mono"><span class="line-number">332.</span> &#160;&#160;&#160;&#160;main()</p>
+	</div>
 
-<p>Line 315 uses list slicing to create a duplicate of the <span
-class="mono">allMoves</span> list. Remember that if you don’t specify a number
-before the <span class="mono">:</span>, then Python assumes the slice should
-start from the very beginning of the list. And if you don’t specify a number
-after the <span class="mono">:</span>, then Python assumes the slice should
-keep going to the very end of the list. So <span class="mono">allMoves[:]</span>
-creates a list slice of the entire <span class="mono">allMoves</span> list.
-This makes a copy of the actual list to store in <span class="mono">revAllMoves</span>,
-rather than just a copy of the list reference. (See <a href="https://invpy.com/references">https://invpy.com/references</a>
-for details.)</p>
+	<p>Just like in the Memory Puzzle game, after all the <span class="mono">def</span> statements have been executed to create all the functions, we call the <span class="mono">main()</span> function to begin the meat of the program.</p>
+	<p>That’s all there is to the Slide Puzzle program! But let’s talk about some general programming concepts that came up in this game.</p>
 
-<p>To undo all the moves in <span class="mono">allMoves</span>,
-we need to perform the opposite move of the moves in <span class="mono">allMoves</span>,
-and in reverse order. There is a list method called <span class="mono">reverse()</span>
-which will reverse the order of the items in a list. We call this on the <span
-class="mono">revAllMoves</span> list on line 316.</p>
-
-<p>The <span class="mono">for</span> loop on line 318 iterates
-over the list of directional values. Remember, we want the opposite move, so
-the <span class="mono">if</span> and <span class="mono">elif</span> statements
-from line 319 to 326 set the correct directional value in the <span
-class="mono">oppositeMove</span> variable. Then we call <span class="mono">slideAnimation()</span>
-to perform the animation, and <span class="mono">makeMove()</span> to update
-the board data structure.</p>
-
-<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">331.</span> if
-__name__ == '__main__':</p>
-
-		<p class="noindent mono"><span class="line-number">332.</span>     main()</p>
-
-</div>
-
-<p>Just like in the Memory Puzzle game, after all the <span
-class="mono">def</span> statements have been executed to create all the
-functions, we call the <span class="mono">main()</span> function to begin the
-meat of the program.</p>
-
-<p>That’s all there is to the Slide Puzzle program! But let’s
-talk about some general programming concepts that came up in this game.</p>
-
-	<h1 class="subheading" id="">Time vs. Memory Tradeoffs</h1>
+	<h1 class="subheading" id="time-memory-tradeoffs">Time vs. Memory Tradeoffs</h1>
 	<p class="noindent">Of course, there are a few different ways to write the Slide Puzzle game so that it looks and acts the exact same way even though the code is different. There are many different ways the a program that does a task could be written. The most common differences are making tradeoffs between execution time and memory usage.</p>
-	<p>Usually, the faster a program can run, the better it is.
-This is especially true with programs that need to do a lot of calculations,
-whether they are scientific weather simulators or games with a large amount of
-detailed 3D graphics to draw. It’s also good to use the least amount of memory
-possible. The more variables and the larger the lists your program uses, the
-more memory it takes up. (You can find out how to measure your program’s memory
-usage and execution time at <a href="https://invpy.com/profiling">https://invpy.com/profiling</a>.)</p>
-	<p>Right now, the programs in this book aren’t big and complicated
-enough where you have to worry about conserving memory or optimizing the
-execution time. But it can be something to consider as you become a more
-skilled programmer.</p>
-	<p>For example, consider the <span class="mono">getBlankPosition()</span>
-function. This function takes time to run, since it goes through all the
-possible board coordinates to find where the blank space is. Instead, we could
-just have a <span class="mono">blankspacex</span> and <span class="mono">blankspacey</span>
-variable which would have these XY coordinates so we would not have to look
-through the entire board each time we want to know where it was. (We would also
-need code that updates the <span class="mono">blankspacex</span> and <span
-class="mono">blankspacey</span> variables whenever a move is done. This code
-could go in <span class="mono">makeMove()</span>.) Using these variables would
-take up more memory, but they would save you on execution time so your program
-would run faster.</p>
-	<p>Another example is that we keep a board data structure in
-the solved state in the <span class="mono">SOLVEDBOARD</span> variable, so
-that we can compare the current board to <span class="mono">SOLVEDBOARD</span>
-to see if the player has solved the puzzle. Each time we wanted to do this
-check, we could just call the <span class="mono">getStartingBoard()</span>
-function and compare the returned value to the current board. Then we would not
-need the <span class="mono">SOLVEDBOARD</span> variable. This would save us a
-little bit of memory, but then our program would take longer to run because it
-is re-creating the solved-state board data structure each time we do this
-check.</p>
-	<p>There is one thing you must remember though. Writing code
-that is readable is a very important skill. Code that is “readable” is code
-that is easy to understand, especially by programmers who did not write the
-code. If another programmer can look at your program’s source code and figure
-out what it does without much trouble, then that program is very readable.
-Readability is important because when you want to fix bugs or add new features
-to your program (and bugs and ideas for new features <strong>always</strong>
-come up), then having a readable program makes those tasks much easier.</p>
+	<p>Usually, the faster a program can run, the better it is. This is especially true with programs that need to do a lot of calculations, whether they are scientific weather simulators or games with a large amount of detailed 3D graphics to draw. It’s also good to use the least amount of memory possible. The more variables and the larger the lists your program uses, the more memory it takes up. (You can find out how to measure your program’s memory usage and execution time at <a href="https://invpy.com/profiling">https://invpy.com/profiling</a>.)</p>
+	<p>Right now, the programs in this book aren’t big and complicated enough where you have to worry about conserving memory or optimizing the execution time. But it can be something to consider as you become a more skilled programmer.</p>
+	<p>For example, consider the <span class="mono">getBlankPosition()</span> function. This function takes time to run, since it goes through all the possible board coordinates to find where the blank space is. Instead, we could just have a <span class="mono">blankspacex</span> and <span class="mono">blankspacey</span> variable which would have these XY coordinates so we would not have to look through the entire board each time we want to know where it was. (We would also need code that updates the <span class="mono">blankspacex</span> and <span class="mono">blankspacey</span> variables whenever a move is done. This code could go in <span class="mono">makeMove()</span>.) Using these variables would take up more memory, but they would save you on execution time so your program would run faster.</p>
+	<p>Another example is that we keep a board data structure in the solved state in the <span class="mono">SOLVEDBOARD</span> variable, so that we can compare the current board to <span class="mono">SOLVEDBOARD</span> to see if the player has solved the puzzle. Each time we wanted to do this check, we could just call the <span class="mono">getStartingBoard()</span> function and compare the returned value to the current board. Then we would not need the <span class="mono">SOLVEDBOARD</span> variable. This would save us a little bit of memory, but then our program would take longer to run because it is re-creating the solved-state board data structure each time we do this check.</p>
+	<p>There is one thing you must remember though. Writing code that is readable is a very important skill. Code that is “readable” is code that is easy to understand, especially by programmers who did not write the code. If another programmer can look at your program’s source code and figure out what it does without much trouble, then that program is very readable. Readability is important because when you want to fix bugs or add new features to your program (and bugs and ideas for new features <b>always</b> come up), then having a readable program makes those tasks much easier.</p>
 
-<h1 class="subheading" id="">Nobody Cares About a Few Bytes</h1>
-<p class="noindent">Also, there is one thing that might seem kind of silly to
-say in this book because it seem obvious, but many people wonder about it. You
-should know that using short variable names like <span class="mono">x</span>
-or <span class="mono">num</span> instead of longer, more descriptive variable
-names like <span class="mono">blankx</span> or <span class="mono">numSlides</span>
-does not save you any memory when your program actually runs. Using these
-longer variable names is better because they’ll make your program more
-readable.</p>
-<p>You might also come up with some clever tricks that do save
-a few bytes of memory here and there. One trick is that when you no longer need
-a variable, you can reuse that variable name for a different purpose instead of
-just using two differently named variables. </p>
-<p>Try to avoid the temptation to do this. Usually, these
-tricks reduce code readability and make it harder to debug your programs.
-Modern computers have billions of bytes of memory, and saving a few bytes here
-and there really isn’t worth making the code more confusing for human
-programmers.</p>
+	<h1 class="subheading" id="few-bytes">Nobody Cares About a Few Bytes</h1>
+	<p class="noindent">Also, there is one thing that might seem kind of silly to say in this book because it seem obvious, but many people wonder about it. You should know that using short variable names like <span class="mono">x</span> or <span class="mono">num</span> instead of longer, more descriptive variable names like <span class="mono">blankx</span> or <span class="mono">numSlides</span> does not save you any memory when your program actually runs. Using these longer variable names is better because they’ll make your program more readable.</p>
+	<p>You might also come up with some clever tricks that do save a few bytes of memory here and there. One trick is that when you no longer need a variable, you can reuse that variable name for a different purpose instead of just using two differently named variables. </p>
+	<p>Try to avoid the temptation to do this. Usually, these tricks reduce code readability and make it harder to debug your programs. Modern computers have billions of bytes of memory, and saving a few bytes here and there really isn’t worth making the code more confusing for human programmers.</p>
 
-<h1 class="subheading" id="">Nobody Cares About a Few Million Nanoseconds</h1>
-<p class="noindent">Similarly, there are times when you can rearrange your code in some way to make it slightly faster by a few nanoseconds. These tricks also usually make the code harder to read. When you consider that several billion nanoseconds have passed in the time it takes you to read this sentence, saving a few nanoseconds of execution time in your program won’t be noticed by the player.</p>
+	<h1 class="subheading" id="few-nanoseconds">Nobody Cares About a Few Million Nanoseconds</h1>
+	<p class="noindent">Similarly, there are times when you can rearrange your code in some way to make it slightly faster by a few nanoseconds. These tricks also usually make the code harder to read. When you consider that several billion nanoseconds have passed in the time it takes you to read this sentence, saving a few nanoseconds of execution time in your program won’t be noticed by the player.</p>
 
-<h1 class="subheading" id="">Summary</h1>
-<p class="noindent">This chapter hasn’t introduced any new Pygame programming concepts that the Memory Puzzle game didn’t use, aside from using the <span
-class="mono">copy()</span> method of Surface objects. Just knowing a few different concepts will let you create completely different games.</p>
-<p>For practice, you can download buggy versions of the Sliding Puzzle program from <a href="https://invpy.com/buggy/slidepuzzle">https://invpy.com/buggy/slidepuzzle</a>.</p>
+	<h1 class="subheading" id="summary">Summary</h1>
+	<p class="noindent">This chapter hasn’t introduced any new Pygame programming concepts that the Memory Puzzle game didn’t use, aside from using the <span class="mono">copy()</span> method of Surface objects. Just knowing a few different concepts will let you create completely different games.</p>
+	<p>For practice, you can download buggy versions of the Sliding Puzzle program from <a href="https://invpy.com/buggy/slidepuzzle">https://invpy.com/buggy/slidepuzzle</a>.</p>
 
 </body>
 </html>

@@ -597,110 +597,314 @@
 			<text>Chapter 4 - Slide Puzzle</text>
 		</navLabel>
 		<content src="chapter4.xhtml" />
+		<navPoint id="navpoint-99" playOrder="99">
+				<navLabel>
+					<text>How to Play Slide Puzzle</text>
+				</navLabel>
+				<content src="chapter4.xhtml#how-to-play" />
+		</navPoint>
+		<navPoint id="navpoint-100" playOrder="100">
+				<navLabel>
+					<text>Source Code for Slide Puzzle</text>
+				</navLabel>
+				<content src="chapter4.xhtml#source-code" />
+		</navPoint>
+		<navPoint id="navpoint-101" playOrder="101">
+				<navLabel>
+					<text>Second Verse, Same as the First</text>
+				</navLabel>
+				<content src="chapter4.xhtml#second-verse" />
+		</navPoint>
+		<navPoint id="navpoint-102" playOrder="102">
+				<navLabel>
+					<text>Setting Up the Buttons</text>
+				</navLabel>
+				<content src="chapter4.xhtml#setting-up-buttons" />
+		</navPoint>
+		<navPoint id="navpoint-103" playOrder="103">
+				<navLabel>
+					<text>Being Smart By Using Stupid Code</text>
+				</navLabel>
+				<content src="chapter4.xhtml#stupid-code" />
+		</navPoint>
+		<navPoint id="navpoint-104" playOrder="104">
+				<navLabel>
+					<text>The Main Game Loop</text>
+				</navLabel>
+				<content src="chapter4.xhtml#main-loop" />
+		</navPoint>
+		<navPoint id="navpoint-105" playOrder="105">
+				<navLabel>
+					<text>Clicking on the Buttons</text>
+				</navLabel>
+				<content src="chapter4.xhtml#clicking-buttons" />
+		</navPoint>
+		<navPoint id="navpoint-106" playOrder="106">
+				<navLabel>
+					<text>Sliding Tiles with the Mouse</text>
+				</navLabel>
+				<content src="chapter4.xhtml#sliding-tiles-mouse" />
+		</navPoint>
+		<navPoint id="navpoint-107" playOrder="107">
+				<navLabel>
+					<text>Sliding Tiles with the Keyboard</text>
+				</navLabel>
+				<content src="chapter4.xhtml#sliding-tiles-keyboard" />
+		</navPoint>
+		<navPoint id="navpoint-108" playOrder="108">
+				<navLabel>
+					<text>Equal to One Of Trick within the in Operator</text>
+				</navLabel>
+				<content src="chapter4.xhtml#equal-to-one" />
+		</navPoint>
+		<navPoint id="navpoint-109" playOrder="109">
+				<navLabel>
+					<text>WASD and Arrow Keys</text>
+				</navLabel>
+				<content src="chapter4.xhtml#wasd-arrow-keys" />
+		</navPoint>
+		<navPoint id="navpoint-110" playOrder="110">
+				<navLabel>
+					<text>Actually Performing the Tile Slide</text>
+				</navLabel>
+				<content src="chapter4.xhtml#performing-tile-slide" />
+		</navPoint>
+		<navPoint id="navpoint-111" playOrder="111">
+				<navLabel>
+					<text>IDLE and Terminating Pygame Programs</text>
+				</navLabel>
+				<content src="chapter4.xhtml#terminating-pygame" />
+		</navPoint>
+		<navPoint id="navpoint-112" playOrder="112">
+				<navLabel>
+					<text>Checking for a Specific Event, and Posting Events to Pygame’s Event Queue</text>
+				</navLabel>
+				<content src="chapter4.xhtml#checking-specific-event" />
+		</navPoint>
+		<navPoint id="navpoint-113" playOrder="113">
+				<navLabel>
+					<text>Creating the Board Data Structure</text>
+				</navLabel>
+				<content src="chapter4.xhtml#creating-board-structure" />
+		</navPoint>
+		<navPoint id="navpoint-114" playOrder="114">
+				<navLabel>
+					<text>Not Tracking the Blank Position</text>
+				</navLabel>
+				<content src="chapter4.xhtml#not-tracking-blank" />
+		</navPoint>
+		<navPoint id="navpoint-115" playOrder="115">
+				<navLabel>
+					<text>Making a Move by Updating the Board Data Structure</text>
+				</navLabel>
+				<content src="chapter4.xhtml#updating-board-structure" />
+		</navPoint>
+		<navPoint id="navpoint-116" playOrder="116">
+				<navLabel>
+					<text>When NOT to Use an Assertion</text>
+				</navLabel>
+				<content src="chapter4.xhtml#when-not-assertion" />
+		</navPoint>
+		<navPoint id="navpoint-117" playOrder="117">
+				<navLabel>
+					<text>Getting a Not-So-Random Move</text>
+				</navLabel>
+				<content src="chapter4.xhtml#a-random-move" />
+		</navPoint>
+		<navPoint id="navpoint-118" playOrder="118">
+				<navLabel>
+					<text>Converting Tile Coordinates to Pixel Coordinates</text>
+				</navLabel>
+				<content src="chapter4.xhtml#tile-to-pixel" />
+		</navPoint>
+		<navPoint id="navpoint-119" playOrder="119">
+				<navLabel>
+					<text>Converting from Pixel Coordinates to Board Coordinates</text>
+				</navLabel>
+				<content src="chapter4.xhtml#pixel-to-board" />
+		</navPoint>
+		<navPoint id="navpoint-120" playOrder="120">
+				<navLabel>
+					<text>Drawing a Tile</text>
+				</navLabel>
+				<content src="chapter4.xhtml#drawing-a-tile" />
+		</navPoint>
+		<navPoint id="navpoint-121" playOrder="121">
+				<navLabel>
+					<text>The Making Text Appear on the Screen</text>
+				</navLabel>
+				<content src="chapter4.xhtml#making-text-appear" />
+		</navPoint>
+		<navPoint id="navpoint-122" playOrder="122">
+				<navLabel>
+					<text>Drawing the Board</text>
+				</navLabel>
+				<content src="chapter4.xhtml#drawing-the-board" />
+		</navPoint>
+		<navPoint id="navpoint-123" playOrder="123">
+				<navLabel>
+					<text>Drawing the Border of the Board</text>
+				</navLabel>
+				<content src="chapter4.xhtml#drawing-border-board" />
+		</navPoint>
+		<navPoint id="navpoint-124" playOrder="124">
+				<navLabel>
+					<text>Drawing the Buttons</text>
+				</navLabel>
+				<content src="chapter4.xhtml#drawing-the-buttons" />
+		</navPoint>
+		<navPoint id="navpoint-125" playOrder="125">
+				<navLabel>
+					<text>Animating the Tile Slides</text>
+				</navLabel>
+				<content src="chapter4.xhtml#animating-tile-slides" />
+		</navPoint>
+		<navPoint id="navpoint-126" playOrder="126">
+				<navLabel>
+					<text>The copy() Surface Method</text>
+				</navLabel>
+				<content src="chapter4.xhtml#copy-surface-method" />
+		</navPoint>
+		<navPoint id="navpoint-127" playOrder="127">
+				<navLabel>
+					<text>Creating a New Puzzle</text>
+				</navLabel>
+				<content src="chapter4.xhtml#create-new-puzzle" />
+		</navPoint>
+		<navPoint id="navpoint-128" playOrder="128">
+				<navLabel>
+					<text>Animating the Board Reset</text>
+				</navLabel>
+				<content src="chapter4.xhtml#animating-board-reset" />
+		</navPoint>
+		<navPoint id="navpoint-129" playOrder="129">
+				<navLabel>
+					<text>Time vs. Memory Tradeoffs</text>
+				</navLabel>
+				<content src="chapter4.xhtml#time-memory-tradeoffs" />
+		</navPoint>
+		<navPoint id="navpoint-130" playOrder="130">
+				<navLabel>
+					<text>Nobody Cares About a Few Bytes</text>
+				</navLabel>
+				<content src="chapter4.xhtml#few-bytes" />
+		</navPoint>
+		<navPoint id="navpoint-131" playOrder="131">
+				<navLabel>
+					<text>Nobody Cares About a Few Million Nanoseconds</text>
+				</navLabel>
+				<content src="chapter4.xhtml#few-nanoseconds" />
+		</navPoint>
+		<navPoint id="navpoint-132" playOrder="132">
+				<navLabel>
+					<text>Summary</text>
+				</navLabel>
+				<content src="chapter4.xhtml#summary" />
+		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-99" playOrder="99">
+	<navPoint id="navpoint-133" playOrder="133">
 		<navLabel>
 			<text>Chapter 5 - Simulate</text>
 		</navLabel>
 		<content src="chapter5.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-100" playOrder="100">
+	<navPoint id="navpoint-134" playOrder="134">
 		<navLabel>
 			<text>Chapter 6 - Wormy</text>
 		</navLabel>
 		<content src="chapter6.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-101" playOrder="101">
+	<navPoint id="navpoint-135" playOrder="135">
 		<navLabel>
 			<text>Chapter 7 - Tetronimo</text>
 		</navLabel>
 		<content src="chapter7.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-102" playOrder="102">
+	<navPoint id="navpoint-136" playOrder="136">
 		<navLabel>
 			<text>Chapter 8 - Squirrel Eat Squirrel</text>
 		</navLabel>
 		<content src="chapter8.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-103" playOrder="103">
+	<navPoint id="navpoint-137" playOrder="137">
 		<navLabel>
 			<text>Chapter 9 - Star Pusher</text>
 		</navLabel>
 		<content src="chapter9.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-104" playOrder="104">
+	<navPoint id="navpoint-138" playOrder="138">
 		<navLabel>
 			<text>Chapter 10 - Four Extra Games</text>
 		</navLabel>
 		<content src="chapter10.xhtml" />
-		<navPoint id="navpoint-105" playOrder="105">
+		<navPoint id="navpoint-139" playOrder="139">
 				<navLabel>
 					<text>Flippy, an Othello Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy" />
 		</navPoint>
-		<navPoint id="navpoint-106" playOrder="106">
+		<navPoint id="navpoint-140" playOrder="140">
 				<navLabel>
 					<text>Source Code for Flippy</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy-source" />
 		</navPoint>
-		<navPoint id="navpoint-107" playOrder="107">
+		<navPoint id="navpoint-141" playOrder="141">
 				<navLabel>
 					<text>Ink Spill, a Flood It Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill" />
 		</navPoint>
-		<navPoint id="navpoint-108" playOrder="108">
+		<navPoint id="navpoint-142" playOrder="142">
 				<navLabel>
 					<text>Source Code for Ink Spill</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill-source" />
 		</navPoint>
-		<navPoint id="navpoint-109" playOrder="109">
+		<navPoint id="navpoint-143" playOrder="143">
 				<navLabel>
 					<text>Four-In-A-Row, a Connect Four Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four" />
 		</navPoint>
-		<navPoint id="navpoint-110" playOrder="110">
+		<navPoint id="navpoint-144" playOrder="144">
 				<navLabel>
 					<text>Source Code for Four-In-A-Row</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four-source" />
 		</navPoint>
-		<navPoint id="navpoint-111" playOrder="111">
+		<navPoint id="navpoint-145" playOrder="145">
 				<navLabel>
 					<text>Gemgem, a Bejeweled Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem" />
 		</navPoint>
-		<navPoint id="navpoint-112" playOrder="112">
+		<navPoint id="navpoint-146" playOrder="146">
 				<navLabel>
 					<text>Source Code for Gemgem</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem-source" />
 		</navPoint>
-		<navPoint id="navpoint-113" playOrder="113">
+		<navPoint id="navpoint-147" playOrder="147">
 				<navLabel>
 					<text>Summary</text>
 				</navLabel>
 				<content src="chapter10.xhtml#summary" />
 		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-114" playOrder="114">
+	<navPoint id="navpoint-148" playOrder="148">
 		<navLabel>
 			<text>Glossary</text>
 		</navLabel>
 		<content src="glossary.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-115" playOrder="115">
+	<navPoint id="navpoint-149" playOrder="149">
 		<navLabel>
 			<text>About the Author</text>
 		</navLabel>
 		<content src="abouttheauthor.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-116" playOrder="116">
+	<navPoint id="navpoint-150" playOrder="150">
 		<navLabel>
 			<text>Other Titles</text>
 		</navLabel>

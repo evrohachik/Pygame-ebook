@@ -10,5 +10,1833 @@
 	<h1 class="heading">Chapter 5 – Stimulate</h1>
 	<hr class="heading"/>
 
+	<h1 class="subheading" id="">How to Play Simulate</h1>
+		<p class="noindent">Simulate is a clone of the game Simon. There are four colored buttons on the screen. The buttons light up in a certain random pattern, and then the player must repeat this pattern by pressing the buttons in the correct order. Each time the player successfully simulates the pattern, the pattern gets longer. The player tries to match the pattern for as long as possible.</p>
+
+	<h1 class="subheading" id="">Source Code to Simulate</h1>
+		<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/simulate.py">https://invpy.com/simulate.py</a>. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/simulate">https://invpy.com/diff/simulate</a> to see if the differences between your code and the code in the book.</p>
+		<p>You can download the four sound files that this program uses from:</p>
+
+	<ul>
+		<li><a href="https://invpy.com/beep1.ogg">https://invpy.com/beep1.ogg</a></li>
+		<li><a href="https://invpy.com/beep2.ogg">https://invpy.com/beep2.ogg</a></li>
+		<li><a href="https://invpy.com/beep3.ogg">https://invpy.com/beep3.ogg</a></li>
+		<li><a href="https://invpy.com/beep4.ogg">https://invpy.com/beep4.ogg</a></li>
+	</ul>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Simulate (a Simon clone)</span></p>
+		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">6.</span> import random, sys, time, pygame</p>
+		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+		<p class="noindent mono"><span class="line-number">9.</span> FPS = 30</p>
+		<p class="noindent mono"><span class="line-number">10.</span> WINDOWWIDTH = 640</p>
+		<p class="noindent mono"><span class="line-number">11.</span> WINDOWHEIGHT = 480</p>
+		<p class="noindent mono"><span class="line-number">12.</span> FLASHSPEED = 500 <span class="comment"># in milliseconds</span></p>
+		<p class="noindent mono"><span class="line-number">13.</span> FLASHDELAY = 200 <span class="comment"># in milliseconds</span></p>
+		<p class="noindent mono"><span class="line-number">14.</span> BUTTONSIZE = 200</p>
+		<p class="noindent mono"><span class="line-number">15.</span> BUTTONGAPSIZE = 20</p>
+		<p class="noindent mono"><span class="line-number">16.</span> TIMEOUT = 4 <span class="comment"># seconds before game over if no button is pushed.</span></p>
+		<p class="noindent mono"><span class="line-number">17.</span></p>
+		<p class="noindent mono"> <span class="line-number">18.</span> <span class="comment">#                R    G    B</span></p>
+		<p class="noindent mono"> <span class="line-number">19.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"> <span class="line-number">20.</span> BLACK = (  0,   0,   0)</p>
+		<p class="noindent mono"> <span class="line-number">21.</span> BRIGHTRED = (255,   0,   0)</p>
+		<p class="noindent mono"> <span class="line-number">22.</span> RED = (155,   0,   0)</p>
+		<p class="noindent mono"> <span class="line-number">23.</span> BRIGHTGREEN = (  0, 255,   0)</p>
+		<p class="noindent mono"> <span class="line-number">24.</span> GREEN = (  0, 155,   0)</p>
+		<p class="noindent mono"> <span class="line-number">25.</span> BRIGHTBLUE = (  0,   0, 255)</p>
+		<p class="noindent mono"> <span class="line-number">26.</span> BLUE = (  0,   0, 155)</p>
+		<p class="noindent mono"> <span class="line-number">27.</span> BRIGHTYELLOW = (255, 255,   0)</p>
+		<p class="noindent mono"> <span class="line-number">28.</span> YELLOW = (155, 155,   0)</p>
+		<p class="noindent mono"> <span class="line-number">29.</span> DARKGRAY = ( 40,  40,  40)</p>
+		<p class="noindent mono"> <span class="line-number">30.</span> bgColor = BLACK</p>
+		<p class="noindent mono"> <span class="line-number">31.</span></p>
+		<p class="noindent mono"> <span class="line-number">32.</span> XMARGIN = int((WINDOWWIDTH - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
+		<p class="noindent mono"> <span class="line-number">33.</span> YMARGIN = int((WINDOWHEIGHT - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
+		<p class="noindent mono"> <span class="line-number">34.</span></p>
+		<p class="noindent mono"><span class="line-number"> 35.</span> <span class="comment"># Rect objects for each of the four buttons</span></p>
+		<p class="noindent mono"> <span class="line-number">36.</span> YELLOWRECT = pygame.Rect(XMARGIN, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">37.</span> BLUERECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">38.</span> REDRECT = pygame.Rect(XMARGIN, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">39.</span> GREENRECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">40.</span></p>
+		<p class="noindent mono"><span class="line-number"> 41.</span> def main():</p>
+		<p class="noindent mono"> <span class="line-number">42.</span>     global FPSCLOCK, DISPLAYSURF, BASICFONT, BEEP1, BEEP2, BEEP3, BEEP4</p>
+		<p class="noindent mono"> <span class="line-number">43.</span></p>
+		<p class="noindent mono"> <span class="line-number">44.</span>     pygame.init()</p>
+		<p class="noindent mono"> <span class="line-number">45.</span>     FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"> <span class="line-number">46.</span>     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+		<p class="noindent mono"> <span class="line-number">47.</span>     pygame.display.set_caption('Simulate')</p>
+		<p class="noindent mono"> <span class="line-number">48.</span></p>
+		<p class="noindent mono"> <span class="line-number">49.</span>     BASICFONT = pygame.font.Font('freesansbold.ttf', 16)</p>
+		<p class="noindent mono"> <span class="line-number">50.</span></p>
+		<p class="noindent mono"><span class="line-number"> 51.</span>    infoSurf = BASICFONT.render('Match the pattern by clicking on the button or using the Q, W, A, S keys.', 1, DARKGRAY)</p>
+		<p class="noindent mono"> <span class="line-number">52.</span>     infoRect = infoSurf.get_rect()</p>
+		<p class="noindent mono"> <span class="line-number">53.</span>     infoRect.topleft = (10, WINDOWHEIGHT - 25)</p>
+		<p class="noindent mono"> <span class="line-number">54.</span>     <span class="comment"># load the sound files</span></p>
+		<p class="noindent mono"> <span class="line-number">55.</span>     BEEP1 = pygame.mixer.Sound('beep1.ogg')</p>
+		<p class="noindent mono"> <span class="line-number">56.</span>     BEEP2 = pygame.mixer.Sound('beep2.ogg')</p>
+		<p class="noindent mono"> <span class="line-number">57.</span>     BEEP3 = pygame.mixer.Sound('beep3.ogg')</p>
+		<p class="noindent mono"> <span class="line-number">58.</span>     BEEP4 = pygame.mixer.Sound('beep4.ogg')</p>
+		<p class="noindent mono"> <span class="line-number">59.</span></p>
+		<p class="noindent mono"><span class="line-number"> 60.</span>    <span class="comment"># Initialize some variables for a new game</span></p>
+		<p class="noindent mono"> <span class="line-number">61.</span>     pattern = [] <span class="comment"># stores the pattern of colors</span></p>
+		<p class="noindent mono"> <span class="line-number">62.</span>     currentStep = 0 <span class="comment"># the color the player must push next</span></p>
+		<p class="noindent mono"> <span class="line-number">63.</span>     lastClickTime = 0 <span class="comment"># timestamp of the player's last button push</span></p>
+		<p class="noindent mono"> <span class="line-number">64.</span>     score = 0</p>
+		<p class="noindent mono"> <span class="line-number">65.</span>     <span class="comment"># when False, the pattern is playing. when True, waiting for the player to click a colored button:</span></p>
+		<p class="noindent mono"> <span class="line-number">66.</span>     waitingForInput = False</p>
+		<p class="noindent mono"> <span class="line-number">67.</span></p>
+		<p class="noindent mono"><span class="line-number"> 68.</span>    while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"> <span class="line-number">69.</span>         clickedButton = None <span class="comment"># button that was clicked (set to YELLOW, RED, GREEN, or BLUE)</span></p>
+		<p class="noindent mono"> <span class="line-number">70.</span>         DISPLAYSURF.fill(bgColor)</p>
+		<p class="noindent mono"> <span class="line-number">71.</span>         drawButtons()</p>
+		<p class="noindent mono"> <span class="line-number">72.</span></p>
+		<p class="noindent mono"> <span class="line-number">73.</span>         scoreSurf = BASICFONT.render('Score: ' + str(score), 1, WHITE)</p>
+		<p class="noindent mono"> <span class="line-number">74.</span>         scoreRect = scoreSurf.get_rect()</p>
+		<p class="noindent mono"> <span class="line-number">75.</span>         scoreRect.topleft = (WINDOWWIDTH - 100, 10)</p>
+		<p class="noindent mono"> <span class="line-number">76.</span>         DISPLAYSURF.blit(scoreSurf, scoreRect)</p>
+		<p class="noindent mono"> <span class="line-number">77.</span></p>
+		<p class="noindent mono"><span class="line-number"> 78.</span>        DISPLAYSURF.blit(infoSurf, infoRect)</p>
+		<p class="noindent mono"> <span class="line-number">79.</span></p>
+		<p class="noindent mono"><span class="line-number"> 80.</span>        checkForQuit()</p>
+		<p class="noindent mono"> <span class="line-number">81.</span>         for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"> <span class="line-number">82.</span>             if event.type == MOUSEBUTTONUP:</p>
+		<p class="noindent mono"> <span class="line-number">83.</span>                 mousex, mousey = event.pos</p>
+		<p class="noindent mono"> <span class="line-number">84.</span>                 clickedButton = getButtonClicked(mousex, mousey)</p>
+		<p class="noindent mono"><span class="line-number"> 85.</span>            elif event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 86.</span>                if
+event.key == K_q:</p>
+
+		<p class="noindent mono"> <span class="line-number">87.</span>                     clickedButton
+= YELLOW</p>
+
+		<p class="noindent mono"> <span class="line-number">88.</span>                 elif
+event.key == K_w:</p>
+
+		<p class="noindent mono"> <span class="line-number">89.</span>                     clickedButton
+= BLUE</p>
+
+		<p class="noindent mono"> <span class="line-number">90.</span>                 elif
+event.key == K_a:</p>
+
+		<p class="noindent mono"> <span class="line-number">91.</span>                     clickedButton
+= RED</p>
+
+		<p class="noindent mono"> <span class="line-number">92.</span>                 elif
+event.key == K_s:</p>
+
+		<p class="noindent mono"> <span class="line-number">93.</span>                     clickedButton
+= GREEN</p>
+
+		<p class="noindent mono"><span class="line-number"> 94.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 95.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 96.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 97.</span>        if
+not waitingForInput:</p>
+
+		<p class="noindent mono"> <span class="line-number">98.</span>             <span
+class="comment"># play the pattern</span></p>
+
+		<p class="noindent mono"> <span class="line-number">99.</span>             pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">100.</span>            pygame.time.wait(1000)</p>
+
+		<p class="noindent mono"><span class="line-number">101.</span>            pattern.append(random.choice((YELLOW,
+BLUE, RED, GREEN)))</p>
+
+		<p class="noindent mono"><span class="line-number">102.</span>            for
+button in pattern:</p>
+
+		<p class="noindent mono"><span class="line-number">103.</span>                flashButtonAnimation(button)</p>
+
+		<p class="noindent mono"><span class="line-number">104.</span>                pygame.time.wait(FLASHDELAY)</p>
+
+		<p class="noindent mono"><span class="line-number">105.</span>            waitingForInput
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">106.</span>        else:</p>
+
+		<p class="noindent mono"><span class="line-number">107.</span>            <span
+class="comment"># wait for the player to enter buttons</span></p>
+
+		<p class="noindent mono"><span class="line-number">108.</span>            if
+clickedButton and clickedButton == pattern[currentStep]:</p>
+
+		<p class="noindent mono"><span class="line-number">109.</span>                <span
+class="comment"># pushed the correct button</span></p>
+
+		<p class="noindent mono"><span class="line-number">110.</span>                flashButtonAnimation(clickedButton)</p>
+
+		<p class="noindent mono"><span class="line-number">111.</span>                currentStep
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">112.</span>                lastClickTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">113.</span></p>
+
+		<p class="noindent mono"><span class="line-number">114.</span>                if
+currentStep == len(pattern):</p>
+
+		<p class="noindent mono"><span class="line-number">115.</span>                    <span
+class="comment"># pushed the last button in the pattern</span></p>
+
+		<p class="noindent mono"><span class="line-number">116.</span>                    changeBackgroundAnimation()</p>
+
+		<p class="noindent mono"><span class="line-number">117.</span>                    score
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">118.</span>                    waitingForInput
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">119.</span>                    currentStep
+= 0 <span class="comment"># reset back to first step</span></p>
+
+		<p class="noindent mono"><span class="line-number">120.</span></p>
+
+		<p class="noindent mono"><span class="line-number">121.</span>            elif
+(clickedButton and clickedButton != pattern[currentStep]) or (currentStep != 0
+and time.time() - TIMEOUT &gt; lastClickTime):</p>
+
+		<p class="noindent mono"><span class="line-number">122.</span>                <span
+class="comment"># pushed the incorrect button, or has timed out</span></p>
+
+		<p class="noindent mono"><span class="line-number">123.</span>                gameOverAnimation()</p>
+
+		<p class="noindent mono"><span class="line-number">124.</span>                <span
+class="comment"># reset the variables for a new game:</span></p>
+
+		<p class="noindent mono"><span class="line-number">125.</span>                pattern
+= []</p>
+
+		<p class="noindent mono"><span class="line-number">126.</span>                currentStep
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">127.</span>                waitingForInput
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">128.</span>                score
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">129.</span>                pygame.time.wait(1000)</p>
+
+		<p class="noindent mono"><span class="line-number">130.</span>                changeBackgroundAnimation()</p>
+
+		<p class="noindent mono"><span class="line-number">131.</span></p>
+
+		<p class="noindent mono"><span class="line-number">132.</span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">133.</span>        FPSCLOCK.tick(FPS)</p>
+
+		<p class="noindent mono"><span class="line-number">134.</span></p>
+
+		<p class="noindent mono"><span class="line-number">135.</span></p>
+
+		<p class="noindent mono"><span class="line-number">136.</span>def
+terminate():</p>
+
+		<p class="noindent mono"><span class="line-number">137.</span>    pygame.quit()</p>
+
+		<p class="noindent mono"><span class="line-number">138.</span>    sys.exit()</p>
+
+		<p class="noindent mono"><span class="line-number">139.</span></p>
+
+		<p class="noindent mono"><span class="line-number">140.</span></p>
+
+		<p class="noindent mono"><span class="line-number">141.</span>def
+checkForQuit():</p>
+
+		<p class="noindent mono"><span class="line-number">142.</span>    for
+event in pygame.event.get(QUIT): <span class="comment"># get all the
+QUIT events</span></p>
+
+		<p class="noindent mono"><span class="line-number">143.</span>        terminate()
+<span class="comment"># terminate if any QUIT events are present</span></p>
+
+		<p class="noindent mono"><span class="line-number">144.</span>    for
+event in pygame.event.get(KEYUP): <span class="comment"># get all the
+KEYUP events</span></p>
+
+		<p class="noindent mono"><span class="line-number">145.</span>        if
+event.key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number">146.</span>            terminate()
+<span class="comment"># terminate if the KEYUP event was for the Esc
+key</span></p>
+
+		<p class="noindent mono"><span class="line-number">147.</span>        pygame.event.post(event)
+<span class="comment"># put the other KEYUP event objects back</span></p>
+
+		<p class="noindent mono"><span class="line-number">148.</span></p>
+
+		<p class="noindent mono"><span class="line-number">149.</span></p>
+
+		<p class="noindent mono"><span class="line-number">150.</span>def
+flashButtonAnimation(color, animationSpeed=50):</p>
+
+		<p class="noindent mono"><span class="line-number">151.</span>    if
+color == YELLOW:</p>
+
+		<p class="noindent mono"><span class="line-number">152.</span>        sound
+= BEEP1</p>
+
+		<p class="noindent mono"><span class="line-number">153.</span>        flashColor
+= BRIGHTYELLOW</p>
+
+		<p class="noindent mono"><span class="line-number">154.</span>        rectangle
+= YELLOWRECT</p>
+
+		<p class="noindent mono"><span class="line-number">155.</span>    elif
+color == BLUE:</p>
+
+		<p class="noindent mono"><span class="line-number">156.</span>        sound
+= BEEP2</p>
+
+		<p class="noindent mono"><span class="line-number">157.</span>        flashColor
+= BRIGHTBLUE</p>
+
+		<p class="noindent mono"><span class="line-number">158.</span>        rectangle
+= BLUERECT</p>
+
+		<p class="noindent mono"><span class="line-number">159.</span>    elif
+color == RED:</p>
+
+		<p class="noindent mono"><span class="line-number">160.</span>        sound
+= BEEP3</p>
+
+		<p class="noindent mono"><span class="line-number">161.</span>        flashColor
+= BRIGHTRED</p>
+
+		<p class="noindent mono"><span class="line-number">162.</span>        rectangle
+= REDRECT</p>
+
+		<p class="noindent mono"><span class="line-number">163.</span>    elif
+color == GREEN:</p>
+
+		<p class="noindent mono"><span class="line-number">164.</span>        sound
+= BEEP4</p>
+
+		<p class="noindent mono"><span class="line-number">165.</span>        flashColor
+= BRIGHTGREEN</p>
+
+		<p class="noindent mono"><span class="line-number">166.</span>        rectangle
+= GREENRECT</p>
+
+		<p class="noindent mono"><span class="line-number">167.</span></p>
+
+		<p class="noindent mono"><span class="line-number">168.</span>    origSurf
+= DISPLAYSURF.copy()</p>
+
+		<p class="noindent mono"><span class="line-number">169.</span>    flashSurf
+= pygame.Surface((BUTTONSIZE, BUTTONSIZE))</p>
+
+		<p class="noindent mono"><span class="line-number">170.</span>    flashSurf
+= flashSurf.convert_alpha()</p>
+
+		<p class="noindent mono"><span class="line-number">171.</span>    r,
+g, b = flashColor</p>
+
+		<p class="noindent mono"><span class="line-number">172.</span>    sound.play()</p>
+
+		<p class="noindent mono"><span class="line-number">173.</span>    for
+start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment">#
+animation loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">174.</span>        for
+alpha in range(start, end, animationSpeed * step):</p>
+
+		<p class="noindent mono"><span class="line-number">175.</span>            checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">176.</span>            DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">177.</span>            flashSurf.fill((r,
+g, b, alpha))</p>
+
+		<p class="noindent mono"><span class="line-number">178.</span>            DISPLAYSURF.blit(flashSurf,
+rectangle.topleft)</p>
+
+		<p class="noindent mono"><span class="line-number">179.</span>            pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">180.</span>            FPSCLOCK.tick(FPS)</p>
+
+		<p class="noindent mono"><span class="line-number">181.</span>    DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">182.</span></p>
+
+		<p class="noindent mono"><span class="line-number">183.</span></p>
+
+		<p class="noindent mono"><span class="line-number">184.</span>def
+drawButtons():</p>
+
+		<p class="noindent mono"><span class="line-number">185.</span>    pygame.draw.rect(DISPLAYSURF,
+YELLOW, YELLOWRECT)</p>
+
+		<p class="noindent mono"><span class="line-number">186.</span>    pygame.draw.rect(DISPLAYSURF,
+BLUE,   BLUERECT)</p>
+
+		<p class="noindent mono"><span class="line-number">187.</span>    pygame.draw.rect(DISPLAYSURF,
+RED,    REDRECT)</p>
+
+		<p class="noindent mono"><span class="line-number">188.</span>    pygame.draw.rect(DISPLAYSURF,
+GREEN,  GREENRECT)</p>
+
+		<p class="noindent mono"><span class="line-number">189.</span></p>
+
+		<p class="noindent mono"><span class="line-number">190.</span></p>
+
+		<p class="noindent mono"><span class="line-number">191.</span>def
+changeBackgroundAnimation(animationSpeed=40):</p>
+
+		<p class="noindent mono"><span class="line-number">192.</span>    global
+bgColor</p>
+
+		<p class="noindent mono"><span class="line-number">193.</span>    newBgColor
+= (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))</p>
+
+		<p class="noindent mono"><span class="line-number">194.</span></p>
+
+		<p class="noindent mono"><span class="line-number">195.</span>    newBgSurf
+= pygame.Surface((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">196.</span>    newBgSurf
+= newBgSurf.convert_alpha()</p>
+
+		<p class="noindent mono"><span class="line-number">197.</span>    r,
+g, b = newBgColor</p>
+
+		<p class="noindent mono"><span class="line-number">198.</span>    for
+alpha in range(0, 255, animationSpeed): <span class="comment">#
+animation loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">199.</span>        checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">200.</span>        DISPLAYSURF.fill(bgColor)</p>
+
+		<p class="noindent mono"><span class="line-number">201.</span></p>
+
+		<p class="noindent mono"><span class="line-number">202.</span>        newBgSurf.fill((r,
+g, b, alpha))</p>
+
+		<p class="noindent mono"><span class="line-number">203.</span>        DISPLAYSURF.blit(newBgSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">204.</span></p>
+
+		<p class="noindent mono"><span class="line-number">205.</span>        drawButtons()
+<span class="comment"># redraw the buttons on top of the tint</span></p>
+
+		<p class="noindent mono"><span class="line-number">206.</span></p>
+
+		<p class="noindent mono"><span class="line-number">207.</span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">208.</span>        FPSCLOCK.tick(FPS)</p>
+
+		<p class="noindent mono"><span class="line-number">209.</span>    bgColor
+= newBgColor</p>
+
+		<p class="noindent mono"><span class="line-number">210.</span></p>
+
+		<p class="noindent mono"><span class="line-number">211.</span></p>
+
+		<p class="noindent mono"><span class="line-number">212.</span>def
+gameOverAnimation(color=WHITE, animationSpeed=50):</p>
+
+		<p class="noindent mono"><span class="line-number">213.</span>    <span
+class="comment"># play all beeps at once, then flash the background</span></p>
+
+		<p class="noindent mono"><span class="line-number">214.</span>    origSurf
+= DISPLAYSURF.copy()</p>
+
+		<p class="noindent mono"><span class="line-number">215.</span>    flashSurf
+= pygame.Surface(DISPLAYSURF.get_size())</p>
+
+		<p class="noindent mono"><span class="line-number">216.</span>    flashSurf
+= flashSurf.convert_alpha()</p>
+
+		<p class="noindent mono"><span class="line-number">217.</span>    BEEP1.play()
+<span class="comment"># play all four beeps at the same time, roughly.</span></p>
+
+		<p class="noindent mono"><span class="line-number">218.</span>    BEEP2.play()</p>
+
+		<p class="noindent mono"><span class="line-number">219.</span>    BEEP3.play()</p>
+
+		<p class="noindent mono"><span class="line-number">220.</span>    BEEP4.play()</p>
+
+		<p class="noindent mono"><span class="line-number">221.</span>    r,
+g, b = color</p>
+
+		<p class="noindent mono"><span class="line-number">222.</span>    for
+i in range(3): <span class="comment"># do the flash 3 times</span></p>
+
+		<p class="noindent mono"><span class="line-number">223.</span>        for
+start, end, step in ((0, 255, 1), (255, 0, -1)):</p>
+
+		<p class="noindent mono"><span class="line-number">224.</span>            <span
+class="comment"># The first iteration in this loop sets the following
+for loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">225.</span>            <span
+class="comment"># to go from 0 to 255, the second from 255 to 0.</span></p>
+
+		<p class="noindent mono"><span class="line-number">226.</span>            for
+alpha in range(start, end, animationSpeed * step): <span
+class="comment"># animation loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">227.</span>                <span
+class="comment"># alpha means transparency. 255 is opaque, 0 is
+invisible</span></p>
+		<p class="noindent mono"><span class="line-number">228.</span>                checkForQuit()</p>
+		<p class="noindent mono"><span class="line-number">229.</span>                flashSurf.fill((r, g, b, alpha))</p>
+		<p class="noindent mono"><span class="line-number">230.</span>                DISPLAYSURF.blit(origSurf, (0, 0))</p>
+		<p class="noindent mono"><span class="line-number">231.</span>                DISPLAYSURF.blit(flashSurf, (0, 0))</p>
+		<p class="noindent mono"><span class="line-number">232.</span>                drawButtons()</p>
+		<p class="noindent mono"><span class="line-number">233.</span>                pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">234.</span>                FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">235.</span></p>
+		<p class="noindent mono"><span class="line-number">236.</span></p>
+		<p class="noindent mono"><span class="line-number">237.</span></p>
+		<p class="noindent mono"><span class="line-number">238.</span>def getButtonClicked(x, y):</p>
+		<p class="noindent mono"><span class="line-number">239.</span>    if YELLOWRECT.collidepoint( (x, y) ):</p>
+		<p class="noindent mono"><span class="line-number">240.</span>        return YELLOW</p>
+		<p class="noindent mono"><span class="line-number">241.</span>    elif BLUERECT.collidepoint( (x, y) ):</p>
+		<p class="noindent mono"><span class="line-number">242.</span>        return BLUE</p>
+		<p class="noindent mono"><span class="line-number">243.</span>    elif REDRECT.collidepoint( (x, y) ):</p>
+		<p class="noindent mono"><span class="line-number">244.</span>        return RED</p>
+		<p class="noindent mono"><span class="line-number">245.</span>    elif GREENRECT.collidepoint( (x, y) ):</p>
+		<p class="noindent mono"><span class="line-number">246.</span>        return GREEN</p>
+		<p class="noindent mono"><span class="line-number">247.</span>    return None</p>
+		<p class="noindent mono"><span class="line-number">248.</span></p>
+		<p class="noindent mono"><span class="line-number">249.</span></p>
+		<p class="noindent mono"><span class="line-number">250.</span> if __name__ == '__main__':</p>
+		<p class="noindent mono"><span class="line-number">251.</span>    main()</p>
+	</div>
+
+	<h1 class="subheading" id="">The Usual Starting Stuff</h1>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">  1.</span><span class="comment"># Simulate (a Simon clone)</span></p>
+		<p class="noindent mono"><span class="line-number">  2.</span><span class="comment"># By Al Sweigart <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73121f331a1d05161d07041a071b030a071b1c1d5d101c1e">[email&#160;protected]</a></span></p>
+		<p class="noindent mono"><span class="line-number">  3.</span><span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">  4.</span><span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">  5.</span></p>
+		<p class="noindent mono">  <span class="line-number">6.</span>import random, sys, time, pygame</p>
+		<p class="noindent mono">  <span class="line-number">7.</span>from pygame.locals import *</p>
+		<p class="noindent mono">  <span class="line-number">8.</span></p>
+		<p class="noindent mono">  <span class="line-number">9.</span>FPS
+= 30</p>
+		<p class="noindent mono"> <span class="line-number">10.</span> WINDOWWIDTH
+= 640</p>
+		<p class="noindent mono"> <span class="line-number">11.</span> WINDOWHEIGHT
+= 480</p>
+		<p class="noindent mono"> <span class="line-number">12.</span> FLASHSPEED
+= 500 <span class="comment"># in milliseconds</span></p>
+		<p class="noindent mono"> <span class="line-number">13.</span> FLASHDELAY
+= 200 <span class="comment"># in milliseconds</span></p>
+
+		<p class="noindent mono"> <span class="line-number">14.</span> BUTTONSIZE
+= 200</p>
+
+		<p class="noindent mono"> <span class="line-number">15.</span> BUTTONGAPSIZE
+= 20</p>
+
+		<p class="noindent mono"> <span class="line-number">16.</span> TIMEOUT
+= 4 <span class="comment"># seconds before game over if no button is
+pushed.</span></p>
+
+		<p class="noindent mono"> <span class="line-number">17.</span></p>
+
+		<p class="noindent mono"> <span class="line-number">18.</span> <span
+class="comment">#                R    G    B</span></p>
+
+		<p class="noindent mono"> <span class="line-number">19.</span> WHITE
+= (255, 255, 255)</p>
+
+		<p class="noindent mono"> <span class="line-number">20.</span> BLACK
+= (  0,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">21.</span> BRIGHTRED
+= (255,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">22.</span> RED
+= (155,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">23.</span> BRIGHTGREEN
+= (  0, 255,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">24.</span> GREEN
+= (  0, 155,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">25.</span> BRIGHTBLUE
+= (  0,   0, 255)</p>
+
+		<p class="noindent mono"> <span class="line-number">26.</span> BLUE
+= (  0,   0, 155)</p>
+
+		<p class="noindent mono"> <span class="line-number">27.</span> BRIGHTYELLOW
+= (255, 255,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">28.</span> YELLOW
+= (155, 155,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">29.</span> DARKGRAY
+= ( 40,  40,  40)</p>
+
+		<p class="noindent mono"> <span class="line-number">30.</span> bgColor
+= BLACK</p>
+
+		<p class="noindent mono"> <span class="line-number">31.</span></p>
+
+		<p class="noindent mono"> <span class="line-number">32.</span> XMARGIN
+= int((WINDOWWIDTH - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
+
+		<p class="noindent mono"> <span class="line-number">33.</span>YMARGIN
+= int((WINDOWHEIGHT - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
+
+	</div>
+
+	<p>Here we set up the usual constants for things that we might want to modify later such as the size of the four buttons, the shades of color used for the buttons (the bright colors are used when the buttons light up) and the amount of time the player has to push the next button in the sequence before the game times out.</p>
+
+	<h1 class="subheading" id="">Setting Up the Buttons</h1>
+
+	<div class="python-shell">
+		<p class="noindent mono"> <span class="line-number">35.</span><span class="comment"># Rect objects for each of the four buttons</span></p>
+		<p class="noindent mono"> <span class="line-number">36.</span> YELLOWRECT = pygame.Rect(XMARGIN, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">37.</span> BLUERECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">38.</span> REDRECT = pygame.Rect(XMARGIN, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"> <span class="line-number">39.</span>GREENRECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+	</div>
+
+	<p>Just like the buttons in the Sliding Puzzle games for “Reset”, “Solve” and “New Game”, the Simulate game has four rectangular areas and code to handle when the player clicks inside of those areas. The program will need Rect objects for the areas of the four buttons so it can call the <span class="mono">collidepoint()</span> method on them. Lines 36 to 39 set up these Rect objects with the appropriate coordinates and sizes.</p>
+
+	<h1 class="subheading">The <span class="mono">main()</span> Function</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"> <span class="line-number">41.</span>def
+main():</p>
+
+		<p class="noindent mono"> <span class="line-number">42.</span>     global
+FPSCLOCK, DISPLAYSURF, BASICFONT, BEEP1, BEEP2, BEEP3, BEEP4</p>
+
+		<p class="noindent mono"> <span class="line-number">43.</span></p>
+
+		<p class="noindent mono"> <span class="line-number">44.</span>     pygame.init()</p>
+
+		<p class="noindent mono"> <span class="line-number">45.</span>     FPSCLOCK
+= pygame.time.Clock()</p>
+
+		<p class="noindent mono"> <span class="line-number">46.</span>     DISPLAYSURF
+= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"> <span class="line-number">47.</span>     pygame.display.set_caption('Simulate')</p>
+
+		<p class="noindent mono"> <span class="line-number">48.</span></p>
+
+		<p class="noindent mono"> <span class="line-number">49.</span>     BASICFONT
+= pygame.font.Font('freesansbold.ttf', 16)</p>
+
+		<p class="noindent mono"> <span class="line-number">50.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 51.</span>    infoSurf
+= BASICFONT.render('Match the pattern by clicking on the button or using the Q,
+W, A, S keys.', 1, DARKGRAY)</p>
+
+		<p class="noindent mono"> <span class="line-number">52.</span>     infoRect
+= infoSurf.get_rect()</p>
+
+		<p class="noindent mono"> <span class="line-number">53.</span>     infoRect.topleft
+= (10, WINDOWHEIGHT - 25)</p>
+
+		<p class="noindent mono"> <span class="line-number">54.</span>     <span
+class="comment"># load the sound files</span></p>
+
+		<p class="noindent mono"> <span class="line-number">55.</span>     BEEP1
+= pygame.mixer.Sound('beep1.ogg')</p>
+
+		<p class="noindent mono"> <span class="line-number">56.</span>     BEEP2
+= pygame.mixer.Sound('beep2.ogg')</p>
+
+		<p class="noindent mono"> <span class="line-number">57.</span>     BEEP3
+= pygame.mixer.Sound('beep3.ogg')</p>
+
+	<p class="noindent mono"> <span class="line-number">58.</span>    BEEP4
+= pygame.mixer.Sound('beep4.ogg')</p>
+
+</div>
+
+		<p>The <span class="mono">main()</span> function will implement
+the bulk of the program and call the other functions as they are needed. The
+usual Pygame setup functions are called to initialize the library, create a
+Clock object, create a window, set the caption, and create a Font object that
+will be used to display the score and the instructions on the window. The
+objects that are created by these function calls will be stored in global
+variables so that they can be used in other functions. But they are basically
+constants since the value in them is never changed.</p>
+
+		<p>Lines 55 to 58 will load sound files so that Simulate can
+play sound effects as the player clicks on each button. The <span
+class="mono">pygame.mixer.Sound()</span> constructor function will return a Sound
+object, which we store in the variables <span class="mono">BEEP1</span> to <span
+class="mono">BEEP4</span> which were made into global variables on line 42.</p>
+
+	<h1 class="subheading" id="">Some Local Variables Used in This Program</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"> <span class="line-number">60.</span>    <span
+class="comment"># Initialize some variables for a new game</span></p>
+
+		<p class="noindent mono"> <span class="line-number">61.</span>     pattern
+= [] <span class="comment"># stores the pattern of colors</span></p>
+
+		<p class="noindent mono"> <span class="line-number">62.</span>     currentStep
+= 0 <span class="comment"># the color the player must push next</span></p>
+
+		<p class="noindent mono"> <span class="line-number">63.</span>     lastClickTime
+= 0 <span class="comment"># timestamp of the player's last button push</span></p>
+
+		<p class="noindent mono"> <span class="line-number">64.</span>     score
+= 0</p>
+
+		<p class="noindent mono"> <span class="line-number">65.</span>     <span
+class="comment"># when False, the pattern is playing. when True,
+waiting for the player to click a colored button:</span></p>
+
+	<p class="noindent mono"> <span class="line-number">66.</span>    waitingForInput
+= False</p>
+
+</div>
+
+		<p>The <span class="mono">pattern</span> variable will be a
+list of color values (either <span class="mono">YELLOW</span>, <span
+class="mono">RED</span>, <span class="mono">BLUE</span>, or <span
+class="mono">GREEN</span>) to keep track of the pattern that the player must
+memorize. For example, if the value of pattern was <span class="mono">[RED,
+RED, YELLOW, RED, BLUE, BLUE, RED, GREEN]</span> then the player would have to
+first click the red button twice, then the yellow button, then the red button,
+and so on until the final green button. As the player finishes each round, a
+new random color is added to the end of the list.</p>
+
+		<p>The <span class="mono">currentStep</span> variable will
+keep track of which color in the pattern list the player has to click next. If <span
+class="mono">currentStep</span> was <span class="mono">0</span> and <span
+class="mono">pattern</span> was <span class="mono">[GREEN, RED, RED, YELLOW]</span>,
+then the player would have to click the green button. If they clicked on any
+other button, the code will cause a game over.</p>
+
+		<p>There is a <span class="mono">TIMEOUT</span> constant that
+makes the player click on next button in the pattern within a number of
+seconds, otherwise the code causes a game over. In order to check if enough time
+has passed since the last button click, the <span class="mono">lastClickTime</span>
+variable needs to keep track of the last time the player clicked on a button.
+(Python has a module named time and a <span class="mono">time.time()</span>
+function to return the current time. This will be explained later.)</p>
+
+		<p>It may be hard to believe, but the <span class="mono">score</span>
+variable keeps track of the score. Inconceivable!</p>
+
+		<p>There are also two modes that our program will be in. Either
+the program is playing the pattern of buttons for the player (in which case, <span
+class="mono">waitingForInput</span> is set to <span class="mono">False</span>),
+or the program has finished playing the pattern and is waiting for the user to
+click the buttons in the correct order (in which case, <span class="mono">waitingForInput</span>
+is set to <span class="mono">True</span>).</p>
+
+	<h1 class="subheading" id="">Drawing the Board and Handling Input</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"> <span class="line-number">68.</span>    while
+True: <span class="comment"># main game loop</span></p>
+
+		<p class="noindent mono"> <span class="line-number">69.</span>         clickedButton
+= None <span class="comment"># button that was clicked (set to YELLOW,
+RED, GREEN, or BLUE)</span></p>
+
+		<p class="noindent mono"> <span class="line-number">70.</span>         DISPLAYSURF.fill(bgColor)</p>
+
+		<p class="noindent mono"> <span class="line-number">71.</span>         drawButtons()</p>
+
+		<p class="noindent mono"> <span class="line-number">72.</span></p>
+
+		<p class="noindent mono"> <span class="line-number">73.</span>         scoreSurf
+= BASICFONT.render('Score: ' + str(score), 1, WHITE)</p>
+
+		<p class="noindent mono"> <span class="line-number">74.</span>         scoreRect
+= scoreSurf.get_rect()</p>
+
+		<p class="noindent mono"> <span class="line-number">75.</span>         scoreRect.topleft
+= (WINDOWWIDTH - 100, 10)</p>
+
+		<p class="noindent mono"> <span class="line-number">76.</span>         DISPLAYSURF.blit(scoreSurf,
+scoreRect)</p>
+
+		<p class="noindent mono"> <span class="line-number">77.</span></p>
+
+	<p class="noindent mono"><span class="line-number"> 78.</span>        DISPLAYSURF.blit(infoSurf,
+infoRect)</p>
+
+</div>
+
+		<p>Line 68 is the start of the main game loop. The <span
+class="mono">clickedButton</span> will be reset to <span class="mono">None</span>
+at the beginning of each iteration. If a button is clicked during this
+iteration, then <span class="mono">clickedButton</span> will be set to one of
+the color values to match the button (<span class="mono">YELLOW</span>, <span
+class="mono">RED</span>, <span class="mono">GREEN</span>, or <span
+class="mono">BLUE</span>).</p>
+
+		<p>The <span class="mono">fill()</span> method is called on
+line 70 to repaint the entire display Surface so that we can start drawing from
+scratch. The four colored buttons are drawn with a call to the <span
+class="mono">drawButtons()</span> (explained later). Then the text for the
+score is created on lines 73 to 76.</p>
+
+		<p>There will also be text that tells the player what their
+current score is. Unlike the call to the <span class="mono">render()</span>
+method on line 51 for the instruction text, the text for the score changes. It
+starts off as <span class="mono">'Score: 0'</span> and then becomes <span
+class="mono">'Score: 1'</span> and then <span class="mono">'Score: 2'</span>
+and so on. This is why we create new Surface objects by calling the <span
+class="mono">render()</span> method on line 73 inside the game loop. Since the
+instruction text (“Match the pattern by…”) never changes, we only need one call
+to <span class="mono">render()</span> outside the game loop on line 50.</p>
+
+	<h1 class="subheading" id="">Checking for Mouse Clicks</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"> <span class="line-number">80.</span>        checkForQuit()</p>
+
+		<p class="noindent mono"> <span class="line-number">81.</span>         for
+event in pygame.event.get(): <span class="comment"># event handling
+loop</span></p>
+
+		<p class="noindent mono"> <span class="line-number">82.</span>             if
+event.type == MOUSEBUTTONUP:</p>
+
+		<p class="noindent mono"> <span class="line-number">83.</span>                 mousex,
+mousey = event.pos</p>
+
+	<p class="noindent mono"> <span class="line-number">84.</span>                clickedButton
+= getButtonClicked(mousex, mousey)</p>
+
+</div>
+
+		<p>Line 80 does a quick check for any <span class="mono">QUIT</span>
+events, and then line 81 is the start of the event handling loop. The XY
+coordinates of any mouse clicks will be stored in the <span class="mono">mousex</span>
+and <span class="mono">mousey</span> variables. If the mouse click was over
+one of the four buttons, then our <span class="mono">getButtonClicked()</span>
+function will return a Color object of the button clicked (otherwise it returns
+<span class="mono">None</span>).</p>
+
+	<h1 class="subheading" id="">Checking for Keyboard Presses</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"> <span class="line-number">85.</span>            elif
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 86.</span>                if
+event.key == K_q:</p>
+
+		<p class="noindent mono"> <span class="line-number">87.</span>                     clickedButton
+= YELLOW</p>
+
+		<p class="noindent mono"> <span class="line-number">88.</span>                 elif
+event.key == K_w:</p>
+
+		<p class="noindent mono"> <span class="line-number">89.</span>                     clickedButton
+= BLUE</p>
+
+		<p class="noindent mono"> <span class="line-number">90.</span>                 elif
+event.key == K_a:</p>
+
+		<p class="noindent mono"> <span class="line-number">91.</span>                     clickedButton
+= RED</p>
+
+		<p class="noindent mono"> <span class="line-number">92.</span>                 elif
+event.key == K_s:</p>
+
+	<p class="noindent mono"> <span class="line-number">93.</span>                    clickedButton
+= GREEN</p>
+
+</div>
+
+		<p>Lines 85 to 93 check for any <span class="mono">KEYDOWN</span>
+events (created when the user presses a key on the keyboard). The Q, W, A, and
+S keys correspond to the buttons because they are arranged in a square shape on
+the keyboard.</p>
+
+		<p>The Q key is in the upper left of the four keyboard keys,
+just like the yellow button on the screen is in the upper left, so we will make
+pressing the Q key the same as clicking on the yellow button. We can do this by
+setting the <span class="mono">clickedButton</span> variable to the value in the
+constant variable <span class="mono">YELLOW</span>. We can do the same for the
+three other keys. This way, the user can play Simulate with either the mouse or
+keyboard.</p>
+
+	<h1 class="subheading" id="">The Two States of the Game Loop</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"> <span class="line-number">97.</span>        if
+not waitingForInput:</p>
+
+		<p class="noindent mono"> <span class="line-number">98.</span>             <span
+class="comment"># play the pattern</span></p>
+
+		<p class="noindent mono"> <span class="line-number">99.</span>             pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">100.</span>            pygame.time.wait(1000)</p>
+
+		<p class="noindent mono"><span class="line-number">101.</span>            pattern.append(random.choice((YELLOW,
+BLUE, RED, GREEN)))</p>
+
+		<p class="noindent mono"><span class="line-number">102.</span>            for
+button in pattern:</p>
+
+		<p class="noindent mono"><span class="line-number">103.</span>                flashButtonAnimation(button)</p>
+
+		<p class="noindent mono"><span class="line-number">104.</span>                pygame.time.wait(FLASHDELAY)</p>
+
+	<p class="noindent mono"><span class="line-number">105.</span>            waitingForInput
+= True</p>
+
+</div>
+
+		<p>There are two different “modes” or “states” that the program
+can be in. When <span class="mono">waitingForInput</span> is <span
+class="mono">False</span>, the program will be displaying the animation for
+the pattern. When <span class="mono">waitingForInput</span> is <span
+class="mono">True</span>, the program will be waiting for the user to select
+buttons.</p>
+
+		<p>Lines 97 to 105 will cover the case where the program
+displays the pattern animation. Since this is done at the start of the game or
+when the player finishes a pattern, line 101 will add a random color to the
+pattern list to make the pattern one step longer. Then lines 102 to 104 loops
+through each of the values in the pattern list and calls <span class="mono">flashButtonAnimation()</span>
+which makes that button light up. After it is done lighting up all the buttons
+in the pattern list, the program sets the <span class="mono">waitingForInput</span>
+variable to <span class="mono">True</span>.</p>
+
+<h2><a name="_Toc316488627">Figuring Out if the Player Pressed the Right
+Buttons</a></h2>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">106.</span>        else:</p>
+
+		<p class="noindent mono"><span class="line-number">107.</span>            <span
+class="comment"># wait for the player to enter buttons</span></p>
+
+		<p class="noindent mono"><span class="line-number">108.</span>            if
+clickedButton and clickedButton == pattern[currentStep]:</p>
+
+		<p class="noindent mono"><span class="line-number">109.</span>                <span
+class="comment"># pushed the correct button</span></p>
+
+		<p class="noindent mono"><span class="line-number">110.</span>                flashButtonAnimation(clickedButton)</p>
+
+		<p class="noindent mono"><span class="line-number">111.</span>                currentStep
++= 1</p>
+
+	<p class="noindent mono"><span class="line-number">112.</span>                lastClickTime
+= time.time()</p>
+
+</div>
+
+		<p>If <span class="mono">waitingForInput</span> is <span
+class="mono">True</span>, then the code in line 106’s <span class="mono">else</span>
+statement will execute. Line 108 checks if the player has clicked on a button
+during this iteration of the game loop and if that button was the correct one.
+The <span class="mono">currentStep</span> variable keeps track of the index in
+the pattern list for the button that the player should click on next.</p>
+
+		<p>For example, if pattern was set to <span class="mono">[YELLOW,
+RED, RED]</span> and the <span class="mono">currentStep</span> variable was
+set to <span class="mono">0</span> (like it would be when the player first
+starts the game), then the correct button for the player to click would be <span
+class="mono">pattern[0]</span> (the yellow button).</p>
+
+		<p>If the player has clicked on the correct button, we want to
+flash the button the player clicked by calling <span class="mono">flashButtonAnimation()</span>
+then, increase the <span class="mono">currentStep</span> to the next step, and
+then update the <span class="mono">lastClickTime</span> variable to the
+current time. (The <span class="mono">time.time()</span> function returns a
+float value of the number of seconds since January 1<sup>st</sup>, 1970, so we
+can use it to keep track of time.)</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">114.</span>                if
+currentStep == len(pattern):</p>
+
+		<p class="noindent mono"><span class="line-number">115.</span>                    <span
+class="comment"># pushed the last button in the pattern</span></p>
+
+		<p class="noindent mono"><span class="line-number">116.</span>                    changeBackgroundAnimation()</p>
+
+		<p class="noindent mono"><span class="line-number">117.</span>                    score
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">118.</span>                    waitingForInput
+= False</p>
+
+	<p class="noindent mono"><span class="line-number">119.</span>                    currentStep
+= 0 <span class="comment"># reset back to first step</span></p>
+
+</div>
+
+		<p>Lines 114 to 119 are inside the <span class="mono">else</span>
+statement that started on line 106. If the execution is inside that <span
+class="mono">else</span> statement, we know the player clicked on a button and
+also it was the correct button. Line 114 checks if this was the last correct
+button in the pattern list by checking if the integer stored in <span
+class="mono">currentStep</span> is equal to the number of values inside the
+pattern list.</p>
+
+		<p>If this is <span class="mono">True</span>, then we want to
+change the background color by calling our <span class="mono">changeBackgroundAnimation()</span>.
+This is a simple way to let the player know they have entered the entire
+pattern correctly. The score is incremented, <span class="mono">currentStep</span>
+is set back to <span class="mono">0</span>, and the <span class="mono">waitingForInput</span>
+variable is set to <span class="mono">False</span> so that on the next
+iteration of the game loop the code will add a new Color value to the pattern
+list and then flash the buttons.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">121.</span>            elif (clickedButton and clickedButton != pattern[currentStep]) or (currentStep != 0 and time.time() - TIMEOUT &gt; lastClickTime):</p>
+	</div>
+
+		<p>If the player did not click on the correct button, the <span
+class="mono">elif</span> statement on line 121 handles the case where either
+the player clicked on the wrong button or the player has waited too long to
+click on a button. Either way, we need to show the “game over” animation and
+start a new game.</p>
+
+		<p>The <span class="mono">(clickedButton and clickedButton !=
+pattern[currentStep])</span> part of the <span class="mono">elif</span>
+statement’s condition checks if a button was clicked and was the wrong button
+to click. You can compare this to line 108’s <span class="mono">if</span>
+statement’s condition <span class="mono">clickedButton and clickedButton ==
+pattern[currentStep]</span> which evaluates to <span class="mono">True</span>
+if the player clicked a button and it was the correct button to click.</p>
+
+		<p>The other part of line 121’s <span class="mono">elif</span>
+condition is <span class="mono">(currentStep != 0 and time.time() - TIMEOUT
+&gt; lastClickTime)</span>. This handles making sure the player did not “time
+out”. Notice that this part of the condition has two expressions connected by
+an <span class="mono">and</span> keyword. That means both sides of the and
+keyword need to evaluate to <span class="mono">True</span>.</p>
+
+		<p>In order to “time out”, it must not be the player’s first
+button click. But once they’ve started to click buttons, they must keep clicking
+the buttons quickly enough until they’ve entered the entire pattern (or have
+clicked on the wrong pattern and gotten a “game over”). If <span class="mono">currentStep
+!= 0</span> is <span class="mono">True</span>, then we know the player has
+begun clicking the buttons.</p>
+
+	<h1 class="subheading" id="">Epoch Time</h1>
+
+	<p>Also in order to “time out”, the current time (returned by <span class="mono">time.time()</span>) minus four seconds (because <span class="mono">4</span> is stored in <span class="mono">TIMEOUT</span>) must be greater than the last time clicked a button (stored in <span class="mono">lastClickTime</span>). The reason why <span class="mono">time.time() - TIMEOUT &gt; lastClickTime</span> works has to do with how epoch time works. Epoch time (also called Unix epoch time) is the number of seconds it has been since January 1<sup>st</sup>, 1970. This date is called the Unix epoch.</p>
+	<p>For example, when I run <span class="mono">time.time()</span> from the interactive shell (don’t forget to import the time module first), it looks like this:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; import time</p>
+		<p class="noindent mono">&gt;&gt;&gt; time.time()</p>
+		<p class="noindent mono">1320460242.118</p>
+	</div>
+
+	<p>What this number means is that the moment the <span class="mono">time.time()</span> function was called was a little over 1,320,460,242 seconds since midnight of January 1<sup>st</sup>, 1970. (This translates to November 4<sup>th</sup>, 2011 at 7:30:42pm. You can learn how to convert from Unix epoch time to regular English time at <a href="http://invpy.com/epochtime">http://invpy.com/epochtime</a>)</p>
+	<p>If I call <span class="mono">time.time()</span> from the interactive shell a few seconds later, it might look like this:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; time.time()</p>
+		<p class="noindent mono">1320460261.315</p>
+	</div>
+
+		<p>1320460261.315 seconds after midnight of the Unix epoch is
+November 4<sup>th</sup>, 2011 at 7:31:01pm. (Actually, it’s 7:31 and 0.315
+seconds if you want to be precise.)</p>
+
+		<p>Dealing with time would be difficult if we had to deal with
+strings. It’s hard to tell that 19 seconds have passed if we only had the
+string values <span class="mono">'7:30:42 PM'</span> and <span class="mono">'7:31:01
+PM'</span> to compare. But with epoch time, it’s just a matter of subtracting
+the integers <span class="mono">1320460261.315 - 1320460242.118</span>, which
+evaluates to <span class="mono">19.197000026702881</span>. This value is the
+number of seconds between those two times. (The extra <span class="mono">0.000026702881</span>
+comes from very small rounding errors that happen when you do math with
+floating point numbers. They only happen sometimes and are usually too tiny to
+matter. You can learn more about floating point rounding errors at <a href="https://invpy.com/roundingerrors">https://invpy.com/roundingerrors</a>.)</p>
+
+		<p>Going back to line 121, if <span class="mono">time.time() -
+TIMEOUT &gt; lastClickTime</span> evaluates to <span class="mono">True</span>,
+then it has been longer than 4 seconds since <span class="mono">time.time()</span>
+was called and stored in <span class="mono">lastClickTime</span>. If it evaluates
+to <span class="mono">False</span>, then it has been less than 4 seconds.</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">122.</span>                <span
+class="comment"># pushed the incorrect button, or has timed out</span></p>
+
+		<p class="noindent mono"><span class="line-number">123.</span>                gameOverAnimation()</p>
+
+		<p class="noindent mono"><span class="line-number">124.</span>                <span
+class="comment"># reset the variables for a new game:</span></p>
+
+		<p class="noindent mono"><span class="line-number">125.</span>                pattern
+= []</p>
+
+		<p class="noindent mono"><span class="line-number">126.</span>                currentStep
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">127.</span>                waitingForInput
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">128.</span>                score
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">129.</span>                pygame.time.wait(1000)</p>
+
+	<p class="noindent mono"><span class="line-number">130.</span>                changeBackgroundAnimation()</p>
+
+</div>
+
+		<p>If either the player clicked on the wrong button or has
+timed out, the program should play the “game over” animation and then reset the
+variables for a new game. This involves setting the <span class="mono">pattern</span>
+list to a blank list, <span class="mono">currentStep</span> to <span
+class="mono">0</span>, <span class="mono">waitingForInput</span> to <span
+class="mono">False</span>, and then <span class="mono">score</span> to <span
+class="mono">0</span>. A small pause and a new background color will be set to
+indicate to the player the start of a new game, which will begin on the next
+iteration of the game loop.</p>
+
+	<h1 class="subheading" id="">Drawing the Board to the Screen</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">132.</span>        pygame.display.update()</p>
+
+	<p class="noindent mono"><span class="line-number">133.</span>        FPSCLOCK.tick(FPS)</p>
+
+</div>
+
+		<p>Just like the other game programs, the last thing done in
+the game loop is drawing the display Surface object to the screen and calling
+the <span class="mono">tick()</span> method.</p>
+
+<h2><a name="_Toc316488630">Same Old </a><span class="mono">terminate()</span>
+Function</h2>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">136.</span>def
+terminate():</p>
+
+		<p class="noindent mono"><span class="line-number">137.</span>    pygame.quit()</p>
+
+		<p class="noindent mono"><span class="line-number">138.</span>    sys.exit()</p>
+
+		<p class="noindent mono"><span class="line-number">139.</span></p>
+
+		<p class="noindent mono"><span class="line-number">140.</span></p>
+
+		<p class="noindent mono"><span class="line-number">141.</span>def
+checkForQuit():</p>
+
+		<p class="noindent mono"><span class="line-number">142.</span>    for
+event in pygame.event.get(QUIT): <span class="comment"># get all the
+QUIT events</span></p>
+
+		<p class="noindent mono"><span class="line-number">143.</span>        terminate()
+<span class="comment"># terminate if any QUIT events are present</span></p>
+
+		<p class="noindent mono"><span class="line-number">144.</span>    for
+event in pygame.event.get(KEYUP): <span class="comment"># get all the
+KEYUP events</span></p>
+
+		<p class="noindent mono"><span class="line-number">145.</span>        if
+event.key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number">146.</span>            terminate()
+<span class="comment"># terminate if the KEYUP event was for the Esc
+key</span></p>
+
+	<p class="noindent mono"><span class="line-number">147.</span>        pygame.event.post(event)
+<span class="comment"># put the other KEYUP event objects back</span></p>
+
+</div>
+
+		<p>The <span class="mono">terminate()</span> and <span
+class="mono">checkForQuit()</span> functions were used and explained in the
+Sliding Puzzle chapter, so we will skip describing them again.</p>
+
+	<h1 class="subheading" id="">Reusing The Constant Variables</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">150.</span>def
+flashButtonAnimation(color, animationSpeed=50):</p>
+
+		<p class="noindent mono"><span class="line-number">151.</span>    if
+color == YELLOW:</p>
+
+		<p class="noindent mono"><span class="line-number">152.</span>        sound
+= BEEP1</p>
+
+		<p class="noindent mono"><span class="line-number">153.</span>        flashColor
+= BRIGHTYELLOW</p>
+
+		<p class="noindent mono"><span class="line-number">154.</span>        rectangle
+= YELLOWRECT</p>
+
+		<p class="noindent mono"><span class="line-number">155.</span>    elif
+color == BLUE:</p>
+
+		<p class="noindent mono"><span class="line-number">156.</span>        sound
+= BEEP2</p>
+
+		<p class="noindent mono"><span class="line-number">157.</span>        flashColor
+= BRIGHTBLUE</p>
+
+		<p class="noindent mono"><span class="line-number">158.</span>        rectangle
+= BLUERECT</p>
+
+		<p class="noindent mono"><span class="line-number">159.</span>    elif
+color == RED:</p>
+
+		<p class="noindent mono"><span class="line-number">160.</span>        sound
+= BEEP3</p>
+
+		<p class="noindent mono"><span class="line-number">161.</span>        flashColor
+= BRIGHTRED</p>
+
+		<p class="noindent mono"><span class="line-number">162.</span>        rectangle
+= REDRECT</p>
+
+		<p class="noindent mono"><span class="line-number">163.</span>    elif
+color == GREEN:</p>
+
+		<p class="noindent mono"><span class="line-number">164.</span>        sound
+= BEEP4</p>
+
+		<p class="noindent mono"><span class="line-number">165.</span>        flashColor
+= BRIGHTGREEN</p>
+
+	<p class="noindent mono"><span class="line-number">166.</span>        rectangle
+= GREENRECT</p>
+
+</div>
+
+		<p>Depending on which Color value is passed as an argument for
+the color parameter, the sound, color of the bright flash, and rectangular area
+of the flash will be different. Line 151 to 166 sets three local variables
+differently depending on the value in the <span class="mono">color</span>
+parameter: <span class="mono">sound</span>, <span class="mono">flashColor</span>,
+and <span class="mono">rectangle</span>.</p>
+
+	<h1 class="subheading" id="">Animating the Button Flash</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">168.</span>    origSurf
+= DISPLAYSURF.copy()</p>
+
+		<p class="noindent mono"><span class="line-number">169.</span>    flashSurf
+= pygame.Surface((BUTTONSIZE, BUTTONSIZE))</p>
+
+		<p class="noindent mono"><span class="line-number">170.</span>    flashSurf
+= flashSurf.convert_alpha()</p>
+
+		<p class="noindent mono"><span class="line-number">171.</span>    r,
+g, b = flashColor</p>
+
+	<p class="noindent mono"><span class="line-number">172.</span>    sound.play()</p>
+
+</div>
+
+		<p>The process of animating the button flash is simple: On each
+frame of the animation, the normal board is drawn and then on top of that, the
+bright color version of the button that is flashing is drawn over the button.
+The alpha value of the bright color starts off at <span class="mono">0</span>
+for the first frame of animation, but then on each frame after the alpha value
+is slowly increased until it is fully opaque and the bright color version
+completely paints over the normal button color. This will make it look like the
+button is slowly brightening up.</p>
+
+		<p>The brightening up is the first half of the animation. The
+second half is the button dimming. This is done with the same code, except that
+instead of the alpha value increasing for each frame, it will be decreasing. As
+the alpha value gets lower and lower, the bright color painted on top will
+become more and more invisible, until only the original board with the dull
+colors is visible.</p>
+
+		<p>To do this in code, line 168 creates a copy of the display
+Surface object and stores it in <span class="mono">origSurf</span>. Line 169
+creates a new Surface object the size of a single button and stores it in <span
+class="mono">flashSurf</span>. The <span class="mono">convert_alpha()</span>
+method is called on <span class="mono">flashSurf</span> so that the Surface
+object can have transparent colors drawn on it (otherwise, the alpha value in
+the Color objects we use will be ignored and automatically assumed to be 255).
+In your own game programs, if you are having trouble getting color transparency
+to work, make sure that you have called the <span class="mono">convert_alpha()</span>
+method on any Surface objects that have transparent colors painted on them.</p>
+
+		<p>Line 171 creates individual local variables named <span
+class="mono">r</span>, <span class="mono">g</span>, and <span class="mono">b</span>
+to store the individual RGB values of the tuple stored in <span class="mono">flashColor</span>.
+This is just some syntactic sugar that makes the rest of the code in this
+function easier to read. Before we begin animating the button flash, line 172
+will play the sound effect for that button. The program execution keeps going
+after the sound effect has started to play, so the sound will be playing during
+the button flash animation.</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">173.</span>    for
+start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment">#
+animation loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">174.</span>        for
+alpha in range(start, end, animationSpeed * step):</p>
+
+		<p class="noindent mono"><span class="line-number">175.</span>            checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">176.</span>            DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">177.</span>            flashSurf.fill((r,
+g, b, alpha))</p>
+
+		<p class="noindent mono"><span class="line-number">178.</span>            DISPLAYSURF.blit(flashSurf,
+rectangle.topleft)</p>
+
+		<p class="noindent mono"><span class="line-number">179.</span>            pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">180.</span>            FPSCLOCK.tick(FPS)</p>
+
+	<p class="noindent mono"><span class="line-number">181.</span>    DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+</div>
+
+		<p>Remember that to do the animation, we want to first draw the
+<span class="mono">flashSurf</span> with color that has increasing alpha
+values from <span class="mono">0</span> to <span class="mono">255</span> to
+do the brightening part of the animation. Then to do the dimming, we want the
+alpha value to go from <span class="mono">255</span> to <span class="mono">0</span>.
+We <em>could</em> do that with code like this:</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono">    for alpha in <strong><span
+style='font-family:"Lucida Sans Typewriter"'>range(0, 255, animationSpeed)</span></strong>:
+# brightening</p>
+
+	<p class="noindent mono">
+checkForQuit()</p>
+
+	<p class="noindent mono">        DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+	<p class="noindent mono">
+flashSurf.fill((r, g, b, alpha))</p>
+
+	<p class="noindent mono">        DISPLAYSURF.blit(flashSurf,
+rectangle.topleft)</p>
+
+	<p class="noindent mono">
+pygame.display.update()</p>
+
+	<p class="noindent mono">
+FPSCLOCK.tick(FPS)</p>
+
+	<p class="noindent mono">    for alpha in
+<strong><span style='font-family:"Lucida Sans Typewriter"'>range(255, 0,
+-animationSpeed)</span></strong>: # dimming</p>
+
+	<p class="noindent mono">
+checkForQuit()</p>
+
+	<p class="noindent mono">        DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+	<p class="noindent mono">
+flashSurf.fill((r, g, b, alpha))</p>
+
+	<p class="noindent mono">        DISPLAYSURF.blit(flashSurf,
+rectangle.topleft)</p>
+
+	<p class="noindent mono">
+pygame.display.update()</p>
+
+	<p class="noindent mono">
+FPSCLOCK.tick(FPS)</p>
+
+</div>
+
+		<p>But notice that the code inside the <span class="mono">for</span>
+loops handles drawing the frame and are identical to each other. If we wrote
+the code like the above, then the first <span class="mono">for</span> loop
+would handle the brightening part of the animation (where the alpha value goes
+from <span class="mono">0</span> to <span class="mono">255</span>) and the
+second <span class="mono">for</span> loop would handle the dimming part of the
+animation (where the alpha values goes from <span class="mono">255</span> to <span
+class="mono">0</span>). Note that for the second <span class="mono">for</span>
+loop, the third argument to the <span class="mono">range()</span> call is a
+negative number.</p>
+
+		<p>Whenever we have identical code like this, we can probably shorten
+our code so we don’t have to repeat it. This is what we do with the <span
+class="mono">for</span> loop on line 173, which supplies different values for
+the <span class="mono">range()</span> call on line 174:</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">173.</span>    for
+start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment">#
+animation loop</span></p>
+
+	<p class="noindent mono"><span class="line-number">174.</span>        for
+alpha in range(start, end, animationSpeed * step):</p>
+
+</div>
+
+		<p>On the first iteration of line 173’s <span class="mono">for</span>
+loop, <span class="mono">start</span> is set to <span class="mono">0</span>, <span
+class="mono">end</span> is set to <span class="mono">255</span>, and <span
+class="mono">step</span> is set to <span class="mono">1</span>. This way,
+when the <span class="mono">for</span> loop on line 174 is executed, it is
+calling <span class="mono">range(0, 255, animationSpeed)</span>. (Note that <span
+class="mono">animationSpeed * 1</span> is the same as <span class="mono">animationSpeed</span>.
+Multiplying a number by <span class="mono">1</span> gives us the same number.)</p>
+
+		<p>Line 174’s <span class="mono">for</span> loop then executes
+and performs the brightening animation.</p>
+
+		<p>On the second iteration of line 173’s <span class="mono">for</span>
+loop (there are always two and only two iterations of this inner <span
+class="mono">for</span> loop), <span class="mono">start</span> is set to <span
+class="mono">255</span>, <span class="mono">end</span> is set to <span
+class="mono">0</span>, and <span class="mono">step</span> is set to <span
+class="mono">-1</span>. When the line 174’s <span class="mono">for</span>
+loop is executed, it is calling <span class="mono">range(255, 0,
+-animationSpeed)</span>. (Note that <span class="mono">animationSpeed * -1</span>
+evaluates to <span class="mono">-animationSpeed</span>, since multiplying any
+number by <span class="mono">-1</span> returns the negative form of that same
+number.)</p>
+
+		<p>This way, we don’t have to have two separate <span
+class="mono">for</span> loops and repeat all the code that is inside of them.
+Here’s the code again that is inside line 174’s <span class="mono">for</span>
+loop:</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">175.</span>            checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">176.</span>            DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">177.</span>            flashSurf.fill((r,
+g, b, alpha))</p>
+
+		<p class="noindent mono"><span class="line-number">178.</span>            DISPLAYSURF.blit(flashSurf,
+rectangle.topleft)</p>
+
+		<p class="noindent mono"><span class="line-number">179.</span>            pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">180.</span>            FPSCLOCK.tick(FPS)</p>
+
+	<p class="noindent mono"><span class="line-number">181.</span>    DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+</div>
+
+		<p>We check for any <span class="mono">QUIT</span> events (in
+case the user tried to close the program during the animation), then blit the <span
+class="mono">origSurf</span> Surface to the display Surface. Then we paint the
+<span class="mono">flashSurf</span> Surface by calling <span class="mono">fill()</span>
+(supplying the <span class="mono">r</span>, <span class="mono">g</span>, <span
+class="mono">b</span> values of the color we got on line 171 and the alpha
+value that the <span class="mono">for</span> loop sets in the <span
+class="mono">alpha</span> variable). Then the <span class="mono">flashSurf</span>
+Surface is blitted to the display Surface. </p>
+
+		<p>Then, to make the display Surface appear on the screen, <span
+class="mono">pygame.display.update()</span> is called on line 179. To make
+sure the animation doesn’t play as fast as the computer can draw it, we add
+short pauses with a call to the <span class="mono">tick()</span> method. (If
+you want to see the flashing animation play very slowly, put a low number like
+1 or 2 as the argument to <span class="mono">tick()</span> instead of <span
+class="mono">FPS</span>.)</p>
+
+	<h1 class="subheading" id="">Drawing the Buttons</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">184.</span>def
+drawButtons():</p>
+
+		<p class="noindent mono"><span class="line-number">185.</span>    pygame.draw.rect(DISPLAYSURF,
+YELLOW, YELLOWRECT)</p>
+
+		<p class="noindent mono"><span class="line-number">186.</span>    pygame.draw.rect(DISPLAYSURF,
+BLUE,   BLUERECT)</p>
+
+		<p class="noindent mono"><span class="line-number">187.</span>    pygame.draw.rect(DISPLAYSURF,
+RED,    REDRECT)</p>
+
+	<p class="noindent mono"><span class="line-number">188.</span>    pygame.draw.rect(DISPLAYSURF,
+GREEN,  GREENRECT)</p>
+
+</div>
+
+		<p>Since each of the buttons is just a rectangle of a certain
+color in a certain place, we just make four calls to <span class="mono">pygame.draw.rect()</span>
+to draw the buttons on the display Surface. The Color object and the Rect
+object we use to position them never change, which is why we stored them in
+constant variables like <span class="mono">YELLOW</span> and <span
+class="mono">YELLOWRECT</span>.</p>
+
+	<h1 class="subheading" id="">Animating the Background Change</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">191.</span>def
+changeBackgroundAnimation(animationSpeed=40):</p>
+
+		<p class="noindent mono"><span class="line-number">192.</span>    global
+bgColor</p>
+
+		<p class="noindent mono"><span class="line-number">193.</span>    newBgColor
+= (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))</p>
+
+		<p class="noindent mono"><span class="line-number">194.</span></p>
+
+		<p class="noindent mono"><span class="line-number">195.</span>    newBgSurf
+= pygame.Surface((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">196.</span>    newBgSurf
+= newBgSurf.convert_alpha()</p>
+
+		<p class="noindent mono"><span class="line-number">197.</span>    r,
+g, b = newBgColor</p>
+
+		<p class="noindent mono"><span class="line-number">198.</span>    for
+alpha in range(0, 255, animationSpeed): <span class="comment">#
+animation loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">199.</span>        checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">200.</span>        DISPLAYSURF.fill(bgColor)</p>
+
+		<p class="noindent mono"><span class="line-number">201.</span></p>
+
+		<p class="noindent mono"><span class="line-number">202.</span>        newBgSurf.fill((r,
+g, b, alpha))</p>
+
+		<p class="noindent mono"><span class="line-number">203.</span>        DISPLAYSURF.blit(newBgSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">204.</span></p>
+
+		<p class="noindent mono"><span class="line-number">205.</span>        drawButtons()
+<span class="comment"># redraw the buttons on top of the tint</span></p>
+
+		<p class="noindent mono"><span class="line-number">206.</span></p>
+
+		<p class="noindent mono"><span class="line-number">207.</span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">208.</span>        FPSCLOCK.tick(FPS)</p>
+
+	<p class="noindent mono"><span class="line-number">209.</span>    bgColor
+= newBgColor</p>
+
+</div>
+
+		<p>The background color change animation happens whenever the
+player finishes entering the entire pattern correctly. On each iteration
+through the loop which starts on line 198 the entire display Surface has to be
+redrawn (blended with a less and less transparent new background color, until
+the background is completely covered by the new color). The steps done on each
+iteration of the loop are:</p>
+
+	<ul>
+		<li>Line 200 fills in the entire display Surface (stored in <span class="mono">DISPLAYSURF</span>) with the old background color (which is stored in <span class="mono">bgColor</span>).</li>
+		<li>Line 202 fills in a different Surface object (stored in <span class="mono">newBgSurf</span>) with the new background color’s RGB values (and the alpha transparency value changes on each iteration since that is what the <span class="mono">for</span> loop on line 198 does).</li>
+		<li>Line 203 then draws the <span class="mono">newBgSurf</span> Surface to the display Surface in <span class="mono">DISPLAYSURF</span>. The reason we didn’t just paint our semitransparent new background color on <span class="mono">DISPLAYSURF</span> to begin with is because the <span class="mono">fill()</span> method will just replace the color on the Surface, whereas the <span class="mono">blit()</span> method will blend the colors.</li>
+		<li>Now that we have the background the way we want it, we’ll draw the buttons over it with a call to <span class="mono">drawButtons()</span> on line 205.</li>
+		<li>Line 207 and 208 then just draws the display Surface to the screen and adds a pause.</li>
+	</ul>
+
+		<p>The reason there is a <span class="mono">global</span>
+statement at the beginning of the <span class="mono">changeBackgroundAnimation()</span>
+function is for the <span class="mono">bgColor</span> variable is because this
+function modifies the content of the variable with an assignment statement on
+line 209. Any function can read the value of a global variable without
+specifying the <span class="mono">global</span> statement. </p>
+
+		<p>If that function assigns a value to a global variable
+without a <span class="mono">global</span> statement, then Python considers
+that variable to be a local variable that just happens to have the same name as
+a global variable. The <span class="mono">main()</span> function uses the <span
+class="mono">bgColor</span> variable but doesn’t need a global statement for
+it because it only reads the contents of the <span class="mono">bgColor</span>
+the <span class="mono">main()</span> function never assigns <span
+class="mono">bgColor</span> a new value. This concept is explained in more
+detail at <a href="http://invpy.com/global">http://invpy.com/global</a>.</p>
+
+	<h1 class="subheading" id="">The Game Over Animation</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">212.</span>def
+gameOverAnimation(color=WHITE, animationSpeed=50):</p>
+
+		<p class="noindent mono"><span class="line-number">213.</span>    <span
+class="comment"># play all beeps at once, then flash the background</span></p>
+
+		<p class="noindent mono"><span class="line-number">214.</span>    origSurf
+= DISPLAYSURF.copy()</p>
+
+		<p class="noindent mono"><span class="line-number">215.</span>    flashSurf
+= pygame.Surface(DISPLAYSURF.get_size())</p>
+
+		<p class="noindent mono"><span class="line-number">216.</span>    flashSurf
+= flashSurf.convert_alpha()</p>
+
+		<p class="noindent mono"><span class="line-number">217.</span>    BEEP1.play()
+<span class="comment"># play all four beeps at the same time, roughly.</span></p>
+
+		<p class="noindent mono"><span class="line-number">218.</span>    BEEP2.play()</p>
+
+		<p class="noindent mono"><span class="line-number">219.</span>    BEEP3.play()</p>
+
+		<p class="noindent mono"><span class="line-number">220.</span>    BEEP4.play()</p>
+
+		<p class="noindent mono"><span class="line-number">221.</span>    r,
+g, b = color</p>
+
+	<p class="noindent mono"><span class="line-number">222.</span>    for
+i in range(3): <span class="comment"># do the flash 3 times</span></p>
+
+</div>
+
+		<p>Each of the iterations of the <span class="mono">for</span>
+loop on the next line (line 223 below) will perform a flash. To have three
+flashes done, we put all of that code in a <span class="mono">for</span> loop
+that has three iterations. If you want more or fewer flashes, then change the
+integer that is passed to <span class="mono">range()</span> on line 222.</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">223.</span>        for
+start, end, step in ((0, 255, 1), (255, 0, -1)):</p>
+
+</div>
+
+		<p>The <span class="mono">for</span> loop on line 223 is
+exactly the same as the one line 173. The <span class="mono">start</span>, <span
+class="mono">end</span>, and <span class="mono">step</span> variables will be
+used on the next <span class="mono">for</span> loop (on line 224) to control
+how the <span class="mono">alpha</span> variable changes. Reread the “Animating
+the Button Flash” section if you need to refresh yourself on how these loops
+work.</p>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">224.</span>            <span
+class="comment"># The first iteration in this loop sets the following
+for loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">225.</span>            <span
+class="comment"># to go from 0 to 255, the second from 255 to 0.</span></p>
+
+		<p class="noindent mono"><span class="line-number">226.</span>            for
+alpha in range(start, end, animationSpeed * step): <span
+class="comment"># animation loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">227.</span>                <span
+class="comment"># alpha means transparency. 255 is opaque, 0 is
+invisible</span></p>
+
+		<p class="noindent mono"><span class="line-number">228.</span>                checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">229.</span>                flashSurf.fill((r,
+g, b, alpha))</p>
+
+		<p class="noindent mono"><span class="line-number">230.</span>                DISPLAYSURF.blit(origSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">231.</span>                DISPLAYSURF.blit(flashSurf,
+(0, 0))</p>
+
+		<p class="noindent mono"><span class="line-number">232.</span>                drawButtons()</p>
+
+		<p class="noindent mono"><span class="line-number">233.</span>                pygame.display.update()</p>
+
+	<p class="noindent mono"><span class="line-number">234.</span>                FPSCLOCK.tick(FPS)</p>
+
+</div>
+
+		<p>This animation loop works the same as the previous flashing
+animation code in the “Animating the Background Change” section. The copy of
+the original Surface object stored in <span class="mono">origSurf</span> is
+drawn on the display Surface, then <span class="mono">flashSurf</span> (which
+has the new flashing color painted on it) is blitted on top of the display
+Surface. After the background color is set up, the buttons are drawn on top on
+line 232. Finally the display Surface is drawn to the screen with the call to <span
+class="mono">pygame.display.update()</span>.</p>
+
+		<p>The <span class="mono">for</span> loop on line 226 adjusts
+the alpha value for the color used for each frame of animation (increasing at
+first, and then decreasing).</p>
+
+	<h1 class="subheading" id="">Converting from Pixel Coordinates to Buttons</h1>
+
+	<div class="python-shell">
+
+	<p class="noindent mono"><span class="line-number">238.</span>def
+getButtonClicked(x, y):</p>
+
+		<p class="noindent mono"><span class="line-number">239.</span>    if
+YELLOWRECT.collidepoint( (x, y) ):</p>
+
+		<p class="noindent mono"><span class="line-number">240.</span>        return
+YELLOW</p>
+
+		<p class="noindent mono"><span class="line-number">241.</span>    elif
+BLUERECT.collidepoint( (x, y) ):</p>
+
+		<p class="noindent mono"><span class="line-number">242.</span>        return
+BLUE</p>
+
+		<p class="noindent mono"><span class="line-number">243.</span>    elif
+REDRECT.collidepoint( (x, y) ):</p>
+
+		<p class="noindent mono"><span class="line-number">244.</span>        return
+RED</p>
+
+		<p class="noindent mono"><span class="line-number">245.</span>    elif
+GREENRECT.collidepoint( (x, y) ):</p>
+
+		<p class="noindent mono"><span class="line-number">246.</span>        return
+GREEN</p>
+
+		<p class="noindent mono"><span class="line-number">247.</span>    return
+None</p>
+
+		<p class="noindent mono"><span class="line-number">248.</span></p>
+
+		<p class="noindent mono"><span class="line-number">249.</span></p>
+
+		<p class="noindent mono"><span class="line-number">250.</span>if
+__name__ == '__main__':</p>
+
+	<p class="noindent mono"><span class="line-number">251.</span>    main()</p>
+
+</div>
+
+		<p>The <span class="mono">getButtonClicked()</span> function
+simply takes XY pixel coordinates and returns either the values <span
+class="mono">YELLOW</span>, <span class="mono">BLUE</span>, <span
+class="mono">RED</span>, or <span class="mono">GREEN</span> if one of the
+buttons was clicked, or returns <span class="mono">None</span> if the XY pixel
+coordinates are not over any of the four buttons.</p>
+
+	<h1 class="subheading" id="explicit-better">Explicit is Better Than Implicit</h1>
+
+		<p>You may have noticed that the code for <span class="mono">getButtonClicked()</span>
+ends with a return <span class="mono">None</span> statement on line 247. This
+might seem like an odd thing to type out, since all functions return <span
+class="mono">None</span> if they don’t have any <span class="mono">return</span>
+statement at all. We could have left line 47 out entirely and the program would
+have worked the exact same way. So why bother writing it in?</p>
+
+		<p>Normally when a function reaches the end and returns the <span
+class="mono">None</span> value implicitly (that is, there is no <span
+class="mono">return</span> statement outright saying that it is returning <span
+class="mono">None</span>) the code that calls it doesn’t care about the return
+value. All function calls have to return a value (so that they can evaluate to
+something and be part of expressions), but our code doesn’t always make use of
+the return value.</p>
+
+		<p>For example, think about the <span class="mono">print()</span>
+function. Technically, this function returns the <span class="mono">None</span>
+value, but we never care about it:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; spam = print('Hello')</p>
+		<p class="noindent mono">Hello</p>
+		<p class="noindent mono">&gt;&gt;&gt; spam == None</p>
+		<p class="noindent mono">True</p>
+		<p class="noindent mono">&gt;&gt;&gt;</p>
+	</div>
+
+		<p>However, when <span class="mono">getButtonClicked()</span>
+returns <span class="mono">None</span>, it means that the coordinates that
+were passed to it were not over any of the four buttons. To make it clear that
+in this case the value <span class="mono">None</span> is returned from <span
+class="mono">getButtonClicked()</span>, we have the <span class="mono">return</span>
+<span class="mono">None</span> line at the end of the function.</p>
+
+		<p>To make your code more readable, it is better to have your
+code be explicit (that is, clearly state something even if it might be obvious)
+rather than implicit (that is, leaving it up to the person reading code to know
+how it works without outright telling them). In fact, “explicit is better than
+implicit” is one of the Python Koans. </p>
+
+		<p>The koans are a group of little sayings about how to write good
+code. There’s an Easter egg (that is, a little hidden surprise) in the Python
+interactive shell where if you try to import a module named <span
+class="mono">this</span>, then it will display “The Zen of Python” koans. Try
+it out in the interactive shell:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; import this</p>
+		<p class="noindent mono">The Zen of Python, by Tim Peters</p>
+		<p class="noindent mono"></p>
+		<p class="noindent mono">Beautiful is better than ugly.</p>
+		<p class="noindent mono">Explicit is better than implicit.</p>
+		<p class="noindent mono">Simple is better than complex.</p>
+		<p class="noindent mono">Complex is better than complicated.</p>
+		<p class="noindent mono">Flat is better than nested.</p>
+		<p class="noindent mono">Sparse is better than dense.</p>
+		<p class="noindent mono">Readability counts.</p>
+		<p class="noindent mono">Special cases aren't special enough to break the rules.</p>
+		<p class="noindent mono">Although practicality beats purity.</p>
+		<p class="noindent mono">Errors should never pass silently.</p>
+		<p class="noindent mono">Unless explicitly silenced.</p>
+		<p class="noindent mono">In the face of ambiguity, refuse the temptation to guess.</p>
+		<p class="noindent mono">There should be one-- and preferably only one --obvious way to do it.</p>
+		<p class="noindent mono">Although that way may not be obvious at first unless you're Dutch.</p>
+		<p class="noindent mono">Now is better than never.</p>
+		<p class="noindent mono">Although never is often better than *right* now.</p>
+		<p class="noindent mono">If the implementation is hard to explain, it's a bad idea.</p>
+		<p class="noindent mono">If the implementation is easy to explain, it may be a good idea.</p>
+		<p class="noindent mono">Namespaces are one honking great idea -- let's do more of those!</p>
+	</div>
+
+	<p>If you’d like to know more about what these individual koans mean, visit <a href="https://invpy.com/zen">https://invpy.com/zen</a>.</p>
+
 </body>
 </html>
