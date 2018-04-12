@@ -10,10 +10,10 @@
 	<h1 class="heading">Chapter 5 – Stimulate</h1>
 	<hr class="heading"/>
 
-	<h1 class="subheading" id="">How to Play Simulate</h1>
+	<h1 class="subheading" id="how-to-play">How to Play Simulate</h1>
 		<p class="noindent">Simulate is a clone of the game Simon. There are four colored buttons on the screen. The buttons light up in a certain random pattern, and then the player must repeat this pattern by pressing the buttons in the correct order. Each time the player successfully simulates the pattern, the pattern gets longer. The player tries to match the pattern for as long as possible.</p>
 
-	<h1 class="subheading" id="">Source Code to Simulate</h1>
+	<h1 class="subheading" id="source-code">Source Code to Simulate</h1>
 		<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/simulate.py">https://invpy.com/simulate.py</a>. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/simulate">https://invpy.com/diff/simulate</a> to see if the differences between your code and the code in the book.</p>
 		<p>You can download the four sound files that this program uses from:</p>
 
@@ -110,18 +110,10 @@
 		<p class="noindent mono"> <span class="line-number">83.</span>                 mousex, mousey = event.pos</p>
 		<p class="noindent mono"> <span class="line-number">84.</span>                 clickedButton = getButtonClicked(mousex, mousey)</p>
 		<p class="noindent mono"><span class="line-number"> 85.</span>            elif event.type == KEYDOWN:</p>
-
-		<p class="noindent mono"><span class="line-number"> 86.</span>                if
-event.key == K_q:</p>
-
-		<p class="noindent mono"> <span class="line-number">87.</span>                     clickedButton
-= YELLOW</p>
-
-		<p class="noindent mono"> <span class="line-number">88.</span>                 elif
-event.key == K_w:</p>
-
-		<p class="noindent mono"> <span class="line-number">89.</span>                     clickedButton
-= BLUE</p>
+		<p class="noindent mono"><span class="line-number"> 86.</span>                if event.key == K_q:</p>
+		<p class="noindent mono"> <span class="line-number">87.</span>                     clickedButton = YELLOW</p>
+		<p class="noindent mono"> <span class="line-number">88.</span>                 elifevent.key == K_w:</p>
+		<p class="noindent mono"> <span class="line-number">89.</span>                     clickedButton = BLUE</p>
 
 		<p class="noindent mono"> <span class="line-number">90.</span>                 elif
 event.key == K_a:</p>
@@ -526,18 +518,16 @@ invisible</span></p>
 	<h1 class="subheading" id="">The Usual Starting Stuff</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">  1.</span><span class="comment"># Simulate (a Simon clone)</span></p>
-		<p class="noindent mono"><span class="line-number">  2.</span><span class="comment"># By Al Sweigart <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73121f331a1d05161d07041a071b030a071b1c1d5d101c1e">[email&#160;protected]</a></span></p>
-		<p class="noindent mono"><span class="line-number">  3.</span><span class="comment"># http://inventwithpython.com/pygame</span></p>
-		<p class="noindent mono"><span class="line-number">  4.</span><span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
-		<p class="noindent mono"><span class="line-number">  5.</span></p>
-		<p class="noindent mono">  <span class="line-number">6.</span>import random, sys, time, pygame</p>
-		<p class="noindent mono">  <span class="line-number">7.</span>from pygame.locals import *</p>
-		<p class="noindent mono">  <span class="line-number">8.</span></p>
-		<p class="noindent mono">  <span class="line-number">9.</span>FPS
-= 30</p>
-		<p class="noindent mono"> <span class="line-number">10.</span> WINDOWWIDTH
-= 640</p>
+		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Simulate (a Simon clone)</span></p>
+		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">6.</span> import random, sys, time, pygame</p>
+		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+		<p class="noindent mono"><span class="line-number">9.</span> FPS = 30</p>
+		<p class="noindent mono"> <span class="line-number">10.</span> WINDOWWIDTH = 640</p>
 		<p class="noindent mono"> <span class="line-number">11.</span> WINDOWHEIGHT
 = 480</p>
 		<p class="noindent mono"> <span class="line-number">12.</span> FLASHSPEED
@@ -1636,12 +1626,12 @@ class="comment"># play all beeps at once, then flash the background</span></p>
 		<p class="noindent mono"><span class="line-number">221.</span>    r,
 g, b = color</p>
 
-	<p class="noindent mono"><span class="line-number">222.</span>    for
+		<p class="noindent mono"><span class="line-number">222.</span>    for
 i in range(3): <span class="comment"># do the flash 3 times</span></p>
 
-</div>
+	</div>
 
-		<p>Each of the iterations of the <span class="mono">for</span>
+	<p>Each of the iterations of the <span class="mono">for</span>
 loop on the next line (line 223 below) will perform a flash. To have three
 flashes done, we put all of that code in a <span class="mono">for</span> loop
 that has three iterations. If you want more or fewer flashes, then change the
@@ -1664,7 +1654,7 @@ work.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"><span class="line-number">224.</span>            <span
+		<p class="noindent mono"><span class="line-number">224.</span>            <span
 class="comment"># The first iteration in this loop sets the following
 for loop</span></p>
 
@@ -1756,7 +1746,7 @@ __name__ == '__main__':</p>
 
 </div>
 
-		<p>The <span class="mono">getButtonClicked()</span> function
+	<p>The <span class="mono">getButtonClicked()</span> function
 simply takes XY pixel coordinates and returns either the values <span
 class="mono">YELLOW</span>, <span class="mono">BLUE</span>, <span
 class="mono">RED</span>, or <span class="mono">GREEN</span> if one of the
@@ -1764,23 +1754,20 @@ buttons was clicked, or returns <span class="mono">None</span> if the XY pixel
 coordinates are not over any of the four buttons.</p>
 
 	<h1 class="subheading" id="explicit-better">Explicit is Better Than Implicit</h1>
-
-		<p>You may have noticed that the code for <span class="mono">getButtonClicked()</span>
+	<p class="noindent">You may have noticed that the code for <span class="mono">getButtonClicked()</span>
 ends with a return <span class="mono">None</span> statement on line 247. This
 might seem like an odd thing to type out, since all functions return <span
 class="mono">None</span> if they don’t have any <span class="mono">return</span>
 statement at all. We could have left line 47 out entirely and the program would
 have worked the exact same way. So why bother writing it in?</p>
-
-		<p>Normally when a function reaches the end and returns the <span
+	<p>Normally when a function reaches the end and returns the <span
 class="mono">None</span> value implicitly (that is, there is no <span
 class="mono">return</span> statement outright saying that it is returning <span
 class="mono">None</span>) the code that calls it doesn’t care about the return
 value. All function calls have to return a value (so that they can evaluate to
 something and be part of expressions), but our code doesn’t always make use of
 the return value.</p>
-
-		<p>For example, think about the <span class="mono">print()</span>
+	<p>For example, think about the <span class="mono">print()</span>
 function. Technically, this function returns the <span class="mono">None</span>
 value, but we never care about it:</p>
 

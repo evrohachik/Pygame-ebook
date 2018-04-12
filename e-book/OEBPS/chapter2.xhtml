@@ -10,7 +10,7 @@
 	<h1 class="heading">Chapter 2 – Pygame Basics</h1>
 	<hr class="heading"/>
 
-	<p class="noindent">Just like how Python comes with several modules like random, math, or time that provide additional functions for your programs, the Pygame framework includes several modules with functions for drawing graphics, playing sounds, handling mouse input, and other things.</p>
+	<p class="noindent">Just like how Python comes with several modules like <span class="mono">random</span>, <span class="mono">math</span>, or <span class="mono">time</span> that provide additional functions for your programs, the Pygame framework includes several modules with functions for drawing graphics, playing sounds, handling mouse input, and other things.</p>
 	<p>This chapter will cover the basic modules and functions that Pygame provides and assumes you already know basic Python programming. If you have trouble with some of the programming concepts, you can read through the <i>“Invent Your Own Computer Games with Python“</i> book online at <a href="https://invpy.com/book">https://invpy.com/book</a>. This book is aimed at complete beginners to programming.</p>
 	<p>The <i>“Invent with Python“</i> book also has a few chapters covering Pygame. You can read them online at <a href="https://invpy.com/chap17">https://invpy.com/chap17</a>.</p>
 	<p>Once you learn more about Pygame, you can view the other modules that Pygame provides from the online documentation at <a href="https://pygame.org/docs">https://pygame.org/docs</a>.</p>
@@ -101,7 +101,7 @@
 	<p>Since the game state is usually updated in response to events (such as mouse clicks or keyboard presses) or the passage of time, the game loop is constantly checking and re-checking many times a second for any new events that have happened. Inside the main loop is code that looks at which events have been created (with Pygame, this is done by calling the <span class="mono">pygame.event.get()</span> function). The main loop also has code that updates the game state based on which events have been created. This is usually called <a href="glossary.xhtml#event-handling"><b>event handling</b></a>.</p>
 
 	<div class="image-center">
-		<img class="half-image" src="images/chapter2/game-loop.jpg" alt=""/>
+		<img class="image" src="images/chapter2/game-loop.jpg" alt=""/>
 	</div>
 
 	<h1 class="subheading" id="pygame-event-objects"><span class="mono">pygame.event.Event</span> Objects</h1>
@@ -135,7 +135,7 @@
 	<p>That is the entire program. After line 12 is done, the infinite <span class="mono">while</span> loop starts again from the beginning. This program does nothing besides make a black window appear on the screen, constantly check for a <span class="mono">QUIT</span> event, and then redraws the unchanged black window to the screen over and over again. Let’s learn how to make interesting things appear on this window instead of just blackness by learning about pixels, Surface objects, Color objects, Rect objects, and the Pygame drawing functions.</p>
 
 	<h1 class="subheading" id="pixel-coordinates"><a>Pixel Coordinates</a></h1>
-	<p class="noindent">The window that the “Hello World” program creates is just composed of little square dots on your screen called <a href="glossary.xhtml#pixels"><b>pixels</b></a>. Each pixel starts off as black but can be set to a different color. Imagine that instead of a Surface object that is 400 pixels wide and 300 pixels tall, we just had a Surface object that was 8 pixels by 8 pixels. If that tiny 8x8 Surface was enlarged so that each pixel looks like a square in a grid, and we added numbers for the X and Y axis, then a good representation of it could look something like this:</p>
+	<p class="noindent">The window that the “Hello World” program creates is just composed of little square dots on your screen called <a href="glossary.xhtml#pixels"><b>pixels</b></a>. Each pixel starts off as black but can be set to a different color. Imagine that instead of a Surface object that is 400 pixels wide and 300 pixels tall, we just had a Surface object that was 8 pixels by 8 pixels. If that tiny 8 × 8 Surface was enlarged so that each pixel looks like a square in a grid, and we added numbers for the X and Y axis, then a good representation of it could look something like this:</p>
 
 	<div class="image-center">
 		<img class="half-image" src="images/chapter2/pixel.jpg" alt=""/>

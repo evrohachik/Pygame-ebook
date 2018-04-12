@@ -10,5 +10,1782 @@
 	<h1 class="heading">Chapter 6 – Wormy</h1>
 	<hr class="heading"/>
 
+	<h1 class="subheading" id="">How to Play Wormy</h1>
+
+	<p class="noindent">Wormy is a Nibbles clone. The player starts out controlling a short worm that is constantly moving around the screen. The player cannot stop or slow down the worm, but they can control which direction it turns. A red apple appears randomly on the screen, and the player must move the worm so that it eats the apple. Each time the worm eats an apple, the worm grows longer by one segment and a new apply randomly appears on the screen. The game is over if the worm crashes into itself or the edges of the screen.</p>
+
+	<h1 class="subheading" id="">Source Code to Wormy</h1>
+	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/wormy.py">https://invpy.com/wormy.py</a>. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/wormy">https://invpy.com/diff/wormy</a> to see if the differences between your code and the code in the book.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Wormy (a Nibbles clone)</span></p>
+		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">6.</span> import random, pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+		<p class="noindent mono"><span class="line-number">9.</span> FPS = 15</p>
+		<p class="noindent mono"><span class="line-number">10.</span> WINDOWWIDTH = 640</p>
+		<p class="noindent mono"><span class="line-number">11.</span> WINDOWHEIGHT = 480</p>
+		<p class="noindent mono"><span class="line-number">12.</span> CELLSIZE = 20</p>
+		<p class="noindent mono"><span class="line-number">13.</span> assert WINDOWWIDTH % CELLSIZE == 0, &quot;Window width must be a multiple of cell size.&quot;</p>
+		<p class="noindent mono"><span class="line-number">14.</span> assert WINDOWHEIGHT % CELLSIZE == 0, &quot;Window height must be a multiple of cell size.&quot;</p>
+		<p class="noindent mono"><span class="line-number">15.</span> CELLWIDTH = int(WINDOWWIDTH / CELLSIZE)</p>
+		<p class="noindent mono"><span class="line-number">16.</span> CELLHEIGHT = int(WINDOWHEIGHT / CELLSIZE)</p>
+		<p class="noindent mono"><span class="line-number">17.</span></p>
+
+		<p class="noindent mono"><span class="line-number">18.</span> <span
+class="comment">#             R    G    B</span></p>
+
+		<p class="noindent mono"><span class="line-number">19.</span> WHITE
+= (255, 255, 255)</p>
+
+		<p class="noindent mono"><span class="line-number">20.</span> BLACK
+= (  0,   0,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">21.</span> RED
+= (255,   0,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">22.</span> GREEN
+= (  0, 255,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">23.</span> DARKGREEN
+= (  0, 155,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">24.</span> DARKGRAY
+= ( 40,  40,  40)</p>
+
+		<p class="noindent mono"><span class="line-number">25.</span> BGCOLOR
+= BLACK</p>
+
+		<p class="noindent mono"><span class="line-number">26.</span></p>
+
+		<p class="noindent mono"><span class="line-number">27.</span> UP
+= 'up'</p>
+
+		<p class="noindent mono"><span class="line-number">28.</span> DOWN
+= 'down'</p>
+
+		<p class="noindent mono"><span class="line-number">29.</span> LEFT
+= 'left'</p>
+
+		<p class="noindent mono"><span class="line-number">30.</span> RIGHT
+= 'right'</p>
+
+		<p class="noindent mono"><span class="line-number">31.</span></p>
+
+		<p class="noindent mono"><span class="line-number">32.</span> HEAD
+= 0 <span class="comment"># syntactic sugar: index of the worm's head</span></p>
+
+		<p class="noindent mono"><span class="line-number">33.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 34.</span> def
+main():</p>
+
+		<p class="noindent mono"><span class="line-number">35.</span>     global
+FPSCLOCK, DISPLAYSURF, BASICFONT</p>
+
+		<p class="noindent mono"><span class="line-number">36.</span></p>
+
+		<p class="noindent mono"><span class="line-number">37.</span>     pygame.init()</p>
+
+		<p class="noindent mono"><span class="line-number">38.</span>     FPSCLOCK
+= pygame.time.Clock()</p>
+
+		<p class="noindent mono"><span class="line-number">39.</span>     DISPLAYSURF
+= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">40.</span>     BASICFONT
+= pygame.font.Font('freesansbold.ttf', 18)</p>
+
+		<p class="noindent mono"><span class="line-number">41.</span>     pygame.display.set_caption('Wormy')</p>
+
+		<p class="noindent mono"><span class="line-number">42.</span></p>
+
+		<p class="noindent mono"><span class="line-number">43.</span>     showStartScreen()</p>
+
+		<p class="noindent mono"><span class="line-number">44.</span>     while
+True:</p>
+
+		<p class="noindent mono"><span class="line-number">45.</span>         runGame()</p>
+
+		<p class="noindent mono"><span class="line-number">46.</span>         showGameOverScreen()</p>
+
+		<p class="noindent mono"><span class="line-number">47.</span></p>
+
+		<p class="noindent mono"><span class="line-number">48.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 49.</span> def
+runGame():</p>
+
+		<p class="noindent mono"><span class="line-number"> 50.</span>     <span
+class="comment"># Set a random start point.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 51.</span>     startx
+= random.randint(5, CELLWIDTH - 6)</p>
+
+		<p class="noindent mono"><span class="line-number"> 52.</span>     starty
+= random.randint(5, CELLHEIGHT - 6)</p>
+
+		<p class="noindent mono"><span class="line-number"> 53.</span>     wormCoords
+= [{'x': startx,     'y': starty},</p>
+
+		<p class="noindent mono"><span class="line-number"> 54.</span>                   {'x':
+startx - 1, 'y': starty},</p>
+
+		<p class="noindent mono"><span class="line-number"> 55.</span>                   {'x':
+startx - 2, 'y': starty}]</p>
+
+		<p class="noindent mono"><span class="line-number"> 56.</span>     direction
+= RIGHT</p>
+
+		<p class="noindent mono"><span class="line-number"> 57.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 58.</span>     <span
+class="comment"># Start the apple in a random place.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 59.</span>     apple
+= getRandomLocation()</p>
+
+		<p class="noindent mono"><span class="line-number"> 60.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 61.</span>     while
+True: <span class="comment"># main game loop</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 62.</span>         for
+event in pygame.event.get(): <span class="comment"># event handling
+loop</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 63.</span>             if
+event.type == QUIT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 64.</span>                 terminate()</p>
+
+		<p class="noindent mono"><span class="line-number"> 65.</span>             elif
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 66.</span>                 if
+(event.key == K_LEFT or event.key == K_a) and direction != RIGHT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 67.</span>                     direction
+= LEFT</p>
+
+		<p class="noindent mono"><span class="line-number"> 68.</span>                 elif
+(event.key == K_RIGHT or event.key == K_d) and direction != LEFT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 69.</span>                     direction
+= RIGHT</p>
+
+		<p class="noindent mono"><span class="line-number"> 70.</span>                 elif
+(event.key == K_UP or event.key == K_w) and direction != DOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 71.</span>                     direction
+= UP</p>
+
+		<p class="noindent mono"><span class="line-number"> 72.</span>                 elif
+(event.key == K_DOWN or event.key == K_s) and direction != UP:</p>
+
+		<p class="noindent mono"><span class="line-number"> 73.</span>                     direction
+= DOWN</p>
+
+		<p class="noindent mono"><span class="line-number"> 74.</span>                 elif
+event.key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number"> 75.</span>                     terminate()</p>
+
+		<p class="noindent mono"><span class="line-number"> 76.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 77.</span>         <span
+class="comment"># check if the worm has hit itself or the edge</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 78.</span>         if
+wormCoords[HEAD]['x'] == -1 or wormCoords[HEAD]['x'] == CELLWIDTH or
+wormCoords[HEAD]['y'] == -1 or wormCoords[HEAD]['y'] == CELLHEIGHT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 79.</span>             return
+<span class="comment"># game over</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 80.</span>         for
+wormBody in wormCoords[1:]:</p>
+
+		<p class="noindent mono"><span class="line-number"> 81.</span>             if
+wormBody['x'] == wormCoords[HEAD]['x'] and wormBody['y'] ==
+wormCoords[HEAD]['y']:</p>
+
+		<p class="noindent mono"><span class="line-number"> 82.</span>                 return
+<span class="comment"># game over</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 83.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 84.</span>         <span
+class="comment"># check if worm has eaten an apply</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 85.</span>         if
+wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']:</p>
+
+		<p class="noindent mono"><span class="line-number"> 86.</span>             <span
+class="comment"># don't remove worm's tail segment</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 87.</span>             apple
+= getRandomLocation() <span class="comment"># set a new apple somewhere</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 88.</span>         else:</p>
+
+		<p class="noindent mono"><span class="line-number"> 89.</span>             del
+wormCoords[-1] <span class="comment"># remove worm's tail segment</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 90.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 91.</span>         <span
+class="comment"># move the worm by adding a segment in the direction it
+is moving</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 92.</span>         if
+direction == UP:</p>
+
+		<p class="noindent mono"><span class="line-number"> 93.</span>             newHead
+= {'x': wormCoords[HEAD]['x'], 'y': wormCoords[HEAD]['y'] - 1}</p>
+
+		<p class="noindent mono"><span class="line-number"> 94.</span>         elif
+direction == DOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 95.</span>             newHead
+= {'x': wormCoords[HEAD]['x'], 'y': wormCoords[HEAD]['y'] + 1}</p>
+
+		<p class="noindent mono"><span class="line-number"> 96.</span>         elif
+direction == LEFT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 97.</span>             newHead
+= {'x': wormCoords[HEAD]['x'] - 1, 'y': wormCoords[HEAD]['y']}</p>
+
+		<p class="noindent mono"><span class="line-number"> 98.</span>         elif
+direction == RIGHT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 99.</span>             newHead
+= {'x': wormCoords[HEAD]['x'] + 1, 'y': wormCoords[HEAD]['y']}</p>
+
+		<p class="noindent mono"><span class="line-number">100.</span>
+wormCoords.insert(0, newHead)</p>
+
+		<p class="noindent mono"><span class="line-number">101.</span>         DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">102.</span>         drawGrid()</p>
+
+		<p class="noindent mono"><span class="line-number">103.</span>         drawWorm(wormCoords)</p>
+
+		<p class="noindent mono"><span class="line-number">104.</span>         drawApple(apple)</p>
+
+		<p class="noindent mono"><span class="line-number">105.</span>         drawScore(len(wormCoords)
+- 3)</p>
+
+		<p class="noindent mono"><span class="line-number">106.</span>         pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">107.</span>         FPSCLOCK.tick(FPS)</p>
+
+		<p class="noindent mono"><span class="line-number">108.</span></p>
+
+		<p class="noindent mono"><span class="line-number">109.</span> def
+drawPressKeyMsg():</p>
+
+		<p class="noindent mono"><span class="line-number">110.</span>     pressKeySurf
+= BASICFONT.render('Press a key to play.', True, DARKGRAY)</p>
+
+		<p class="noindent mono"><span class="line-number">111.</span>     pressKeyRect
+= pressKeySurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">112.</span>     pressKeyRect.topleft
+= (WINDOWWIDTH - 200, WINDOWHEIGHT - 30)</p>
+
+		<p class="noindent mono"><span class="line-number">113.</span>     DISPLAYSURF.blit(pressKeySurf,
+pressKeyRect)</p>
+
+		<p class="noindent mono"><span class="line-number">114.</span></p>
+
+		<p class="noindent mono"><span class="line-number">115.</span></p>
+
+		<p class="noindent mono"><span class="line-number">116.</span> def
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">117.</span>     if
+len(pygame.event.get(QUIT)) &gt; 0:</p>
+
+		<p class="noindent mono"><span class="line-number">118.</span>         terminate()</p>
+
+		<p class="noindent mono"><span class="line-number">119.</span></p>
+
+		<p class="noindent mono"><span class="line-number">120.</span>     keyUpEvents
+= pygame.event.get(KEYUP)</p>
+
+		<p class="noindent mono"><span class="line-number">121.</span>
+if len(keyUpEvents) == 0:</p>
+
+		<p class="noindent mono"><span class="line-number">122.</span>
+return None</p>
+
+		<p class="noindent mono"><span class="line-number">123.</span>     if
+keyUpEvents[0].key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number">124.</span>         terminate()</p>
+
+		<p class="noindent mono"><span class="line-number">125.</span>     return
+keyUpEvents[0].key</p>
+
+		<p class="noindent mono"><span class="line-number">126.</span></p>
+
+		<p class="noindent mono"><span class="line-number">127.</span></p>
+
+		<p class="noindent mono"><span class="line-number">128.</span> def
+showStartScreen():</p>
+
+		<p class="noindent mono"><span class="line-number">129.</span>     titleFont
+= pygame.font.Font('freesansbold.ttf', 100)</p>
+
+		<p class="noindent mono"><span class="line-number">130.</span>     titleSurf1
+= titleFont.render('Wormy!', True, WHITE, DARKGREEN)</p>
+
+		<p class="noindent mono"><span class="line-number">131.</span>     titleSurf2
+= titleFont.render('Wormy!', True, GREEN)</p>
+
+		<p class="noindent mono"><span class="line-number">132.</span></p>
+
+		<p class="noindent mono"><span class="line-number">133.</span>     degrees1
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">134.</span>     degrees2
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">135.</span>     while
+True:</p>
+
+		<p class="noindent mono"><span class="line-number">136.</span>         DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">137.</span>         rotatedSurf1
+= pygame.transform.rotate(titleSurf1, degrees1)</p>
+
+		<p class="noindent mono"><span class="line-number">138.</span>         rotatedRect1
+= rotatedSurf1.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">139.</span>         rotatedRect1.center
+= (WINDOWWIDTH / 2, WINDOWHEIGHT / 2)</p>
+
+		<p class="noindent mono"><span class="line-number">140.</span>         DISPLAYSURF.blit(rotatedSurf1,
+rotatedRect1)</p>
+
+		<p class="noindent mono"><span class="line-number">141.</span></p>
+
+		<p class="noindent mono"><span class="line-number">142.</span>         rotatedSurf2
+= pygame.transform.rotate(titleSurf2, degrees2)</p>
+
+		<p class="noindent mono"><span class="line-number">143.</span>         rotatedRect2
+= rotatedSurf2.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">144.</span>         rotatedRect2.center
+= (WINDOWWIDTH / 2, WINDOWHEIGHT / 2)</p>
+
+		<p class="noindent mono"><span class="line-number">145.</span>         DISPLAYSURF.blit(rotatedSurf2,
+rotatedRect2)</p>
+
+		<p class="noindent mono"><span class="line-number">146.</span></p>
+
+		<p class="noindent mono"><span class="line-number">147.</span>         drawPressKeyMsg()</p>
+
+		<p class="noindent mono"><span class="line-number">148.</span></p>
+
+		<p class="noindent mono"><span class="line-number">149.</span>         if
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">150.</span>             pygame.event.get()
+<span class="comment"># clear event queue</span></p>
+
+		<p class="noindent mono"><span class="line-number">151.</span>
+return</p>
+
+		<p class="noindent mono"><span class="line-number">152.</span>         pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">153.</span>         FPSCLOCK.tick(FPS)</p>
+
+		<p class="noindent mono"><span class="line-number">154.</span>         degrees1
++= 3 <span class="comment"># rotate by 3 degrees each frame</span></p>
+
+		<p class="noindent mono"><span class="line-number">155.</span>         degrees2
++= 7 <span class="comment"># rotate by 7 degrees each frame</span></p>
+
+		<p class="noindent mono"><span class="line-number">156.</span></p>
+
+		<p class="noindent mono"><span class="line-number">157.</span></p>
+
+		<p class="noindent mono"><span class="line-number">158.</span> def
+terminate():</p>
+
+		<p class="noindent mono"><span class="line-number">159.</span>     pygame.quit()</p>
+
+		<p class="noindent mono"><span class="line-number">160.</span>     sys.exit()</p>
+
+		<p class="noindent mono"><span class="line-number">161.</span></p>
+
+		<p class="noindent mono"><span class="line-number">162.</span></p>
+
+		<p class="noindent mono"><span class="line-number">163.</span> def
+getRandomLocation():</p>
+
+		<p class="noindent mono"><span class="line-number">164.</span>     return
+{'x': random.randint(0, CELLWIDTH - 1), 'y': random.randint(0, CELLHEIGHT - 1)}</p>
+
+		<p class="noindent mono"><span class="line-number">165.</span></p>
+
+		<p class="noindent mono"><span class="line-number">166.</span></p>
+
+		<p class="noindent mono"><span class="line-number">167.</span> def
+showGameOverScreen():</p>
+
+		<p class="noindent mono"><span class="line-number">168.</span>     gameOverFont
+= pygame.font.Font('freesansbold.ttf', 150)</p>
+
+		<p class="noindent mono"><span class="line-number">169.</span>     gameSurf
+= gameOverFont.render('Game', True, WHITE)</p>
+
+		<p class="noindent mono"><span class="line-number">170.</span>     overSurf
+= gameOverFont.render('Over', True, WHITE)</p>
+
+		<p class="noindent mono"><span class="line-number">171.</span>     gameRect
+= gameSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">172.</span>     overRect
+= overSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">173.</span>     gameRect.midtop
+= (WINDOWWIDTH / 2, 10)</p>
+
+		<p class="noindent mono"><span class="line-number">174.</span>     overRect.midtop
+= (WINDOWWIDTH / 2, gameRect.height + 10 + 25)</p>
+
+		<p class="noindent mono"><span class="line-number">175.</span></p>
+
+		<p class="noindent mono"><span class="line-number">176.</span>     DISPLAYSURF.blit(gameSurf,
+gameRect)</p>
+
+		<p class="noindent mono"><span class="line-number">177.</span>     DISPLAYSURF.blit(overSurf,
+overRect)</p>
+
+		<p class="noindent mono"><span class="line-number">178.</span>     drawPressKeyMsg()</p>
+
+		<p class="noindent mono"><span class="line-number">179.</span>     pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">180.</span>     pygame.time.wait(500)</p>
+
+		<p class="noindent mono"><span class="line-number">181.</span>     checkForKeyPress()
+<span class="comment"># clear out any key presses in the event queue</span></p>
+
+		<p class="noindent mono"><span class="line-number">182.</span></p>
+
+		<p class="noindent mono"><span class="line-number">183.</span>     while
+True:</p>
+
+		<p class="noindent mono"><span class="line-number">184.</span>         if
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">185.</span>             pygame.event.get()
+<span class="comment"># clear event queue</span></p>
+
+		<p class="noindent mono"><span class="line-number">186.</span>
+return</p>
+
+		<p class="noindent mono"><span class="line-number">187.</span></p>
+
+		<p class="noindent mono"><span class="line-number">188.</span> def
+drawScore(score):</p>
+
+		<p class="noindent mono"><span class="line-number">189.</span>     scoreSurf
+= BASICFONT.render('Score: %s' % (score), True, WHITE)</p>
+
+		<p class="noindent mono"><span class="line-number">190.</span>     scoreRect
+= scoreSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">191.</span>     scoreRect.topleft
+= (WINDOWWIDTH - 120, 10)</p>
+
+		<p class="noindent mono"><span class="line-number">192.</span>     DISPLAYSURF.blit(scoreSurf,
+scoreRect)</p>
+
+		<p class="noindent mono"><span class="line-number">193.</span></p>
+
+		<p class="noindent mono"><span class="line-number">194.</span></p>
+
+		<p class="noindent mono"><span class="line-number">195.</span> def
+drawWorm(wormCoords):</p>
+
+		<p class="noindent mono"><span class="line-number">196.</span>     for
+coord in wormCoords:</p>
+
+		<p class="noindent mono"><span class="line-number">197.</span>         x
+= coord['x'] * CELLSIZE</p>
+
+		<p class="noindent mono"><span class="line-number">198.</span>         y
+= coord['y'] * CELLSIZE</p>
+
+		<p class="noindent mono"><span class="line-number">199.</span>         wormSegmentRect
+= pygame.Rect(x, y, CELLSIZE, CELLSIZE)</p>
+
+		<p class="noindent mono"><span class="line-number">200.</span>         pygame.draw.rect(DISPLAYSURF,
+DARKGREEN, wormSegmentRect)</p>
+
+		<p class="noindent mono"><span class="line-number">201.</span>         wormInnerSegmentRect
+= pygame.Rect(x + 4, y + 4, CELLSIZE - 8, CELLSIZE - 8)</p>
+
+		<p class="noindent mono"><span class="line-number">202.</span>         pygame.draw.rect(DISPLAYSURF,
+GREEN, wormInnerSegmentRect)</p>
+
+		<p class="noindent mono"><span class="line-number">203.</span></p>
+
+		<p class="noindent mono"><span class="line-number">204.</span></p>
+
+		<p class="noindent mono"><span class="line-number">205.</span> def
+drawApple(coord):</p>
+
+		<p class="noindent mono"><span class="line-number">206.</span>     x
+= coord['x'] * CELLSIZE</p>
+
+		<p class="noindent mono"><span class="line-number">207.</span>     y
+= coord['y'] * CELLSIZE</p>
+
+		<p class="noindent mono"><span class="line-number">208.</span>     appleRect
+= pygame.Rect(x, y, CELLSIZE, CELLSIZE)</p>
+
+		<p class="noindent mono"><span class="line-number">209.</span>     pygame.draw.rect(DISPLAYSURF,
+RED, appleRect)</p>
+
+		<p class="noindent mono"><span class="line-number">210.</span></p>
+
+		<p class="noindent mono"><span class="line-number">211.</span></p>
+
+		<p class="noindent mono"><span class="line-number">212.</span> def
+drawGrid():</p>
+
+		<p class="noindent mono"><span class="line-number">213.</span>     for
+x in range(0, WINDOWWIDTH, CELLSIZE): <span class="comment"># draw
+vertical lines</span></p>
+
+		<p class="noindent mono"><span class="line-number">214.</span>         pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (x, 0), (x, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">215.</span>     for
+y in range(0, WINDOWHEIGHT, CELLSIZE): <span class="comment"># draw
+horizontal lines</span></p>
+
+		<p class="noindent mono"><span class="line-number">216.</span>         pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, y), (WINDOWWIDTH, y))</p>
+
+		<p class="noindent mono"><span class="line-number">217.</span></p>
+
+		<p class="noindent mono"><span class="line-number">218.</span></p>
+
+		<p class="noindent mono"><span class="line-number">219.</span> if
+__name__ == '__main__':</p>
+
+		<p class="noindent mono"><span class="line-number">220.</span>     main()</p>
+
+	</div>
+
+	<h1 class="subheading" id="">The Grid</h1>
+
+	<p class="noindent">If you play the game a little, you’ll notice that the apple
+and the segments of the worm’s body always fit along a grid of lines. We will call
+each of the squares in this grid a cell (it’s not always what a space in a grid
+is called, it’s just a name I came up with). The cells have their own Cartesian
+coordinate system, with (0, 0) being the top left cell and (31, 23) being the
+bottom right cell.</p>
+
+	<h1 class="subheading" id="">The Setup Code</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">1.</span> <span
+class="comment"># Wormy (a Nibbles clone)</span></p>
+
+		<p class="noindent mono"><span class="line-number">2.</span> <span
+class="comment"># By Al Sweigart <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f0fdd1f8ffe7f4ffe5e6f8e5f9e1e8e5f9feffbff2fefc">[email&#160;protected]</a></span></p>
+
+		<p class="noindent mono"><span class="line-number">3.</span> <span
+class="comment"># http://inventwithpython.com/pygame</span></p>
+
+		<p class="noindent mono"><span class="line-number">4.</span> <span
+class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+
+		<p class="noindent mono"><span class="line-number">6.</span> import
+random, pygame, sys</p>
+
+		<p class="noindent mono"><span class="line-number">7.</span> from
+pygame.locals import *</p>
+
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+
+		<p class="noindent mono"><span class="line-number">9.</span> FPS
+= 15</p>
+
+		<p class="noindent mono"><span class="line-number">10.</span> WINDOWWIDTH
+= 640</p>
+
+		<p class="noindent mono"><span class="line-number">11.</span> WINDOWHEIGHT
+= 480</p>
+
+		<p class="noindent mono"><span class="line-number">12.</span> CELLSIZE
+= 20</p>
+
+		<p class="noindent mono"><span class="line-number">13.</span> assert
+WINDOWWIDTH % CELLSIZE == 0, &quot;Window width must be a multiple of cell
+size.&quot;</p>
+
+		<p class="noindent mono"><span class="line-number">14.</span> assert
+WINDOWHEIGHT % CELLSIZE == 0, &quot;Window height must be a multiple of cell
+size.&quot;</p>
+
+		<p class="noindent mono"><span class="line-number">15.</span> CELLWIDTH
+= int(WINDOWWIDTH / CELLSIZE)</p>
+
+		<p class="noindent mono"><span class="line-number">16.</span> CELLHEIGHT
+= int(WINDOWHEIGHT / CELLSIZE)</p>
+
+	</div>
+
+<p>The code at the start of the program just sets up some
+constant variables used in the game. The width and height of the cells are
+stored in <span class="mono">CELLSIZE</span>. The <span class="mono">assert</span>
+statements on lines 13 and 14 ensure that the cells fit perfectly in the
+window. For example, if the <span class="mono">CELLSIZE</span> was <span
+class="mono">10</span> and the <span class="mono">WINDOWWIDTH</span> or <span
+class="mono">WINDOWHEIGHT</span> constants were set to <span class="mono">15</span>,
+then only 1.5 cells could fit. The <span class="mono">assert</span> statements
+make sure that only a whole integer number of cells fits in the window.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">18.</span> <span
+class="comment">#             R    G    B</span></p>
+
+		<p class="noindent mono"><span class="line-number">19.</span> WHITE
+= (255, 255, 255)</p>
+
+		<p class="noindent mono"><span class="line-number">20.</span> BLACK
+= (  0,   0,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">21.</span> RED
+= (255,   0,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">22.</span> GREEN
+= (  0, 255,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">23.</span> DARKGREEN
+= (  0, 155,   0)</p>
+
+		<p class="noindent mono"><span class="line-number">24.</span> DARKGRAY
+= ( 40,  40,  40)</p>
+
+		<p class="noindent mono"><span class="line-number">25.</span> BGCOLOR
+= BLACK</p>
+
+		<p class="noindent mono"><span class="line-number">26.</span></p>
+
+		<p class="noindent mono"><span class="line-number">27.</span> UP
+= 'up'</p>
+
+		<p class="noindent mono"><span class="line-number">28.</span> DOWN
+= 'down'</p>
+
+		<p class="noindent mono"><span class="line-number">29.</span> LEFT
+= 'left'</p>
+
+		<p class="noindent mono"><span class="line-number">30.</span> RIGHT
+= 'right'</p>
+
+		<p class="noindent mono"><span class="line-number">31.</span></p>
+
+		<p class="noindent mono"><span class="line-number">32.</span> HEAD
+= 0 <span class="comment"># syntactic sugar: index of the worm's head</span></p>
+
+	</div>
+
+<p>Some more constants are set on lines 19 to 32. The <span
+class="mono">HEAD</span> constant will be explained later in this chapter.</p>
+
+	<h1 class="subheading" id="">The <span class="mono">main()</span> Function</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">34.</span> def
+main():</p>
+
+		<p class="noindent mono"><span class="line-number">35.</span>     global
+FPSCLOCK, DISPLAYSURF, BASICFONT</p>
+
+		<p class="noindent mono"><span class="line-number">36.</span></p>
+
+		<p class="noindent mono"><span class="line-number">37.</span>     pygame.init()</p>
+
+		<p class="noindent mono"><span class="line-number">38.</span>     FPSCLOCK
+= pygame.time.Clock()</p>
+
+		<p class="noindent mono"><span class="line-number">39.</span>     DISPLAYSURF
+= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">40.</span>     BASICFONT
+= pygame.font.Font('freesansbold.ttf', 18)</p>
+
+		<p class="noindent mono"><span class="line-number">41.</span>     pygame.display.set_caption('Wormy')</p>
+
+		<p class="noindent mono"><span class="line-number">42.</span></p>
+
+		<p class="noindent mono"><span class="line-number">43.</span>     showStartScreen()</p>
+
+		<p class="noindent mono"><span class="line-number">44.</span>     while
+True:</p>
+
+		<p class="noindent mono"><span class="line-number">45.</span>         runGame()</p>
+
+		<p class="noindent mono"><span class="line-number">46.</span>         showGameOverScreen()</p>
+
+	</div>
+
+<p>In the Wormy game program, we’ve put the main part of the
+code in a function called <span class="mono">runGame()</span>. This is because
+we only want to show the “start screen” (the animation with the rotating
+“Wormy” text) once when the program starts (by calling the <span class="mono">showStartScreen()</span>
+function). Then we want to call <span class="mono">runGame()</span>, which
+will start a game of Wormy. This function will return when the player’s worm
+collides into a wall or into itself and causes a game over.</p>
+
+<p>At that point we will show the game over screen by calling <span
+class="mono">showGameOverScreen()</span>. When that function call returns, the
+loop goes back to the start and <span class="mono">calls runGame()</span>
+again. The <span class="mono">while</span> loop on line 44 will loop forever
+until the program terminates.</p>
+
+	<h1 class="subheading" id="">A Separate <span class="mono">runGame()</span> Function</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number"> 49.</span> def
+runGame():</p>
+
+		<p class="noindent mono"><span class="line-number"> 50.</span>     <span
+class="comment"># Set a random start point.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 51.</span>     startx
+= random.randint(5, CELLWIDTH - 6)</p>
+
+		<p class="noindent mono"><span class="line-number"> 52.</span>     starty
+= random.randint(5, CELLHEIGHT - 6)</p>
+
+		<p class="noindent mono"><span class="line-number"> 53.</span>     wormCoords
+= [{'x': startx,     'y': starty},</p>
+
+		<p class="noindent mono"><span class="line-number"> 54.</span>                   {'x':
+startx - 1, 'y': starty},</p>
+
+		<p class="noindent mono"><span class="line-number"> 55.</span>                   {'x':
+startx - 2, 'y': starty}]</p>
+
+		<p class="noindent mono"><span class="line-number"> 56.</span>     direction
+= RIGHT</p>
+
+		<p class="noindent mono"><span class="line-number"> 57.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 58.</span>     <span
+class="comment"># Start the apple in a random place.</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 59.</span>     apple
+= getRandomLocation()</p>
+
+	</div>
+
+<p>At the beginning of a game, we want the worm to start in a
+random position (but not too close to the edges of the board) so we store a
+random coordinate in <span class="mono">startx</span> and <span class="mono">starty</span>.
+(Remember that <span class="mono">CELLWIDTH</span> and <span class="mono">CELLHEIGHT</span>
+is the number of cells wide and high the window is, not the number of pixels
+wide and high).</p>
+
+<p>The body of the worm will be stored in a list of dictionary
+values. There will be one dictionary value per body segment of the worm. The
+dictionary will have keys <span class="mono">'x'</span> and <span
+class="mono">'y'</span> for the XY coordinates of that body segment. The head
+of the body to be at <span class="mono">startx</span> and <span class="mono">starty</span>.
+The other two body segments will be one and two cells to the left of the head.</p>
+
+<p>The head of the worm will always be the body part at <span
+class="mono">wormCoords[0]</span>. To make this code more readable, we’ve set
+the <span class="mono">HEAD</span> constant to <span class="mono">0</span> on
+line 32, so that we can use <span class="mono">wormCoords[HEAD]</span> instead
+of <span class="mono">wormCoords[0]</span>.</p>
+
+	<h1 class="subheading" id="">The Event Handling Loop</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number"> 61.</span>     while
+True: <span class="comment"># main game loop</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 62.</span>         for
+event in pygame.event.get(): <span class="comment"># event handling
+loop</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 63.</span>             if
+event.type == QUIT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 64.</span>                 terminate()</p>
+
+		<p class="noindent mono"><span class="line-number"> 65.</span>             elif
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 66.</span>                 if
+(event.key == K_LEFT or event.key == K_a) and direction != RIGHT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 67.</span>                     direction
+= LEFT</p>
+
+		<p class="noindent mono"><span class="line-number"> 68.</span>                 elif
+(event.key == K_RIGHT or event.key == K_d) and direction != LEFT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 69.</span>                     direction
+= RIGHT</p>
+
+		<p class="noindent mono"><span class="line-number"> 70.</span>                 elif
+(event.key == K_UP or event.key == K_w) and direction != DOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 71.</span>                     direction
+= UP</p>
+
+		<p class="noindent mono"><span class="line-number"> 72.</span>                 elif
+(event.key == K_DOWN or event.key == K_s) and direction != UP:</p>
+
+		<p class="noindent mono"><span class="line-number"> 73.</span>                     direction
+= DOWN</p>
+
+		<p class="noindent mono"><span class="line-number"> 74.</span>                 elif
+event.key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number"> 75.</span>                     terminate()</p>
+
+	</div>
+
+<p>Line 61 is the start of the main game loop and line 62 is
+the start of the event handling loop. If the event is a <span class="mono">QUIT</span>
+event, then we call <span class="mono">terminate()</span> (which we’ve defined
+the same as the <span class="mono">terminate()</span> function in the previous
+game programs).</p>
+
+<p>Otherwise, if the event is a <span class="mono">KEYDOWN</span>
+event, then we check if the key that was pressed down is an arrow key or a WASD
+key. We want an additional check so that the worm does not turn in on itself.
+For example, if the worm is moving left, then if the player accidentally
+presses the right arrow key, the worm would immediate start going right and
+crash into itself.</p>
+
+<p>That is why we have this check for the current value of the <span
+class="mono">direction</span> variable. That way, if the player accidentally
+presses an arrow key that would cause them to immediately crash the worm, we
+just ignore that key press.</p>
+
+	<h1 class="subheading" id="">Collision Detection</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">77.</span>         <span
+class="comment"># check if the worm has hit itself or the edge</span></p>
+
+		<p class="noindent mono"><span class="line-number">78.</span>         if
+wormCoords[HEAD]['x'] == -1 or wormCoords[HEAD]['x'] == CELLWIDTH or
+wormCoords[HEAD]['y'] == -1 or wormCoords[HEAD]['y'] == CELLHEIGHT:</p>
+
+		<p class="noindent mono"><span class="line-number">79.</span>             return
+<span class="comment"># game over</span></p>
+
+		<p class="noindent mono"><span class="line-number">80.</span>         for
+wormBody in wormCoords[1:]:</p>
+
+		<p class="noindent mono"><span class="line-number">81.</span>             if
+wormBody['x'] == wormCoords[HEAD]['x'] and wormBody['y'] ==
+wormCoords[HEAD]['y']:</p>
+
+		<p class="noindent mono"><span class="line-number">82.</span>                 return
+<span class="comment"># game over</span></p>
+
+	</div>
+
+<p>The worm has crashed when the head has moved off the edge of
+the grid or when the head moves onto a cell that is already occupied by another
+body segment.</p>
+
+<p>We can check if the head has moved off the edge of the grid
+by seeing if either the X coordinate of the head (which is stored in <span
+class="mono">wormCoords[HEAD]['x']</span>) is <span class="mono">-1</span>
+(which is past the left edge of the grid) or equal to <span class="mono">CELLWIDTH</span>
+(which is past the right edge, since the rightmost X cell coordinate is one
+less than <span class="mono">CELLWIDTH</span>). </p>
+
+<p>The head has also moved off the grid if the Y coordinate of
+the head (which is stored in <span class="mono">wormCoords[HEAD]['y']</span>)
+is either <span class="mono">-1</span> (which is past the top edge) or <span
+class="mono">CELLHEIGHT</span> (which is past the bottom edge).</p>
+
+<p>All we have to do to end the current game is to return out
+of <span class="mono">runGame()</span>. When <span class="mono">runGame()</span>
+returns to the function call in <span class="mono">main()</span>, the next
+line after the <span class="mono">runGame()</span> call (line 46) is the call to
+<span class="mono">showGameOverScreen()</span> which makes the large “Game
+Over” text appear. This is why we have the <span class="mono">return</span>
+statement on line 79.</p>
+
+<p>Line 80 loops through every body segment in <span
+class="mono">wormCoords</span> after the head (which is at index <span
+class="mono">0</span>. This is why the <span class="mono">for</span> loop
+iterates over <span class="mono">wormCoords[1:]</span> instead of just <span
+class="mono">wormCoords</span>). If both the <span class="mono">'x'</span>
+and <span class="mono">'y'</span> values of the body segment are the same as
+the <span class="mono">'x'</span> and <span class="mono">'y'</span> of the
+head, then we also end the game by returning out of the <span class="mono">runGame()</span>
+function.</p>
+
+	<h1 class="subheading" id="">Detecting Collisions with the Apple</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number"> 84.</span>         <span
+class="comment"># check if worm has eaten an apply</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 85.</span>         if
+wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']:</p>
+
+		<p class="noindent mono"><span class="line-number"> 86.</span>             <span
+class="comment"># don't remove worm's tail segment</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 87.</span>             apple
+= getRandomLocation() <span class="comment"># set a new apple somewhere</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 88.</span>         else:</p>
+
+		<p class="noindent mono"><span class="line-number"> 89.</span>             del
+wormCoords[-1] <span class="comment"># remove worm's tail segment</span></p>
+
+	</div>
+
+<p>We do a similar collision detection check between the head
+of the worm and the apple’s XY coordinates. If they match, we set the
+coordinates of the apple to a random new location (which we get from the return
+value of <span class="mono">getRandomLocation()</span>).</p>
+
+<p>If the head has not collided with an apple, then we delete
+the last body segment in the <span class="mono">wormCoords</span> list.
+Remember that negative integers for indexes count from the end of the list. So
+while <span class="mono">0</span> is the index of the first item in the list
+and <span class="mono">1</span> is for the second item, <span class="mono">-1</span>
+is for the last item in the list and <span class="mono">-2</span> is for the
+second to last item.</p>
+
+<p>The code on lines 91 to 100 (described next in the “Moving
+the Worm” section) will add a new body segment (for the head) in the direction
+that the worm is going. This will make the worm one segment longer. By not
+deleting the last body segment when the worm eats an apple, the overall length
+of the worm increases by one. But when line 89 deletes the last body segment,
+the size remains the same because a new head segment is added right afterwards.</p>
+
+	<h1 class="subheading" id="">Moving the Worm</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number"> 91.</span>         <span
+class="comment"># move the worm by adding a segment in the direction it
+is moving</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 92.</span>         if
+direction == UP:</p>
+
+		<p class="noindent mono"><span class="line-number"> 93.</span>             newHead
+= {'x': wormCoords[HEAD]['x'], 'y': wormCoords[HEAD]['y'] - 1}</p>
+
+		<p class="noindent mono"><span class="line-number"> 94.</span>         elif
+direction == DOWN:</p>
+
+		<p class="noindent mono"><span class="line-number"> 95.</span>             newHead
+= {'x': wormCoords[HEAD]['x'], 'y': wormCoords[HEAD]['y'] + 1}</p>
+
+		<p class="noindent mono"><span class="line-number"> 96.</span>         elif
+direction == LEFT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 97.</span>             newHead
+= {'x': wormCoords[HEAD]['x'] - 1, 'y': wormCoords[HEAD]['y']}</p>
+
+		<p class="noindent mono"><span class="line-number"> 98.</span>         elif
+direction == RIGHT:</p>
+
+		<p class="noindent mono"><span class="line-number"> 99.</span>             newHead
+= {'x': wormCoords[HEAD]['x'] + 1, 'y': wormCoords[HEAD]['y']}</p>
+
+		<p class="noindent mono"><span class="line-number">100.</span>         wormCoords.insert(0,
+newHead)</p>
+
+	</div>
+
+<p>To move the worm, we add a new body segment to the beginning
+of the <span class="mono">wormCoords</span> list. Because the body segment is
+being added to the beginning of the list, it will become the new head. The
+coordinates of the new head will be right next to the old head’s coordinates.
+Whether <span class="mono">1</span> is added or subtracted from either the X
+or Y coordinate depends on the direction the worm was going.</p>
+
+<p>This new head segment is added to <span class="mono">wormCoords</span>
+with the <span class="mono">insert()</span> list method on line 100.</p>
+
+	<h1 class="subheading" id="">The <span class="mono">insert()</span> List Method</h1>
+
+<p class="noindent">Unlike the <span class="mono">append()</span> list method
+that can only add items to the end of a list, the <span class="mono">insert()</span>
+list method can add items anywhere inside the list. The first parameter for <span
+class="mono">insert()</span> is the index where the item should go (all the
+items originally at this index and after have their indexes increase by one).
+If the argument passed for the first parameter is larger than the length of the
+list, the item is simply added to the end of the list (just like what <span
+class="mono">append()</span> does). The second parameter for <span
+class="mono">insert()</span> is the item value to be added. Type the following
+into the interactive shell to see how <span class="mono">insert()</span> works:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono">&gt;&gt;&gt; spam
+= ['cat', 'dog', 'bat']</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;
+spam.insert(0, 'frog')</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;
+spam</p>
+
+		<p class="noindent mono">['frog', 'cat',
+'dog', 'bat']</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;
+spam.insert(10, 42)</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;
+spam</p>
+
+		<p class="noindent mono">['frog', 'cat',
+'dog', 'bat', 42]</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;
+spam.insert(2, 'horse')</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;
+spam</p>
+
+		<p class="noindent mono">['frog', 'cat',
+'horse', 'dog', 'bat', 42]</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;</p>
+
+	</div>
+
+	<h1 class="subheading" id="">Drawing the Screen</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">101.</span>         DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">102.</span>         drawGrid()</p>
+
+		<p class="noindent mono"><span class="line-number">103.</span>         drawWorm(wormCoords)</p>
+
+		<p class="noindent mono"><span class="line-number">104.</span>         drawApple(apple)</p>
+
+		<p class="noindent mono"><span class="line-number">105.</span>         drawScore(len(wormCoords)
+- 3)</p>
+
+		<p class="noindent mono"><span class="line-number">106.</span>         pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">107.</span>         FPSCLOCK.tick(FPS)</p>
+
+	</div>
+
+	<p>The code for drawing the screen in the <span class="mono">runGame()</span>
+function is fairly simple. Line 101 fills in the entire display Surface with
+the background color. Lines 102 to 105 draw the grid, worm, apple, and score to
+the display Surface. Then the call to <span class="mono">pygame.display.update()</span>
+draws the display Surface to the actual computer screen.</p>
+
+	<h1 class="subheading" id="">Drawing “Press a key” Text to the Screen</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">109.</span> def
+drawPressKeyMsg():</p>
+
+		<p class="noindent mono"><span class="line-number">110.</span>     pressKeySurf
+= BASICFONT.render('Press a key to play.', True, DARKGRAY)</p>
+
+		<p class="noindent mono"><span class="line-number">111.</span>     pressKeyRect
+= pressKeySurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">112.</span>     pressKeyRect.topleft
+= (WINDOWWIDTH - 200, WINDOWHEIGHT - 30)</p>
+
+		<p class="noindent mono"><span class="line-number">113.</span>     DISPLAYSURF.blit(pressKeySurf,
+pressKeyRect)</p>
+
+	</div>
+
+<p>While the start screen animation is playing or the game over
+screen is being shown, there will be some small text in the bottom right corner
+that says “Press a key to play.” Rather than have the code typed out in both
+the <span class="mono">showStartScreen()</span> and the <span class="mono">showGameOverScreen()</span>,
+we put it in a this separate function and simply call the function from <span
+class="mono">showStartScreen()</span> and <span class="mono">showGameOverScreen()</span>.</p>
+
+	<h1 class="subheading" id="">The <span class="mono">checkForKeyPress()</span> Function</h1>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">116.</span> def
+checkForKeyPress():</p>
+		<p class="noindent mono"><span class="line-number">117.</span>     if
+len(pygame.event.get(QUIT)) &gt; 0:</p>
+		<p class="noindent mono"><span class="line-number">118.</span>         terminate()</p>
+		<p class="noindent mono"><span class="line-number">119.</span></p>
+		<p class="noindent mono"><span class="line-number">120.</span>     keyUpEvents
+= pygame.event.get(KEYUP)</p>
+		<p class="noindent mono"><span class="line-number">121.</span>
+if len(keyUpEvents) == 0:</p>
+		<p class="noindent mono"><span class="line-number">122.</span>
+return None</p>
+		<p class="noindent mono"><span class="line-number">123.</span>     if
+keyUpEvents[0].key == K_ESCAPE:</p>
+		<p class="noindent mono"><span class="line-number">124.</span>         terminate()</p>
+		<p class="noindent mono"><span class="line-number">125.</span>     return
+keyUpEvents[0].key</p>
+	</div>
+
+	<p>This function first checks if there are any <span
+class="mono">QUIT</span> events in the event queue. The call to <span
+class="mono">pygame.event.get()</span> on line 117 returns a list of all the <span
+class="mono">QUIT</span> events in the event queue (because we pass <span
+class="mono">QUIT</span> as an argument). If there are not <span
+class="mono">QUIT</span> events in the event queue, then the list that <span
+class="mono">pygame.event.get()</span> returns will be the empty list: <span
+class="mono">[]</span></p>
+
+	<p>The <span class="mono">len()</span> call on line 117 will
+return <span class="mono">0</span> if <span class="mono">pygame.event.get()</span>
+returned an empty list. If there are more than zero items in the list returned
+by <span class="mono">pygame.event.get()</span> (and remember, any items in
+this list will only be <span class="mono">QUIT</span> events because we passed
+<span class="mono">QUIT</span> as the argument to <span class="mono">pygame.event.get()</span>),
+then the <span class="mono">terminate()</span> function gets called on line
+118 and the program terminates.</p>
+
+	<p>After that, the call to <span class="mono">pygame.event.get()</span>
+gets a list of any <span class="mono">KEYUP</span> events in the event queue.
+If the key event is for the Esc key, then the program terminates in that case
+as well. Otherwise, the first key event object in the list that was returned by
+<span class="mono">pygame.event.get()</span> is returned from this <span
+class="mono">checkForKeyPress()</span> function.</p>
+
+	<h1 class="subheading" id="">The Start Screen</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">128.</span> def
+showStartScreen():</p>
+
+		<p class="noindent mono"><span class="line-number">129.</span>     titleFont
+= pygame.font.Font('freesansbold.ttf', 100)</p>
+
+		<p class="noindent mono"><span class="line-number">130.</span>     titleSurf1
+= titleFont.render('Wormy!', True, WHITE, DARKGREEN)</p>
+
+		<p class="noindent mono"><span class="line-number">131.</span>     titleSurf2
+= titleFont.render('Wormy!', True, GREEN)</p>
+
+		<p class="noindent mono"><span class="line-number">132.</span></p>
+
+		<p class="noindent mono"><span class="line-number">133.</span>     degrees1
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">134.</span>     degrees2
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">135.</span>     while
+True:</p>
+
+		<p class="noindent mono"><span class="line-number">136.</span>         DISPLAYSURF.fill(BGCOLOR)</p>
+
+	</div>
+
+<p>When the Wormy game program first begins running, the player
+doesn’t automatically begin playing the game. Instead, a start screen appears
+which tells the player what program they are running. A start screen also gives
+the player a chance to prepare for the game to begin (otherwise the player
+might not be ready and crash on their first game).</p>
+
+<p>The Wormy start screen requires two Surface objects with the
+“Wormy!” text drawn on them. These are what the <span class="mono">render()</span>
+method calls create on lines 130 and 131. The text will be large: the <span
+class="mono">Font()</span> constructor function call on line 129 creates a
+Font object that is 100 points in size. The first “Wormy!” text will have white
+text with a dark green background, and the other will have green text with a
+transparent background.</p>
+
+<p>Line 135 begins the animation loop for the start screen.
+During this animation, the two pieces of text will be rotated and drawn to the
+display Surface object.</p>
+
+	<h1 class="subheading" id="">Rotating the Start Screen Text</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">137.</span>         rotatedSurf1
+= pygame.transform.rotate(titleSurf1, degrees1)</p>
+
+		<p class="noindent mono"><span class="line-number">138.</span>         rotatedRect1
+= rotatedSurf1.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">139.</span>         rotatedRect1.center
+= (WINDOWWIDTH / 2, WINDOWHEIGHT / 2)</p>
+
+		<p class="noindent mono"><span class="line-number">140.</span>         DISPLAYSURF.blit(rotatedSurf1,
+rotatedRect1)</p>
+
+		<p class="noindent mono"><span class="line-number">141.</span></p>
+
+		<p class="noindent mono"><span class="line-number">142.</span>         rotatedSurf2
+= pygame.transform.rotate(titleSurf2, degrees2)</p>
+
+		<p class="noindent mono"><span class="line-number">143.</span>         rotatedRect2
+= rotatedSurf2.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">144.</span>         rotatedRect2.center
+= (WINDOWWIDTH / 2, WINDOWHEIGHT / 2)</p>
+
+		<p class="noindent mono"><span class="line-number">145.</span>         DISPLAYSURF.blit(rotatedSurf2,
+rotatedRect2)</p>
+
+		<p class="noindent mono"><span class="line-number">146.</span></p>
+
+		<p class="noindent mono"><span class="line-number">147.</span>         drawPressKeyMsg()</p>
+
+		<p class="noindent mono"><span class="line-number">148.</span></p>
+
+		<p class="noindent mono"><span class="line-number">149.</span>         if
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">150.</span>             pygame.event.get()
+<span class="comment"># clear event queue</span></p>
+
+		<p class="noindent mono"><span class="line-number">151.</span>             return</p>
+
+		<p class="noindent mono"><span class="line-number">152.</span>         pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">153.</span>         FPSCLOCK.tick(FPS)</p>
+
+	</div>
+
+<p>The <span class="mono">showStartScreen()</span> function
+will rotate the images on the Surface objects that the “Wormy!” text is written
+on. The first parameter is the Surface object to make a rotated copy of. The
+second parameter is the number of degrees to rotate the Surface. The <span
+class="mono">pygame.transform.rotate()</span> function doesn’t change the
+Surface object you pass it, but rather returns a new Surface object with the
+rotated image drawn on it.</p>
+
+<p>Note that this new Surface object will probably be larger
+than the original one, since all Surface objects represent rectangular areas
+and the corners of the rotated Surface will stick out past the width and height
+of original Surface. The picture below has a black rectangle along with a
+slightly rotated version of itself. In order to make a Surface object that can
+fit the rotated rectangle (which is colored gray in the picture below), it must
+be larger than the original black rectangle’s Surface object:</p>
+
+
+
+<p>The amount you rotate it is given in degrees, which is a
+measure of rotation. There are 360 degrees in a circle. Not rotated at all is 0
+degrees. Rotating to one quarter counter-clockwise is 90 degrees. To rotate
+clockwise, pass a negative integer. Rotating 360 degrees is rotating the image
+all the way around, which means you end up with the same image as if you
+rotated it 0 degrees. In fact, if the rotation argument you pass to <span
+class="mono">pygame.transform.rotate()</span> is 360 or larger, then Pygame
+automatically keeps subtracting 360 from it until it gets a number less than
+360. This image shows several examples of different rotation amounts:</p>
+
+
+<p>The two rotated “Wormy!” Surface objects are blitted to the
+display Surface on each frame of the animation loop on lines 140 and 145.</p>
+
+<p>On line 147 the <span class="mono">drawPressKeyMsg()</span>
+function call draws the “Press a key to play.” text in the lower corner of the
+display Surface object. This animation loop will keep looping until <span
+class="mono">checkForKeyPress()</span> returns a value that is not <span
+class="mono">None</span>, which happens if the player presses a key. Before
+returning, <span class="mono">pygame.event.get()</span> is called simply to
+clear out any other events that have accumulated in the event queue which the
+start screen was displayed.</p>
+
+	<h1 class="subheading" id="">Rotations Are Not Perfect</h1>
+
+<p>You may wonder why we store the rotated Surface in a
+separate variable, rather than just overwrite the <span class="mono">titleSurf1</span>
+and <span class="mono">titleSurf2</span> variables. There are two reasons.</p>
+
+<p>First, rotating a 2D image is never completely perfect. The
+rotated image is always approximate. If you rotate an image by 10 degrees
+counterclockwise, and then rotate it back 10 degrees clockwise, the image you
+have will not be the exact same image you started with. Think of it as making a
+photocopy, and then a photocopy of the first photocopy, and the another
+photocopy of that photocopy. If you keep doing this, the image gets worse and
+worse as the slight distortions add up.</p>
+
+<p>(The only exception to this is if you rotate an image by a
+multiple of 90 degrees, such as 0, 90, 180, 270, or 360 degrees. In that case,
+the pixels can be rotated without any distortion.)</p>
+
+<p>Second, if you rotate a 2D image then the rotated image will
+be slightly larger than the original image. If you rotate that rotated image,
+then the next rotated image will be slightly larger again. If you keep doing
+this, eventually the image will become too large for Pygame to handle, and your
+program will crash with the error message, <span class="mono">pygame.error:
+Width or height is too large</span>.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">154.</span>         degrees1
++= 3 <span class="comment"># rotate by 3 degrees each frame</span></p>
+
+		<p class="noindent mono"><span class="line-number">155.</span>         degrees2
++= 7 <span class="comment"># rotate by 7 degrees each frame</span></p>
+
+	</div>
+
+<p>The amount that we rotate the two “Wormy!” text Surface
+objects is stored in <span class="mono">degrees1</span> and <span
+class="mono">degrees2</span>. On each iteration through the animation loop, we
+increase the number stored in <span class="mono">degrees1</span> by <span
+class="mono">3</span> and <span class="mono">degrees2</span> by <span
+class="mono">7</span>. This means on the next iteration of the animation loop
+the white text “Wormy!” Surface object will be rotated by another 3 degrees and
+the green text “Wormy!” Surface object will be rotated by another 7 degrees.
+This is why the one of the Surface objects rotates slower than the other.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">158.</span> def
+terminate():</p>
+
+		<p class="noindent mono"><span class="line-number">159.</span>     pygame.quit()</p>
+
+		<p class="noindent mono"><span class="line-number">160.</span>     sys.exit()</p>
+
+	</div>
+
+<p>The <span class="mono">terminate()</span> function calls <span
+class="mono">pygame.quit()</span> and <span class="mono">sys.exit()</span> so
+that the game correctly shuts down. It is identical to the <span class="mono">terminate()</span>
+functions in the previous game programs.</p>
+
+	<h1 class="subheading" id="">Deciding Where the Apple Appears</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">163.</span> def
+getRandomLocation():</p>
+
+		<p class="noindent mono"><span class="line-number">164.</span>     return
+{'x': random.randint(0, CELLWIDTH - 1), 'y': random.randint(0, CELLHEIGHT - 1)}</p>
+
+	</div>
+
+<p>The <span class="mono">getRandomLocation()</span> function
+is called whenever new coordinates for the apple are needed. This function
+returns a dictionary with keys <span class="mono">'x'</span> and <span
+class="mono">'y'</span>, with the values set to random XY coordinates.</p>
+
+	<h1 class="subheading" id="">Game Over Screens</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">167.</span> def
+showGameOverScreen():</p>
+
+		<p class="noindent mono"><span class="line-number">168.</span>     gameOverFont
+= pygame.font.Font('freesansbold.ttf', 150)</p>
+
+		<p class="noindent mono"><span class="line-number">169.</span>     gameSurf
+= gameOverFont.render('Game', True, WHITE)</p>
+
+		<p class="noindent mono"><span class="line-number">170.</span>     overSurf
+= gameOverFont.render('Over', True, WHITE)</p>
+
+		<p class="noindent mono"><span class="line-number">171.</span>     gameRect
+= gameSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">172.</span>     overRect
+= overSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">173.</span>     gameRect.midtop
+= (WINDOWWIDTH / 2, 10)</p>
+
+		<p class="noindent mono"><span class="line-number">174.</span>     overRect.midtop
+= (WINDOWWIDTH / 2, gameRect.height + 10 + 25)</p>
+
+		<p class="noindent mono"><span class="line-number">175.</span></p>
+
+		<p class="noindent mono"><span class="line-number">176.</span>     DISPLAYSURF.blit(gameSurf,
+gameRect)</p>
+
+		<p class="noindent mono"><span class="line-number">177.</span>     DISPLAYSURF.blit(overSurf,
+overRect)</p>
+
+		<p class="noindent mono"><span class="line-number">178.</span>     drawPressKeyMsg()</p>
+
+		<p class="noindent mono"><span class="line-number">179.</span>     pygame.display.update()</p>
+
+	</div>
+
+<p>The game over screen is similar to the start screen, except
+it isn’t animated. The words “Game” and “Over” are rendered to two Surface
+objects which are then drawn on the screen.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">180.</span>     pygame.time.wait(500)</p>
+
+		<p class="noindent mono"><span class="line-number">181.</span>     checkForKeyPress()
+<span class="comment"># clear out any key presses in the event queue</span></p>
+
+		<p class="noindent mono"><span class="line-number">182.</span></p>
+
+		<p class="noindent mono"><span class="line-number">183.</span>     while
+True:</p>
+
+		<p class="noindent mono"><span class="line-number">184.</span>         if
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">185.</span>             pygame.event.get()
+<span class="comment"># clear event queue</span></p>
+
+		<p class="noindent mono"><span class="line-number">186.</span>             return</p>
+
+	</div>
+
+<p>The Game Over text will stay on the screen until the player
+pushes a key. Just to make sure the player doesn’t accidentally press a key too
+soon, we will put a half second pause with the call to <span class="mono">pygame.time.wait()</span>
+on line 180. (The 500 argument stands for a 500 millisecond pause, which is
+half of one second.) </p>
+
+<p>Then, <span class="mono">checkForKeyPress()</span> is
+called so that any key events that were made since the <span class="mono">showGameOverScreen()</span>
+function started are ignored. This pause and dropping of the key events is to
+prevent the following situation: Say the player was trying to turn away from
+the edge of the screen at the last minute, but pressed the key too late and
+crashed into the edge of the board. If this happens, then the key press would
+have happened after the <span class="mono">showGameOverScreen()</span> was
+called, and that key press would cause the game over screen to disappear almost
+instantly. The next game would start immediately after that, and might take the
+player by surprise. Adding this pause helps the make the game more “user
+friendly”.</p>
+
+	<h1 class="subheading" id="">Drawing Functions</h1>
+	<p class="noindent">The code to draw the score, worm, apple, and grid are all put into separate functions.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">188.</span> def drawScore(score):</p>
+		<p class="noindent mono"><span class="line-number">189.</span>     scoreSurf = BASICFONT.render('Score: %s' % (score), True, WHITE)</p>
+		<p class="noindent mono"><span class="line-number">190.</span>     scoreRect = scoreSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">191.</span>     scoreRect.topleft = (WINDOWWIDTH - 120, 10)</p>
+		<p class="noindent mono"><span class="line-number">192.</span>     DISPLAYSURF.blit(scoreSurf, scoreRect)</p>
+	</div>
+
+	<p>The <span class="mono">drawScore()</span> function simply renders and draws the text of the score that was passed in its <span class="mono">score</span> parameter on the display Surface object.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">195.</span> def drawWorm(wormCoords):</p>
+		<p class="noindent mono"><span class="line-number">196.</span>     for coord in wormCoords:</p>
+		<p class="noindent mono"><span class="line-number">197.</span>         x = coord['x'] * CELLSIZE</p>
+		<p class="noindent mono"><span class="line-number">198.</span>         y = coord['y'] * CELLSIZE</p>
+		<p class="noindent mono"><span class="line-number">199.</span>         wormSegmentRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)</p>
+		<p class="noindent mono"><span class="line-number">200.</span>         pygame.draw.rect(DISPLAYSURF,
+DARKGREEN, wormSegmentRect)</p>
+
+		<p class="noindent mono"><span class="line-number">201.</span>         wormInnerSegmentRect
+= pygame.Rect(x + 4, y + 4, CELLSIZE - 8, CELLSIZE - 8)</p>
+
+		<p class="noindent mono"><span class="line-number">202.</span>         pygame.draw.rect(DISPLAYSURF,
+GREEN, wormInnerSegmentRect)</p>
+
+	</div>
+
+	<p>The <span class="mono">drawWorm()</span> function will draw
+a green box for each of the segments of the worm’s body. The segments are
+passed in the <span class="mono">wormCoords</span> parameter, which is a list
+of dictionaries each with an <span class="mono">'x'</span> key and a <span
+class="mono">'y'</span> key. The <span class="mono">for</span> loop on line
+196 loops through each of the dictionary values in <span class="mono">wormCoords</span>.</p>
+	<p>Because the grid coordinates take up the entire window and
+also begin a 0, 0 pixel, it is fairly easy to convert from grid coordinates to
+pixel coordinates. Line 197 and 198 simply multiply the <span class="mono">coord['x']</span>
+and <span class="mono">coord['y']</span> coordinate by the <span
+class="mono">CELLSIZE</span>.</p>
+	<p>Line 199 creates a Rect object for the worm segment that
+will be passed to the <span class="mono">pygame.draw.rect()</span> function on
+line 200. Remember that each cell in the grid is <span class="mono">CELLSIZE</span>
+in width and height, so that’s what the size of the segment’s Rect object
+should be. Line 200 draws a dark green rectangle for the segment. Then on top
+of this, a smaller bright green rectangle is drawn. This makes the worm look a
+little nicer. </p>
+<p>The inner bright green rectangle starts 4 pixels to the
+right and 4 pixels below the topleft corner of the cell. The width and height
+of this rectangle are 8 pixels less than the cell size, so there will be a 4
+pixel margin on the right and bottom sides as well.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">205.</span> def
+drawApple(coord):</p>
+
+		<p class="noindent mono"><span class="line-number">206.</span>     x
+= coord['x'] * CELLSIZE</p>
+
+		<p class="noindent mono"><span class="line-number">207.</span>     y
+= coord['y'] * CELLSIZE</p>
+
+		<p class="noindent mono"><span class="line-number">208.</span>     appleRect
+= pygame.Rect(x, y, CELLSIZE, CELLSIZE)</p>
+
+		<p class="noindent mono"><span class="line-number">209.</span>     pygame.draw.rect(DISPLAYSURF,
+RED, appleRect)</p>
+
+	</div>
+
+<p>The <span class="mono">drawApple()</span> function is very
+similar to <span class="mono">drawWorm()</span>, except since the red apple is
+just a single rectangle that fills up the cell, all the function needs to do is
+convert to pixel coordinates (which is what lines 206 and 207 do), create the
+Rect object with the location and size of the apple (line 208), and then pass
+this Rect object to the <span class="mono">pygame.draw.rect()</span> function.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">212.</span> def
+drawGrid():</p>
+
+		<p class="noindent mono"><span class="line-number">213.</span>     for
+x in range(0, WINDOWWIDTH, CELLSIZE): <span class="comment"># draw vertical
+lines</span></p>
+
+		<p class="noindent mono"><span class="line-number">214.</span>         pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (x, 0), (x, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">215.</span>     for
+y in range(0, WINDOWHEIGHT, CELLSIZE): <span class="comment"># draw
+horizontal lines</span></p>
+
+		<p class="noindent mono"><span class="line-number">216.</span>         pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, y), (WINDOWWIDTH, y))</p>
+
+	</div>
+
+<p>Just to make it easier to visualize the grid of cells, we
+call <span class="mono">pygame.draw.line()</span> to draw out each of the
+vertical and horizontal lines of the grid.</p>
+
+<p>Normally, to draw the 32 vertical lines needed, we would
+need 32 calls to <span class="mono">pygame.draw.line()</span> with the
+following coordinates:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 0), (0, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (20, 0), (20, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (40, 0), (40, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (60, 0), (60, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">...skipped for
+brevity...</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (560, 0), (560, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (580, 0), (580, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (600, 0), (600, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (620, 0), (620, WINDOWHEIGHT))</p>
+
+	</div>
+
+<p>Instead of typing out all these lines of code, we can just
+have one line of code inside a <span class="mono">for</span> loop. Notice that
+the pattern for the vertical lines is that the X coordinate of the start and
+end point starts at <span class="mono">0</span> and goes up to <span
+class="mono">620</span>, increasing by <span class="mono">20</span> each
+time. The Y coordinate is always <span class="mono">0</span> for the start
+point and <span class="mono">WINDOWHEIGHT</span> for the end point parameter.
+That means the <span class="mono">for</span> loop should iterate over <span
+class="mono">range(0, 640, 20)</span>. This is why the <span class="mono">for</span>
+loop on line 213 iterates over <span class="mono">range(0, WINDOWWIDTH,
+CELLSIZE)</span>.</p>
+
+<p>For the horizontal lines, the coordinates would have to be:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 0), (WINDOWWIDTH, 0))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 20), (WINDOWWIDTH, 20))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 40), (WINDOWWIDTH, 40))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 60), (WINDOWWIDTH, 60))</p>
+
+		<p class="noindent mono">...skipped for
+brevity...</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 400), (WINDOWWIDTH, 400))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 420), (WINDOWWIDTH, 420))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 440), (WINDOWWIDTH, 440))</p>
+
+		<p class="noindent mono">pygame.draw.line(DISPLAYSURF,
+DARKGRAY, (0, 460), (WINDOWWIDTH, 460))</p>
+
+	</div>
+
+<p>The Y coordinate ranges from <span class="mono">0</span> to
+<span class="mono">460</span>, increasing by <span class="mono">20</span>
+each time. The X coordinate is always <span class="mono">0</span> for the
+start point and <span class="mono">WINDOWWIDTH</span> for the end point
+parameter. We can also use a <span class="mono">for</span> loop here so we
+don’t have to type out all those <span class="mono">pygame.draw.line()</span>
+calls.</p>
+
+<p>Noticing regular patterns needed by the calls and using
+loops is a clever programmer trick to save us from a lot of typing. We could
+have typed out all 56 <span class="mono">pygame.draw.line()</span> calls and
+the program would have worked the exact same. But by being a little bit clever,
+we can save ourselves a lot of work.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">219.</span> if
+__name__ == '__main__':</p>
+
+		<p class="noindent mono"><span class="line-number">220.</span>     main()</p>
+
+	</div>
+
+<p>After all the functions and constants and global variables
+have been defined and created, the <span class="mono">main()</span> function
+is called to start the game.</p>
+
+	<h1 class="subheading" id="">Don’t Reuse Variable Names</h1>
+	<p class="noindent">Take a look at a few lines of code from the <span class="mono">drawWorm()</span> function again:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">199.</span>         wormSegmentRect
+= pygame.Rect(x, y, CELLSIZE, CELLSIZE)</p>
+
+		<p class="noindent mono"><span class="line-number">200.</span>         pygame.draw.rect(DISPLAYSURF,
+DARKGREEN, wormSegmentRect)</p>
+
+		<p class="noindent mono"><span class="line-number">201.</span>         wormInnerSegmentRect
+= pygame.Rect(x + 4, y + 4, CELLSIZE - 8, CELLSIZE - 8)</p>
+
+		<p class="noindent mono"><span class="line-number">202.</span>         pygame.draw.rect(DISPLAYSURF,
+GREEN, wormInnerSegmentRect)</p>
+
+	</div>
+
+<p>Notice that two different Rect objects are created on lines 199
+and 201. The Rect object created on line 199 is stored in the <span
+class="mono">wormSegmentRect</span> local variable and is passed to the <span
+class="mono">pygame.draw.rect()</span> function on line 200. The Rect object
+created on line 201 is stored in the <span class="mono">wormInnerSegmentRect</span>
+local variable and is passed to the <span class="mono">pygame.draw.rect()</span>
+function on line 202.</p>
+
+<p>Every time you create a variable, it takes up a small amount
+of the computer’s memory. You might think it would be clever to reuse the <span
+class="mono">wormSegmentRect</span> variable for both Rect objects, like this:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span
+class="line-number">199. </span>        wormSegmentRect = pygame.Rect(x, y,
+CELLSIZE, CELLSIZE)</p>
+
+		<p class="noindent mono"><span
+class="line-number">200. </span>        pygame.draw.rect(DISPLAYSURF,
+DARKGREEN, wormSegmentRect)</p>
+
+		<p class="noindent mono"><span
+class="line-number">201. </span>        wormSegmentRect = pygame.Rect(x + 4,
+y + 4, CELLSIZE - 8, CELLSIZE - 8)</p>
+
+		<p class="noindent mono"><span
+class="line-number">202. </span>        pygame.draw.rect(DISPLAYSURF, GREEN,
+wormInnerSegmentRect)</p>
+
+	</div>
+
+<p>Because the Rect object returned by <span class="mono">pygame.Rect()</span>
+on line 199 won’t be needed after 200, we can overwrite this value and reuse
+the variable to store the Rect object returned by <span class="mono">pygame.Rect()</span>
+on line 201. Since we are now using fewer variables we are saving memory,
+right?</p>
+
+<p>While this is technically true, you really are only saving a
+few bytes. Modern computers have memory of several billion bytes. So the
+savings aren’t that great. Meanwhile, reusing variables reduces the code readability.
+If a programmer was reading through this code after it was written, they would
+see that <span class="mono">wormSegmentRect</span> is passed to the <span
+class="mono">pygame.draw.rect()</span> calls on line 200 and 202. If they
+tried to find the first time the <span class="mono">wormSegmentRect</span>
+variable was assigned a value, they would see the <span class="mono">pygame.Rect()</span>
+call on line 199. They might not realize that the Rect object returned by line
+199’s <span class="mono">pygame.Rect()</span> call isn’t the same as the one
+that is passed to the <span class="mono">pygame.draw.rect()</span> call on
+line 202.</p>
+
+<p>Little things like this make it harder to understand how
+exactly your program works. It won’t just be other programmers looking at your
+code who will be confused. When you look at your own code a couple weeks after
+writing it, you may have a hard time remembering how exactly it works. Code
+readability is much more important than saving a few bytes of memory here and
+there.</p>
+
+<p>For additional programming practice, you can download buggy
+versions of Wormy from <a href="https://invpy.com/buggy/wormy">https://invpy.com/buggy/wormy</a>
+and try to figure out how to fix the bugs.</p>
+
+
 </body>
 </html>

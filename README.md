@@ -5,6 +5,7 @@
 This is an ePub production of Al Sweigart's games programming book *Making Games with Python & Pygame* at (https://inventwithpython.com/pygame/), the only freely available ePub of the book to my knowledge. This isn't merely a copy of the source PDF and HTML, there are a few tweaks:
 
 * New cover [PLANNED] - There's going to be a new cover that has the spirit of the original, but to my taste and at a larger resolution.
+* Bonus chapter [POSSIBLE] - I might make a bonus chapter which shows how to make a Space Invaders-style game, in the spirit of Blitz Games' *Raspberry Invaders*.
 * Licenses page - There's a new license page that clearly lays out the book's licenses, as standard in all my sample book productions.
 * HTTPS links - All links direct to sites by using HTTPS unless the sites don't support it.
 * Changed comment colour - Comments are red rather than grey.
