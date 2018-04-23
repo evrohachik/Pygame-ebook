@@ -924,31 +924,17 @@ which makes that button light up. After it is done lighting up all the buttons
 in the pattern list, the program sets the <span class="mono">waitingForInput</span>
 variable to <span class="mono">True</span>.</p>
 
-<h2><a name="_Toc316488627">Figuring Out if the Player Pressed the Right
-Buttons</a></h2>
+	<h1 class="subheading" id="">Figuring Out if the Player Pressed the Right Buttons</h1>
 
 	<div class="python-shell">
-
-	<p class="noindent mono"><span class="line-number">106.</span>        else:</p>
-
-		<p class="noindent mono"><span class="line-number">107.</span>            <span
-class="comment"># wait for the player to enter buttons</span></p>
-
-		<p class="noindent mono"><span class="line-number">108.</span>            if
-clickedButton and clickedButton == pattern[currentStep]:</p>
-
-		<p class="noindent mono"><span class="line-number">109.</span>                <span
-class="comment"># pushed the correct button</span></p>
-
+		<p class="noindent mono"><span class="line-number">106.</span>        else:</p>
+		<p class="noindent mono"><span class="line-number">107.</span>            <span class="comment"># wait for the player to enter buttons</span></p>
+		<p class="noindent mono"><span class="line-number">108.</span>            if clickedButton and clickedButton == pattern[currentStep]:</p>
+		<p class="noindent mono"><span class="line-number">109.</span>                <span class="comment"># pushed the correct button</span></p>
 		<p class="noindent mono"><span class="line-number">110.</span>                flashButtonAnimation(clickedButton)</p>
-
-		<p class="noindent mono"><span class="line-number">111.</span>                currentStep
-+= 1</p>
-
-	<p class="noindent mono"><span class="line-number">112.</span>                lastClickTime
-= time.time()</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">111.</span>                currentStep += 1</p>
+	<p class="noindent mono"><span class="line-number">112.</span>                lastClickTime = time.time()</p>
+	</div>
 
 		<p>If <span class="mono">waitingForInput</span> is <span
 class="mono">True</span>, then the code in line 106’s <span class="mono">else</span>
@@ -1052,7 +1038,7 @@ begun clicking the buttons.</p>
 		<p class="noindent mono">1320460242.118</p>
 	</div>
 
-	<p>What this number means is that the moment the <span class="mono">time.time()</span> function was called was a little over 1,320,460,242 seconds since midnight of January 1<sup>st</sup>, 1970. (This translates to November 4<sup>th</sup>, 2011 at 7:30:42pm. You can learn how to convert from Unix epoch time to regular English time at <a href="http://invpy.com/epochtime">http://invpy.com/epochtime</a>)</p>
+	<p>What this number means is that the moment the <span class="mono">time.time()</span> function was called was a little over 1,320,460,242 seconds since midnight of January 1<sup>st</sup>, 1970. (This translates to November 4<sup>th</sup>, 2011 at 7:30:42pm. You can learn how to convert from Unix epoch time to regular English time at <a href="https://invpy.com/epochtime">https://invpy.com/epochtime</a>)</p>
 	<p>If I call <span class="mono">time.time()</span> from the interactive shell a few seconds later, it might look like this:</p>
 
 	<div class="python-shell">
@@ -1133,8 +1119,7 @@ iteration of the game loop.</p>
 the game loop is drawing the display Surface object to the screen and calling
 the <span class="mono">tick()</span> method.</p>
 
-<h2><a name="_Toc316488630">Same Old </a><span class="mono">terminate()</span>
-Function</h2>
+	<h1 class="subheading" id="">Same Old <span class="mono">terminate()</span> Function</h1>
 
 	<div class="python-shell">
 
@@ -1593,7 +1578,7 @@ class="mono">bgColor</span> variable but doesn’t need a global statement for
 it because it only reads the contents of the <span class="mono">bgColor</span>
 the <span class="mono">main()</span> function never assigns <span
 class="mono">bgColor</span> a new value. This concept is explained in more
-detail at <a href="http://invpy.com/global">http://invpy.com/global</a>.</p>
+detail at <a href="https://invpy.com/global">https://invpy.com/global</a>.</p>
 
 	<h1 class="subheading" id="">The Game Over Animation</h1>
 

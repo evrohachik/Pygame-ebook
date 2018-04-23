@@ -10,5 +10,3869 @@
 	<h1 class="heading">Chapter 7 – Tetronimo</h1>
 	<hr class="heading"/>
 
+	<h1 class="subheading" id="">How to Play Tetromino</h1>
+
+	<p class="noindent">Tetromino is a Tetris clone. Differently shaped blocks (each made up of four boxes) fall from the top of the screen, and the player must guide them down to form complete rows that have no gaps in them. When a complete row is formed, the row disappears and each row above it moves down one row. The player tries to keep forming complete lines until the screen fills up and a new falling block cannot fit on the screen.</p>
+
+	<h1 class="subheading" id="">Some Tetromino Nomenclature</h1>
+	<p class="noindent">In this chapter, I have come up with a set of terms for the different things in the game program.</p>
+
+	<ul>
+		<li><b>Board</b> – The board is made up of 10 x 20 spaces that the blocks fall and stack up in.</li>
+		<li><b>Box</b> – A box is a single filled-in square space on the board.</li>
+		<li><b>Piece</b> – The things that fall from the top of the board that the player can rotate and position. Each piece has a shape and is made up of 4 boxes.</li>
+		<li><b>Shape</b> – The shapes are the different types of pieces in the game. The names of the shapes are T, S, Z, J, L, I, and O.</li>
+	</ul>
+
+	<ul>
+		<li><b>Template</b> – A list of shape data structures that represents all the possible rotations of a shape. These are store in variables with names like <span class="mono">S_SHAPE_TEMPLATE</span> or <span class="mono">J_SHAPE_TEMPLATE</span>.</li>
+		<li><b>Landed</b> – When a piece has either reached the bottom of the board or is touching a box on the board, we say that the piece has landed. At that point, the next piece should start falling.</li>
+	</ul>
+
+	<h1 class="subheading" id="">Source Code to Tetromino</h1>
+	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/tetromino.py">https://invpy.com/tetromino.py</a>. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/tetromino">https://invpy.com/diff/tetromino</a> to see if the differences between your code and the code in the book.</p>
+	<p>You will also need the background music files in the same folder of as the <i>tetromino.py</i> file. You can download them from here:</p>
+
+	<ul>
+		<li><a href="https://invpy.com/tetrisb.mid">https://invpy.com/tetrisb.mid</a></li>
+		<li><a href="https://invpy.com/tetrisc.mid">https://invpy.com/tetrisc.mid</a></li>
+	</ul>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Tetromino (a Tetris clone)</span></p>
+		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">6.</span> import random, time, pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+		<p class="noindent mono"><span class="line-number">9.</span> FPS = 25</p>
+		<p class="noindent mono"> <span class="line-number">10. </span>WINDOWWIDTH = 640</p>
+		<p class="noindent mono"> <span class="line-number">11. </span>WINDOWHEIGHT = 480</p>
+
+		<p class="noindent mono"> <span class="line-number">12. </span>BOXSIZE
+= 20</p>
+
+		<p class="noindent mono"> <span class="line-number">13. </span>BOARDWIDTH
+= 10</p>
+
+		<p class="noindent mono"> <span class="line-number">14. </span>BOARDHEIGHT
+= 20</p>
+
+		<p class="noindent mono"> <span class="line-number">15. </span>BLANK
+= '.'</p>
+
+		<p class="noindent mono"> <span class="line-number">16. </span></p>
+
+		<p class="noindent mono"><span class="line-number"> 17. </span>MOVESIDEWAYSFREQ
+= 0.15</p>
+
+		<p class="noindent mono"> <span class="line-number">18. </span>MOVEDOWNFREQ
+= 0.1</p>
+
+		<p class="noindent mono"> <span class="line-number">19. </span></p>
+
+		<p class="noindent mono"><span class="line-number"> 20. </span>XMARGIN
+= int((WINDOWWIDTH - BOARDWIDTH * BOXSIZE) / 2)</p>
+
+		<p class="noindent mono"> <span class="line-number">21. </span>TOPMARGIN
+= WINDOWHEIGHT - (BOARDHEIGHT * BOXSIZE) - 5</p>
+
+		<p class="noindent mono"> <span class="line-number">22. </span></p>
+
+		<p class="noindent mono"><span class="line-number"> 23. </span><span
+class="comment">#               R    G    B</span></p>
+
+		<p class="noindent mono"> <span class="line-number">24. </span>WHITE
+      = (255, 255, 255)</p>
+
+		<p class="noindent mono"> <span class="line-number">25. </span>GRAY
+= (185, 185, 185)</p>
+
+		<p class="noindent mono"> <span class="line-number">26. </span>BLACK
+= (  0,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">27. </span>RED
+= (155,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">28. </span>LIGHTRED
+= (175,  20,  20)</p>
+
+		<p class="noindent mono"> <span class="line-number">29. </span>GREEN
+= (  0, 155,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">30. </span>LIGHTGREEN
+= ( 20, 175,  20)</p>
+
+		<p class="noindent mono"> <span class="line-number">31. </span>BLUE
+= (  0,   0, 155)</p>
+
+		<p class="noindent mono"> <span class="line-number">32. </span>LIGHTBLUE
+= ( 20,  20, 175)</p>
+
+		<p class="noindent mono"> <span class="line-number">33. </span>YELLOW
+= (155, 155,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">34. </span>LIGHTYELLOW
+= (175, 175,  20)</p>
+
+		<p class="noindent mono"><span class="line-number"> 35. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">36. </span>BORDERCOLOR
+= BLUE</p>
+
+		<p class="noindent mono"> <span class="line-number">37. </span>BGCOLOR
+= BLACK</p>
+
+		<p class="noindent mono"> <span class="line-number">38. </span>TEXTCOLOR
+= WHITE</p>
+
+		<p class="noindent mono"> <span class="line-number">39. </span>TEXTSHADOWCOLOR
+= GRAY</p>
+
+		<p class="noindent mono"> <span class="line-number">40. </span>COLORS
+= (     BLUE,      GREEN,      RED,      YELLOW)</p>
+
+		<p class="noindent mono"> <span class="line-number">41. </span>LIGHTCOLORS
+= (LIGHTBLUE, LIGHTGREEN, LIGHTRED, LIGHTYELLOW)</p>
+
+		<p class="noindent mono"> <span class="line-number">42. </span>assert
+len(COLORS) == len(LIGHTCOLORS) <span class="comment"># each color must
+have light color</span></p>
+
+		<p class="noindent mono"><span class="line-number"> 43. </span></p>
+
+		<p class="noindent mono"><span class="line-number"> 44. </span>TEMPLATEWIDTH
+= 5</p>
+
+		<p class="noindent mono"> <span class="line-number">45. </span>TEMPLATEHEIGHT
+= 5</p>
+
+		<p class="noindent mono"> <span class="line-number">46. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">47. </span>S_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">48. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">49. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">50. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">51. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">52. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">53. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">54. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">55. </span>                     '...O.',</p>
+
+		<p class="noindent mono"> <span class="line-number">56. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">57. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">58. </span>Z_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">59. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">60. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">61. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">62. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">63. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">64. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">65. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">66. </span>                     '.O...',</p>
+
+		<p class="noindent mono"> <span class="line-number">67. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">68. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">69. </span>I_SHAPE_TEMPLATE
+= [['..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">70. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">71. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">72. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">73. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">74. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">75. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">76. </span>                     'OOOO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">77. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">78. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">79. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">80. </span>O_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">81. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">82. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">83. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">84. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">85. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">86. </span>J_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">87. </span>                     '.O...',</p>
+
+		<p class="noindent mono"> <span class="line-number">88. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">89. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">90. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">91. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">92. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">93. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">94. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">95. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">96. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">97. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">98. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">99. </span>                     '...O.',</p>
+
+		<p class="noindent mono"><span class="line-number">100. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">101. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">102. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">103. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">104. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"><span class="line-number">105. </span>                     '.....']]</p>
+
+		<p class="noindent mono"><span class="line-number">106. </span></p>
+
+		<p class="noindent mono"><span class="line-number">107. </span>L_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">108. </span>                     '...O.',</p>
+
+		<p class="noindent mono"><span class="line-number">109. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">110. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">111. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">112. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">113. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">114. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">115. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"><span class="line-number">116. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">117. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">118. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">119. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">120. </span>                     '.O...',</p>
+
+		<p class="noindent mono"><span class="line-number">121. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">122. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">123. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"><span class="line-number">124. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">125. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">126. </span>                     '.....']]</p>
+
+		<p class="noindent mono"><span class="line-number">127. </span></p>
+
+		<p class="noindent mono"><span class="line-number">128. </span>T_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">129. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">130. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">131. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">132. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">133. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">134. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">135. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"><span class="line-number">136. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">137. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">138. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">139. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">140. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">141. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">142. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">143. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">144. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">145. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"><span class="line-number">146. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">147. </span>                     '.....']]</p>
+
+		<p class="noindent mono"><span class="line-number">148. </span></p>
+
+		<p class="noindent mono"><span class="line-number">149. </span>SHAPES
+= {'S': S_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">150. </span>          'Z':
+Z_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">151. </span>          'J':
+J_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">152. </span>          'L':
+L_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">153. </span>          'I':
+I_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">154. </span>          'O':
+O_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">155. </span>          'T':
+T_SHAPE_TEMPLATE}</p>
+
+		<p class="noindent mono"><span class="line-number">156. </span></p>
+
+		<p class="noindent mono"><span class="line-number">157.</span></p>
+
+		<p class="noindent mono"><span class="line-number">158. </span>def
+main():</p>
+
+		<p class="noindent mono"><span class="line-number">159. </span>    global
+FPSCLOCK, DISPLAYSURF, BASICFONT, BIGFONT</p>
+
+		<p class="noindent mono"><span class="line-number">160. </span>    pygame.init()</p>
+
+		<p class="noindent mono"><span class="line-number">161. </span>    FPSCLOCK
+= pygame.time.Clock()</p>
+
+		<p class="noindent mono"><span class="line-number">162. </span>    DISPLAYSURF
+= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">163. </span>    BASICFONT
+= pygame.font.Font('freesansbold.ttf', 18)</p>
+
+		<p class="noindent mono"><span class="line-number">164. </span>    BIGFONT
+= pygame.font.Font('freesansbold.ttf', 100)</p>
+
+		<p class="noindent mono"><span class="line-number">165. </span>    pygame.display.set_caption('Tetromino')</p>
+
+		<p class="noindent mono"><span class="line-number">166. </span></p>
+
+		<p class="noindent mono"><span class="line-number">167. </span>    showTextScreen('Tetromino')</p>
+
+		<p class="noindent mono"><span class="line-number">168. </span>    while
+True: <span class="comment"># game loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">169. </span>        if
+random.randint(0, 1) == 0:</p>
+
+		<p class="noindent mono"><span class="line-number">170. </span>            pygame.mixer.music.load('tetrisb.mid')</p>
+
+		<p class="noindent mono"><span class="line-number">171. </span>        else:</p>
+
+		<p class="noindent mono"><span class="line-number">172. </span>            pygame.mixer.music.load('tetrisc.mid')</p>
+
+		<p class="noindent mono"><span class="line-number">173. </span>        pygame.mixer.music.play(-1,
+0.0)</p>
+
+		<p class="noindent mono"><span class="line-number">174. </span>        runGame()</p>
+
+		<p class="noindent mono"><span class="line-number">175. </span>        pygame.mixer.music.stop()</p>
+
+		<p class="noindent mono"><span class="line-number">176. </span>        showTextScreen('Game
+Over')</p>
+
+		<p class="noindent mono"><span class="line-number">177. </span></p>
+
+		<p class="noindent mono"><span class="line-number">178. </span></p>
+
+		<p class="noindent mono"><span class="line-number">179. </span>def
+runGame():</p>
+
+		<p class="noindent mono"><span class="line-number">180. </span>    <span
+class="comment"># setup variables for the start of the game</span></p>
+
+		<p class="noindent mono"><span class="line-number">181. </span>    board
+= getBlankBoard()</p>
+
+		<p class="noindent mono"><span class="line-number">182. </span>    lastMoveDownTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">183. </span>    lastMoveSidewaysTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">184. </span>    lastFallTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">185. </span>    movingDown
+= False <span class="comment"># note: there is no movingUp variable</span></p>
+
+		<p class="noindent mono"><span class="line-number">186. </span>    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">187. </span>    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">188. </span>    score
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">189. </span>    level,
+fallFreq = calculateLevelAndFallFreq(score)</p>
+
+		<p class="noindent mono"><span class="line-number">190. </span></p>
+
+		<p class="noindent mono"><span class="line-number">191. </span>    fallingPiece
+= getNewPiece()</p>
+
+		<p class="noindent mono"><span class="line-number">192. </span>    nextPiece
+= getNewPiece()</p>
+
+		<p class="noindent mono"><span class="line-number">193. </span></p>
+
+		<p class="noindent mono"><span class="line-number">194. </span>    while
+True: <span class="comment"># main game loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">195. </span>        if
+fallingPiece == None:</p>
+
+		<p class="noindent mono"><span class="line-number">196. </span>            <span
+class="comment"># No falling piece in play, so start a new piece at the
+top</span></p>
+
+		<p class="noindent mono"><span class="line-number">197. </span>            fallingPiece
+= nextPiece</p>
+
+		<p class="noindent mono"><span class="line-number">198. </span>            nextPiece
+= getNewPiece()</p>
+
+		<p class="noindent mono"><span class="line-number">199. </span>            lastFallTime
+= time.time() <span class="comment"># reset lastFallTime</span></p>
+
+		<p class="noindent mono"><span class="line-number">200. </span></p>
+
+		<p class="noindent mono"><span class="line-number">201. </span>            if
+not isValidPosition(board, fallingPiece):</p>
+
+		<p class="noindent mono"><span class="line-number">202. </span>                return
+<span class="comment"># can't fit a new piece on the board, so game
+over</span></p>
+
+		<p class="noindent mono"><span class="line-number">203. </span></p>
+
+		<p class="noindent mono"><span class="line-number">204. </span>        checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">205. </span>        for
+event in pygame.event.get(): <span class="comment"># event handling
+loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">206. </span>            if
+event.type == KEYUP:</p>
+
+		<p class="noindent mono"><span class="line-number">207. </span>                if
+(event.key == K_p):</p>
+
+		<p class="noindent mono"><span class="line-number">208. </span>                    <span
+class="comment"># Pausing the game</span></p>
+
+		<p class="noindent mono"><span class="line-number">209. </span>                    DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">210. </span>                    pygame.mixer.music.stop()</p>
+
+		<p class="noindent mono"><span class="line-number">211. </span>                    showTextScreen('Paused')
+<span class="comment"># pause until a key press</span></p>
+
+		<p class="noindent mono"><span class="line-number">212. </span>                    pygame.mixer.music.play(-1,
+0.0)</p>
+
+		<p class="noindent mono"><span class="line-number">213. </span>                    lastFallTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">214. </span>                    lastMoveDownTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">215. </span>                    lastMoveSidewaysTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">216. </span>                elif
+(event.key == K_LEFT or event.key == K_a):</p>
+
+		<p class="noindent mono"><span class="line-number">217. </span>                    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">218. </span>                elif
+(event.key == K_RIGHT or event.key == K_d):</p>
+
+		<p class="noindent mono"><span class="line-number">219. </span>                    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">220. </span>                elif
+(event.key == K_DOWN or event.key == K_s):</p>
+
+		<p class="noindent mono"><span class="line-number">221. </span>                    movingDown
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">222. </span></p>
+
+		<p class="noindent mono"><span class="line-number">223. </span>            elif
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number">224. </span>                <span
+class="comment"># moving the block sideways</span></p>
+
+		<p class="noindent mono"><span class="line-number">225. </span>                if
+(event.key == K_LEFT or event.key == K_a) and isValidPosition(board,
+fallingPiece, adjX=-1):</p>
+
+		<p class="noindent mono"><span class="line-number">226. </span>                    fallingPiece['x']
+-= 1</p>
+
+		<p class="noindent mono"><span class="line-number">227. </span>                    movingLeft
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">228. </span>                    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">229. </span>                    lastMoveSidewaysTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">230.</span></p>
+
+		<p class="noindent mono"><span class="line-number">231. </span>                elif
+(event.key == K_RIGHT or event.key == K_d) and isValidPosition(board,
+fallingPiece, adjX=1):</p>
+
+		<p class="noindent mono"><span class="line-number">232. </span>                    fallingPiece['x']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">233. </span>                    movingRight
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">234. </span>                    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">235. </span>                    lastMoveSidewaysTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">236. </span></p>
+
+		<p class="noindent mono"><span class="line-number">237. </span>                <span
+class="comment"># rotating the block (if there is room to rotate)</span></p>
+
+		<p class="noindent mono"><span class="line-number">238. </span>                elif
+(event.key == K_UP or event.key == K_w):</p>
+
+		<p class="noindent mono"><span class="line-number">239. </span>                    fallingPiece['rotation']
+= (fallingPiece['rotation'] + 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+		<p class="noindent mono"><span class="line-number">240. </span>                    if
+not isValidPosition(board, fallingPiece):</p>
+
+		<p class="noindent mono"><span class="line-number">241. </span>                        fallingPiece['rotation']
+= (fallingPiece['rotation'] - 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+		<p class="noindent mono"><span class="line-number">242. </span>                elif
+(event.key == K_q): <span class="comment"># rotate the other direction</span></p>
+
+		<p class="noindent mono"><span class="line-number">243. </span>                    fallingPiece['rotation']
+= (fallingPiece['rotation'] - 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+		<p class="noindent mono"><span class="line-number">244. </span>                    if
+not isValidPosition(board, fallingPiece):</p>
+
+		<p class="noindent mono"><span class="line-number">245. </span>                        fallingPiece['rotation']
+= (fallingPiece['rotation'] + 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+		<p class="noindent mono"><span class="line-number">246. </span></p>
+
+		<p class="noindent mono"><span class="line-number">247. </span>                <span
+class="comment"># making the block fall faster with the down key</span></p>
+
+		<p class="noindent mono"><span class="line-number">248. </span>                elif
+(event.key == K_DOWN or event.key == K_s):</p>
+
+		<p class="noindent mono"><span class="line-number">249. </span>                    movingDown
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">250. </span>                    if
+isValidPosition(board, fallingPiece, adjY=1):</p>
+
+		<p class="noindent mono"><span class="line-number">251. </span>                        fallingPiece['y']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">252. </span>                    lastMoveDownTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">253. </span></p>
+
+		<p class="noindent mono"><span class="line-number">254. </span>                <span
+class="comment"># move the current block all the way down</span></p>
+
+		<p class="noindent mono"><span class="line-number">255. </span>                elif
+event.key == K_SPACE:</p>
+
+		<p class="noindent mono"><span class="line-number">256. </span>                    movingDown
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">257. </span>                    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">258. </span>                    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">259. </span>                    for
+i in range(1, BOARDHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">260. </span>                        if
+not isValidPosition(board, fallingPiece, adjY=i):</p>
+
+		<p class="noindent mono"><span class="line-number">261. </span>                            break</p>
+
+		<p class="noindent mono"><span class="line-number">262. </span>                    fallingPiece['y']
++= i - 1</p>
+
+		<p class="noindent mono"><span class="line-number">263. </span></p>
+
+		<p class="noindent mono"><span class="line-number">264. </span>        <span
+class="comment"># handle moving the block because of user input</span></p>
+
+		<p class="noindent mono"><span class="line-number">265. </span>        if
+(movingLeft or movingRight) and time.time() - lastMoveSidewaysTime &gt; MOVESIDEWAYSFREQ:</p>
+
+		<p class="noindent mono"><span class="line-number">266. </span>            if
+movingLeft and isValidPosition(board, fallingPiece, adjX=-1):</p>
+
+		<p class="noindent mono"><span class="line-number">267. </span>                fallingPiece['x']
+-= 1</p>
+
+		<p class="noindent mono"><span class="line-number">268. </span>            elif
+movingRight and isValidPosition(board, fallingPiece, adjX=1):</p>
+
+		<p class="noindent mono"><span class="line-number">269. </span>                fallingPiece['x']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">270. </span>            lastMoveSidewaysTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">271. </span></p>
+
+		<p class="noindent mono"><span class="line-number">272. </span>        if
+movingDown and time.time() - lastMoveDownTime &gt; MOVEDOWNFREQ and
+isValidPosition(board, fallingPiece, adjY=1):</p>
+
+		<p class="noindent mono"><span class="line-number">273. </span>            fallingPiece['y']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">274. </span>            lastMoveDownTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">275. </span></p>
+
+		<p class="noindent mono"><span class="line-number">276. </span>        <span
+class="comment"># let the piece fall if it is time to fall</span></p>
+
+		<p class="noindent mono"><span class="line-number">277. </span>        if
+time.time() - lastFallTime &gt; fallFreq:</p>
+
+		<p class="noindent mono"><span class="line-number">278. </span>            <span
+class="comment"># see if the piece has landed</span></p>
+
+		<p class="noindent mono"><span class="line-number">279. </span>            if
+not isValidPosition(board, fallingPiece, adjY=1):</p>
+
+		<p class="noindent mono"><span class="line-number">280. </span>                <span
+class="comment"># falling piece has landed, set it on the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">281. </span>                addToBoard(board,
+fallingPiece)</p>
+
+		<p class="noindent mono"><span class="line-number">282. </span>                score
++= removeCompleteLines(board)</p>
+
+		<p class="noindent mono"><span class="line-number">283. </span>                level,
+fallFreq = calculateLevelAndFallFreq(score)</p>
+
+		<p class="noindent mono"><span class="line-number">284. </span>                fallingPiece
+= None</p>
+
+		<p class="noindent mono"><span class="line-number">285. </span>            else:</p>
+
+		<p class="noindent mono"><span class="line-number">286. </span>                <span
+class="comment"># piece did not land, just move the block down</span></p>
+
+		<p class="noindent mono"><span class="line-number">287. </span>                fallingPiece['y']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">288. </span>                lastFallTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">289. </span></p>
+
+		<p class="noindent mono"><span class="line-number">290. </span>        <span
+class="comment"># drawing everything on the screen</span></p>
+
+		<p class="noindent mono"><span class="line-number">291. </span>        DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">292. </span>        drawBoard(board)</p>
+
+		<p class="noindent mono"><span class="line-number">293. </span>        drawStatus(score,
+level)</p>
+
+		<p class="noindent mono"><span class="line-number">294. </span>        drawNextPiece(nextPiece)</p>
+
+		<p class="noindent mono"><span class="line-number">295. </span>        if
+fallingPiece != None:</p>
+
+		<p class="noindent mono"><span class="line-number">296. </span>            drawPiece(fallingPiece)</p>
+
+		<p class="noindent mono"><span class="line-number">297. </span></p>
+
+		<p class="noindent mono"><span class="line-number">298. </span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">299. </span>        FPSCLOCK.tick(FPS)</p>
+
+		<p class="noindent mono"><span class="line-number">300. </span></p>
+
+		<p class="noindent mono"><span class="line-number">301. </span></p>
+
+		<p class="noindent mono"><span class="line-number">302. </span>def
+makeTextObjs(text, font, color):</p>
+
+		<p class="noindent mono"><span class="line-number">303. </span>    surf
+= font.render(text, True, color)</p>
+
+		<p class="noindent mono"><span class="line-number">304. </span>    return
+surf, surf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">305. </span></p>
+
+		<p class="noindent mono"><span class="line-number">306. </span></p>
+
+		<p class="noindent mono"><span class="line-number">307. </span>def
+terminate():</p>
+
+		<p class="noindent mono"><span class="line-number">308. </span>    pygame.quit()</p>
+
+		<p class="noindent mono"><span class="line-number">309. </span>    sys.exit()</p>
+
+		<p class="noindent mono"><span class="line-number">310. </span></p>
+
+		<p class="noindent mono"><span class="line-number">311. </span></p>
+
+		<p class="noindent mono"><span class="line-number">312. </span>def
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">313. </span>    <span
+class="comment"># Go through event queue looking for a KEYUP event.</span></p>
+
+		<p class="noindent mono"><span class="line-number">314. </span>    <span
+class="comment"># Grab KEYDOWN events to remove them from the event
+queue.</span></p>
+
+		<p class="noindent mono"><span class="line-number">315. </span>    checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">316.</span></p>
+
+		<p class="noindent mono"><span class="line-number">317. </span>    for
+event in pygame.event.get([KEYDOWN, KEYUP]):</p>
+
+		<p class="noindent mono"><span class="line-number">318. </span>        if
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number">319. </span>            continue</p>
+
+		<p class="noindent mono"><span class="line-number">320. </span>        return
+event.key</p>
+
+		<p class="noindent mono"><span class="line-number">321. </span>    return
+None</p>
+
+		<p class="noindent mono"><span class="line-number">322. </span></p>
+
+		<p class="noindent mono"><span class="line-number">323. </span></p>
+
+		<p class="noindent mono"><span class="line-number">324. </span>def
+showTextScreen(text):</p>
+
+		<p class="noindent mono"><span class="line-number">325. </span>    <span
+class="comment"># This function displays large text in the</span></p>
+
+		<p class="noindent mono"><span class="line-number">326. </span>    <span
+class="comment"># center of the screen until a key is pressed.</span></p>
+
+		<p class="noindent mono"><span class="line-number">327. </span>    <span
+class="comment"># Draw the text drop shadow</span></p>
+
+		<p class="noindent mono"><span class="line-number">328. </span>    titleSurf,
+titleRect = makeTextObjs(text, BIGFONT, TEXTSHADOWCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">329. </span>    titleRect.center
+= (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2))</p>
+
+		<p class="noindent mono"><span class="line-number">330. </span>    DISPLAYSURF.blit(titleSurf,
+titleRect)</p>
+
+		<p class="noindent mono"><span class="line-number">331. </span></p>
+
+		<p class="noindent mono"><span class="line-number">332. </span>    <span
+class="comment"># Draw the text</span></p>
+
+		<p class="noindent mono"><span class="line-number">333. </span>    titleSurf,
+titleRect = makeTextObjs(text, BIGFONT, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">334. </span>    titleRect.center
+= (int(WINDOWWIDTH / 2) - 3, int(WINDOWHEIGHT / 2) - 3)</p>
+
+		<p class="noindent mono"><span class="line-number">335. </span>    DISPLAYSURF.blit(titleSurf,
+titleRect)</p>
+
+		<p class="noindent mono"><span class="line-number">336. </span></p>
+
+		<p class="noindent mono"><span class="line-number">337. </span>    <span
+class="comment"># Draw the additional &quot;Press a key to play.&quot;
+text.</span></p>
+
+		<p class="noindent mono"><span class="line-number">338. </span>    pressKeySurf,
+pressKeyRect = makeTextObjs('Press a key to play.', BASICFONT, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">339. </span>    pressKeyRect.center
+= (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2) + 100)</p>
+
+		<p class="noindent mono"><span class="line-number">340. </span>    DISPLAYSURF.blit(pressKeySurf,
+pressKeyRect)</p>
+
+		<p class="noindent mono"><span class="line-number">341. </span></p>
+
+		<p class="noindent mono"><span class="line-number">342. </span>    while
+checkForKeyPress() == None:</p>
+
+		<p class="noindent mono"><span class="line-number">343. </span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">344. </span>        FPSCLOCK.tick()</p>
+
+		<p class="noindent mono"><span class="line-number">345. </span></p>
+
+		<p class="noindent mono"><span class="line-number">346. </span></p>
+
+		<p class="noindent mono"><span class="line-number">347. </span>def
+checkForQuit():</p>
+
+		<p class="noindent mono"><span class="line-number">348. </span>    for
+event in pygame.event.get(QUIT): <span class="comment"># get all the QUIT
+events</span></p>
+
+		<p class="noindent mono"><span class="line-number">349. </span>        terminate()
+<span class="comment"># terminate if any QUIT events are present</span></p>
+
+		<p class="noindent mono"><span class="line-number">350. </span>    for
+event in pygame.event.get(KEYUP): <span class="comment"># get all the
+KEYUP events</span></p>
+
+		<p class="noindent mono"><span class="line-number">351. </span>        if
+event.key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number">352. </span>            terminate()
+<span class="comment"># terminate if the KEYUP event was for the Esc
+key</span></p>
+
+		<p class="noindent mono"><span class="line-number">353. </span>        pygame.event.post(event)
+<span class="comment"># put the other KEYUP event objects back</span></p>
+
+		<p class="noindent mono"><span class="line-number">354. </span></p>
+
+		<p class="noindent mono"><span class="line-number">355.</span></p>
+
+		<p class="noindent mono"><span class="line-number">356. </span>def
+calculateLevelAndFallFreq(score):</p>
+
+		<p class="noindent mono"><span class="line-number">357. </span>    <span
+class="comment"># Based on the score, return the level the player is on
+and</span></p>
+
+		<p class="noindent mono"><span class="line-number">358. </span>    <span
+class="comment"># how many seconds pass until a falling piece falls one
+space.</span></p>
+
+		<p class="noindent mono"><span class="line-number">359. </span>    level
+= int(score / 10) + 1</p>
+
+		<p class="noindent mono"><span class="line-number">360. </span>    fallFreq
+= 0.27 - (level * 0.02)</p>
+
+		<p class="noindent mono"><span class="line-number">361.     </span>return
+level, fallFreq</p>
+
+		<p class="noindent mono"><span class="line-number">362. </span></p>
+
+		<p class="noindent mono"><span class="line-number">363. </span>def
+getNewPiece():</p>
+
+		<p class="noindent mono"><span class="line-number">364. </span>    <span
+class="comment"># return a random new piece in a random rotation and
+color</span></p>
+
+		<p class="noindent mono"><span class="line-number">365. </span>    shape
+= random.choice(list(SHAPES.keys()))</p>
+
+		<p class="noindent mono"><span class="line-number">366. </span>    newPiece
+= {'shape': shape,</p>
+
+		<p class="noindent mono"><span class="line-number">367. </span>                'rotation':
+random.randint(0, len(SHAPES[shape]) - 1),</p>
+
+		<p class="noindent mono"><span class="line-number">368. </span>                'x':
+int(BOARDWIDTH / 2) - int(TEMPLATEWIDTH / 2),</p>
+
+		<p class="noindent mono"><span class="line-number">369. </span>                'y':
+-2, <span class="comment"># start it above the board (i.e. less than 0)</span></p>
+
+		<p class="noindent mono"><span class="line-number">370. </span>                'color':
+random.randint(0, len(COLORS)-1)}</p>
+
+		<p class="noindent mono"><span class="line-number">371. </span>    return
+newPiece</p>
+
+		<p class="noindent mono"><span class="line-number">372. </span></p>
+
+		<p class="noindent mono"><span class="line-number">373. </span></p>
+
+		<p class="noindent mono"><span class="line-number">374. </span>def
+addToBoard(board, piece):</p>
+
+		<p class="noindent mono"><span class="line-number">375. </span>    <span
+class="comment"># fill in the board based on piece's location, shape,
+and rotation</span></p>
+
+		<p class="noindent mono"><span class="line-number">376. </span>    for
+x in range(TEMPLATEWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">377. </span>        for
+y in range(TEMPLATEHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">378. </span>            if
+SHAPES[piece['shape']][piece['rotation']][y][x] != BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">379. </span>                board[x
++ piece['x']][y + piece['y']] = piece['color']</p>
+
+		<p class="noindent mono"><span class="line-number">380. </span></p>
+
+		<p class="noindent mono"><span class="line-number">381. </span></p>
+
+		<p class="noindent mono"><span class="line-number">382. </span>def
+getBlankBoard():</p>
+
+		<p class="noindent mono"><span class="line-number">383. </span>    <span
+class="comment"># create and return a new blank board data structure</span></p>
+
+		<p class="noindent mono"><span class="line-number">384. </span>    board
+= []</p>
+
+		<p class="noindent mono"><span class="line-number">385. </span>    for
+i in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">386. </span>        board.append([BLANK]
+* BOARDHEIGHT)</p>
+
+		<p class="noindent mono"><span class="line-number">387. </span>    return
+board</p>
+
+		<p class="noindent mono"><span class="line-number">388. </span></p>
+
+		<p class="noindent mono"><span class="line-number">389. </span></p>
+
+		<p class="noindent mono"><span class="line-number">390. </span>def
+isOnBoard(x, y):</p>
+
+		<p class="noindent mono"><span class="line-number">391. </span>    return
+x &gt;= 0 and x &lt; BOARDWIDTH and y &lt; BOARDHEIGHT</p>
+
+		<p class="noindent mono"><span class="line-number">392. </span></p>
+
+		<p class="noindent mono"><span class="line-number">393. </span></p>
+
+		<p class="noindent mono"><span class="line-number">394. </span>def
+isValidPosition(board, piece, adjX=0, adjY=0):</p>
+
+		<p class="noindent mono"><span class="line-number">395. </span>    <span
+class="comment"># Return True if the piece is within the board and not
+colliding</span></p>
+
+		<p class="noindent mono"><span class="line-number">396. </span>    for
+x in range(TEMPLATEWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">397. </span>        for
+y in range(TEMPLATEHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">398.</span>
+isAboveBoard = y + piece['y'] + adjY &lt; 0</p>
+
+		<p class="noindent mono"><span class="line-number">399. </span>            if
+isAboveBoard or SHAPES[piece['shape']][piece['rotation']][y][x] == BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">400. </span>                continue</p>
+
+		<p class="noindent mono"><span class="line-number">401. </span>            if
+not isOnBoard(x + piece['x'] + adjX, y + piece['y'] + adjY):</p>
+
+		<p class="noindent mono"><span class="line-number">402. </span>                return
+False</p>
+
+		<p class="noindent mono"><span class="line-number">403. </span>            if
+board[x + piece['x'] + adjX][y + piece['y'] + adjY] != BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">404. </span>                return
+False</p>
+
+		<p class="noindent mono"><span class="line-number">405. </span>    return
+True</p>
+
+		<p class="noindent mono"><span class="line-number">406. </span></p>
+
+		<p class="noindent mono"><span class="line-number">407. </span>def
+isCompleteLine(board, y):</p>
+
+		<p class="noindent mono"><span class="line-number">408. </span>    <span
+class="comment"># Return True if the line filled with boxes with no
+gaps.</span></p>
+
+		<p class="noindent mono"><span class="line-number">409. </span>    for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">410. </span>        if
+board[x][y] == BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">411. </span>            return
+False</p>
+
+		<p class="noindent mono"><span class="line-number">412. </span>    return
+True</p>
+
+		<p class="noindent mono"><span class="line-number">413. </span></p>
+
+		<p class="noindent mono"><span class="line-number">414. </span></p>
+
+		<p class="noindent mono"><span class="line-number">415. </span>def
+removeCompleteLines(board):</p>
+
+		<p class="noindent mono"><span class="line-number">416. </span>    <span
+class="comment"># Remove any completed lines on the board, move
+everything above them down, and return the number of complete lines.</span></p>
+
+		<p class="noindent mono"><span class="line-number">417. </span>    numLinesRemoved
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">418. </span>    y
+= BOARDHEIGHT - 1 <span class="comment"># start y at the bottom of the
+board</span></p>
+
+		<p class="noindent mono"><span class="line-number">419. </span>    while
+y &gt;= 0:</p>
+
+		<p class="noindent mono"><span class="line-number">420. </span>        if
+isCompleteLine(board, y):</p>
+
+		<p class="noindent mono"><span class="line-number">421. </span>            <span
+class="comment"># Remove the line and pull boxes down by one line.</span></p>
+
+		<p class="noindent mono"><span class="line-number">422. </span>            for
+pullDownY in range(y, 0, -1):</p>
+
+		<p class="noindent mono"><span class="line-number">423. </span>                for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">424. </span>                    board[x][pullDownY]
+= board[x][pullDownY-1]</p>
+
+		<p class="noindent mono"><span class="line-number">425. </span>            <span
+class="comment"># Set very top line to blank.</span></p>
+
+		<p class="noindent mono"><span class="line-number">426. </span>            for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">427. </span>                board[x][0]
+= BLANK</p>
+
+		<p class="noindent mono"><span class="line-number">428. </span>            numLinesRemoved
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">429. </span>            <span
+class="comment"># Note on the next iteration of the loop, y is the
+same.</span></p>
+
+		<p class="noindent mono"><span class="line-number">430. </span>            <span
+class="comment"># This is so that if the line that was pulled down is
+also</span></p>
+
+		<p class="noindent mono"><span class="line-number">431. </span>            <span
+class="comment"># complete, it will be removed.</span></p>
+
+		<p class="noindent mono"><span class="line-number">432. </span>        else:</p>
+
+		<p class="noindent mono"><span class="line-number">433. </span>            y
+-= 1 <span class="comment"># move on to check next row up</span></p>
+
+		<p class="noindent mono"><span class="line-number">434. </span>    return
+numLinesRemoved</p>
+
+		<p class="noindent mono"><span class="line-number">435. </span></p>
+
+		<p class="noindent mono"><span class="line-number">436. </span></p>
+
+		<p class="noindent mono"><span class="line-number">437. </span>def
+convertToPixelCoords(boxx, boxy):</p>
+
+		<p class="noindent mono"><span class="line-number">438. </span>    <span
+class="comment"># Convert the given xy coordinates of the board to xy </span></p>
+
+		<p class="noindent mono"><span class="line-number">439. </span>    <span
+class="comment"># coordinates of the</span> <span
+class="comment">location on the screen.</span></p>
+
+		<p class="noindent mono"><span class="line-number">440. </span>    return
+(XMARGIN + (boxx * BOXSIZE)), (TOPMARGIN + (boxy * BOXSIZE))</p>
+
+		<p class="noindent mono"><span class="line-number">441. </span></p>
+
+		<p class="noindent mono"><span class="line-number">442. </span></p>
+
+		<p class="noindent mono"><span class="line-number">443. </span>def
+drawBox(boxx, boxy, color, pixelx=None, pixely=None):</p>
+
+		<p class="noindent mono"><span class="line-number">444. </span>    <span
+class="comment"># draw a single box (each tetromino piece has four
+boxes)</span></p>
+
+		<p class="noindent mono"><span class="line-number">445. </span>    <span
+class="comment"># at xy coordinates on the board. Or, if pixelx &amp;
+pixely</span></p>
+
+		<p class="noindent mono"><span class="line-number">446. </span>    <span
+class="comment"># are specified, draw to the pixel coordinates stored
+in</span></p>
+
+		<p class="noindent mono"><span class="line-number">447. </span>    <span
+class="comment"># pixelx &amp; pixely (this is used for the
+&quot;Next&quot; piece).</span></p>
+
+		<p class="noindent mono"><span class="line-number">448. </span>    if
+color == BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">449. </span>        return</p>
+
+		<p class="noindent mono"><span class="line-number">450. </span>    if
+pixelx == None and pixely == None:</p>
+
+		<p class="noindent mono"><span class="line-number">451. </span>        pixelx,
+pixely = convertToPixelCoords(boxx, boxy)</p>
+
+		<p class="noindent mono"><span class="line-number">452. </span>    pygame.draw.rect(DISPLAYSURF,
+COLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 1, BOXSIZE - 1))</p>
+
+		<p class="noindent mono"><span class="line-number">453. </span>    pygame.draw.rect(DISPLAYSURF,
+LIGHTCOLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 4, BOXSIZE - 4))</p>
+
+		<p class="noindent mono"><span class="line-number">454. </span></p>
+
+		<p class="noindent mono"><span class="line-number">455. </span></p>
+
+		<p class="noindent mono"><span class="line-number">456. </span>def
+drawBoard(board):</p>
+
+		<p class="noindent mono"><span class="line-number">457. </span>    <span
+class="comment"># draw the border around the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">458. </span>    pygame.draw.rect(DISPLAYSURF,
+BORDERCOLOR, (XMARGIN - 3, TOPMARGIN - 7, (BOARDWIDTH * BOXSIZE) + 8,
+(BOARDHEIGHT * BOXSIZE) + 8), 5)</p>
+
+		<p class="noindent mono"><span class="line-number">459. </span></p>
+
+		<p class="noindent mono"><span class="line-number">460. </span>    <span
+class="comment"># fill the background of the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">461. </span>    pygame.draw.rect(DISPLAYSURF,
+BGCOLOR, (XMARGIN, TOPMARGIN, BOXSIZE * BOARDWIDTH, BOXSIZE * BOARDHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">462. </span>    <span
+class="comment"># draw the individual boxes on the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">463. </span>    for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">464. </span>        for
+y in range(BOARDHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">465. </span>            drawBox(x,
+y, board[x][y])</p>
+
+		<p class="noindent mono"><span class="line-number">466. </span></p>
+
+		<p class="noindent mono"><span class="line-number">467. </span></p>
+
+		<p class="noindent mono"><span class="line-number">468. </span>def
+drawStatus(score, level):</p>
+
+		<p class="noindent mono"><span class="line-number">469. </span>    <span
+class="comment"># draw the score text</span></p>
+
+		<p class="noindent mono"><span class="line-number">470. </span>    scoreSurf
+= BASICFONT.render('Score: %s' % score, True, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">471. </span>    scoreRect
+= scoreSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">472. </span>    scoreRect.topleft
+= (WINDOWWIDTH - 150, 20)</p>
+
+		<p class="noindent mono"><span class="line-number">473. </span>    DISPLAYSURF.blit(scoreSurf,
+scoreRect)</p>
+
+		<p class="noindent mono"><span class="line-number">474. </span></p>
+
+		<p class="noindent mono"><span class="line-number">475. </span>    <span
+class="comment"># draw the level text</span></p>
+
+		<p class="noindent mono"><span class="line-number">476. </span>    levelSurf
+= BASICFONT.render('Level: %s' % level, True, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">477. </span>    levelRect
+= levelSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">478. </span>    levelRect.topleft
+= (WINDOWWIDTH - 150, 50)</p>
+
+		<p class="noindent mono"><span class="line-number">479. </span>    DISPLAYSURF.blit(levelSurf,
+levelRect)</p>
+
+		<p class="noindent mono"><span class="line-number">480. </span></p>
+
+		<p class="noindent mono"><span class="line-number">481. </span></p>
+
+		<p class="noindent mono"><span class="line-number">482. </span>def
+drawPiece(piece, pixelx=None, pixely=None):</p>
+
+		<p class="noindent mono"><span class="line-number">483. </span>    shapeToDraw
+= SHAPES[piece['shape']][piece['rotation']]</p>
+
+		<p class="noindent mono"><span class="line-number">484. </span>    if
+pixelx == None and pixely == None:</p>
+
+		<p class="noindent mono"><span class="line-number">485. </span>        <span
+class="comment"># if pixelx &amp; pixely hasn't been specified, use the
+location stored in the piece data structure</span></p>
+
+		<p class="noindent mono"><span class="line-number">486. </span>        pixelx,
+pixely = convertToPixelCoords(piece['x'], piece['y'])</p>
+
+		<p class="noindent mono"><span class="line-number">487. </span></p>
+
+		<p class="noindent mono"><span class="line-number">488. </span>    <span
+class="comment"># draw each of the blocks that make up the piece</span></p>
+
+		<p class="noindent mono"><span class="line-number">489. </span>    for
+x in range(TEMPLATEWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">490. </span>        for
+y in range(TEMPLATEHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">491. </span>            if
+shapeToDraw[y][x] != BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">492. </span>                drawBox(None,
+None, piece['color'], pixelx + (x * BOXSIZE), pixely + (y * BOXSIZE))</p>
+
+		<p class="noindent mono"><span class="line-number">493.</span></p>
+
+		<p class="noindent mono"><span class="line-number">494.</span></p>
+
+		<p class="noindent mono"><span class="line-number">495. </span>def
+drawNextPiece(piece):</p>
+
+		<p class="noindent mono"><span class="line-number">496. </span>    <span
+class="comment"># draw the &quot;next&quot; text</span></p>
+
+		<p class="noindent mono"><span class="line-number">497. </span>    nextSurf
+= BASICFONT.render('Next:', True, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">498. </span>    nextRect
+= nextSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">499. </span>    nextRect.topleft
+= (WINDOWWIDTH - 120, 80)</p>
+
+		<p class="noindent mono"><span class="line-number">500. </span>    DISPLAYSURF.blit(nextSurf,
+nextRect)</p>
+
+		<p class="noindent mono"><span class="line-number">501. </span>    <span
+class="comment"># draw the &quot;next&quot; piece</span></p>
+
+		<p class="noindent mono"><span class="line-number">502. </span>    drawPiece(piece,
+pixelx=WINDOWWIDTH-120, pixely=100)</p>
+
+		<p class="noindent mono"><span class="line-number">503. </span></p>
+
+		<p class="noindent mono"><span class="line-number">504. </span></p>
+
+		<p class="noindent mono"><span class="line-number">505. </span>if
+__name__ == '__main__':</p>
+
+		<p class="noindent mono"><span class="line-number">506. </span>    main()</p>
+
+</div>
+
+	<h1 class="subheading" id="">The Usual Setup Code</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">1.</span> <span
+class="comment"># Tetromino (a Tetris clone)</span></p>
+
+		<p class="noindent mono"><span class="line-number">2.</span> <span
+class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+
+		<p class="noindent mono"><span class="line-number">3.</span> <span
+class="comment"># http://inventwithpython.com/pygame</span></p>
+
+		<p class="noindent mono"><span class="line-number">4.</span> <span
+class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+
+		<p class="noindent mono"><span class="line-number">5.</span></p>
+
+		<p class="noindent mono"><span class="line-number">6.</span> import
+random, time, pygame, sys</p>
+
+		<p class="noindent mono"><span class="line-number">7.</span> from
+pygame.locals import *</p>
+
+		<p class="noindent mono"><span class="line-number">8.</span></p>
+
+		<p class="noindent mono"><span class="line-number">9.</span> FPS
+= 25</p>
+
+		<p class="noindent mono"> <span class="line-number">10. </span>WINDOWWIDTH
+= 640</p>
+
+		<p class="noindent mono"> <span class="line-number">11. </span>WINDOWHEIGHT
+= 480</p>
+
+		<p class="noindent mono"> <span class="line-number">12. </span>BOXSIZE
+= 20</p>
+
+		<p class="noindent mono"> <span class="line-number">13. </span>BOARDWIDTH
+= 10</p>
+
+		<p class="noindent mono"> <span class="line-number">14. </span>BOARDHEIGHT
+= 20</p>
+
+		<p class="noindent mono"> <span class="line-number">15. </span>BLANK
+= '.'</p>
+
+</div>
+
+	<p>These are the constants used by our Tetromino game. Each box
+is a square that is 20 pixels wide and high. The board itself is 10 boxes wide
+and 20 boxes tall. The <span class="mono">BLANK</span> constant will be used
+as a value to represent blank spaces in the board’s data structure.</p>
+
+	<h1 class="subheading" id="">Setting up Timing Constants for Holding Down Keys</h1>
+
+	<div class="python-shell">
+		<p class="noindent mono"> <span class="line-number">17. </span>MOVESIDEWAYSFREQ = 0.15</p>
+		<p class="noindent mono"> <span class="line-number">18. </span>MOVEDOWNFREQ = 0.1</p>
+	</div>
+
+	<p>Every time the player pushes the left or right arrow key
+down, the falling piece should move one box over to the left or right,
+respectively. However, the player can also hold down the left or right arrow
+key to keep moving the falling piece. The <span class="mono">MOVESIDEWAYSFREQ</span>
+constant will set it so that every 0.15 seconds that passes with the left or
+right arrow key held down, the piece will move another space over.</p>
+
+	<p>The <span class="mono">MOVEDOWNFREQ</span> constant is the
+same thing except it tells how frequently the piece drops by one box while the
+player has the down arrow key held down.</p>
+
+	<h1 class="subheading" id="">More Setup Code</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"> <span class="line-number">20. </span>XMARGIN
+= int((WINDOWWIDTH - BOARDWIDTH * BOXSIZE) / 2)</p>
+
+		<p class="noindent mono"> <span class="line-number">21. </span>TOPMARGIN
+= WINDOWHEIGHT - (BOARDHEIGHT * BOXSIZE) - 5</p>
+
+</div>
+
+	<p>The program needs to calculate how many pixels are to the left
+and right side of the board to use later in the program. <span class="mono">WINDOWWIDTH</span>
+is the total number of pixels wide the entire window is. The board is <span
+class="mono">BOARDWIDTH</span> boxes wide and each box is <span class="mono">BOXSIZE</span>
+pixels wide. If we subtract <span class="mono">BOXSIZE</span> pixels from this
+for each of the boxes wide in the board (which is <span class="mono">BOARDWIDTH
+* BOXSIZE</span>), we’ll have the size of the margin to the left and right of
+the board. If we divide this by <span class="mono">2</span>, then we will have
+the size of just one margin. Since the margins are the same size, we can use <span
+class="mono">XMARGIN</span> for either the left-side or right-side margin.</p>
+
+	<p>We can calculate the size of the space between the top of
+the board and the top of the window in a similar manner. The board will be
+drawn 5 pixels above the bottom of the window, so <span class="mono">5</span>
+is subtracted from <span class="mono">topmargin</span> to account for this.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"> <span class="line-number">23. </span><span
+class="comment">#               R    G    B</span></p>
+
+		<p class="noindent mono"> <span class="line-number">24. </span>WHITE
+= (255, 255, 255)</p>
+
+		<p class="noindent mono"> <span class="line-number">25. </span>GRAY
+= (185, 185, 185)</p>
+
+		<p class="noindent mono"> <span class="line-number">26. </span>BLACK
+= (  0,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">27. </span>RED
+= (155,   0,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">28. </span>LIGHTRED
+= (175,  20,  20)</p>
+
+		<p class="noindent mono"> <span class="line-number">29. </span>GREEN
+= (  0, 155,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">30. </span>LIGHTGREEN
+= ( 20, 175,  20)</p>
+
+		<p class="noindent mono"> <span class="line-number">31. </span>BLUE
+= (  0,   0, 155)</p>
+
+		<p class="noindent mono"> <span class="line-number">32. </span>LIGHTBLUE
+= ( 20,  20, 175)</p>
+
+		<p class="noindent mono"> <span class="line-number">33. </span>YELLOW
+= (155, 155,   0)</p>
+
+		<p class="noindent mono"> <span class="line-number">34. </span>LIGHTYELLOW
+= (175, 175,  20)</p>
+
+		<p class="noindent mono"><span class="line-number"> 35. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">36. </span>BORDERCOLOR
+= BLUE</p>
+
+		<p class="noindent mono"> <span class="line-number">37. </span>BGCOLOR
+= BLACK</p>
+
+		<p class="noindent mono"> <span class="line-number">38. </span>TEXTCOLOR
+= WHITE</p>
+
+		<p class="noindent mono"> <span class="line-number">39. </span>TEXTSHADOWCOLOR
+= GRAY</p>
+
+		<p class="noindent mono"> <span class="line-number">40. </span>COLORS
+= (     BLUE,      GREEN,      RED,      YELLOW)</p>
+
+		<p class="noindent mono"> <span class="line-number">41. </span>LIGHTCOLORS
+= (LIGHTBLUE, LIGHTGREEN, LIGHTRED, LIGHTYELLOW)</p>
+
+		<p class="noindent mono"> <span class="line-number">42. </span>assert
+len(COLORS) == len(LIGHTCOLORS) <span class="comment"># each color must
+have light color</span></p>
+
+</div>
+
+	<p>The pieces will come in four colors: blue, green, red, and
+yellow. When we draw the boxes though, there will be a thin highlight on the
+box in a lighter color. So this means we need to create light blue, light
+green, light red, and light yellow colors as well.</p>
+
+	<p>Each of these four colors will be stored in tuples named <span
+class="mono">COLORS</span> (for the normal colors) and <span class="mono">LIGHTCOLORS</span>
+(for the lighter colors).</p>
+
+	<h1 class="subheading" id="">Setting Up the Piece Templates</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"> <span class="line-number">44. </span>TEMPLATEWIDTH
+= 5</p>
+
+		<p class="noindent mono"> <span class="line-number">45. </span>TEMPLATEHEIGHT
+= 5</p>
+
+		<p class="noindent mono"> <span class="line-number">46. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">47. </span>S_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">48. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">49. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">50. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">51. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">52. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">53. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">54. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">55. </span>                     '...O.',</p>
+
+		<p class="noindent mono"> <span class="line-number">56. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">57. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">58. </span>Z_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">59. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">60. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">61. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">62. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">63. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">64. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">65. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">66. </span>                     '.O...',</p>
+
+		<p class="noindent mono"> <span class="line-number">67. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">68. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">69. </span>I_SHAPE_TEMPLATE
+= [['..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">70. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">71. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">72. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">73. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">74. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">75. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">76. </span>                     'OOOO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">77. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">78. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">79. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">80. </span>O_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">81. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">82. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">83. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"> <span class="line-number">84. </span>                     '.....']]</p>
+
+		<p class="noindent mono"> <span class="line-number">85. </span></p>
+
+		<p class="noindent mono"> <span class="line-number">86. </span>J_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">87. </span>                     '.O...',</p>
+
+		<p class="noindent mono"> <span class="line-number">88. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">89. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">90. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">91. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">92. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">93. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">94. </span>                     '..O..',</p>
+
+		<p class="noindent mono"> <span class="line-number">95. </span>                     '.....'],</p>
+
+		<p class="noindent mono"> <span class="line-number">96. </span>                    ['.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">97. </span>                     '.....',</p>
+
+		<p class="noindent mono"> <span class="line-number">98. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"> <span class="line-number">99. </span>                     '...O.',</p>
+
+		<p class="noindent mono"><span class="line-number">100. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">101. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">102. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">103. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">104. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"><span class="line-number">105. </span>                     '.....']]</p>
+
+		<p class="noindent mono"><span class="line-number">106. </span></p>
+
+		<p class="noindent mono"><span class="line-number">107. </span>L_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">108. </span>                     '...O.',</p>
+
+		<p class="noindent mono"><span class="line-number">109. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">110. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">111. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">112. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">113. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">114. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">115. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"><span class="line-number">116. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">117. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">118. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">119. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">120. </span>                     '.O...',</p>
+
+		<p class="noindent mono"><span class="line-number">121. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">122. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">123. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"><span class="line-number">124. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">125. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">126. </span>                     '.....']]</p>
+
+		<p class="noindent mono"><span class="line-number">127. </span></p>
+
+		<p class="noindent mono"><span class="line-number">128. </span>T_SHAPE_TEMPLATE
+= [['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">129. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">130. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">131. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">132. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">133. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">134. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">135. </span>                     '..OO.',</p>
+
+		<p class="noindent mono"><span class="line-number">136. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">137. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">138. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">139. </span>                     '.....',</p>
+
+		<p class="noindent mono"><span class="line-number">140. </span>                     '.OOO.',</p>
+
+		<p class="noindent mono"><span class="line-number">141. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">142. </span>                     '.....'],</p>
+
+		<p class="noindent mono"><span class="line-number">143. </span>                    ['.....',</p>
+
+		<p class="noindent mono"><span class="line-number">144. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">145. </span>                     '.OO..',</p>
+
+		<p class="noindent mono"><span class="line-number">146. </span>                     '..O..',</p>
+
+		<p class="noindent mono"><span class="line-number">147. </span>                     '.....']]</p>
+
+</div>
+
+	<p>Our game program needs to know how each of the shapes are
+shaped, including for all of their possible rotations. In order to do this, we
+will create lists of lists of strings. The inner list of strings will represent
+a single rotation of a shape, like this:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">['.....',</p>
+		<p class="noindent mono"> '.....',</p>
+		<p class="noindent mono"> '..OO.',</p>
+		<p class="noindent mono"> '.OO..',</p>
+		<p class="noindent mono"> '.....']</p>
+	</div>
+
+	<p>We will write the rest of our code so that it interprets a
+list of strings like the one above to represent a shape where the periods are
+empty spaces and the O’s are boxes, like this:</p>
+
+	<h1 class="subheading" id="">Splitting a “Line of Code” Across Multiple Lines</h1>
+	<p class="noindent">You can see that this list is spread across many lines in
+the file editor. This is perfectly valid Python, because the Python interpreter
+realizes that until it sees the <span class="mono">]</span> closing square
+bracket, the list isn’t finished. The indentation doesn’t matter because Python
+knows you won’t have different indentation for a new block in the middle of a
+list. This code below works just fine:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono">spam = ['hello',
+3.14, 'world', 42, 10, 'fuzz']</p>
+
+		<p class="noindent mono">eggs = ['hello',
+3.14,</p>
+
+		<p class="noindent mono">   'world'</p>
+
+		<p class="noindent mono">         , 42,</p>
+
+		<p class="noindent mono">       10, 'fuzz']</p>
+
+</div>
+
+	<p>Though, of course, the code for the <span class="mono">eggs</span>
+list would be much more readable if we lined up all the items in the list or
+put on a single line like <span class="mono">spam</span>.</p>
+
+	<p>Normally, splitting a line of code across multiple lines in
+the file editor would require putting a <span class="mono">\</span> character
+at the end of the line. The <span class="mono">\</span> tells Python, “This
+code continues onto the next line.” (This slash was first used in the Sliding
+Puzzle game in the <span class="mono">isValidMove()</span> function.)</p>
+
+	<p>We will make “template” data structures of the shapes by
+creating a list of these list of strings, and store them in variables such as <span
+class="mono">S_SHAPE_TEMPLATE</span>. This way, <span class="mono">len(S_SHAPE_TEMPLATE)</span>
+will represent how many possible rotations there are for the S shape, and <span
+class="mono">S_SHAPE_TEMPLATE[0]</span> will represent the S shape’s first
+possible rotation. Lines 47 to 147 will create “template” data structures for
+each of the shapes.</p>
+
+	<p>Imagine that each possible piece in a tiny 5 x 5 board of
+empty space, with some of the spaces on the board filled in with boxes. The
+following expressions that use <span class="mono">S_SHAPE_TEMPLATE[0]</span>
+are <span class="mono">True</span>:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono">S_SHAPE_TEMPLATE[0][2][2]
+== 'O'</p>
+
+		<p class="noindent mono">S_SHAPE_TEMPLATE[0][2][3]
+== 'O'</p>
+
+		<p class="noindent mono">S_SHAPE_TEMPLATE[0][3][1]
+== 'O'</p>
+
+		<p class="noindent mono">S_SHAPE_TEMPLATE[0][3][2]
+== 'O'</p>
+
+</div>
+
+	<p>If we represented this shape on paper, it would look
+something like this:</p>
+
+
+	<p>This is how we can represent things like Tetromino pieces as
+Python values such as strings and lists. The <span class="mono">TEMPLATEWIDTH</span>
+and <span class="mono">TEMPLATEHEIGHT</span> constants simply set how large
+each row and column for each shape’s rotation should be. (The templates will
+always be 5x5.)</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">149. </span>SHAPES
+= {'S': S_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">150. </span>          'Z':
+Z_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">151. </span>          'J':
+J_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">152. </span>          'L':
+L_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">153. </span>          'I':
+I_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">154. </span>          'O':
+O_SHAPE_TEMPLATE,</p>
+
+		<p class="noindent mono"><span class="line-number">155. </span>          'T':
+T_SHAPE_TEMPLATE}</p>
+
+</div>
+
+	<p>The <span class="mono">SHAPES</span> variable will be a
+dictionary that stores all of the different templates. Because each template
+has all the possible rotations of a single shape, this means that the <span
+class="mono">SHAPES</span> variable contains all possible rotations of every
+possible shape. This will be the data structure that contains all of the shape
+data in our game.</p>
+
+<h2><a name="_Toc316488669">The </a><span class="mono">main()</span> Function</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">158. </span>def
+main():</p>
+
+		<p class="noindent mono"><span class="line-number">159. </span>    global
+FPSCLOCK, DISPLAYSURF, BASICFONT, BIGFONT</p>
+
+		<p class="noindent mono"><span class="line-number">160. </span>    pygame.init()</p>
+
+		<p class="noindent mono"><span class="line-number">161. </span>    FPSCLOCK
+= pygame.time.Clock()</p>
+
+		<p class="noindent mono"><span class="line-number">162. </span>    DISPLAYSURF
+= pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">163. </span>    BASICFONT
+= pygame.font.Font('freesansbold.ttf', 18)</p>
+
+		<p class="noindent mono"><span class="line-number">164. </span>    BIGFONT
+= pygame.font.Font('freesansbold.ttf', 100)</p>
+
+		<p class="noindent mono"><span class="line-number">165. </span>    pygame.display.set_caption('Tetromino')</p>
+
+		<p class="noindent mono"><span class="line-number">166. </span></p>
+
+		<p class="noindent mono"><span class="line-number">167. </span>    showTextScreen('Tetromino')</p>
+
+</div>
+
+	<p>The <span class="mono">main()</span> function handles
+creating some more global constants and showing the start screen that appears
+when the program is run. </p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">168. </span>    while
+True: <span class="comment"># game loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">169. </span>        if
+random.randint(0, 1) == 0:</p>
+
+		<p class="noindent mono"><span class="line-number">170. </span>            pygame.mixer.music.load('tetrisb.mid')</p>
+
+		<p class="noindent mono"><span class="line-number">171. </span>        else:</p>
+
+		<p class="noindent mono"><span class="line-number">172. </span>            pygame.mixer.music.load('tetrisc.mid')</p>
+
+		<p class="noindent mono"><span class="line-number">173. </span>        pygame.mixer.music.play(-1,
+0.0)</p>
+
+		<p class="noindent mono"><span class="line-number">174. </span>        runGame()</p>
+
+		<p class="noindent mono"><span class="line-number">175. </span>        pygame.mixer.music.stop()</p>
+
+		<p class="noindent mono"><span class="line-number">176. </span>        showTextScreen('Game
+Over')</p>
+
+</div>
+
+	<p>The code for the actual game is all in <span class="mono">runGame()</span>.
+The <span class="mono">main()</span> function here simply randomly decides
+what background music to start playing (either the <em>tetrisb.mid</em> or <em>tetrisc.mid</em>
+MIDI music file), then calls <span class="mono">runGame()</span> to begin the
+game. When the player loses, <span class="mono">runGame()</span> will return
+to <span class="mono">main()</span>, which then stops the background music and
+displays the game over screen.</p>
+
+	<p>When the player presses a key, the <span class="mono">showTextScreen()</span>
+function that displays the game over screen will return. The game loop will
+loop back to the beginning at line 169 and start another game.</p>
+
+	<h1 class="subheading" id="">The Start of a New Game</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">179. </span>def
+runGame():</p>
+
+		<p class="noindent mono"><span class="line-number">180. </span>    <span
+class="comment"># setup variables for the start of the game</span></p>
+
+		<p class="noindent mono"><span class="line-number">181. </span>    board
+= getBlankBoard()</p>
+
+		<p class="noindent mono"><span class="line-number">182. </span>    lastMoveDownTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">183. </span>    lastMoveSidewaysTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">184. </span>    lastFallTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">185. </span>    movingDown
+= False <span class="comment"># note: there is no movingUp variable</span></p>
+
+		<p class="noindent mono"><span class="line-number">186. </span>    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">187. </span>    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">188. </span>    score
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">189. </span>    level,
+fallFreq = calculateLevelAndFallFreq(score)</p>
+
+		<p class="noindent mono"><span class="line-number">190. </span></p>
+
+		<p class="noindent mono"><span class="line-number">191. </span>    fallingPiece
+= getNewPiece()</p>
+
+		<p class="noindent mono"><span class="line-number">192. </span>    nextPiece
+= getNewPiece()</p>
+
+</div>
+
+	<p>Before the game begins and pieces start falling, we need to
+initialize some variables to their start-of-game values. On line 191 the <span
+class="mono">fallingPiece</span> variable will be set to the currently falling
+piece that can be rotated by the player. On line 192 the <span class="mono">nextPiece</span>
+variable will be set to the piece that shows up in the “Next” part of the
+screen so that player knows what piece is coming up after setting the falling
+piece.</p>
+
+	<h1 class="subheading" id="">The Game Loop</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">194. </span>    while
+True: <span class="comment"># main game loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">195. </span>        if
+fallingPiece == None:</p>
+
+		<p class="noindent mono"><span class="line-number">196. </span>            <span
+class="comment"># No falling piece in play, so start a new piece at the
+top</span></p>
+
+		<p class="noindent mono"><span class="line-number">197. </span>            fallingPiece
+= nextPiece</p>
+
+		<p class="noindent mono"><span class="line-number">198. </span>            nextPiece
+= getNewPiece()</p>
+
+		<p class="noindent mono"><span class="line-number">199. </span>            lastFallTime
+= time.time() <span class="comment"># reset lastFallTime</span></p>
+
+		<p class="noindent mono"><span class="line-number">200. </span></p>
+
+		<p class="noindent mono"><span class="line-number">201. </span>            if
+not isValidPosition(board, fallingPiece):</p>
+
+		<p class="noindent mono"><span class="line-number">202. </span>                return
+<span class="comment"># can't fit a new piece on the board, so game
+over</span></p>
+
+		<p class="noindent mono"><span class="line-number">203. </span></p>
+
+		<p class="noindent mono"><span class="line-number">204. </span>        checkForQuit()</p>
+
+</div>
+
+	<p>The main game loop that starts on line 194 handles all of
+the code for the main part of the game when pieces are falling to the bottom.
+The <span class="mono">fallingPiece</span> variable is set to <span
+class="mono">None</span> after the falling piece has landed. This means that
+the piece in <span class="mono">nextPiece</span> should be copied to the <span
+class="mono">fallingPiece</span> variable, and a random new piece should be
+put into the <span class="mono">nextPiece</span> variable. A new piece can be
+generated from the <span class="mono">getNewPiece()</span> function. The <span
+class="mono">lastFallTime</span> variable is also reset to the current time so
+that the piece will fall in however many seconds is in <span class="mono">fallFreq</span>.
+</p>
+
+	<p>The pieces that <span class="mono">getNewPiece()</span> are
+positioned a little bit above the board, usually with part of the piece already
+on the board. But if this is an invalid position because the board is already
+filled up there (in which case the <span class="mono">isValidPosition()</span>
+call on line 201 will return <span class="mono">False</span>), then we know
+that the board is full and the player should lose the game. When this happens,
+the <span class="mono">runGame()</span> function returns.</p>
+
+	<h1 class="subheading" id="">The Event Handling Loop</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">205. </span>        for
+event in pygame.event.get(): <span class="comment"># event handling
+loop</span></p>
+
+		<p class="noindent mono"><span class="line-number">206. </span>            if
+event.type == KEYUP:</p>
+
+</div>
+
+	<p>The event handling loop takes care of when the player
+rotates the falling piece, moves the falling piece, or pauses the game.</p>
+
+	<h1 class="subheading" id="">Pausing the Game</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">207. </span>                if
+(event.key == K_p):</p>
+
+		<p class="noindent mono"><span class="line-number">208. </span>                    <span
+class="comment"># Pausing the game</span></p>
+
+		<p class="noindent mono"><span class="line-number">209. </span>                    DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">210. </span>                    pygame.mixer.music.stop()</p>
+
+		<p class="noindent mono"><span class="line-number">211. </span>                    showTextScreen('Paused')
+<span class="comment"># pause until a key press</span></p>
+
+		<p class="noindent mono"><span class="line-number">212. </span>                    pygame.mixer.music.play(-1,
+0.0)</p>
+
+		<p class="noindent mono"><span class="line-number">213. </span>                    lastFallTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">214. </span>                    lastMoveDownTime
+= time.time()</p>
+
+		<p class="noindent mono"><span class="line-number">215. </span>                    lastMoveSidewaysTime
+= time.time()</p>
+
+</div>
+
+	<p>If the player has pressed the P key, then the game should
+pause. We need to hide the board from the player (otherwise the player could
+cheat by pausing the game and taking time to decide where to move the piece).</p>
+
+	<p>The code blanks out the display Surface with a call to <span
+class="mono">DISPLAYSURF.fill(BGCOLOR)</span> and stops the music. The <span
+class="mono">showTextScreen()</span> function is called to display the
+“Paused” text and wait for the player to press a key to continue.</p>
+
+	<p>Once the player has pressed a key, <span class="mono">showTextScreen()</span>
+will return. Line 212 will restart the background music. Also, since a large
+amount of time could have passed since the player paused the game, the <span
+class="mono">lastFallTime</span>, <span class="mono">lastMoveDownTime</span>,
+and <span class="mono">lastMoveSidewaysTime</span> variables should all be
+reset to the current time (which is done on lines 213 to 215).</p>
+
+	<h1 class="subheading" id="">Using Movement Variables to Handle User Input</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">216. </span>                elif
+(event.key == K_LEFT or event.key == K_a):</p>
+
+		<p class="noindent mono"><span class="line-number">217. </span>                    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">218. </span>                elif
+(event.key == K_RIGHT or event.key == K_d):</p>
+
+		<p class="noindent mono"><span class="line-number">219. </span>                    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">220. </span>                elif
+(event.key == K_DOWN or event.key == K_s):</p>
+
+		<p class="noindent mono"><span class="line-number">221. </span>                    movingDown
+= False</p>
+
+</div>
+
+	<p>Letting up on one of the arrow keys (or the WASD keys) will
+set the <span class="mono">movingLeft</span>, <span class="mono">movingRight</span>,
+or <span class="mono">movingDown</span> variables back to <span class="mono">False</span>,
+indicating that the player no longer wants to move the piece in those
+directions. The code later will handle what to do based on the Boolean values
+inside these “moving” variables. Note that the up arrow and W keys are used for
+rotating the piece, not moving the piece up. This is why there is no <span
+class="mono">movingUp</span> variable.</p>
+
+	<h1 class="subheading" id="">Checking if a Slide or Rotation is Valid</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">223. </span>            elif
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number">224. </span>                <span
+class="comment"># moving the block sideways</span></p>
+
+		<p class="noindent mono"><span class="line-number">225. </span>                if
+(event.key == K_LEFT or event.key == K_a) and isValidPosition(board, fallingPiece,
+adjX=-1):</p>
+
+		<p class="noindent mono"><span class="line-number">226. </span>                    fallingPiece['x']
+-= 1</p>
+
+		<p class="noindent mono"><span class="line-number">227. </span>                    movingLeft
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">228. </span>                    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">229. </span>                    lastMoveSidewaysTime
+= time.time()</p>
+
+</div>
+
+	<p>When the left arrow key is pressed down (and moving to the
+left is a valid move for the falling piece, as determined by the call to <span
+class="mono">isValidPosition()</span>), then we should change the position to
+one space to the left by subtracting the value of <span class="mono">fallingPiece['x']</span>
+by <span class="mono">1</span>. The <span class="mono">isValidPosition()</span>
+function has optional parameters called <span class="mono">adjX</span> and <span
+class="mono">adjY</span>. Normally the <span class="mono">isValidPosition()</span>
+function checks the position of the data provided by the piece object that is
+passed for the second parameter. However, sometimes we don’t want to check
+where the piece is currently located, but rather a few spaces over from that
+position.</p>
+
+	<p>If we pass <span class="mono">-1</span> for the <span
+class="mono">adjX</span> (a short name for “adjusted X”), then it doesn’t
+check the validity of the position in the piece’s data structure, but rather if
+the position of where the piece would be if it was one space to the left.
+Passing <span class="mono">1</span> for <span class="mono">adjX</span> would
+check one space to the right. There is also an <span class="mono">adjY</span>
+optional parameter. Passing <span class="mono">-1</span> for <span
+class="mono">adjY</span> checks one space above where the piece is currently
+positioned, and passing a value like <span class="mono">3</span> for <span
+class="mono">adjY</span> would check three spaces down from where the piece
+is.</p>
+
+	<p>The <span class="mono">movingLeft</span> variable is set to
+<span class="mono">True</span>, and just to make sure the falling piece won’t
+move both left <em>and</em> right, the <span class="mono">movingRight</span>
+variable is set to <span class="mono">False</span> on line 228. The <span
+class="mono">lastMoveSidewaysTime</span> variable will be updated to the current
+time on line 229.</p>
+
+	<p>These variables are set so that the player can just hold
+down the arrow key to keep moving the piece over. If the <span class="mono">movingLeft</span>
+variable is set to <span class="mono">True</span>, the program can know that
+the left arrow key (or A key) has been pressed and not yet let go. And if 0.15
+seconds (the number stored in <span class="mono">MOVESIDEWAYSFREQ</span>) has
+passed since the time stored in <span class="mono">lastMoveSidewaysTime</span>,
+then it is time for the program to move the falling piece to the left again.</p>
+
+	<p>The <span class="mono">lastMoveSidewaysTime</span> works
+just like how the <span class="mono">lastClickTime</span> variable did in the
+Simulate chapter.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">231. </span>                elif
+(event.key == K_RIGHT or event.key == K_d) and isValidPosition(board, fallingPiece,
+adjX=1):</p>
+
+		<p class="noindent mono"><span class="line-number">232. </span>                    fallingPiece['x']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">233. </span>                    movingRight
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">234. </span>                    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">235. </span>                    lastMoveSidewaysTime
+= time.time()</p>
+
+</div>
+
+	<p>The code on lines 231 to 235 is almost identical to lines
+225 to 229, except that it handles moving the falling piece to the right when
+the right arrow key (or D key) has been pressed.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">237. </span>                <span
+class="comment"># rotating the block (if there is room to rotate)</span></p>
+
+		<p class="noindent mono"><span class="line-number">238. </span>                elif
+(event.key == K_UP or event.key == K_w):</p>
+
+		<p class="noindent mono"><span class="line-number">239. </span>                    fallingPiece['rotation']
+= (fallingPiece['rotation'] + 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+</div>
+
+	<p>The up arrow key (or W key) will rotate the falling piece to
+its next rotation. All the code has to do is increment the <span class="mono">'rotation'</span>
+key’s value in the <span class="mono">fallingPiece</span> dictionary by <span
+class="mono">1</span>. However, if incrementing the <span class="mono">'rotation'</span>
+key’s value makes it larger than the total number of rotations, then “modding”
+by the total number of possible rotations for that shape (which is what <span
+class="mono">len(SHAPES[fallingPiece['shape']]</span>) is) then it will “roll
+over” to <span class="mono">0</span>.</p>
+
+	<p>Here’s an example of this modding with the J shape, which
+has 4 possible rotations:</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono">&gt;&gt;&gt; 0 %
+4</p>
+
+		<p class="noindent mono">0</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 1 %
+4</p>
+
+		<p class="noindent mono">1</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 2 %
+4</p>
+
+		<p class="noindent mono">2</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 3 %
+4</p>
+
+		<p class="noindent mono">3</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 5 %
+4</p>
+
+		<p class="noindent mono">1</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 6 %
+4</p>
+
+		<p class="noindent mono">2</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 7 %
+4</p>
+
+		<p class="noindent mono">3</p>
+
+		<p class="noindent mono">&gt;&gt;&gt; 8 %
+4</p>
+
+		<p class="noindent mono">0</p>
+
+		<p class="noindent mono">&gt;&gt;&gt;</p>
+
+</div>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">240. </span>                    if not isValidPosition(board, fallingPiece):</p>
+		<p class="noindent mono"><span class="line-number">241. </span>                        fallingPiece['rotation'] = (fallingPiece['rotation'] - 1) % len(SHAPES[fallingPiece['shape']])</p>
+	</div>
+
+	<p>If the new rotated position is not valid because it overlaps
+some boxes already on the board, then we want to switch it back to the original
+rotation by subtracting <span class="mono">1</span> from <span class="mono">fallingPiece['rotation']</span>.
+We can also mod it by <span class="mono">len(SHAPES[fallingPiece['shape']])</span>
+so that if the new value is <span class="mono">-1</span>, the modding will
+change it back to the last rotation in the list. Here’s an example of modding a
+negative number:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; -1 % 4</p>
+		<p class="noindent mono">3</p>
+	</div>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">242. </span>                elif
+(event.key == K_q): <span class="comment"># rotate the other direction</span></p>
+
+		<p class="noindent mono"><span class="line-number">243. </span>                    fallingPiece['rotation']
+= (fallingPiece['rotation'] - 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+		<p class="noindent mono"><span class="line-number">244. </span>                    if
+not isValidPosition(board, fallingPiece):</p>
+
+		<p class="noindent mono"><span class="line-number">245. </span>                        fallingPiece['rotation']
+= (fallingPiece['rotation'] + 1) % len(SHAPES[fallingPiece['shape']])</p>
+
+</div>
+
+	<p>Lines 242 to 245 do the same thing 238 to 241, except they
+handle the case where the player has pressed the Q key which rotates the piece
+in the opposite direction. In this case, we <em>subtract</em> <span
+class="mono">1</span> from <span class="mono">fallingPiece['rotation']</span>
+(which is done on line 243) instead of adding <span class="mono">1</span>.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">247. </span>                <span
+class="comment"># making the block fall faster with the down key</span></p>
+
+		<p class="noindent mono"><span class="line-number">248. </span>                elif
+(event.key == K_DOWN or event.key == K_s):</p>
+
+		<p class="noindent mono"><span class="line-number">249. </span>                    movingDown
+= True</p>
+
+		<p class="noindent mono"><span class="line-number">250. </span>                    if
+isValidPosition(board, fallingPiece, adjY=1):</p>
+
+		<p class="noindent mono"><span class="line-number">251. </span>                        fallingPiece['y']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">252. </span>                    lastMoveDownTime
+= time.time()</p>
+
+</div>
+
+	<p>If the down arrow or S key is pressed down, then the player
+wants the piece to fall faster than normal. Line 251 moves the piece down one
+space on the board (but only if it is a valid space). The <span class="mono">movingDown</span>
+variable is set to <span class="mono">True</span> and <span class="mono">lastMoveDownTime</span>
+is reset to the current time. These variables will be checked later so that the
+piece keeps falling at the faster rate as long as the down arrow or S key is
+held down.</p>
+
+	<h1 class="subheading" id="">Finding the Bottom</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">254. </span>                <span
+class="comment"># move the current block all the way down</span></p>
+
+		<p class="noindent mono"><span class="line-number">255. </span>                elif
+event.key == K_SPACE:</p>
+
+		<p class="noindent mono"><span class="line-number">256. </span>                    movingDown
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">257. </span>                    movingLeft
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">258. </span>                    movingRight
+= False</p>
+
+		<p class="noindent mono"><span class="line-number">259. </span>                    for
+i in range(1, BOARDHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">260. </span>                        if
+not isValidPosition(board, fallingPiece, adjY=i):</p>
+
+		<p class="noindent mono"><span class="line-number">261. </span>                            break</p>
+
+		<p class="noindent mono"><span class="line-number">262. </span>                    fallingPiece['y']
++= i - 1</p>
+
+</div>
+
+	<p>When the player presses the space key the falling piece will
+immediately drop down as far as it can go on the board and land. The program
+first needs to find out how many spaces the piece can move until it lands.</p>
+
+	<p>Lines 256 to 258 will set all the moving variables to <span
+class="mono">False</span> (which makes the code in later parts of the
+programming think that the user has let up on any arrow keys that were held
+down). This is done because this code will move the piece to the absolute
+bottom and begin falling the next piece, and we don’t want to surprise the
+player by having those pieces immediately start moving just because they were holding
+down an arrow key when they hit the space key.</p>
+
+	<p>To find the farthest that the piece can fall, we should first
+call <span class="mono">isValidPosition()</span> and pass the integer <span
+class="mono">1</span> for the <span class="mono">adjY</span> parameter. If <span
+class="mono">isValidPosition()</span> returns <span class="mono">False</span>,
+we know that the piece cannot fall any further and is already at the bottom. If
+<span class="mono">isValidPosition()</span> returns <span class="mono">True</span>,
+then we know that it can fall <span class="mono">1</span> space down.</p>
+
+	<p>In that case, we should call <span class="mono">isValidPosition()</span>
+with <span class="mono">adjY</span> set to <span class="mono">2</span>. If it
+returns <span class="mono">True</span> again, we will call <span
+class="mono">isValidPosition()</span> with <span class="mono">adjY</span> set
+to <span class="mono">3</span>, and so on. This is what the <span
+class="mono">for</span> loop on line 259 handles: calling <span class="mono">isValidPosition()</span>
+with increasing integer values to pass for <span class="mono">adjY</span>
+until the function call returns <span class="mono">False</span>. At that
+point, we know that the value in i is one space more past the bottom. This is
+why line 262 increases <span class="mono">fallingPiece['y']</span> by <span
+class="mono">i - 1</span> instead of <span class="mono">i</span>.</p>
+
+	<p>(Also note that the second parameter to <span class="mono">range()</span>
+on line 259’s <span class="mono">for</span> statement is set to <span
+class="mono">BOARDHEIGHT</span> because this is the maximum amount that the
+piece could fall before it must hit the bottom of the board.)</p>
+
+	<h1 class="subheading" id="">Moving by Holding Down the Key</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">264. </span>        <span
+class="comment"># handle moving the block because of user input</span></p>
+
+		<p class="noindent mono"><span class="line-number">265. </span>        if
+(movingLeft or movingRight) and time.time() - lastMoveSidewaysTime &gt;
+MOVESIDEWAYSFREQ:</p>
+
+		<p class="noindent mono"><span class="line-number">266. </span>            if
+movingLeft and isValidPosition(board, fallingPiece, adjX=-1):</p>
+
+		<p class="noindent mono"><span class="line-number">267. </span>                fallingPiece['x']
+-= 1</p>
+
+		<p class="noindent mono"><span class="line-number">268. </span>            elif
+movingRight and isValidPosition(board, fallingPiece, adjX=1):</p>
+
+		<p class="noindent mono"><span class="line-number">269. </span>                fallingPiece['x']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">270. </span>            lastMoveSidewaysTime
+= time.time()</p>
+
+</div>
+
+	<p>Remember that on line 227 the <span class="mono">movingLeft</span>
+variable was set to <span class="mono">True</span> if the player pressed down
+on the left arrow key? (The same for line 233 where <span class="mono">movingRight</span>
+was set to <span class="mono">True</span> if the player pressed down on the
+right arrow key.) The moving variables were set back to <span class="mono">False</span>
+if the user let up on these keys also (see line 217 and 219).</p>
+
+	<p>What also happened when the player pressed down on the left
+or right arrow key was that the <span class="mono">lastMoveSidewaysTime</span>
+variable was set to the current time (which was the return value of <span
+class="mono">time.time()</span>). If the player continued to hold down the
+arrow key without letting up on it, then the <span class="mono">movingLeft</span>
+or <span class="mono">movingRight</span> variable would still be set to <span
+class="mono">True</span>.</p>
+
+	<p>If the user held down on the key for longer than 0.15
+seconds (the value stored in <span class="mono">MOVESIDEWAYSFREQ</span> is the
+float <span class="mono">0.15</span>) then the expression <span class="mono">time.time()
+- lastMoveSidewaysTime &gt; MOVESIDEWAYSFREQ</span> would evaluate to <span
+class="mono">True</span>. Line 265’s condition is <span class="mono">True</span>
+if the user has both held down the arrow key and 0.15 seconds has passed, and
+in that case we should move the falling piece to the left or right even though
+the user hasn’t pressed the arrow key again.</p>
+
+	<p>This is very useful because it would become tiresome for the
+player to repeatedly hit the arrow keys to get the falling piece to move over
+multiple spaces on the board. Instead, they can just hold down an arrow key and
+the piece will keep moving over until they let up on the key. When that
+happens, the code on lines 216 to 221 will set the moving variable to <span
+class="mono">False</span> and the condition on line 265 will be <span
+class="mono">False</span>. That is what stops the falling piece from sliding
+over more.</p>
+
+	<p>To demonstrate why the <span class="mono">time.time() -
+lastMoveSidewaysTime &gt; MOVESIDEWAYSFREQ</span> returns <span class="mono">True</span>
+after the number of seconds in <span class="mono">MOVESIDEWAYSFREQ</span> has
+passed, run this short program:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"> import time</p>
+		<p class="noindent mono"></p>
+		<p class="noindent mono"> WAITTIME = 4</p>
+		<p class="noindent mono"> begin = time.time()</p>
+		<p class="noindent mono"></p>
+		<p class="noindent mono"> while True:</p>
+		<p class="noindent mono">    now = time.time()</p>
+		<p class="noindent mono">    message = '%s, %s, %s' % (begin, now, (now - begin))</p>
+		<p class="noindent mono">    if now - begin &gt; WAITTIME:</p>
+		<p class="noindent mono"> print(message + ' PASSED WAIT TIME!')</p>
+		<p class="noindent mono">    else:</p>
+		<p class="noindent mono"> print(message + ' Not yet...')</p>
+		<p class="noindent mono">    time.sleep(0.2)</p>
+	</div>
+
+	<p>This program has an infinite loop, so in order to terminate
+it, press Ctrl-C. The output of this program will look something like this:</p>
+
+	<div class="python-shell">
+		<p class="sample-code">1322106392.2, 1322106392.2, 0.0 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106392.42, 0.219000101089 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106392.65, 0.449000120163 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106392.88, 0.680999994278 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106393.11, 0.910000085831 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106393.34, 1.1400001049 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106393.57, 1.3710000515 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106393.83, 1.6360001564 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106394.05, 1.85199999809 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106394.28, 2.08000016212 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106394.51, 2.30900001526 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106394.74, 2.54100012779 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106394.97, 2.76999998093 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106395.2, 2.99800014496 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106395.42, 3.22699999809 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106395.65, 3.45600008965 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106395.89, 3.69200015068 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106396.12, 3.92100000381 Not yet...</p>
+		<p class="sample-code">1322106392.2, 1322106396.35, 4.14899992943 PASSED WAIT TIME!</p>
+		<p class="sample-code">1322106392.2, 1322106396.58, 4.3789999485 PASSED WAIT TIME!</p>
+		<p class="sample-code">1322106392.2, 1322106396.81, 4.60700011253 PASSED WAIT TIME!</p>
+		<p class="sample-code">1322106392.2, 1322106397.04, 4.83700013161 PASSED WAIT TIME!</p>
+		<p class="sample-code">1322106392.2, 1322106397.26, 5.06500005722 PASSED WAIT TIME!</p>
+		<p class="sample-code">Traceback (most recent call last):</p>
+		<p class="sample-code">  File &quot;C:\timetest.py&quot;, line 13, in &lt;module&gt;</p>
+		<p class="sample-code">    time.sleep(0.2)</p>
+		<p class="sample-code">KeyboardInterrupt</p>
+	</div>
+
+	<p>The first number on each line of output is the return value
+of <span class="mono">time.time()</span> when the program first started (and
+this value never changes). The second number is the latest return value from <span
+class="mono">time.time()</span> (this value keeps getting updated on each
+iteration of the loop). And the third number is the current time minus the
+start time. This third number is the number of seconds that have elapsed since
+the <span class="mono">begin = time.time()</span> line of code was executed.</p>
+
+	<p>If this number is greater than 4, the code will start
+printing “PASSED WAIT TIME!” instead of “Not yet...”. This is how our game
+program can know if a certain amount of time has passed since a line of code
+was run.</p>
+
+	<p>In our Tetromino program, the <span class="mono">time.time()
+– lastMoveSidewaysTime</span> expression will evaluate to the number of seconds
+that has elapsed since the last time <span class="mono">lastMoveSidewaysTime</span>
+was set to the current time. If this value is greater than the value in <span
+class="mono">MOVESIDEWAYSFREQ</span>, we know it is time for the code to move
+the falling piece over one more space.</p>
+
+	<p>Don’t forget to update <span class="mono">lastMoveSidewaysTime</span>
+to the current time again! This is what we do on line 270.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">272. </span>        if
+movingDown and time.time() - lastMoveDownTime &gt; MOVEDOWNFREQ and
+isValidPosition(board, fallingPiece, adjY=1):</p>
+
+		<p class="noindent mono"><span class="line-number">273. </span>            fallingPiece['y']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">274. </span>            lastMoveDownTime
+= time.time()</p>
+
+</div>
+
+	<p>Lines 272 to 274 do almost the same thing as lines 265 to
+270 do except for moving the falling piece down. This has a separate move
+variable (<span class="mono">movingDown</span>) and “last time” variable (<span
+class="mono">lastMoveDownTime</span>) as well as a different “move frequency”
+variable (<span class="mono">MOVEDOWNFREQ</span>). </p>
+
+	<h1 class="subheading" id="">Letting the Piece “Naturally” Fall</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">276. </span>        <span
+class="comment"># let the piece fall if it is time to fall</span></p>
+
+		<p class="noindent mono"><span class="line-number">277. </span>        if
+time.time() - lastFallTime &gt; fallFreq:</p>
+
+		<p class="noindent mono"><span class="line-number">278. </span>            <span
+class="comment"># see if the piece has landed</span></p>
+
+		<p class="noindent mono"><span class="line-number">279. </span>            if
+not isValidPosition(board, fallingPiece, adjY=1):</p>
+
+		<p class="noindent mono"><span class="line-number">280. </span>                <span
+class="comment"># falling piece has landed, set it on the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">281. </span>                addToBoard(board,
+fallingPiece)</p>
+
+		<p class="noindent mono"><span class="line-number">282. </span>                score
++= removeCompleteLines(board)</p>
+
+		<p class="noindent mono"><span class="line-number">283. </span>                level,
+fallFreq = calculateLevelAndFallFreq(score)</p>
+
+		<p class="noindent mono"><span class="line-number">284. </span>                fallingPiece
+= None</p>
+
+		<p class="noindent mono"><span class="line-number">285. </span>            else:</p>
+
+		<p class="noindent mono"><span class="line-number">286. </span>                <span
+class="comment"># piece did not land, just move the block down</span></p>
+
+		<p class="noindent mono"><span class="line-number">287. </span>                fallingPiece['y']
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">288. </span>                lastFallTime
+= time.time()</p>
+
+</div>
+
+	<p>The rate that the piece is naturally moving down (that is,
+falling) is tracked by the <span class="mono">lastFallTime</span> variable. If
+enough time has elapsed since the falling piece last fell down one space, lines
+279 to 288 will handle dropping the piece by one space.</p>
+
+	<p>If the condition on line 279 is <span class="mono">True</span>,
+then the piece has landed. The call to <span class="mono">addToBoard()</span>
+will make the piece part of the board data structure (so that future pieces can
+land on it), and the <span class="mono">removeCompleteLines()</span> call will
+handle erasing any complete lines on the board and pulling the boxes down. The <span
+class="mono">removeCompleteLines()</span> function also returns an integer
+value of how many lines were removed, so we add this number to the score. </p>
+
+	<p>Because the score may have changed, we call the <span
+class="mono">calculateLevelAndFallFreq()</span> function to update the current
+level and frequency that the pieces fall. And finally, we set the <span
+class="mono">fallingPiece</span> variable to <span class="mono">None</span>
+to indicate that the next piece should become the new falling piece, and a
+random new piece should be generated for the new next piece. (That is done on
+lines 195 to 199 at the beginning of the game loop.)</p>
+
+	<p>If the piece has not landed, we simply set its Y position
+down one space (on line 287) and reset <span class="mono">lastFallTime</span>
+to the current time (on line 288).</p>
+
+	<h1 class="subheading" id="">Drawing Everything on the Screen</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">290. </span>        <span
+class="comment"># drawing everything on the screen</span></p>
+
+		<p class="noindent mono"><span class="line-number">291. </span>        DISPLAYSURF.fill(BGCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">292. </span>        drawBoard(board)</p>
+
+		<p class="noindent mono"><span class="line-number">293. </span>        drawStatus(score,
+level)</p>
+
+		<p class="noindent mono"><span class="line-number">294. </span>        drawNextPiece(nextPiece)</p>
+
+		<p class="noindent mono"><span class="line-number">295. </span>        if
+fallingPiece != None:</p>
+
+		<p class="noindent mono"><span class="line-number">296. </span>            drawPiece(fallingPiece)</p>
+
+		<p class="noindent mono"><span class="line-number">297. </span></p>
+
+		<p class="noindent mono"><span class="line-number">298. </span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">299. </span>        FPSCLOCK.tick(FPS)</p>
+
+</div>
+
+	<p>Now that the game loop has handled all events and updated
+the game state, the game loop just needs to draw the game state to the screen.
+Most of the drawing is handled by other functions, so the game loop code just
+needs to call those functions. Then the call to <span class="mono">pygame.display.update()</span>
+makes the display Surface appear on the actual computer screen, and the <span
+class="mono">tick()</span> method call adds a slight pause so the game doesn’t
+run too fast.</p>
+
+<h2><a name="_Toc316488680"><span class="mono">makeTextObjs()</span>, A
+Shortcut Function for Making Text</a></h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">302. </span>def
+makeTextObjs(text, font, color):</p>
+
+		<p class="noindent mono"><span class="line-number">303. </span>    surf
+= font.render(text, True, color)</p>
+
+		<p class="noindent mono"><span class="line-number">304. </span>    return
+surf, surf.get_rect()</p>
+
+</div>
+
+	<p>The <span class="mono">makeTextObjs()</span> function just
+provides us with a shortcut. Given the text, Font object, and a Color object,
+it calls <span class="mono">render()</span> for us and returns the Surface and
+Rect object for this text. This just saves us from typing out the code to
+create the Surface and Rect object each time we need them.</p>
+
+<h2><a name="_Toc316488681">The Same Old </a><span class="mono">terminate()</span>
+Function</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">307. </span>def
+terminate():</p>
+
+		<p class="noindent mono"><span class="line-number">308. </span>    pygame.quit()</p>
+
+		<p class="noindent mono"><span class="line-number">309. </span>    sys.exit()</p>
+
+</div>
+
+	<p>The <span class="mono">terminate()</span> function works
+the same as in the previous game programs.</p>
+
+<h2><a name="_Toc316488682">Waiting for a Key Press Event with the </a><span
+class="mono">checkForKeyPress()</span> Function</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">312. </span>def
+checkForKeyPress():</p>
+
+		<p class="noindent mono"><span class="line-number">313. </span>    <span
+class="comment"># Go through event queue looking for a KEYUP event.</span></p>
+
+		<p class="noindent mono"><span class="line-number">314. </span>    <span
+class="comment"># Grab KEYDOWN events to remove them from the event
+queue.</span></p>
+
+		<p class="noindent mono"><span class="line-number">315. </span>    checkForQuit()</p>
+
+		<p class="noindent mono"><span class="line-number">316.</span></p>
+
+		<p class="noindent mono"><span class="line-number">317. </span>    for
+event in pygame.event.get([KEYDOWN, KEYUP]):</p>
+
+		<p class="noindent mono"><span class="line-number">318. </span>        if
+event.type == KEYDOWN:</p>
+
+		<p class="noindent mono"><span class="line-number">319. </span>            continue</p>
+
+		<p class="noindent mono"><span class="line-number">320. </span>        return
+event.key</p>
+
+		<p class="noindent mono"><span class="line-number">321. </span>    return
+None</p>
+
+</div>
+
+	<p>The <span class="mono">checkForKeyPress()</span> function
+works almost the same as it did in the Wormy game. First it calls <span
+class="mono">checkForQuit()</span> to handle any <span class="mono">QUIT</span>
+events (or <span class="mono">KEYUP</span> events specifically for the Esc
+key) and terminates the program if there are any. Then it pulls out all the <span
+class="mono">KEYUP</span> and <span class="mono">KEYDOWN</span> events from
+the event queue. It ignores any <span class="mono">KEYDOWN</span> events (<span
+class="mono">KEYDOWN</span> was specified to <span class="mono">pygame.event.get()</span>
+only to clear those events out of the event queue).</p>
+
+	<p>If there were no <span class="mono">KEYUP</span> events in
+the event queue, then the function returns <span class="mono">None</span>.</p>
+
+<h2><a name="_Toc316488683"><span class="mono">showTextScreen()</span>, A
+Generic Text Screen Function</a></h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">324. </span>def
+showTextScreen(text):</p>
+
+		<p class="noindent mono"><span class="line-number">325. </span>    <span
+class="comment"># This function displays large text in the</span></p>
+
+		<p class="noindent mono"><span class="line-number">326. </span>    <span
+class="comment"># center of the screen until a key is pressed.</span></p>
+
+		<p class="noindent mono"><span class="line-number">327. </span>    <span
+class="comment"># Draw the text drop shadow</span></p>
+
+		<p class="noindent mono"><span class="line-number">328. </span>    titleSurf,
+titleRect = makeTextObjs(text, BIGFONT, TEXTSHADOWCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">329. </span>    titleRect.center
+= (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2))</p>
+
+		<p class="noindent mono"><span class="line-number">330. </span>    DISPLAYSURF.blit(titleSurf,
+titleRect)</p>
+
+		<p class="noindent mono"><span class="line-number">331. </span></p>
+
+		<p class="noindent mono"><span class="line-number">332. </span>    <span
+class="comment"># Draw the text</span></p>
+
+		<p class="noindent mono"><span class="line-number">333. </span>    titleSurf,
+titleRect = makeTextObjs(text, BIGFONT, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">334. </span>    titleRect.center
+= (int(WINDOWWIDTH / 2) - 3, int(WINDOWHEIGHT / 2) - 3)</p>
+
+		<p class="noindent mono"><span class="line-number">335. </span>    DISPLAYSURF.blit(titleSurf,
+titleRect)</p>
+
+		<p class="noindent mono"><span class="line-number">336. </span></p>
+
+		<p class="noindent mono"><span class="line-number">337. </span>    <span
+class="comment"># Draw the additional &quot;Press a key to play.&quot;
+text.</span></p>
+
+		<p class="noindent mono"><span class="line-number">338. </span>    pressKeySurf,
+pressKeyRect = makeTextObjs('Press a key to play.', BASICFONT, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">339. </span>    pressKeyRect.center
+= (int(WINDOWWIDTH / 2), int(WINDOWHEIGHT / 2) + 100)</p>
+
+		<p class="noindent mono"><span class="line-number">340. </span>    DISPLAYSURF.blit(pressKeySurf,
+pressKeyRect)</p>
+
+</div>
+
+	<p>Instead of separate functions for the start screen and game
+over screens, we will create one generic function named <span class="mono">showTextScreen()</span>.
+The <span class="mono">showTextScreen()</span> function will draw whatever
+text we pass for the text parameter. Also, the text “Press a key to play.” will
+be displayed in addition.</p>
+
+	<p>Notice that lines 328 to 330 draw the text in a darker
+shadow color first, and then lines 333 to 335 draw the same text again, except
+offset by 3 pixels to the left and 3 pixels upward. This creates a “drop
+shadow” effect that makes the text look a bit prettier. You can compare the
+difference by commenting out lines 328 to 330 to see the text without a drop
+shadow.</p>
+
+	<p>The <span class="mono">showTextScreen()</span> will be used
+for the start screen, the game over screen, and also for a pause screen. (The
+pause screen is explained later in this chapter.)</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">342. </span>    while
+checkForKeyPress() == None:</p>
+
+		<p class="noindent mono"><span class="line-number">343. </span>        pygame.display.update()</p>
+
+		<p class="noindent mono"><span class="line-number">344. </span>        FPSCLOCK.tick()</p>
+
+</div>
+
+	<p>We want the text to stay on the screen until the user
+presses a key. This small loop will constantly call <span class="mono">pygame.display.update()</span>
+and <span class="mono">FPSCLOCK.tick()</span> until <span class="mono">checkForKeyPress()</span>
+returns a value other than <span class="mono">None</span>. This happens when
+the user presses a key.</p>
+
+<h2><a name="_Toc316488684">The </a><span class="mono">checkForQuit()</span>
+Function</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">347. </span>def
+checkForQuit():</p>
+
+		<p class="noindent mono"><span class="line-number">348. </span>    for
+event in pygame.event.get(QUIT): <span class="comment"># get all the
+QUIT events</span></p>
+
+		<p class="noindent mono"><span class="line-number">349. </span>        terminate()
+<span class="comment"># terminate if any QUIT events are present</span></p>
+
+		<p class="noindent mono"><span class="line-number">350. </span>    for
+event in pygame.event.get(KEYUP): <span class="comment"># get all the
+KEYUP events</span></p>
+
+		<p class="noindent mono"><span class="line-number">351. </span>        if
+event.key == K_ESCAPE:</p>
+
+		<p class="noindent mono"><span class="line-number">352. </span>            terminate()
+<span class="comment"># terminate if the KEYUP event was for the Esc
+key</span></p>
+
+		<p class="noindent mono"><span class="line-number">353. </span>        pygame.event.post(event)
+<span class="comment"># put the other KEYUP event objects back</span></p>
+
+</div>
+
+	<p>The <span class="mono">checkForQuit()</span> function can
+be called to handle any events that will cause the program to terminate. This
+happens if there are any <span class="mono">QUIT</span> events in the event
+queue (this is handle by lines 348 and 349), or if there is a <span
+class="mono">KEYUP</span> event of the Esc key. The player should be able to
+press the Esc key at any time to quit the program.</p>
+
+	<p>Because the <span class="mono">pygame.event.get()</span>
+call on line 350 pulls out all of the <span class="mono">KEYUP</span> events
+(including events for keys other than the Esc key), if the event is not for the
+Esc key, we want to put it back into the event queue by calling the <span
+class="mono">pygame.event.post()</span> function.</p>
+
+<h2><a name="_Toc316488685">The </a><span class="mono">calculateLevelAndFallFreq()</span>
+Function</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">356. </span>def
+calculateLevelAndFallFreq(score):</p>
+
+		<p class="noindent mono"><span class="line-number">357. </span>    <span
+class="comment"># Based on the score, return the level the player is on
+and</span></p>
+
+		<p class="noindent mono"><span class="line-number">358. </span>    <span
+class="comment"># how many seconds pass until a falling piece falls one
+space.</span></p>
+
+		<p class="noindent mono"><span class="line-number">359. </span>    level
+= int(score / 10) + 1</p>
+
+		<p class="noindent mono"><span class="line-number">360. </span>    fallFreq
+= 0.27 - (level * 0.02)</p>
+
+		<p class="noindent mono"><span class="line-number">361.     </span>return
+level, fallFreq</p>
+
+</div>
+
+	<p>Every time the player completes a line, their score will
+increase by one point. Every ten points, the game goes up a level and the
+pieces start falling down faster. Both the level and the falling frequency can
+be calculated from the score that is passed to this function.</p>
+
+	<p>To calculate the level, we use the <span class="mono">int()</span>
+function to round down the score divided by <span class="mono">10</span>. So
+if the score any number between <span class="mono">0</span> and <span
+class="mono">9</span>, the <span class="mono">int()</span> call will round it
+down to <span class="mono">0</span>. The <span class="mono">+ 1</span> part
+of the code is there because we want the first level to be level 1, not level
+0. When the score reaches <span class="mono">10</span>, then <span
+class="mono">int(10 / 10)</span> will evaluate to 1, and the <span
+class="mono">+ 1</span> will make the level 2. Here is a graph showing the
+values of level for the scores 1 to 34:</p>
+
+	<p>To calculate the falling frequency, we start with a base
+time of <span class="mono">0.27</span> (meaning that the piece will naturally
+fall once every 0.27 seconds). Then we multiply the level by <span
+class="mono">0.02</span>, and subtract that from the <span class="mono">0.27</span>
+base time. So on level 1, we subtract <span class="mono">0.02 * 1</span> (that
+is, <span class="mono">0.02</span>) from <span class="mono">0.27</span> to
+get <span class="mono">0.25</span>. On level 2, we subtract <span
+class="mono">0.02 * 2</span> (that is, <span class="mono">0.04</span>) to get
+<span class="mono">0.23</span>. You can think of the <span class="mono">level
+* 0.02</span> part of the equation as “for every level, the piece will fall
+0.02 seconds faster than the previous level.”</p>
+
+	<p>We can also make a graph showing how fast the pieces will
+fall at each level of the game:</p>
+
+	<p>You can see that at level 14, the falling frequency will be
+less than <span class="mono">0</span>. This won’t cause any bugs with our
+code, because line 277 just checks that the elapsed time since the falling
+piece last fell one space is greater than the calculated falling frequency. So
+if the falling frequency is negative, then the condition on line 277 will
+always be <span class="mono">True</span> and the piece will fall on every
+iteration of the game loop. From level 14 and beyond, the piece cannot fall any
+faster.</p>
+
+	<p>If the <span class="mono">FPS</span> is set at <span
+class="mono">25</span>, this means that at reaching level 14, the falling
+piece will fall 25 spaces a second. Considering that the board is only 20
+spaces tall, that means the player will have less than a second to set each
+piece!</p>
+
+	<p>If you want the pieces to start (if you can see what I mean)
+falling faster at a slower rate, you can change the equation that the <span
+class="mono">calculateLevelAndFallFreq()</span> uses. For example, let’s say
+line 360 was this:</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">360. </span>    fallFreq = 0.27 - (level * 0.01)</p>
+	</div>
+
+	<p>In the above case, the pieces would only fall 0.01 seconds
+faster on each level rather than 0.02 seconds faster. The graph would look like
+this (the original line is also in the graph in light grey):</p>
+
+	<p>As you can see, with this new equation, level 14 would only
+be as hard as the original level 7. You can change the game to be as difficult
+or easy as you like by changing the equations in <span class="mono">calculateLevelAndFallFreq()</span>.</p>
+
+	<h1 class="subheading">Generating Pieces with the <span class="mono">getNewPiece()</span> Function</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">363. </span>def
+getNewPiece():</p>
+
+		<p class="noindent mono"><span class="line-number">364. </span>    <span
+class="comment"># return a random new piece in a random rotation and color</span></p>
+
+		<p class="noindent mono"><span class="line-number">365. </span>    shape
+= random.choice(list(SHAPES.keys()))</p>
+
+		<p class="noindent mono"><span class="line-number">366. </span>    newPiece
+= {'shape': shape,</p>
+
+		<p class="noindent mono"><span class="line-number">367. </span>                'rotation':
+random.randint(0, len(SHAPES[shape]) - 1),</p>
+
+		<p class="noindent mono"><span class="line-number">368. </span>                'x':
+int(BOARDWIDTH / 2) - int(TEMPLATEWIDTH / 2),</p>
+
+		<p class="noindent mono"><span class="line-number">369. </span>                'y':
+-2, <span class="comment"># start it above the board (i.e. less than 0)</span></p>
+
+		<p class="noindent mono"><span class="line-number">370. </span>                'color':
+random.randint(0, len(COLORS)-1)}</p>
+
+		<p class="noindent mono"><span class="line-number">371. </span>    return
+newPiece</p>
+
+</div>
+
+	<p>The <span class="mono">getNewPiece()</span> function
+generates a random piece that is positioned at the top of the board. First, to
+randomly choose the shape of the piece, we create a list of all the possible
+shapes by calling <span class="mono">list(SHAPES.keys())</span> on line 365.
+The <span class="mono">keys()</span> dictionary method returns a value of the
+data type “dict_keys”, which must be converted to a list value with the <span
+class="mono">list()</span> function before being passed to <span
+class="mono">random.choice()</span>. This is because the <span class="mono">random.choice()</span>
+function only accepts list values for its parameter. The <span class="mono">random.choice()</span>
+function then randomly returns the value of an item from the list.</p>
+
+	<p>The piece data structures are simply a dictionary value with
+the keys <span class="mono">'shape'</span>, <span class="mono">'rotation'</span>,
+<span class="mono">'x'</span>, <span class="mono">'y'</span>, and <span
+class="mono">'color'</span>.</p>
+
+	<p>The value for the <span class="mono">'rotation'</span> key
+is a random integer between <span class="mono">0</span> to one less than
+however many possible rotations there are for that shape. The number of
+rotations for a shape can be found from the expression <span class="mono">len(SHAPES[shape])</span>.</p>
+
+	<p>Notice that we don’t store the list of string values (like
+the ones store in the constants like <span class="mono">S_SHAPE_TEMPLATE</span>)
+in each piece data structure to represent the boxes of each piece. Instead, we
+just store an index for the shape and rotation which refer to the <span
+class="mono">PIECES</span> constant.</p>
+
+	<p>The <span class="mono">'x'</span> key’s value is always set
+to the middle of the board (also accounting for the width of the pieces
+themselves, which is found from our <span class="mono">TEMPLATEWIDTH</span>
+constant). The <span class="mono">'y'</span> key’s value is always set to <span
+class="mono">-2</span> to place it slightly above the board. (The top row of
+the board is row 0.)</p>
+
+	<p>Since the <span class="mono">COLORS</span> constant is a
+tuple of the different colors, selecting a random number from <span
+class="mono">0</span> to the length of <span class="mono">COLORS</span>
+(subtracting one) will give us a random index value for the piece’s color.</p>
+
+	<p>Once all of the values in the <span class="mono">newPiece</span>
+dictionary are set, the <span class="mono">getNewPiece()</span> function
+returns <span class="mono">newPiece</span>. </p>
+
+	<h1 class="subheading" id="">Adding Pieces to the Board Data Structure</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">374. </span>def
+addToBoard(board, piece):</p>
+
+		<p class="noindent mono"><span class="line-number">375. </span>    <span
+class="comment"># fill in the board based on piece's location, shape,
+and rotation</span></p>
+
+		<p class="noindent mono"><span class="line-number">376. </span>    for
+x in range(TEMPLATEWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">377. </span>        for
+y in range(TEMPLATEHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">378. </span>            if
+SHAPES[piece['shape']][piece['rotation']][y][x] != BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">379. </span>                board[x
++ piece['x']][y + piece['y']] = piece['color']</p>
+
+</div>
+
+	<p>The board data structure is a data representation for the
+rectangular space where pieces that have previously landed are tracked. The currently
+falling piece is not marked on the board data structure. What the <span
+class="mono">addToBoard()</span> function does is takes a piece data structure
+and adds its boxes to the board data structure. This happens after a piece has
+landed.</p>
+
+	<p>The nested <span class="mono">for</span> loops on lines 376
+and 377 go through every space in the piece data structure, and if it finds a
+box in the space (line 378), it adds it to the board (line 379).</p>
+
+	<h1 class="subheading" id="">Creating a New Board Data Structure</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">382. </span>def
+getBlankBoard():</p>
+
+		<p class="noindent mono"><span class="line-number">383. </span>    <span
+class="comment"># create and return a new blank board data structure</span></p>
+
+		<p class="noindent mono"><span class="line-number">384. </span>    board
+= []</p>
+
+		<p class="noindent mono"><span class="line-number">385. </span>    for
+i in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">386. </span>        board.append([BLANK]
+* BOARDHEIGHT)</p>
+
+		<p class="noindent mono"><span class="line-number">387. </span>    return
+board</p>
+
+</div>
+
+	<p>The data structure used for the board is fairly simple: it’s
+a list of lists of values. If the value is the same as the value in <span
+class="mono">BLANK</span>, then it is an empty space. If the value is an
+integer, then it represents a box that is the color that the integer indexes in
+the <span class="mono">COLORS</span> constant list. That is, <span
+class="mono">0</span> is blue, <span class="mono">1</span> is green, <span
+class="mono">2</span> is red, and <span class="mono">3</span> is yellow.</p>
+
+	<p>In order to create a blank board, list replication is used
+to create the lists of <span class="mono">BLANK</span> values which represents
+a column. This is done on line 386. One of these lists is created for each of
+the columns in the board (this is what the <span class="mono">for</span> loop
+on line 385 does).</p>
+
+<h2><a name="_Toc316488689">The </a><span class="mono">isOnBoard()</span> and <span
+class="mono">isValidPosition()</span> Functions</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">390. </span>def
+isOnBoard(x, y):</p>
+
+		<p class="noindent mono"><span class="line-number">391. </span>    return
+x &gt;= 0 and x &lt; BOARDWIDTH and y &lt; BOARDHEIGHT</p>
+
+</div>
+
+	<p>The <span class="mono">isOnBoard()</span> is a simple
+function which checks that the XY coordinates that are passed represent valid
+values that exist on the board. As long as both the XY coordinates are not less
+<span class="mono">0</span> or greater than or equal to the <span
+class="mono">BOARDWIDTH</span> and <span class="mono">BOARDHEIGHT</span>
+constants, then the function returns <span class="mono">True</span>. </p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">394. </span>def
+isValidPosition(board, piece, adjX=0, adjY=0):</p>
+
+		<p class="noindent mono"><span class="line-number">395. </span>    <span
+class="comment"># Return True if the piece is within the board and not
+colliding</span></p>
+
+		<p class="noindent mono"><span class="line-number">396. </span>    for
+x in range(TEMPLATEWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">397. </span>        for
+y in range(TEMPLATEHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">398.</span>
+isAboveBoard = y + piece['y'] + adjY &lt; 0</p>
+
+		<p class="noindent mono"><span class="line-number">399. </span>            if
+isAboveBoard or SHAPES[piece['shape']][piece['rotation']][y][x] == BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">400. </span>                continue</p>
+
+</div>
+
+	<p>The <span class="mono">isValidPosition()</span> function is
+given a board data structure and a piece data structure, and returns <span
+class="mono">True</span> if all the boxes in the piece are both on the board
+and not overlapping any boxes on the board. This is done by taking the piece’s
+XY coordinates (which is really the coordinate of the upper right box on the
+5x5 boxes for the piece) and adding the coordinate inside the piece data
+structure. Here’s a couple pictures to help illustrate this:</p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse'>
+ <tr>
+  <td width=265 valign=top style='width:198.9pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><img width=180
+  height=321 id="Picture 26" src="chapter7_files/image009.jpg"></p>
+  </td>
+  <td width=325 valign=top style='width:243.9pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><img width=180
+  height=321 id="Picture 27" src="chapter7_files/image010.jpg"></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=265 valign=top style='width:198.9pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>The board with a
+  falling piece in a valid position.</p>
+  </td>
+  <td width=325 valign=top style='width:243.9pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>The board with the
+  falling piece in an invalid position.</p>
+  </td>
+ </tr>
+</table>
+
+	<p>		<p class="noindent mono"></p>
+
+	<p>On the left board, the falling piece’s (that is, the top
+left corner of the falling piece’s) XY coordinates are (2, 3) on the board. But
+the boxes inside the falling piece’s coordinate system have their own
+coordinates. To find the “board” coordinates of these pieces, we just have to
+add the “board” coordinates of the falling piece’s top left box and the “piece”
+coordinates of the boxes.</p>
+
+	<p>On the left board, the falling piece’s boxes are at the
+following “piece” coordinates:</p>
+
+	<p>            (2, 2)    (3, 2)    (1, 3)    (2, 3)</p>
+
+	<p>When we add the (2, 3) coordinate (the piece’s coordinates
+on the board) to these coordinates, it looks like this:</p>
+
+	<p>            (2 + 2, 2 + 3)    (3 + 2, 2 + 3)    (1 + 2, 3 +
+3)    (2 + 2, 3 + 3)</p>
+
+	<p>After adding the (2, 3) coordinate the boxes are at the
+following “board” coordinates:</p>
+
+	<p>            (4, 5)    (5, 5)    (3, 6)    (4, 6)</p>
+
+	<p>And now that we can figure out where the falling piece’s
+boxes are as board coordinates, we can see if they overlap with the landed
+boxes that are already on the board. The nested <span class="mono">for</span>
+loops on lines 396 and 397 go through each of the possible coordinates on the
+falling piece.</p>
+
+	<p>We want to check if a box of the falling piece is either off
+of the board or overlapping a box on the board. (Although one exception is if
+the box is above the board, which is where it could be when the falling piece
+just begins falling.) Line 398 creates a variable named <span class="mono">isAboveBoard</span>
+that is set to <span class="mono">True</span> if the box on the falling piece
+at the coordinates pointed to be x and y is above the board. Otherwise it is
+set to <span class="mono">False</span>.</p>
+
+	<p>The <span class="mono">if</span> statement on line 399 checks
+if the space on the piece is above the board or is blank. If either of those is
+<span class="mono">True</span>, then the code executes a <span class="mono">continue</span>
+statement and goes to the next iteration. (Note that the end of line 399 has <span
+class="mono">[y][x]</span> instead of <span class="mono">[x][y]</span>. This
+is because the coordinates in the <span class="mono">PIECES</span> data
+structure are reversed. See the previous section, “Setting Up the Piece
+Templates”).</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">401. </span>            if
+not isOnBoard(x + piece['x'] + adjX, y + piece['y'] + adjY):</p>
+
+		<p class="noindent mono"><span class="line-number">402. </span>                return
+False</p>
+
+		<p class="noindent mono"><span class="line-number">403. </span>            if
+board[x + piece['x'] + adjX][y + piece['y'] + adjY] != BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">404. </span>                return
+False</p>
+
+		<p class="noindent mono"><span class="line-number">405. </span>    return
+True</p>
+
+</div>
+
+	<p>The <span class="mono">if</span> statement on line 401
+checks that the piece’s box is not located on the board. The <span
+class="mono">if</span> statement on line 403 checks that the board space the
+piece’s box is located is not blank. If either of these conditions are <span
+class="mono">True</span>, then the <span class="mono">isValidPosition()</span>
+function will return <span class="mono">False</span>. Notice that these <span
+class="mono">if</span> statements also adjust the coordinates for the <span
+class="mono">adjX</span> and <span class="mono">adjY</span> parameters that
+were passed in to the function.</p>
+
+	<p>If the code goes through the nested <span class="mono">for</span>
+loop and hasn’t found a reason to return <span class="mono">False</span>, then
+the position of the piece must be valid and so the function returns <span
+class="mono">True</span> on line 405.</p>
+
+	<h1 class="subheading" id="">Checking for, and Removing, Complete Lines</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">407. </span>def
+isCompleteLine(board, y):</p>
+
+		<p class="noindent mono"><span class="line-number">408. </span>    <span
+class="comment"># Return True if the line filled with boxes with no
+gaps.</span></p>
+
+		<p class="noindent mono"><span class="line-number">409. </span>    for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">410. </span>        if
+board[x][y] == BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">411. </span>            return
+False</p>
+
+		<p class="noindent mono"><span class="line-number">412. </span>    return
+True</p>
+
+</div>
+
+	<p>The <span class="mono">isCompleteLine</span> does a simple
+check at the row specified by the <span class="mono">y</span> parameter. A row
+on the board is considered to be “complete” when every space is filled by a
+box. The <span class="mono">for</span> loop on line 409 goes through each
+space in the row. If a space is blank (which is caused by it having the same
+value as the <span class="mono">BLANK</span> constant), then the function
+return <span class="mono">False</span>.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">415. </span>def
+removeCompleteLines(board):</p>
+
+		<p class="noindent mono"><span class="line-number">416. </span>    <span
+class="comment"># Remove any completed lines on the board, move
+everything above them down, and return the number of complete lines.</span></p>
+
+		<p class="noindent mono"><span class="line-number">417. </span>    numLinesRemoved
+= 0</p>
+
+		<p class="noindent mono"><span class="line-number">418. </span>    y
+= BOARDHEIGHT - 1 <span class="comment"># start y at the bottom of the
+board</span></p>
+
+		<p class="noindent mono"><span class="line-number">419. </span>    while
+y &gt;= 0:</p>
+
+</div>
+
+	<p>The <span class="mono">removeCompleteLines()</span>
+function will find any complete lines in the passed board data structure,
+remove the lines, and then shift all the boxes on the board above that line
+down one row. The function will return the number of lines that were removed
+(which is tracked by the <span class="mono">numLinesRemoved</span> variable)
+so that this can be added to the score.</p>
+
+	<p>The way this function works is by running in a loop starting
+on line 419 with the <span class="mono">y</span> variable starting at the
+lowest row (which is <span class="mono">BOARDHEIGHT - 1</span>). Whenever the
+row specified by <span class="mono">y</span> is not complete, <span
+class="mono">y</span> will be decremented to the next highest row. The loop
+finally stops once y reaches <span class="mono">-1</span>.</p>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">420. </span>        if
+isCompleteLine(board, y):</p>
+
+		<p class="noindent mono"><span class="line-number">421. </span>            <span
+class="comment"># Remove the line and pull boxes down by one line.</span></p>
+
+		<p class="noindent mono"><span class="line-number">422. </span>            for
+pullDownY in range(y, 0, -1):</p>
+
+		<p class="noindent mono"><span class="line-number">423. </span>                for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">424. </span>                    board[x][pullDownY]
+= board[x][pullDownY-1]</p>
+
+		<p class="noindent mono"><span class="line-number">425. </span>            <span
+class="comment"># Set very top line to blank.</span></p>
+
+		<p class="noindent mono"><span class="line-number">426. </span>            for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">427. </span>                board[x][0]
+= BLANK</p>
+
+		<p class="noindent mono"><span class="line-number">428. </span>            numLinesRemoved
++= 1</p>
+
+		<p class="noindent mono"><span class="line-number">429. </span>            <span
+class="comment"># Note on the next iteration of the loop, y is the
+same.</span></p>
+
+		<p class="noindent mono"><span class="line-number">430. </span>            <span
+class="comment"># This is so that if the line that was pulled down is
+also</span></p>
+
+		<p class="noindent mono"><span class="line-number">431. </span>            <span
+class="comment"># complete, it will be removed.</span></p>
+
+		<p class="noindent mono"><span class="line-number">432. </span>        else:</p>
+
+		<p class="noindent mono"><span class="line-number">433. </span>            y
+-= 1 <span class="comment"># move on to check next row up</span></p>
+
+		<p class="noindent mono"><span class="line-number">434. </span>    return
+numLinesRemoved</p>
+
+</div>
+
+	<p>The <span class="mono">isCompleteLine()</span> function
+will return <span class="mono">True</span> if the line that <span
+class="mono">y</span> is referring to is complete. In that case, the program
+needs to copy the values of each row above the removed line to the next lowest
+line. This is what the <span class="mono">for</span> loop on line 422 does
+(which is why its call to the <span class="mono">range()</span> function
+begins at <span class="mono">y</span>, rather than <span class="mono">0</span>.
+Also note that it uses the three argument form of <span class="mono">range()</span>,
+so that the list it returns starts at <span class="mono">y</span>, ends at <span
+class="mono">0</span>, and after each iteration “increases” by <span
+class="mono">-1</span>.)</p>
+
+	<p>Let’s look at the following example. To save space, only the
+top five rows of the board are shown. Row 3 is a complete line, which means
+that all the rows above it (row 2, 1, and 0) must be “pulled down”. First, row
+2 is copied down to row 3. The board on the right shows what the board will
+look like after this is done:</p>
+
+<p class=MsoNormal align=center style='text-align:center'><img width=393
+height=89 id="Picture 78" src="chapter7_files/image011.jpg"></p>
+
+	<p>This “pulling down” is really just copying the higher row’s
+values to the row below it on line 424. After row 2 is copied to row 3, then
+row 1 is copied to row 2 followed by row 0 copied to row 1:</p>
+
+<p class=MsoNormal align=center style='text-align:center'><img width=393
+height=89 id="Picture 79" src="chapter7_files/image012.jpg"></p>
+
+<p class=MsoNormal align=center style='text-align:center'><img width=393
+height=89 id="Picture 92" src="chapter7_files/image013.jpg"></p>
+
+	<p>Row 0 (the row at the very top) doesn’t have a row above it
+to copy values down. But row 0 doesn’t need a row copied to it, it just needs
+all the spaces set to <span class="mono">BLANK</span>. This is what lines 426
+and 427 do. After that, the board will have changed from the board shown below
+on the left to the board shown below on the right:</p>
+
+<p class=MsoNormal align=center style='text-align:center'><img width=393
+height=89 id="Picture 93" src="chapter7_files/image014.jpg"></p>
+
+	<p>After the complete line is removed, the execution reaches
+the end of the <span class="mono">while</span> loop that started on line 419,
+so the execution jumps back to the beginning of the loop. Note that at no point
+when the line was being removed and the rows being pulled down that the <span
+class="mono">y</span> variable changed at all. So on the next iteration, the <span
+class="mono">y</span> variable is pointing to the same row as before.</p>
+
+	<p>This is needed because if there were two complete lines,
+then the second complete line would have been pulled down and would also have
+to be removed. The code will then remove this complete line, and then go to the
+next iteration. It is only when there is not a completed line that the <span
+class="mono">y</span> variable is decremented on line 433. Once the <span
+class="mono">y</span> variable has been decremented all the way to <span
+class="mono">0</span>, the execution will exit the <span class="mono">while</span>
+loop.</p>
+
+<h2><a name="_Toc316488691">Convert from Board Coordinates to Pixel Coordinates</a>
+</h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">437. </span>def
+convertToPixelCoords(boxx, boxy):</p>
+
+		<p class="noindent mono"><span class="line-number">438. </span>    <span
+class="comment"># Convert the given xy coordinates of the board to xy </span></p>
+
+		<p class="noindent mono"><span class="line-number">439. </span>    <span
+class="comment"># coordinates of the</span> <span
+class="comment">location on the screen.</span></p>
+
+		<p class="noindent mono"><span class="line-number">440. </span>    return
+(XMARGIN + (boxx * BOXSIZE)), (TOPMARGIN + (boxy * BOXSIZE))</p>
+
+</div>
+
+	<p>This helper function converts the board’s box coordinates to
+pixel coordinates. This function works the same way to the other “convert
+coordinates” functions used in the previous game programs.</p>
+
+	<h1 class="subheading" id="">Drawing a Box on the Board or Elsewhere on the Screen</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">443. </span>def
+drawBox(boxx, boxy, color, pixelx=None, pixely=None):</p>
+
+		<p class="noindent mono"><span class="line-number">444. </span>    <span
+class="comment"># draw a single box (each tetromino piece has four
+boxes)</span></p>
+
+		<p class="noindent mono"><span class="line-number">445. </span>    <span
+class="comment"># at xy coordinates on the board. Or, if pixelx &amp;
+pixely</span></p>
+
+		<p class="noindent mono"><span class="line-number">446. </span>    <span
+class="comment"># are specified, draw to the pixel coordinates stored
+in</span></p>
+
+		<p class="noindent mono"><span class="line-number">447. </span>    <span
+class="comment"># pixelx &amp; pixely (this is used for the
+&quot;Next&quot; piece).</span></p>
+
+		<p class="noindent mono"><span class="line-number">448. </span>    if
+color == BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">449. </span>        return</p>
+
+		<p class="noindent mono"><span class="line-number">450. </span>    if
+pixelx == None and pixely == None:</p>
+
+		<p class="noindent mono"><span class="line-number">451. </span>        pixelx,
+pixely = convertToPixelCoords(boxx, boxy)</p>
+
+		<p class="noindent mono"><span class="line-number">452. </span>    pygame.draw.rect(DISPLAYSURF,
+COLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 1, BOXSIZE - 1))</p>
+
+		<p class="noindent mono"><span class="line-number">453. </span>    pygame.draw.rect(DISPLAYSURF,
+LIGHTCOLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 4, BOXSIZE - 4))</p>
+
+</div>
+
+	<p>The <span class="mono">drawBox()</span> function draws a
+single box on the screen. The function can receive <span class="mono">boxx</span>
+and <span class="mono">boxy</span> parameters for board coordinates where the
+box should be drawn. However, if the <span class="mono">pixelx</span> and <span
+class="mono">pixely</span> parameters are specified, then these pixel
+coordinates will override the <span class="mono">boxx</span> and <span
+class="mono">boxy</span> parameters. The <span class="mono">pixelx</span> and
+<span class="mono">pixely</span> parameters are used to draw the boxes of the
+“Next” piece, which is not on the board.</p>
+
+	<p>If the <span class="mono">pixelx</span> and <span
+class="mono">pixely</span> parameters are not set, then they will be set to <span
+class="mono">None</span> by default when the function first begins. Then the <span
+class="mono">if</span> statement on line 450 will overwrite the <span
+class="mono">None</span> values with the return values from <span
+class="mono">convertToPixelCoords()</span>. This call gets the pixel
+coordinates of the board coordinates specified by <span class="mono">boxx</span>
+and <span class="mono">boxy</span>.</p>
+
+	<p>The code won’t fill the entire box’s space with color. To
+have a black outline in between the boxes of a piece, the <span class="mono">left
+</span>and <span class="mono">top</span> parameters in the <span
+class="mono">pygame.draw.rect()</span> call have <span class="mono">+ 1</span>
+added to them and a <span class="mono">- 1</span> is added to the <span
+class="mono">width</span> and <span class="mono">height</span> parameters. In
+order to draw the highlighted box, first the box is drawn with the darker color
+on line 452. Then, a slightly smaller box is drawn on top of the darker box on
+line 453.</p>
+
+	<h1 class="subheading" id="">Drawing Everything to the Screen</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">456. </span>def
+drawBoard(board):</p>
+
+		<p class="noindent mono"><span class="line-number">457. </span>    <span
+class="comment"># draw the border around the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">458. </span>    pygame.draw.rect(DISPLAYSURF,
+BORDERCOLOR, (XMARGIN - 3, TOPMARGIN - 7, (BOARDWIDTH * BOXSIZE) + 8,
+(BOARDHEIGHT * BOXSIZE) + 8), 5)</p>
+
+		<p class="noindent mono"><span class="line-number">459. </span></p>
+
+		<p class="noindent mono"><span class="line-number">460. </span>    <span
+class="comment"># fill the background of the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">461. </span>    pygame.draw.rect(DISPLAYSURF,
+BGCOLOR, (XMARGIN, TOPMARGIN, BOXSIZE * BOARDWIDTH, BOXSIZE * BOARDHEIGHT))</p>
+
+		<p class="noindent mono"><span class="line-number">462. </span>    <span
+class="comment"># draw the individual boxes on the board</span></p>
+
+		<p class="noindent mono"><span class="line-number">463. </span>    for
+x in range(BOARDWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">464. </span>        for
+y in range(BOARDHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">465. </span>            drawBox(x,
+y, board[x][y])</p>
+
+</div>
+
+	<p>The <span class="mono">drawBoard()</span> function is
+responsible for calling the drawing functions for the board’s border and all
+the boxes on the board. First the board’s border is drawn on <span
+class="mono">DISPLAYSURF</span>, followed by the background color of the
+board. Then a call to <span class="mono">drawBox()</span> is made for each
+space on the board. The <span class="mono">drawBox()</span> function is smart
+enough to leave out the box if <span class="mono">board[x][y]</span> is set to
+<span class="mono">BLANK</span>.</p>
+
+	<h1 class="subheading" id="">Drawing the Score and Level Text</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">468. </span>def
+drawStatus(score, level):</p>
+
+		<p class="noindent mono"><span class="line-number">469. </span>    <span
+class="comment"># draw the score text</span></p>
+
+		<p class="noindent mono"><span class="line-number">470. </span>    scoreSurf
+= BASICFONT.render('Score: %s' % score, True, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">471. </span>    scoreRect
+= scoreSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">472. </span>    scoreRect.topleft
+= (WINDOWWIDTH - 150, 20)</p>
+
+		<p class="noindent mono"><span class="line-number">473. </span>    DISPLAYSURF.blit(scoreSurf,
+scoreRect)</p>
+
+		<p class="noindent mono"><span class="line-number">474. </span></p>
+
+		<p class="noindent mono"><span class="line-number">475. </span>    <span
+class="comment"># draw the level text</span></p>
+
+		<p class="noindent mono"><span class="line-number">476. </span>    levelSurf
+= BASICFONT.render('Level: %s' % level, True, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">477. </span>    levelRect
+= levelSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">478. </span>    levelRect.topleft
+= (WINDOWWIDTH - 150, 50)</p>
+
+		<p class="noindent mono"><span class="line-number">479. </span>    DISPLAYSURF.blit(levelSurf,
+levelRect)</p>
+
+</div>
+
+	<p>The <span class="mono">drawStatus()</span> function is
+responsible for rendering the text for the “Score:” and “Level:” information
+that appears in the upper right of the corner of the screen.</p>
+
+<h2><a name="_Toc316488695">Drawing a Piece on the Board or Elsewhere on the
+Screen</a></h2>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">482. </span>def
+drawPiece(piece, pixelx=None, pixely=None):</p>
+
+		<p class="noindent mono"><span class="line-number">483. </span>    shapeToDraw
+= SHAPES[piece['shape']][piece['rotation']]</p>
+
+		<p class="noindent mono"><span class="line-number">484. </span>    if
+pixelx == None and pixely == None:</p>
+
+		<p class="noindent mono"><span class="line-number">485. </span>        <span
+class="comment"># if pixelx &amp; pixely hasn't been specified, use the
+location stored in the piece data structure</span></p>
+
+		<p class="noindent mono"><span class="line-number">486. </span>        pixelx,
+pixely = convertToPixelCoords(piece['x'], piece['y'])</p>
+
+		<p class="noindent mono"><span class="line-number">487. </span></p>
+
+		<p class="noindent mono"><span class="line-number">488. </span>    <span
+class="comment"># draw each of the blocks that make up the piece</span></p>
+
+		<p class="noindent mono"><span class="line-number">489. </span>    for
+x in range(TEMPLATEWIDTH):</p>
+
+		<p class="noindent mono"><span class="line-number">490. </span>        for
+y in range(TEMPLATEHEIGHT):</p>
+
+		<p class="noindent mono"><span class="line-number">491. </span>            if
+shapeToDraw[y][x] != BLANK:</p>
+
+		<p class="noindent mono"><span class="line-number">492. </span>                drawBox(None,
+None, piece['color'], pixelx + (x * BOXSIZE), pixely + (y * BOXSIZE))</p>
+
+</div>
+
+	<p>The <span class="mono">drawPiece()</span> function will
+draw the boxes of a piece according to the piece data structure that is passed
+to it. This function will be used to draw the falling piece and the “Next”
+piece. Since the piece data structure will contain all of the shape, position,
+rotation, and color information, nothing else besides the piece data structure needs
+to be passed to the function.</p>
+
+	<p>However, the “Next” piece is not drawn on the board. In this
+case, we ignore the position information stored inside the piece data structure
+and instead let the caller of the <span class="mono">drawPiece()</span>
+function pass in arguments for the optional <span class="mono">pixelx</span>
+and <span class="mono">pixely</span> parameters to specify where exactly on
+the window the piece should be drawn.</p>
+
+	<p>If no <span class="mono">pixelx</span> and <span
+class="mono">pixely</span> arguments are passed in, then lines 484 and 486
+will overwrite those variables with the return values of <span class="mono">convertToPixelCoords()</span>
+call.</p>
+
+	<p>The nested <span class="mono">for</span> loops on line 489
+and 490 will then call <span class="mono">drawBox()</span> for each box of the
+piece that needs to be drawn.</p>
+
+	<h1 class="subheading" id="">Drawing the “Next” Piece</h1>
+
+	<div class="python-shell">
+
+		<p class="noindent mono"><span class="line-number">495. </span>def
+drawNextPiece(piece):</p>
+
+		<p class="noindent mono"><span class="line-number">496. </span>    <span
+class="comment"># draw the &quot;next&quot; text</span></p>
+
+		<p class="noindent mono"><span class="line-number">497. </span>    nextSurf
+= BASICFONT.render('Next:', True, TEXTCOLOR)</p>
+
+		<p class="noindent mono"><span class="line-number">498. </span>    nextRect
+= nextSurf.get_rect()</p>
+
+		<p class="noindent mono"><span class="line-number">499. </span>    nextRect.topleft
+= (WINDOWWIDTH - 120, 80)</p>
+
+		<p class="noindent mono"><span class="line-number">500. </span>    DISPLAYSURF.blit(nextSurf,
+nextRect)</p>
+
+		<p class="noindent mono"><span class="line-number">501. </span>    <span
+class="comment"># draw the &quot;next&quot; piece</span></p>
+
+		<p class="noindent mono"><span class="line-number">502. </span>    drawPiece(piece,
+pixelx=WINDOWWIDTH-120, pixely=100)</p>
+
+		<p class="noindent mono"><span class="line-number">503. </span></p>
+
+		<p class="noindent mono"><span class="line-number">504. </span></p>
+
+		<p class="noindent mono"><span class="line-number">505. </span>if
+__name__ == '__main__':</p>
+
+		<p class="noindent mono"><span class="line-number">506. </span>    main()</p>
+
+</div>
+
+	<p>The <span class="mono">drawNextPiece()</span> draws the
+“Next” piece in the upper right corner of the screen. It does this by calling
+the <span class="mono">drawPiece()</span> function and passing in arguments
+for <span class="mono">drawPiece()</span>’s <span class="mono">pixelx</span>
+and <span class="mono">pixely</span> parameters.</p>
+
+	<p>That’s the last function. Line 505 and 506 are run after all
+the function definitions have been executed, and then the <span class="mono">main()</span>
+function is called to begin the main part of the program.</p>
+
+	<h1 class="subheading" id="">Summary</h1>
+
+	<p>The Tetromino game (which is a clone of the more popular game,
+“Tetris”) is pretty easy to explain to someone in English: “Blocks fall from
+the top of a board, and the player moves and rotates them so that they form
+complete lines. The complete lines disappear (giving the player points) and the
+lines above them move down. The game keeps going until the blocks fill up the
+entire board and the player loses.”</p>
+
+	<p>Explaining it in plain English is one thing, but when we
+have to tell a computer exactly what to do there are many details we have to
+fill in. The original Tetris game was designed and programmed one person, Alex
+Pajitnov, in the Soviet Union in 1984. The game is simple, fun, and addictive.
+It is one of the most popular video games ever made, and has sold 100 million
+copies with many people creating their own clones and variations of it.</p>
+
+	<p>And it was all created by one person who knew how to
+program.</p>
+
+	<p>With the right idea and some programming knowledge you can
+create incredibly fun games. And with some practice, you will be able to turn
+your game ideas into real programs that might become as popular as Tetris!</p>
+
+	<p>For additional programming practice, you can download buggy
+versions of Tetromino from <a href="http://invpy.com/buggy/tetromino">http://invpy.com/buggy/tetromino</a>
+and try to figure out how to fix the bugs.</p>
+
+	<p>There are also variations of the Tetromino game on the
+book’s website. “Pentomino” is a version of this game with pieces made up of
+five boxes. There is also “Tetromino for Idiots”, where all of the pieces are
+made up of just one box.</p>
+
+	<p>These variations can be downloaded from:</p>
+
+	<ul>
+		<li><a href="http://invpy.com/pentomino.py">https://invpy.com/pentomino.py</a></li>
+		<li><a href="http://invpy.com/tetrominoforidiots.py">https://invpy.com/tetrominoforidiots.py</a></li>
+	</ul>
+
 </body>
 </html>
