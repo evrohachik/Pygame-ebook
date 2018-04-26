@@ -34,1031 +34,893 @@
 	</ul>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Squirrel Eat Squirrel (a 2D Katamari Damacy clone)</span></p>
-		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
-		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
-		<p class="noindent mono"><span class="line-number">5.</span></p>
-		<p class="noindent mono"><span class="line-number">6.</span> import random, sys, time, math, pygame</p>
-		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">8.</span></p>
-		<p class="noindent mono"><span class="line-number">9.</span> FPS = 30 <span class="comment"># frames per second to update the screen</span></p>
-		<p class="noindent mono"><span class="line-number">10.</span> WINWIDTH = 640 <span class="comment"># width of the program's window, in pixels</span></p>
-		<p class="noindent mono"><span class="line-number">11.</span> WINHEIGHT = 480 <span class="comment"># height in pixels</span></p>
-		<p class="noindent mono"><span class="line-number">12.</span> HALF_WINWIDTH = int(WINWIDTH / 2)</p>
-		<p class="noindent mono"><span class="line-number">13.</span> HALF_WINHEIGHT = int(WINHEIGHT / 2)</p>
-		<p class="noindent mono"><span class="line-number">14.</span></p>
-		<p class="noindent mono"><span class="line-number">15.</span> GRASSCOLOR = (24, 255, 0)</p>
-		<p class="noindent mono"><span class="line-number">16.</span> WHITE = (255, 255, 255)</p>
-		<p class="noindent mono"><span class="line-number">17.</span> RED = (255, 0, 0)</p>
-		<p class="noindent mono"><span class="line-number">18.</span></p>
-		<p class="noindent mono"><span class="line-number">19.</span> CAMERASLACK = 90     <span class="comment"># how far from the center the squirrel moves before moving the camera</span></p>
-		<p class="noindent mono"><span class="line-number">20.</span> MOVERATE = 9         <span class="comment"># how fast the player moves</span></p>
-		<p class="noindent mono"><span class="line-number">21.</span> BOUNCERATE = 6       <span class="comment"># how fast the player bounces (large is slower)</span></p>
-		<p class="noindent mono"><span class="line-number">22.</span> BOUNCEHEIGHT = 30    <span class="comment"># how high the player bounces</span></p>
-		<p class="noindent mono"><span class="line-number">23.</span> STARTSIZE = 25       <span class="comment"># how big the player starts off</span></p>
-		<p class="noindent mono"><span class="line-number">24.</span> WINSIZE = 300        <span class="comment"># how big the player needs to be to win</span></p>
-		<p class="noindent mono"><span class="line-number">25.</span> INVULNTIME = 2       <span class="comment"># how long the player is invulnerable after being hit in seconds</span></p>
-		<p class="noindent mono"><span class="line-number">26.</span> GAMEOVERTIME = 4     <span class="comment"># how long the &quot;game over&quot; text stays on the screen in seconds</span></p>
-		<p class="noindent mono"><span class="line-number">27.</span> MAXHEALTH = 3        <span class="comment"># how much health the player starts with</span></p>
-		<p class="noindent mono"><span class="line-number">28.</span></p>
-		<p class="noindent mono"><span class="line-number">29.</span> NUMGRASS = 80        <span class="comment"># number of grass objects in the active area</span></p>
-		<p class="noindent mono"><span class="line-number">30.</span> NUMSQUIRRELS = 30    <span class="comment"># number of squirrels in the active area</span></p>
-		<p class="noindent mono"><span class="line-number">31.</span> SQUIRRELMINSPEED = 3 <span class="comment"># slowest squirrel speed</span></p>
-		<p class="noindent mono"><span class="line-number">32.</span> SQUIRRELMAXSPEED = 7 <span class="comment"># fastest squirrel speed</span></p>
-		<p class="noindent mono"><span class="line-number">33.</span> DIRCHANGEFREQ = 2    <span class="comment"># % chance of direction change per frame</span></p>
-		<p class="noindent mono"><span class="line-number">34.</span> LEFT = 'left'</p>
-		<p class="noindent mono"><span class="line-number">35.</span> RIGHT = 'right'</p>
-		<p class="noindent mono"><span class="line-number">36.</span></p>
-		<p class="noindent mono"><span class="line-number">37.</span> <span class="comment">&quot;&quot;&quot;</span></p>
-		<p class="noindent mono"><span class="line-number">38.</span> <span class="comment">This program has three data structures to represent the player, enemy squirrels, and grass background objects. The data structures are dictionaries with the following keys:</span></p>
-		<p class="noindent mono"><span class="line-number">39.</span></p>
-		<p class="noindent mono"><span class="line-number">40.</span> <span class="comment">Keys used by all three data structures:</span></p>
-		<p class="noindent mono"><span class="line-number">41.</span>    <span class="comment">'x' - the left edge coordinate of the object in the game world (not a pixel coordinate on the screen)</span></p>
-		<p class="noindent mono"><span class="line-number">42.</span>    <span class="comment">'y' - the top edge coordinate of the object in the game world (not a pixel coordinate on the screen)</span></p>
-		<p class="noindent mono"><span class="line-number">43.</span>    <span class="comment">'rect' - the pygame.Rect object representing where on the screen the object is located.</span></p>
-		<p class="noindent mono"><span class="line-number">44.</span> <span class="comment">Player data structure keys:</span></p>
-		<p class="noindent mono"><span class="line-number">45.</span>    <span class="comment">'surface' - the pygame.Surface object that stores the image of the squirrel which will be drawn to the screen.</span></p>
-		<p class="noindent mono"><span class="line-number">46.</span>    <span class="comment">'facing' - either set to LEFT or RIGHT, stores which direction the player is facing.</span></p>
-		<p class="noindent mono"><span class="line-number">47.</span>    <span class="comment">'size' - the width and height of the player in pixels. (The width &amp; height are always the same.)</span></p>
-		<p class="noindent mono"><span class="line-number">48.</span>    <span class="comment">'bounce' - represents at what point in a bounce the player is in. 0 means standing (no bounce), up to BOUNCERATE (the completion of the bounce)</span></p>
-		<p class="noindent mono"><span class="line-number">49.</span>    <span class="comment">'health' - an integer showing how many more times the player can be hit by a larger squirrel before dying.</span></p>
-		<p class="noindent mono"><span class="line-number">50.</span> <span class="comment">Enemy Squirrel data structure keys:</span></p>
-		<p class="noindent mono"><span class="line-number">51.</span>    <span class="comment">'surface' - the pygame.Surface object that stores the image of the squirrel which will be drawn to the screen.</span></p>
-		<p class="noindent mono"><span class="line-number">52.</span>    <span class="comment">'movex' - how many pixels per frame the squirrel moves horizontally. A negative integer is moving to the left, a positive to the right.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;1.</span> <span class="comment"># Squirrel Eat Squirrel (a 2D Katamari Damacy clone)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;6.</span> import random, sys, time, math, pygame</p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;9.</span> FPS = 30 <span class="comment"># frames per second to update the screen</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;10.</span> WINWIDTH = 640 <span class="comment"># width of the program's window, in pixels</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;11.</span> WINHEIGHT = 480 <span class="comment"># height in pixels</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;12.</span> HALF_WINWIDTH = int(WINWIDTH / 2)</p>
+		<p class="noindent mono"><span class="line-number">&#160;13.</span> HALF_WINHEIGHT = int(WINHEIGHT / 2)</p>
+		<p class="noindent mono"><span class="line-number">&#160;14.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;15.</span> GRASSCOLOR = (24, 255, 0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;16.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;17.</span> RED = (255, 0, 0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;18.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;19.</span> CAMERASLACK = 90 &#160;&#160;&#160;&#160;<span class="comment"># how far from the center the squirrel moves before moving the camera</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;20.</span> MOVERATE = 9 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># how fast the player moves</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;21.</span> BOUNCERATE = 6 &#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># how fast the player bounces (large is slower)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;22.</span> BOUNCEHEIGHT = 30 &#160;&#160;&#160;<span class="comment"># how high the player bounces</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;23.</span> STARTSIZE = 25 &#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># how big the player starts off</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;24.</span> WINSIZE = 300 &#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># how big the player needs to be to win</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;25.</span> INVULNTIME = 2 &#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># how long the player is invulnerable after being hit in seconds</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;26.</span> GAMEOVERTIME = 4 &#160;&#160;&#160;&#160;<span class="comment"># how long the &quot;game over&quot; text stays on the screen in seconds</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;27.</span> MAXHEALTH = 3 &#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># how much health the player starts with</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;28.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;29.</span> NUMGRASS = 80 &#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># number of grass objects in the active area</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;30.</span> NUMSQUIRRELS = 30 &#160;&#160;&#160;<span class="comment"># number of squirrels in the active area</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;31.</span> SQUIRRELMINSPEED = 3 <span class="comment"># slowest squirrel speed</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;32.</span> SQUIRRELMAXSPEED = 7 <span class="comment"># fastest squirrel speed</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;33.</span> DIRCHANGEFREQ = 2 &#160;&#160;&#160;<span class="comment"># % chance of direction change per frame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;34.</span> LEFT = 'left'</p>
+		<p class="noindent mono"><span class="line-number">&#160;35.</span> RIGHT = 'right'</p>
+		<p class="noindent mono"><span class="line-number">&#160;36.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;37.</span> <span class="comment">&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;38.</span> <span class="comment">This program has three data structures to represent the player, enemy squirrels, and grass background objects. The data structures are dictionaries with the following keys:</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;39.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;40.</span> <span class="comment">Keys used by all three data structures:</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;41.</span> &#160;&#160;&#160;&#160;<span class="comment">'x' - the left edge coordinate of the object in the game world (not a pixel coordinate on the screen)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;42.</span> &#160;&#160;&#160;&#160;<span class="comment">'y' - the top edge coordinate of the object in the game world (not a pixel coordinate on the screen)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;43.</span> &#160;&#160;&#160;&#160;<span class="comment">'rect' - the pygame.Rect object representing where on the screen the object is located.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;44.</span> <span class="comment">Player data structure keys:</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;45.</span> &#160;&#160;&#160;&#160;<span class="comment">'surface' - the pygame.Surface object that stores the image of the squirrel which will be drawn to the screen.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;46.</span> &#160;&#160;&#160;&#160;<span class="comment">'facing' - either set to LEFT or RIGHT, stores which direction the player is facing.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;47.</span> &#160;&#160;&#160;&#160;<span class="comment">'size' - the width and height of the player in pixels. (The width &amp; height are always the same.)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;48.</span> &#160;&#160;&#160;&#160;<span class="comment">'bounce' - represents at what point in a bounce the player is in. 0 means standing (no bounce), up to BOUNCERATE (the completion of the bounce)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;49.</span> &#160;&#160;&#160;&#160;<span class="comment">'health' - an integer showing how many more times the player can be hit by a larger squirrel before dying.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;50.</span> <span class="comment">Enemy Squirrel data structure keys:</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;51.</span> &#160;&#160;&#160;&#160;<span class="comment">'surface' - the pygame.Surface object that stores the image of the squirrel which will be drawn to the screen.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;52.</span> &#160;&#160;&#160;&#160;<span class="comment">'movex' - how many pixels per frame the squirrel moves horizontally. A negative integer is moving to the left, a positive to the right.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;53.</span> &#160;&#160;&#160;&#160;<span class="comment">'movey' - how many pixels per frame the squirrel moves vertically. A negative integer is moving up, a positive moving down.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;54.</span> &#160;&#160;&#160;&#160;<span class="comment">'width' - the width of the squirrel's image, in pixels</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;55.</span> &#160;&#160;&#160;&#160;<span class="comment">'height' - the height of the squirrel's image, in pixels</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;56.</span> &#160;&#160;&#160;&#160;<span class="comment">'bounce' - represents at what point in a bounce the player is in. 0 means standing (no bounce), up to BOUNCERATE (the completion of the bounce)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;57.</span> &#160;&#160;&#160;&#160;<span class="comment">'bouncerate' - how quickly the squirrel bounces. A lower number means a quicker bounce.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;58.</span> &#160;&#160;&#160;&#160;<span class="comment">'bounceheight' - how high (in pixels) the squirrel bounces</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;59.</span> <span class="comment">Grass data structure keys:</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;60.</span> &#160;&#160;&#160;&#160;<span class="comment">'grassImage' - an integer that refers to the index of the pygame.Surface object in GRASSIMAGES used for this grass object</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;61.</span> <span class="comment">&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;62.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;63.</span> def main():</p>
+		<p class="noindent mono"><span class="line-number">&#160;64.</span> &#160;&#160;&#160;&#160;global FPSCLOCK, DISPLAYSURF, BASICFONT, L_SQUIR_IMG, R_SQUIR_IMG, GRASSIMAGES</p>
+		<p class="noindent mono"><span class="line-number">&#160;65.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;66.</span> &#160;&#160;&#160;&#160;pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;67.</span> &#160;&#160;&#160;&#160;FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">&#160;68.</span> &#160;&#160;&#160;&#160;pygame.display.set_icon(pygame.image.load('gameicon.png'))</p>
+		<p class="noindent mono"><span class="line-number">&#160;69.</span> &#160;&#160;&#160;&#160;DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">&#160;70.</span> &#160;&#160;&#160;&#160;pygame.display.set_caption('Squirrel Eat Squirrel')</p>
+		<p class="noindent mono"><span class="line-number">&#160;71.</span> &#160;&#160;&#160;&#160;BASICFONT = pygame.font.Font('freesansbold.ttf', 32)</p>
+		<p class="noindent mono"><span class="line-number">&#160;72.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;73.</span> &#160;&#160;&#160;&#160;<span class="comment"># load the image files</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;74.</span> &#160;&#160;&#160;&#160;L_SQUIR_IMG = pygame.image.load('squirrel.png')</p>
+		<p class="noindent mono"><span class="line-number">&#160;75.</span> &#160;&#160;&#160;&#160;R_SQUIR_IMG = pygame.transform.flip(L_SQUIR_IMG, True, False)</p>
+		<p class="noindent mono"><span class="line-number">&#160;76.</span> &#160;&#160;&#160;&#160;GRASSIMAGES = []</p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span> &#160;&#160;&#160;&#160;for i in range(1, 5):</p>
+		<p class="noindent mono"><span class="line-number">&#160;78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;GRASSIMAGES.append(pygame.image.load('grass%s.png' % i))</p>
+		<p class="noindent mono"><span class="line-number">&#160;79.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;80.</span> &#160;&#160;&#160;&#160;while True:</p>
+		<p class="noindent mono"><span class="line-number">&#160;81.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;runGame()</p>
+		<p class="noindent mono"><span class="line-number">&#160;82.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;83.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;84.</span> def runGame():</p>
+		<p class="noindent mono"><span class="line-number">&#160;85.</span> &#160;&#160;&#160;&#160;<span class="comment"># set up variables for the start of a new game</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;86.</span> &#160;&#160;&#160;&#160;invulnerableMode = False  <span class="comment"># if the player is invulnerable</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;87.</span> &#160;&#160;&#160;&#160;invulnerableStartTime = 0 <span class="comment"># time the player became invulnerable</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;88.</span> &#160;&#160;&#160;&#160;gameOverMode = False      <span class="comment"># if the player has lost</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;89.</span> &#160;&#160;&#160;&#160;gameOverStartTime = 0     <span class="comment"># time the player lost</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;90.</span> &#160;&#160;&#160;&#160;winMode = False           <span class="comment"># if the player has won</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;91.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;92.</span> &#160;&#160;&#160;&#160;<span class="comment"># create the surfaces to hold game text</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;93.</span> &#160;&#160;&#160;&#160;gameOverSurf = BASICFONT.render('Game Over', True, WHITE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;94.</span> &#160;&#160;&#160;&#160;gameOverRect = gameOverSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">&#160;95.</span> &#160;&#160;&#160;&#160;gameOverRect.center = (HALF_WINWIDTH, HALF_WINHEIGHT)</p>
+		<p class="noindent mono"><span class="line-number">&#160;96.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;97.</span> &#160;&#160;&#160;&#160;winSurf = BASICFONT.render('You have achieved OMEGA SQUIRREL!', True, WHITE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;98.</span> &#160;&#160;&#160;&#160;winRect = winSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">&#160;99.</span> &#160;&#160;&#160;&#160;winRect.center = (HALF_WINWIDTH, HALF_WINHEIGHT)</p>
+		<p class="noindent mono"><span class="line-number">100.</span></p>
+		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;winSurf2 = BASICFONT.render('(Press &quot;r&quot; to restart.)', True, WHITE)</p>
+		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;winRect2 = winSurf2.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">103.</span> &#160;&#160;&#160;&#160;winRect2.center = (HALF_WINWIDTH, HALF_WINHEIGHT + 30)</p>
+		<p class="noindent mono"><span class="line-number">104.</span></p>
+		<p class="noindent mono"><span class="line-number">105.</span> &#160;&#160;&#160;&#160;<span class="comment"># camerax and cameray are where the middle of the camera view is</span></p>
+		<p class="noindent mono"><span class="line-number">106.</span> &#160;&#160;&#160;&#160;camerax = 0</p>
+		<p class="noindent mono"><span class="line-number">107.</span> &#160;&#160;&#160;&#160;cameray = 0</p>
+		<p class="noindent mono"><span class="line-number">108.</span></p>
+		<p class="noindent mono"><span class="line-number">109.</span> &#160;&#160;&#160;&#160;grassObjs = [] &#160;&#160;&#160;<span class="comment"># stores all the grass objects in the game</span></p>
+		<p class="noindent mono"><span class="line-number">110.</span> &#160;&#160;&#160;&#160;squirrelObjs = [] <span class="comment"># stores all the non-player squirrel objects</span></p>
+		<p class="noindent mono"><span class="line-number">111.</span> &#160;&#160;&#160;&#160;<span class="comment"># stores the player object:</span></p>
+		<p class="noindent mono"><span class="line-number">112.</span> &#160;&#160;&#160;&#160;playerObj = {'surface': pygame.transform.scale(L_SQUIR_IMG, (STARTSIZE, STARTSIZE)),</p>
+		<p class="noindent mono"><span class="line-number">113.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'facing': LEFT,</p>
+		<p class="noindent mono"><span class="line-number">114.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'size': STARTSIZE,</p>
+		<p class="noindent mono"><span class="line-number">115.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'x': HALF_WINWIDTH,</p>
+		<p class="noindent mono"><span class="line-number">116.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'y': HALF_WINHEIGHT,</p>
+		<p class="noindent mono"><span class="line-number">117.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'bounce':0,</p>
+		<p class="noindent mono"><span class="line-number">118.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'health': MAXHEALTH}</p>
+		<p class="noindent mono"><span class="line-number">119.</span></p>
+		<p class="noindent mono"><span class="line-number">120.</span> &#160;&#160;&#160;&#160;moveLeft = False</p>
+		<p class="noindent mono"><span class="line-number">121.</span> &#160;&#160;&#160;&#160;moveRight = False</p>
+		<p class="noindent mono"><span class="line-number">122.</span> &#160;&#160;&#160;&#160;moveUp = False</p>
+		<p class="noindent mono"><span class="line-number">123.</span> &#160;&#160;&#160;&#160;moveDown = False</p>
+		<p class="noindent mono"><span class="line-number">124.</span></p>
+		<p class="noindent mono"><span class="line-number">125.</span> &#160;&#160;&#160;&#160;<span class="comment"># start off with some random grass images on the screen</span></p>
 	</div>
 <!--
-		<p class="noindent mono"><span class="line-number">53.</span>    <span
-class="comment">'movey' - how many pixels per frame the squirrel moves
-vertically. A negative integer is moving up, a positive moving down.</span></p>
-
-		<p class="noindent mono"><span class="line-number">54.</span>    <span
-class="comment">'width' - the width of the squirrel's image, in pixels</span></p>
-
-		<p class="noindent mono"><span class="line-number">55.</span>    <span
-class="comment">'height' - the height of the squirrel's image, in
-pixels</span></p>
-
-		<p class="noindent mono"><span class="line-number">56.</span>    <span
-class="comment">'bounce' - represents at what point in a bounce the
-player is in. 0 means standing (no bounce), up to BOUNCERATE (the completion of
-the bounce)</span></p>
-
-		<p class="noindent mono"><span class="line-number">57.</span>    <span
-class="comment">'bouncerate' - how quickly the squirrel bounces. A
-lower number means a quicker bounce.</span></p>
-
-		<p class="noindent mono"><span class="line-number">58.</span>    <span
-class="comment">'bounceheight' - how high (in pixels) the squirrel
-bounces</span></p>
-
-		<p class="noindent mono"><span class="line-number">59.</span> <span
-class="comment">Grass data structure keys:</span></p>
-
-		<p class="noindent mono"><span class="line-number">60.</span>    <span
-class="comment">'grassImage' - an integer that refers to the index of
-the pygame.Surface object in GRASSIMAGES used for this grass object</span></p>
-
-		<p class="noindent mono"><span class="line-number">61.</span> <span
-class="comment">&quot;&quot;&quot;</span></p>
-
-		<p class="noindent mono"><span class="line-number">62.</span></p>
-
-		<p class="noindent mono"><span class="line-number">63.</span> def
-main():</p>
-
-		<p class="noindent mono"><span class="line-number">64.</span>    global
-FPSCLOCK, DISPLAYSURF, BASICFONT, L_SQUIR_IMG, R_SQUIR_IMG, GRASSIMAGES</p>
-
-		<p class="noindent mono"><span class="line-number">65.</span></p>
-
-		<p class="noindent mono"><span class="line-number">66.</span>    pygame.init()</p>
-
-		<p class="noindent mono"><span class="line-number">67.</span>    FPSCLOCK
-= pygame.time.Clock()</p>
-
-		<p class="noindent mono"><span class="line-number">68.</span>    pygame.display.set_icon(pygame.image.load('gameicon.png'))</p>
-
-		<p class="noindent mono"><span class="line-number">69.</span>    DISPLAYSURF
-= pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
-
-		<p class="noindent mono"><span class="line-number">70.</span>    pygame.display.set_caption('Squirrel
-Eat Squirrel')</p>
-
-		<p class="noindent mono"><span class="line-number">71.</span>    BASICFONT
-= pygame.font.Font('freesansbold.ttf', 32)</p>
-
-		<p class="noindent mono"><span class="line-number">72.</span></p>
-
-		<p class="noindent mono"><span class="line-number">73.</span>     <span
-class="comment"># load the image files</span></p>
-
-		<p class="noindent mono"><span class="line-number">74.</span>    L_SQUIR_IMG
-= pygame.image.load('squirrel.png')</p>
-
-		<p class="noindent mono"><span class="line-number">75.</span>    R_SQUIR_IMG
-= pygame.transform.flip(L_SQUIR_IMG, True, False)</p>
-
-		<p class="noindent mono"><span class="line-number">76.</span>    GRASSIMAGES
-= []</p>
-
-		<p class="noindent mono"><span class="line-number">77.</span>    for
-i in range(1, 5):</p>
-
-		<p class="noindent mono"><span class="line-number">78.</span>        GRASSIMAGES.append(pygame.image.load('grass%s.png'
-% i))</p>
-
-		<p class="noindent mono"><span class="line-number">79.</span></p>
-
-		<p class="noindent mono"><span class="line-number">80.</span>     while
-True:</p>
-
-		<p class="noindent mono"><span class="line-number">81.</span>        runGame()</p>
-
-		<p class="noindent mono"><span class="line-number">82.</span></p>
-
-		<p class="noindent mono"><span class="line-number">83.</span></p>
-
-		<p class="noindent mono"><span class="line-number">84.</span> def
-runGame():</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber> 85.</span>
-<span class="comment"># set up variables for the start of a new game</span></p>
-
-		<p class="noindent mono"><span class="line-number">86.</span>    invulnerableMode
-= False  <span class="comment"># if the player is invulnerable</span></p>
-
-		<p class="noindent mono"><span class="line-number">87.</span>    invulnerableStartTime
-= 0 <span class="comment"># time the player became invulnerable</span></p>
-
-		<p class="noindent mono"><span class="line-number">88.</span>    gameOverMode
-= False      <span class="comment"># if the player has lost</span></p>
-
-		<p class="noindent mono"><span class="line-number">89.</span>    gameOverStartTime
-= 0     <span class="comment"># time the player lost</span></p>
-
-		<p class="noindent mono"><span class="line-number">90.</span>    winMode
-= False           <span class="comment"># if the player has won</span></p>
-
-		<p class="noindent mono"><span class="line-number">91.</span>    </p>
-
-		<p class="noindent mono"><span class="line-number">92.</span>     <span
-class="comment"># create the surfaces to hold game text</span></p>
-
-		<p class="noindent mono"><span class="line-number">93.</span>    gameOverSurf
-= BASICFONT.render('Game Over', True, WHITE)</p>
-
-		<p class="noindent mono"><span class="line-number">94.</span>    gameOverRect
-= gameOverSurf.get_rect()</p>
-
-		<p class="noindent mono"><span class="line-number">95.</span>    gameOverRect.center
-= (HALF_WINWIDTH, HALF_WINHEIGHT)</p>
-
-		<p class="noindent mono"><span class="line-number">96.</span></p>
-
-		<p class="noindent mono"><span class="line-number">97.</span>    winSurf
-= BASICFONT.render('You have achieved OMEGA SQUIRREL!', True, WHITE)</p>
-
-		<p class="noindent mono"><span class="line-number">98.</span>    winRect
-= winSurf.get_rect()</p>
-
-		<p class="noindent mono"><span class="line-number">99.</span>    winRect.center
-= (HALF_WINWIDTH, HALF_WINHEIGHT)</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>100. </span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>101. </span>    winSurf2
-= BASICFONT.render('(Press &quot;r&quot; to restart.)', True, WHITE)</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>102. </span>    winRect2
-= winSurf2.get_rect()</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>103. </span>    winRect2.center
-= (HALF_WINWIDTH, HALF_WINHEIGHT + 30)</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>104. </span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>105. </span>    <span
-class="comment"># camerax and cameray are where the middle of the
-camera view is</span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>106. </span>    camerax
-= 0</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>107. </span>    cameray
-= 0</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>108. </span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>109. </span>    grassObjs
-= []    <span class="comment"># stores all the grass objects in the
-game</span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>110. </span>    squirrelObjs
-= [] <span class="comment"># stores all the non-player squirrel objects</span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>111. </span>    <span
-class="comment"># stores the player object:</span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>112. </span>    playerObj
-= {'surface': pygame.transform.scale(L_SQUIR_IMG, (STARTSIZE, STARTSIZE)),</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>113. </span>                 'facing':
-LEFT,</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>114. </span>                 'size':
-STARTSIZE,</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>115. </span>                 'x':
-HALF_WINWIDTH,</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>116. </span>                 'y':
-HALF_WINHEIGHT,</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>117. </span>                 'bounce':0,</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>118. </span>                 'health':
-MAXHEALTH}</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>119. </span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>120. </span>    moveLeft
-= False</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>121. </span>    moveRight
-= False</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>122. </span>    moveUp
-= False</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>123. </span>    moveDown
-= False</p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>124. </span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>125. </span>    <span
-class="comment"># start off with some random grass images on the screen</span></p>
-
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>126. </span>    for
+		<p class="noindent mono"><span class="line-number">126.</span>    for
 i in range(10):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>127. </span>        grassObjs.append(makeNewGrass(camerax,
+		<p class="noindent mono"><span class="line-number">127.</span>        grassObjs.append(makeNewGrass(camerax,
 cameray))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>128. </span>        grassObjs[i]['x']
+		<p class="noindent mono"><span class="line-number">128.</span>        grassObjs[i]['x']
 = random.randint(0, WINWIDTH)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>129. </span>        grassObjs[i]['y']
+		<p class="noindent mono"><span class="line-number">129.</span>        grassObjs[i]['y']
 = random.randint(0, WINHEIGHT)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>130. </span></p>
+		<p class="noindent mono"><span class="line-number">130.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>131. </span>    while
+		<p class="noindent mono"><span class="line-number">131.</span>    while
 True: <span class="comment"># main game loop</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>132. </span>        <span
+		<p class="noindent mono"><span class="line-number">132.</span>        <span
 class="comment"># Check if we should turn off invulnerability</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>133. </span>        if
+		<p class="noindent mono"><span class="line-number">133.</span>        if
 invulnerableMode and time.time() - invulnerableStartTime &gt; INVULNTIME:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>134. </span>            invulnerableMode
+		<p class="noindent mono"><span class="line-number">134.</span>            invulnerableMode
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>135. </span></p>
+		<p class="noindent mono"><span class="line-number">135.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>136. </span>        <span
+		<p class="noindent mono"><span class="line-number">136.</span>        <span
 class="comment"># move all the squirrels</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>137. </span>        for
+		<p class="noindent mono"><span class="line-number">137.</span>        for
 sObj in squirrelObjs:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>138. </span>            <span
+		<p class="noindent mono"><span class="line-number">138.</span>            <span
 class="comment"># move the squirrel, and adjust for their bounce</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>139. </span>            sObj['x']
+		<p class="noindent mono"><span class="line-number">139.</span>            sObj['x']
 += sObj['movex']</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>140. </span>            sObj['y']
+		<p class="noindent mono"><span class="line-number">140.</span>            sObj['y']
 += sObj['movey']</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>141. </span>            sObj['bounce']
+		<p class="noindent mono"><span class="line-number">141.</span>            sObj['bounce']
 += 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>142. </span>            if
+		<p class="noindent mono"><span class="line-number">142.</span>            if
 sObj['bounce'] &gt; sObj['bouncerate']:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>143. </span>                sObj['bounce']
+		<p class="noindent mono"><span class="line-number">143.</span>                sObj['bounce']
 = 0 <span class="comment"># reset bounce amount</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>144.</span></p>
+		<p class="noindent mono"><span class="line-number">144.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>145. </span>            <span
+		<p class="noindent mono"><span class="line-number">145.</span>            <span
 class="comment"># random chance they change direction</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>146. </span>            if
+		<p class="noindent mono"><span class="line-number">146.</span>            if
 random.randint(0, 99) &lt; DIRCHANGEFREQ:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>147. </span>                sObj['movex']
+		<p class="noindent mono"><span class="line-number">147.</span>                sObj['movex']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>148. </span>                sObj['movey']
+		<p class="noindent mono"><span class="line-number">148.</span>                sObj['movey']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>149. </span>                if
+		<p class="noindent mono"><span class="line-number">149.</span>                if
 sObj['movex'] &gt; 0: <span class="comment"># faces right</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>150. </span>                    sObj['surface']
+		<p class="noindent mono"><span class="line-number">150.</span>                    sObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (sObj['width'], sObj['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>151. </span>                else:
+		<p class="noindent mono"><span class="line-number">151.</span>                else:
 <span class="comment"># faces left</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>152. </span>                    sObj['surface']
+		<p class="noindent mono"><span class="line-number">152.</span>                    sObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (sObj['width'], sObj['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>153.</span></p>
+		<p class="noindent mono"><span class="line-number">153.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>154. </span></p>
+		<p class="noindent mono"><span class="line-number">154.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>155. </span>        <span
+		<p class="noindent mono"><span class="line-number">155.</span>        <span
 class="comment"># go through all the objects and see if any need to be
 deleted.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>156. </span>        for
+		<p class="noindent mono"><span class="line-number">156.</span>        for
 i in range(len(grassObjs) - 1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>157. </span>            if
+		<p class="noindent mono"><span class="line-number">157.</span>            if
 isOutsideActiveArea(camerax, cameray, grassObjs[i]):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>158. </span>                del
+		<p class="noindent mono"><span class="line-number">158.</span>                del
 grassObjs[i]</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>159. </span>        for
+		<p class="noindent mono"><span class="line-number">159.</span>        for
 i in range(len(squirrelObjs) - 1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>160. </span>            if
+		<p class="noindent mono"><span class="line-number">160.</span>            if
 isOutsideActiveArea(camerax, cameray, squirrelObjs[i]):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>161. </span>                del
+		<p class="noindent mono"><span class="line-number">161.</span>                del
 squirrelObjs[i]</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>162. </span></p>
+		<p class="noindent mono"><span class="line-number">162.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>163. </span>        <span
+		<p class="noindent mono"><span class="line-number">163.</span>        <span
 class="comment"># add more grass &amp; squirrels if we don't have
 enough.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>164. </span>        while
+		<p class="noindent mono"><span class="line-number">164.</span>        while
 len(grassObjs) &lt; NUMGRASS:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>165. </span>            grassObjs.append(makeNewGrass(camerax,
+		<p class="noindent mono"><span class="line-number">165.</span>            grassObjs.append(makeNewGrass(camerax,
 cameray))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>166. </span>        while
+		<p class="noindent mono"><span class="line-number">166.</span>        while
 len(squirrelObjs) &lt; NUMSQUIRRELS:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>167. </span>            squirrelObjs.append(makeNewSquirrel(camerax,
+		<p class="noindent mono"><span class="line-number">167.</span>            squirrelObjs.append(makeNewSquirrel(camerax,
 cameray))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>168. </span></p>
+		<p class="noindent mono"><span class="line-number">168.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>169. </span>        <span
+		<p class="noindent mono"><span class="line-number">169.</span>        <span
 class="comment"># adjust camerax and cameray if beyond the &quot;camera
 slack&quot;</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>170. </span>        playerCenterx
+		<p class="noindent mono"><span class="line-number">170.</span>        playerCenterx
 = playerObj['x'] + int(playerObj['size'] / 2)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>171. </span>        playerCentery
+		<p class="noindent mono"><span class="line-number">171.</span>        playerCentery
 = playerObj['y'] + int(playerObj['size'] / 2)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>172.</span>         if
+		<p class="noindent mono"><span class="line-number">172.</span>         if
 (camerax + HALF_WINWIDTH) - playerCenterx &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>173.</span>             camerax
+		<p class="noindent mono"><span class="line-number">173.</span>             camerax
 = playerCenterx + CAMERASLACK - HALF_WINWIDTH</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>174.</span>         elif
+		<p class="noindent mono"><span class="line-number">174.</span>         elif
 playerCenterx – (camerax + HALF_WINWIDTH) &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>175.</span>             camerax
+		<p class="noindent mono"><span class="line-number">175.</span>             camerax
 = playerCenterx – CAMERASLACK - HALF_WINWIDTH</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>176.</span>         if
+		<p class="noindent mono"><span class="line-number">176.</span>         if
 (cameray + HALF_WINHEIGHT) - playerCentery &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>177.</span>             cameray
+		<p class="noindent mono"><span class="line-number">177.</span>             cameray
 = playerCentery + CAMERASLACK - HALF_WINHEIGHT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>178.</span>         elif
+		<p class="noindent mono"><span class="line-number">178.</span>         elif
 playerCentery – (cameray + HALF_WINHEIGHT) &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>179.</span>             cameray
+		<p class="noindent mono"><span class="line-number">179.</span>             cameray
 = playerCentery – CAMERASLACK - HALF_WINHEIGHT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>180. </span></p>
+		<p class="noindent mono"><span class="line-number">180.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>181. </span>        <span
+		<p class="noindent mono"><span class="line-number">181.</span>        <span
 class="comment"># draw the green background</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>182. </span>        DISPLAYSURF.fill(GRASSCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">182.</span>        DISPLAYSURF.fill(GRASSCOLOR)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>183. </span></p>
+		<p class="noindent mono"><span class="line-number">183.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>184. </span>        <span
+		<p class="noindent mono"><span class="line-number">184.</span>        <span
 class="comment"># draw all the grass objects on the screen</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>185. </span>        for
+		<p class="noindent mono"><span class="line-number">185.</span>        for
 gObj in grassObjs:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>186. </span>            gRect
+		<p class="noindent mono"><span class="line-number">186.</span>            gRect
 = pygame.Rect( (gObj['x'] - camerax,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>187. </span>                                  gObj['y']
+		<p class="noindent mono"><span class="line-number">187.</span>                                  gObj['y']
 - cameray,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>188. </span>                                  gObj['width'],</p>
+		<p class="noindent mono"><span class="line-number">188.</span>                                  gObj['width'],</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>189. </span>                                  gObj['height'])
+		<p class="noindent mono"><span class="line-number">189.</span>                                  gObj['height'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>190. </span>            DISPLAYSURF.blit(GRASSIMAGES[gObj['grassImage']],
+		<p class="noindent mono"><span class="line-number">190.</span>            DISPLAYSURF.blit(GRASSIMAGES[gObj['grassImage']],
 gRect)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>191.</span></p>
+		<p class="noindent mono"><span class="line-number">191.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>192. </span></p>
+		<p class="noindent mono"><span class="line-number">192.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>193. </span>        <span
+		<p class="noindent mono"><span class="line-number">193.</span>        <span
 class="comment"># draw the other squirrels</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>194. </span>        for
+		<p class="noindent mono"><span class="line-number">194.</span>        for
 sObj in squirrelObjs:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>195. </span>            sObj['rect']
+		<p class="noindent mono"><span class="line-number">195.</span>            sObj['rect']
 = pygame.Rect( (sObj['x'] - camerax,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>196. </span>                                         sObj['y']
+		<p class="noindent mono"><span class="line-number">196.</span>                                         sObj['y']
 - cameray - getBounceAmount(sObj['bounce'], sObj['bouncerate'],
 sObj['bounceheight']),</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>197. </span>                                         sObj['width'],</p>
+		<p class="noindent mono"><span class="line-number">197.</span>                                         sObj['width'],</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>198. </span>                                         sObj['height'])
+		<p class="noindent mono"><span class="line-number">198.</span>                                         sObj['height'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>199. </span>            DISPLAYSURF.blit(sObj['surface'],
+		<p class="noindent mono"><span class="line-number">199.</span>            DISPLAYSURF.blit(sObj['surface'],
 sObj['rect'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>200.</span></p>
+		<p class="noindent mono"><span class="line-number">200.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>201. </span></p>
+		<p class="noindent mono"><span class="line-number">201.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>202. </span>        <span
+		<p class="noindent mono"><span class="line-number">202.</span>        <span
 class="comment"># draw the player squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>203. </span>        flashIsOn
+		<p class="noindent mono"><span class="line-number">203.</span>        flashIsOn
 = round(time.time(), 1) * 10 % 2 == 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>204. </span>        if
+		<p class="noindent mono"><span class="line-number">204.</span>        if
 not gameOverMode and not (invulnerableMode and flashIsOn):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>205. </span>            playerObj['rect']
+		<p class="noindent mono"><span class="line-number">205.</span>            playerObj['rect']
 = pygame.Rect( (playerObj['x'] - camerax,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>206. </span>                                              playerObj['y']
+		<p class="noindent mono"><span class="line-number">206.</span>                                              playerObj['y']
 – cameray - getBounceAmount(playerObj['bounce'], BOUNCERATE, BOUNCEHEIGHT),</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>207. </span>                                              playerObj['size'],</p>
+		<p class="noindent mono"><span class="line-number">207.</span>                                              playerObj['size'],</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>208. </span>                                              playerObj['size'])
+		<p class="noindent mono"><span class="line-number">208.</span>                                              playerObj['size'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>209. </span>            DISPLAYSURF.blit(playerObj['surface'],
+		<p class="noindent mono"><span class="line-number">209.</span>            DISPLAYSURF.blit(playerObj['surface'],
 playerObj['rect'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>210.</span></p>
+		<p class="noindent mono"><span class="line-number">210.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>211. </span></p>
+		<p class="noindent mono"><span class="line-number">211.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>212. </span>        <span
+		<p class="noindent mono"><span class="line-number">212.</span>        <span
 class="comment"># draw the health meter</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>213. </span>        drawHealthMeter(playerObj['health'])</p>
+		<p class="noindent mono"><span class="line-number">213.</span>        drawHealthMeter(playerObj['health'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>214. </span></p>
+		<p class="noindent mono"><span class="line-number">214.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>215. </span>        for
+		<p class="noindent mono"><span class="line-number">215.</span>        for
 event in pygame.event.get(): <span class="comment"># event handling
 loop</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>216. </span>            if
+		<p class="noindent mono"><span class="line-number">216.</span>            if
 event.type == QUIT:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>217. </span>                terminate()</p>
+		<p class="noindent mono"><span class="line-number">217.</span>                terminate()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>218.</span></p>
+		<p class="noindent mono"><span class="line-number">218.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>219. </span>            elif
+		<p class="noindent mono"><span class="line-number">219.</span>            elif
 event.type == KEYDOWN:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>220. </span>                if
+		<p class="noindent mono"><span class="line-number">220.</span>                if
 event.key in (K_UP, K_w):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>221. </span>                    moveDown
+		<p class="noindent mono"><span class="line-number">221.</span>                    moveDown
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>222. </span>                    moveUp
+		<p class="noindent mono"><span class="line-number">222.</span>                    moveUp
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>223. </span>                elif
+		<p class="noindent mono"><span class="line-number">223.</span>                elif
 event.key in (K_DOWN, K_s):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>224. </span>                    moveUp
+		<p class="noindent mono"><span class="line-number">224.</span>                    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>225. </span>                    moveDown
+		<p class="noindent mono"><span class="line-number">225.</span>                    moveDown
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>226. </span>                elif
+		<p class="noindent mono"><span class="line-number">226.</span>                elif
 event.key in (K_LEFT, K_a):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>227. </span>                    moveRight
+		<p class="noindent mono"><span class="line-number">227.</span>                    moveRight
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>228. </span>                    moveLeft
+		<p class="noindent mono"><span class="line-number">228.</span>                    moveLeft
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>229. </span>                    if
+		<p class="noindent mono"><span class="line-number">229.</span>                    if
 playerObj['facing'] == RIGHT: <span class="comment"># change player
 image</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>230. </span>                        playerObj['surface']
+		<p class="noindent mono"><span class="line-number">230.</span>                        playerObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>231. </span>                    playerObj['facing']
+		<p class="noindent mono"><span class="line-number">231.</span>                    playerObj['facing']
 = LEFT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>232. </span>                elif
+		<p class="noindent mono"><span class="line-number">232.</span>                elif
 event.key in (K_RIGHT, K_d):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>233. </span>                    moveLeft
+		<p class="noindent mono"><span class="line-number">233.</span>                    moveLeft
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>234. </span>                    moveRight
+		<p class="noindent mono"><span class="line-number">234.</span>                    moveRight
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>235. </span>                    if
+		<p class="noindent mono"><span class="line-number">235.</span>                    if
 playerObj['facing'] == LEFT: <span class="comment"># change player
 image</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>236. </span>                        playerObj['surface']
+		<p class="noindent mono"><span class="line-number">236.</span>                        playerObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>237. </span>                    playerObj['facing']
+		<p class="noindent mono"><span class="line-number">237.</span>                    playerObj['facing']
 = RIGHT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>238. </span>                elif
+		<p class="noindent mono"><span class="line-number">238.</span>                elif
 winMode and event.key == K_r:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>239. </span>                    return</p>
+		<p class="noindent mono"><span class="line-number">239.</span>                    return</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>240.</span></p>
+		<p class="noindent mono"><span class="line-number">240.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>241. </span>            elif
+		<p class="noindent mono"><span class="line-number">241.</span>            elif
 event.type == KEYUP:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>242. </span>                <span
+		<p class="noindent mono"><span class="line-number">242.</span>                <span
 class="comment"># stop moving the player's squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>243. </span>                if
+		<p class="noindent mono"><span class="line-number">243.</span>                if
 event.key in (K_LEFT, K_a):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>244. </span>                    moveLeft
+		<p class="noindent mono"><span class="line-number">244.</span>                    moveLeft
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>245. </span>                elif
+		<p class="noindent mono"><span class="line-number">245.</span>                elif
 event.key in (K_RIGHT, K_d):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>246. </span>                    moveRight
+		<p class="noindent mono"><span class="line-number">246.</span>                    moveRight
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>247. </span>                elif
+		<p class="noindent mono"><span class="line-number">247.</span>                elif
 event.key in (K_UP, K_w):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>248. </span>                    moveUp
+		<p class="noindent mono"><span class="line-number">248.</span>                    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>249. </span>                elif
+		<p class="noindent mono"><span class="line-number">249.</span>                elif
 event.key in (K_DOWN, K_s):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>250. </span>                    moveDown
+		<p class="noindent mono"><span class="line-number">250.</span>                    moveDown
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>251.</span></p>
+		<p class="noindent mono"><span class="line-number">251.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>252. </span>                elif
+		<p class="noindent mono"><span class="line-number">252.</span>                elif
 event.key == K_ESCAPE:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>253. </span>                    terminate()</p>
+		<p class="noindent mono"><span class="line-number">253.</span>                    terminate()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>254.</span></p>
+		<p class="noindent mono"><span class="line-number">254.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>255. </span>        if
+		<p class="noindent mono"><span class="line-number">255.</span>        if
 not gameOverMode:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>256. </span>            <span
+		<p class="noindent mono"><span class="line-number">256.</span>            <span
 class="comment"># actually move the player</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>257. </span>            if
+		<p class="noindent mono"><span class="line-number">257.</span>            if
 moveLeft:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>258. </span>                playerObj['x']
+		<p class="noindent mono"><span class="line-number">258.</span>                playerObj['x']
 -= MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>259. </span>            if
+		<p class="noindent mono"><span class="line-number">259.</span>            if
 moveRight:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>260. </span>                playerObj['x']
+		<p class="noindent mono"><span class="line-number">260.</span>                playerObj['x']
 += MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>261. </span>            if
+		<p class="noindent mono"><span class="line-number">261.</span>            if
 moveUp:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>262. </span>                playerObj['y']
+		<p class="noindent mono"><span class="line-number">262.</span>                playerObj['y']
 -= MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>263. </span>            if
+		<p class="noindent mono"><span class="line-number">263.</span>            if
 moveDown:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>264. </span>                playerObj['y']
+		<p class="noindent mono"><span class="line-number">264.</span>                playerObj['y']
 += MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>265.</span></p>
+		<p class="noindent mono"><span class="line-number">265.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>266. </span>            if
+		<p class="noindent mono"><span class="line-number">266.</span>            if
 (moveLeft or moveRight or moveUp or moveDown) or playerObj['bounce'] != 0:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>267. </span>                playerObj['bounce']
+		<p class="noindent mono"><span class="line-number">267.</span>                playerObj['bounce']
 += 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>268. </span></p>
+		<p class="noindent mono"><span class="line-number">268.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>269. </span>            if
+		<p class="noindent mono"><span class="line-number">269.</span>            if
 playerObj['bounce'] &gt; BOUNCERATE:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>270. </span>                playerObj['bounce']
+		<p class="noindent mono"><span class="line-number">270.</span>                playerObj['bounce']
 = 0 <span class="comment"># reset bounce amount</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>271.</span></p>
+		<p class="noindent mono"><span class="line-number">271.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>272. </span>            <span
+		<p class="noindent mono"><span class="line-number">272.</span>            <span
 class="comment"># check if the player has collided with any squirrels</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>273. </span>            for
+		<p class="noindent mono"><span class="line-number">273.</span>            for
 i in range(len(squirrelObjs)-1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>274. </span>                sqObj
+		<p class="noindent mono"><span class="line-number">274.</span>                sqObj
 = squirrelObjs[i]</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>275. </span>                if
+		<p class="noindent mono"><span class="line-number">275.</span>                if
 'rect' in sqObj and playerObj['rect'].colliderect(sqObj['rect']):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>276. </span>                    <span
+		<p class="noindent mono"><span class="line-number">276.</span>                    <span
 class="comment"># a player/squirrel collision has occurred</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class="comment">277.</span></p>
+<p class="noindent mono"><span class="comment">277.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>278. </span>                    if
+		<p class="noindent mono"><span class="line-number">278.</span>                    if
 sqObj['width'] * sqObj['height'] &lt;= playerObj['size']**2:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>279. </span>                        <span
+		<p class="noindent mono"><span class="line-number">279.</span>                        <span
 class="comment"># player is larger and eats the squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>280. </span>                        playerObj['size']
+		<p class="noindent mono"><span class="line-number">280.</span>                        playerObj['size']
 += int( (sqObj['width'] * sqObj['height'])**0.2 ) + 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>281. </span>                        del
+		<p class="noindent mono"><span class="line-number">281.</span>                        del
 squirrelObjs[i]</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>282.</span></p>
+		<p class="noindent mono"><span class="line-number">282.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>283. </span>                        if
+		<p class="noindent mono"><span class="line-number">283.</span>                        if
 playerObj['facing'] == LEFT:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>284. </span>                            playerObj['surface']
+		<p class="noindent mono"><span class="line-number">284.</span>                            playerObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>285. </span>                        if
+		<p class="noindent mono"><span class="line-number">285.</span>                        if
 playerObj['facing'] == RIGHT:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>286. </span>                            playerObj['surface']
+		<p class="noindent mono"><span class="line-number">286.</span>                            playerObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>287.</span></p>
+		<p class="noindent mono"><span class="line-number">287.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>288. </span>                        if
+		<p class="noindent mono"><span class="line-number">288.</span>                        if
 playerObj['size'] &gt; WINSIZE:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>289. </span>                            winMode
+		<p class="noindent mono"><span class="line-number">289.</span>                            winMode
 = True <span class="comment"># turn on &quot;win mode&quot;</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>290.</span></p>
+		<p class="noindent mono"><span class="line-number">290.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>291. </span>                    elif
+		<p class="noindent mono"><span class="line-number">291.</span>                    elif
 not invulnerableMode:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>292. </span>                        <span
+		<p class="noindent mono"><span class="line-number">292.</span>                        <span
 class="comment"># player is smaller and takes damage</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>293. </span>                        invulnerableMode
+		<p class="noindent mono"><span class="line-number">293.</span>                        invulnerableMode
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>294. </span>                        invulnerableStartTime
+		<p class="noindent mono"><span class="line-number">294.</span>                        invulnerableStartTime
 = time.time()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>295. </span>                        playerObj['health']
+		<p class="noindent mono"><span class="line-number">295.</span>                        playerObj['health']
 -= 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>296. </span>                        if
+		<p class="noindent mono"><span class="line-number">296.</span>                        if
 playerObj['health'] == 0:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>297. </span>                            gameOverMode
+		<p class="noindent mono"><span class="line-number">297.</span>                            gameOverMode
 = True <span class="comment"># turn on &quot;game over mode&quot;</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>298. </span>                            gameOverStartTime
+		<p class="noindent mono"><span class="line-number">298.</span>                            gameOverStartTime
 = time.time()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>299. </span>        else:</p>
+		<p class="noindent mono"><span class="line-number">299.</span>        else:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>300. </span>            <span
+		<p class="noindent mono"><span class="line-number">300.</span>            <span
 class="comment"># game is over, show &quot;game over&quot; text</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>301. </span>            DISPLAYSURF.blit(gameOverSurf,
+		<p class="noindent mono"><span class="line-number">301.</span>            DISPLAYSURF.blit(gameOverSurf,
 gameOverRect)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>302. </span>            if
+		<p class="noindent mono"><span class="line-number">302.</span>            if
 time.time() - gameOverStartTime &gt; GAMEOVERTIME:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>303. </span>                return
+		<p class="noindent mono"><span class="line-number">303.</span>                return
 <span class="comment"># end the current game</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>304. </span></p>
+		<p class="noindent mono"><span class="line-number">304.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>305. </span>        <span
+		<p class="noindent mono"><span class="line-number">305.</span>        <span
 class="comment"># check if the player has won.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>306. </span>        if
+		<p class="noindent mono"><span class="line-number">306.</span>        if
 winMode:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>307. </span>            DISPLAYSURF.blit(winSurf,
+		<p class="noindent mono"><span class="line-number">307.</span>            DISPLAYSURF.blit(winSurf,
 winRect)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>308. </span>            DISPLAYSURF.blit(winSurf2,
+		<p class="noindent mono"><span class="line-number">308.</span>            DISPLAYSURF.blit(winSurf2,
 winRect2)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>309. </span></p>
+		<p class="noindent mono"><span class="line-number">309.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>310. </span>        pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">310.</span>        pygame.display.update()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>311. </span>        FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">311.</span>        FPSCLOCK.tick(FPS)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>312. </span></p>
+		<p class="noindent mono"><span class="line-number">312.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>313. </span></p>
+		<p class="noindent mono"><span class="line-number">313.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>314.</span></p>
+		<p class="noindent mono"><span class="line-number">314.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>315.</span></p>
+		<p class="noindent mono"><span class="line-number">315.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>316. </span>def
+		<p class="noindent mono"><span class="line-number">316.</span>def
 drawHealthMeter(currentHealth):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>317. </span>    for
+		<p class="noindent mono"><span class="line-number">317.</span>    for
 i in range(currentHealth): <span class="comment"># draw red health bars</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>318. </span>        pygame.draw.rect(DISPLAYSURF,
+		<p class="noindent mono"><span class="line-number">318.</span>        pygame.draw.rect(DISPLAYSURF,
 RED,   (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>319. </span>    for
+		<p class="noindent mono"><span class="line-number">319.</span>    for
 i in range(MAXHEALTH): <span class="comment"># draw the white outlines</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>320. </span>        pygame.draw.rect(DISPLAYSURF,
+		<p class="noindent mono"><span class="line-number">320.</span>        pygame.draw.rect(DISPLAYSURF,
 WHITE, (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10), 1)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>321. </span></p>
+		<p class="noindent mono"><span class="line-number">321.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>322. </span></p>
+		<p class="noindent mono"><span class="line-number">322.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>323. </span>def
+		<p class="noindent mono"><span class="line-number">323.</span>def
 terminate():</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>324. </span>    pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">324.</span>    pygame.quit()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>325. </span>    sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">325.</span>    sys.exit()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>326.</span></p>
+		<p class="noindent mono"><span class="line-number">326.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>327.</span></p>
+		<p class="noindent mono"><span class="line-number">327.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>328. </span>def
+		<p class="noindent mono"><span class="line-number">328.</span>def
 getBounceAmount(currentBounce, bounceRate, bounceHeight):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>329. </span>    <span
+		<p class="noindent mono"><span class="line-number">329.</span>    <span
 class="comment"># Returns the number of pixels to offset based on the
 bounce.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>330. </span>    <span
+		<p class="noindent mono"><span class="line-number">330.</span>    <span
 class="comment"># Larger bounceRate means a slower bounce.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>331. </span>    <span
+		<p class="noindent mono"><span class="line-number">331.</span>    <span
 class="comment"># Larger bounceHeight means a higher bounce.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>332.</span>     <span
+		<p class="noindent mono"><span class="line-number">332.</span>     <span
 class="comment"># currentBounce will always be less than bounceRate</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>333. </span>    return
+		<p class="noindent mono"><span class="line-number">333.</span>    return
 int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>334.</span></p>
+		<p class="noindent mono"><span class="line-number">334.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>335. </span>def
+		<p class="noindent mono"><span class="line-number">335.</span>def
 getRandomVelocity():</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>336. </span>    speed
+		<p class="noindent mono"><span class="line-number">336.</span>    speed
 = random.randint(SQUIRRELMINSPEED, SQUIRRELMAXSPEED)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>337. </span>    if
+		<p class="noindent mono"><span class="line-number">337.</span>    if
 random.randint(0, 1) == 0:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>338. </span>        return
+		<p class="noindent mono"><span class="line-number">338.</span>        return
 speed</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>339. </span>    else:</p>
+		<p class="noindent mono"><span class="line-number">339.</span>    else:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>340. </span>        return
+		<p class="noindent mono"><span class="line-number">340.</span>        return
 -speed</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>341. </span></p>
+		<p class="noindent mono"><span class="line-number">341.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>342. </span></p>
+		<p class="noindent mono"><span class="line-number">342.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>343. </span>def
+		<p class="noindent mono"><span class="line-number">343.</span>def
 getRandomOffCameraPos(camerax, cameray, objWidth, objHeight):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>344. </span>    <span
+		<p class="noindent mono"><span class="line-number">344.</span>    <span
 class="comment"># create a Rect of the camera view</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>345. </span>    cameraRect
+		<p class="noindent mono"><span class="line-number">345.</span>    cameraRect
 = pygame.Rect(camerax, cameray, WINWIDTH, WINHEIGHT)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>346. </span>    while
+		<p class="noindent mono"><span class="line-number">346.</span>    while
 True:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>347. </span>        x
+		<p class="noindent mono"><span class="line-number">347.</span>        x
 = random.randint(camerax - WINWIDTH, camerax + (2 * WINWIDTH))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>348. </span>        y
+		<p class="noindent mono"><span class="line-number">348.</span>        y
 = random.randint(cameray - WINHEIGHT, cameray + (2 * WINHEIGHT))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>349.
+<p class="noindent mono"><span class="line-number">&#160;349.
 </span><span class="comment"># create a Rect object with the random
 coordinates and use colliderect()</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>350.</span><span
+		<p class="noindent mono"><span class="line-number">350.</span><span
 class="comment">         # to make sure the right edge isn't in the
 camera view.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>351. </span>        objRect
+		<p class="noindent mono"><span class="line-number">351.</span>        objRect
 = pygame.Rect(x, y, objWidth, objHeight)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>352. </span>        if
+		<p class="noindent mono"><span class="line-number">352.</span>        if
 not objRect.colliderect(cameraRect):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>353. </span>            return
+		<p class="noindent mono"><span class="line-number">353.</span>            return
 x, y</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>354. </span></p>
+		<p class="noindent mono"><span class="line-number">354.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>355. </span></p>
+		<p class="noindent mono"><span class="line-number">355.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>356. </span>def
+		<p class="noindent mono"><span class="line-number">356.</span>def
 makeNewSquirrel(camerax, cameray):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>357. </span>    sq
+		<p class="noindent mono"><span class="line-number">357.</span>    sq
 = {}</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>358. </span>    generalSize
+		<p class="noindent mono"><span class="line-number">358.</span>    generalSize
 = random.randint(5, 25)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>359. </span>    multiplier
+		<p class="noindent mono"><span class="line-number">359.</span>    multiplier
 = random.randint(1, 3)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>360. </span>    sq['width']
+		<p class="noindent mono"><span class="line-number">360.</span>    sq['width']
 = (generalSize + random.randint(0, 10)) * multiplier</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>361. </span>    sq['height']
+		<p class="noindent mono"><span class="line-number">361.</span>    sq['height']
 = (generalSize + random.randint(0, 10)) * multiplier</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>362. </span>    sq['x'],
+		<p class="noindent mono"><span class="line-number">362.</span>    sq['x'],
 sq['y'] = getRandomOffCameraPos(camerax, cameray, sq['width'], sq['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>363. </span>    sq['movex']
+		<p class="noindent mono"><span class="line-number">363.</span>    sq['movex']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>364. </span>    sq['movey']
+		<p class="noindent mono"><span class="line-number">364.</span>    sq['movey']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>365. </span>    if
+		<p class="noindent mono"><span class="line-number">365.</span>    if
 sq['movex'] &lt; 0: <span class="comment"># squirrel is facing left</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>366. </span>        sq['surface']
+		<p class="noindent mono"><span class="line-number">366.</span>        sq['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (sq['width'], sq['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>367. </span>    else:
+		<p class="noindent mono"><span class="line-number">367.</span>    else:
 <span class="comment"># squirrel is facing right</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>368. </span>        sq['surface']
+		<p class="noindent mono"><span class="line-number">368.</span>        sq['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (sq['width'], sq['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>369. </span>    sq['bounce']
+		<p class="noindent mono"><span class="line-number">369.</span>    sq['bounce']
 = 0</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>370. </span>    sq['bouncerate']
+		<p class="noindent mono"><span class="line-number">370.</span>    sq['bouncerate']
 = random.randint(10, 18)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>371. </span>    sq['bounceheight']
+		<p class="noindent mono"><span class="line-number">371.</span>    sq['bounceheight']
 = random.randint(10, 50)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>372. </span>    return
+		<p class="noindent mono"><span class="line-number">372.</span>    return
 sq</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>373. </span></p>
+		<p class="noindent mono"><span class="line-number">373.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>374. </span></p>
+		<p class="noindent mono"><span class="line-number">374.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>375. </span>def
+		<p class="noindent mono"><span class="line-number">375.</span>def
 makeNewGrass(camerax, cameray):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>376. </span>    gr
+		<p class="noindent mono"><span class="line-number">376.</span>    gr
 = {}</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>377. </span>    gr['grassImage']
+		<p class="noindent mono"><span class="line-number">377.</span>    gr['grassImage']
 = random.randint(0, len(GRASSIMAGES) - 1)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>378. </span>    gr['width']
+		<p class="noindent mono"><span class="line-number">378.</span>    gr['width']
 = GRASSIMAGES[0].get_width()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>379. </span>    gr['height']
+		<p class="noindent mono"><span class="line-number">379.</span>    gr['height']
 = GRASSIMAGES[0].get_height()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>380.</span>
+		<p class="noindent mono"><span class="line-number">380.</span>
  gr['x'], gr['y'] = getRandomOffCameraPos(camerax, cameray, gr['width'],
 gr['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>381.</span>
+		<p class="noindent mono"><span class="line-number">381.</span>
 gr['rect'] = pygame.Rect( (gr['x'], gr['y'], gr['width'], gr['height']) )</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>382. </span>    return
+		<p class="noindent mono"><span class="line-number">382.</span>    return
 gr</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>383.</span></p>
+		<p class="noindent mono"><span class="line-number">383.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>384.</span></p>
+		<p class="noindent mono"><span class="line-number">384.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>385. </span>def
+		<p class="noindent mono"><span class="line-number">385.</span>def
 isOutsideActiveArea(camerax, cameray, obj):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>386. </span>    <span
+		<p class="noindent mono"><span class="line-number">386.</span>    <span
 class="comment"># Return False if camerax and cameray are more than</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>387. </span>    <span
+		<p class="noindent mono"><span class="line-number">387.</span>    <span
 class="comment"># a half-window length beyond the edge of the window.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>388. </span>    boundsLeftEdge
+		<p class="noindent mono"><span class="line-number">388.</span>    boundsLeftEdge
 = camerax - WINWIDTH</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>389. </span>    boundsTopEdge
+		<p class="noindent mono"><span class="line-number">389.</span>    boundsTopEdge
 = cameray - WINHEIGHT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>390. </span>    boundsRect
+		<p class="noindent mono"><span class="line-number">390.</span>    boundsRect
 = pygame.Rect(boundsLeftEdge, boundsTopEdge, WINWIDTH * 3, WINHEIGHT * 3)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>391. </span>    objRect
+		<p class="noindent mono"><span class="line-number">391.</span>    objRect
 = pygame.Rect(obj['x'], obj['y'], obj['width'], obj['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>392. </span>    return
+		<p class="noindent mono"><span class="line-number">392.</span>    return
 not boundsRect.colliderect(objRect)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>393. </span></p>
+		<p class="noindent mono"><span class="line-number">393.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>394. </span></p>
+		<p class="noindent mono"><span class="line-number">394.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>395. </span>if
+		<p class="noindent mono"><span class="line-number">395.</span>if
 __name__ == '__main__':</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>396. </span>    main()</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;396. </span>    main()</p>
 
 </div>
 
@@ -1091,27 +953,27 @@ pygame.locals import *</p>
 		<p class="noindent mono"><span class="line-number">9.</span>FPS
 = 30 <span class="comment"># frames per second to update the screen</span></p>
 
-		<p class="noindent mono"><span class="line-number">10.</span>WINWIDTH
+		<p class="noindent mono"><span class="line-number">&#160;10.</span>WINWIDTH
 = 640 <span class="comment"># width of the program's window, in pixels</span></p>
 
-		<p class="noindent mono"><span class="line-number">11.</span>WINHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;11.</span>WINHEIGHT
 = 480 <span class="comment"># height in pixels</span></p>
 
-		<p class="noindent mono"><span class="line-number">12.</span>HALF_WINWIDTH
+		<p class="noindent mono"><span class="line-number">&#160;12.</span>HALF_WINWIDTH
 = int(WINWIDTH / 2)</p>
 
-		<p class="noindent mono"><span class="line-number">13.</span>HALF_WINHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;13.</span>HALF_WINHEIGHT
 = int(WINHEIGHT / 2)</p>
 
-		<p class="noindent mono"><span class="line-number">14.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;14.</span></p>
 
-		<p class="noindent mono"><span class="line-number">15.</span>GRASSCOLOR
+		<p class="noindent mono"><span class="line-number">&#160;15.</span>GRASSCOLOR
 = (24, 255, 0)</p>
 
-		<p class="noindent mono"><span class="line-number">16.</span>WHITE
+		<p class="noindent mono"><span class="line-number">&#160;16.</span>WHITE
 = (255, 255, 255)</p>
 
-		<p class="noindent mono"><span class="line-number">17.</span>RED
+		<p class="noindent mono"><span class="line-number">&#160;17.</span>RED
 = (255, 0, 0)</p>
 
 </div>
@@ -1122,7 +984,7 @@ the window so much that the <span class="mono">HALF_WINWIDTH</span> and <span
 class=Literal>HALF_WINHEIGHT</span> variables store these numbers.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">19.</span> CAMERASLACK = 90     <span class="comment"># how far from the center the squirrel moves before moving the camera</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;19.</span> CAMERASLACK = 90     <span class="comment"># how far from the center the squirrel moves before moving the camera</span></p>
 	</div>
 
 	<p>The “camera slack” is described later. Basically, it means
@@ -1131,57 +993,57 @@ pixels away from the center of the window.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">20.</span>MOVERATE
+		<p class="noindent mono"><span class="line-number">&#160;20.</span>MOVERATE
 = 9         <span class="comment"># how fast the player moves</span></p>
 
-		<p class="noindent mono"><span class="line-number">21.</span>BOUNCERATE
+		<p class="noindent mono"><span class="line-number">&#160;21.</span>BOUNCERATE
 = 6       <span class="comment"># how fast the player bounces (large is
 slower)</span></p>
 
-		<p class="noindent mono"><span class="line-number">22.</span>BOUNCEHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;22.</span>BOUNCEHEIGHT
 = 30    <span class="comment"># how high the player bounces</span></p>
 
-		<p class="noindent mono"><span class="line-number">23.</span>STARTSIZE
+		<p class="noindent mono"><span class="line-number">&#160;23.</span>STARTSIZE
 = 25       <span class="comment"># how big the player starts off</span></p>
 
-		<p class="noindent mono"><span class="line-number">24.</span>WINSIZE
+		<p class="noindent mono"><span class="line-number">&#160;24.</span>WINSIZE
 = 300        <span class="comment"># how big the player needs to be to
 win</span></p>
 
-		<p class="noindent mono"><span class="line-number">25.</span>INVULNTIME
+		<p class="noindent mono"><span class="line-number">&#160;25.</span>INVULNTIME
 = 2       <span class="comment"># how long the player is invulnerable
 after being hit in seconds</span></p>
 
-		<p class="noindent mono"><span class="line-number">26.</span>GAMEOVERTIME
+		<p class="noindent mono"><span class="line-number">&#160;26.</span>GAMEOVERTIME
 = 4     <span class="comment"># how long the &quot;game over&quot; text
 stays on the screen in seconds</span></p>
 
-		<p class="noindent mono"><span class="line-number">27.</span>MAXHEALTH
+		<p class="noindent mono"><span class="line-number">&#160;27.</span>MAXHEALTH
 = 3        <span class="comment"># how much health the player starts
 with</span></p>
 
-		<p class="noindent mono"><span class="line-number">28.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;28.</span></p>
 
-		<p class="noindent mono"><span class="line-number">29.</span>NUMGRASS
+		<p class="noindent mono"><span class="line-number">&#160;29.</span>NUMGRASS
 = 80        <span class="comment"># number of grass objects in the active
 area</span></p>
 
-		<p class="noindent mono"><span class="line-number">30.</span>NUMSQUIRRELS
+		<p class="noindent mono"><span class="line-number">&#160;30.</span>NUMSQUIRRELS
 = 30    <span class="comment"># number of squirrels in the active area</span></p>
 
-		<p class="noindent mono"><span class="line-number">31.</span>SQUIRRELMINSPEED
+		<p class="noindent mono"><span class="line-number">&#160;31.</span>SQUIRRELMINSPEED
 = 3 <span class="comment"># slowest squirrel speed</span></p>
 
-		<p class="noindent mono"><span class="line-number">32.</span>SQUIRRELMAXSPEED
+		<p class="noindent mono"><span class="line-number">&#160;32.</span>SQUIRRELMAXSPEED
 = 7 <span class="comment"># fastest squirrel speed</span></p>
 
-		<p class="noindent mono"><span class="line-number">33.</span>DIRCHANGEFREQ
+		<p class="noindent mono"><span class="line-number">&#160;33.</span>DIRCHANGEFREQ
 = 2    <span class="comment"># % chance of direction change per frame</span></p>
 
-		<p class="noindent mono"><span class="line-number">34.</span>LEFT
+		<p class="noindent mono"><span class="line-number">&#160;34.</span>LEFT
 = 'left'</p>
 
-		<p class="noindent mono"><span class="line-number">35.</span>RIGHT
+		<p class="noindent mono"><span class="line-number">&#160;35.</span>RIGHT
 = 'right'</p>
 
 </div>
@@ -1193,99 +1055,99 @@ constant variable is used for. </p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">37.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;37.</span> <span
 class="comment">&quot;&quot;&quot;</span></p>
 
-		<p class="noindent mono"><span class="line-number">38.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;38.</span> <span
 class="comment">This program has three data structures to represent the
 player, enemy squirrels, and grass background objects. The data structures are
 dictionaries with the following keys:</span></p>
 
-		<p class="noindent mono"><span class="line-number">39.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;39.</span></p>
 
-		<p class="noindent mono"><span class="line-number">40.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;40.</span> <span
 class="comment">Keys used by all three data structures:</span></p>
 
-		<p class="noindent mono"><span class="line-number">41.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;41.</span>    <span
 class="comment">'x' - the left edge coordinate of the object in the
 game world (not a pixel coordinate on the screen)</span></p>
 
-		<p class="noindent mono"><span class="line-number">42.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;42.</span>    <span
 class="comment">'y' - the top edge coordinate of the object in the game
 world (not a pixel coordinate on the screen)</span></p>
 
-		<p class="noindent mono"><span class="line-number">43.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;43.</span>    <span
 class="comment">'rect' - the pygame.Rect object representing where on
 the screen the object is located.</span></p>
 
-		<p class="noindent mono"><span class="line-number">44.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;44.</span> <span
 class="comment">Player data structure keys:</span></p>
 
-		<p class="noindent mono"><span class="line-number">45.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;45.</span>    <span
 class="comment">'surface' - the pygame.Surface object that stores the
 image of the squirrel which will be drawn to the screen.</span></p>
 
-		<p class="noindent mono"><span class="line-number">46.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;46.</span>    <span
 class="comment">'facing' - either set to LEFT or RIGHT, stores which
 direction the player is facing.</span></p>
 
-		<p class="noindent mono"><span class="line-number">47.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;47.</span>    <span
 class="comment">'size' - the width and height of the player in pixels.
 (The width &amp; height are always the same.)</span></p>
 
-		<p class="noindent mono"><span class="line-number">48.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;48.</span>    <span
 class="comment">'bounce' - represents at what point in a bounce the
 player is in. 0 means standing (no bounce), up to BOUNCERATE (the completion of
 the bounce)</span></p>
 
-		<p class="noindent mono"><span class="line-number">49.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;49.</span>    <span
 class="comment">'health' - an integer showing how many more times the
 player can be hit by a larger squirrel before dying.</span></p>
 
-		<p class="noindent mono"><span class="line-number">50.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;50.</span> <span
 class="comment">Enemy Squirrel data structure keys:</span></p>
 
-		<p class="noindent mono"><span class="line-number">51.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;51.</span>    <span
 class="comment">'surface' - the pygame.Surface object that stores the
 image of the squirrel which will be drawn to the screen.</span></p>
 
-		<p class="noindent mono"><span class="line-number">52.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;52.</span>    <span
 class="comment">'movex' - how many pixels per frame the squirrel moves
 horizontally. A negative integer is moving to the left, a positive to the
 right.</span></p>
 
-		<p class="noindent mono"><span class="line-number">53.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;53.</span>    <span
 class="comment">'movey' - how many pixels per frame the squirrel moves
 vertically. A negative integer is moving up, a positive moving down.</span></p>
 
-		<p class="noindent mono"><span class="line-number">54.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;54.</span>    <span
 class="comment">'width' - the width of the squirrel's image, in pixels</span></p>
 
-		<p class="noindent mono"><span class="line-number">55.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;55.</span>    <span
 class="comment">'height' - the height of the squirrel's image, in
 pixels</span></p>
 
-		<p class="noindent mono"><span class="line-number">56.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;56.</span>    <span
 class="comment">'bounce' - represents at what point in a bounce the
 player is in. 0 means standing (no bounce), up to BOUNCERATE (the completion of
 the bounce)</span></p>
 
-		<p class="noindent mono"><span class="line-number">57.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;57.</span>    <span
 class="comment">'bouncerate' - how quickly the squirrel bounces. A
 lower number means a quicker bounce.</span></p>
 
-		<p class="noindent mono"><span class="line-number">58.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;58.</span>    <span
 class="comment">'bounceheight' - how high (in pixels) the squirrel
 bounces</span></p>
 
-		<p class="noindent mono"><span class="line-number">59.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;59.</span> <span
 class="comment">Grass data structure keys:</span></p>
 
-		<p class="noindent mono"><span class="line-number">60.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;60.</span>    <span
 class="comment">'grassImage' - an integer that refers to the index of
 the pygame.Surface object in GRASSIMAGES used for this grass object</span></p>
 
-		<p class="noindent mono"><span class="line-number">61.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;61.</span> <span
 class="comment">&quot;&quot;&quot;</span></p>
 
 </div>
@@ -1299,28 +1161,28 @@ works as a multi-line comment.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">63.</span>def
+		<p class="noindent mono"><span class="line-number">&#160;63.</span>def
 main():</p>
 
-		<p class="noindent mono"><span class="line-number">64.</span>    global
+		<p class="noindent mono"><span class="line-number">&#160;64.</span>    global
 FPSCLOCK, DISPLAYSURF, BASICFONT, L_SQUIR_IMG, R_SQUIR_IMG, GRASSIMAGES</p>
 
-		<p class="noindent mono"><span class="line-number">65.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;65.</span></p>
 
-		<p class="noindent mono"><span class="line-number">66.</span>    pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;66.</span>    pygame.init()</p>
 
-		<p class="noindent mono"><span class="line-number">67.</span>    FPSCLOCK
+		<p class="noindent mono"><span class="line-number">&#160;67.</span>    FPSCLOCK
 = pygame.time.Clock()</p>
 
-		<p class="noindent mono"><span class="line-number">68.</span>    pygame.display.set_icon(pygame.image.load('gameicon.png'))</p>
+		<p class="noindent mono"><span class="line-number">&#160;68.</span>    pygame.display.set_icon(pygame.image.load('gameicon.png'))</p>
 
-		<p class="noindent mono"><span class="line-number">69.</span>    DISPLAYSURF
+		<p class="noindent mono"><span class="line-number">&#160;69.</span>    DISPLAYSURF
 = pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
 
-		<p class="noindent mono"><span class="line-number">70.</span>    pygame.display.set_caption('Squirrel
+		<p class="noindent mono"><span class="line-number">&#160;70.</span>    pygame.display.set_caption('Squirrel
 Eat Squirrel')</p>
 
-		<p class="noindent mono"><span class="line-number">71.</span>    BASICFONT
+		<p class="noindent mono"><span class="line-number">&#160;71.</span>    BASICFONT
 = pygame.font.Font('freesansbold.ttf', 32)</p>
 
 </div>
@@ -1338,12 +1200,12 @@ window’s icon.</p>
 	<h1 class="subheading" id="">The <span class="mono">pygame.transform.flip()</span> Function</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">73.</span>    <span class="comment"># load the image files</span></p>
-		<p class="noindent mono"><span class="line-number">74.</span>    L_SQUIR_IMG = pygame.image.load('squirrel.png')</p>
-		<p class="noindent mono"><span class="line-number">75.</span>    R_SQUIR_IMG = pygame.transform.flip(L_SQUIR_IMG, True, False)</p>
-		<p class="noindent mono"><span class="line-number">76.</span>    GRASSIMAGES = []</p>
-		<p class="noindent mono"><span class="line-number">77.</span>    for i in range(1, 5):</p>
-		<p class="noindent mono"><span class="line-number">78.</span>        GRASSIMAGES.append(pygame.image.load('grass%s.png' % i))</p>
+		<p class="noindent mono"><span class="line-number">&#160;73.</span> &#160;&#160;&#160;&#160;<span class="comment"># load the image files</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;74.</span>    L_SQUIR_IMG = pygame.image.load('squirrel.png')</p>
+		<p class="noindent mono"><span class="line-number">&#160;75.</span>    R_SQUIR_IMG = pygame.transform.flip(L_SQUIR_IMG, True, False)</p>
+		<p class="noindent mono"><span class="line-number">&#160;76.</span>    GRASSIMAGES = []</p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span>    for i in range(1, 5):</p>
+		<p class="noindent mono"><span class="line-number">&#160;78.</span>        GRASSIMAGES.append(pygame.image.load('grass%s.png' % i))</p>
 	</div>
 
 	<p>The image for the player and enemy squirrels is loaded from <i>squirrel.png</i>
@@ -1408,10 +1270,10 @@ vertically flipped:</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">80.</span>    while
+		<p class="noindent mono"><span class="line-number">&#160;80.</span>    while
 True:</p>
 
-		<p class="noindent mono"><span class="line-number">81.</span>        runGame()</p>
+		<p class="noindent mono"><span class="line-number">&#160;81.</span>        runGame()</p>
 
 </div>
 
@@ -1423,25 +1285,25 @@ called. </p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">84.</span>def
+		<p class="noindent mono"><span class="line-number">&#160;84.</span>def
 runGame():</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber> 85.</span>
+<p class="noindent mono"><span class="line-number"> 85.</span>
 <span class="comment"># set up variables for the start of a new game</span></p>
 
-		<p class="noindent mono"><span class="line-number">86.</span>    invulnerableMode
+		<p class="noindent mono"><span class="line-number">&#160;86.</span>    invulnerableMode
 = False  <span class="comment"># if the player is invulnerable</span></p>
 
-		<p class="noindent mono"><span class="line-number">87.</span>    invulnerableStartTime
+		<p class="noindent mono"><span class="line-number">&#160;87.</span>    invulnerableStartTime
 = 0 <span class="comment"># time the player became invulnerable</span></p>
 
-		<p class="noindent mono"><span class="line-number">88.</span>    gameOverMode
+		<p class="noindent mono"><span class="line-number">&#160;88.</span>    gameOverMode
 = False      <span class="comment"># if the player has lost</span></p>
 
-		<p class="noindent mono"><span class="line-number">89.</span>    gameOverStartTime
+		<p class="noindent mono"><span class="line-number">&#160;89.</span>    gameOverStartTime
 = 0     <span class="comment"># time the player lost</span></p>
 
-		<p class="noindent mono"><span class="line-number">90.</span>    winMode
+		<p class="noindent mono"><span class="line-number">&#160;90.</span>    winMode
 = False           <span class="comment"># if the player has won</span></p>
 
 </div>
@@ -1454,38 +1316,38 @@ later when they are used in the code.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">92.</span>    <span
+		<p class="noindent mono"><span class="line-number">&#160;92.</span>    <span
 class="comment"># create the surfaces to hold game text</span></p>
 
-		<p class="noindent mono"><span class="line-number">93.</span>    gameOverSurf
+		<p class="noindent mono"><span class="line-number">&#160;93.</span>    gameOverSurf
 = BASICFONT.render('Game Over', True, WHITE)</p>
 
-		<p class="noindent mono"><span class="line-number">94.</span>    gameOverRect
+		<p class="noindent mono"><span class="line-number">&#160;94.</span>    gameOverRect
 = gameOverSurf.get_rect()</p>
 
-		<p class="noindent mono"><span class="line-number">95.</span>    gameOverRect.center
+		<p class="noindent mono"><span class="line-number">&#160;95.</span>    gameOverRect.center
 = (HALF_WINWIDTH, HALF_WINHEIGHT)</p>
 
-		<p class="noindent mono"><span class="line-number">96.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;96.</span></p>
 
-		<p class="noindent mono"><span class="line-number">97.</span>    winSurf
+		<p class="noindent mono"><span class="line-number">&#160;97.</span>    winSurf
 = BASICFONT.render('You have achieved OMEGA SQUIRREL!', True, WHITE)</p>
 
-		<p class="noindent mono"><span class="line-number">98.</span>    winRect
+		<p class="noindent mono"><span class="line-number">&#160;98.</span>    winRect
 = winSurf.get_rect()</p>
 
-		<p class="noindent mono"><span class="line-number">99.</span>    winRect.center
+		<p class="noindent mono"><span class="line-number">&#160;99.</span>    winRect.center
 = (HALF_WINWIDTH, HALF_WINHEIGHT)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>100. </span></p>
+		<p class="noindent mono"><span class="line-number">100.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>101. </span>    winSurf2
+		<p class="noindent mono"><span class="line-number">101.</span>    winSurf2
 = BASICFONT.render('(Press &quot;r&quot; to restart.)', True, WHITE)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>102. </span>    winRect2
+		<p class="noindent mono"><span class="line-number">102.</span>    winRect2
 = winSurf2.get_rect()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>103. </span>    winRect2.center
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;103. </span>    winRect2.center
 = (HALF_WINWIDTH, HALF_WINHEIGHT + 30)</p>
 
 </div>
@@ -1499,14 +1361,14 @@ player losing or winning).</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>105. </span>    <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;105. </span>    <span
 class="comment"># camerax and cameray are where the middle of the
 camera view is</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>106. </span>    camerax
+		<p class="noindent mono"><span class="line-number">106.</span>    camerax
 = 0</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>107. </span>    cameray
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;107. </span>    cameray
 = 0</p>
 
 </div>
@@ -1590,48 +1452,48 @@ World</a></h2>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>109. </span>    grassObjs
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;109. </span>    grassObjs
 = []    <span class="comment"># stores all the grass objects in the
 game</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>110. </span>    squirrelObjs
+		<p class="noindent mono"><span class="line-number">110.</span>    squirrelObjs
 = [] <span class="comment"># stores all the non-player squirrel objects</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>111. </span>    <span
+		<p class="noindent mono"><span class="line-number">111.</span>    <span
 class="comment"># stores the player object:</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>112. </span>    playerObj
+		<p class="noindent mono"><span class="line-number">112.</span>    playerObj
 = {'surface': pygame.transform.scale(L_SQUIR_IMG, (STARTSIZE, STARTSIZE)),</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>113. </span>                 'facing':
+		<p class="noindent mono"><span class="line-number">113.</span>                 'facing':
 LEFT,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>114. </span>                 'size':
+		<p class="noindent mono"><span class="line-number">114.</span>                 'size':
 STARTSIZE,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>115. </span>                 'x':
+		<p class="noindent mono"><span class="line-number">115.</span>                 'x':
 HALF_WINWIDTH,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>116. </span>                 'y':
+		<p class="noindent mono"><span class="line-number">116.</span>                 'y':
 HALF_WINHEIGHT,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>117. </span>                 'bounce':0,</p>
+		<p class="noindent mono"><span class="line-number">117.</span>                 'bounce':0,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>118. </span>                 'health':
+		<p class="noindent mono"><span class="line-number">118.</span>                 'health':
 MAXHEALTH}</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>119. </span></p>
+		<p class="noindent mono"><span class="line-number">119.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>120. </span>    moveLeft
+		<p class="noindent mono"><span class="line-number">120.</span>    moveLeft
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>121. </span>    moveRight
+		<p class="noindent mono"><span class="line-number">121.</span>    moveRight
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>122. </span>    moveUp
+		<p class="noindent mono"><span class="line-number">122.</span>    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>123. </span>    moveDown
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;123. </span>    moveDown
 = False</p>
 
 </div>
@@ -1653,19 +1515,19 @@ game programs.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>125. </span>    <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;125. </span>    <span
 class="comment"># start off with some random grass images on the screen</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>126. </span>    for
+		<p class="noindent mono"><span class="line-number">126.</span>    for
 i in range(10):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>127. </span>        grassObjs.append(makeNewGrass(camerax,
+		<p class="noindent mono"><span class="line-number">127.</span>        grassObjs.append(makeNewGrass(camerax,
 cameray))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>128. </span>        grassObjs[i]['x']
+		<p class="noindent mono"><span class="line-number">128.</span>        grassObjs[i]['x']
 = random.randint(0, WINWIDTH)</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>129. </span>        grassObjs[i]['y']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;129. </span>        grassObjs[i]['y']
 = random.randint(0, WINHEIGHT)</p>
 
 </div>
@@ -1682,7 +1544,7 @@ overwritten.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeatured><span class=SourceLineNumber>131. </span>    while
+<p class=SourceCodeFeatured><span class="line-number">&#160;131. </span>    while
 True: <span class="comment"># main game loop</span></p>
 
 </div>
@@ -1695,13 +1557,13 @@ everything to the screen.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>132. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;132. </span>        <span
 class="comment"># Check if we should turn off invulnerability</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>133. </span>        if
+		<p class="noindent mono"><span class="line-number">133.</span>        if
 invulnerableMode and time.time() - invulnerableStartTime &gt; INVULNTIME:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>134. </span>            invulnerableMode
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;134. </span>            invulnerableMode
 = False</p>
 
 </div>
@@ -1717,19 +1579,19 @@ set <span class="mono">invulnerableMode</span> to <span class="mono">False</span
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>136. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;136. </span>        <span
 class="comment"># move all the squirrels</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>137. </span>        for
+		<p class="noindent mono"><span class="line-number">137.</span>        for
 sObj in squirrelObjs:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>138. </span>            <span
+		<p class="noindent mono"><span class="line-number">138.</span>            <span
 class="comment"># move the squirrel, and adjust for their bounce</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>139. </span>            sObj['x']
+		<p class="noindent mono"><span class="line-number">139.</span>            sObj['x']
 += sObj['movex']</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>140. </span>            sObj['y']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;140. </span>            sObj['y']
 += sObj['movey']</p>
 
 </div>
@@ -1749,13 +1611,13 @@ values.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>141. </span>            sObj['bounce']
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;141. </span>            sObj['bounce']
 += 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>142. </span>            if
+		<p class="noindent mono"><span class="line-number">142.</span>            if
 sObj['bounce'] &gt; sObj['bouncerate']:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>143. </span>                sObj['bounce']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;143. </span>                sObj['bounce']
 = 0 <span class="comment"># reset bounce amount</span></p>
 
 </div>
@@ -1776,28 +1638,28 @@ to <span class="mono">0</span>. This is what lines 142 and 143 do.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>145. </span>            <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;145. </span>            <span
 class="comment"># random chance they change direction</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>146. </span>            if
+		<p class="noindent mono"><span class="line-number">146.</span>            if
 random.randint(0, 99) &lt; DIRCHANGEFREQ:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>147. </span>                sObj['movex']
+		<p class="noindent mono"><span class="line-number">147.</span>                sObj['movex']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>148. </span>                sObj['movey']
+		<p class="noindent mono"><span class="line-number">148.</span>                sObj['movey']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>149. </span>                if
+		<p class="noindent mono"><span class="line-number">149.</span>                if
 sObj['movex'] &gt; 0: <span class="comment"># faces right</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>150. </span>                    sObj['surface']
+		<p class="noindent mono"><span class="line-number">150.</span>                    sObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (sObj['width'], sObj['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>151. </span>                else:
+		<p class="noindent mono"><span class="line-number">151.</span>                else:
 <span class="comment"># faces left</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>152. </span>                    sObj['surface']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;152. </span>                    sObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (sObj['width'], sObj['height']))</p>
 
 </div>
@@ -1821,26 +1683,26 @@ and line 152 gets one scaled from <span class="mono">L_SQUIR_IMG</span>.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>155. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;155. </span>        <span
 class="comment"># go through all the objects and see if any need to be
 deleted.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>156. </span>        for
+		<p class="noindent mono"><span class="line-number">156.</span>        for
 i in range(len(grassObjs) - 1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>157. </span>            if
+		<p class="noindent mono"><span class="line-number">157.</span>            if
 isOutsideActiveArea(camerax, cameray, grassObjs[i]):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>158. </span>                del
+		<p class="noindent mono"><span class="line-number">158.</span>                del
 grassObjs[i]</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>159. </span>        for
+		<p class="noindent mono"><span class="line-number">159.</span>        for
 i in range(len(squirrelObjs) - 1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>160. </span>            if
+		<p class="noindent mono"><span class="line-number">160.</span>            if
 isOutsideActiveArea(camerax, cameray, squirrelObjs[i]):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>161. </span>                del
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;161. </span>                del
 squirrelObjs[i]</p>
 
 </div>
@@ -1992,20 +1854,20 @@ lists without error because the <span class="mono">for</span> loop on lines
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>163. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;163. </span>        <span
 class="comment"># add more grass &amp;amp; squirrels if we don't have
 enough.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>164. </span>        while
+		<p class="noindent mono"><span class="line-number">164.</span>        while
 len(grassObjs) &lt; NUMGRASS:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>165. </span>            grassObjs.append(makeNewGrass(camerax,
+		<p class="noindent mono"><span class="line-number">165.</span>            grassObjs.append(makeNewGrass(camerax,
 cameray))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>166. </span>        while
+		<p class="noindent mono"><span class="line-number">166.</span>        while
 len(squirrelObjs) &lt; NUMSQUIRRELS:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>167. </span>            squirrelObjs.append(makeNewSquirrel(camerax,
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;167. </span>            squirrelObjs.append(makeNewSquirrel(camerax,
 cameray))</p>
 
 </div>
@@ -2025,38 +1887,38 @@ functions that create these objects are explained later in this chapter.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>169. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;169. </span>        <span
 class="comment"># adjust camerax and cameray if beyond the &quot;camera
 slack&quot;</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>170. </span>        playerCenterx
+		<p class="noindent mono"><span class="line-number">170.</span>        playerCenterx
 = playerObj['x'] + int(playerObj['size'] / 2)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>171. </span>        playerCentery
+		<p class="noindent mono"><span class="line-number">171.</span>        playerCentery
 = playerObj['y'] + int(playerObj['size'] / 2)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>172.</span>         if
+		<p class="noindent mono"><span class="line-number">172.</span>         if
 (camerax + HALF_WINWIDTH) - playerCenterx &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>173.</span>             camerax
+		<p class="noindent mono"><span class="line-number">173.</span>             camerax
 = playerCenterx + CAMERASLACK - HALF_WINWIDTH</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>174.</span>         elif
+		<p class="noindent mono"><span class="line-number">174.</span>         elif
 playerCenterx – (camerax + HALF_WINWIDTH) &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>175.</span>             camerax
+		<p class="noindent mono"><span class="line-number">175.</span>             camerax
 = playerCenterx – CAMERASLACK - HALF_WINWIDTH</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>176.</span>         if
+		<p class="noindent mono"><span class="line-number">176.</span>         if
 (cameray + HALF_WINHEIGHT) - playerCentery &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>177.</span>             cameray
+		<p class="noindent mono"><span class="line-number">177.</span>             cameray
 = playerCentery + CAMERASLACK - HALF_WINHEIGHT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>178.</span>         elif
+		<p class="noindent mono"><span class="line-number">178.</span>         elif
 playerCentery – (cameray + HALF_WINHEIGHT) &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>179.</span>             cameray
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;179.</span>             cameray
 = playerCentery – CAMERASLACK - HALF_WINHEIGHT</p>
 
 </div>
@@ -2096,10 +1958,10 @@ Health Meter</a></h2>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>181. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;181. </span>        <span
 class="comment"># draw the green background</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>182. </span>        DISPLAYSURF.fill(GRASSCOLOR)</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;182. </span>        DISPLAYSURF.fill(GRASSCOLOR)</p>
 
 </div>
 
@@ -2110,24 +1972,24 @@ that we can start drawing the frame from scratch.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>184. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;184. </span>        <span
 class="comment"># draw all the grass objects on the screen</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>185. </span>        for
+		<p class="noindent mono"><span class="line-number">185.</span>        for
 gObj in grassObjs:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>186. </span>            gRect
+		<p class="noindent mono"><span class="line-number">186.</span>            gRect
 = pygame.Rect( (gObj['x'] - camerax,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>187. </span>                                  gObj['y']
+		<p class="noindent mono"><span class="line-number">187.</span>                                  gObj['y']
 - cameray,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>188. </span>                                  gObj['width'],</p>
+		<p class="noindent mono"><span class="line-number">188.</span>                                  gObj['width'],</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>189. </span>                                  gObj['height'])
+		<p class="noindent mono"><span class="line-number">189.</span>                                  gObj['height'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>190. </span>            DISPLAYSURF.blit(GRASSIMAGES[gObj['grassImage']],
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;190. </span>            DISPLAYSURF.blit(GRASSIMAGES[gObj['grassImage']],
 gRect)</p>
 
 </div>
@@ -2149,25 +2011,25 @@ grass objects themselves.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>193. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;193. </span>        <span
 class="comment"># draw the other squirrels</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>194. </span>        for
+		<p class="noindent mono"><span class="line-number">194.</span>        for
 sObj in squirrelObjs:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>195. </span>            sObj['rect']
+		<p class="noindent mono"><span class="line-number">195.</span>            sObj['rect']
 = pygame.Rect( (sObj['x'] - camerax,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>196. </span>                                         sObj['y']
+		<p class="noindent mono"><span class="line-number">196.</span>                                         sObj['y']
 - cameray - getBounceAmount(sObj['bounce'], sObj['bouncerate'],
 sObj['bounceheight']),</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>197. </span>                                         sObj['width'],</p>
+		<p class="noindent mono"><span class="line-number">197.</span>                                         sObj['width'],</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>198. </span>                                         sObj['height'])
+		<p class="noindent mono"><span class="line-number">198.</span>                                         sObj['height'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>199. </span>            DISPLAYSURF.blit(sObj['surface'],
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;199. </span>            DISPLAYSURF.blit(sObj['surface'],
 sObj['rect'])</p>
 
 </div>
@@ -2193,10 +2055,10 @@ to different sizes.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>202. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;202. </span>        <span
 class="comment"># draw the player squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>203. </span>        flashIsOn
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;203. </span>        flashIsOn
 = round(time.time(), 1) * 10 % 2 == 1</p>
 
 </div>
@@ -2243,21 +2105,21 @@ second (no matter how many iterations happen in that tenth of a second).</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>204. </span>        if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;204. </span>        if
 not gameOverMode and not (invulnerableMode and flashIsOn):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>205. </span>            playerObj['rect']
+		<p class="noindent mono"><span class="line-number">205.</span>            playerObj['rect']
 = pygame.Rect( (playerObj['x'] - camerax,</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>206. </span>                                              playerObj['y']
+		<p class="noindent mono"><span class="line-number">206.</span>                                              playerObj['y']
 – cameray - getBounceAmount(playerObj['bounce'], BOUNCERATE, BOUNCEHEIGHT),</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>207. </span>                                              playerObj['size'],</p>
+		<p class="noindent mono"><span class="line-number">207.</span>                                              playerObj['size'],</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>208. </span>                                              playerObj['size'])
+		<p class="noindent mono"><span class="line-number">208.</span>                                              playerObj['size'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>209. </span>            DISPLAYSURF.blit(playerObj['surface'],
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;209. </span>            DISPLAYSURF.blit(playerObj['surface'],
 playerObj['rect'])</p>
 
 </div>
@@ -2274,10 +2136,10 @@ identical to the code for drawing the enemy squirrels.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>212. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;212. </span>        <span
 class="comment"># draw the health meter</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>213. </span>        drawHealthMeter(playerObj['health'])</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;213. </span>        drawHealthMeter(playerObj['health'])</p>
 
 </div>
 
@@ -2290,14 +2152,14 @@ be explained later in this chapter.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>215. </span>        for
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;215. </span>        for
 event in pygame.event.get(): <span class="comment"># event handling
 loop</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>216. </span>            if
+		<p class="noindent mono"><span class="line-number">216.</span>            if
 event.type == QUIT:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>217. </span>                terminate()</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;217. </span>                terminate()</p>
 
 </div>
 
@@ -2307,25 +2169,25 @@ the program should be terminated.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>219. </span>            elif
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;219. </span>            elif
 event.type == KEYDOWN:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>220. </span>                if
+		<p class="noindent mono"><span class="line-number">220.</span>                if
 event.key in (K_UP, K_w):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>221. </span>                    moveDown
+		<p class="noindent mono"><span class="line-number">221.</span>                    moveDown
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>222. </span>                    moveUp
+		<p class="noindent mono"><span class="line-number">222.</span>                    moveUp
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>223. </span>                elif
+		<p class="noindent mono"><span class="line-number">223.</span>                elif
 event.key in (K_DOWN, K_s):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>224. </span>                    moveUp
+		<p class="noindent mono"><span class="line-number">224.</span>                    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>225. </span>                    moveDown
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;225. </span>                    moveDown
 = True</p>
 
 </div>
@@ -2338,42 +2200,42 @@ should be set to <span class="mono">False</span>.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>226. </span>                elif
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;226. </span>                elif
 event.key in (K_LEFT, K_a):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>227. </span>                    moveRight
+		<p class="noindent mono"><span class="line-number">227.</span>                    moveRight
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>228. </span>                    moveLeft
+		<p class="noindent mono"><span class="line-number">228.</span>                    moveLeft
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>229. </span>                    if
+		<p class="noindent mono"><span class="line-number">229.</span>                    if
 playerObj['facing'] == RIGHT: <span class="comment"># change player
 image</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>230. </span>                        playerObj['surface']
+		<p class="noindent mono"><span class="line-number">230.</span>                        playerObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>231. </span>                    playerObj['facing']
+		<p class="noindent mono"><span class="line-number">231.</span>                    playerObj['facing']
 = LEFT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>232. </span>                elif
+		<p class="noindent mono"><span class="line-number">232.</span>                elif
 event.key in (K_RIGHT, K_d):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>233. </span>                    moveLeft
+		<p class="noindent mono"><span class="line-number">233.</span>                    moveLeft
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>234. </span>                    moveRight
+		<p class="noindent mono"><span class="line-number">234.</span>                    moveRight
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>235. </span>                    if
+		<p class="noindent mono"><span class="line-number">235.</span>                    if
 playerObj['facing'] == LEFT: <span class="comment"># change player
 image</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>236. </span>                        playerObj['surface']
+		<p class="noindent mono"><span class="line-number">236.</span>                        playerObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>237. </span>                    playerObj['facing']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;237. </span>                    playerObj['facing']
 = RIGHT</p>
 
 </div>
@@ -2395,10 +2257,10 @@ opposite case.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>238. </span>                elif
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;238. </span>                elif
 winMode and event.key == K_r:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>239. </span>                    return</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;239. </span>                    return</p>
 
 </div>
 
@@ -2411,34 +2273,34 @@ gets called.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>241. </span>            elif
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;241. </span>            elif
 event.type == KEYUP:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>242. </span>                <span
+		<p class="noindent mono"><span class="line-number">242.</span>                <span
 class="comment"># stop moving the player's squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>243. </span>                if
+		<p class="noindent mono"><span class="line-number">243.</span>                if
 event.key in (K_LEFT, K_a):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>244. </span>                    moveLeft
+		<p class="noindent mono"><span class="line-number">244.</span>                    moveLeft
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>245. </span>                elif
+		<p class="noindent mono"><span class="line-number">245.</span>                elif
 event.key in (K_RIGHT, K_d):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>246. </span>                    moveRight
+		<p class="noindent mono"><span class="line-number">246.</span>                    moveRight
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>247. </span>                elif
+		<p class="noindent mono"><span class="line-number">247.</span>                elif
 event.key in (K_UP, K_w):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>248. </span>                    moveUp
+		<p class="noindent mono"><span class="line-number">248.</span>                    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>249. </span>                elif
+		<p class="noindent mono"><span class="line-number">249.</span>                elif
 event.key in (K_DOWN, K_s):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>250. </span>                    moveDown
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;250. </span>                    moveDown
 = False</p>
 
 </div>
@@ -2450,10 +2312,10 @@ direction any more.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>252. </span>                elif
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;252. </span>                elif
 event.key == K_ESCAPE:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>253. </span>                    terminate()</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;253. </span>                    terminate()</p>
 
 </div>
 
@@ -2464,34 +2326,34 @@ the program.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>255. </span>        if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;255. </span>        if
 not gameOverMode:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>256. </span>            <span
+		<p class="noindent mono"><span class="line-number">256.</span>            <span
 class="comment"># actually move the player</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>257. </span>            if
+		<p class="noindent mono"><span class="line-number">257.</span>            if
 moveLeft:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>258. </span>                playerObj['x']
+		<p class="noindent mono"><span class="line-number">258.</span>                playerObj['x']
 -= MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>259. </span>            if
+		<p class="noindent mono"><span class="line-number">259.</span>            if
 moveRight:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>260. </span>                playerObj['x']
+		<p class="noindent mono"><span class="line-number">260.</span>                playerObj['x']
 += MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>261. </span>            if
+		<p class="noindent mono"><span class="line-number">261.</span>            if
 moveUp:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>262. </span>                playerObj['y']
+		<p class="noindent mono"><span class="line-number">262.</span>                playerObj['y']
 -= MOVERATE</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>263. </span>            if
+		<p class="noindent mono"><span class="line-number">263.</span>            if
 moveDown:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>264. </span>                playerObj['y']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;264. </span>                playerObj['y']
 += MOVERATE</p>
 
 </div>
@@ -2508,18 +2370,18 @@ squirrel move faster.)</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>266. </span>            if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;266. </span>            if
 (moveLeft or moveRight or moveUp or moveDown) or playerObj['bounce'] != 0:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>267. </span>                playerObj['bounce']
+		<p class="noindent mono"><span class="line-number">267.</span>                playerObj['bounce']
 += 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>268. </span></p>
+		<p class="noindent mono"><span class="line-number">268.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>269. </span>            if
+		<p class="noindent mono"><span class="line-number">269.</span>            if
 playerObj['bounce'] &gt; BOUNCERATE:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>270. </span>                playerObj['bounce']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;270. </span>                playerObj['bounce']
 = 0 <span class="comment"># reset bounce amount</span></p>
 
 </div>
@@ -2550,13 +2412,13 @@ class=Literal>0</span>.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>272. </span>            <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;272. </span>            <span
 class="comment"># check if the player has collided with any squirrels</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>273. </span>            for
+		<p class="noindent mono"><span class="line-number">273.</span>            for
 i in range(len(squirrelObjs)-1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>274. </span>                sqObj
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;274. </span>                sqObj
 = squirrelObjs[i]</p>
 
 </div>
@@ -2573,24 +2435,24 @@ Deleting Items in a List, Iterate Over the List in Reverse” section.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>275. </span>                if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;275. </span>                if
 'rect' in sqObj and playerObj['rect'].colliderect(sqObj['rect']):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>276. </span>                    <span
+		<p class="noindent mono"><span class="line-number">276.</span>                    <span
 class="comment"># a player/squirrel collision has occurred</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class="comment">277.</span></p>
+<p class="noindent mono"><span class="comment">277.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>278. </span>                    if
+		<p class="noindent mono"><span class="line-number">278.</span>                    if
 sqObj['width'] * sqObj['height'] &lt;= playerObj['size']**2:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>279. </span>                        <span
+		<p class="noindent mono"><span class="line-number">279.</span>                        <span
 class="comment"># player is larger and eats the squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>280. </span>                        playerObj['size']
+		<p class="noindent mono"><span class="line-number">280.</span>                        playerObj['size']
 += int( (sqObj['width'] * sqObj['height'])**0.2 ) + 1</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>281. </span>                        del
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;281. </span>                        del
 squirrelObjs[i]</p>
 
 </div>
@@ -2615,16 +2477,16 @@ screen or have its position updated.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>283. </span>                        if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;283. </span>                        if
 playerObj['facing'] == LEFT:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>284. </span>                            playerObj['surface']
+		<p class="noindent mono"><span class="line-number">284.</span>                            playerObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>285. </span>                        if
+		<p class="noindent mono"><span class="line-number">285.</span>                        if
 playerObj['facing'] == RIGHT:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>286. </span>                            playerObj['surface']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;286. </span>                            playerObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
 </div>
@@ -2640,10 +2502,10 @@ pass to the function.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>288. </span>                        if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;288. </span>                        if
 playerObj['size'] &gt; WINSIZE:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>289. </span>                            winMode
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;289. </span>                            winMode
 = True <span class="comment"># turn on &quot;win mode&quot;</span></p>
 
 </div>
@@ -2657,28 +2519,28 @@ the player to press the R key to restart the game.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>291. </span>                    elif
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;291. </span>                    elif
 not invulnerableMode:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>292. </span>                        <span
+		<p class="noindent mono"><span class="line-number">292.</span>                        <span
 class="comment"># player is smaller and takes damage</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>293. </span>                        invulnerableMode
+		<p class="noindent mono"><span class="line-number">293.</span>                        invulnerableMode
 = True</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>294. </span>                        invulnerableStartTime
+		<p class="noindent mono"><span class="line-number">294.</span>                        invulnerableStartTime
 = time.time()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>295. </span>                        playerObj['health']
+		<p class="noindent mono"><span class="line-number">295.</span>                        playerObj['health']
 -= 1</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>296. </span>                        if
+		<p class="noindent mono"><span class="line-number">296.</span>                        if
 playerObj['health'] == 0:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>297. </span>                            gameOverMode
+		<p class="noindent mono"><span class="line-number">297.</span>                            gameOverMode
 = True <span class="comment"># turn on &quot;game over mode&quot;</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>298. </span>                            gameOverStartTime
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;298. </span>                            gameOverStartTime
 = time.time()</p>
 
 </div>
@@ -2707,18 +2569,18 @@ class=Literal>gameOverStartTime</span> to the current time.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>299. </span>        else:</p>
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;299. </span>        else:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>300. </span>            <span
+		<p class="noindent mono"><span class="line-number">300.</span>            <span
 class="comment"># game is over, show &quot;game over&quot; text</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>301. </span>            DISPLAYSURF.blit(gameOverSurf,
+		<p class="noindent mono"><span class="line-number">301.</span>            DISPLAYSURF.blit(gameOverSurf,
 gameOverRect)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>302. </span>            if
+		<p class="noindent mono"><span class="line-number">302.</span>            if
 time.time() - gameOverStartTime &gt; GAMEOVERTIME:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>303. </span>                return
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;303. </span>                return
 <span class="comment"># end the current game</span></p>
 
 </div>
@@ -2738,23 +2600,23 @@ player presses a key before a new game starts.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>305. </span>        <span
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;305. </span>        <span
 class="comment"># check if the player has won.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>306. </span>        if
+		<p class="noindent mono"><span class="line-number">306.</span>        if
 winMode:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>307. </span>            DISPLAYSURF.blit(winSurf,
+		<p class="noindent mono"><span class="line-number">307.</span>            DISPLAYSURF.blit(winSurf,
 winRect)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>308. </span>            DISPLAYSURF.blit(winSurf2,
+		<p class="noindent mono"><span class="line-number">308.</span>            DISPLAYSURF.blit(winSurf2,
 winRect2)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>309. </span></p>
+		<p class="noindent mono"><span class="line-number">309.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>310. </span>        pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">310.</span>        pygame.display.update()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>311. </span>        FPSCLOCK.tick(FPS)</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;311. </span>        FPSCLOCK.tick(FPS)</p>
 
 </div>
 
@@ -2774,19 +2636,19 @@ on lines 238 and 239.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>316. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;316. </span>def
 drawHealthMeter(currentHealth):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>317. </span>    for
+		<p class="noindent mono"><span class="line-number">317.</span>    for
 i in range(currentHealth): <span class="comment"># draw red health bars</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>318. </span>        pygame.draw.rect(DISPLAYSURF,
+		<p class="noindent mono"><span class="line-number">318.</span>        pygame.draw.rect(DISPLAYSURF,
 RED,   (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>319. </span>    for
+		<p class="noindent mono"><span class="line-number">319.</span>    for
 i in range(MAXHEALTH): <span class="comment"># draw the white outlines</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>320. </span>        pygame.draw.rect(DISPLAYSURF,
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;320. </span>        pygame.draw.rect(DISPLAYSURF,
 WHITE, (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10), 1)</p>
 
 </div>
@@ -2804,12 +2666,12 @@ Function</h2>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>323. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;323. </span>def
 terminate():</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>324. </span>    pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">324.</span>    pygame.quit()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>325. </span>    sys.exit()</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;325. </span>    sys.exit()</p>
 
 </div>
 
@@ -2820,26 +2682,26 @@ the same as in the previous game programs.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>328. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;328. </span>def
 getBounceAmount(currentBounce, bounceRate, bounceHeight):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>329. </span>    <span
+		<p class="noindent mono"><span class="line-number">329.</span>    <span
 class="comment"># Returns the number of pixels to offset based on the
 bounce.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>330. </span>    <span
+		<p class="noindent mono"><span class="line-number">330.</span>    <span
 class="comment"># Larger bounceRate means a slower bounce.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>331. </span>    <span
+		<p class="noindent mono"><span class="line-number">331.</span>    <span
 class="comment"># Larger bounceHeight means a higher bounce.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>332.</span>     <span
+		<p class="noindent mono"><span class="line-number">332.</span>     <span
 class="comment"># currentBounce will always be less than bounceRate</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>333. </span>    return
+		<p class="noindent mono"><span class="line-number">333.</span>    return
 int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>334.</span></p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;334.</span></p>
 
 </div>
 
@@ -2934,7 +2796,7 @@ class=Literal>getBounceAmount()</span> and figure out what it does exactly.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeatured><span class=SourceLineNumber>333. </span>    return
+<p class=SourceCodeFeatured><span class="line-number">&#160;333. </span>    return
 int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p>
 
 </div>
@@ -3064,21 +2926,21 @@ Function</h2>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>335. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;335. </span>def
 getRandomVelocity():</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>336. </span>    speed
+		<p class="noindent mono"><span class="line-number">336.</span>    speed
 = random.randint(SQUIRRELMINSPEED, SQUIRRELMAXSPEED)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>337. </span>    if
+		<p class="noindent mono"><span class="line-number">337.</span>    if
 random.randint(0, 1) == 0:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>338. </span>        return
+		<p class="noindent mono"><span class="line-number">338.</span>        return
 speed</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>339. </span>    else:</p>
+		<p class="noindent mono"><span class="line-number">339.</span>    else:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>340. </span>        return
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;340. </span>        return
 -speed</p>
 
 </div>
@@ -3095,39 +2957,39 @@ chance for the random speed to be positive or negative.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>343. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;343. </span>def
 getRandomOffCameraPos(camerax, cameray, objWidth, objHeight):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>344. </span>    <span
+		<p class="noindent mono"><span class="line-number">344.</span>    <span
 class="comment"># create a Rect of the camera view</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>345. </span>    cameraRect
+		<p class="noindent mono"><span class="line-number">345.</span>    cameraRect
 = pygame.Rect(camerax, cameray, WINWIDTH, WINHEIGHT)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>346. </span>    while
+		<p class="noindent mono"><span class="line-number">346.</span>    while
 True:</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>347. </span>        x
+		<p class="noindent mono"><span class="line-number">347.</span>        x
 = random.randint(camerax - WINWIDTH, camerax + (2 * WINWIDTH))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>348. </span>        y
+		<p class="noindent mono"><span class="line-number">348.</span>        y
 = random.randint(cameray - WINHEIGHT, cameray + (2 * WINHEIGHT))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>349.
+<p class="noindent mono"><span class="line-number">&#160;349.
 </span><span class="comment"># create a Rect object with the random
 coordinates and use colliderect()</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>350.</span><span
+		<p class="noindent mono"><span class="line-number">350.</span><span
 class="comment">         # to make sure the right edge isn't in the
 camera view.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>351. </span>        objRect
+		<p class="noindent mono"><span class="line-number">351.</span>        objRect
 = pygame.Rect(x, y, objWidth, objHeight)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>352. </span>        if
+		<p class="noindent mono"><span class="line-number">352.</span>        if
 not objRect.colliderect(cameraRect):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>353. </span>            return
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;353. </span>            return
 x, y</p>
 
 </div>
@@ -3165,31 +3027,31 @@ will keep generating new coordinates until it finds acceptable ones.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>356. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;356. </span>def
 makeNewSquirrel(camerax, cameray):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>357. </span>    sq
+		<p class="noindent mono"><span class="line-number">357.</span>    sq
 = {}</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>358. </span>    generalSize
+		<p class="noindent mono"><span class="line-number">358.</span>    generalSize
 = random.randint(5, 25)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>359. </span>    multiplier
+		<p class="noindent mono"><span class="line-number">359.</span>    multiplier
 = random.randint(1, 3)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>360. </span>    sq['width']
+		<p class="noindent mono"><span class="line-number">360.</span>    sq['width']
 = (generalSize + random.randint(0, 10)) * multiplier</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>361. </span>    sq['height']
+		<p class="noindent mono"><span class="line-number">361.</span>    sq['height']
 = (generalSize + random.randint(0, 10)) * multiplier</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>362. </span>    sq['x'],
+		<p class="noindent mono"><span class="line-number">362.</span>    sq['x'],
 sq['y'] = getRandomOffCameraPos(camerax, cameray, sq['width'], sq['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>363. </span>    sq['movex']
+		<p class="noindent mono"><span class="line-number">363.</span>    sq['movex']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>364. </span>    sq['movey']
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;364. </span>    sq['movey']
 = getRandomVelocity()</p>
 
 </div>
@@ -3216,28 +3078,28 @@ class=Literal>getRandomVelocity()</span> function.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>365. </span>    if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;365. </span>    if
 sq['movex'] &lt; 0: <span class="comment"># squirrel is facing left</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>366. </span>        sq['surface']
+		<p class="noindent mono"><span class="line-number">366.</span>        sq['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (sq['width'], sq['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>367. </span>    else:
+		<p class="noindent mono"><span class="line-number">367.</span>    else:
 <span class="comment"># squirrel is facing right</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>368. </span>        sq['surface']
+		<p class="noindent mono"><span class="line-number">368.</span>        sq['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (sq['width'], sq['height']))</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>369. </span>    sq['bounce']
+		<p class="noindent mono"><span class="line-number">369.</span>    sq['bounce']
 = 0</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>370. </span>    sq['bouncerate']
+		<p class="noindent mono"><span class="line-number">370.</span>    sq['bouncerate']
 = random.randint(10, 18)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>371. </span>    sq['bounceheight']
+		<p class="noindent mono"><span class="line-number">371.</span>    sq['bounceheight']
 = random.randint(10, 50)</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>372. </span>    return
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;372. </span>    return
 sq</p>
 
 </div>
@@ -3258,29 +3120,29 @@ the bounce) and the dictionary is returned on line 372.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>375. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;375. </span>def
 makeNewGrass(camerax, cameray):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>376. </span>    gr
+		<p class="noindent mono"><span class="line-number">376.</span>    gr
 = {}</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>377. </span>    gr['grassImage']
+		<p class="noindent mono"><span class="line-number">377.</span>    gr['grassImage']
 = random.randint(0, len(GRASSIMAGES) - 1)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>378. </span>    gr['width']
+		<p class="noindent mono"><span class="line-number">378.</span>    gr['width']
 = GRASSIMAGES[0].get_width()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>379. </span>    gr['height']
+		<p class="noindent mono"><span class="line-number">379.</span>    gr['height']
 = GRASSIMAGES[0].get_height()</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>380.</span>
+		<p class="noindent mono"><span class="line-number">380.</span>
 gr['x'], gr['y'] = getRandomOffCameraPos(camerax, cameray, gr['width'],
 gr['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>381.</span>
+		<p class="noindent mono"><span class="line-number">381.</span>
 gr['rect'] = pygame.Rect( (gr['x'], gr['y'], gr['width'], gr['height']) )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>382. </span>    return
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;382. </span>    return
 gr</p>
 
 </div>
@@ -3299,28 +3161,28 @@ at <span class="mono">GRASSIMAGES[3]</span> for its image.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>385. </span>def
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;385. </span>def
 isOutsideActiveArea(camerax, cameray, obj):</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>386. </span>    <span
+		<p class="noindent mono"><span class="line-number">386.</span>    <span
 class="comment"># Return False if camerax and cameray are more than</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>387. </span>    <span
+		<p class="noindent mono"><span class="line-number">387.</span>    <span
 class="comment"># a half-window length beyond the edge of the window.</span></p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>388. </span>    boundsLeftEdge
+		<p class="noindent mono"><span class="line-number">388.</span>    boundsLeftEdge
 = camerax - WINWIDTH</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>389. </span>    boundsTopEdge
+		<p class="noindent mono"><span class="line-number">389.</span>    boundsTopEdge
 = cameray - WINHEIGHT</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>390. </span>    boundsRect
+		<p class="noindent mono"><span class="line-number">390.</span>    boundsRect
 = pygame.Rect(boundsLeftEdge, boundsTopEdge, WINWIDTH * 3, WINHEIGHT * 3)</p>
 
-<p class=SourceCodeFeaturedCxSpMiddle><span class=SourceLineNumber>391. </span>    objRect
+		<p class="noindent mono"><span class="line-number">391.</span>    objRect
 = pygame.Rect(obj['x'], obj['y'], obj['width'], obj['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>392. </span>    return
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;392. </span>    return
 not boundsRect.colliderect(objRect)</p>
 
 </div>
@@ -3353,10 +3215,10 @@ game objects. </p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class=SourceLineNumber>395. </span>if
+<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;395. </span>if
 __name__ == '__main__':</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class=SourceLineNumber>396. </span>    main()</p>
+<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;396. </span>    main()</p>
 
 </div>
 

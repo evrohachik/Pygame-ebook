@@ -25,121 +25,121 @@
 	</ul>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Simulate (a Simon clone)</span></p>
-		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
-		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
-		<p class="noindent mono"><span class="line-number">5.</span></p>
-		<p class="noindent mono"><span class="line-number">6.</span> import random, sys, time, pygame</p>
-		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">8.</span></p>
-		<p class="noindent mono"><span class="line-number">9.</span> FPS = 30</p>
-		<p class="noindent mono"><span class="line-number">10.</span> WINDOWWIDTH = 640</p>
-		<p class="noindent mono"><span class="line-number">11.</span> WINDOWHEIGHT = 480</p>
-		<p class="noindent mono"><span class="line-number">12.</span> FLASHSPEED = 500 <span class="comment"># in milliseconds</span></p>
-		<p class="noindent mono"><span class="line-number">13.</span> FLASHDELAY = 200 <span class="comment"># in milliseconds</span></p>
-		<p class="noindent mono"><span class="line-number">14.</span> BUTTONSIZE = 200</p>
-		<p class="noindent mono"><span class="line-number">15.</span> BUTTONGAPSIZE = 20</p>
-		<p class="noindent mono"><span class="line-number">16.</span> TIMEOUT = 4 <span class="comment"># seconds before game over if no button is pushed.</span></p>
-		<p class="noindent mono"><span class="line-number">17.</span></p>
-		<p class="noindent mono"> <span class="line-number">18.</span> <span class="comment">#                R    G    B</span></p>
-		<p class="noindent mono"> <span class="line-number">19.</span> WHITE = (255, 255, 255)</p>
-		<p class="noindent mono"> <span class="line-number">20.</span> BLACK = (  0,   0,   0)</p>
-		<p class="noindent mono"> <span class="line-number">21.</span> BRIGHTRED = (255,   0,   0)</p>
-		<p class="noindent mono"> <span class="line-number">22.</span> RED = (155,   0,   0)</p>
-		<p class="noindent mono"> <span class="line-number">23.</span> BRIGHTGREEN = (  0, 255,   0)</p>
-		<p class="noindent mono"> <span class="line-number">24.</span> GREEN = (  0, 155,   0)</p>
-		<p class="noindent mono"> <span class="line-number">25.</span> BRIGHTBLUE = (  0,   0, 255)</p>
-		<p class="noindent mono"> <span class="line-number">26.</span> BLUE = (  0,   0, 155)</p>
-		<p class="noindent mono"> <span class="line-number">27.</span> BRIGHTYELLOW = (255, 255,   0)</p>
-		<p class="noindent mono"> <span class="line-number">28.</span> YELLOW = (155, 155,   0)</p>
-		<p class="noindent mono"> <span class="line-number">29.</span> DARKGRAY = ( 40,  40,  40)</p>
-		<p class="noindent mono"> <span class="line-number">30.</span> bgColor = BLACK</p>
-		<p class="noindent mono"> <span class="line-number">31.</span></p>
-		<p class="noindent mono"> <span class="line-number">32.</span> XMARGIN = int((WINDOWWIDTH - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
-		<p class="noindent mono"> <span class="line-number">33.</span> YMARGIN = int((WINDOWHEIGHT - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
-		<p class="noindent mono"> <span class="line-number">34.</span></p>
-		<p class="noindent mono"><span class="line-number"> 35.</span> <span class="comment"># Rect objects for each of the four buttons</span></p>
-		<p class="noindent mono"> <span class="line-number">36.</span> YELLOWRECT = pygame.Rect(XMARGIN, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">37.</span> BLUERECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">38.</span> REDRECT = pygame.Rect(XMARGIN, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">39.</span> GREENRECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">40.</span></p>
-		<p class="noindent mono"><span class="line-number"> 41.</span> def main():</p>
-		<p class="noindent mono"> <span class="line-number">42.</span>     global FPSCLOCK, DISPLAYSURF, BASICFONT, BEEP1, BEEP2, BEEP3, BEEP4</p>
-		<p class="noindent mono"> <span class="line-number">43.</span></p>
-		<p class="noindent mono"> <span class="line-number">44.</span>     pygame.init()</p>
-		<p class="noindent mono"> <span class="line-number">45.</span>     FPSCLOCK = pygame.time.Clock()</p>
-		<p class="noindent mono"> <span class="line-number">46.</span>     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
-		<p class="noindent mono"> <span class="line-number">47.</span>     pygame.display.set_caption('Simulate')</p>
-		<p class="noindent mono"> <span class="line-number">48.</span></p>
-		<p class="noindent mono"> <span class="line-number">49.</span>     BASICFONT = pygame.font.Font('freesansbold.ttf', 16)</p>
-		<p class="noindent mono"> <span class="line-number">50.</span></p>
-		<p class="noindent mono"><span class="line-number"> 51.</span>    infoSurf = BASICFONT.render('Match the pattern by clicking on the button or using the Q, W, A, S keys.', 1, DARKGRAY)</p>
-		<p class="noindent mono"> <span class="line-number">52.</span>     infoRect = infoSurf.get_rect()</p>
-		<p class="noindent mono"> <span class="line-number">53.</span>     infoRect.topleft = (10, WINDOWHEIGHT - 25)</p>
-		<p class="noindent mono"> <span class="line-number">54.</span>     <span class="comment"># load the sound files</span></p>
-		<p class="noindent mono"> <span class="line-number">55.</span>     BEEP1 = pygame.mixer.Sound('beep1.ogg')</p>
-		<p class="noindent mono"> <span class="line-number">56.</span>     BEEP2 = pygame.mixer.Sound('beep2.ogg')</p>
-		<p class="noindent mono"> <span class="line-number">57.</span>     BEEP3 = pygame.mixer.Sound('beep3.ogg')</p>
-		<p class="noindent mono"> <span class="line-number">58.</span>     BEEP4 = pygame.mixer.Sound('beep4.ogg')</p>
-		<p class="noindent mono"> <span class="line-number">59.</span></p>
-		<p class="noindent mono"><span class="line-number"> 60.</span>    <span class="comment"># Initialize some variables for a new game</span></p>
-		<p class="noindent mono"> <span class="line-number">61.</span>     pattern = [] <span class="comment"># stores the pattern of colors</span></p>
-		<p class="noindent mono"> <span class="line-number">62.</span>     currentStep = 0 <span class="comment"># the color the player must push next</span></p>
-		<p class="noindent mono"> <span class="line-number">63.</span>     lastClickTime = 0 <span class="comment"># timestamp of the player's last button push</span></p>
-		<p class="noindent mono"> <span class="line-number">64.</span>     score = 0</p>
-		<p class="noindent mono"> <span class="line-number">65.</span>     <span class="comment"># when False, the pattern is playing. when True, waiting for the player to click a colored button:</span></p>
-		<p class="noindent mono"> <span class="line-number">66.</span>     waitingForInput = False</p>
-		<p class="noindent mono"> <span class="line-number">67.</span></p>
-		<p class="noindent mono"><span class="line-number"> 68.</span>    while True: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"> <span class="line-number">69.</span>         clickedButton = None <span class="comment"># button that was clicked (set to YELLOW, RED, GREEN, or BLUE)</span></p>
-		<p class="noindent mono"> <span class="line-number">70.</span>         DISPLAYSURF.fill(bgColor)</p>
-		<p class="noindent mono"> <span class="line-number">71.</span>         drawButtons()</p>
-		<p class="noindent mono"> <span class="line-number">72.</span></p>
-		<p class="noindent mono"> <span class="line-number">73.</span>         scoreSurf = BASICFONT.render('Score: ' + str(score), 1, WHITE)</p>
-		<p class="noindent mono"> <span class="line-number">74.</span>         scoreRect = scoreSurf.get_rect()</p>
-		<p class="noindent mono"> <span class="line-number">75.</span>         scoreRect.topleft = (WINDOWWIDTH - 100, 10)</p>
-		<p class="noindent mono"> <span class="line-number">76.</span>         DISPLAYSURF.blit(scoreSurf, scoreRect)</p>
-		<p class="noindent mono"> <span class="line-number">77.</span></p>
-		<p class="noindent mono"><span class="line-number"> 78.</span>        DISPLAYSURF.blit(infoSurf, infoRect)</p>
-		<p class="noindent mono"> <span class="line-number">79.</span></p>
-		<p class="noindent mono"><span class="line-number"> 80.</span>        checkForQuit()</p>
-		<p class="noindent mono"> <span class="line-number">81.</span>         for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
-		<p class="noindent mono"> <span class="line-number">82.</span>             if event.type == MOUSEBUTTONUP:</p>
-		<p class="noindent mono"> <span class="line-number">83.</span>                 mousex, mousey = event.pos</p>
-		<p class="noindent mono"> <span class="line-number">84.</span>                 clickedButton = getButtonClicked(mousex, mousey)</p>
-		<p class="noindent mono"><span class="line-number"> 85.</span>            elif event.type == KEYDOWN:</p>
-		<p class="noindent mono"><span class="line-number"> 86.</span>                if event.key == K_q:</p>
-		<p class="noindent mono"> <span class="line-number">87.</span>                     clickedButton = YELLOW</p>
-		<p class="noindent mono"> <span class="line-number">88.</span>                 elifevent.key == K_w:</p>
-		<p class="noindent mono"> <span class="line-number">89.</span>                     clickedButton = BLUE</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;1.</span> <span class="comment"># Simulate (a Simon clone)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;6.</span> import random, sys, time, pygame</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;9.</span> FPS = 30</p>
+		<p class="noindent mono"><span class="line-number">&#160;10.</span> WINDOWWIDTH = 640</p>
+		<p class="noindent mono"><span class="line-number">&#160;11.</span> WINDOWHEIGHT = 480</p>
+		<p class="noindent mono"><span class="line-number">&#160;12.</span> FLASHSPEED = 500 <span class="comment"># in milliseconds</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;13.</span> FLASHDELAY = 200 <span class="comment"># in milliseconds</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;14.</span> BUTTONSIZE = 200</p>
+		<p class="noindent mono"><span class="line-number">&#160;15.</span> BUTTONGAPSIZE = 20</p>
+		<p class="noindent mono"><span class="line-number">&#160;16.</span> TIMEOUT = 4 <span class="comment"># seconds before game over if no button is pushed.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;17.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;18.</span> <span class="comment">#                R    G    B</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;19.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;20.</span> BLACK = (  0,   0,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;21.</span> BRIGHTRED = (255,   0,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;22.</span> RED = (155,   0,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;23.</span> BRIGHTGREEN = (  0, 255,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;24.</span> GREEN = (  0, 155,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;25.</span> BRIGHTBLUE = (  0,   0, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;26.</span> BLUE = (  0,   0, 155)</p>
+		<p class="noindent mono"><span class="line-number">&#160;27.</span> BRIGHTYELLOW = (255, 255,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;28.</span> YELLOW = (155, 155,   0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;29.</span> DARKGRAY = ( 40,  40,  40)</p>
+		<p class="noindent mono"><span class="line-number">&#160;30.</span> bgColor = BLACK</p>
+		<p class="noindent mono"><span class="line-number">&#160;31.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;32.</span> XMARGIN = int((WINDOWWIDTH - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
+		<p class="noindent mono"><span class="line-number">&#160;33.</span> YMARGIN = int((WINDOWHEIGHT - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
+		<p class="noindent mono"><span class="line-number">&#160;34.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;35.</span> <span class="comment"># Rect objects for each of the four buttons</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;36.</span> YELLOWRECT = pygame.Rect(XMARGIN, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;37.</span> BLUERECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;38.</span> REDRECT = pygame.Rect(XMARGIN, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;39.</span> GREENRECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;40.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;41.</span> def main():</p>
+		<p class="noindent mono"><span class="line-number">&#160;42.</span>     global FPSCLOCK, DISPLAYSURF, BASICFONT, BEEP1, BEEP2, BEEP3, BEEP4</p>
+		<p class="noindent mono"><span class="line-number">&#160;43.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;44.</span>     pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;45.</span>     FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">&#160;46.</span>     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">&#160;47.</span>     pygame.display.set_caption('Simulate')</p>
+		<p class="noindent mono"><span class="line-number">&#160;48.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;49.</span>     BASICFONT = pygame.font.Font('freesansbold.ttf', 16)</p>
+		<p class="noindent mono"><span class="line-number">&#160;50.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;51.</span>    infoSurf = BASICFONT.render('Match the pattern by clicking on the button or using the Q, W, A, S keys.', 1, DARKGRAY)</p>
+		<p class="noindent mono"><span class="line-number">&#160;52.</span>     infoRect = infoSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">&#160;53.</span>     infoRect.topleft = (10, WINDOWHEIGHT - 25)</p>
+		<p class="noindent mono"><span class="line-number">&#160;54.</span>     <span class="comment"># load the sound files</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;55.</span>     BEEP1 = pygame.mixer.Sound('beep1.ogg')</p>
+		<p class="noindent mono"><span class="line-number">&#160;56.</span>     BEEP2 = pygame.mixer.Sound('beep2.ogg')</p>
+		<p class="noindent mono"><span class="line-number">&#160;57.</span>     BEEP3 = pygame.mixer.Sound('beep3.ogg')</p>
+		<p class="noindent mono"><span class="line-number">&#160;58.</span>     BEEP4 = pygame.mixer.Sound('beep4.ogg')</p>
+		<p class="noindent mono"><span class="line-number">&#160;59.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;60.</span>    <span class="comment"># Initialize some variables for a new game</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;61.</span>     pattern = [] <span class="comment"># stores the pattern of colors</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;62.</span>     currentStep = 0 <span class="comment"># the color the player must push next</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;63.</span>     lastClickTime = 0 <span class="comment"># timestamp of the player's last button push</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;64.</span>     score = 0</p>
+		<p class="noindent mono"><span class="line-number">&#160;65.</span>     <span class="comment"># when False, the pattern is playing. when True, waiting for the player to click a colored button:</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;66.</span>     waitingForInput = False</p>
+		<p class="noindent mono"><span class="line-number">&#160;67.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;68.</span>    while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;69.</span>         clickedButton = None <span class="comment"># button that was clicked (set to YELLOW, RED, GREEN, or BLUE)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;70.</span>         DISPLAYSURF.fill(bgColor)</p>
+		<p class="noindent mono"><span class="line-number">&#160;71.</span>         drawButtons()</p>
+		<p class="noindent mono"><span class="line-number">&#160;72.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;73.</span>         scoreSurf = BASICFONT.render('Score: ' + str(score), 1, WHITE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;74.</span>         scoreRect = scoreSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">&#160;75.</span>         scoreRect.topleft = (WINDOWWIDTH - 100, 10)</p>
+		<p class="noindent mono"><span class="line-number">&#160;76.</span>         DISPLAYSURF.blit(scoreSurf, scoreRect)</p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;78.</span>        DISPLAYSURF.blit(infoSurf, infoRect)</p>
+		<p class="noindent mono"><span class="line-number">&#160;79.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;80.</span>        checkForQuit()</p>
+		<p class="noindent mono"><span class="line-number">&#160;81.</span>         for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;82.</span>             if event.type == MOUSEBUTTONUP:</p>
+		<p class="noindent mono"><span class="line-number">&#160;83.</span>                 mousex, mousey = event.pos</p>
+		<p class="noindent mono"><span class="line-number">&#160;84.</span>                 clickedButton = getButtonClicked(mousex, mousey)</p>
+		<p class="noindent mono"><span class="line-number">&#160;85.</span>            elif event.type == KEYDOWN:</p>
+		<p class="noindent mono"><span class="line-number">&#160;86.</span>                if event.key == K_q:</p>
+		<p class="noindent mono"><span class="line-number">&#160;87.</span>                     clickedButton = YELLOW</p>
+		<p class="noindent mono"><span class="line-number">&#160;88.</span>                 elifevent.key == K_w:</p>
+		<p class="noindent mono"><span class="line-number">&#160;89.</span>                     clickedButton = BLUE</p>
 
-		<p class="noindent mono"> <span class="line-number">90.</span>                 elif
+		<p class="noindent mono"><span class="line-number">&#160;90.</span>                 elif
 event.key == K_a:</p>
 
-		<p class="noindent mono"> <span class="line-number">91.</span>                     clickedButton
+		<p class="noindent mono"><span class="line-number">&#160;91.</span>                     clickedButton
 = RED</p>
 
-		<p class="noindent mono"> <span class="line-number">92.</span>                 elif
+		<p class="noindent mono"><span class="line-number">&#160;92.</span>                 elif
 event.key == K_s:</p>
 
-		<p class="noindent mono"> <span class="line-number">93.</span>                     clickedButton
+		<p class="noindent mono"><span class="line-number">&#160;93.</span>                     clickedButton
 = GREEN</p>
 
-		<p class="noindent mono"><span class="line-number"> 94.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;94.</span></p>
 
-		<p class="noindent mono"><span class="line-number"> 95.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;95.</span></p>
 
-		<p class="noindent mono"><span class="line-number"> 96.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;96.</span></p>
 
-		<p class="noindent mono"><span class="line-number"> 97.</span>        if
+		<p class="noindent mono"><span class="line-number">&#160;97.</span>        if
 not waitingForInput:</p>
 
-		<p class="noindent mono"> <span class="line-number">98.</span>             <span
+		<p class="noindent mono"><span class="line-number">&#160;98.</span>             <span
 class="comment"># play the pattern</span></p>
 
-		<p class="noindent mono"> <span class="line-number">99.</span>             pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">&#160;99.</span>             pygame.display.update()</p>
 
 		<p class="noindent mono"><span class="line-number">100.</span>            pygame.time.wait(1000)</p>
 
@@ -518,80 +518,80 @@ invisible</span></p>
 	<h1 class="subheading" id="">The Usual Starting Stuff</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> <span class="comment"># Simulate (a Simon clone)</span></p>
-		<p class="noindent mono"><span class="line-number">2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
-		<p class="noindent mono"><span class="line-number">3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
-		<p class="noindent mono"><span class="line-number">5.</span></p>
-		<p class="noindent mono"><span class="line-number">6.</span> import random, sys, time, pygame</p>
-		<p class="noindent mono"><span class="line-number">7.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">8.</span></p>
-		<p class="noindent mono"><span class="line-number">9.</span> FPS = 30</p>
-		<p class="noindent mono"> <span class="line-number">10.</span> WINDOWWIDTH = 640</p>
-		<p class="noindent mono"> <span class="line-number">11.</span> WINDOWHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;&#160;1.</span> <span class="comment"># Simulate (a Simon clone)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;6.</span> import random, sys, time, pygame</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;9.</span> FPS = 30</p>
+		<p class="noindent mono"><span class="line-number">&#160;10.</span> WINDOWWIDTH = 640</p>
+		<p class="noindent mono"><span class="line-number">&#160;11.</span> WINDOWHEIGHT
 = 480</p>
-		<p class="noindent mono"> <span class="line-number">12.</span> FLASHSPEED
+		<p class="noindent mono"><span class="line-number">&#160;12.</span> FLASHSPEED
 = 500 <span class="comment"># in milliseconds</span></p>
-		<p class="noindent mono"> <span class="line-number">13.</span> FLASHDELAY
+		<p class="noindent mono"><span class="line-number">&#160;13.</span> FLASHDELAY
 = 200 <span class="comment"># in milliseconds</span></p>
 
-		<p class="noindent mono"> <span class="line-number">14.</span> BUTTONSIZE
+		<p class="noindent mono"><span class="line-number">&#160;14.</span> BUTTONSIZE
 = 200</p>
 
-		<p class="noindent mono"> <span class="line-number">15.</span> BUTTONGAPSIZE
+		<p class="noindent mono"><span class="line-number">&#160;15.</span> BUTTONGAPSIZE
 = 20</p>
 
-		<p class="noindent mono"> <span class="line-number">16.</span> TIMEOUT
+		<p class="noindent mono"><span class="line-number">&#160;16.</span> TIMEOUT
 = 4 <span class="comment"># seconds before game over if no button is
 pushed.</span></p>
 
-		<p class="noindent mono"> <span class="line-number">17.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;17.</span></p>
 
-		<p class="noindent mono"> <span class="line-number">18.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;18.</span> <span
 class="comment">#                R    G    B</span></p>
 
-		<p class="noindent mono"> <span class="line-number">19.</span> WHITE
+		<p class="noindent mono"><span class="line-number">&#160;19.</span> WHITE
 = (255, 255, 255)</p>
 
-		<p class="noindent mono"> <span class="line-number">20.</span> BLACK
+		<p class="noindent mono"><span class="line-number">&#160;20.</span> BLACK
 = (  0,   0,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">21.</span> BRIGHTRED
+		<p class="noindent mono"><span class="line-number">&#160;21.</span> BRIGHTRED
 = (255,   0,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">22.</span> RED
+		<p class="noindent mono"><span class="line-number">&#160;22.</span> RED
 = (155,   0,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">23.</span> BRIGHTGREEN
+		<p class="noindent mono"><span class="line-number">&#160;23.</span> BRIGHTGREEN
 = (  0, 255,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">24.</span> GREEN
+		<p class="noindent mono"><span class="line-number">&#160;24.</span> GREEN
 = (  0, 155,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">25.</span> BRIGHTBLUE
+		<p class="noindent mono"><span class="line-number">&#160;25.</span> BRIGHTBLUE
 = (  0,   0, 255)</p>
 
-		<p class="noindent mono"> <span class="line-number">26.</span> BLUE
+		<p class="noindent mono"><span class="line-number">&#160;26.</span> BLUE
 = (  0,   0, 155)</p>
 
-		<p class="noindent mono"> <span class="line-number">27.</span> BRIGHTYELLOW
+		<p class="noindent mono"><span class="line-number">&#160;27.</span> BRIGHTYELLOW
 = (255, 255,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">28.</span> YELLOW
+		<p class="noindent mono"><span class="line-number">&#160;28.</span> YELLOW
 = (155, 155,   0)</p>
 
-		<p class="noindent mono"> <span class="line-number">29.</span> DARKGRAY
+		<p class="noindent mono"><span class="line-number">&#160;29.</span> DARKGRAY
 = ( 40,  40,  40)</p>
 
-		<p class="noindent mono"> <span class="line-number">30.</span> bgColor
+		<p class="noindent mono"><span class="line-number">&#160;30.</span> bgColor
 = BLACK</p>
 
-		<p class="noindent mono"> <span class="line-number">31.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;31.</span></p>
 
-		<p class="noindent mono"> <span class="line-number">32.</span> XMARGIN
+		<p class="noindent mono"><span class="line-number">&#160;32.</span> XMARGIN
 = int((WINDOWWIDTH - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
 
-		<p class="noindent mono"> <span class="line-number">33.</span>YMARGIN
+		<p class="noindent mono"><span class="line-number">&#160;33.</span> YMARGIN
 = int((WINDOWHEIGHT - (2 * BUTTONSIZE) - BUTTONGAPSIZE) / 2)</p>
 
 	</div>
@@ -601,11 +601,11 @@ class="comment">#                R    G    B</span></p>
 	<h1 class="subheading" id="">Setting Up the Buttons</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"> <span class="line-number">35.</span><span class="comment"># Rect objects for each of the four buttons</span></p>
-		<p class="noindent mono"> <span class="line-number">36.</span> YELLOWRECT = pygame.Rect(XMARGIN, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">37.</span> BLUERECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">38.</span> REDRECT = pygame.Rect(XMARGIN, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
-		<p class="noindent mono"> <span class="line-number">39.</span>GREENRECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;35.</span><span class="comment"># Rect objects for each of the four buttons</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;36.</span> YELLOWRECT = pygame.Rect(XMARGIN, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;37.</span> BLUERECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;38.</span> REDRECT = pygame.Rect(XMARGIN, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
+		<p class="noindent mono"><span class="line-number">&#160;39.</span>GREENRECT = pygame.Rect(XMARGIN + BUTTONSIZE + BUTTONGAPSIZE, YMARGIN + BUTTONSIZE + BUTTONGAPSIZE, BUTTONSIZE, BUTTONSIZE)</p>
 	</div>
 
 	<p>Just like the buttons in the Sliding Puzzle games for “Reset”, “Solve” and “New Game”, the Simulate game has four rectangular areas and code to handle when the player clicks inside of those areas. The program will need Rect objects for the areas of the four buttons so it can call the <span class="mono">collidepoint()</span> method on them. Lines 36 to 39 set up these Rect objects with the appropriate coordinates and sizes.</p>
@@ -614,54 +614,54 @@ class="comment">#                R    G    B</span></p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"> <span class="line-number">41.</span>def
+	<p class="noindent mono"><span class="line-number">&#160;41.</span> def
 main():</p>
 
-		<p class="noindent mono"> <span class="line-number">42.</span>     global
+		<p class="noindent mono"><span class="line-number">&#160;42.</span>     global
 FPSCLOCK, DISPLAYSURF, BASICFONT, BEEP1, BEEP2, BEEP3, BEEP4</p>
 
-		<p class="noindent mono"> <span class="line-number">43.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;43.</span></p>
 
-		<p class="noindent mono"> <span class="line-number">44.</span>     pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;44.</span>     pygame.init()</p>
 
-		<p class="noindent mono"> <span class="line-number">45.</span>     FPSCLOCK
+		<p class="noindent mono"><span class="line-number">&#160;45.</span>     FPSCLOCK
 = pygame.time.Clock()</p>
 
-		<p class="noindent mono"> <span class="line-number">46.</span>     DISPLAYSURF
+		<p class="noindent mono"><span class="line-number">&#160;46.</span>     DISPLAYSURF
 = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))</p>
 
-		<p class="noindent mono"> <span class="line-number">47.</span>     pygame.display.set_caption('Simulate')</p>
+		<p class="noindent mono"><span class="line-number">&#160;47.</span>     pygame.display.set_caption('Simulate')</p>
 
-		<p class="noindent mono"> <span class="line-number">48.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;48.</span></p>
 
-		<p class="noindent mono"> <span class="line-number">49.</span>     BASICFONT
+		<p class="noindent mono"><span class="line-number">&#160;49.</span>     BASICFONT
 = pygame.font.Font('freesansbold.ttf', 16)</p>
 
-		<p class="noindent mono"> <span class="line-number">50.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;50.</span></p>
 
 		<p class="noindent mono"><span class="line-number"> 51.</span>    infoSurf
 = BASICFONT.render('Match the pattern by clicking on the button or using the Q,
 W, A, S keys.', 1, DARKGRAY)</p>
 
-		<p class="noindent mono"> <span class="line-number">52.</span>     infoRect
+		<p class="noindent mono"><span class="line-number">&#160;52.</span>     infoRect
 = infoSurf.get_rect()</p>
 
-		<p class="noindent mono"> <span class="line-number">53.</span>     infoRect.topleft
+		<p class="noindent mono"><span class="line-number">&#160;53.</span>     infoRect.topleft
 = (10, WINDOWHEIGHT - 25)</p>
 
-		<p class="noindent mono"> <span class="line-number">54.</span>     <span
+		<p class="noindent mono"><span class="line-number">&#160;54.</span>     <span
 class="comment"># load the sound files</span></p>
 
-		<p class="noindent mono"> <span class="line-number">55.</span>     BEEP1
+		<p class="noindent mono"><span class="line-number">&#160;55.</span>     BEEP1
 = pygame.mixer.Sound('beep1.ogg')</p>
 
-		<p class="noindent mono"> <span class="line-number">56.</span>     BEEP2
+		<p class="noindent mono"><span class="line-number">&#160;56.</span>     BEEP2
 = pygame.mixer.Sound('beep2.ogg')</p>
 
-		<p class="noindent mono"> <span class="line-number">57.</span>     BEEP3
+		<p class="noindent mono"><span class="line-number">&#160;57.</span>     BEEP3
 = pygame.mixer.Sound('beep3.ogg')</p>
 
-	<p class="noindent mono"> <span class="line-number">58.</span>    BEEP4
+	<p class="noindent mono"><span class="line-number">&#160;58.</span>    BEEP4
 = pygame.mixer.Sound('beep4.ogg')</p>
 
 </div>
@@ -685,26 +685,26 @@ class="mono">BEEP4</span> which were made into global variables on line 42.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"> <span class="line-number">60.</span>    <span
+	<p class="noindent mono"><span class="line-number">&#160;60.</span>    <span
 class="comment"># Initialize some variables for a new game</span></p>
 
-		<p class="noindent mono"> <span class="line-number">61.</span>     pattern
+		<p class="noindent mono"><span class="line-number">&#160;61.</span>     pattern
 = [] <span class="comment"># stores the pattern of colors</span></p>
 
-		<p class="noindent mono"> <span class="line-number">62.</span>     currentStep
+		<p class="noindent mono"><span class="line-number">&#160;62.</span>     currentStep
 = 0 <span class="comment"># the color the player must push next</span></p>
 
-		<p class="noindent mono"> <span class="line-number">63.</span>     lastClickTime
+		<p class="noindent mono"><span class="line-number">&#160;63.</span>     lastClickTime
 = 0 <span class="comment"># timestamp of the player's last button push</span></p>
 
-		<p class="noindent mono"> <span class="line-number">64.</span>     score
+		<p class="noindent mono"><span class="line-number">&#160;64.</span>     score
 = 0</p>
 
-		<p class="noindent mono"> <span class="line-number">65.</span>     <span
+		<p class="noindent mono"><span class="line-number">&#160;65.</span>     <span
 class="comment"># when False, the pattern is playing. when True,
 waiting for the player to click a colored button:</span></p>
 
-	<p class="noindent mono"> <span class="line-number">66.</span>    waitingForInput
+	<p class="noindent mono"><span class="line-number">&#160;66.</span>    waitingForInput
 = False</p>
 
 </div>
@@ -748,32 +748,32 @@ is set to <span class="mono">True</span>).</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"> <span class="line-number">68.</span>    while
+	<p class="noindent mono"><span class="line-number">&#160;68.</span>    while
 True: <span class="comment"># main game loop</span></p>
 
-		<p class="noindent mono"> <span class="line-number">69.</span>         clickedButton
+		<p class="noindent mono"><span class="line-number">&#160;69.</span>         clickedButton
 = None <span class="comment"># button that was clicked (set to YELLOW,
 RED, GREEN, or BLUE)</span></p>
 
-		<p class="noindent mono"> <span class="line-number">70.</span>         DISPLAYSURF.fill(bgColor)</p>
+		<p class="noindent mono"><span class="line-number">&#160;70.</span>         DISPLAYSURF.fill(bgColor)</p>
 
-		<p class="noindent mono"> <span class="line-number">71.</span>         drawButtons()</p>
+		<p class="noindent mono"><span class="line-number">&#160;71.</span>         drawButtons()</p>
 
-		<p class="noindent mono"> <span class="line-number">72.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;72.</span></p>
 
-		<p class="noindent mono"> <span class="line-number">73.</span>         scoreSurf
+		<p class="noindent mono"><span class="line-number">&#160;73.</span>         scoreSurf
 = BASICFONT.render('Score: ' + str(score), 1, WHITE)</p>
 
-		<p class="noindent mono"> <span class="line-number">74.</span>         scoreRect
+		<p class="noindent mono"><span class="line-number">&#160;74.</span>         scoreRect
 = scoreSurf.get_rect()</p>
 
-		<p class="noindent mono"> <span class="line-number">75.</span>         scoreRect.topleft
+		<p class="noindent mono"><span class="line-number">&#160;75.</span>         scoreRect.topleft
 = (WINDOWWIDTH - 100, 10)</p>
 
-		<p class="noindent mono"> <span class="line-number">76.</span>         DISPLAYSURF.blit(scoreSurf,
+		<p class="noindent mono"><span class="line-number">&#160;76.</span>         DISPLAYSURF.blit(scoreSurf,
 scoreRect)</p>
 
-		<p class="noindent mono"> <span class="line-number">77.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span></p>
 
 	<p class="noindent mono"><span class="line-number"> 78.</span>        DISPLAYSURF.blit(infoSurf,
 infoRect)</p>
@@ -808,19 +808,19 @@ to <span class="mono">render()</span> outside the game loop on line 50.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"> <span class="line-number">80.</span>        checkForQuit()</p>
+	<p class="noindent mono"><span class="line-number">&#160;80.</span>        checkForQuit()</p>
 
-		<p class="noindent mono"> <span class="line-number">81.</span>         for
+		<p class="noindent mono"><span class="line-number">&#160;81.</span>         for
 event in pygame.event.get(): <span class="comment"># event handling
 loop</span></p>
 
-		<p class="noindent mono"> <span class="line-number">82.</span>             if
+		<p class="noindent mono"><span class="line-number">&#160;82.</span>             if
 event.type == MOUSEBUTTONUP:</p>
 
-		<p class="noindent mono"> <span class="line-number">83.</span>                 mousex,
+		<p class="noindent mono"><span class="line-number">&#160;83.</span>                 mousex,
 mousey = event.pos</p>
 
-	<p class="noindent mono"> <span class="line-number">84.</span>                clickedButton
+	<p class="noindent mono"><span class="line-number">&#160;84.</span>                clickedButton
 = getButtonClicked(mousex, mousey)</p>
 
 </div>
@@ -837,31 +837,31 @@ function will return a Color object of the button clicked (otherwise it returns
 
 	<div class="python-shell">
 
-	<p class="noindent mono"> <span class="line-number">85.</span>            elif
+	<p class="noindent mono"><span class="line-number">&#160;85.</span>            elif
 event.type == KEYDOWN:</p>
 
 		<p class="noindent mono"><span class="line-number"> 86.</span>                if
 event.key == K_q:</p>
 
-		<p class="noindent mono"> <span class="line-number">87.</span>                     clickedButton
+		<p class="noindent mono"><span class="line-number">&#160;87.</span>                     clickedButton
 = YELLOW</p>
 
-		<p class="noindent mono"> <span class="line-number">88.</span>                 elif
+		<p class="noindent mono"><span class="line-number">&#160;88.</span>                 elif
 event.key == K_w:</p>
 
-		<p class="noindent mono"> <span class="line-number">89.</span>                     clickedButton
+		<p class="noindent mono"><span class="line-number">&#160;89.</span>                     clickedButton
 = BLUE</p>
 
-		<p class="noindent mono"> <span class="line-number">90.</span>                 elif
+		<p class="noindent mono"><span class="line-number">&#160;90.</span>                 elif
 event.key == K_a:</p>
 
-		<p class="noindent mono"> <span class="line-number">91.</span>                     clickedButton
+		<p class="noindent mono"><span class="line-number">&#160;91.</span>                     clickedButton
 = RED</p>
 
-		<p class="noindent mono"> <span class="line-number">92.</span>                 elif
+		<p class="noindent mono"><span class="line-number">&#160;92.</span>                 elif
 event.key == K_s:</p>
 
-	<p class="noindent mono"> <span class="line-number">93.</span>                    clickedButton
+	<p class="noindent mono"><span class="line-number">&#160;93.</span>                    clickedButton
 = GREEN</p>
 
 </div>
@@ -883,13 +883,13 @@ keyboard.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"> <span class="line-number">97.</span>        if
+	<p class="noindent mono"><span class="line-number">&#160;97.</span>        if
 not waitingForInput:</p>
 
-		<p class="noindent mono"> <span class="line-number">98.</span>             <span
+		<p class="noindent mono"><span class="line-number">&#160;98.</span>             <span
 class="comment"># play the pattern</span></p>
 
-		<p class="noindent mono"> <span class="line-number">99.</span>             pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">&#160;99.</span>             pygame.display.update()</p>
 
 		<p class="noindent mono"><span class="line-number">100.</span>            pygame.time.wait(1000)</p>
 
@@ -1123,7 +1123,7 @@ the <span class="mono">tick()</span> method.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"><span class="line-number">136.</span>def
+	<p class="noindent mono"><span class="line-number">136.</span> def
 terminate():</p>
 
 		<p class="noindent mono"><span class="line-number">137.</span>    pygame.quit()</p>
@@ -1134,7 +1134,7 @@ terminate():</p>
 
 		<p class="noindent mono"><span class="line-number">140.</span></p>
 
-		<p class="noindent mono"><span class="line-number">141.</span>def
+		<p class="noindent mono"><span class="line-number">141.</span> def
 checkForQuit():</p>
 
 		<p class="noindent mono"><span class="line-number">142.</span>    for
@@ -1168,7 +1168,7 @@ Sliding Puzzle chapter, so we will skip describing them again.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"><span class="line-number">150.</span>def
+	<p class="noindent mono"><span class="line-number">150.</span> def
 flashButtonAnimation(color, animationSpeed=50):</p>
 
 		<p class="noindent mono"><span class="line-number">151.</span>    if
@@ -1285,88 +1285,40 @@ after the sound effect has started to play, so the sound will be playing during
 the button flash animation.</p>
 
 	<div class="python-shell">
-
-	<p class="noindent mono"><span class="line-number">173.</span>    for
-start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment">#
-animation loop</span></p>
-
-		<p class="noindent mono"><span class="line-number">174.</span>        for
-alpha in range(start, end, animationSpeed * step):</p>
-
-		<p class="noindent mono"><span class="line-number">175.</span>            checkForQuit()</p>
-
-		<p class="noindent mono"><span class="line-number">176.</span>            DISPLAYSURF.blit(origSurf,
-(0, 0))</p>
-
-		<p class="noindent mono"><span class="line-number">177.</span>            flashSurf.fill((r,
-g, b, alpha))</p>
-
-		<p class="noindent mono"><span class="line-number">178.</span>            DISPLAYSURF.blit(flashSurf,
-rectangle.topleft)</p>
-
-		<p class="noindent mono"><span class="line-number">179.</span>            pygame.display.update()</p>
-
-		<p class="noindent mono"><span class="line-number">180.</span>            FPSCLOCK.tick(FPS)</p>
-
-	<p class="noindent mono"><span class="line-number">181.</span>    DISPLAYSURF.blit(origSurf,
-(0, 0))</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">173.</span> &#160;&#160;&#160;&#160;for start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment"># animation loop</span></p>
+		<p class="noindent mono"><span class="line-number">174.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for alpha in range(start, end, animationSpeed * step):</p>
+		<p class="noindent mono"><span class="line-number">175.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;checkForQuit()</p>
+		<p class="noindent mono"><span class="line-number">176.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(origSurf, (0, 0))</p>
+		<p class="noindent mono"><span class="line-number">177.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;flashSurf.fill((r, g, b, alpha))</p>
+		<p class="noindent mono"><span class="line-number">178.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(flashSurf, rectangle.topleft)</p>
+		<p class="noindent mono"><span class="line-number">179.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">180.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">181.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.blit(origSurf, (0, 0))</p>
+	</div>
 
 		<p>Remember that to do the animation, we want to first draw the
 <span class="mono">flashSurf</span> with color that has increasing alpha
 values from <span class="mono">0</span> to <span class="mono">255</span> to
 do the brightening part of the animation. Then to do the dimming, we want the
 alpha value to go from <span class="mono">255</span> to <span class="mono">0</span>.
-We <em>could</em> do that with code like this:</p>
+We <i>could</i> do that with code like this:</p>
 
 	<div class="python-shell">
-
-	<p class="noindent mono">    for alpha in <strong><span
-style='font-family:"Lucida Sans Typewriter"'>range(0, 255, animationSpeed)</span></strong>:
-# brightening</p>
-
-	<p class="noindent mono">
-checkForQuit()</p>
-
-	<p class="noindent mono">        DISPLAYSURF.blit(origSurf,
-(0, 0))</p>
-
-	<p class="noindent mono">
-flashSurf.fill((r, g, b, alpha))</p>
-
-	<p class="noindent mono">        DISPLAYSURF.blit(flashSurf,
-rectangle.topleft)</p>
-
-	<p class="noindent mono">
-pygame.display.update()</p>
-
-	<p class="noindent mono">
-FPSCLOCK.tick(FPS)</p>
-
-	<p class="noindent mono">    for alpha in
-<strong><span style='font-family:"Lucida Sans Typewriter"'>range(255, 0,
--animationSpeed)</span></strong>: # dimming</p>
-
-	<p class="noindent mono">
-checkForQuit()</p>
-
-	<p class="noindent mono">        DISPLAYSURF.blit(origSurf,
-(0, 0))</p>
-
-	<p class="noindent mono">
-flashSurf.fill((r, g, b, alpha))</p>
-
-	<p class="noindent mono">        DISPLAYSURF.blit(flashSurf,
-rectangle.topleft)</p>
-
-	<p class="noindent mono">
-pygame.display.update()</p>
-
-	<p class="noindent mono">
-FPSCLOCK.tick(FPS)</p>
-
-</div>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;for alpha in <b>range(0, 255, animationSpeed)</b>: # brightening</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;checkForQuit()</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(origSurf, (0, 0))</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;flashSurf.fill((r, g, b, alpha))</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(flashSurf, rectangle.topleft)</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;for alpha in <b>range(255, 0, -animationSpeed)</b>: # dimming</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;checkForQuit()</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(origSurf, (0, 0))</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;flashSurf.fill((r, g, b, alpha))</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(flashSurf, rectangle.topleft)</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
+	</div>
 
 		<p>But notice that the code inside the <span class="mono">for</span>
 loops handles drawing the frame and are identical to each other. If we wrote
@@ -1385,15 +1337,9 @@ class="mono">for</span> loop on line 173, which supplies different values for
 the <span class="mono">range()</span> call on line 174:</p>
 
 	<div class="python-shell">
-
-	<p class="noindent mono"><span class="line-number">173.</span>    for
-start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment">#
-animation loop</span></p>
-
-	<p class="noindent mono"><span class="line-number">174.</span>        for
-alpha in range(start, end, animationSpeed * step):</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">173.</span> &#160;&#160;&#160;&#160;for start, end, step in ((0, 255, 1), (255, 0, -1)): <span class="comment"># animation loop</span></p>
+		<p class="noindent mono"><span class="line-number">174.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for alpha in range(start, end, animationSpeed * step):</p>
+	</div>
 
 		<p>On the first iteration of line 173’s <span class="mono">for</span>
 loop, <span class="mono">start</span> is set to <span class="mono">0</span>, <span
@@ -1468,7 +1414,7 @@ class="mono">FPS</span>.)</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"><span class="line-number">184.</span>def
+	<p class="noindent mono"><span class="line-number">184.</span> def
 drawButtons():</p>
 
 		<p class="noindent mono"><span class="line-number">185.</span>    pygame.draw.rect(DISPLAYSURF,
@@ -1584,7 +1530,7 @@ detail at <a href="https://invpy.com/global">https://invpy.com/global</a>.</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"><span class="line-number">212.</span>def
+	<p class="noindent mono"><span class="line-number">212.</span> def
 gameOverAnimation(color=WHITE, animationSpeed=50):</p>
 
 		<p class="noindent mono"><span class="line-number">213.</span>    <span
@@ -1690,7 +1636,7 @@ first, and then decreasing).</p>
 
 	<div class="python-shell">
 
-	<p class="noindent mono"><span class="line-number">238.</span>def
+	<p class="noindent mono"><span class="line-number">238.</span> def
 getButtonClicked(x, y):</p>
 
 		<p class="noindent mono"><span class="line-number">239.</span>    if
@@ -1724,7 +1670,7 @@ None</p>
 
 		<p class="noindent mono"><span class="line-number">249.</span></p>
 
-		<p class="noindent mono"><span class="line-number">250.</span>if
+		<p class="noindent mono"><span class="line-number">250.</span> if
 __name__ == '__main__':</p>
 
 	<p class="noindent mono"><span class="line-number">251.</span>    main()</p>
@@ -1780,7 +1726,7 @@ implicit” is one of the Python Koans. </p>
 		<p>The koans are a group of little sayings about how to write good
 code. There’s an Easter egg (that is, a little hidden surprise) in the Python
 interactive shell where if you try to import a module named <span
-class="mono">this</span>, then it will display “The Zen of Python” koans. Try
+class="mono">this</span>, then it will display “<i>The Zen of Python</i>” koans. Try
 it out in the interactive shell:</p>
 
 	<div class="python-shell">

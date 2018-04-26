@@ -24,15 +24,15 @@
 	<p>Remember, do not type the numbers or the periods at the beginning of each line (that’s just for reference in this book).</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
-		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">3.</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
-		<p class="noindent mono"><span class="line-number">5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
-		<p class="noindent mono"><span class="line-number">6.</span> pygame.display.set_caption(<span class="string">'Hello World!'</span>)</p>
-		<p class="noindent mono"><span class="line-number">7.</span> while True: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
-		<p class="noindent mono"><span class="line-number">9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">&#160;1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">&#160;2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;3.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
+		<p class="noindent mono"><span class="line-number">&#160;6.</span> pygame.display.set_caption(<span class="string">'Hello World!'</span>)</p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span> while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">&#160;9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
 		<p class="noindent mono"><span class="line-number">10.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
 		<p class="noindent mono"><span class="line-number">11.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
 		<p class="noindent mono"><span class="line-number">12.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
@@ -47,27 +47,27 @@
 	<p class="noindent">The first few lines of code in the Hello World program are lines that will begin almost every program you write that uses Pygame.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">&#160;1.</span> import pygame, sys</p>
 	</div>
 
 	<p>Line 1 is a simple <span class="mono">import</span> statement that imports the <span class="mono">pygame</span> and <span class="mono">sys</span> modules so that our program can use the functions in them. All of the Pygame functions dealing with graphics, sound, and other features that Pygame provides are in the <span class="mono">pygame</span> module.</p>
 	<p>Note that when you import the pygame module you automatically import all the modules that are in the pygame module as well, such as <span class="mono">pygame.images</span> and <span class="mono">pygame.mixer.music</span>. There’s no need to import these modules-inside-modules with additional <span class="mono">import</span> statements.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;2.</span> from pygame.locals import *</p>
 	</div>
 
 	<p>Line 2 is also an <span class="mono">import</span> statement. However, instead of the <span class="mono">import modulename</span> format, it uses the from modulename import * format. Normally if you want to call a function that is in a module, you must use the <span class="mono">modulename.functionname()</span> format after importing the module. However, with from <span class="mono">modulename import *</span>, you can skip the modulename. portion and simply use <span class="mono">functionname()</span> (just like Python’s built-in functions).</p>
 	<p>The reason we use this form of import statement for <span class="mono">pygame.locals</span> is because pygame.locals contains several constant variables that are easy to identify as being in the pygame.locals module without <span class="mono">pygame.locals</span>. in front of them. For all other modules, you generally want to use the regular import modulename format. (There is more information about why you want to do this at <a href="https://invpy.com/namespaces">https://invpy.com/namespaces</a>.)</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;4.</span> pygame.init()</p>
 	</div>
 
 	<p>Line 4 is the <span class="mono">pygame.init()</span> function call, which always needs to be called after importing the pygame module and before calling any other Pygame function. You don’t need to know what this function does, you just need to know that it needs to be called first in order for many Pygame functions to work. If you ever see an error message like pygame.error: font not initialized, check to see if you forgot to call <span class="mono">pygame.init()</span> at the start of your program.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
+		<p class="noindent mono"><span class="line-number">&#160;5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
 	</div>
 
 	<p>Line 5 is a call to the <span class="mono">pygame.display.set_mode()</span> function, which returns the pygame.Surface object for the window. (Surface objects are described later in this chapter.) Notice that we pass a tuple value of two integers to the function: <span class="mono">(400, 300)</span>. This tuple tells the <span class="mono">set_mode()</span> function how wide and how high to make the window in pixels. <span class="mono">(400, 300)</span> will make a window with a width of 400 pixels and height of 300 pixels.</p>
@@ -75,7 +75,7 @@
 	<p>The <span class="mono">pygame.Surface</span> object (we will just call them Surface objects for short) returned is stored in a variable named <span class="mono">DISPLAYSURF</span>.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">6.</span> pygame.display.set_caption('Hello World!')</p>
+		<p class="noindent mono"><span class="line-number">&#160;6.</span> pygame.display.set_caption('Hello World!')</p>
 	</div>
 
 	<p>Line 6 sets the caption text that will appear at the top of the window by calling the <span class="mono">pygame.display.set_caption()</span> function. The string value <span class="mono">'Hello World!'</span> is passed in this function call to make that text appear as the caption:</p>
@@ -83,8 +83,8 @@
 	<h1 class="subheading" id="game-loops-game-states">Game Loops and Game States</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">7.</span> while True: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span> while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span> &#160;&#160;&#160;&#160;for event in pygame.event.get():</p>
 	</div>
 
 	<p>Line 7 is a <span class="mono">while</span> loop that has a condition of simply the value <span class="mono">True</span>. This means that it never exits due to its condition evaluating to <span class="mono">False</span>. The only way the program execution will ever exit the loop is if a break statement is executed (which moves execution to the first line after the loop) or <span class="mono">sys.exit()</span> (which terminates the program). If a loop like this was inside a function, a <span class="mono">return</span> statement will also move execution out of the loop (as well as the function too).</p>
@@ -109,8 +109,8 @@
 	<p>The list of Event objects will be for each event that has happened since the last time the <span class="mono">pygame.event.get()</span> function was called. (Or, if <span class="mono">pygame.event.get()</span> has never been called, the events that have happened since the start of the program.)</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">7.</span> <span class="keyword">while True</span>: <span class="comment"># main game loop</span></p>
-		<p class="noindent mono"><span class="line-number">8.</span> &#160;&#160;&#160;&#160;<span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span> <span class="keyword">while True</span>: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span> &#160;&#160;&#160;&#160;<span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</p>
 	</div>
 
 	<p>Line 8 is a for loop that will iterate over the list of Event objects that was returned by <span class="mono">pygame.event.get()</span>. On each iteration through the for loop, a variable named event will be assigned the value of the next event object in this list. The list of Event objects returned from <span class="mono">pygame.event.get()</span> will be in the order that the events happened. If the user clicked the mouse and then pressed a keyboard key, the Event object for the mouse click would be the first item in the list and the Event object for the keyboard press would be second. If no events have happened, then <span class="mono">pygame.event.get()</span> will return a blank list.</p>
@@ -118,7 +118,7 @@
 	<h1 class="subheading" id="pygame-quit">The <span class="mono">QUIT</span> Event and <span class="mono">pygame.quit()</span> Function</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="keyword">if</span> event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">&#160;9.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="keyword">if</span> event.type == QUIT:</p>
 		<p class="noindent mono"><span class="line-number">10.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
 		<p class="noindent mono"><span class="line-number">11.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit()</p>
 	</div>
@@ -143,7 +143,7 @@
 
 	<p>We can refer to a specific pixel by using a Cartesian Coordinate system. Each column of the <a href="glossary.xhtml#x-axis"><b>X-axis</b></a> and each row of the <a href="glossary.xhtml#y-axis"><b>Y-axis</b></a> will have an “address” that is an integer from 0 to 7 so that we can locate any pixel by specifying the X and Y axis integers.</p>
 
-	<p>For example, in the above 8x8 image, we can see that the pixels at the XY coordinates (4, 0), (2, 2), (0, 5), and (5, 6) have been painted black, the pixel at (2, 4) has been painted gray, while all the other pixels are painted white. XY coordinates are also called <a href="glossary.xhtml#points"><b>points</b></a>. If you’ve taken a math class and learned about Cartesian Coordinates, you might notice that the Y-axis starts at 0 at the <i>top</i> and then increases going <i>down</i>, rather than increasing as it goes up. This is just how Cartesian Coordinates work in Pygame (and almost every programming language).</p>
+	<p>For example, in the above 8 × 8 image, we can see that the pixels at the XY coordinates (4, 0), (2, 2), (0, 5), and (5, 6) have been painted black, the pixel at (2, 4) has been painted gray, while all the other pixels are painted white. XY coordinates are also called <a href="glossary.xhtml#points"><b>points</b></a>. If you’ve taken a math class and learned about Cartesian Coordinates, you might notice that the Y-axis starts at 0 at the <i>top</i> and then increases going <i>down</i>, rather than increasing as it goes up. This is just how Cartesian Coordinates work in Pygame (and almost every programming language).</p>
 
 	<p>The Pygame framework often represents Cartesian Coordinates as a tuple of two integers, such as (4, 0) or (2, 2). The first integer is the X coordinate and the second is the Y coordinate. (Cartesian Coordinates are covered in more detail in chapter 12 of <i>“Invent Your Own Computer Games with Python”</i> at <a href="https://invpy.com/chap12">https://invpy.com/chap12</a>)</p>
 
@@ -187,7 +187,7 @@
 
 	<h1 class="subheading" id="colors">Colors</h1>
 	<p class="noindent">There are three primary colors of light: red, green and blue. (Red, blue, and yellow are the primary colors for paints and pigments, but the computer monitor uses light, not paint.) By combining different amounts of these three colors you can form any other color. In Pygame, we represent colors with tuples of three integers. The first value in the tuple is how much red is in the color. An integer value of <span class="mono">0</span> means there is no red in this color, and a value of <span class="mono">255</span> means there is the maximum amount of red in the color. The second value is for green and the third value is for blue. These tuples of three integers used to represent a color are often called <a href="glossary.xhtml#rgb-values"><b>RGB values</b></a>.</p>
-	<p>Because you can use any combination of <span class="mono">0</span> to <span class="mono">255</span> for each of the three primary colors, this means Pygame can draw 16,777,216 different colors (that is, 256 x 256 x 256 colors). However, if try to use a number larger than <span class="mono">255</span> or a negative number, you will get an error that looks like “<span class="mono">ValueError: invalid color argument</span>”.</p>
+	<p>Because you can use any combination of <span class="mono">0</span> to <span class="mono">255</span> for each of the three primary colors, this means Pygame can draw 16,777,216 different colors (that is, 256 × 256 × 256 colors). However, if try to use a number larger than <span class="mono">255</span> or a negative number, you will get an error that looks like “<span class="mono">ValueError: invalid color argument</span>”.</p>
 	<p>For example, we will create the tuple <span class="mono">(0, 0, 0)</span> and store it in a variable named <span class="mono">BLACK</span>. With no amount of red, green, or blue, the resulting color is completely black. The color black is the absence of any color. The tuple <span class="mono">(255, 255, 255)</span> for a maximum amount of red, green, and blue to result in white. The color white is the full combination of red, green, and blue. The tuple <span class="mono">(255, 0, 0)</span> represents the maximum amount of red but no amount of green and blue, so the resulting color is red. Similarly, <span class="mono">(0, 255, 0)</span> is green and <span class="mono">(0, 0, 255)</span> is blue.</p>
 	<p>You can mix the amount of red, green, and blue to form other colors. Here are the RGB values for a few common colors:</p>
 
@@ -305,15 +305,15 @@
 	<p class="noindent">Pygame provides several different functions for drawing different shapes onto a surface object. These shapes such as rectangles, circles, ellipses, lines, or individual pixels are often called <a href="glossary.xhtml#drawing-primitives"><b>drawing primitives</b></a>. Open IDLE’s file editor and type in the following program, and save it as <i>drawing.py</i>.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
-		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">3.</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
-		<p class="noindent mono"><span class="line-number">5.</span></p>
-		<p class="noindent mono"><span class="line-number">6.</span> <span class="comment"># set up the window</span></p>
-		<p class="noindent mono"><span class="line-number">7.</span> DISPLAYSURF = pygame.display.set_mode((500, 400), 0, 32)</p>
-		<p class="noindent mono"><span class="line-number">8.</span> pygame.display.set_caption('Drawing')</p>
-		<p class="noindent mono"><span class="line-number">9.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">&#160;2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;3.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;6.</span> <span class="comment"># set up the window</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span> DISPLAYSURF = pygame.display.set_mode((500, 400), 0, 32)</p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span> pygame.display.set_caption('Drawing')</p>
+		<p class="noindent mono"><span class="line-number">&#160;9.</span></p>
 		<p class="noindent mono"><span class="line-number">10.</span> <span class="comment"># set up the colors</span></p>
 		<p class="noindent mono"><span class="line-number">11.</span> BLACK = (0, 0, 0)</p>
 		<p class="noindent mono"><span class="line-number">12.</span> WHITE = (255, 255, 255)</p>
@@ -407,15 +407,15 @@
 	<p>Here is an example program demonstrating a simple animation. Type this code into IDLE’s file editor and save it as <i>catanimation.py</i>. It will also require the image file cat.png to be in the same folder as the <i>catanimation.py</i> file. You can download this image from <a href="https://invpy.com/cat.png">https://invpy.com/cat.png</a>. This code is available at <a href="https://invpy.com/catanimation.py">https://invpy.com/catanimation.py</a>.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
-		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">3.</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
-		<p class="noindent mono"><span class="line-number">5.</span></p>
-		<p class="noindent mono"><span class="line-number">6.</span> FPS = 30 <span class="comment"># frames per second setting</span></p>
-		<p class="noindent mono"><span class="line-number">7.</span> fpsClock = pygame.time.Clock()</p>
-		<p class="noindent mono"><span class="line-number">8.</span></p>
-		<p class="noindent mono"><span class="line-number">9.</span> <span class="comment"># set up the window</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">&#160;2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;3.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;6.</span> FPS = 30 <span class="comment"># frames per second setting</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span> fpsClock = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;9.</span> <span class="comment"># set up the window</span></p>
 		<p class="noindent mono"><span class="line-number">10.</span> DISPLAYSURF = pygame.display.set_mode((400, 300), 0, 32)</p>
 		<p class="noindent mono"><span class="line-number">11.</span> pygame.display.set_caption('Animation')</p>
 		<p class="noindent mono"><span class="line-number">12.</span></p>
@@ -500,15 +500,15 @@
 	<p>The above message would take forty one calls to the <span class="mono">pygame.draw.line()</span> function to make. Instead, Pygame provides some much simpler functions for fonts and creating text. Here is a small Hello World program using Pygame’s font functions. Type it into IDLE’s file editor and save it as <i>fonttext.py</i>:</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">1.</span> import pygame, sys</p>
-		<p class="noindent mono"><span class="line-number">2.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">3.</span></p>
-		<p class="noindent mono"><span class="line-number">4.</span> pygame.init()</p>
-		<p class="noindent mono"><span class="line-number">5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
-		<p class="noindent mono"><span class="line-number">6.</span> pygame.display.set_caption('Hello World!')</p>
-		<p class="noindent mono"><span class="line-number">7.</span></p>
-		<p class="noindent mono"><span class="line-number">8.</span> WHITE = (255, 255, 255)</p>
-		<p class="noindent mono"><span class="line-number">9.</span> GREEN = (0, 255, 0)</p>
+		<p class="noindent mono"><span class="line-number">&#160;1.</span> import pygame, sys</p>
+		<p class="noindent mono"><span class="line-number">&#160;2.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;3.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;4.</span> pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;5.</span> DISPLAYSURF = pygame.display.set_mode((400, 300))</p>
+		<p class="noindent mono"><span class="line-number">&#160;6.</span> pygame.display.set_caption('Hello World!')</p>
+		<p class="noindent mono"><span class="line-number">&#160;7.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;8.</span> WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;9.</span> GREEN = (0, 255, 0)</p>
 		<p class="noindent mono"><span class="line-number">10.</span> BLUE = (0, 0, 128)</p>
 		<p class="noindent mono"><span class="line-number">11.</span></p>
 		<p class="noindent mono"><span class="line-number">12.</span> fontObj = pygame.font.Font('freesansbold.ttf', 32)</p>
