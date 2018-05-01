@@ -34,15 +34,15 @@
 	</ul>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">&#160;1.</span> <span class="comment"># Squirrel Eat Squirrel (a 2D Katamari Damacy clone)</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;5.</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;6.</span> import random, sys, time, math, pygame</p>
-		<p class="noindent mono"><span class="line-number">&#160;7.</span> from pygame.locals import *</p>
-		<p class="noindent mono"><span class="line-number">&#160;8.</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;9.</span> FPS = 30 <span class="comment"># frames per second to update the screen</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;1.</span> <span class="comment"># Squirrel Eat Squirrel (a 2D Katamari Damacy clone)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;6.</span> import random, sys, time, math, pygame</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;9.</span> FPS = 30 <span class="comment"># frames per second to update the screen</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;10.</span> WINWIDTH = 640 <span class="comment"># width of the program's window, in pixels</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;11.</span> WINHEIGHT = 480 <span class="comment"># height in pixels</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;12.</span> HALF_WINWIDTH = int(WINWIDTH / 2)</p>
@@ -159,25 +159,12 @@
 		<p class="noindent mono"><span class="line-number">123.</span> &#160;&#160;&#160;&#160;moveDown = False</p>
 		<p class="noindent mono"><span class="line-number">124.</span></p>
 		<p class="noindent mono"><span class="line-number">125.</span> &#160;&#160;&#160;&#160;<span class="comment"># start off with some random grass images on the screen</span></p>
-	</div>
-<!--
-		<p class="noindent mono"><span class="line-number">126.</span>    for
-i in range(10):</p>
-
-		<p class="noindent mono"><span class="line-number">127.</span>        grassObjs.append(makeNewGrass(camerax,
-cameray))</p>
-
-		<p class="noindent mono"><span class="line-number">128.</span>        grassObjs[i]['x']
-= random.randint(0, WINWIDTH)</p>
-
-		<p class="noindent mono"><span class="line-number">129.</span>        grassObjs[i]['y']
-= random.randint(0, WINHEIGHT)</p>
-
+		<p class="noindent mono"><span class="line-number">126.</span>    for i in range(10):</p>
+		<p class="noindent mono"><span class="line-number">127.</span>        grassObjs.append(makeNewGrass(camerax, cameray))</p>
+		<p class="noindent mono"><span class="line-number">128.</span>        grassObjs[i]['x'] = random.randint(0, WINWIDTH)</p>
+		<p class="noindent mono"><span class="line-number">129.</span>        grassObjs[i]['y'] = random.randint(0, WINHEIGHT)</p>
 		<p class="noindent mono"><span class="line-number">130.</span></p>
-
-		<p class="noindent mono"><span class="line-number">131.</span>    while
-True: <span class="comment"># main game loop</span></p>
-
+		<p class="noindent mono"><span class="line-number">131.</span>    while True: <span class="comment"># main game loop</span></p>
 		<p class="noindent mono"><span class="line-number">132.</span>        <span
 class="comment"># Check if we should turn off invulnerability</span></p>
 
@@ -590,7 +577,7 @@ i in range(len(squirrelObjs)-1, -1, -1):</p>
 		<p class="noindent mono"><span class="line-number">276.</span>                    <span
 class="comment"># a player/squirrel collision has occurred</span></p>
 
-<p class="noindent mono"><span class="comment">277.</span></p>
+		<p class="noindent mono"><span class="line-number">277.</span></p>
 
 		<p class="noindent mono"><span class="line-number">278.</span>                    if
 sqObj['width'] * sqObj['height'] &lt;= playerObj['size']**2:</p>
@@ -694,7 +681,7 @@ winRect2)</p>
 
 		<p class="noindent mono"><span class="line-number">315.</span></p>
 
-		<p class="noindent mono"><span class="line-number">316.</span>def
+		<p class="noindent mono"><span class="line-number">316.</span> def
 drawHealthMeter(currentHealth):</p>
 
 		<p class="noindent mono"><span class="line-number">317.</span>    for
@@ -713,7 +700,7 @@ WHITE, (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10), 1)</p>
 
 		<p class="noindent mono"><span class="line-number">322.</span></p>
 
-		<p class="noindent mono"><span class="line-number">323.</span>def
+		<p class="noindent mono"><span class="line-number">323.</span> def
 terminate():</p>
 
 		<p class="noindent mono"><span class="line-number">324.</span>    pygame.quit()</p>
@@ -724,7 +711,7 @@ terminate():</p>
 
 		<p class="noindent mono"><span class="line-number">327.</span></p>
 
-		<p class="noindent mono"><span class="line-number">328.</span>def
+		<p class="noindent mono"><span class="line-number">328.</span> def
 getBounceAmount(currentBounce, bounceRate, bounceHeight):</p>
 
 		<p class="noindent mono"><span class="line-number">329.</span>    <span
@@ -745,7 +732,7 @@ int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p
 
 		<p class="noindent mono"><span class="line-number">334.</span></p>
 
-		<p class="noindent mono"><span class="line-number">335.</span>def
+		<p class="noindent mono"><span class="line-number">335.</span> def
 getRandomVelocity():</p>
 
 		<p class="noindent mono"><span class="line-number">336.</span>    speed
@@ -766,7 +753,7 @@ speed</p>
 
 		<p class="noindent mono"><span class="line-number">342.</span></p>
 
-		<p class="noindent mono"><span class="line-number">343.</span>def
+		<p class="noindent mono"><span class="line-number">343.</span> def
 getRandomOffCameraPos(camerax, cameray, objWidth, objHeight):</p>
 
 		<p class="noindent mono"><span class="line-number">344.</span>    <span
@@ -784,7 +771,7 @@ True:</p>
 		<p class="noindent mono"><span class="line-number">348.</span>        y
 = random.randint(cameray - WINHEIGHT, cameray + (2 * WINHEIGHT))</p>
 
-<p class="noindent mono"><span class="line-number">&#160;349.
+		<p class="noindent mono"><span class="line-number">&#160;349.
 </span><span class="comment"># create a Rect object with the random
 coordinates and use colliderect()</span></p>
 
@@ -805,7 +792,7 @@ x, y</p>
 
 		<p class="noindent mono"><span class="line-number">355.</span></p>
 
-		<p class="noindent mono"><span class="line-number">356.</span>def
+		<p class="noindent mono"><span class="line-number">356.</span> def
 makeNewSquirrel(camerax, cameray):</p>
 
 		<p class="noindent mono"><span class="line-number">357.</span>    sq
@@ -860,7 +847,7 @@ sq</p>
 
 		<p class="noindent mono"><span class="line-number">374.</span></p>
 
-		<p class="noindent mono"><span class="line-number">375.</span>def
+		<p class="noindent mono"><span class="line-number">375.</span> def
 makeNewGrass(camerax, cameray):</p>
 
 		<p class="noindent mono"><span class="line-number">376.</span>    gr
@@ -889,7 +876,7 @@ gr</p>
 
 		<p class="noindent mono"><span class="line-number">384.</span></p>
 
-		<p class="noindent mono"><span class="line-number">385.</span>def
+		<p class="noindent mono"><span class="line-number">385.</span> def
 isOutsideActiveArea(camerax, cameray, obj):</p>
 
 		<p class="noindent mono"><span class="line-number">386.</span>    <span
@@ -917,10 +904,10 @@ not boundsRect.colliderect(objRect)</p>
 
 		<p class="noindent mono"><span class="line-number">394.</span></p>
 
-		<p class="noindent mono"><span class="line-number">395.</span>if
+		<p class="noindent mono"><span class="line-number">395.</span> if
 __name__ == '__main__':</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;396. </span>    main()</p>
+		<p class="noindent mono"><span class="line-number">396.</span>     main()</p>
 
 </div>
 
@@ -928,60 +915,60 @@ __name__ == '__main__':</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">1.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;&#160;1.</span> <span
 class="comment"># Squirrel Eat Squirrel (a 2D Katamari Damacy clone)</span></p>
 
-		<p class="noindent mono"><span class="line-number">2.</span> <span
-class="comment"># By Al Sweigart <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="27464b674e4951424953504e534f575e534f48490944484a">[email&#160;protected]</a></span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;2.</span> <span
+class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
 
-		<p class="noindent mono"><span class="line-number">3.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;&#160;3.</span> <span
 class="comment"># http://inventwithpython.com/pygame</span></p>
 
-		<p class="noindent mono"><span class="line-number">4.</span> <span
+		<p class="noindent mono"><span class="line-number">&#160;&#160;4.</span> <span
 class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
 
-		<p class="noindent mono"><span class="line-number">5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;5.</span></p>
 
-		<p class="noindent mono"><span class="line-number">6.</span>import
+		<p class="noindent mono"><span class="line-number">&#160;&#160;6.</span> import
 random, sys, time, math, pygame</p>
 
-		<p class="noindent mono"><span class="line-number">7.</span>from
+		<p class="noindent mono"><span class="line-number">&#160;&#160;7.</span> from
 pygame.locals import *</p>
 
-		<p class="noindent mono"><span class="line-number">8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;8.</span></p>
 
-		<p class="noindent mono"><span class="line-number">9.</span>FPS
+		<p class="noindent mono"><span class="line-number">&#160;&#160;9.</span> FPS
 = 30 <span class="comment"># frames per second to update the screen</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;10.</span>WINWIDTH
+		<p class="noindent mono"><span class="line-number">&#160;10.</span> WINWIDTH
 = 640 <span class="comment"># width of the program's window, in pixels</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;11.</span>WINHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;11.</span> WINHEIGHT
 = 480 <span class="comment"># height in pixels</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;12.</span>HALF_WINWIDTH
+		<p class="noindent mono"><span class="line-number">&#160;12.</span> HALF_WINWIDTH
 = int(WINWIDTH / 2)</p>
 
-		<p class="noindent mono"><span class="line-number">&#160;13.</span>HALF_WINHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;13.</span> HALF_WINHEIGHT
 = int(WINHEIGHT / 2)</p>
 
 		<p class="noindent mono"><span class="line-number">&#160;14.</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;15.</span>GRASSCOLOR
+		<p class="noindent mono"><span class="line-number">&#160;15.</span> GRASSCOLOR
 = (24, 255, 0)</p>
 
-		<p class="noindent mono"><span class="line-number">&#160;16.</span>WHITE
+		<p class="noindent mono"><span class="line-number">&#160;16.</span> WHITE
 = (255, 255, 255)</p>
 
-		<p class="noindent mono"><span class="line-number">&#160;17.</span>RED
+		<p class="noindent mono"><span class="line-number">&#160;17.</span> RED
 = (255, 0, 0)</p>
 
-</div>
+	</div>
 
 	<p>The start of the program assigns several constant variables.
 This program frequently makes use of the half length of the width and height of
 the window so much that the <span class="mono">HALF_WINWIDTH</span> and <span
-class=Literal>HALF_WINHEIGHT</span> variables store these numbers.</p>
+class="mono">HALF_WINHEIGHT</span> variables store these numbers.</p>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">&#160;19.</span> CAMERASLACK = 90     <span class="comment"># how far from the center the squirrel moves before moving the camera</span></p>
@@ -993,57 +980,57 @@ pixels away from the center of the window.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">&#160;20.</span>MOVERATE
+		<p class="noindent mono"><span class="line-number">&#160;20.</span> MOVERATE
 = 9         <span class="comment"># how fast the player moves</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;21.</span>BOUNCERATE
+		<p class="noindent mono"><span class="line-number">&#160;21.</span> BOUNCERATE
 = 6       <span class="comment"># how fast the player bounces (large is
 slower)</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;22.</span>BOUNCEHEIGHT
+		<p class="noindent mono"><span class="line-number">&#160;22.</span> BOUNCEHEIGHT
 = 30    <span class="comment"># how high the player bounces</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;23.</span>STARTSIZE
+		<p class="noindent mono"><span class="line-number">&#160;23.</span> STARTSIZE
 = 25       <span class="comment"># how big the player starts off</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;24.</span>WINSIZE
+		<p class="noindent mono"><span class="line-number">&#160;24.</span> WINSIZE
 = 300        <span class="comment"># how big the player needs to be to
 win</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;25.</span>INVULNTIME
+		<p class="noindent mono"><span class="line-number">&#160;25.</span> INVULNTIME
 = 2       <span class="comment"># how long the player is invulnerable
 after being hit in seconds</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;26.</span>GAMEOVERTIME
+		<p class="noindent mono"><span class="line-number">&#160;26.</span> GAMEOVERTIME
 = 4     <span class="comment"># how long the &quot;game over&quot; text
 stays on the screen in seconds</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;27.</span>MAXHEALTH
+		<p class="noindent mono"><span class="line-number">&#160;27.</span> MAXHEALTH
 = 3        <span class="comment"># how much health the player starts
 with</span></p>
 
 		<p class="noindent mono"><span class="line-number">&#160;28.</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;29.</span>NUMGRASS
+		<p class="noindent mono"><span class="line-number">&#160;29.</span> NUMGRASS
 = 80        <span class="comment"># number of grass objects in the active
 area</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;30.</span>NUMSQUIRRELS
+		<p class="noindent mono"><span class="line-number">&#160;30.</span> NUMSQUIRRELS
 = 30    <span class="comment"># number of squirrels in the active area</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;31.</span>SQUIRRELMINSPEED
+		<p class="noindent mono"><span class="line-number">&#160;31.</span> SQUIRRELMINSPEED
 = 3 <span class="comment"># slowest squirrel speed</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;32.</span>SQUIRRELMAXSPEED
+		<p class="noindent mono"><span class="line-number">&#160;32.</span> SQUIRRELMAXSPEED
 = 7 <span class="comment"># fastest squirrel speed</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;33.</span>DIRCHANGEFREQ
+		<p class="noindent mono"><span class="line-number">&#160;33.</span> DIRCHANGEFREQ
 = 2    <span class="comment"># % chance of direction change per frame</span></p>
 
-		<p class="noindent mono"><span class="line-number">&#160;34.</span>LEFT
+		<p class="noindent mono"><span class="line-number">&#160;34.</span> LEFT
 = 'left'</p>
 
-		<p class="noindent mono"><span class="line-number">&#160;35.</span>RIGHT
+		<p class="noindent mono"><span class="line-number">&#160;35.</span> RIGHT
 = 'right'</p>
 
 </div>
@@ -1161,7 +1148,7 @@ works as a multi-line comment.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">&#160;63.</span>def
+		<p class="noindent mono"><span class="line-number">&#160;63.</span> def
 main():</p>
 
 		<p class="noindent mono"><span class="line-number">&#160;64.</span>    global
@@ -1192,7 +1179,7 @@ function are the same setup code that we’ve seen in our previous game programs
 The <span class="mono">pygame.display.set_icon()</span> is a Pygame function
 that sets the icon in the window’s title bar (just like <span class="mono">pygame.display.set_caption()</span>
 sets the caption text in the title bar). The single argument to <span
-class=Literal>pygame.display.set_icon()</span> is a Surface object of a small
+class="mono">pygame.display.set_icon()</span> is a Surface object of a small
 image. The ideal image size is 32 x 32 pixels, although you can use other sized
 images. The image will just be compressed into a smaller size to be used as the
 window’s icon.</p>
@@ -1210,7 +1197,7 @@ window’s icon.</p>
 
 	<p>The image for the player and enemy squirrels is loaded from <i>squirrel.png</i>
 on line 74. Make sure that this PNG file is in the same folder as <i>squirrel.py</i>,
-otherwise you will get the error <span class=Literal>pygame.error: Couldn't open
+otherwise you will get the error <span class="mono">pygame.error: Couldn't open
 squirrel.png</span>.</p>
 
 	<p>The image in <i>squirrel.png</i> (which you can download
@@ -1229,45 +1216,6 @@ passed in is unchanged.</p>
 	<p>Here are examples of images being horizontally and
 vertically flipped:</p>
 
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse'>
- <tr>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'><img width=71
-  height=71 id="Picture 38" src="chapter8_files/image003.jpg"></p>
-  </td>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'><img width=71
-  height=71 id="Picture 40" src="chapter8_files/image004.jpg"></p>
-  </td>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'><img width=71
-  height=71 id="Picture 41" src="chapter8_files/image005.jpg"></p>
-  </td>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'><img width=71
-  height=71 id="Picture 35" src="chapter8_files/image006.jpg"></p>
-  </td>
- </tr>
- <tr>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'>Original</p>
-  </td>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'>Horizontal Flip</p>
-  </td>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'>Vertical Flip</p>
-  </td>
-  <td width=148 valign=top style='width:110.7pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center'>Horizontal and
-  Vertical Flip</p>
-  </td>
- </tr>
-</table>
-
-	<p>&nbsp;</p>
-
 	<div class="python-shell">
 
 		<p class="noindent mono"><span class="line-number">&#160;80.</span>    while
@@ -1285,10 +1233,10 @@ called. </p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">&#160;84.</span>def
+		<p class="noindent mono"><span class="line-number">&#160;84.</span> def
 runGame():</p>
 
-<p class="noindent mono"><span class="line-number"> 85.</span>
+		<p class="noindent mono"><span class="line-number"> 85.</span>
 <span class="comment"># set up variables for the start of a new game</span></p>
 
 		<p class="noindent mono"><span class="line-number">&#160;86.</span>    invulnerableMode
@@ -1347,10 +1295,9 @@ class="comment"># create the surfaces to hold game text</span></p>
 		<p class="noindent mono"><span class="line-number">102.</span>    winRect2
 = winSurf2.get_rect()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;103. </span>    winRect2.center
-= (HALF_WINWIDTH, HALF_WINHEIGHT + 30)</p>
+	<p class="noindent mono"><span class="line-number">103.</span>     winRect2.center = (HALF_WINWIDTH, HALF_WINHEIGHT + 30)</p>
 
-</div>
+	</div>
 
 	<p>These variables contain Surface objects with the “Game
 Over”, “You have achieved OMEGA SQUIRREL!”, and “(Press &quot;r&quot; to
@@ -1360,30 +1307,19 @@ player losing or winning).</p>
 	<h1 class="subheading" id="">Cameras</h1>
 
 	<div class="python-shell">
-
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;105. </span>    <span
-class="comment"># camerax and cameray are where the middle of the
-camera view is</span></p>
-
-		<p class="noindent mono"><span class="line-number">106.</span>    camerax
-= 0</p>
-
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;107. </span>    cameray
-= 0</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">105.</span>     <span class="comment"># camerax and cameray are where the middle of the camera view is</span></p>
+		<p class="noindent mono"><span class="line-number">106.</span>    camerax = 0</p>
+		<p class="noindent mono"><span class="line-number">107.</span>     cameray = 0</p>
+	</div>
 
 	<p>The <span class="mono">camerax</span> and <span
-class=Literal>cameray</span> variables track the game coordinates of the
+class="mono">cameray</span> variables track the game coordinates of the
 “camera”. Imagine the game world as an infinite 2D space. This could, of
 course, never fit on any screen. We can only draw a portion of the infinite 2D
-space on the screen. We call the area of this portion a <span class=Definition>camera</span>,
+space on the screen. We call the area of this portion a <a href="glossary.xhtml#camera"><b>camera</b></a>,
 because it is as though our screen is just the area of the game world in front what
 a camera would see. Here’s a picture of the game world (an infinite green
 field) and the area that the camera can view:</p>
-
-<p class=MsoNormal align=center style='text-align:center'><img width=384
-height=346 id="Picture 64" src="chapter8_files/image007.png"></p>
 
 	<p>As you can see, the game world XY coordinates keep getting
 bigger and smaller forever. The game world origin is where the (0, 0) game
@@ -1392,15 +1328,12 @@ game world coordinates) at (-384, -84), (384, 306), and (585, -234).</p>
 
 	<p>But we can only display 640 x 480 pixel area on the screen
 (though this can change if we pass different numbers to the <span
-class=Literal>pygame.display.set_mode()</span> function), so we need to track
+class="mono">pygame.display.set_mode()</span> function), so we need to track
 where the camera’s origin is located in game world coordinates. In the picture above,
 the camera is placed at (-486, -330) in game world coordinates.</p>
 
 	<p>The picture below shows the same field and squirrels, except
 everything is given in camera coordinates:</p>
-
-<p class=MsoNormal align=center style='text-align:center'><img width=269
-height=196 id="Picture 65" src="chapter8_files/image008.png"></p>
 
 	<p>The area that the camera can see (called the camera view)
 has it’s center (that is, its origin) at the game world coordinates (-486, -330).
@@ -1424,9 +1357,6 @@ range of the screen. This is why they don’t appear in the camera’s view.</p>
 the area of the game world that the camera views plus an area around it the
 size of the camera area:</p>
 
-<p class=MsoNormal align=center style='text-align:center'><img width=269
-height=196 id="Picture 48" src="chapter8_files/image009.png"></p>
-
 	<p>Calculating if something is in the active area or not is
 explained in the <span class="mono">isOutsideActiveArea()</span> function’s
 explanation later in this chapter. When we create new enemy squirrel or grass
@@ -1447,12 +1377,11 @@ less likely that they’ll come back into view of the camera.</p>
 Nintendo, there is a good YouTube video explaining how Super Mario World’s
 camera system works. You can find this video at <a href="https://invpy.com/mariocamera">https://invpy.com/mariocamera</a>.</p>
 
-<h2><a name="_Toc316488710">Keeping Track of the Location of Things in the Game
-World</a></h2>
+	<h1 class="subheading" id="">Keeping Track of the Location of Things in the Game World</h1>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;109. </span>    grassObjs
+		<p class="noindent mono"><span class="line-number">109.</span>     grassObjs
 = []    <span class="comment"># stores all the grass objects in the
 game</span></p>
 
@@ -1493,7 +1422,7 @@ MAXHEALTH}</p>
 		<p class="noindent mono"><span class="line-number">122.</span>    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;123. </span>    moveDown
+		<p class="noindent mono"><span class="line-number">123.</span>     moveDown
 = False</p>
 
 </div>
@@ -1515,7 +1444,7 @@ game programs.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;125. </span>    <span
+		<p class="noindent mono"><span class="line-number">125.</span>     <span
 class="comment"># start off with some random grass images on the screen</span></p>
 
 		<p class="noindent mono"><span class="line-number">126.</span>    for
@@ -1527,7 +1456,7 @@ cameray))</p>
 		<p class="noindent mono"><span class="line-number">128.</span>        grassObjs[i]['x']
 = random.randint(0, WINWIDTH)</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;129. </span>        grassObjs[i]['y']
+		<p class="noindent mono"><span class="line-number">129.</span>         grassObjs[i]['y']
 = random.randint(0, WINHEIGHT)</p>
 
 </div>
@@ -1543,11 +1472,8 @@ overwritten.</p>
 	<h1 class="subheading" id="">The Game Loop</h1>
 
 	<div class="python-shell">
-
-<p class=SourceCodeFeatured><span class="line-number">&#160;131. </span>    while
-True: <span class="comment"># main game loop</span></p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">131.</span>     while True: <span class="comment"># main game loop</span></p>
+	</div>
 
 	<p>The game loop, like the game loops in the previous game
 programs, will do event handling, updating the game state, and drawing
@@ -1557,20 +1483,20 @@ everything to the screen.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;132. </span>        <span
+		<p class="noindent mono"><span class="line-number">132.</span>         <span
 class="comment"># Check if we should turn off invulnerability</span></p>
 
 		<p class="noindent mono"><span class="line-number">133.</span>        if
 invulnerableMode and time.time() - invulnerableStartTime &gt; INVULNTIME:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;134. </span>            invulnerableMode
+		<p class="noindent mono"><span class="line-number">134.</span>             invulnerableMode
 = False</p>
 
 </div>
 
 	<p>When the player gets hit by an enemy squirrel and does not
 die, we make the player invulnerable for a couple seconds (since the <span
-class=Literal>INVULNTIME</span> constant is set to <span class="mono">2</span>).
+class="mono">INVULNTIME</span> constant is set to <span class="mono">2</span>).
 During this time, the player’s squirrel flashes and the won’t take any damage
 from other squirrels. If the “invulnerability mode” time is over, line 134 will
 set <span class="mono">invulnerableMode</span> to <span class="mono">False</span>.</p>
@@ -1579,7 +1505,7 @@ set <span class="mono">invulnerableMode</span> to <span class="mono">False</span
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;136. </span>        <span
+		<p class="noindent mono"><span class="line-number">136.</span>         <span
 class="comment"># move all the squirrels</span></p>
 
 		<p class="noindent mono"><span class="line-number">137.</span>        for
@@ -1591,7 +1517,7 @@ class="comment"># move the squirrel, and adjust for their bounce</span></p>
 		<p class="noindent mono"><span class="line-number">139.</span>            sObj['x']
 += sObj['movex']</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;140. </span>            sObj['y']
+		<p class="noindent mono"><span class="line-number">140.</span>             sObj['y']
 += sObj['movey']</p>
 
 </div>
@@ -1605,19 +1531,19 @@ faster).</p>
 
 	<p>The <span class="mono">for</span> loop on line 137 will
 apply this moving code to each of the enemy squirrel objects in the <span
-class=Literal>squirrelObjs</span> list. First, line 139 and 140 will adjust
+class="mono">squirrelObjs</span> list. First, line 139 and 140 will adjust
 their <span class="mono">'x'</span> and <span class="mono">'y'</span> keys’
 values.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;141. </span>            sObj['bounce']
+		<p class="noindent mono"><span class="line-number">141.</span>             sObj['bounce']
 += 1</p>
 
 		<p class="noindent mono"><span class="line-number">142.</span>            if
 sObj['bounce'] &gt; sObj['bouncerate']:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;143. </span>                sObj['bounce']
+		<p class="noindent mono"><span class="line-number">143.</span>                 sObj['bounce']
 = 0 <span class="comment"># reset bounce amount</span></p>
 
 </div>
@@ -1638,8 +1564,7 @@ to <span class="mono">0</span>. This is what lines 142 and 143 do.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;145. </span>            <span
-class="comment"># random chance they change direction</span></p>
+		<p class="noindent mono"><span class="line-number">145.</span>             <span class="comment"># random chance they change direction</span></p>
 
 		<p class="noindent mono"><span class="line-number">146.</span>            if
 random.randint(0, 99) &lt; DIRCHANGEFREQ:</p>
@@ -1659,14 +1584,14 @@ sObj['movex'] &gt; 0: <span class="comment"># faces right</span></p>
 		<p class="noindent mono"><span class="line-number">151.</span>                else:
 <span class="comment"># faces left</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;152. </span>                    sObj['surface']
+		<p class="noindent mono"><span class="line-number">152.</span>                     sObj['surface']
 = pygame.transform.scale(L_SQUIR_IMG, (sObj['width'], sObj['height']))</p>
 
-</div>
+	</div>
 
 	<p>There is a 2% chance on each iteration through the game loop
 that the squirrel will randomly change speed and direction. On line 146 the <span
-class=Literal>random.randint(0, 99)</span> call randomly selects an integer out
+class="mono">random.randint(0, 99)</span> call randomly selects an integer out
 of 100 possible integers. If this number is less than <span class="mono">DIRCHANGEFREQ</span>
 (which we set to <span class="mono">2</span> on line 33) then a new value will
 be set for <span class="mono">sObj['movex']</span> and <span class="mono">sObj['movey']</span>.
@@ -1683,7 +1608,7 @@ and line 152 gets one scaled from <span class="mono">L_SQUIR_IMG</span>.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;155. </span>        <span
+		<p class="noindent mono"><span class="line-number">155.</span>         <span
 class="comment"># go through all the objects and see if any need to be
 deleted.</span></p>
 
@@ -1702,7 +1627,7 @@ i in range(len(squirrelObjs) - 1, -1, -1):</p>
 		<p class="noindent mono"><span class="line-number">160.</span>            if
 isOutsideActiveArea(camerax, cameray, squirrelObjs[i]):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;161. </span>                del
+		<p class="noindent mono"><span class="line-number">161.</span>                 del
 squirrelObjs[i]</p>
 
 </div>
@@ -1711,7 +1636,7 @@ squirrelObjs[i]</p>
 all of the grass and enemy squirrel objects to see if they are outside the
 “active area”. The <span class="mono">isOutsideActiveArea()</span> function
 takes the current coordinates of the camera (which are stored in <span
-class=Literal>camerax</span> and <span class="mono">cameray</span>) and the
+class="mono">camerax</span> and <span class="mono">cameray</span>) and the
 grass/enemy squirrel object, and returns <span class="mono">True</span> if the
 object is not located in the active area.</p>
 
@@ -1725,9 +1650,9 @@ that there is always a number of squirrels and grass objects near the player.</p
 List in Reverse</a></h2>
 
 	<p>Deleting squirrel and grass objects is done with the <span
-class=Literal>del</span> operator. However, notice that the <span
-class=Literal>for</span> loop on line 156 and 159 pass arguments to the <span
-class=Literal>range()</span> function so that the numbering starts at the index
+class="mono">del</span> operator. However, notice that the <span
+class="mono">for</span> loop on line 156 and 159 pass arguments to the <span
+class="mono">range()</span> function so that the numbering starts at the index
 of the last item and then decrements by <span class="mono">-1</span> (unlike
 incrementing by <span class="mono">1</span> as it normally does) until it
 reaches the number <span class="mono">-1</span>. We are iterating backwards
@@ -1737,111 +1662,108 @@ because we are iterating over the list that we are also deleting items from.</p>
 	<p>To see why this reverse order is needed, say we had the
 following list value:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExample style='border:none;padding:0in'>animals = ['cat', 'mouse',
-'dog', 'horse']</p>
-
-</div>
+	<div class="python-shell">
+		<p class="noindent mono">animals = ['cat', 'mouse', 'dog', 'horse']</p>
+	</div>
 
 	<p>So we wanted to write code to delete any instances of the
 string <span class="mono">'dog'</span> from this list. We might think to write
 out code like this:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+	<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>for i in
+		<p class="noindent mono">for i in
 range(len(animals)):</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    if
+		<p class="noindent mono">    if
 animals[i] == 'dog':</p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>        del
+		<p class="noindent mono">        del
 animals[i]</p>
 
 </div>
 
 	<p>But if we ran this code, we would get an <span
-class=Literal>IndexError</span> error that looks like this:</p>
+class="mono">IndexError</span> error that looks like this:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+	<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>Traceback (most
+		<p class="noindent mono">Traceback (most
 recent call last):</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>  File
+		<p class="noindent mono">  File
 &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;</p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>IndexError: list
+		<p class="noindent mono">IndexError: list
 index out of range</p>
 
 </div>
 
 	<p>To see why this error happens, let’s walk through the code.
 First, the <span class="mono">animals</span> list would be set to <span
-class=Literal>['cat', 'mouse', 'dog', 'horse']</span> and <span class="mono">len(animals)</span>
+class="mono">['cat', 'mouse', 'dog', 'horse']</span> and <span class="mono">len(animals)</span>
 would return <span class="mono">4</span>. This means that the call to <span
-class=Literal>range(4)</span> would cause the <span class="mono">for</span>
+class="mono">range(4)</span> would cause the <span class="mono">for</span>
 loop to iterate with the values <span class="mono">0</span>, <span
-class=Literal>1</span>, <span class="mono">2</span>, and <span class="mono">3</span>.</p>
+class="mono">1</span>, <span class="mono">2</span>, and <span class="mono">3</span>.</p>
 
 	<p>When the <span class="mono">for</span> loop iterates with <span
-class=Literal>i</span> set to <span class="mono">2</span>, the <span
-class=Literal>if</span> statement’s condition will be <span class="mono">True</span>
+class="mono">i</span> set to <span class="mono">2</span>, the <span
+class="mono">if</span> statement’s condition will be <span class="mono">True</span>
 and the <span class="mono">del animals[i]</span> statement will delete <span
-class=Literal>animals[2]</span>. This means that afterwards the animals list
+class="mono">animals[2]</span>. This means that afterwards the animals list
 will be <span class="mono">['cat', 'mouse', 'horse']</span>. The indexes of
 all the items after <span class="mono">'dog'</span> are all shifted down by
 one because the <span class="mono">'dog'</span> value was removed.</p>
 
 	<p>But on the next iteration through the <span class="mono">for</span>
 loop, <span class="mono">i</span> is set to <span class="mono">3</span>. But <span
-class=Literal>animals[3]</span> is out of bounds because the valid indexes of
+class="mono">animals[3]</span> is out of bounds because the valid indexes of
 the animals list is no longer <span class="mono">0</span> to <span
-class=Literal>3</span> but <span class="mono">0</span> to <span class="mono">2</span>.
+class="mono">3</span> but <span class="mono">0</span> to <span class="mono">2</span>.
 The original call to <span class="mono">range()</span> was for a list with 4
 items in it. The list changed in length, but the <span class="mono">for</span>
 loop is set up for the original length.</p>
 
 	<p>However, if we iterate from the last index of the list to <span
-class=Literal>0</span>, we don’t run into this problem. The following program
+class="mono">0</span>, we don’t run into this problem. The following program
 deletes the <span class="mono">'dog'</span> string from the <span
-class=Literal>animals</span> list without causing an <span class="mono">IndexError</span>
+class="mono">animals</span> list without causing an <span class="mono">IndexError</span>
 error:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+	<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>animals = ['cat',
+		<p class="noindent mono">animals = ['cat',
 'mouse', 'dog', 'horse']</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>for i in
+		<p class="noindent mono">for i in
 range(len(animals) - 1, -1, -1):</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    if
+		<p class="noindent mono">    if
 animals[i] == 'dog':</p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>        del
+		<p class="noindent mono">        del
 animals[i]</p>
 
 </div>
 
 	<p>The reason this code doesn’t cause an error is because the <span
-class=Literal>for</span> loop iterates over <span class="mono">3</span>, <span
-class=Literal>2</span>, <span class="mono">1</span>, and <span class="mono">0</span>.
+class="mono">for</span> loop iterates over <span class="mono">3</span>, <span
+class="mono">2</span>, <span class="mono">1</span>, and <span class="mono">0</span>.
 On the first iteration, the code checks if <span class="mono">animals[3]</span>
 is equal to <span class="mono">'dog'</span>. It isn’t (<span class="mono">animals[3]</span>
 is <span class="mono">'horse'</span>) so the code moves on to the next
 iteration. Then <span class="mono">animals[2]</span> is checked if it equals <span
-class=Literal>'dog'</span>. It does, so <span class="mono">animals[2]</span>
+class="mono">'dog'</span>. It does, so <span class="mono">animals[2]</span>
 is deleted.</p>
 
 	<p>After <span class="mono">animals[2]</span> is deleted, the <span
-class=Literal>animals</span> list is set to <span class=Literal>['cat',
+class="mono">animals</span> list is set to <span class="mono">['cat',
 'mouse', 'horse']</span>. On the next iteration, <span class="mono">i</span>
 is set to <span class="mono">1</span>. There is a value at <span
-class=Literal>animals[1]</span> (the <span class="mono">'mouse'</span> value),
+class="mono">animals[1]</span> (the <span class="mono">'mouse'</span> value),
 so no error is caused. It doesn’t matter that all the items in the list after <span
-class=Literal>'dog'</span> have shifted down by one, because since we started
+class="mono">'dog'</span> have shifted down by one, because since we started
 at the end of the list and are going towards the front, all of those items have
 already been checked.</p>
 
@@ -1854,7 +1776,7 @@ lists without error because the <span class="mono">for</span> loop on lines
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;163. </span>        <span
+		<p class="noindent mono"><span class="line-number">163.</span>         <span
 class="comment"># add more grass &amp;amp; squirrels if we don't have
 enough.</span></p>
 
@@ -1867,7 +1789,7 @@ cameray))</p>
 		<p class="noindent mono"><span class="line-number">166.</span>        while
 len(squirrelObjs) &lt; NUMSQUIRRELS:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;167. </span>            squirrelObjs.append(makeNewSquirrel(camerax,
+		<p class="noindent mono"><span class="line-number">167.</span>             squirrelObjs.append(makeNewSquirrel(camerax,
 cameray))</p>
 
 </div>
@@ -1880,14 +1802,14 @@ of grass and squirrel objects in the active area at all times. If the length of
 the <span class="mono">grassObjs</span> or <span class="mono">squirrelObjs</span>
 drops below <span class="mono">NUMGRASS</span> or <span class="mono">NUMSQUIRRELS</span>
 respectively, then new grass and squirrel objects are created. The <span
-class=Literal>makeNewGrass()</span> and <span class="mono">makeNewSquirrel()</span>
+class="mono">makeNewGrass()</span> and <span class="mono">makeNewSquirrel()</span>
 functions that create these objects are explained later in this chapter.</p>
 
 	<h1 class="subheading" id="">Camera Slack, and Moving the Camera View</h1>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;169. </span>        <span
+		<p class="noindent mono"><span class="line-number">169.</span>         <span
 class="comment"># adjust camerax and cameray if beyond the &quot;camera
 slack&quot;</span></p>
 
@@ -1918,13 +1840,13 @@ playerCenterx – (camerax + HALF_WINWIDTH) &gt; CAMERASLACK:</p>
 		<p class="noindent mono"><span class="line-number">178.</span>         elif
 playerCentery – (cameray + HALF_WINHEIGHT) &gt; CAMERASLACK:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;179.</span>             cameray
+		<p class="noindent mono"><span class="line-number">179.</span>             cameray
 = playerCentery – CAMERASLACK - HALF_WINHEIGHT</p>
 
 </div>
 
 	<p>The camera’s position (which is stored as integers in the <span
-class=Literal>camerax</span> and <span class="mono">cameray</span> variables) needs
+class="mono">camerax</span> and <span class="mono">cameray</span> variables) needs
 to be updated when the player moves over. I’ve called the number of pixels the
 player can move before the camera gets updated the “camera slack”. Line 19 set
 the <span class="mono">CAMERASLACK</span> constant to <span class="mono">90</span>,
@@ -1932,9 +1854,9 @@ which our program will take to mean that the player squirrel can move 90 pixels
 from the center before the camera position gets updated to follow the squirrel.</p>
 
 	<p>In order to understand the equations used in the <span
-class=Literal>if</span> statements on lines 172, 174, 176, and 178, you should
+class="mono">if</span> statements on lines 172, 174, 176, and 178, you should
 note that <span class="mono">(camerax + HALF_WINWIDTH)</span> and <span
-class=Literal>(cameray + HALF_WINHEIGHT)</span> are the XY game world coordinates
+class="mono">(cameray + HALF_WINHEIGHT)</span> are the XY game world coordinates
 currently at the center of the screen. The <span class="mono">playerCenterx</span>
 and <span class="mono">playerCentery</span> is set to the middle of the player’s
 squirrel’s position, also in game world coordinates.</p>
@@ -1947,7 +1869,7 @@ value needs to be updated so that the player squirrel is just at the edge of
 the camera slack. This is why line 173 sets <span class="mono">camerax</span>
 to <span class="mono">playerCenterx + CAMERASLACK – HALF_WINWIDTH</span>. Note
 that the <span class="mono">camerax</span> variable is changed, not the <span
-class=Literal>playerObj['x']</span> value. We want to move the camera, not the
+class="mono">playerObj['x']</span> value. We want to move the camera, not the
 player.</p>
 
 	<p>The other three <span class="mono">if</span> statements
@@ -1958,10 +1880,10 @@ Health Meter</a></h2>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;181. </span>        <span
+		<p class="noindent mono"><span class="line-number">181.</span>         <span
 class="comment"># draw the green background</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;182. </span>        DISPLAYSURF.fill(GRASSCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">182.</span>         DISPLAYSURF.fill(GRASSCOLOR)</p>
 
 </div>
 
@@ -1972,7 +1894,7 @@ that we can start drawing the frame from scratch.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;184. </span>        <span
+		<p class="noindent mono"><span class="line-number">184.</span>         <span
 class="comment"># draw all the grass objects on the screen</span></p>
 
 		<p class="noindent mono"><span class="line-number">185.</span>        for
@@ -1989,7 +1911,7 @@ gObj in grassObjs:</p>
 		<p class="noindent mono"><span class="line-number">189.</span>                                  gObj['height'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;190. </span>            DISPLAYSURF.blit(GRASSIMAGES[gObj['grassImage']],
+		<p class="noindent mono"><span class="line-number">190.</span>             DISPLAYSURF.blit(GRASSIMAGES[gObj['grassImage']],
 gRect)</p>
 
 </div>
@@ -1999,10 +1921,10 @@ through all the grass objects in the <span class="mono">grassObjs</span> list
 and creates a Rect object from the x, y, width, and height information stored
 in it. This Rect object is stored in a variable named <span class="mono">gRect</span>.
 On line 190, <span class="mono">gRect</span> is used in the <span
-class=Literal>blit()</span> method call to draw the grass image on the display
+class="mono">blit()</span> method call to draw the grass image on the display
 Surface. Note that <span class="mono">gObj['grassImage']</span> only contains
 an integer that is an index to <span class="mono">GRASSIMAGES</span>. <span
-class=Literal>GRASSIMAGES</span> is a list of Surface objects that contain all
+class="mono">GRASSIMAGES</span> is a list of Surface objects that contain all
 the grass images. Surface objects take up much more memory than just a single
 integer, and all the grass objects with similar <span class="mono">gObj['grassImage']</span>
 values look identical. So it makes sense to only have each grass image stored
@@ -2011,7 +1933,7 @@ grass objects themselves.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;193. </span>        <span
+		<p class="noindent mono"><span class="line-number">193.</span>         <span
 class="comment"># draw the other squirrels</span></p>
 
 		<p class="noindent mono"><span class="line-number">194.</span>        for
@@ -2029,7 +1951,7 @@ sObj['bounceheight']),</p>
 		<p class="noindent mono"><span class="line-number">198.</span>                                         sObj['height'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;199. </span>            DISPLAYSURF.blit(sObj['surface'],
+		<p class="noindent mono"><span class="line-number">199.</span>             DISPLAYSURF.blit(sObj['surface'],
 sObj['rect'])</p>
 
 </div>
@@ -2037,12 +1959,12 @@ sObj['rect'])</p>
 	<p>The <span class="mono">for</span> loop that draws all the
 enemy squirrel game objects is similar to the previous <span class="mono">for</span>
 loop, except that the Rect object it creates is saved in the <span
-class=Literal>'rect'</span> key’s value of the squirrel dictionary. The reason
+class="mono">'rect'</span> key’s value of the squirrel dictionary. The reason
 the code does this is because we will use this Rect object later to check if
 the enemy squirrels have collided with the player squirrel.</p>
 
 	<p>Note that the top parameter for the Rect constructor is not
-just <span class="mono">sObj['y'] - cameray</span> but <span class=Literal>sObj['y']
+just <span class="mono">sObj['y'] - cameray</span> but <span class="mono">sObj['y']
 - cameray - getBounceAmount(sObj['bounce'], sObj['bouncerate'],
 sObj['bounceheight'])</span>. The <span class="mono">getBounceAmount()</span>
 function will return the number of pixels that the top value should be raised.</p>
@@ -2050,15 +1972,15 @@ function will return the number of pixels that the top value should be raised.</
 	<p>Also, there is no common list of Surface objects of the squirrel
 images, like there was with grass game objects and <span class="mono">GRASSIMAGES</span>.
 Each enemy squirrel game object has its own Surface object stored in the <span
-class=Literal>'surface'</span> key. This is because the squirrel images can be scaled
+class="mono">'surface'</span> key. This is because the squirrel images can be scaled
 to different sizes.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;202. </span>        <span
+		<p class="noindent mono"><span class="line-number">202.</span>         <span
 class="comment"># draw the player squirrel</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;203. </span>        flashIsOn
+		<p class="noindent mono"><span class="line-number">203.</span>         flashIsOn
 = round(time.time(), 1) * 10 % 2 == 1</p>
 
 </div>
@@ -2085,14 +2007,14 @@ where this function call returns <span class="mono">1323926893.622</span>.
 This value is passed to <span class="mono">round()</span>, which rounds it to
 one digit past the decimal point (since <span class="mono">1</span> is passed
 as <span class="mono">round()</span>’s second parameter). This means <span
-class=Literal>round()</span> will return the value <span class="mono">1323926893.6</span>.</p>
+class="mono">round()</span> will return the value <span class="mono">1323926893.6</span>.</p>
 
 	<p>This value is then multiplied by <span class="mono">10</span>,
 to become <span class="mono">13239268936</span>. Once we have it as an
 integer, we can do the “mod two” trick first discussed in the Memory Puzzle
 chapter to see if it is even or odd. <span class="mono">13239268936 % 2</span>
 evaluates to <span class="mono">0</span>, which means that <span
-class=Literal>flashIsOn</span> will be set to <span class="mono">False</span>,
+class="mono">flashIsOn</span> will be set to <span class="mono">False</span>,
 since <span class="mono">0 == 1</span> is <span class="mono">False</span>.</p>
 
 	<p>In fact, <span class="mono">time.time()</span> will keep
@@ -2105,7 +2027,7 @@ second (no matter how many iterations happen in that tenth of a second).</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;204. </span>        if
+		<p class="noindent mono"><span class="line-number">204.</span>         if
 not gameOverMode and not (invulnerableMode and flashIsOn):</p>
 
 		<p class="noindent mono"><span class="line-number">205.</span>            playerObj['rect']
@@ -2119,7 +2041,7 @@ not gameOverMode and not (invulnerableMode and flashIsOn):</p>
 		<p class="noindent mono"><span class="line-number">208.</span>                                              playerObj['size'])
 )</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;209. </span>            DISPLAYSURF.blit(playerObj['surface'],
+		<p class="noindent mono"><span class="line-number">209.</span>             DISPLAYSURF.blit(playerObj['surface'],
 playerObj['rect'])</p>
 
 </div>
@@ -2127,19 +2049,19 @@ playerObj['rect'])</p>
 	<p>There are three things that must be <span class="mono">True</span>
 before we draw the player’s squirrel. The game must currently be going on
 (which happens while <span class="mono">gameOverMode</span> is <span
-class=Literal>False</span>) and the player is not invulnerable and not flashing
+class="mono">False</span>) and the player is not invulnerable and not flashing
 (which happens while <span class="mono">invulnerableMode</span> and <span
-class=Literal>flashIsOn</span> are <span class="mono">False</span>).</p>
+class="mono">flashIsOn</span> are <span class="mono">False</span>).</p>
 
 	<p>The code for drawing the player’s squirrel is almost
 identical to the code for drawing the enemy squirrels.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;212. </span>        <span
+		<p class="noindent mono"><span class="line-number">212.</span>         <span
 class="comment"># draw the health meter</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;213. </span>        drawHealthMeter(playerObj['health'])</p>
+		<p class="noindent mono"><span class="line-number">213.</span>         drawHealthMeter(playerObj['health'])</p>
 
 </div>
 
@@ -2152,14 +2074,14 @@ be explained later in this chapter.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;215. </span>        for
+		<p class="noindent mono"><span class="line-number">215.</span>         for
 event in pygame.event.get(): <span class="comment"># event handling
 loop</span></p>
 
 		<p class="noindent mono"><span class="line-number">216.</span>            if
 event.type == QUIT:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;217. </span>                terminate()</p>
+		<p class="noindent mono"><span class="line-number">217.</span>                 terminate()</p>
 
 </div>
 
@@ -2169,7 +2091,7 @@ the program should be terminated.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;219. </span>            elif
+		<p class="noindent mono"><span class="line-number">219.</span>             elif
 event.type == KEYDOWN:</p>
 
 		<p class="noindent mono"><span class="line-number">220.</span>                if
@@ -2187,7 +2109,7 @@ event.key in (K_DOWN, K_s):</p>
 		<p class="noindent mono"><span class="line-number">224.</span>                    moveUp
 = False</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;225. </span>                    moveDown
+		<p class="noindent mono"><span class="line-number">225.</span>                     moveDown
 = True</p>
 
 </div>
@@ -2195,12 +2117,12 @@ event.key in (K_DOWN, K_s):</p>
 	<p>If the up or down arrow keys have been pressed (or their
 WASD equivalents), then the move variable (<span class="mono">moveRight</span>,
 <span class="mono">moveDown</span>, etc.) for that direction should be set to <span
-class=Literal>True</span> and the move variable for the opposite direction
+class="mono">True</span> and the move variable for the opposite direction
 should be set to <span class="mono">False</span>.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;226. </span>                elif
+		<p class="noindent mono"><span class="line-number">226.</span>                 elif
 event.key in (K_LEFT, K_a):</p>
 
 		<p class="noindent mono"><span class="line-number">227.</span>                    moveRight
@@ -2235,16 +2157,16 @@ image</span></p>
 		<p class="noindent mono"><span class="line-number">236.</span>                        playerObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;237. </span>                    playerObj['facing']
+		<p class="noindent mono"><span class="line-number">237.</span>                     playerObj['facing']
 = RIGHT</p>
 
 </div>
 
 	<p>The <span class="mono">moveLeft</span> and <span
-class=Literal>moveRight</span> variables should also be set when the left or
+class="mono">moveRight</span> variables should also be set when the left or
 right arrow keys are pressed. Also, the value in <span class="mono">playerObj['facing']</span>
 should be updated to either <span class="mono">LEFT</span> or <span
-class=Literal>RIGHT</span>. If the player squirrel is now facing a new
+class="mono">RIGHT</span>. If the player squirrel is now facing a new
 direction, the <span class="mono">playerObj['surface']</span> value should be
 replaced with a correctly scaled image of the squirrel facing the new
 direction.</p>
@@ -2257,23 +2179,23 @@ opposite case.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;238. </span>                elif
+		<p class="noindent mono"><span class="line-number">238.</span>                 elif
 winMode and event.key == K_r:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;239. </span>                    return</p>
+		<p class="noindent mono"><span class="line-number">239.</span>                     return</p>
 
 </div>
 
 	<p>If the player has won the game by growing large enough (in
 which case, <span class="mono">winMode</span> will be set to <span
-class=Literal>True</span>) and the R key has been pressed, then <span
-class=Literal>runGame()</span>should return. This will end the current game,
+class="mono">True</span>) and the R key has been pressed, then <span
+class="mono">runGame()</span> should return. This will end the current game,
 and a new game will start the next time that <span class="mono">runGame()</span>
 gets called.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;241. </span>            elif
+		<p class="noindent mono"><span class="line-number">241.</span>             elif
 event.type == KEYUP:</p>
 
 		<p class="noindent mono"><span class="line-number">242.</span>                <span
@@ -2300,22 +2222,22 @@ event.key in (K_UP, K_w):</p>
 		<p class="noindent mono"><span class="line-number">249.</span>                elif
 event.key in (K_DOWN, K_s):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;250. </span>                    moveDown
+		<p class="noindent mono"><span class="line-number">250.</span>                     moveDown
 = False</p>
 
 </div>
 
 	<p>If the player lets up on any of the arrow or WASD keys, then
 the code should set the move variable for that direction to <span
-class=Literal>False</span>. This will stop the squirrel from moving in that
+class="mono">False</span>. This will stop the squirrel from moving in that
 direction any more.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;252. </span>                elif
+		<p class="noindent mono"><span class="line-number">252.</span>                 elif
 event.key == K_ESCAPE:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;253. </span>                    terminate()</p>
+		<p class="noindent mono"><span class="line-number">253.</span>                     terminate()</p>
 
 </div>
 
@@ -2326,7 +2248,7 @@ the program.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;255. </span>        if
+		<p class="noindent mono"><span class="line-number">255.</span>         if
 not gameOverMode:</p>
 
 		<p class="noindent mono"><span class="line-number">256.</span>            <span
@@ -2353,7 +2275,7 @@ moveUp:</p>
 		<p class="noindent mono"><span class="line-number">263.</span>            if
 moveDown:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;264. </span>                playerObj['y']
+		<p class="noindent mono"><span class="line-number">264.</span>                 playerObj['y']
 += MOVERATE</p>
 
 </div>
@@ -2362,15 +2284,15 @@ moveDown:</p>
 on line 255 will move the player’s squirrel around only if the game is not
 over. (This is why pressing on the arrow keys after the player’s squirrel dies
 will have no effect.) Depending on which of the move variables is set to <span
-class=Literal>True</span>, the <span class="mono">playerObj</span> dictionary
+class="mono">True</span>, the <span class="mono">playerObj</span> dictionary
 should have its <span class="mono">playerObj['x']</span> and <span
-class=Literal>playerObj['y']</span> values changed by <span class="mono">MOVERATE</span>.
+class="mono">playerObj['y']</span> values changed by <span class="mono">MOVERATE</span>.
 (This is why a larger value in <span class="mono">MOVERATE</span> makes the
 squirrel move faster.)</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;266. </span>            if
+		<p class="noindent mono"><span class="line-number">266.</span>             if
 (moveLeft or moveRight or moveUp or moveDown) or playerObj['bounce'] != 0:</p>
 
 		<p class="noindent mono"><span class="line-number">267.</span>                playerObj['bounce']
@@ -2381,7 +2303,7 @@ squirrel move faster.)</p>
 		<p class="noindent mono"><span class="line-number">269.</span>            if
 playerObj['bounce'] &gt; BOUNCERATE:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;270. </span>                playerObj['bounce']
+		<p class="noindent mono"><span class="line-number">270.</span>                 playerObj['bounce']
 = 0 <span class="comment"># reset bounce amount</span></p>
 
 </div>
@@ -2398,27 +2320,27 @@ player squirrel is at the end of the bounce.</p>
 moving, or if the player has stopped moving but the squirrel hasn’t finished
 its current bounce. This condition is captured in the <span class="mono">if</span>
 statement on line 266. If any of the move variables is set to <span
-class=Literal>True</span> or the current <span class="mono">playerObj['bounce']</span>
+class="mono">True</span> or the current <span class="mono">playerObj['bounce']</span>
 is not <span class="mono">0</span> (which means the player is currently in a
 bounce), then the variable should be incremented on line 267.</p>
 
 	<p>Because the <span class="mono">playerObj['bounce']</span>
 variable should only be in the range of <span class="mono">0</span> to <span
-class=Literal>BOUNCERATE</span>, if incrementing it makes it larger than <span
-class=Literal>BOUNCERATE</span>, it should be reset back to <span
-class=Literal>0</span>.</p>
+class="mono">BOUNCERATE</span>, if incrementing it makes it larger than <span
+class="mono">BOUNCERATE</span>, it should be reset back to <span
+class="mono">0</span>.</p>
 
 	<h1 class="subheading" id="">Collision Detection: Eat or Be Eaten</h1>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;272. </span>            <span
+		<p class="noindent mono"><span class="line-number">272.</span>             <span
 class="comment"># check if the player has collided with any squirrels</span></p>
 
 		<p class="noindent mono"><span class="line-number">273.</span>            for
 i in range(len(squirrelObjs)-1, -1, -1):</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;274. </span>                sqObj
+		<p class="noindent mono"><span class="line-number">274.</span>                 sqObj
 = squirrelObjs[i]</p>
 
 </div>
@@ -2435,13 +2357,13 @@ Deleting Items in a List, Iterate Over the List in Reverse” section.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;275. </span>                if
+		<p class="noindent mono"><span class="line-number">275.</span>                 if
 'rect' in sqObj and playerObj['rect'].colliderect(sqObj['rect']):</p>
 
 		<p class="noindent mono"><span class="line-number">276.</span>                    <span
 class="comment"># a player/squirrel collision has occurred</span></p>
 
-<p class="noindent mono"><span class="comment">277.</span></p>
+		<p class="noindent mono"><span class="line-number">277.</span></p>
 
 		<p class="noindent mono"><span class="line-number">278.</span>                    if
 sqObj['width'] * sqObj['height'] &lt;= playerObj['size']**2:</p>
@@ -2452,7 +2374,7 @@ class="comment"># player is larger and eats the squirrel</span></p>
 		<p class="noindent mono"><span class="line-number">280.</span>                        playerObj['size']
 += int( (sqObj['width'] * sqObj['height'])**0.2 ) + 1</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;281. </span>                        del
+		<p class="noindent mono"><span class="line-number">281.</span>                         del
 squirrelObjs[i]</p>
 
 </div>
@@ -2464,20 +2386,17 @@ key in the player object (that is, the growth) is calculated based on the enemy
 squirrel’s size on line 280. Here’s a graph showing the growth from different
 sized squirrels. Notice that larger squirrels cause more growth:</p>
 
-<p class=MsoNormal align=center style='text-align:center'><img width=577
-height=275 id="Chart 52" src="chapter8_files/image010.png"></p>
-
 	<p>So, according to the chart, eating a squirrel that has a
 width and height of 45 (that is, an area of 1600 pixels) would cause the player
 to grow 5 pixels wider and taller.</p>
 
 	<p>Line 281 deletes the eaten squirrel object from the <span
-class=Literal>squirrelObjs</span> list so that it will no longer appear on the
+class="mono">squirrelObjs</span> list so that it will no longer appear on the
 screen or have its position updated.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;283. </span>                        if
+		<p class="noindent mono"><span class="line-number">283.</span>                         if
 playerObj['facing'] == LEFT:</p>
 
 		<p class="noindent mono"><span class="line-number">284.</span>                            playerObj['surface']
@@ -2486,26 +2405,26 @@ playerObj['facing'] == LEFT:</p>
 		<p class="noindent mono"><span class="line-number">285.</span>                        if
 playerObj['facing'] == RIGHT:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;286. </span>                            playerObj['surface']
+		<p class="noindent mono"><span class="line-number">286.</span>                             playerObj['surface']
 = pygame.transform.scale(R_SQUIR_IMG, (playerObj['size'], playerObj['size']))</p>
 
 </div>
 
 	<p>The player’s squirrel image needs to be updated now that the
 squirrel is larger. This can be done by passing the original squirrel image in <span
-class=Literal>L_SQUIR_IMG</span> or <span class="mono">R_SQUIR_IMG</span> to
+class="mono">L_SQUIR_IMG</span> or <span class="mono">R_SQUIR_IMG</span> to
 the <span class="mono">pygame.transform.scale()</span> function, which will
 return an enlarged version of the image. Depending on whether <span
-class=Literal>playerObj['facing']</span> is equal to <span class="mono">LEFT</span>
+class="mono">playerObj['facing']</span> is equal to <span class="mono">LEFT</span>
 or <span class="mono">RIGHT</span> determines which original squirrel image we
 pass to the function.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;288. </span>                        if
+		<p class="noindent mono"><span class="line-number">288.</span>                         if
 playerObj['size'] &gt; WINSIZE:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;289. </span>                            winMode
+		<p class="noindent mono"><span class="line-number">289.</span>                             winMode
 = True <span class="comment"># turn on &quot;win mode&quot;</span></p>
 
 </div>
@@ -2519,7 +2438,7 @@ the player to press the R key to restart the game.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;291. </span>                    elif
+		<p class="noindent mono"><span class="line-number">291.</span>                     elif
 not invulnerableMode:</p>
 
 		<p class="noindent mono"><span class="line-number">292.</span>                        <span
@@ -2540,7 +2459,7 @@ playerObj['health'] == 0:</p>
 		<p class="noindent mono"><span class="line-number">297.</span>                            gameOverMode
 = True <span class="comment"># turn on &quot;game over mode&quot;</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;298. </span>                            gameOverStartTime
+		<p class="noindent mono"><span class="line-number">298.</span>                             gameOverStartTime
 = time.time()</p>
 
 </div>
@@ -2554,22 +2473,22 @@ colliding with this larger squirrel.</p>
 the same squirrel immediately, we will briefly make the player invulnerable to
 further squirrel attacks by setting <span class="mono">invulnerableMode</span>
 to <span class="mono">True</span> on line 293. Line 294 will set <span
-class=Literal>invulnerableStartTime</span> to the current time (which is
+class="mono">invulnerableStartTime</span> to the current time (which is
 returned by <span class="mono">time.time()</span>) so that lines 133 and 134
 can know when to set <span class="mono">invulnerableMode</span> to <span
-class=Literal>False</span>.</p>
+class="mono">False</span>.</p>
 
 	<p>Line 295 decrements the player’s health by <span
-class=Literal>1</span>. Because there is a chance that the player’s health is
+class="mono">1</span>. Because there is a chance that the player’s health is
 now at <span class="mono">0</span>, line 296 checks for this and, if so, sets <span
-class=Literal>gameOverMode</span> to <span class="mono">True</span> and <span
-class=Literal>gameOverStartTime</span> to the current time.</p>
+class="mono">gameOverMode</span> to <span class="mono">True</span> and <span
+class="mono">gameOverStartTime</span> to the current time.</p>
 
 	<h1 class="subheading" id="">The Game Over Screen</h1>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;299. </span>        else:</p>
+		<p class="noindent mono"><span class="line-number">299.</span>         else:</p>
 
 		<p class="noindent mono"><span class="line-number">300.</span>            <span
 class="comment"># game is over, show &quot;game over&quot; text</span></p>
@@ -2580,7 +2499,7 @@ gameOverRect)</p>
 		<p class="noindent mono"><span class="line-number">302.</span>            if
 time.time() - gameOverStartTime &gt; GAMEOVERTIME:</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;303. </span>                return
+		<p class="noindent mono"><span class="line-number">303.</span>                 return
 <span class="comment"># end the current game</span></p>
 
 </div>
@@ -2588,7 +2507,7 @@ time.time() - gameOverStartTime &gt; GAMEOVERTIME:</p>
 	<p>When the player has died, the “Game Over” text (which is on
 the Surface object in the <span class="mono">gameOverSurf</span> variable)
 will be shown on the screen for the number of seconds that is in the <span
-class=Literal>GAMEOVERTIME</span> constant. Once this amount of time has
+class="mono">GAMEOVERTIME</span> constant. Once this amount of time has
 elapsed, then the <span class="mono">runGame()</span> function will return.</p>
 
 	<p>This lets the enemy squirrels continue to be animated and
@@ -2600,7 +2519,7 @@ player presses a key before a new game starts.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;305. </span>        <span
+		<p class="noindent mono"><span class="line-number">305.</span>         <span
 class="comment"># check if the player has won.</span></p>
 
 		<p class="noindent mono"><span class="line-number">306.</span>        if
@@ -2616,27 +2535,27 @@ winRect2)</p>
 
 		<p class="noindent mono"><span class="line-number">310.</span>        pygame.display.update()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;311. </span>        FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">311.</span>         FPSCLOCK.tick(FPS)</p>
 
 </div>
 
 	<p>The <span class="mono">winMode</span> variable is set to <span
-class=Literal>True</span> on line 289 if the player has reached a certain size
+class="mono">True</span> on line 289 if the player has reached a certain size
 (which is dictated by the <span class="mono">WINSIZE</span> constant). All
 that happens when the player has won is that the “You have achieved OMEGA
 SQUIRREL!” text (which is on the Surface object stored in the <span
-class=Literal>winSurf</span> variable) and the “(Press “r” to restart.)” text
+class="mono">winSurf</span> variable) and the “(Press “r” to restart.)” text
 (which is on the Surface object stored in the <span class="mono">winSurf2</span>
 variable) appears on the screen. The game continues until the user presses the
 R key, at which point the program execution will return from <span
-class=Literal>runGame()</span>. The event handling code for the R key is done
+class="mono">runGame()</span>. The event handling code for the R key is done
 on lines 238 and 239.</p>
 
 	<h1 class="subheading" id="">Drawing a Graphical Health Meter</h1>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;316. </span>def
+		<p class="noindent mono"><span class="line-number">316.</span> def
 drawHealthMeter(currentHealth):</p>
 
 		<p class="noindent mono"><span class="line-number">317.</span>    for
@@ -2648,7 +2567,7 @@ RED,   (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10))</p>
 		<p class="noindent mono"><span class="line-number">319.</span>    for
 i in range(MAXHEALTH): <span class="comment"># draw the white outlines</span></p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;320. </span>        pygame.draw.rect(DISPLAYSURF,
+		<p class="noindent mono"><span class="line-number">320.</span>         pygame.draw.rect(DISPLAYSURF,
 WHITE, (15, 5 + (10 * MAXHEALTH) - i * 10, 20, 10), 1)</p>
 
 </div>
@@ -2666,12 +2585,12 @@ Function</h2>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;323. </span>def
+		<p class="noindent mono"><span class="line-number">323.</span> def
 terminate():</p>
 
 		<p class="noindent mono"><span class="line-number">324.</span>    pygame.quit()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;325. </span>    sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">325.</span>     sys.exit()</p>
 
 </div>
 
@@ -2682,7 +2601,7 @@ the same as in the previous game programs.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;328. </span>def
+		<p class="noindent mono"><span class="line-number">328.</span> def
 getBounceAmount(currentBounce, bounceRate, bounceHeight):</p>
 
 		<p class="noindent mono"><span class="line-number">329.</span>    <span
@@ -2701,13 +2620,13 @@ class="comment"># currentBounce will always be less than bounceRate</span></p>
 		<p class="noindent mono"><span class="line-number">333.</span>    return
 int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;334.</span></p>
+		<p class="noindent mono"><span class="line-number">334.</span></p>
 
 </div>
 
 	<p>There is a mathematical function (which is similar to
 functions in programming in that they both “return” or “evaluate” to a number
-based on their parameters) called <span class=Definition>sine</span>
+based on their parameters) called <a href="glossary.xhtml#sine"><b>sine</b></a>
 (pronounced like “sign” and often abbreviated as “sin”). You may have learned
 about it in math class, but if you haven’t it will be explained here. Python
 has this mathematic function as a Python function in the <span class="mono">math</span>
@@ -2715,109 +2634,78 @@ module. You can pass an int or float value to <span class="mono">math.sin()</spa
 and it will return a float value that is called the “sine value”</p>
 
 	<p>In the interactive shell, let’s see what <span
-class=Literal>math.sin()</span> returns for some values:</p>
+class="mono">math.sin()</span> returns for some values:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt;
-import math</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-math.sin(1)</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>0.8414709848078965</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-math.sin(2)</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>0.90929742682568171</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-math.sin(3)</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>0.14112000805986721</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-math.sin(4)</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>-0.7568024953079282</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-math.sin(5)</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>-0.95892427466313845</p>
-
-</div>
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; import math</p>
+		<p class="noindent mono">&gt;&gt;&gt; math.sin(1)</p>
+		<p class="noindent mono">0.8414709848078965</p>
+		<p class="noindent mono">&gt;&gt;&gt; math.sin(2)</p>
+		<p class="noindent mono">0.90929742682568171</p>
+		<p class="noindent mono">&gt;&gt;&gt; math.sin(3)</p>
+		<p class="noindent mono">0.14112000805986721</p>
+		<p class="noindent mono">&gt;&gt;&gt; math.sin(4)</p>
+		<p class="noindent mono">-0.7568024953079282</p>
+		<p class="noindent mono">&gt;&gt;&gt; math.sin(5)</p>
+		<p class="noindent mono">-0.95892427466313845</p>
+	</div>
 
 	<p>It seems really hard to predict what value <span
-class=Literal>math.sin()</span> is going to return based on what value we pass
+class="mono">math.sin()</span> is going to return based on what value we pass
 it (which might make you wonder what <span class="mono">math.sin()</span> is
 useful for). But if we graph the sine values of the integers <span
-class=Literal>1</span> through <span class="mono">10</span> on a graph, we
+class="mono">1</span> through <span class="mono">10</span> on a graph, we
 would get this:</p>
-
-<p class=MsoNormal align=center style='text-align:center'><img width=552
-height=231 id="Chart 59" src="chapter8_files/image011.png"></p>
 
 	<p>You can kind of see a wavy pattern in the values returned by
 <span class="mono">math.sin()</span>. If you figure out the sine values for
 more numbers besides integers (for example, <span class="mono">1.5</span> and <span
-class=Literal>2.5</span> and so on) and then connect the dots with lines, you
+class="mono">2.5</span> and so on) and then connect the dots with lines, you
 can see this wavy pattern more easily:</p>
-
-<p class=MsoNormal align=center style='text-align:center'><img width=552
-height=247 id="Chart 60" src="chapter8_files/image012.png"></p>
 
 	<p>In fact, if you kept adding more and more data points to
 this graph, you would see that the sine wave looks like this:</p>
 
-<p class=MsoNormal align=center style='text-align:center'><img width=232
-height=96 id="Picture 61" src="chapter8_files/image013.jpg"></p>
 
 	<p>Notice that <span class="mono">math.sin(0)</span> returns <span
-class=Literal>0</span>, then gradually increases until <span class=Literal>math.sin(3.14
+class="mono">0</span>, then gradually increases until <span class="mono">math.sin(3.14
 / 2)</span> returns <span class="mono">1</span>, then it begins to decrease
 until <span class="mono">math.sin(3.14)</span> returns <span class="mono">0</span>.
 The number <span class="mono">3.14</span> is a special number in mathematics
-called <span class=Definition>pi</span> (pronounced the same as delicious
+called <a href="glossary.xhtml#pi"><b>pi</b></a> (pronounced the same as delicious
 “pie”). This value is also stored in the constant variable <span class="mono">pi</span>
 in the <span class="mono">math</span> module (which is why line 333 uses the
 variable, <span class="mono">math.pi</span>), which is technically the float value
 <span class="mono">3.1415926535897931</span>. Since we want a wavy-looking
 bounce for our squirrel, we’ll only pay attention to the return values of <span
-class=Literal>math.sin()</span> for the arguments <span class="mono">0</span>
+class="mono">math.sin()</span> for the arguments <span class="mono">0</span>
 to <span class="mono">3.14</span>:</p>
 
-<p class=MsoNormal align=center style='text-align:center'><img width=541
-height=289 id="Chart 66" src="chapter8_files/image014.png"></p>
 
 	<p>Let’s take a look at the return value of <span
-class=Literal>getBounceAmount()</span> and figure out what it does exactly.</p>
+class="mono">getBounceAmount()</span> and figure out what it does exactly.</p>
 
 	<div class="python-shell">
-
-<p class=SourceCodeFeatured><span class="line-number">&#160;333. </span>    return
-int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">333.</span>     return int(math.sin( (math.pi / float(bounceRate)) * currentBounce ) * bounceHeight)</p>
+	</div>
 
 	<p>Remember that on line 21 we set the <span class="mono">BOUNCERATE</span>
 constant to <span class="mono">6</span>. This means that our code will only
 increment <span class="mono">playerObj['bounce']</span> from <span
-class=Literal>0</span> to <span class="mono">6</span> and that we want to
+class="mono">0</span> to <span class="mono">6</span> and that we want to
 split up the range of floating-point values from <span class="mono">0</span>
 to <span class="mono">3.14</span> into <span class="mono">6</span> parts,
 which we can do with simple division: <span class="mono">3.14 / 6 = 0.5235</span>.
 Each of the <span class="mono">6</span> equal parts of the <span
-class=Literal>3.14</span> length on the graph for the “sine wave bounce” is <span
-class=Literal>0.5235</span>.</p>
+class="mono">3.14</span> length on the graph for the “sine wave bounce” is <span
+class="mono">0.5235</span>.</p>
 
 	<p>You can see that when <span class="mono">playerObj['bounce']</span>
 is at <span class="mono">3</span> (halfway between <span class="mono">0</span>
 and <span class="mono">6</span>), the value passed to the <span class="mono">math.sin()</span>
 call is <span class="mono">math.pi / 6 * 3</span>, which is <span
-class=Literal>1.5707</span> (halfway between <span class="mono">0</span> and <span
-class=Literal>3.1415</span>). Then <span class="mono">math.sin(1.5707)</span>
+class="mono">1.5707</span> (halfway between <span class="mono">0</span> and <span
+class="mono">3.1415</span>). Then <span class="mono">math.sin(1.5707)</span>
 will return <span class="mono">1.0</span>, which is the highest part of the
 sine wave (and the highest part of the sine wave happens half way through the
 wave).</p>
@@ -2825,10 +2713,10 @@ wave).</p>
 	<p>As <span class="mono">playerObj['bounce']</span> gets its
 value incremented, the <span class="mono">getBounceAmount()</span> function
 will return values that have the same bounce shape that the sine wave has from <span
-class=Literal>0</span> to <span class="mono">3.14</span>. If you want to make
+class="mono">0</span> to <span class="mono">3.14</span>. If you want to make
 the bounce higher, than increase the <span class="mono">BOUNCEHEIGHT</span>
 constant. If you want to make the bounce slower, than increase the <span
-class=Literal>BOUNCERATE</span> constant.</p>
+class="mono">BOUNCERATE</span> constant.</p>
 
 	<p>The sine function is a concept from trigonometry
 mathematics. If you’d like to learn more about the sine wave, the Wikipedia
@@ -2842,26 +2730,15 @@ simply so that this program will work in Python version 2. In Python version 3,
 the division operator will evaluate to a floating point value even if both of
 the operands are integers, like this:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt; #
-Python version 3</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>...</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt; 10
-/ 5</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>2.0</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt; 10
-/ 4</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>2.5</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>&gt;&gt;&gt;&nbsp;</p>
-
-</div>
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; # Python version 3</p>
+		<p class="noindent mono">...</p>
+		<p class="noindent mono">&gt;&gt;&gt; 10 / 5</p>
+		<p class="noindent mono">2.0</p>
+		<p class="noindent mono">&gt;&gt;&gt; 10 / 4</p>
+		<p class="noindent mono">2.5</p>
+		<p class="noindent mono">&gt;&gt;&gt;</p>
+	</div>
 
 	<p>However, in Python version 2, the <span class="mono">/</span>
 division operator will only evaluate to a floating point value if one of the
@@ -2869,37 +2746,37 @@ operands is also a floating point value. If both operands are integers, then
 Python 2’s division operator will evaluate to an integer value (rounding down
 if needed), like this:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+	<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt; #
+		<p class="noindent mono">&gt;&gt;&gt; #
 Python version 2</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>...</p>
+		<p class="noindent mono">...</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt; 10
+		<p class="noindent mono">&gt;&gt;&gt; 10
 / 5</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>2</p>
+		<p class="noindent mono">2</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt; 10
+		<p class="noindent mono">&gt;&gt;&gt; 10
 / 4</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>2</p>
+		<p class="noindent mono">2</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt; 10
+		<p class="noindent mono">&gt;&gt;&gt; 10
 / 4.0</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>2.5</p>
+		<p class="noindent mono">2.5</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
+		<p class="noindent mono">&gt;&gt;&gt;
 10.0 / 4</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>2.5</p>
+		<p class="noindent mono">2.5</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
+		<p class="noindent mono">&gt;&gt;&gt;
 10.0 / 4.0</p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>2.5</p>
+		<p class="noindent mono">2.5</p>
 
 </div>
 
@@ -2907,8 +2784,8 @@ Python version 2</p>
 point value with the <span class="mono">float()</span> function, then the
 division operator will evaluate to a float value no matter which version of
 Python runs this source code. Making these changes so that our code works with
-older versions of software is called <span class=Definition>backwards
-compatibility</span>. It is important to maintain backwards compatibility,
+older versions of software is called <a href="glossary.xhtml#backwards-compatibility"><b>backwards
+compatibility</b></a>. It is important to maintain backwards compatibility,
 because not everyone will always be running the latest version of software and
 you want to ensure that the code you write works with as many computers as
 possible.</p>
@@ -2921,34 +2798,21 @@ messages and think that your program is buggy.</p>
 	<p>A list of some differences between Python 2 and Python 3 can
 be found at <a href="https://inventwithpython.com/appendixa.html">https://inventwithpython.com/appendixa.html</a>.</p>
 
-<h2><a name="_Toc316488729">The </a><span class="mono">getRandomVelocity()</span>
-Function</h2>
+<h1 class="subheading" id=""><span class="mono">getRandomVelocity()</span> Function</h1>
 
 	<div class="python-shell">
-
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;335. </span>def
-getRandomVelocity():</p>
-
-		<p class="noindent mono"><span class="line-number">336.</span>    speed
-= random.randint(SQUIRRELMINSPEED, SQUIRRELMAXSPEED)</p>
-
-		<p class="noindent mono"><span class="line-number">337.</span>    if
-random.randint(0, 1) == 0:</p>
-
-		<p class="noindent mono"><span class="line-number">338.</span>        return
-speed</p>
-
-		<p class="noindent mono"><span class="line-number">339.</span>    else:</p>
-
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;340. </span>        return
--speed</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">335.</span> def getRandomVelocity():</p>
+		<p class="noindent mono"><span class="line-number">336.</span> &#160;&#160;&#160;&#160;speed = random.randint(SQUIRRELMINSPEED, SQUIRRELMAXSPEED)</p>
+		<p class="noindent mono"><span class="line-number">337.</span> &#160;&#160;&#160;&#160;if random.randint(0, 1) == 0:</p>
+		<p class="noindent mono"><span class="line-number">338.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return speed</p>
+		<p class="noindent mono"><span class="line-number">339.</span> &#160;&#160;&#160;&#160;else:</p>
+		<p class="noindent mono"><span class="line-number">340.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return -speed</p>
+	</div>
 
 	<p>The <span class="mono">getRandomVelocity()</span> function
 is used to randomly determine how fast an enemy squirrel will move. The range
 of this velocity is set in the <span class="mono">SQUIRRELMINSPEED</span> and <span
-class=Literal>SQUIRRELMAXSPEED</span> constants, but on top of that, the speed
+class="mono">SQUIRRELMAXSPEED</span> constants, but on top of that, the speed
 is either negative (indicating the squirrel goes to the left or up) or positive
 (indicating the squirrel goes to the right or down). There is a fifty-fifty
 chance for the random speed to be positive or negative.</p>
@@ -2956,43 +2820,18 @@ chance for the random speed to be positive or negative.</p>
 	<h1 class="subheading" id="">Finding a Place to Add New Squirrels and Grass</h1>
 
 	<div class="python-shell">
-
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;343. </span>def
-getRandomOffCameraPos(camerax, cameray, objWidth, objHeight):</p>
-
-		<p class="noindent mono"><span class="line-number">344.</span>    <span
-class="comment"># create a Rect of the camera view</span></p>
-
-		<p class="noindent mono"><span class="line-number">345.</span>    cameraRect
-= pygame.Rect(camerax, cameray, WINWIDTH, WINHEIGHT)</p>
-
-		<p class="noindent mono"><span class="line-number">346.</span>    while
-True:</p>
-
-		<p class="noindent mono"><span class="line-number">347.</span>        x
-= random.randint(camerax - WINWIDTH, camerax + (2 * WINWIDTH))</p>
-
-		<p class="noindent mono"><span class="line-number">348.</span>        y
-= random.randint(cameray - WINHEIGHT, cameray + (2 * WINHEIGHT))</p>
-
-<p class="noindent mono"><span class="line-number">&#160;349.
-</span><span class="comment"># create a Rect object with the random
-coordinates and use colliderect()</span></p>
-
-		<p class="noindent mono"><span class="line-number">350.</span><span
-class="comment">         # to make sure the right edge isn't in the
-camera view.</span></p>
-
-		<p class="noindent mono"><span class="line-number">351.</span>        objRect
-= pygame.Rect(x, y, objWidth, objHeight)</p>
-
-		<p class="noindent mono"><span class="line-number">352.</span>        if
-not objRect.colliderect(cameraRect):</p>
-
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;353. </span>            return
-x, y</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">343.</span> def getRandomOffCameraPos(camerax, cameray, objWidth, objHeight):</p>
+		<p class="noindent mono"><span class="line-number">344.</span>    <span class="comment"># create a Rect of the camera view</span></p>
+		<p class="noindent mono"><span class="line-number">345.</span>    cameraRect = pygame.Rect(camerax, cameray, WINWIDTH, WINHEIGHT)</p>
+		<p class="noindent mono"><span class="line-number">346.</span>    while True:</p>
+		<p class="noindent mono"><span class="line-number">347.</span>        x = random.randint(camerax - WINWIDTH, camerax + (2 * WINWIDTH))</p>
+		<p class="noindent mono"><span class="line-number">348.</span>        y = random.randint(cameray - WINHEIGHT, cameray + (2 * WINHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">349.</span> <span class="comment"># create a Rect object with the random coordinates and use colliderect()</span></p>
+		<p class="noindent mono"><span class="line-number">350.</span> <span class="comment">         # to make sure the right edge isn't in the camera view.</span></p>
+		<p class="noindent mono"><span class="line-number">351.</span>        objRect = pygame.Rect(x, y, objWidth, objHeight)</p>
+		<p class="noindent mono"><span class="line-number">352.</span>        if not objRect.colliderect(cameraRect):</p>
+		<p class="noindent mono"><span class="line-number">353.</span>            return x, y</p>
+	</div>
 
 	<p>When a new squirrel or grass object is created in the game
 world, we want it to be within the active area (so that it is near the player’s
@@ -3000,24 +2839,21 @@ squirrel) but not within the view of the camera (so that it doesn’t just
 suddenly pop into existence on the screen). To do this, we create a Rect object
 that represents the area of the camera (using <span class="mono">camerax</span>,
 <span class="mono">cameray</span>, <span class="mono">WINWIDTH</span>, and <span
-class=Literal>WINHEIGHT</span> constants).</p>
+class="mono">WINHEIGHT</span> constants).</p>
 
 	<p>Next, we randomly generate numbers for the XY coordinates
 that would be within the active area. The active area’s left and top edge are <span
-class=Literal>WINWIDTH</span> and <span class="mono">WINHEIGHT</span> pixels
+class="mono">WINWIDTH</span> and <span class="mono">WINHEIGHT</span> pixels
 to the left and up of <span class="mono">camerax</span> and <span
-class=Literal>cameray</span>. So the active area’s left and top edge are at <span
-class=Literal>camerax - WINWIDTH</span> and <span class=Literal>cameray -
+class="mono">cameray</span>. So the active area’s left and top edge are at <span
+class="mono">camerax - WINWIDTH</span> and <span class="mono">cameray -
 WINHEIGHT</span>. The active area’s width and height are also three times the
 size of the <span class="mono">WINWIDTH</span> and <span class="mono">WINHEIGHT</span>,
 as you can see in this image (where <span class="mono">WINWIDTH</span> is set
 to 640 pixels and <span class="mono">WINHEIGHT</span> set to 480 pixels):</p>
 
-<p class=MsoNormal align=center style='text-align:center'><img width=269
-height=196 id="Picture 51" src="chapter8_files/image015.png"></p>
-
 	<p>This means the right and bottom edges will be at <span
-class=Literal>camerax + (2 * WINWIDTH)</span> and <span class=Literal>cameray +
+class="mono">camerax + (2 * WINWIDTH)</span> and <span class="mono">cameray +
 (2 * WINHEIGHT)</span>. Line 352 will check if the random XY coordinates would
 collide with the camera view’s Rect object. If not, then those coordinates are
 returned. If so, then the <span class="mono">while</span> loop on line 346
@@ -3027,7 +2863,7 @@ will keep generating new coordinates until it finds acceptable ones.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;356. </span>def
+		<p class="noindent mono"><span class="line-number">356.</span> def
 makeNewSquirrel(camerax, cameray):</p>
 
 		<p class="noindent mono"><span class="line-number">357.</span>    sq
@@ -3051,7 +2887,7 @@ sq['y'] = getRandomOffCameraPos(camerax, cameray, sq['width'], sq['height'])</p>
 		<p class="noindent mono"><span class="line-number">363.</span>    sq['movex']
 = getRandomVelocity()</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;364. </span>    sq['movey']
+		<p class="noindent mono"><span class="line-number">364.</span>    sq['movey']
 = getRandomVelocity()</p>
 
 </div>
@@ -3072,13 +2908,13 @@ a random location that the camera cannot see, to prevent the squirrels from
 just “popping” into existence on the screen.</p>
 
 	<p>The speed and direction are also randomly selected by the <span
-class=Literal>getRandomVelocity()</span> function.</p>
+class="mono">getRandomVelocity()</span> function.</p>
 
 	<h1 class="subheading" id="">Flipping the Squirrel Image</h1>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;365. </span>    if
+		<p class="noindent mono"><span class="line-number">365.</span>     if
 sq['movex'] &lt; 0: <span class="comment"># squirrel is facing left</span></p>
 
 		<p class="noindent mono"><span class="line-number">366.</span>        sq['surface']
@@ -3099,13 +2935,13 @@ sq['movex'] &lt; 0: <span class="comment"># squirrel is facing left</span></p>
 		<p class="noindent mono"><span class="line-number">371.</span>    sq['bounceheight']
 = random.randint(10, 50)</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;372. </span>    return
+		<p class="noindent mono"><span class="line-number">372.</span>     return
 sq</p>
 
 </div>
 
 	<p>The <span class="mono">L_SQUIR_IMG</span> and <span
-class=Literal>R_SQUIR_IMG</span> constants contain Surface objects with
+class="mono">R_SQUIR_IMG</span> constants contain Surface objects with
 left-facing and right-facing squirrel images on them. New Surface objects will
 be made using the <span class="mono">pygame.transform.scale()</span> function
 to match the squirrel’s  width and height (stored in <span class="mono">sq['width']</span>
@@ -3113,45 +2949,27 @@ and <span class="mono">sq['height']</span> respectively).</p>
 
 	<p>After that, the three bounce-related values are randomly
 generated (except for <span class="mono">sq['bounce']</span> which is <span
-class=Literal>0</span> because the squirrel always starts at the beginning of
+class="mono">0</span> because the squirrel always starts at the beginning of
 the bounce) and the dictionary is returned on line 372.</p>
 
 	<h1 class="subheading" id="">Creating Grass Data Structures</h1>
 
 	<div class="python-shell">
-
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;375. </span>def
-makeNewGrass(camerax, cameray):</p>
-
-		<p class="noindent mono"><span class="line-number">376.</span>    gr
-= {}</p>
-
-		<p class="noindent mono"><span class="line-number">377.</span>    gr['grassImage']
-= random.randint(0, len(GRASSIMAGES) - 1)</p>
-
-		<p class="noindent mono"><span class="line-number">378.</span>    gr['width']
-= GRASSIMAGES[0].get_width()</p>
-
-		<p class="noindent mono"><span class="line-number">379.</span>    gr['height']
-= GRASSIMAGES[0].get_height()</p>
-
-		<p class="noindent mono"><span class="line-number">380.</span>
-gr['x'], gr['y'] = getRandomOffCameraPos(camerax, cameray, gr['width'],
-gr['height'])</p>
-
-		<p class="noindent mono"><span class="line-number">381.</span>
-gr['rect'] = pygame.Rect( (gr['x'], gr['y'], gr['width'], gr['height']) )</p>
-
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;382. </span>    return
-gr</p>
-
-</div>
+		<p class="noindent mono"><span class="line-number">375.</span> def makeNewGrass(camerax, cameray):</p>
+		<p class="noindent mono"><span class="line-number">376.</span>    gr = {}</p>
+		<p class="noindent mono"><span class="line-number">377.</span>    gr['grassImage'] = random.randint(0, len(GRASSIMAGES) - 1)</p>
+		<p class="noindent mono"><span class="line-number">378.</span>    gr['width'] = GRASSIMAGES[0].get_width()</p>
+		<p class="noindent mono"><span class="line-number">379.</span>    gr['height'] = GRASSIMAGES[0].get_height()</p>
+		<p class="noindent mono"><span class="line-number">380.</span> gr['x'], gr['y'] = getRandomOffCameraPos(camerax, cameray, gr['width'], gr['height'])</p>
+		<p class="noindent mono"><span class="line-number">381.</span> gr['rect'] = pygame.Rect( (gr['x'], gr['y'], gr['width'], gr['height']) )</p>
+		<p class="noindent mono"><span class="line-number">382.</span>     return gr</p>
+	</div>
 
 	<p>The grass game objects are dictionaries with the usual <span
-class=Literal>'x'</span>, <span class="mono">'y'</span>, <span class="mono">'width'</span>,
+class="mono">'x'</span>, <span class="mono">'y'</span>, <span class="mono">'width'</span>,
 <span class="mono">'height'</span>, and <span class="mono">'rect'</span> keys
 but also a <span class="mono">'grassImage'</span> key which is a number from <span
-class=Literal>0</span> to one less than the length of the <span class="mono">GRASSIMAGES</span>
+class="mono">0</span> to one less than the length of the <span class="mono">GRASSIMAGES</span>
 list. This number will determine what image the grass game object has. For
 example, if the value of the grass object’s <span class="mono">'grassImage'</span>
 key is <span class="mono">3</span>, then it will use the Surface object stored
@@ -3161,7 +2979,7 @@ at <span class="mono">GRASSIMAGES[3]</span> for its image.</p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;385. </span>def
+		<p class="noindent mono"><span class="line-number">385.</span> def
 isOutsideActiveArea(camerax, cameray, obj):</p>
 
 		<p class="noindent mono"><span class="line-number">386.</span>    <span
@@ -3182,7 +3000,7 @@ class="comment"># a half-window length beyond the edge of the window.</span></p>
 		<p class="noindent mono"><span class="line-number">391.</span>    objRect
 = pygame.Rect(obj['x'], obj['y'], obj['width'], obj['height'])</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;392. </span>    return
+		<p class="noindent mono"><span class="line-number">392.</span>     return
 not boundsRect.colliderect(objRect)</p>
 
 </div>
@@ -3193,32 +3011,29 @@ the “active area” that is dictated by the <span class="mono">camerax</span>
 and <span class="mono">cameray</span> parameters. Remember that the active
 area is an area around the camera view the size of the camera view (which has a
 width and height set by <span class="mono">WINWIDTH</span> and <span
-class=Literal>WINHEIGHT</span>), like this:</p>
-
-<p class=MsoNormal align=center style='text-align:center'><img width=269
-height=196 id="Picture 3" src="chapter8_files/image015.png"></p>
+class="mono">WINHEIGHT</span>), like this:</p>
 
 	<p>We can create a Rect object that represents the active area
 by passing <span class="mono">camerax - WINWIDTH</span> for the left edge
 value and <span class="mono">cameray - WINHEIGHT</span> for the top edge
 value, and then <span class="mono">WINWIDTH * 3</span> and <span
-class=Literal>WINHEIGHT * 3</span> for the width and height. Once we have the
+class="mono">WINHEIGHT * 3</span> for the width and height. Once we have the
 active area represented as a Rect object, we can use the <span class="mono">colliderect()</span>
 method to determine if the object in the <span class="mono">obj</span>
 parameter is collides with (that is, is inside of) the active area Rect object.</p>
 
 	<p>Since the player squirrel, enemy squirrel and grass objects
 all have <span class="mono">'x'</span>, <span class="mono">'y'</span>, <span
-class=Literal>'width'</span> and <span class="mono">'height'</span> keys, the <span
-class=Literal>isOutsideActiveArea()</span> code can work with any type of those
+class="mono">'width'</span> and <span class="mono">'height'</span> keys, the <span
+class="mono">isOutsideActiveArea()</span> code can work with any type of those
 game objects. </p>
 
 	<div class="python-shell">
 
-<p class=SourceCodeFeaturedCxSpFirst><span class="line-number">&#160;395. </span>if
+		<p class="noindent mono"><span class="line-number">395.</span> if
 __name__ == '__main__':</p>
 
-<p class=SourceCodeFeaturedCxSpLast><span class="line-number">&#160;396. </span>    main()</p>
+		<p class="noindent mono"><span class="line-number">396.</span>     main()</p>
 
 </div>
 
@@ -3227,29 +3042,10 @@ program will run the <span class="mono">main()</span> function and start the
 game.</p>
 
 	<h1 class="subheading" id="">Summary</h1>
-
-	<p>Squirrel Eat Squirrel was our first game to have multiple
-enemies moving around the board at once. The key to having several enemies was
-using a dictionary value with identical keys for each enemy squirrel, so that
-the same code could be run on each of them during an iteration through the game
-loop.</p>
-
-	<p>The concept of the camera was also introduced. Cameras
-weren’t needed for our previous games because the entire game world fit onto
-one screen. However, when you make your own games that involve a player moving
-around a large game world, you will need code to handle converting between the
-game world’s coordinate system and the screen’s pixel coordinate system.</p>
-
-	<p>Finally, the mathematical sine function was introduced to
-give realistic squirrel hops (no matter how tall or long each hop was). You
-don’t need to know a lot of math to do programming. In most cases, just knowing
-addition, multiplication, and negative numbers is fine. However, if you study
-mathematics, you’ll often find several uses for math to make your games cooler.</p>
-
-	<p>For additional programming practice, you can download buggy
-versions of Squirrel Eat Squirrel from <a href="https://invpy.com/buggy/squirrel">https://invpy.com/buggy/squirrel</a>
-and try to figure out how to fix the bugs.</p>
--->
+	<p class="noindent">Squirrel Eat Squirrel was our first game to have multiple enemies moving around the board at once. The key to having several enemies was using a dictionary value with identical keys for each enemy squirrel, so that the same code could be run on each of them during an iteration through the game loop.</p>
+	<p>The concept of the camera was also introduced. Cameras weren’t needed for our previous games because the entire game world fit onto one screen. However, when you make your own games that involve a player moving around a large game world, you will need code to handle converting between the game world’s coordinate system and the screen’s pixel coordinate system.</p>
+	<p>Finally, the mathematical sine function was introduced to give realistic squirrel hops (no matter how tall or long each hop was). You don’t need to know a lot of math to do programming. In most cases, just knowing addition, multiplication, and negative numbers is fine. However, if you study mathematics, you’ll often find several uses for math to make your games cooler.</p>
+	<p>For additional programming practice, you can download buggy versions of Squirrel Eat Squirrel from <a href="https://invpy.com/buggy/squirrel">https://invpy.com/buggy/squirrel</a> and try to figure out how to fix the bugs.</p>
 
 </body>
 </html>
