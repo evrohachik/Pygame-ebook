@@ -43,562 +43,198 @@
 		<p class="noindent mono"><span class="line-number">&#160;19.</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;20.</span>  CAM_MOVE_SPEED = 5 <span class="comment"># how many pixels per frame the camera moves</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;21.</span> </p>
-		<p class="noindent mono"><span class="line-number">&#160;22.</span>  <span  class="comment"># The percentage of outdoor tiles that have additional</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;22.</span>  <span class="comment"># The percentage of outdoor tiles that have additional</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;23.</span>  <span class="comment"># decoration on them, such as a tree or rock.</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;24.</span>  OUTSIDE_DECORATION_PCT = 20</p>
 		<p class="noindent mono"><span class="line-number">&#160;25.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;26.</span>  BRIGHTBLUE
-= (  0, 170, 255)</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;27.</span>  WHITE
-= (255, 255, 255)</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;28.</span>  BGCOLOR
-= BRIGHTBLUE</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;29.</span>  TEXTCOLOR
-= WHITE</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;30.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;31.</span>  UP
-= 'up'</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;32.</span>  DOWN
-= 'down'</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;33.</span>  LEFT
-= 'left'</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;34.</span>  RIGHT
-= 'right'</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;26.</span>  BRIGHTBLUE = (  0, 170, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;27.</span>  WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;28.</span>  BGCOLOR = BRIGHTBLUE</p>
+		<p class="noindent mono"><span class="line-number">&#160;29.</span>  TEXTCOLOR = WHITE</p>
+		<p class="noindent mono"><span class="line-number">&#160;30.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;31.</span>  UP = 'up'</p>
+		<p class="noindent mono"><span class="line-number">&#160;32.</span>  DOWN = 'down'</p>
+		<p class="noindent mono"><span class="line-number">&#160;33.</span>  LEFT = 'left'</p>
+		<p class="noindent mono"><span class="line-number">&#160;34.</span>  RIGHT = 'right'</p>
 		<p class="noindent mono"><span class="line-number">&#160;35.</span></p>
-
 		<p class="noindent mono"><span class="line-number">&#160;36.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;37. </span>def
-main():</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;38.</span>      global
-FPSCLOCK, DISPLAYSURF, IMAGESDICT, TILEMAPPING, OUTSIDEDECOMAPPING, BASICFONT,
-PLAYERIMAGES, currentImage</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;39.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;40.</span>      <span
-class="comment"># Pygame initialization and basic set up of the global variables.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;41.</span>      pygame.init()</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;42.</span>      FPSCLOCK
-= pygame.time.Clock()</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;43.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;44.</span>      <span
-class="comment"># Because the Surface object stored in DISPLAYSURF was
-returned</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;45.</span>      <span
-class="comment"># from the pygame.display.set_mode() function, this is
-the</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;46.</span>      <span
-class="comment"># Surface object that is drawn to the actual computer
-screen</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;47.</span>      <span
-class="comment"># when pygame.display.update() is called.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;48.</span>      DISPLAYSURF
-= pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;49.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;50.</span>      pygame.display.set_caption('Star
-Pusher')</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;51.</span>      BASICFONT
-= pygame.font.Font('freesansbold.ttf', 18)</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;37.</span> def main():</p>
+		<p class="noindent mono"><span class="line-number">&#160;38.</span> &#160;&#160;&#160;&#160;global FPSCLOCK, DISPLAYSURF, IMAGESDICT, TILEMAPPING, OUTSIDEDECOMAPPING, BASICFONT, PLAYERIMAGES, currentImage</p>
+		<p class="noindent mono"><span class="line-number">&#160;39.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;40.</span> &#160;&#160;&#160;&#160;<span class="comment"># Pygame initialization and basic set up of the global variables.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;41.</span> &#160;&#160;&#160;&#160;pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;42.</span> &#160;&#160;&#160;&#160;FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">&#160;43.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;44.</span> &#160;&#160;&#160;&#160;<span class="comment"># Because the Surface object stored in DISPLAYSURF was returned</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;45.</span> &#160;&#160;&#160;&#160;<span class="comment"># from the pygame.display.set_mode() function, this is the</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;46.</span> &#160;&#160;&#160;&#160;<span class="comment"># Surface object that is drawn to the actual computer screen</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;47.</span> &#160;&#160;&#160;&#160;<span class="comment"># when pygame.display.update() is called.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;48.</span> &#160;&#160;&#160;&#160;DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">&#160;49.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;50.</span> &#160;&#160;&#160;&#160;pygame.display.set_caption('Star Pusher')</p>
+		<p class="noindent mono"><span class="line-number">&#160;51.</span> &#160;&#160;&#160;&#160;BASICFONT = pygame.font.Font('freesansbold.ttf', 18)</p>
 		<p class="noindent mono"><span class="line-number">&#160;52.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;53.</span>    <span
-class="comment"># A global dict value that will contain all the Pygame</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;54.</span>      <span
-class="comment"># Surface objects returned by pygame.image.load().</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;55.</span>      IMAGESDICT
-= {'uncovered goal': pygame.image.load('RedSelector.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;56.</span>                    'covered
-goal': pygame.image.load('Selector.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;57.</span>                    'star':
-pygame.image.load('Star.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;58.</span>                    'corner':
-pygame.image.load('Wall Block Tall.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;59.</span>                    'wall':
-pygame.image.load('Wood Block Tall.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;60.</span>                    'inside
-floor': pygame.image.load('Plain Block.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;61.</span>                    'outside
-floor': pygame.image.load('Grass Block.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;62.</span>                    'title':
-pygame.image.load('star_title.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;63.</span>                    'solved':
-pygame.image.load('star_solved.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;64.</span>                    'princess':
-pygame.image.load('princess.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;65.</span>                    'boy':
-pygame.image.load('boy.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;66.</span>                    'catgirl':
-pygame.image.load('catgirl.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;67.</span>                    'horngirl':
-pygame.image.load('horngirl.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;68.</span>                    'pinkgirl':
-pygame.image.load('pinkgirl.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;69.</span>                    'rock':
-pygame.image.load('Rock.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;70.</span>                    'short
-tree': pygame.image.load('Tree_Short.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;71.</span>                    'tall
-tree': pygame.image.load('Tree_Tall.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;72.</span>                    'ugly
-tree': pygame.image.load('Tree_Ugly.png')}</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;73.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number"> 74. </span>    <span
-class="comment"># These dict values are global, and map the character
-that appears</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;75.</span>      <span
-class="comment"># in the level file to the Surface object it
-represents.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;76.</span>      TILEMAPPING
-= {'x': IMAGESDICT['corner'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;77.</span>                     '#':
-IMAGESDICT['wall'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;78.</span>                     'o':
-IMAGESDICT['inside floor'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;79.</span>                     '
-': IMAGESDICT['outside floor']}</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;80.</span>    OUTSIDEDECOMAPPING
-= {'1': IMAGESDICT['rock'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;81.</span>                            '2':
-IMAGESDICT['short tree'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;82.</span>                            '3':
-IMAGESDICT['tall tree'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;83.</span>                            '4':
-IMAGESDICT['ugly tree']}</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;84.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;85.</span>    <span
-class="comment"># PLAYERIMAGES is a list of all possible characters the
-player can be.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;86.</span>      <span
-class="comment"># currentImage is the index of the player's current
-player image.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;87.</span>    currentImage
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;88.</span>      PLAYERIMAGES
-= [IMAGESDICT['princess'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;89.</span>                      IMAGESDICT['boy'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;90.</span>                      IMAGESDICT['catgirl'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;91.</span>                      IMAGESDICT['horngirl'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;92.</span>                      IMAGESDICT['pinkgirl']]</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;53.</span> &#160;&#160;&#160;&#160;<span class="comment"># A global dict value that will contain all the Pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;54.</span> &#160;&#160;&#160;&#160;<span class="comment"># Surface objects returned by pygame.image.load().</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;55.</span> &#160;&#160;&#160;&#160;IMAGESDICT = {'uncovered goal': pygame.image.load('RedSelector.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;56.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'covered goal': pygame.image.load('Selector.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;57.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'star': pygame.image.load('Star.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;58.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'corner': pygame.image.load('Wall Block Tall.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;59.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'wall': pygame.image.load('Wood Block Tall.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;60.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'inside floor': pygame.image.load('Plain Block.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;61.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'outside floor': pygame.image.load('Grass Block.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;62.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'title': pygame.image.load('star_title.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;63.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'solved': pygame.image.load('star_solved.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;64.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'princess': pygame.image.load('princess.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;65.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'boy': pygame.image.load('boy.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;66.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'catgirl': pygame.image.load('catgirl.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;67.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'horngirl': pygame.image.load('horngirl.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;68.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'pinkgirl': pygame.image.load('pinkgirl.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;69.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'rock': pygame.image.load('Rock.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;70.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'short tree': pygame.image.load('Tree_Short.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;71.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'tall tree': pygame.image.load('Tree_Tall.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;72.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'ugly tree': pygame.image.load('Tree_Ugly.png')}</p>
+		<p class="noindent mono"><span class="line-number">&#160;73.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;74.</span> &#160;&#160;&#160;&#160;<span class="comment"># These dict values are global, and map the character that appears</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;75.</span> &#160;&#160;&#160;&#160;<span class="comment"># in the level file to the Surface object it represents.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;76.</span> &#160;&#160;&#160;&#160;TILEMAPPING = {'x': IMAGESDICT['corner'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'#': IMAGESDICT['wall'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'o': IMAGESDICT['inside floor'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;79.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' ': IMAGESDICT['outside floor']}</p>
+		<p class="noindent mono"><span class="line-number">&#160;80.</span> &#160;&#160;&#160;&#160;OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;81.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'2': IMAGESDICT['short tree'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'3': IMAGESDICT['tall tree'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;83.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'4': IMAGESDICT['ugly tree']}</p>
+		<p class="noindent mono"><span class="line-number">&#160;84.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;85.</span> &#160;&#160;&#160;&#160;<span class="comment"># PLAYERIMAGES is a list of all possible characters the player can be.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;86.</span> &#160;&#160;&#160;&#160;<span class="comment"># currentImage is the index of the player's current player image.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;87.</span> &#160;&#160;&#160;&#160;currentImage = 0</p>
+		<p class="noindent mono"><span class="line-number">&#160;88.</span> &#160;&#160;&#160;&#160;PLAYERIMAGES = [IMAGESDICT['princess'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;89.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['boy'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;90.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['catgirl'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;91.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['horngirl'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;92.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['pinkgirl']]</p>
 		<p class="noindent mono"><span class="line-number">&#160;93.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;94.</span>    startScreen()
-<span class="comment"># show the title screen until the user presses a
-key</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;95.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;96.</span>      <span
-class="comment"># Read in the levels from the text file. See the
-readLevelsFile() for</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;97.</span>      <span
-class="comment"># details on the format of this file and how to make
-your own levels.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;98.</span>      levels
-= readLevelsFile('starPusherLevels.txt')</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;99.</span>    currentLevelIndex
-= 0</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;94.</span> &#160;&#160;&#160;&#160;startScreen() <span class="comment"># show the title screen until the user presses a key</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;95.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;96.</span> &#160;&#160;&#160;&#160;<span class="comment"># Read in the levels from the text file. See the readLevelsFile() for</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;97.</span> &#160;&#160;&#160;&#160;<span class="comment"># details on the format of this file and how to make your own levels.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;98.</span> &#160;&#160;&#160;&#160;levels = readLevelsFile('starPusherLevels.txt')</p>
+		<p class="noindent mono"><span class="line-number">&#160;99.</span> &#160;&#160;&#160;&#160;currentLevelIndex = 0</p>
 		<p class="noindent mono"><span class="line-number">100.</span></p>
-
-		<p class="noindent mono"><span class="line-number">101.</span>     <span
-class="comment"># The main game loop. This loop runs a single level,
-when the user</span></p>
-
-		<p class="noindent mono"><span class="line-number">102.</span>     <span
-class="comment"># finishes that level, the next/previous level is
-loaded.</span></p>
-
-		<p class="noindent mono"><span class="line-number">103.</span>     while
-True: <span class="comment"># main game loop</span></p>
-
-		<p class="noindent mono"><span class="line-number">104.</span>         <span
-class="comment"># Run the level to actually start playing the game:</span></p>
-
-		<p class="noindent mono"><span class="line-number">105.</span>         result
-= runLevel(levels, currentLevelIndex)</p>
-
+		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;<span class="comment"># The main game loop. This loop runs a single level, when the user</span></p>
+		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;<span class="comment"># finishes that level, the next/previous level is loaded.</span></p>
+		<p class="noindent mono"><span class="line-number">103.</span> &#160;&#160;&#160;&#160;while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Run the level to actually start playing the game:</span></p>
+		<p class="noindent mono"><span class="line-number">105.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;result = runLevel(levels, currentLevelIndex)</p>
 		<p class="noindent mono"><span class="line-number">106.</span></p>
-
-		<p class="noindent mono"><span class="line-number">107.</span>         if
-result in ('solved', 'next'):</p>
-
-		<p class="noindent mono"><span class="line-number">108.</span>             <span
-class="comment"># Go to the next level.</span></p>
-
-		<p class="noindent mono"><span class="line-number">109.</span>             currentLevelIndex
-+= 1</p>
-
-		<p class="noindent mono"><span class="line-number">110.</span>             if
-currentLevelIndex &gt;= len(levels):</p>
-
-		<p class="noindent mono"><span class="line-number">111.</span>                 <span
-class="comment"># If there are no more levels, go back to the first
-one.</span></p>
-
-		<p class="noindent mono"><span class="line-number">112.</span>                 currentLevelIndex
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">113.</span>         elif
-result == 'back':</p>
-
-		<p class="noindent mono"><span class="line-number">114.</span>             <span
-class="comment"># Go to the previous level.</span></p>
-
-		<p class="noindent mono"><span class="line-number">115.</span>             currentLevelIndex
--= 1</p>
-
-		<p class="noindent mono"><span class="line-number">116.</span>             if
-currentLevelIndex &lt; 0:</p>
-
-		<p class="noindent mono"><span class="line-number">117.</span>                 <span
-class="comment"># If there are no previous levels, go to the last one.</span></p>
-
-		<p class="noindent mono"><span class="line-number">118.</span>                 currentLevelIndex
-= len(levels)-1</p>
-
-		<p class="noindent mono"><span class="line-number">119.</span>         elif
-result == 'reset':</p>
-
-		<p class="noindent mono"><span class="line-number">120.</span>             pass
-<span class="comment"># Do nothing. Loop re-calls runLevel() to reset
-the level</span></p>
-
+		<p class="noindent mono"><span class="line-number">107.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if result in ('solved', 'next'):</p>
+		<p class="noindent mono"><span class="line-number">108.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Go to the next level.</span></p>
+		<p class="noindent mono"><span class="line-number">109.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;currentLevelIndex += 1</p>
+		<p class="noindent mono"><span class="line-number">110.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if currentLevelIndex &gt;= len(levels):</p>
+		<p class="noindent mono"><span class="line-number">111.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># If there are no more levels, go back to the first one.</span></p>
+		<p class="noindent mono"><span class="line-number">112.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;currentLevelIndex = 0</p>
+		<p class="noindent mono"><span class="line-number">113.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif result == 'back':</p>
+		<p class="noindent mono"><span class="line-number">114.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Go to the previous level.</span></p>
+		<p class="noindent mono"><span class="line-number">115.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;currentLevelIndex -= 1</p>
+		<p class="noindent mono"><span class="line-number">116.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if currentLevelIndex &lt; 0:</p>
+		<p class="noindent mono"><span class="line-number">117.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># If there are no previous levels, go to the last one.</span></p>
+		<p class="noindent mono"><span class="line-number">118.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;currentLevelIndex = len(levels)-1</p>
+		<p class="noindent mono"><span class="line-number">119.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif result == 'reset':</p>
+		<p class="noindent mono"><span class="line-number">120.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pass <span class="comment"># Do nothing. Loop re-calls runLevel() to reset the level</span></p>
 		<p class="noindent mono"><span class="line-number">121.</span></p>
-
 		<p class="noindent mono"><span class="line-number">122.</span></p>
-
-		<p class="noindent mono"><span class="line-number">123.</span> def
-runLevel(levels, levelNum):</p>
-
-		<p class="noindent mono"><span class="line-number">124.</span>
-global currentImage</p>
-
-		<p class="noindent mono"><span class="line-number">125.</span>
-levelObj = levels[levelnum]</p>
-
-		<p class="noindent mono"><span class="line-number">126.</span>     mapObj
-= decorateMap(levelObj['mapObj'], levelObj['startState']['player'])</p>
-
-		<p class="noindent mono"><span class="line-number">127.</span>     gameStateObj
-= copy.deepcopy(levelObj['startState'])</p>
-
-		<p class="noindent mono"><span class="line-number">128.</span>     mapNeedsRedraw
-= True <span class="comment"># set to True to call drawMap()</span></p>
-
-		<p class="noindent mono"><span class="line-number">129.</span>     levelSurf
-= BASICFONT.render('Level %s of %s' % (levelObj['levelNum'] + 1,
-totalNumOfLevels), 1, TEXTCOLOR)</p>
-
-		<p class="noindent mono"><span class="line-number">130.</span>     levelRect
-= levelSurf.get_rect()</p>
-
-		<p class="noindent mono"><span class="line-number">131.</span>     levelRect.bottomleft
-= (20, WINHEIGHT - 35)</p>
-
-		<p class="noindent mono"><span class="line-number">132.</span>     mapWidth
-= len(mapObj) * TILEWIDTH</p>
-
-		<p class="noindent mono"><span class="line-number">133.</span>     mapHeight
-= (len(mapObj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT</p>
-
-		<p class="noindent mono"><span class="line-number">134.</span>     MAX_CAM_X_PAN
-= abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH</p>
-
-		<p class="noindent mono"><span class="line-number">135.</span>     MAX_CAM_Y_PAN
-= abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT</p>
-
-		<p class="noindent mono"><span class="line-number">136.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">137.</span>     levelIsComplete
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">138.</span>     <span
-class="comment"># Track how much the camera has moved:</span></p>
-
-		<p class="noindent mono"><span class="line-number">139.</span>     cameraOffsetX
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">140.</span>     cameraOffsetY
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">141.</span>     <span
-class="comment"># Track if the keys to move the camera are being held
-down:</span></p>
-
-		<p class="noindent mono"><span class="line-number">142.</span>     cameraUp
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">143.</span>     cameraDown
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">144.</span>     cameraLeft
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">145.</span>     cameraRight
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">146.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">147.</span>     while
-True: <span class="comment"># main game loop</span></p>
-
-		<p class="noindent mono"><span class="line-number">148.</span>         <span
-class="comment"># Reset these variables:</span></p>
-
-		<p class="noindent mono"><span class="line-number">149.</span>         playerMoveTo
-= None</p>
-
-		<p class="noindent mono"><span class="line-number">150.</span>         keyPressed
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">151.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">152.</span>         for
-event in pygame.event.get(): <span class="comment"># event handling
-loop</span></p>
-
-		<p class="noindent mono"><span class="line-number">153.</span>             if
-event.type == QUIT:</p>
-
-		<p class="noindent mono"><span class="line-number">154.</span>                 <span
-class="comment"># Player clicked the &quot;X&quot; at the corner of the
-window.</span></p>
-
-		<p class="noindent mono"><span class="line-number">155.</span>                 terminate()</p>
-
-		<p class="noindent mono"><span class="line-number">156.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">157.</span>             elif
-event.type == KEYDOWN:</p>
-
-		<p class="noindent mono"><span class="line-number">158.</span>                 <span
-class="comment"># Handle key presses</span></p>
-
-		<p class="noindent mono"><span class="line-number">159.</span>                 keyPressed
-= True</p>
-
-		<p class="noindent mono"><span class="line-number">160.</span>                 if
-event.key == K_LEFT:</p>
-
-		<p class="noindent mono"><span class="line-number">161.</span>                     playerMoveTo
-= LEFT</p>
-
-		<p class="noindent mono"><span class="line-number">162.</span>                 elif
-event.key == K_RIGHT:</p>
-
-		<p class="noindent mono"><span class="line-number">163.</span>                     playerMoveTo
-= RIGHT</p>
-
-		<p class="noindent mono"><span class="line-number">164.</span>                 elif
-event.key == K_UP:</p>
-
-		<p class="noindent mono"><span class="line-number">165.</span>                     playerMoveTo
-= UP</p>
-
-		<p class="noindent mono"><span class="line-number">166.</span>                 elif
-event.key == K_DOWN:</p>
-
-		<p class="noindent mono"><span class="line-number">167.</span>                     playerMoveTo
-= DOWN</p>
-
-		<p class="noindent mono"><span class="line-number">168.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">169.</span>                 <span
-class="comment"># Set the camera move mode.</span></p>
-
-		<p class="noindent mono"><span class="line-number">170.</span>                 elif
-event.key == K_a:</p>
-
-		<p class="noindent mono"><span class="line-number">171.</span>                     cameraLeft
-= True</p>
-
-		<p class="noindent mono"><span class="line-number">172.</span>                 elif
-event.key == K_d:</p>
-
-		<p class="noindent mono"><span class="line-number">173.</span>                     cameraRight
-= True</p>
-
-		<p class="noindent mono"><span class="line-number">174.</span>                 elif
-event.key == K_w:</p>
-
-		<p class="noindent mono"><span class="line-number">175.</span>                     cameraUp
-= True</p>
-
-		<p class="noindent mono"><span class="line-number">176.</span>                 elif
-event.key == K_s:</p>
-
-		<p class="noindent mono"><span class="line-number">177.</span>                     cameraDown
-= True</p>
-
-		<p class="noindent mono"><span class="line-number">178.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">179.</span>                 elif
-event.key == K_n:</p>
-
-		<p class="noindent mono"><span class="line-number">180.</span>                     return
-'next'</p>
-
-		<p class="noindent mono"><span class="line-number">181.</span>                 elif
-event.key == K_b:</p>
-
-		<p class="noindent mono"><span class="line-number">182.</span>                     return
-'back'</p>
-
-		<p class="noindent mono"><span class="line-number">183.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">184.</span>                 elif
-event.key == K_ESCAPE:</p>
-
-		<p class="noindent mono"><span class="line-number">185.</span>                     terminate()
-<span class="comment"># Esc key quits.</span></p>
-
-		<p class="noindent mono"><span class="line-number">186.</span>                 elif
-event.key == K_BACKSPACE:</p>
-
-		<p class="noindent mono"><span class="line-number">187.</span>                     return
-'reset' <span class="comment"># Reset the level.</span></p>
-
-		<p class="noindent mono"><span class="line-number">188.</span>                 elif
-event.key == K_p:</p>
-
-		<p class="noindent mono"><span class="line-number">189.</span>                     <span
-class="comment"># Change the player image to the next one.</span></p>
-
-		<p class="noindent mono"><span class="line-number">190.</span>                     currentImage
-+= 1</p>
-
-		<p class="noindent mono"><span class="line-number">191.</span>                     if
-currentImage &gt;= len(PLAYERIMAGES):</p>
-
-		<p class="noindent mono"><span class="line-number">192.</span>                         <span
-class="comment"># After the last player image, use the first one.</span></p>
-
-		<p class="noindent mono"><span class="line-number">193.</span>                         currentImage
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">194.</span>                     mapNeedsRedraw
-= True</p>
-
-		<p class="noindent mono"><span class="line-number">195.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">196.</span>             elif
-event.type == KEYUP:</p>
-
-		<p class="noindent mono"><span class="line-number">197.</span>                 <span
-class="comment"># Unset the camera move mode.</span></p>
-
-		<p class="noindent mono"><span class="line-number">198.</span>                 if
-event.key == K_a:</p>
-
-		<p class="noindent mono"><span class="line-number">199.</span>                     cameraLeft
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">200.</span>                 elif
-event.key == K_d:</p>
-
-		<p class="noindent mono"><span class="line-number">201.</span>                     cameraRight
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">202.</span>                 elif
-event.key == K_w:</p>
-
-		<p class="noindent mono"><span class="line-number">203.</span>                     cameraUp
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">204.</span>                 elif
-event.key == K_s:</p>
-
-		<p class="noindent mono"><span class="line-number">205.</span>                     cameraDown
-= False</p>
-
-		<p class="noindent mono"><span class="line-number">206.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">207.</span>         if
-playerMoveTo != None and not levelIsComplete:</p>
-
-		<p class="noindent mono"><span class="line-number">208.</span>             <span
-class="comment"># If the player pushed a key to move, make the move</span></p>
-
-		<p class="noindent mono"><span class="line-number">209.</span>             <span
-class="comment"># (if possible) and push any stars that are pushable.</span></p>
-
-		<p class="noindent mono"><span class="line-number">210.</span>             moved
-= makeMove(mapObj, gameStateObj, playerMoveTo)</p>
-
-		<p class="noindent mono"><span class="line-number">211.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">212.</span>             if
-moved:</p>
-
-		<p class="noindent mono"><span class="line-number">213.</span>                 <span
-class="comment"># increment the step counter.</span></p>
+		<p class="noindent mono"><span class="line-number">123.</span> def runLevel(levels, levelNum):</p>
+		<p class="noindent mono"><span class="line-number">124.</span> &#160;&#160;&#160;&#160;global currentImage</p>
+		<p class="noindent mono"><span class="line-number">125.</span> &#160;&#160;&#160;&#160;levelObj = levels[levelnum]</p>
+		<p class="noindent mono"><span class="line-number">126.</span> &#160;&#160;&#160;&#160;mapObj = decorateMap(levelObj['mapObj'], levelObj['startState']['player'])</p>
+		<p class="noindent mono"><span class="line-number">127.</span> &#160;&#160;&#160;&#160;gameStateObj = copy.deepcopy(levelObj['startState'])</p>
+		<p class="noindent mono"><span class="line-number">128.</span> &#160;&#160;&#160;&#160;mapNeedsRedraw = True <span class="comment"># set to True to call drawMap()</span></p>
+		<p class="noindent mono"><span class="line-number">129.</span> &#160;&#160;&#160;&#160;levelSurf = BASICFONT.render('Level %s of %s' % (levelObj['levelNum'] + 1, totalNumOfLevels), 1, TEXTCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">130.</span> &#160;&#160;&#160;&#160;levelRect = levelSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">131.</span> &#160;&#160;&#160;&#160;levelRect.bottomleft = (20, WINHEIGHT - 35)</p>
+		<p class="noindent mono"><span class="line-number">132.</span> &#160;&#160;&#160;&#160;mapWidth = len(mapObj) * TILEWIDTH</p>
+		<p class="noindent mono"><span class="line-number">133.</span> &#160;&#160;&#160;&#160;mapHeight = (len(mapObj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT</p>
+		<p class="noindent mono"><span class="line-number">134.</span> &#160;&#160;&#160;&#160;MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(mapHeight / 2)) + TILEWIDTH</p>
+		<p class="noindent mono"><span class="line-number">135.</span> &#160;&#160;&#160;&#160;MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(mapWidth / 2)) + TILEHEIGHT</p>
+		<p class="noindent mono"><span class="line-number">136.</span></p>
+		<p class="noindent mono"><span class="line-number">137.</span> &#160;&#160;&#160;&#160;levelIsComplete = False</p>
+		<p class="noindent mono"><span class="line-number">138.</span> &#160;&#160;&#160;&#160;<span class="comment"># Track how much the camera has moved:</span></p>
+		<p class="noindent mono"><span class="line-number">139.</span> &#160;&#160;&#160;&#160;cameraOffsetX = 0</p>
+		<p class="noindent mono"><span class="line-number">140.</span> &#160;&#160;&#160;&#160;cameraOffsetY = 0</p>
+		<p class="noindent mono"><span class="line-number">141.</span> &#160;&#160;&#160;&#160;<span class="comment"># Track if the keys to move the camera are being held down:</span></p>
+		<p class="noindent mono"><span class="line-number">142.</span> &#160;&#160;&#160;&#160;cameraUp = False</p>
+		<p class="noindent mono"><span class="line-number">143.</span> &#160;&#160;&#160;&#160;cameraDown = False</p>
+		<p class="noindent mono"><span class="line-number">144.</span> &#160;&#160;&#160;&#160;cameraLeft = False</p>
+		<p class="noindent mono"><span class="line-number">145.</span> &#160;&#160;&#160;&#160;cameraRight = False</p>
+		<p class="noindent mono"><span class="line-number">146.</span></p>
+		<p class="noindent mono"><span class="line-number">147.</span> &#160;&#160;&#160;&#160;while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">148.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Reset these variables:</span></p>
+		<p class="noindent mono"><span class="line-number">149.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;playerMoveTo = None</p>
+		<p class="noindent mono"><span class="line-number">150.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;keyPressed = False</p>
+		<p class="noindent mono"><span class="line-number">151.</span></p>
+		<p class="noindent mono"><span class="line-number">152.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(): <span class="comment"># event handling loop</span></p>
+		<p class="noindent mono"><span class="line-number">153.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.type == QUIT:</p>
+		<p class="noindent mono"><span class="line-number">154.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Player clicked the &quot;X&quot; at the corner of the window.</span></p>
+		<p class="noindent mono"><span class="line-number">155.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;terminate()</p>
+		<p class="noindent mono"><span class="line-number">156.</span></p>
+		<p class="noindent mono"><span class="line-number">157.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == KEYDOWN:</p>
+		<p class="noindent mono"><span class="line-number">158.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Handle key presses</span></p>
+		<p class="noindent mono"><span class="line-number">159.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;keyPressed = True</p>
+		<p class="noindent mono"><span class="line-number">160.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.key == K_LEFT:</p>
+		<p class="noindent mono"><span class="line-number">161.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;playerMoveTo = LEFT</p>
+		<p class="noindent mono"><span class="line-number">162.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_RIGHT:</p>
+		<p class="noindent mono"><span class="line-number">163.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;playerMoveTo = RIGHT</p>
+		<p class="noindent mono"><span class="line-number">164.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_UP:</p>
+		<p class="noindent mono"><span class="line-number">165.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;playerMoveTo = UP</p>
+		<p class="noindent mono"><span class="line-number">166.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_DOWN:</p>
+		<p class="noindent mono"><span class="line-number">167.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;playerMoveTo = DOWN</p>
+		<p class="noindent mono"><span class="line-number">168.</span></p>
+		<p class="noindent mono"><span class="line-number">169.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Set the camera move mode.</span></p>
+		<p class="noindent mono"><span class="line-number">170.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_a:</p>
+		<p class="noindent mono"><span class="line-number">171.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;cameraLeft = True</p>
+		<p class="noindent mono"><span class="line-number">172.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_d:</p>
+		<p class="noindent mono"><span class="line-number">173.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;cameraRight = True</p>
+		<p class="noindent mono"><span class="line-number">174.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_w:</p>
+		<p class="noindent mono"><span class="line-number">175.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;cameraUp = True</p>
+		<p class="noindent mono"><span class="line-number">176.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_s:</p>
+		<p class="noindent mono"><span class="line-number">177.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;cameraDown = True</p>
+		<p class="noindent mono"><span class="line-number">178.</span></p>
+		<p class="noindent mono"><span class="line-number">179.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_n:</p>
+		<p class="noindent mono"><span class="line-number">180.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return 'next'</p>
+		<p class="noindent mono"><span class="line-number">181.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_b:</p>
+		<p class="noindent mono"><span class="line-number">182.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return 'back'</p>
+		<p class="noindent mono"><span class="line-number">183.</span></p>
+		<p class="noindent mono"><span class="line-number">184.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_ESCAPE:</p>
+		<p class="noindent mono"><span class="line-number">185.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;terminate() <span class="comment"># Esc key quits.</span></p>
+		<p class="noindent mono"><span class="line-number">186.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_BACKSPACE:</p>
+		<p class="noindent mono"><span class="line-number">187.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return 'reset' <span class="comment"># Reset the level.</span></p>
+		<p class="noindent mono"><span class="line-number">188.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key == K_p:</p>
+		<p class="noindent mono"><span class="line-number">189.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Change the player image to the next one.</span></p>
+		<p class="noindent mono"><span class="line-number">190.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;currentImage += 1</p>
+		<p class="noindent mono"><span class="line-number">191.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if currentImage &gt;= len(PLAYERIMAGES):</p>
+		<p class="noindent mono"><span class="line-number">192.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># After the last player image, use the first one.</span></p>
+		<p class="noindent mono"><span class="line-number">193.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;currentImage = 0</p>
+		<p class="noindent mono"><span class="line-number">194.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapNeedsRedraw = True</p>
+		<p class="noindent mono"><span class="line-number">195.</span></p>
+		<p class="noindent mono"><span class="line-number">196.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == KEYUP:</p>
+		<p class="noindent mono"><span class="line-number">197.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Unset the camera move mode.</span></p>
+		<p class="noindent mono"><span class="line-number">198.</span>                 if event.key == K_a:</p>
+		<p class="noindent mono"><span class="line-number">199.</span>                     cameraLeft = False</p>
+		<p class="noindent mono"><span class="line-number">200.</span>                 elif event.key == K_d:</p>
+		<p class="noindent mono"><span class="line-number">201.</span>                     cameraRight = False</p>
+		<p class="noindent mono"><span class="line-number">202.</span>                 elif event.key == K_w:</p>
+		<p class="noindent mono"><span class="line-number">203.</span>                     cameraUp = False</p>
+		<p class="noindent mono"><span class="line-number">204.</span>                 elif event.key == K_s:</p>
+		<p class="noindent mono"><span class="line-number">205.</span>                     cameraDown = False</p>
+		<p class="noindent mono"><span class="line-number">206.</span></p>
+		<p class="noindent mono"><span class="line-number">207.</span>         if playerMoveTo != None and not levelIsComplete:</p>
+		<p class="noindent mono"><span class="line-number">208.</span>             <span class="comment"># If the player pushed a key to move, make the move</span></p>
+		<p class="noindent mono"><span class="line-number">209.</span>             <span class="comment"># (if possible) and push any stars that are pushable.</span></p>
+		<p class="noindent mono"><span class="line-number">210.</span>             moved = makeMove(mapObj, gameStateObj, playerMoveTo)</p>
+		<p class="noindent mono"><span class="line-number">211.</span></p>
+		<p class="noindent mono"><span class="line-number">212.</span>             if moved:</p>
+		<p class="noindent mono"><span class="line-number">213.</span>                 <span class="comment"># increment the step counter.</span></p>
 
 		<p class="noindent mono"><span class="line-number">214.</span>                 gameStateObj['stepCounter']
 += 1</p>
@@ -664,7 +300,7 @@ cameraRight and cameraOffsetX &gt; -MAX_CAM_Y_PAN:</p>
 
 		<p class="noindent mono"><span class="line-number">236.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">237.</span>         <span
+		<p class="noindent mono"><span class="line-number">237.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Adjust mapSurf's Rect object based on the camera
 offset.</span></p>
 
@@ -676,7 +312,7 @@ offset.</span></p>
 
 		<p class="noindent mono"><span class="line-number">240.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">241.</span>         <span
+		<p class="noindent mono"><span class="line-number">241.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Draw mapSurf to the DISPLAYSURF Surface object.</span></p>
 
 		<p class="noindent mono"><span class="line-number">242.</span>         DISPLAYSURF.blit(mapSurf,
@@ -742,26 +378,26 @@ keyPressed:</p>
 		<p class="noindent mono"><span class="line-number">274.</span> def
 decorateMap(mapObj, startxy):</p>
 
-		<p class="noindent mono"><span class="line-number">275.</span>     <span
+		<p class="noindent mono"><span class="line-number">275.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Makes a copy of the given map object
 and modifies it.</span></p>
 
-		<p class="noindent mono"><span class="line-number">276.</span>     <span
+		<p class="noindent mono"><span class="line-number">276.</span> &#160;&#160;&#160;&#160;<span
 class="comment">Here is what is done to it:</span></p>
 
-		<p class="noindent mono"><span class="line-number">277.</span>         <span
+		<p class="noindent mono"><span class="line-number">277.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment">* Walls that are corners are turned into corner pieces.</span></p>
 
-		<p class="noindent mono"><span class="line-number">278.</span>         <span
+		<p class="noindent mono"><span class="line-number">278.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment">* The outside/inside floor tile distinction is made.</span></p>
 
-		<p class="noindent mono"><span class="line-number">279.</span>         <span
+		<p class="noindent mono"><span class="line-number">279.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment">* Tree/rock decorations are randomly added to the
 outside tiles.</span></p>
 
 		<p class="noindent mono"><span class="line-number">280.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">281.</span>     <span
+		<p class="noindent mono"><span class="line-number">281.</span> &#160;&#160;&#160;&#160;<span
 class="comment">Returns the decorated map object.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">282.</span> </p>
@@ -771,7 +407,7 @@ starty = startxy <span class="comment"># Syntactic sugar</span></p>
 
 		<p class="noindent mono"><span class="line-number">284.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">285.</span>     <span
+		<p class="noindent mono"><span class="line-number">285.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Copy the map object so we don't modify the original
 passed</span></p>
 
@@ -780,7 +416,7 @@ passed</span></p>
 
 		<p class="noindent mono"><span class="line-number">287.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">288.</span>     <span
+		<p class="noindent mono"><span class="line-number">288.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Remove the non-wall characters from the map data</span></p>
 
 		<p class="noindent mono"><span class="line-number">289.</span>     for
@@ -797,7 +433,7 @@ mapObjCopy[x][y] in ('$', '.', '@', '+', '*'):</p>
 
 		<p class="noindent mono"><span class="line-number">293.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">294.</span>     <span
+		<p class="noindent mono"><span class="line-number">294.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Flood fill to determine inside/outside floor tiles.</span></p>
 
 		<p class="noindent mono"><span class="line-number">295.</span>     floodFill(mapObjCopy,
@@ -805,7 +441,7 @@ startx, starty, ' ', 'o')</p>
 
 		<p class="noindent mono"><span class="line-number">296.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">297.</span>     <span
+		<p class="noindent mono"><span class="line-number">297.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Convert the adjoined walls into corner tiles.</span></p>
 
 		<p class="noindent mono"><span class="line-number">298.</span>     for
@@ -854,11 +490,11 @@ mapObjCopy<span class="line-number"> </span></p>
 		<p class="noindent mono"><span class="line-number">314.</span> def
 isBlocked(mapObj, gameStateObj, x, y):</p>
 
-		<p class="noindent mono"><span class="line-number">315.</span>     <span
+		<p class="noindent mono"><span class="line-number">315.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Returns True if the (x, y) position
 on the map is</span></p>
 
-		<p class="noindent mono"><span class="line-number">316.</span>     <span
+		<p class="noindent mono"><span class="line-number">316.</span> &#160;&#160;&#160;&#160;<span
 class="comment">blocked by a wall or star, otherwise return
 False.&quot;&quot;&quot;</span></p>
 
@@ -898,27 +534,27 @@ False</p>
 		<p class="noindent mono"><span class="line-number">330.</span> def
 makeMove(mapObj, gameStateObj, playerMoveTo):</p>
 
-		<p class="noindent mono"><span class="line-number">331.</span>     <span
+		<p class="noindent mono"><span class="line-number">331.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Given a map and game state object,
 see if it is possible for the</span></p>
 
-		<p class="noindent mono"><span class="line-number">332.</span>     <span
+		<p class="noindent mono"><span class="line-number">332.</span> &#160;&#160;&#160;&#160;<span
 class="comment">player to make the given move. If it is, then change
 the player's</span></p>
 
-		<p class="noindent mono"><span class="line-number">333.</span>     <span
+		<p class="noindent mono"><span class="line-number">333.</span> &#160;&#160;&#160;&#160;<span
 class="comment">position (and the position of any pushed star). If not,
 do nothing.</span></p>
 
 		<p class="noindent mono"><span class="line-number">334.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">335.</span>     <span
+		<p class="noindent mono"><span class="line-number">335.</span> &#160;&#160;&#160;&#160;<span
 class="comment">Returns True if the player moved, otherwise
 False.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">336.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">337.</span>     <span
+		<p class="noindent mono"><span class="line-number">337.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Make sure the player can move in the direction they
 want.</span></p>
 
@@ -927,11 +563,11 @@ playery = gameStateObj['player']</p>
 
 		<p class="noindent mono"><span class="line-number">339.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">340.</span>     <span
+		<p class="noindent mono"><span class="line-number">340.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># This variable is &quot;syntactic sugar&quot;. Typing
 &quot;stars&quot; is more</span></p>
 
-		<p class="noindent mono"><span class="line-number">341.</span>     <span
+		<p class="noindent mono"><span class="line-number">341.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># readable than typing
 &quot;gameStateObj['stars']&quot; in our code.</span></p>
 
@@ -940,15 +576,15 @@ class="comment"># readable than typing
 
 		<p class="noindent mono"><span class="line-number">343.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">344.</span>     <span
+		<p class="noindent mono"><span class="line-number">344.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># The code for handling each of the directions is so
 similar aside</span></p>
 
-		<p class="noindent mono"><span class="line-number">345.</span>     <span
+		<p class="noindent mono"><span class="line-number">345.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># from adding or subtracting 1 to the x/y coordinates.
 We can</span></p>
 
-		<p class="noindent mono"><span class="line-number">346.</span>     <span
+		<p class="noindent mono"><span class="line-number">346.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># simplify it by using the xOffset and yOffset
 variables.</span></p>
 
@@ -990,7 +626,7 @@ playerMoveTo == LEFT:</p>
 
 		<p class="noindent mono"><span class="line-number">359.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">360.</span>     <span
+		<p class="noindent mono"><span class="line-number">360.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># See if the player can move in that direction.</span></p>
 
 		<p class="noindent mono"><span class="line-number">361.</span>     if
@@ -1026,7 +662,7 @@ class="comment"># Move the star.</span></p>
 		<p class="noindent mono"><span class="line-number">371.</span>                 return
 False</p>
 
-		<p class="noindent mono"><span class="line-number">372.</span>         <span
+		<p class="noindent mono"><span class="line-number">372.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Move the player upwards.</span></p>
 
 		<p class="noindent mono"><span class="line-number">373.</span>         gameStateObj['player']
@@ -1042,17 +678,17 @@ True</p>
 		<p class="noindent mono"><span class="line-number">377.</span> def
 startScreen():</p>
 
-		<p class="noindent mono"><span class="line-number">378.</span>     <span
+		<p class="noindent mono"><span class="line-number">378.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Display the start screen (which has
 the title and instructions)</span></p>
 
-		<p class="noindent mono"><span class="line-number">379.</span>     <span
+		<p class="noindent mono"><span class="line-number">379.</span> &#160;&#160;&#160;&#160;<span
 class="comment">until the player presses a key. Returns
 None.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">380.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">381.</span>     <span
+		<p class="noindent mono"><span class="line-number">381.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Position the title image.</span></p>
 
 		<p class="noindent mono"><span class="line-number">382.</span>     titleRect
@@ -1073,15 +709,15 @@ of the text</span></p>
 
 		<p class="noindent mono"><span class="line-number">387.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">388.</span>     <span
+		<p class="noindent mono"><span class="line-number">388.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Unfortunately, Pygame's font &amp; text system only
 shows one line at</span></p>
 
-		<p class="noindent mono"><span class="line-number">389.</span>     <span
+		<p class="noindent mono"><span class="line-number">389.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># a time, so we can't use strings with \n newline
 characters in them.</span></p>
 
-		<p class="noindent mono"><span class="line-number">390.</span>     <span
+		<p class="noindent mono"><span class="line-number">390.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># So we will use a list with each line in it.</span></p>
 
 		<p class="noindent mono"><span class="line-number">391.</span>     instructionText
@@ -1098,7 +734,7 @@ for next level, B to go back a level.']</p>
 
 		<p class="noindent mono"><span class="line-number">395.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">396.</span>     <span
+		<p class="noindent mono"><span class="line-number">396.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Start with drawing a blank color to the entire
 window:</span></p>
 
@@ -1106,7 +742,7 @@ window:</span></p>
 
 		<p class="noindent mono"><span class="line-number">398.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">399.</span>     <span
+		<p class="noindent mono"><span class="line-number">399.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Draw the title image to the window:</span></p>
 
 		<p class="noindent mono"><span class="line-number">400.</span>     DISPLAYSURF.blit(IMAGESDICT['title'],
@@ -1114,7 +750,7 @@ titleRect)</p>
 
 		<p class="noindent mono"><span class="line-number">401.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">402.</span>     <span
+		<p class="noindent mono"><span class="line-number">402.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Position and draw the text.</span></p>
 
 		<p class="noindent mono"><span class="line-number">403.</span>     for
@@ -1169,7 +805,7 @@ event.key == K_ESCAPE:</p>
 
 		<p class="noindent mono"><span class="line-number">420.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">421.</span>         <span
+		<p class="noindent mono"><span class="line-number">421.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Display the DISPLAYSURF contents to the actual
 screen.</span></p>
 
@@ -1190,7 +826,7 @@ os.path.exists(filename), 'Cannot find the level file: %s' % (filename)</p>
 		<p class="noindent mono"><span class="line-number">428.</span>     mapFile
 = open(filename, 'r')</p>
 
-		<p class="noindent mono"><span class="line-number">429.</span>     <span
+		<p class="noindent mono"><span class="line-number">429.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Each level must end with a blank line</span></p>
 
 		<p class="noindent mono"><span class="line-number">430.</span>     content
@@ -1217,7 +853,7 @@ map.</span></p>
 		<p class="noindent mono"><span class="line-number">437.</span>     for
 lineNum in range(len(content)):</p>
 
-		<p class="noindent mono"><span class="line-number">438.</span>         <span
+		<p class="noindent mono"><span class="line-number">438.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Process each line that was in the level file.</span></p>
 
 		<p class="noindent mono"><span class="line-number">439.</span>         line
@@ -1442,32 +1078,32 @@ levels</p>
 		<p class="noindent mono"><span class="line-number">513.</span> def
 floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
 
-		<p class="noindent mono"><span class="line-number">514.</span>     <span
+		<p class="noindent mono"><span class="line-number">514.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Changes any values matching
 oldCharacter on the map object to</span></p>
 
-		<p class="noindent mono"><span class="line-number">515.</span>     <span
+		<p class="noindent mono"><span class="line-number">515.</span> &#160;&#160;&#160;&#160;<span
 class="comment">newCharacter at the (x, y) position, and does the same
 for the</span></p>
 
-		<p class="noindent mono"><span class="line-number">516.</span>     <span
+		<p class="noindent mono"><span class="line-number">516.</span> &#160;&#160;&#160;&#160;<span
 class="comment">positions to the left, right, down, and up of (x, y),
 recursively.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">517.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">518.</span>     <span
+		<p class="noindent mono"><span class="line-number">518.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># In this game, the flood fill algorithm creates the
 inside/outside</span></p>
 
-		<p class="noindent mono"><span class="line-number">519.</span>     <span
+		<p class="noindent mono"><span class="line-number">519.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># floor distinction. This is a &quot;recursive&quot;
 function.</span></p>
 
-		<p class="noindent mono"><span class="line-number">520.</span>     <span
+		<p class="noindent mono"><span class="line-number">520.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># For more info on the Flood Fill algorithm, see:</span></p>
 
-		<p class="noindent mono"><span class="line-number">521.</span>     <span
+		<p class="noindent mono"><span class="line-number">521.</span> &#160;&#160;&#160;&#160;<span
 class="comment">#   http://en.wikipedia.org/wiki/Flood_fill</span></p>
 
 		<p class="noindent mono"><span class="line-number">522.</span>     if
@@ -1509,29 +1145,29 @@ x, y-1, oldCharacter, newCharacter) <span class="comment"># call up</span></p>
 		<p class="noindent mono"><span class="line-number">535.</span> def
 drawMap(mapObj, gameStateObj, goals):</p>
 
-		<p class="noindent mono"><span class="line-number">536.</span>     <span
+		<p class="noindent mono"><span class="line-number">536.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Draws the map to a Surface object,
 including the player and</span></p>
 
-		<p class="noindent mono"><span class="line-number">537.</span>     <span
+		<p class="noindent mono"><span class="line-number">537.</span> &#160;&#160;&#160;&#160;<span
 class="comment">stars. This function does not call
 pygame.display.update(), nor</span></p>
 
-		<p class="noindent mono"><span class="line-number">538.</span>     <span
+		<p class="noindent mono"><span class="line-number">538.</span> &#160;&#160;&#160;&#160;<span
 class="comment">does it draw the &quot;Level&quot; and
 &quot;Steps&quot; text in the corner.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">539.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">540.</span>     <span
+		<p class="noindent mono"><span class="line-number">540.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># mapSurf will be the single Surface object that the
 tiles are drawn</span></p>
 
-		<p class="noindent mono"><span class="line-number">541.</span>     <span
+		<p class="noindent mono"><span class="line-number">541.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># on, so that it is easy to position the entire map on
 the DISPLAYSURF</span></p>
 
-		<p class="noindent mono"><span class="line-number">542.</span>     <span
+		<p class="noindent mono"><span class="line-number">542.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Surface object. First, the width and height must be
 calculated.</span></p>
 
@@ -1549,7 +1185,7 @@ calculated.</span></p>
 
 		<p class="noindent mono"><span class="line-number">547.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">548.</span>     <span
+		<p class="noindent mono"><span class="line-number">548.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Draw the tile sprites onto this surface.</span></p>
 
 		<p class="noindent mono"><span class="line-number">549.</span>     for
@@ -1652,7 +1288,7 @@ mapSurf</p>
 		<p class="noindent mono"><span class="line-number">583.</span> def
 isLevelFinished(levelObj, gameStateObj):</p>
 
-		<p class="noindent mono"><span class="line-number">584.</span>     <span
+		<p class="noindent mono"><span class="line-number">584.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Returns True if all the goals have
 stars in them.&quot;&quot;&quot;</span></p>
 
@@ -1694,7 +1330,7 @@ __name__ == '__main__':</p>
 	</div>
 
 	<h1 class="subheading" id="">The Initial Setup</h1>
-<!--
+
 	<div class="python-shell">
 
 		<p class="noindent mono"><span class="line-number">1.</span> <span
@@ -2049,18 +1685,18 @@ the level object in the levels list at index <span class="mono">0</span>.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">101.</span>     <span
+		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># The main game loop. This loop runs a single level,
 when the user</span></p>
 
-		<p class="noindent mono"><span class="line-number">102.</span>     <span
+		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># finishes that level, the next/previous level is
 loaded.</span></p>
 
 		<p class="noindent mono"><span class="line-number">103.</span>     while
 True: <span class="comment"># main game loop</span></p>
 
-		<p class="noindent mono"><span class="line-number">104.</span>         <span
+		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Run the level to actually start playing the game:</span></p>
 
 		<p class="noindent mono"><span class="line-number">105.</span>         result
@@ -2234,7 +1870,7 @@ totalNumOfLevels), 1, TEXTCOLOR)</p>
 		<p class="noindent mono"><span class="line-number">137.</span>     levelIsComplete
 = False</p>
 
-		<p class="noindent mono"><span class="line-number">138.</span>     <span
+		<p class="noindent mono"><span class="line-number">138.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Track how much the camera has moved:</span></p>
 
 		<p class="noindent mono"><span class="line-number">139.</span>     cameraOffsetX
@@ -2243,7 +1879,7 @@ class="comment"># Track how much the camera has moved:</span></p>
 		<p class="noindent mono"><span class="line-number">140.</span>     cameraOffsetY
 = 0</p>
 
-		<p class="noindent mono"><span class="line-number">141.</span>     <span
+		<p class="noindent mono"><span class="line-number">141.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Track if the keys to move the camera are being held
 down:</span></p>
 
@@ -2283,7 +1919,7 @@ variables track the position of the camera.</p>
 		<p class="noindent mono"><span class="line-number">147.</span>     while
 True: <span class="comment"># main game loop</span></p>
 
-		<p class="noindent mono"><span class="line-number">148.</span>         <span
+		<p class="noindent mono"><span class="line-number">148.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Reset these variables:</span></p>
 
 		<p class="noindent mono"><span class="line-number">149.</span>         playerMoveTo
@@ -2601,7 +2237,7 @@ statement.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">237.</span>         <span
+		<p class="noindent mono"><span class="line-number">237.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Adjust mapSurf's Rect object based on the camera
 offset.</span></p>
 
@@ -2613,7 +2249,7 @@ offset.</span></p>
 
 		<p class="noindent mono"><span class="line-number">240.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">241.</span>         <span
+		<p class="noindent mono"><span class="line-number">241.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Draw mapSurf to the DISPLAYSURF Surface object.</span></p>
 
 		<p class="noindent mono"><span class="line-number">242.</span>         DISPLAYSURF.blit(mapSurf,
@@ -2691,11 +2327,11 @@ returns.</p>
 		<p class="noindent mono"><span class="line-number">264.</span> def
 isWall(mapObj, x, y):</p>
 
-		<p class="noindent mono"><span class="line-number">265.</span>     <span
+		<p class="noindent mono"><span class="line-number">265.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Returns True if the (x, y) position
 on</span></p>
 
-		<p class="noindent mono"><span class="line-number">266.</span>     <span
+		<p class="noindent mono"><span class="line-number">266.</span> &#160;&#160;&#160;&#160;<span
 class="comment">the map is a wall, otherwise return
 False.&quot;&quot;&quot;</span></p>
 
@@ -2727,26 +2363,26 @@ object.</p>
 		<p class="noindent mono"><span class="line-number">274.</span> def
 decorateMap(mapObj, startxy):</p>
 
-		<p class="noindent mono"><span class="line-number">275.</span>     <span
+		<p class="noindent mono"><span class="line-number">275.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Makes a copy of the given map object
 and modifies it.</span></p>
 
-		<p class="noindent mono"><span class="line-number">276.</span>     <span
+		<p class="noindent mono"><span class="line-number">276.</span> &#160;&#160;&#160;&#160;<span
 class="comment">Here is what is done to it:</span></p>
 
-		<p class="noindent mono"><span class="line-number">277.</span>         <span
+		<p class="noindent mono"><span class="line-number">277.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment">* Walls that are corners are turned into corner pieces.</span></p>
 
-		<p class="noindent mono"><span class="line-number">278.</span>         <span
+		<p class="noindent mono"><span class="line-number">278.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment">* The outside/inside floor tile distinction is made.</span></p>
 
-		<p class="noindent mono"><span class="line-number">279.</span>         <span
+		<p class="noindent mono"><span class="line-number">279.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment">* Tree/rock decorations are randomly added to the
 outside tiles.</span></p>
 
 		<p class="noindent mono"><span class="line-number">280.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">281.</span>     <span
+		<p class="noindent mono"><span class="line-number">281.</span> &#160;&#160;&#160;&#160;<span
 class="comment">Returns the decorated map object.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">282.</span> </p>
@@ -2756,7 +2392,7 @@ starty = startxy <span class="comment"># Syntactic sugar</span></p>
 
 		<p class="noindent mono"><span class="line-number">284.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">285.</span>     <span
+		<p class="noindent mono"><span class="line-number">285.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Copy the map object so we don't modify the original
 passed</span></p>
 
@@ -2772,7 +2408,7 @@ changes are explained in the comment at the top of the function.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">288.</span>     <span
+		<p class="noindent mono"><span class="line-number">288.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Remove the non-wall characters from the map data</span></p>
 
 		<p class="noindent mono"><span class="line-number">289.</span>     for
@@ -2796,7 +2432,7 @@ converted to blank spaces.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">294.</span>     <span
+		<p class="noindent mono"><span class="line-number">294.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Flood fill to determine inside/outside floor tiles.</span></p>
 
 		<p class="noindent mono"><span class="line-number">295.</span>     floodFill(mapObjCopy,
@@ -2812,7 +2448,7 @@ Functions” section later in this chapter.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">297.</span>     <span
+		<p class="noindent mono"><span class="line-number">297.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Convert the adjoined walls into corner tiles.</span></p>
 
 		<p class="noindent mono"><span class="line-number">298.</span>     for
@@ -2868,11 +2504,11 @@ string which represents a corner wall tile.</p>
 		<p class="noindent mono"><span class="line-number">314.</span> def
 isBlocked(mapObj, gameStateObj, x, y):</p>
 
-		<p class="noindent mono"><span class="line-number">315.</span>     <span
+		<p class="noindent mono"><span class="line-number">315.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Returns True if the (x, y) position
 on the map is</span></p>
 
-		<p class="noindent mono"><span class="line-number">316.</span>     <span
+		<p class="noindent mono"><span class="line-number">316.</span> &#160;&#160;&#160;&#160;<span
 class="comment">blocked by a wall or star, otherwise return
 False.&quot;&quot;&quot;</span></p>
 
@@ -2918,27 +2554,27 @@ XY coordinates are blocked and <span class="mono">False</span> if not.</p>
 		<p class="noindent mono"><span class="line-number">330.</span> def
 makeMove(mapObj, gameStateObj, playerMoveTo):</p>
 
-		<p class="noindent mono"><span class="line-number">331.</span>     <span
+		<p class="noindent mono"><span class="line-number">331.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Given a map and game state object,
 see if it is possible for the</span></p>
 
-		<p class="noindent mono"><span class="line-number">332.</span>     <span
+		<p class="noindent mono"><span class="line-number">332.</span> &#160;&#160;&#160;&#160;<span
 class="comment">player to make the given move. If it is, then change
 the player's</span></p>
 
-		<p class="noindent mono"><span class="line-number">333.</span>     <span
+		<p class="noindent mono"><span class="line-number">333.</span> &#160;&#160;&#160;&#160;<span
 class="comment">position (and the position of any pushed star). If not,
 do nothing.</span></p>
 
 		<p class="noindent mono"><span class="line-number">334.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">335.</span>     <span
+		<p class="noindent mono"><span class="line-number">335.</span> &#160;&#160;&#160;&#160;<span
 class="comment">Returns True if the player moved, otherwise
 False.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">336.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">337.</span>     <span
+		<p class="noindent mono"><span class="line-number">337.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Make sure the player can move in the direction they
 want.</span></p>
 
@@ -2947,11 +2583,11 @@ playery = gameStateObj['player']</p>
 
 		<p class="noindent mono"><span class="line-number">339.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">340.</span>     <span
+		<p class="noindent mono"><span class="line-number">340.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># This variable is &quot;syntactic sugar&quot;. Typing
 &quot;stars&quot; is more</span></p>
 
-		<p class="noindent mono"><span class="line-number">341.</span>     <span
+		<p class="noindent mono"><span class="line-number">341.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># readable than typing
 &quot;gameStateObj['stars']&quot; in our code.</span></p>
 
@@ -2960,15 +2596,15 @@ class="comment"># readable than typing
 
 		<p class="noindent mono"><span class="line-number">343.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">344.</span>     <span
+		<p class="noindent mono"><span class="line-number">344.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># The code for handling each of the directions is so
 similar aside</span></p>
 
-		<p class="noindent mono"><span class="line-number">345.</span>     <span
+		<p class="noindent mono"><span class="line-number">345.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># from adding or subtracting 1 to the x/y coordinates.
 We can</span></p>
 
-		<p class="noindent mono"><span class="line-number">346.</span>     <span
+		<p class="noindent mono"><span class="line-number">346.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># simplify it by using the xOffset and yOffset
 variables.</span></p>
 
@@ -3010,7 +2646,7 @@ playerMoveTo == LEFT:</p>
 
 		<p class="noindent mono"><span class="line-number">359.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">360.</span>     <span
+		<p class="noindent mono"><span class="line-number">360.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># See if the player can move in that direction.</span></p>
 
 		<p class="noindent mono"><span class="line-number">361.</span>     if
@@ -3046,7 +2682,7 @@ class="comment"># Move the star.</span></p>
 		<p class="noindent mono"><span class="line-number">371.</span>                 return
 False</p>
 
-		<p class="noindent mono"><span class="line-number">372.</span>         <span
+		<p class="noindent mono"><span class="line-number">372.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Move the player upwards.</span></p>
 
 		<p class="noindent mono"><span class="line-number">373.</span>         gameStateObj['player']
@@ -3079,17 +2715,17 @@ the function returns <span class="mono">False</span>.</p>
 		<p class="noindent mono"><span class="line-number">377.</span> def
 startScreen():</p>
 
-		<p class="noindent mono"><span class="line-number">378.</span>     <span
+		<p class="noindent mono"><span class="line-number">378.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Display the start screen (which has
 the title and instructions)</span></p>
 
-		<p class="noindent mono"><span class="line-number">379.</span>     <span
+		<p class="noindent mono"><span class="line-number">379.</span> &#160;&#160;&#160;&#160;<span
 class="comment">until the player presses a key. Returns
 None.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">380.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">381.</span>     <span
+		<p class="noindent mono"><span class="line-number">381.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Position the title image.</span></p>
 
 		<p class="noindent mono"><span class="line-number">382.</span>     titleRect
@@ -3110,15 +2746,15 @@ of the text</span></p>
 
 		<p class="noindent mono"><span class="line-number">387.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">388.</span>     <span
+		<p class="noindent mono"><span class="line-number">388.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Unfortunately, Pygame's font &amp; text system only
 shows one line at</span></p>
 
-		<p class="noindent mono"><span class="line-number">389.</span>     <span
+		<p class="noindent mono"><span class="line-number">389.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># a time, so we can't use strings with \n newline
 characters in them.</span></p>
 
-		<p class="noindent mono"><span class="line-number">390.</span>     <span
+		<p class="noindent mono"><span class="line-number">390.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># So we will use a list with each line in it.</span></p>
 
 		<p class="noindent mono"><span class="line-number">391.</span>     instructionText
@@ -3139,7 +2775,7 @@ for next level, B to go back a level.']</p>
 to display a few different pieces of text down the center of the window. We
 will store each line as a string in the <span class="mono">instructionText</span>
 list. The title image (stored in <span class="mono">IMAGESDICT['title']</span>
-as a Surface object (that was originally loaded from the <em>star_title.png</em>
+as a Surface object (that was originally loaded from the <i>star_title.png</i>
 file)) will be positioned 50 pixels from the top of the window. This is because
 the integer <span class="mono">50</span> was stored in the <span
 class="mono">topCoord</span> variable on line 383. The <span class="mono">topCoord</span>
@@ -3153,7 +2789,7 @@ modify the image and the start screen code won’t have to be changed.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">396.</span>     <span
+		<p class="noindent mono"><span class="line-number">396.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Start with drawing a blank color to the entire
 window:</span></p>
 
@@ -3161,7 +2797,7 @@ window:</span></p>
 
 		<p class="noindent mono"><span class="line-number">398.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">399.</span>     <span
+		<p class="noindent mono"><span class="line-number">399.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Draw the title image to the window:</span></p>
 
 		<p class="noindent mono"><span class="line-number">400.</span>     DISPLAYSURF.blit(IMAGESDICT['title'],
@@ -3169,7 +2805,7 @@ titleRect)</p>
 
 		<p class="noindent mono"><span class="line-number">401.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">402.</span>     <span
+		<p class="noindent mono"><span class="line-number">402.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Position and draw the text.</span></p>
 
 		<p class="noindent mono"><span class="line-number">403.</span>     for
@@ -3234,7 +2870,7 @@ event.key == K_ESCAPE:</p>
 
 		<p class="noindent mono"><span class="line-number">420.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">421.</span>         <span
+		<p class="noindent mono"><span class="line-number">421.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Display the DISPLAYSURF contents to the actual
 screen.</span></p>
 
@@ -3252,421 +2888,164 @@ and <span class="mono">FPSCLOCK.tick()</span> to keep the start screen
 displayed on the screen.</p>
 
 	<h1 class="subheading" id="">Data Structures in Star Pusher</h1>
-
-	<p>Star Pusher has a specific format for the levels, maps, and
-game state data structures.</p>
+	<p class="noindent">Star Pusher has a specific format for the levels, maps, and game state data structures.</p>
 
 	<h1 class="subheading" id="">The “Game State” Data Structure</h1>
 
-	<p>The game state object will be a dictionary with three keys: <span
-class="mono">'player'</span>, <span class="mono">'stepCounter'</span>, and <span
-class="mono">'stars'</span>.</p>
+	<p class="noindent">The game state object will be a dictionary with three keys: <span class="mono">'player'</span>, <span class="mono">'stepCounter'</span>, and <span class="mono">'stars'</span>.</p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the <span class="mono">'player'</span> key will be
-a tuple of two integers for the current XY position of the player.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the <span class="mono">'stepCounter'</span> key will
-be an integer that tracks how many moves the player has made in this level (so
-the player can try to solve the puzzle in the future with fewer steps).</p>
-
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the <span class="mono">'stars'</span> key is a list
-of two-integer tuples of XY values for each of the stars on the current level.</p>
+	<ul>
+		<li>The value at the <span class="mono">'player'</span> key will be a tuple of two integers for the current XY position of the player.</li>
+		<li>The value at the <span class="mono">'stepCounter'</span> key will be an integer that tracks how many moves the player has made in this level (so the player can try to solve the puzzle in the future with fewer steps).</li>
+		<li>The value at the <span class="mono">'stars'</span> key is a list of two-integer tuples of XY values for each of the stars on the current level.</li>
+	</ul>
 
 	<h1 class="subheading" id="">The “Map” Data Structure</h1>
+	<p class="noindent">The map data structure is simply a 2D list of lists where the two indexes used represent the X and Y coordinates of the map. The value at each index in the list of lists is a single-character string that represents the title that is on that map at each space:</p>
 
-	<p>The map data structure is simply a 2D list of lists where
-the two indexes used represent the X and Y coordinates of the map. The value at
-each index in the list of lists is a single-character string that represents the
-title that is on that map at each space:</p>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'#'</span> – A wooden wall.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'x'</span> – A corner wall.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'@'</span> – The starting space for the
-player on this level.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'.'</span> – A goal space.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'$'</span> – A space where a star is at the
-start of the level.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'+'</span> – A space with a goal and the
-starting player’s space.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'*'</span> – A space with a goal and a star
-at the start of the level.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">' '</span> – A grassy outdoor space.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'o'</span> – An inside floor space. (This is
-a lowercase letter O, not a zero.)</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'1'</span> – A rock on grass.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'2'</span> – A short tree on grass.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'3'</span> – A tall tree on grass.</p>
-
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span><span class="mono">'4'</span> – An ugly tree on grass.</p>
+	<ul>
+		<li><span class="mono">'#'</span> – A wooden wall.</li>
+		<li><span class="mono">'x'</span> – A corner wall.</li>
+		<li><span class="mono">'@'</span> – The starting space for the player on this level.</li>
+		<li><span class="mono">'.'</span> – A goal space.</li>
+		<li><span class="mono">'$'</span> – A space where a star is at the start of the level.</li>
+		<li><span class="mono">'+'</span> – A space with a goal and the starting player’s space.</li>
+		<li><span class="mono">'*'</span> – A space with a goal and a star at the start of the level.</li>
+		<li><span class="mono">' '</span> – A grassy outdoor space.</li>
+		<li><span class="mono">'o'</span> – An inside floor space. (This is a lowercase letter O, not a zero.)</li>
+		<li><span class="mono">'1'</span> – A rock on grass.</li>
+		<li><span class="mono">'2'</span> – A short tree on grass.</li>
+		<li><span class="mono">'3'</span> – A tall tree on grass.</li>
+		<li><span class="mono">'4'</span> – An ugly tree on grass.</li>
+	</ul>
 
 	<h1 class="subheading" id="">The “Levels” Data Structure</h1>
+	<p class="noindent">The level object contains a game state object (which will be the state used when the level first starts), a map object, and a few other values. The level object itself is a dictionary with the following keys:</p>
 
-	<p>The level object contains a game state object (which will be
-the state used when the level first starts), a map object, and a few other
-values. The level object itself is a dictionary with the following keys:</p>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the key <span class="mono">'width'</span> is an
-integer of how many tiles wide the entire map is.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the key <span class="mono">'height'</span> is an
-integer of how many tiles tall the entire map is.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the key <span class="mono">'mapObj'</span> is the
-map object for this level.</p>
-
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the key <span class="mono">'goals'</span> is a list
-of two-integer tuples with the XY coordinates of each goal space on the map.</p>
-
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>
-</span></span>The value at the key <span class="mono">'startState'</span> is a
-game state object used to show the starting position of the stars and player at
-the start of the level.</p>
+	<ul>
+		<li>The value at the key <span class="mono">'width'</span> is an integer of how many tiles wide the entire map is.</li>
+		<li>The value at the key <span class="mono">'height'</span> is an integer of how many tiles tall the entire map is.</li>
+		<li>The value at the key <span class="mono">'mapObj'</span> is the map object for this level.</li>
+		<li>The value at the key <span class="mono">'goals'</span> is a list of two-integer tuples with the XY coordinates of each goal space on the map.</li>
+		<li>The value at the key <span class="mono">'startState'</span> is a game state object used to show the starting position of the stars and player at the start of the level.</li>
+	</ul>
 
 	<h1 class="subheading" id="">Reading and Writing Text Files</h1>
-
-	<p>Python has functions for reading files off of the player’s
-hard drive. This will be useful for having a separate file keep all of the data
-for each level. This is also a good idea because in order to get new levels,
-the player doesn’t have to change the source code of the game but instead can
-just download new level files.</p>
+	<p class="noindent">Python has functions for reading files off of the player’s hard drive. This will be useful for having a separate file keep all of the data for each level. This is also a good idea because in order to get new levels, the player doesn’t have to change the source code of the game but instead can just download new level files.</p>
 
 	<h1 class="subheading" id="">Text Files and Binary Files</h1>
-
-	<p>Text files are files that contain simple text data. Text
-files are created in Windows by the Notepad application, Gedit on Ubuntu, and
-TextEdit on Mac OS X. There are many other programs called text editors that
-can create and modify text files. IDLE’s own file editor is a text editor.</p>
-
-	<p>The difference between text editors and word processors
-(like Microsoft Word, or OpenOffice Writer, or iWork Pages) is that text
-editors have text only. You can’t set the font, size, or color of the text.
-(IDLE automatically sets the color of the text based on what kind of Python
-code it is, but you can’t change this yourself, so it is still a text editor.) The
-difference between text and binary files isn’t important for this game program,
-but you can read about it at <a href="http://invpy.com/textbinary">http://invpy.com/textbinary</a>.
-All you need to know is the this chapter and the Star Pusher program only deal
-with text files.</p>
+	<p class="noindent">Text files are files that contain simple text data. Text files are created in Windows by the Notepad application, Gedit on Ubuntu, and TextEdit on Mac OS X. There are many other programs called text editors that can create and modify text files. IDLE’s own file editor is a text editor.</p>
+	<p>The difference between text editors and word processors (like Microsoft Word, or OpenOffice Writer, or iWork Pages) is that text editors have text only. You can’t set the font, size, or color of the text. (IDLE automatically sets the color of the text based on what kind of Python code it is, but you can’t change this yourself, so it is still a text editor.) The difference between text and binary files isn’t important for this game program, but you can read about it at <a href="https://invpy.com/textbinary">https://invpy.com/textbinary</a>. All you need to know is the this chapter and the Star Pusher program only deal with text files.</p>
 
 	<h1 class="subheading" id="">Writing to Files</h1>
+	<p class="noindent">To create a file, call the <span class="mono">open()</span> function pass it two arguments: a string for the name of the file, and the string <span class="mono">'w'</span> to tell the <span class="mono">open()</span> function you want to open the file in “write” mode. The <span class="mono">open()</span> function returns a file object:</p>
 
-	<p>To create a file, call the <span class="mono">open()</span>
-function pass it two arguments: a string for the name of the file, and the
-string <span class="mono">'w'</span> to tell the <span class="mono">open()</span>
-function you want to open the file in “write” mode. The <span class="mono">open()</span>
-function returns a file object:</p>
-
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt;
-textFile = open('hello.txt', 'w')</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>&gt;&gt;&gt;</p>
-
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; textFile = open('hello.txt', 'w')</p>
+		<p class="noindent mono">&gt;&gt;&gt;</p>
 	</div>
 
-	<p>If you run this code from the interactive shell, the <em>hello.txt</em>
-file that this function creates will be created in the same folder that the
-python.exe program is in (on Windows, this will probably be C:\Python32). If
-the <span class="mono">open()</span> function is called from a .py program,
-the file is created in the same folder that the .py file is in.</p>
+	<p>If you run this code from the interactive shell, the <i>hello.txt</i> file that this function creates will be created in the same folder that the python.exe program is in (on Windows, this will probably be C:\Python32). If the <span class="mono">open()</span> function is called from a .py program, the file is created in the same folder that the .py file is in.</p>
+	<p>The “write” mode tells <span class="mono">open()</span> to create the file if it does not exist. If it does exist, then <span class="mono">open()</span> will delete that file and create a new, blank file. This is just like how an assignment statement can create a new variable, or overwrite the current value in an already existing variable. <b>This can be somewhat dangerous.</b> If you accidentally send a filename of an important file to the <span class="mono">open()</span> function with <span class="mono">'w'</span> as the second parameter, it will be deleted. This could result in having to reinstall the operating system on your computer and/or the launching of nuclear missiles.</p>
+	<p>The file object has a method called <span class="mono">write()</span> which can be used to write text to the file. Just pass it a string like you would pass a string to the <span class="mono">print()</span> function. The difference is that <span class="mono">write()</span> does not automatically add a newline character (<span class="mono">'\n'</span>) to the end of the string. If you want to add a newline, you will have to include it in the string:</p>
 
-	<p>The “write” mode tells <span class="mono">open()</span> to
-create the file if it does not exist. If it does exist, then <span
-class="mono">open()</span> will delete that file and create a new, blank file.
-This is just like how an assignment statement can create a new variable, or
-overwrite the current value in an already existing variable. <strong>This can
-be somewhat dangerous.</strong> If you accidentally send a filename of an
-important file to the <span class="mono">open()</span> function with <span
-class="mono">'w'</span> as the second parameter, it will be deleted. This
-could result in having to reinstall the operating system on your computer
-and/or the launching of nuclear missiles.</p>
-
-	<p>The file object has a method called <span class="mono">write()</span>
-which can be used to write text to the file. Just pass it a string like you
-would pass a string to the <span class="mono">print()</span> function. The
-difference is that <span class="mono">write()</span> does not automatically
-add a newline character (<span class="mono">'\n'</span>) to the end of the
-string. If you want to add a newline, you will have to include it in the
-string:</p>
-
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt;
-textFile = open('hello.txt', 'w')</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-textFile.write('This will be the content of the file.\nHello world!\n')</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>&gt;&gt;&gt;</p>
-
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; textFile = open('hello.txt', 'w')</p>
+		<p class="noindent mono">&gt;&gt;&gt; textFile.write('This will be the content of the file.\nHello world!\n')</p>
+		<p class="noindent mono">&gt;&gt;&gt;</p>
 	</div>
 
-	<p>To tell Python that you are done writing content to this
-file, you should call the <span class="mono">close()</span> method of the file
-object. (Although Python will automatically close any opened file objects when
-the program ends.)</p>
+	<p>To tell Python that you are done writing content to this file, you should call the <span class="mono">close()</span> method of the file object. (Although Python will automatically close any opened file objects when the program ends.)</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExample style='border:none;padding:0in'>&gt;&gt;&gt;
-textFile.close()</p>
-
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; textFile.close()</p>
 	</div>
 
 	<h1 class="subheading" id="">Reading from Files</h1>
+	<p class="noindent">To read the content of a file, pass the string <span class="mono">'r'</span> instead of <span class="mono">'w'</span> to the <span class="mono">open()</span> function. Then call the <span class="mono">readlines()</span> method on the file object to read in the contents of the file. Last, close the file by calling the <span class="mono">close()</span> method.</p>
 
-	<p>To read the content of a file, pass the string <span
-class="mono">'r'</span> instead of <span class="mono">'w'</span> to the <span
-class="mono">open()</span> function. Then call the <span class="mono">readlines()</span>
-method on the file object to read in the contents of the file. Last, close the
-file by calling the <span class="mono">close()</span> method.</p>
-
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt;
-textFile = open('hello.txt', 'r')</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-content = textFile.readlines()</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>&gt;&gt;&gt;
-textFile.close()</p>
-
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; textFile = open('hello.txt', 'r')</p>
+		<p class="noindent mono">&gt;&gt;&gt; content = textFile.readlines()</p>
+		<p class="noindent mono">&gt;&gt;&gt; textFile.close()</p>
 	</div>
 
-	<p>The <span class="mono">readlines()</span> method returns a
-list of strings: one string for each line of text in the file:</p>
+	<p>The <span class="mono">readlines()</span> method returns a list of strings: one string for each line of text in the file:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt;
-content</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>['This will be
-the content of the file.\n', 'Hello world!\n']</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>&gt;&gt;&gt;</p>
-
+	<div class="python-shell">
+			<p class="noindent mono">&gt;&gt;&gt; content</p>
+			<p class="noindent mono">['This will be the content of the file.\n', 'Hello world!\n']</p>
+			<p class="noindent mono">&gt;&gt;&gt;</p>
 	</div>
 
-	<p>If you want to re-read the contents of that file, you will
-have to call <span class="mono">close()</span> on the file object and re-open
-it.</p>
+	<p>If you want to re-read the contents of that file, you will have to call <span class="mono">close()</span> on the file object and re-open it.</p>
+	<p>As an alternative to <span class="mono">readlines()</span>, you can also call the <span class="mono">read()</span> method, which will return the entire contents of the file as a single string value:</p>
 
-	<p>As an alternative to <span class="mono">readlines()</span>,
-you can also call the <span class="mono">read()</span> method, which will
-return the entire contents of the file as a single string value:</p>
-
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>&gt;&gt;&gt; textFile
-= open('hello.txt', 'r')</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-content = textFile.read()</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>&gt;&gt;&gt;
-content</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>'This will be the
-content of the file.\nHello world!\n'</p>
-
+	<div class="python-shell">
+		<p class="noindent mono">&gt;&gt;&gt; textFile = open('hello.txt', 'r')</p>
+		<p class="noindent mono">&gt;&gt;&gt; content = textFile.read()</p>
+		<p class="noindent mono">&gt;&gt;&gt; content</p>
+		<p class="noindent mono">'This will be the content of the file.\nHello world!\n'</p>
 	</div>
 
-	<p>On a side note, if you leave out the second parameter to the
-<span class="mono">open()</span> function, Python will assume you mean to open
-the file in read mode. So <span class="mono">open('foobar.txt', 'r')</span>
-and <span class="mono">open('foobar.txt')</span> do the exact same thing.</p>
+	<p>On a side note, if you leave out the second parameter to the <span class="mono">open()</span> function, Python will assume you mean to open the file in read mode. So <span class="mono">open('foobar.txt', 'r')</span> and <span class="mono">open('foobar.txt')</span> do the exact same thing.</p>
 
 	<h1 class="subheading" id="">About the Star Pusher Map File Format</h1>
-
-	<p>We need the level text file to be in a specific format.
-Which characters represent walls, or stars, or the player’s starting position?
-If we have the maps for multiple levels, how can we tell when one level’s map
-ends and the next one begins?</p>
-
-	<p>Fortunately, the map file format we will use is already
-defined for us. There are many Sokoban games out there (you can find more at <span
-class=URL><a href="http://invpy.com/sokobanclones">http://invpy.com/sokobanclones</a></span>), and they all use the
-same map file format. If you download the levels file from <a href="http://invpy.com/starPusherLevels.txt">http://invpy.com/starPusherLevels.txt</a>
-and open it in a text editor, you’ll see something like this:</p>
-
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
-
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>; Star Pusher
-(Sokoban clone)</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;
-http://inventwithpython.com/blog</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; By Al Sweigart
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f0919cb0999e86959e8487998498808984989f9ede939f9d">[email&#160;protected]</a></p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; Everything
-after the ; is a comment and will be ignored by the game that</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; reads in this
-file.</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; The format is
-described at:</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;
-http://sokobano.de/wiki/index.php?title=Level_format</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;   @ - The
-starting position of the player.</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;   $ - The
-starting position for a pushable star.</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;   . - A goal
-where a star needs to be pushed.</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;   + - Player
-&amp; goal</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;   * - Star
-&amp; goal</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;  (space) - an
-empty open space.</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;   # - A wall.</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; Level maps are
-separated by a blank line (I like to use a ; at the start</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; of the line
-since it is more visible.)</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>;</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; I tried to use
-the same format as other people use for their Sokoban games,</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; so that
-loading new levels is easy. Just place the levels in a text file</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; and name it
-&quot;starPusherLevels.txt&quot; (after renaming this file, of course).</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>; Starting demo
-level:</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'> ########</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>##      #</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>#   .   #</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>#   $   #</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'># <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c42482c">[email&#160;protected]</a>$. #</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>####$   #</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>   #.   #</p>
-
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>   #   ##</p>
-
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>   #####</p>
-
-	</div>
-
-	<p>The comments at the top of the file explain the file’s
-format. When you load the first level, it looks like this:</p>
+	<p class="noindent">We need the level text file to be in a specific format. Which characters represent walls, or stars, or the player’s starting position? If we have the maps for multiple levels, how can we tell when one level’s map ends and the next one begins?</p>
+	<p>Fortunately, the map file format we will use is already defined for us. There are many Sokoban games out there (you can find more at <a href="https://invpy.com/sokobanclones">https://invpy.com/sokobanclones</a>), and they all use the same map file format. If you download the levels file from <a href="https://invpy.com/starPusherLevels.txt">https://invpy.com/starPusherLevels.txt</a> and open it in a text editor, you’ll see something like this:</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">426.</span> def
-readLevelsFile(filename):</p>
-
-		<p class="noindent mono"><span class="line-number">427.</span>     assert
-os.path.exists(filename), 'Cannot find the level file: %s' % (filename)</p>
-
+		<p class="noindent mono">; Star Pusher (Sokoban clone)</p>
+		<p class="noindent mono">; http://inventwithpython.com/blog</p>
+		<p class="noindent mono">; By Al Sweigart al@inventwithpython.com</p>
+		<p class="noindent mono">;</p>
+		<p class="noindent mono">; Everything after the ; is a comment and will be ignored by the game that</p>
+		<p class="noindent mono">; reads in this file.</p>
+		<p class="noindent mono">;</p>
+		<p class="noindent mono">; The format is described at:</p>
+		<p class="noindent mono">; http://sokobano.de/wiki/index.php?title=Level_format</p>
+		<p class="noindent mono">;   @ - The starting position of the player.</p>
+		<p class="noindent mono">;   $ - The starting position for a pushable star.</p>
+		<p class="noindent mono">;   . - A goal where a star needs to be pushed.</p>
+		<p class="noindent mono">;   + - Player &amp; goal</p>
+		<p class="noindent mono">;   * - Star &amp; goal</p>
+		<p class="noindent mono">;  (space) - an empty open space.</p>
+		<p class="noindent mono">;   # - A wall.</p>
+		<p class="noindent mono">;</p>
+		<p class="noindent mono">; Level maps are separated by a blank line (I like to use a ; at the start</p>
+		<p class="noindent mono">; of the line since it is more visible.)</p>
+		<p class="noindent mono">;</p>
+		<p class="noindent mono">; I tried to use the same format as other people use for their Sokoban games,</p>
+		<p class="noindent mono">; so that loading new levels is easy. Just place the levels in a text file</p>
+		<p class="noindent mono">; and name it &quot;starPusherLevels.txt&quot; (after renaming this file, of course).</p>
+		<p class="noindent mono"></p>
+		<p class="noindent mono"></p>
+		<p class="noindent mono">; Starting demo level:</p>
+		<p class="noindent mono"> &#160;&#160;########</p>
+		<p class="noindent mono"> &#160;##&#160;&#160;&#160;&#160;&#160;&#160;#</p>
+		<p class="noindent mono"> &#160;#&#160;&#160;&#160;.&#160;&#160;&#160;#</p>
+		<p class="noindent mono"> &#160;#&#160;&#160;&#160;$&#160;&#160;&#160;#</p>
+		<p class="noindent mono"> &#160;#&#160;.$@$.&#160;#</p>
+		<p class="noindent mono"> &#160;####$&#160;&#160;&#160;#</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;#.&#160;&#160;&#160;#</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;#&#160;&#160;&#160;##</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;#####</p>
 	</div>
 
-	<p>The <span class="mono">os.path.exists()</span> function
-will return <span class="mono">True</span> if the file specified by the string
-passed to the function exists. If it does not exist, <span class="mono">os.path.exists()</span>
-returns <span class="mono">False</span>.</p>
+	<p>The comments at the top of the file explain the file’s format. When you load the first level, it looks like this:</p>
 
 	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">426.</span> def readLevelsFile(filename):</p>
+		<p class="noindent mono"><span class="line-number">427.</span> &#160;&#160;&#160;&#160;assert os.path.exists(filename), 'Cannot find the level file: %s' % (filename)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">428.</span>     mapFile
-= open(filename, 'r')</p>
-
-		<p class="noindent mono"><span class="line-number">429.</span>     <span
-class="comment"># Each level must end with a blank line</span></p>
-
-		<p class="noindent mono"><span class="line-number">430.</span>     content
-= mapFile.readlines() + ['\r\n']</p>
-
+	<p>The <span class="mono">os.path.exists()</span> function will return <span class="mono">True</span> if the file specified by the string passed to the function exists. If it does not exist, <span class="mono">os.path.exists()</span> returns <span class="mono">False</span>.</p>
+<!--
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">428.</span>     mapFile = open(filename, 'r')</p>
+		<p class="noindent mono"><span class="line-number">429.</span> &#160;&#160;&#160;&#160;<span class="comment"># Each level must end with a blank line</span></p>
+		<p class="noindent mono"><span class="line-number">430.</span>     content = mapFile.readlines() + ['\r\n']</p>
 		<p class="noindent mono"><span class="line-number">431.</span>     mapFile.close()</p>
-
 		<p class="noindent mono"><span class="line-number">432.</span></p>
 
 		<p class="noindent mono"><span class="line-number">433.</span>     levels
@@ -3703,7 +3082,7 @@ The <span class="mono">mapObj</span> variable will be a 2D list.</p>
 		<p class="noindent mono"><span class="line-number">437.</span>     for
 lineNum in range(len(content)):</p>
 
-		<p class="noindent mono"><span class="line-number">438.</span>         <span
+		<p class="noindent mono"><span class="line-number">438.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
 class="comment"># Process each line that was in the level file.</span></p>
 
 		<p class="noindent mono"><span class="line-number">439.</span>         line
@@ -3925,19 +3304,19 @@ y))</p>
 class="mono">for</span> loops on lines 475 and 476 will go through each space
 to find the XY coordinates three things:</p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>1.<span
+		<li>1.<span
 style='font:7.0pt "Times New Roman"'> </span>The
 player’s starting position. This will be stored in the <span class="mono">startx</span>
 and <span class="mono">starty</span> variables, which will then be stored in
 the game state object later on line 494.</p>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>2.<span
+		<li>2.<span
 style='font:7.0pt "Times New Roman"'> </span>The
 starting position of all the stars These will be stored in the <span
 class="mono">stars</span> list, which is later stored in the game state object
 on line 496.</p>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'>3.<span
+		<li>3.<span
 style='font:7.0pt "Times New Roman"'> </span>The
 position of all the goals. These will be stored in the <span class="mono">goals</span>
 list, which is later stored in the level object on line 500.</p>
@@ -4061,42 +3440,42 @@ concept: A <span ><a href="glossary.xhtml#recursive function<b>recursive functio
 that calls itself, like the one in the following program: (don’t type the
 letters at the beginning of each line though)</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">A.</span> def passFortyTwoWhenYouCallThisFunction(param):</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">B.</span>     print('Start of function.')</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">C.</span>     if param != 42:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">D.</span>         print('You did not pass 42 when you
 called this function.')</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">E.</span>         print('Fine. I will do it myself.')</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">F.</span>         passFortyTwoWhenYouCallThisFunction(42)
 <span class="comment"># this is the recursive call</span></p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">G.</span>     if param == 42:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">H.</span>         print('Thank you for passing 42 when
 you called this function.')</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="comment">I.</span>     print('End of function.')</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="line-number">J. </span></p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'><span
+<p class="noindent mono"><span
 class="line-number">K.</span> passFortyTwoWhenYouCallThisFunction(41)</p>
 
 	</div>
@@ -4171,15 +3550,15 @@ remembers which line of code made the call. That way when the function returns
 Python knows where to resume the execution. Remembering this takes up a tiny
 bit of memory. This isn’t normally a big deal, but take a look at this code:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>def funky():</p>
+<p class="noindent mono">def funky():</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    funky()</p>
+<p class="noindent mono">    funky()</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
+<p class="noindent mono"></p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>funky()</p>
+<p class="noindent mono">funky()</p>
 
 	</div>
 
@@ -4229,21 +3608,21 @@ program. This type of bug is called a <span class=Definition>stack overflow</spa
 	<p>This code also causes a stack overflow, even though there
 are no recursive functions:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>def spam():</p>
+<p class="noindent mono">def spam():</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    eggs()</p>
+<p class="noindent mono">    eggs()</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
+<p class="noindent mono"></p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>def eggs():</p>
+<p class="noindent mono">def eggs():</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    spam()</p>
+<p class="noindent mono">    spam()</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
+<p class="noindent mono"></p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>spam()</p>
+<p class="noindent mono">spam()</p>
 
 	</div>
 
@@ -4286,23 +3665,23 @@ calls. If there is no base case then the function calls will never stop and
 eventually a stack overflow will occur. Here is an example of a recursive
 function with a base case. The base case is when the param parameter equals 2.</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>def fizz(param):</p>
+<p class="noindent mono">def fizz(param):</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    print(param)</p>
+<p class="noindent mono">    print(param)</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    if param ==
+<p class="noindent mono">    if param ==
 2:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>        return</p>
+<p class="noindent mono">        return</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    fizz(param -
+<p class="noindent mono">    fizz(param -
 1)</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
+<p class="noindent mono"></p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>fizz(5)</p>
+<p class="noindent mono">fizz(5)</p>
 
 	</div>
 
@@ -4371,32 +3750,32 @@ string (which represents an indoor floor).</p>
 		<p class="noindent mono"><span class="line-number">513.</span> def
 floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
 
-		<p class="noindent mono"><span class="line-number">514.</span>     <span
+		<p class="noindent mono"><span class="line-number">514.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Changes any values matching
 oldCharacter on the map object to</span></p>
 
-		<p class="noindent mono"><span class="line-number">515.</span>     <span
+		<p class="noindent mono"><span class="line-number">515.</span> &#160;&#160;&#160;&#160;<span
 class="comment">newCharacter at the (x, y) position, and does the same
 for the</span></p>
 
-		<p class="noindent mono"><span class="line-number">516.</span>     <span
+		<p class="noindent mono"><span class="line-number">516.</span> &#160;&#160;&#160;&#160;<span
 class="comment">positions to the left, right, down, and up of (x, y),
 recursively.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">517.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">518.</span>     <span
+		<p class="noindent mono"><span class="line-number">518.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># In this game, the flood fill algorithm creates the
 inside/outside</span></p>
 
-		<p class="noindent mono"><span class="line-number">519.</span>     <span
+		<p class="noindent mono"><span class="line-number">519.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># floor distinction. This is a &quot;recursive&quot;
 function.</span></p>
 
-		<p class="noindent mono"><span class="line-number">520.</span>     <span
+		<p class="noindent mono"><span class="line-number">520.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># For more info on the Flood Fill algorithm, see:</span></p>
 
-		<p class="noindent mono"><span class="line-number">521.</span>     <span
+		<p class="noindent mono"><span class="line-number">521.</span> &#160;&#160;&#160;&#160;<span
 class="comment">#   http://en.wikipedia.org/wiki/Flood_fill</span></p>
 
 		<p class="noindent mono"><span class="line-number">522.</span>     if
@@ -4450,53 +3829,53 @@ function works, here is a version that does not use recursive calls, but
 instead uses a list of XY coordinates to keep track of which spaces on the map
 should be checked and possibly changed to <span class="mono">newCharacter</span>.</p>
 
-<div style='border:solid windowtext 1.0pt;padding:4.0pt 4.0pt 4.0pt 4.0pt'>
+<div class="python-shell">
 
-<p class=CodeExampleCxSpFirst style='border:none;padding:0in'>def
+<p class="noindent mono">def
 floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>
+<p class="noindent mono">
 spacesToCheck = []</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    if
+<p class="noindent mono">    if
 mapObj[x][y] == oldCharacter:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>
+<p class="noindent mono">
 spacesToCheck.append((x, y))</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>    while
+<p class="noindent mono">    while
 spacesToCheck != []:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>        x, y =
+<p class="noindent mono">        x, y =
 spacesToCheck.pop()</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>
+<p class="noindent mono">
 mapObj[x][y] = newCharacter</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'></p>
+<p class="noindent mono"></p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>        if x
+<p class="noindent mono">        if x
 &lt; len(mapObj) - 1 and mapObj[x+1][y] == oldCharacter:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>
+<p class="noindent mono">
 spacesToCheck.append((x+1, y)) <span class="comment"># check right</span></p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>        if x
+<p class="noindent mono">        if x
 &gt; 0 and mapObj[x-1][y] == oldCharacter:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>
+<p class="noindent mono">
 spacesToCheck.append((x-1, y)) <span class="comment"># check left</span></p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>        if y
+<p class="noindent mono">        if y
 &lt; len(mapObj[x]) - 1 and mapObj[x][y+1] == oldCharacter:</p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>
+<p class="noindent mono">
 spacesToCheck.append((x, y+1)) <span class="comment"># check down</span></p>
 
-<p class=CodeExampleCxSpMiddle style='border:none;padding:0in'>        if y
+<p class="noindent mono">        if y
 &gt; 0 and mapObj[x][y-1] == oldCharacter:</p>
 
-<p class=CodeExampleCxSpLast style='border:none;padding:0in'>
+<p class="noindent mono">
 spacesToCheck.append((x, y-1)) <span class="comment"># check up</span></p>
 
 	</div>
@@ -4511,29 +3890,29 @@ recursion that uses cats and zombies for an example, go to <a href="http://invpy
 		<p class="noindent mono"><span class="line-number">535.</span> def
 drawMap(mapObj, gameStateObj, goals):</p>
 
-		<p class="noindent mono"><span class="line-number">536.</span>     <span
+		<p class="noindent mono"><span class="line-number">536.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Draws the map to a Surface object,
 including the player and</span></p>
 
-		<p class="noindent mono"><span class="line-number">537.</span>     <span
+		<p class="noindent mono"><span class="line-number">537.</span> &#160;&#160;&#160;&#160;<span
 class="comment">stars. This function does not call pygame.display.update(),
 nor</span></p>
 
-		<p class="noindent mono"><span class="line-number">538.</span>     <span
+		<p class="noindent mono"><span class="line-number">538.</span> &#160;&#160;&#160;&#160;<span
 class="comment">does it draw the &quot;Level&quot; and
 &quot;Steps&quot; text in the corner.&quot;&quot;&quot;</span></p>
 
 		<p class="noindent mono"><span class="line-number">539.</span> </p>
 
-		<p class="noindent mono"><span class="line-number">540.</span>     <span
+		<p class="noindent mono"><span class="line-number">540.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># mapSurf will be the single Surface object that the
 tiles are drawn</span></p>
 
-		<p class="noindent mono"><span class="line-number">541.</span>     <span
+		<p class="noindent mono"><span class="line-number">541.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># on, so that it is easy to position the entire map on
 the DISPLAYSURF</span></p>
 
-		<p class="noindent mono"><span class="line-number">542.</span>     <span
+		<p class="noindent mono"><span class="line-number">542.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Surface object. First, the width and height must be
 calculated.</span></p>
 
@@ -4560,7 +3939,7 @@ the entire Surface object is painted to the background color on line 546.</p>
 
 	<div class="python-shell">
 
-		<p class="noindent mono"><span class="line-number">548.</span>     <span
+		<p class="noindent mono"><span class="line-number">548.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># Draw the tile sprites onto this surface.</span></p>
 
 		<p class="noindent mono"><span class="line-number">549.</span>     for
@@ -4718,7 +4097,7 @@ the Surface object is returned, the entire map has been drawn on it.</p>
 		<p class="noindent mono"><span class="line-number">583.</span> def
 isLevelFinished(levelObj, gameStateObj):</p>
 
-		<p class="noindent mono"><span class="line-number">584.</span>     <span
+		<p class="noindent mono"><span class="line-number">584.</span> &#160;&#160;&#160;&#160;<span
 class="comment">&quot;&quot;&quot;Returns True if all the goals have
 stars in them.&quot;&quot;&quot;</span></p>
 
@@ -4801,7 +4180,7 @@ any configuration that the level file is set to (as long as it passes the <span
 class="mono">assert</span> statements that ensure the map makes sense).</p>
 
 	<p>You won’t even have to know how to program Python to make
-your own levels. A text editor program that modifies the <em>starPusherLevels.txt</em>
+your own levels. A text editor program that modifies the <i>starPusherLevels.txt</i>
 file is all that anyone needs to have their own level editor for the Star
 Pusher game.</p>
 
