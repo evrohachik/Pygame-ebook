@@ -10,13 +10,13 @@
 	<h1 class="heading">Chapter 9 – Star Pusher</h1>
 	<hr class="heading"/>
 
-	<h1 class="subheading" id="">How to Play Star Pusher</h1>
+	<h1 class="subheading" id="how-to-play">How to Play Star Pusher</h1>
 	<p class="noindent">Star Pusher is a Sokoban or “Box Pusher” clone. The player is in a room with several stars. There are star marks on the grounds of some of the tile sprites in the room. The player must figure out how to push the stars on top of the tiles with star marks. The player cannot push a star if there is a wall or another star behind it. The player cannot pull stars, so if a star gets pushed into a corner, the player will have to restart the level. When all of the stars have been pushed onto star-marked floor tiles, the level is complete and the next level starts.</p>
 	<p>Each level is made up of a 2D grid of tile images. <a href="glossary.xhtml#tile-sprites"><b>Tile sprites</b></a> are images of the same size that can be placed next to each other to form more complex images. With a few floor and wall tiles, we can create levels of many interesting shapes and sizes.</p>
 	<p>The level files are not included in the source code. Instead, you can either create the level files yourself or download them. A level file with 201 levels can be downloaded from <a href="https://invpy.com/starPusherLevels.txt">https://invpy.com/starPusherLevels.txt</a>. When you run the Star Pusher program, make sure that this level file is in the same folder as the <i>starpusher.py</i> file. Otherwise you will get this error message: <span class="mono">AssertionError: Cannot find the level file: starPusherLevels.txt</span></p>
 	<p>The level designs were originally made David W. Skinner. You can download more puzzles from his website at <a href="http://sneezingtiger.com/sokoban/levels.html">http://sneezingtiger.com/sokoban/levels.html</a>.</p>
 
-	<h1 class="subheading" id="">Source Code to Star Pusher</h1>
+	<h1 class="subheading" id="source-code">Source Code to Star Pusher</h1>
 	<p class="noindent">This source code can be downloaded from <a href="https://invpy.com/starpusher.py">https://invpy.com/starpusher.py</a>. If you get any error messages, look at the line number that is mentioned in the error message and check your code for any typos. You can also copy and paste your code into the web form at <a href="https://invpy.com/diff/starpusher">https://invpy.com/diff/starpusher</a> to see if the differences between your code and the code in the book.</p>
 	<p>The level file can be downloaded from <a href="https://invpy.com/starPusherLevels.txt">https://invpy.com/starPusherLevels.txt</a>. The tiles can be downloaded from <a href="https://invpy.com/starPusherImages.zip">https://invpy.com/starPusherImages.zip</a>.</p>
 	<p>Also, just like the squirrel, grass, and enemy “objects” in the Squirrel Eat Squirrel game, when I say “map objects”, “game state objects”, or “level objects” in this chapter, I do not mean objects in the Object-Oriented Programming sense. These “objects” are really just dictionary values, but it is easier to refer to them as objects since they represent things in the game world.</p>
@@ -1208,7 +1208,7 @@ x, y-1, oldCharacter, newCharacter) <span class="comment"># call up</span></p>
 		<p class="noindent mono"><span class="line-number">598.</span> &#160;&#160;&#160;&#160;main()</p>
 	</div>
 
-	<h1 class="subheading" id="">The Initial Setup</h1>
+	<h1 class="subheading" id="initial-setup">The Initial Setup</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">&#160;&#160;1.</span> <span class="comment"># Star Pusher (a Sokoban clone)</span></p>
@@ -2530,10 +2530,10 @@ Until the player does either, the loop will keep calling <span class="mono">pyga
 and <span class="mono">FPSCLOCK.tick()</span> to keep the start screen
 displayed on the screen.</p>
 
-	<h1 class="subheading" id="">Data Structures in Star Pusher</h1>
+	<h1 class="subheading" id="data-structure">Data Structures in Star Pusher</h1>
 	<p class="noindent">Star Pusher has a specific format for the levels, maps, and game state data structures.</p>
 
-	<h1 class="subheading" id="">The “Game State” Data Structure</h1>
+	<h1 class="subheading" id="game-structure">The “Game State” Data Structure</h1>
 
 	<p class="noindent">The game state object will be a dictionary with three keys: <span class="mono">'player'</span>, <span class="mono">'stepCounter'</span>, and <span class="mono">'stars'</span>.</p>
 
@@ -2543,7 +2543,7 @@ displayed on the screen.</p>
 		<li>The value at the <span class="mono">'stars'</span> key is a list of two-integer tuples of XY values for each of the stars on the current level.</li>
 	</ul>
 
-	<h1 class="subheading" id="">The “Map” Data Structure</h1>
+	<h1 class="subheading" id="map-structure">The “Map” Data Structure</h1>
 	<p class="noindent">The map data structure is simply a 2D list of lists where the two indexes used represent the X and Y coordinates of the map. The value at each index in the list of lists is a single-character string that represents the title that is on that map at each space:</p>
 
 	<ul>
@@ -2562,7 +2562,7 @@ displayed on the screen.</p>
 		<li><span class="mono">'4'</span> – An ugly tree on grass.</li>
 	</ul>
 
-	<h1 class="subheading" id="">The “Levels” Data Structure</h1>
+	<h1 class="subheading" id="level-structure">The “Levels” Data Structure</h1>
 	<p class="noindent">The level object contains a game state object (which will be the state used when the level first starts), a map object, and a few other values. The level object itself is a dictionary with the following keys:</p>
 
 	<ul>
@@ -2573,14 +2573,14 @@ displayed on the screen.</p>
 		<li>The value at the key <span class="mono">'startState'</span> is a game state object used to show the starting position of the stars and player at the start of the level.</li>
 	</ul>
 
-	<h1 class="subheading" id="">Reading and Writing Text Files</h1>
+	<h1 class="subheading" id="reading-writing">Reading and Writing Text Files</h1>
 	<p class="noindent">Python has functions for reading files off of the player’s hard drive. This will be useful for having a separate file keep all of the data for each level. This is also a good idea because in order to get new levels, the player doesn’t have to change the source code of the game but instead can just download new level files.</p>
 
-	<h1 class="subheading" id="">Text Files and Binary Files</h1>
+	<h1 class="subheading" id="text-binary">Text Files and Binary Files</h1>
 	<p class="noindent">Text files are files that contain simple text data. Text files are created in Windows by the Notepad application, Gedit on Ubuntu, and TextEdit on Mac OS X. There are many other programs called text editors that can create and modify text files. IDLE’s own file editor is a text editor.</p>
 	<p>The difference between text editors and word processors (like Microsoft Word, or OpenOffice Writer, or iWork Pages) is that text editors have text only. You can’t set the font, size, or color of the text. (IDLE automatically sets the color of the text based on what kind of Python code it is, but you can’t change this yourself, so it is still a text editor.) The difference between text and binary files isn’t important for this game program, but you can read about it at <a href="https://invpy.com/textbinary">https://invpy.com/textbinary</a>. All you need to know is the this chapter and the Star Pusher program only deal with text files.</p>
 
-	<h1 class="subheading" id="">Writing to Files</h1>
+	<h1 class="subheading" id="writing-files">Writing to Files</h1>
 	<p class="noindent">To create a file, call the <span class="mono">open()</span> function pass it two arguments: a string for the name of the file, and the string <span class="mono">'w'</span> to tell the <span class="mono">open()</span> function you want to open the file in “write” mode. The <span class="mono">open()</span> function returns a file object:</p>
 
 	<div class="python-shell">
@@ -2604,7 +2604,7 @@ displayed on the screen.</p>
 		<p class="noindent mono">&gt;&gt;&gt; textFile.close()</p>
 	</div>
 
-	<h1 class="subheading" id="">Reading from Files</h1>
+	<h1 class="subheading" id="reading-files">Reading from Files</h1>
 	<p class="noindent">To read the content of a file, pass the string <span class="mono">'r'</span> instead of <span class="mono">'w'</span> to the <span class="mono">open()</span> function. Then call the <span class="mono">readlines()</span> method on the file object to read in the contents of the file. Last, close the file by calling the <span class="mono">close()</span> method.</p>
 
 	<div class="python-shell">
@@ -2633,7 +2633,7 @@ displayed on the screen.</p>
 
 	<p>On a side note, if you leave out the second parameter to the <span class="mono">open()</span> function, Python will assume you mean to open the file in read mode. So <span class="mono">open('foobar.txt', 'r')</span> and <span class="mono">open('foobar.txt')</span> do the exact same thing.</p>
 
-	<h1 class="subheading" id="">About the Star Pusher Map File Format</h1>
+	<h1 class="subheading" id="star-map-files">About the Star Pusher Map File Format</h1>
 	<p class="noindent">We need the level text file to be in a specific format. Which characters represent walls, or stars, or the player’s starting position? If we have the maps for multiple levels, how can we tell when one level’s map ends and the next one begins?</p>
 	<p>Fortunately, the map file format we will use is already defined for us. There are many Sokoban games out there (you can find more at <a href="https://invpy.com/sokobanclones">https://invpy.com/sokobanclones</a>), and they all use the same map file format. If you download the levels file from <a href="https://invpy.com/starPusherLevels.txt">https://invpy.com/starPusherLevels.txt</a> and open it in a text editor, you’ll see something like this:</p>
 
@@ -2841,7 +2841,7 @@ len(goals), len(stars))</p>
 
 	<p>Now that this level is done processing, the variables for <span class="mono">mapTextLines</span>, <span class="mono">mapObj</span>, and <span class="mono">gameStateObj</span> should be reset to blank values for the next level that will be read in from the level file. The <span class="mono">levelNum</span> variable is also incremented by <span class="mono">1</span> for the next level’s level number.</p>
 
-	<h1 class="subheading" id="">Recursive Functions</h1>
+	<h1 class="subheading" id="recursive-functions">Recursive Functions</h1>
 	<p class="noindent">Before you can learn how the <span class="mono">floodFill()</span> function works, you need to learn about recursion. Recursion is a simple concept: A <a href="glossary.xhtml#recursive-function"><b>recursive function</b></a> is just a function that calls itself, like the one in the following program: (don’t type the letters at the beginning of each line though)</p>
 
 	<div class="python-shell">
@@ -2878,7 +2878,7 @@ len(goals), len(stars))</p>
 	<p>Since it has reached the end of the function, it returns to the line of code that called this function call, which was line K. There are no more lines of code after line K, so the program terminates. </p>
 	<p>Note that local variables are not just local to the function, but to a specific call of the function.</p>
 
-	<h1 class="subheading" id="">Stack Overflows</h1>
+	<h1 class="subheading" id="stack-overflows">Stack Overflows</h1>
 	<p class="noindent">Each time a function is called, the Python interpreter remembers which line of code made the call. That way when the function returns Python knows where to resume the execution. Remembering this takes up a tiny bit of memory. This isn’t normally a big deal, but take a look at this code:</p>
 
 	<div class="python-shell">
@@ -2937,7 +2937,7 @@ len(goals), len(stars))</p>
 		<p class="sample-code">RuntimeError: maximum recursion depth exceeded</p>
 	</div>
 
-	<h1 class="subheading" id="">Preventing Stack Overflows with a Base Case</h1>
+	<h1 class="subheading" id="prevent-stack-overflows">Preventing Stack Overflows with a Base Case</h1>
 	<p class="noindent">In order to prevent stack overflow bugs, you must have a <a href="glossary.xhtml#base-case"><b>base case</b></a> where the function stops make new recursive calls. If there is no base case then the function calls will never stop and eventually a stack overflow will occur. Here is an example of a recursive function with a base case. The base case is when the param parameter equals 2.</p>
 
 	<div class="python-shell">
@@ -2976,7 +2976,7 @@ len(goals), len(stars))</p>
 
 	<p>Recursive calls and base cases will be used to perform the flood fill algorithm, which is described next.</p>
 
-	<h1 class="subheading" id="">The Flood Fill Algorithm</h1>
+	<h1 class="subheading" id="flood-fill-algorithm">The Flood Fill Algorithm</h1>
 	<p class="noindent">The flood fill algorithm is used in Star Pusher to change all of the floor tiles inside the walls of the level to use the “inside floor” tile image instead of the “outside floor” tile (which all the tiles on the map are by default). The original <span class="mono">floodFill()</span> call is on line 295. It will convert any tiles represented with the <span class="mono">' '</span> string (which represents an outdoor floor) to a <span class="mono">'o'</span> string (which represents an indoor floor).</p>
 
 	<div class="python-shell">
@@ -3030,7 +3030,7 @@ len(goals), len(stars))</p>
 
 	<p>If you would like to read a more detailed tutorial on recursion that uses cats and zombies for an example, go to <a href="https://invpy.com/recursivezombies">https://invpy.com/recursivezombies</a>.</p>
 
-	<h1 class="subheading" id="">Drawing the Map</h1>
+	<h1 class="subheading" id="drawing-map">Drawing the Map</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">535.</span> def drawMap(mapObj, gameStateObj, goals):</p>
@@ -3111,7 +3111,7 @@ len(goals), len(stars))</p>
 
 	<p>Finally, the <span class="mono">drawMap()</span> function checks if the player is located at this XY coordinate, and if so, the player’s image is drawn over the tile. Line 580 is outside of the nested <span class="mono">for</span> loops that began on line 549 and 550, so by the time the Surface object is returned, the entire map has been drawn on it.</p>
 
-	<h1 class="subheading" id="">Checking if the Level is Finished</h1>
+	<h1 class="subheading" id="level-finished">Checking if the Level is Finished</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">583.</span> def isLevelFinished(levelObj, gameStateObj):</p>
@@ -3142,7 +3142,7 @@ len(goals), len(stars))</p>
 
 	<p>After all the functions have been defined, the <span class="mono">main()</span> function is called on line 602 to begin the game.</p>
 
-	<h1 class="subheading" id="">Summary</h1>
+	<h1 class="subheading" id="summary">Summary</h1>
 	<p class="noindent">In the Squirrel Eat Squirrel game, the game world was pretty simple: just an infinite green plain with grass images randomly scattered around it. The Star Pusher game introduced something new: having uniquely designed levels with tile graphics. In order to store these levels in a format that the computer can read, they are typed out into a text file and code in the program reads those files and creates the data structures for the level.</p>
 	<p>Really, rather than just make a simple game with a single map, the Star Pusher program is more of a system for loading custom maps based the level file. Just by modifying the level file, we can change where walls, stars, and goals appear in the game world. The Star Pusher program can handle any configuration that the level file is set to (as long as it passes the <span class="mono">assert</span> statements that ensure the map makes sense).</p>
 	<p>You won’t even have to know how to program Python to make your own levels. A text editor program that modifies the <i>starPusherLevels.txt</i> file is all that anyone needs to have their own level editor for the Star Pusher game.</p>
