@@ -98,13 +98,13 @@
 		<p class="noindent mono"><span class="line-number">&#160;74.</span> &#160;&#160;&#160;&#160;<span class="comment"># These dict values are global, and map the character that appears</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;75.</span> &#160;&#160;&#160;&#160;<span class="comment"># in the level file to the Surface object it represents.</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;76.</span> &#160;&#160;&#160;&#160;TILEMAPPING = {'x': IMAGESDICT['corner'],</p>
-		<p class="noindent mono"><span class="line-number">&#160;77.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'#': IMAGESDICT['wall'],</p>
-		<p class="noindent mono"><span class="line-number">&#160;78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'o': IMAGESDICT['inside floor'],</p>
-		<p class="noindent mono"><span class="line-number">&#160;79.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' ': IMAGESDICT['outside floor']}</p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'#': IMAGESDICT['wall'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'o': IMAGESDICT['inside floor'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;79.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' ': IMAGESDICT['outside floor']}</p>
 		<p class="noindent mono"><span class="line-number">&#160;80.</span> &#160;&#160;&#160;&#160;OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],</p>
-		<p class="noindent mono"><span class="line-number">&#160;81.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'2': IMAGESDICT['short tree'],</p>
-		<p class="noindent mono"><span class="line-number">&#160;82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'3': IMAGESDICT['tall tree'],</p>
-		<p class="noindent mono"><span class="line-number">&#160;83.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'4': IMAGESDICT['ugly tree']}</p>
+		<p class="noindent mono"><span class="line-number">&#160;81.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'2': IMAGESDICT['short tree'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'3': IMAGESDICT['tall tree'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;83.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'4': IMAGESDICT['ugly tree']}</p>
 		<p class="noindent mono"><span class="line-number">&#160;84.</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;85.</span> &#160;&#160;&#160;&#160;<span class="comment"># PLAYERIMAGES is a list of all possible characters the player can be.</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;86.</span> &#160;&#160;&#160;&#160;<span class="comment"># currentImage is the index of the player's current player image.</span></p>
@@ -1071,9 +1071,9 @@ class="comment"># Reset the variables for reading the next map.</span></p>
 		<p class="noindent mono"><span class="line-number">510.</span>     return
 levels</p>
 
-		<p class="noindent mono"><span class="comment">511.</span></p>
+		<p class="noindent mono"><span class="line-number">511.</span></p>
 
-		<p class="noindent mono"><span class="comment">512.</span></p>
+		<p class="noindent mono"><span class="line-number">512.</span></p>
 
 		<p class="noindent mono"><span class="line-number">513.</span> def
 floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
@@ -1142,566 +1142,209 @@ x, y-1, oldCharacter, newCharacter) <span class="comment"># call up</span></p>
 
 		<p class="noindent mono"><span class="line-number">534.</span></p>
 
-		<p class="noindent mono"><span class="line-number">535.</span> def
-drawMap(mapObj, gameStateObj, goals):</p>
-
-		<p class="noindent mono"><span class="line-number">536.</span> &#160;&#160;&#160;&#160;<span
-class="comment">&quot;&quot;&quot;Draws the map to a Surface object,
-including the player and</span></p>
-
-		<p class="noindent mono"><span class="line-number">537.</span> &#160;&#160;&#160;&#160;<span
-class="comment">stars. This function does not call
-pygame.display.update(), nor</span></p>
-
-		<p class="noindent mono"><span class="line-number">538.</span> &#160;&#160;&#160;&#160;<span
-class="comment">does it draw the &quot;Level&quot; and
-&quot;Steps&quot; text in the corner.&quot;&quot;&quot;</span></p>
-
-		<p class="noindent mono"><span class="line-number">539.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">540.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># mapSurf will be the single Surface object that the
-tiles are drawn</span></p>
-
-		<p class="noindent mono"><span class="line-number">541.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># on, so that it is easy to position the entire map on
-the DISPLAYSURF</span></p>
-
-		<p class="noindent mono"><span class="line-number">542.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># Surface object. First, the width and height must be
-calculated.</span></p>
-
-		<p class="noindent mono"><span class="line-number">543.</span>     mapSurfWidth
-= len(mapObj) * TILEWIDTH</p>
-
-		<p class="noindent mono"><span class="line-number">544.</span>     mapSurfHeight
-= (len(mapObj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT</p>
-
-		<p class="noindent mono"><span class="line-number">545.</span>     mapSurf
-= pygame.Surface((mapSurfWidth, mapSurfHeight))</p>
-
-		<p class="noindent mono"><span class="line-number">546.</span>     mapSurf.fill(BGCOLOR)
-<span class="comment"># start with a blank color on the surface.</span></p>
-
-		<p class="noindent mono"><span class="line-number">547.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">548.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># Draw the tile sprites onto this surface.</span></p>
-
-		<p class="noindent mono"><span class="line-number">549.</span>     for
-x in range(len(mapObj)):</p>
-
-		<p class="noindent mono"><span class="line-number">550.</span>         for
-y in range(len(mapObj[x])):</p>
-
-		<p class="noindent mono"><span class="line-number">551.</span>             spaceRect
-= pygame.Rect((x * TILEWIDTH, y * (TILEHEIGHT - TILEFLOORHEIGHT), TILEWIDTH,
-TILEHEIGHT))</p>
-
-		<p class="noindent mono"><span class="line-number">552.</span>             if
-mapObj[x][y] in TILEMAPPING:</p>
-
-		<p class="noindent mono"><span class="line-number">553.</span>                 baseTile
-= TILEMAPPING[mapObj[x][y]]</p>
-
-		<p class="noindent mono"><span class="line-number">554.</span>             elif
-mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
-
-		<p class="noindent mono"><span class="line-number">555.</span>                 baseTile
-= TILEMAPPING[' ']</p>
-
-		<p class="noindent mono"><span class="line-number">556.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">557.</span>             <span
-class="comment"># First draw the base ground/wall tile.</span></p>
-
-		<p class="noindent mono"><span class="line-number">558.</span>             mapSurf.blit(baseTile,
-spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">559.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">560.</span>             if
-mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
-
-		<p class="noindent mono"><span class="line-number">561.</span>                 <span
-class="comment"># Draw any tree/rock decorations that are on this tile.</span></p>
-
-		<p class="noindent mono"><span class="line-number">562.</span>                 mapSurf.blit(OUTSIDEDECOMAPPING[mapObj[x][y]],
-spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">563.</span>             elif
-(x, y) in gameStateObj['stars']:</p>
-
-		<p class="noindent mono"><span class="line-number">564.</span>                 if
-(x, y) in goals:</p>
-
-		<p class="noindent mono"><span class="line-number">565.</span>                     <span
-class="comment"># A goal AND star are on this space, draw goal first.</span></p>
-
-		<p class="noindent mono"><span class="line-number">566.</span>                     mapSurf.blit(IMAGESDICT['covered
-goal'], spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">567.</span>                 <span
-class="comment"># Then draw the star sprite.</span></p>
-
-		<p class="noindent mono"><span class="line-number">568.</span>                 mapSurf.blit(IMAGESDICT['star'],
-spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">569.</span>             elif
-(x, y) in goals:</p>
-
-		<p class="noindent mono"><span class="line-number">570.</span>                 <span
-class="comment"># Draw a goal without a star on it.</span></p>
-
-		<p class="noindent mono"><span class="line-number">571.</span>                 mapSurf.blit(IMAGESDICT['uncovered
-goal'], spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">572.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">573.</span>             <span
-class="comment"># Last draw the player on the board.</span></p>
-
-		<p class="noindent mono"><span class="line-number">574.</span>             if
-(x, y) == gameStateObj['player']:</p>
-
-		<p class="noindent mono"><span class="line-number">575.</span>                 <span
-class="comment"># Note: The value &quot;currentImage&quot; refers</span></p>
-
-		<p class="noindent mono"><span class="line-number">576.</span>                 <span
-class="comment"># to a key in &quot;PLAYERIMAGES&quot; which has the</span></p>
-
-		<p class="noindent mono"><span class="line-number">577.</span>                 <span
-class="comment"># specific player image we want to show.</span></p>
-
-		<p class="noindent mono"><span class="line-number">578.</span>                 mapSurf.blit(PLAYERIMAGES[currentImage],
-spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">579.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">580.</span>     return
-mapSurf</p>
-
+		<p class="noindent mono"><span class="line-number">535.</span> def drawMap(mapObj, gameStateObj, goals):</p>
+		<p class="noindent mono"><span class="line-number">536.</span> &#160;&#160;&#160;&#160;<span class="comment">&quot;&quot;&quot;Draws the map to a Surface object, including the player and</span></p>
+		<p class="noindent mono"><span class="line-number">537.</span> &#160;&#160;&#160;&#160;<span class="comment">stars. This function does not call pygame.display.update(), nor</span></p>
+		<p class="noindent mono"><span class="line-number">538.</span> &#160;&#160;&#160;&#160;<span class="comment">does it draw the &quot;Level&quot; and &quot;Steps&quot; text in the corner.&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">539.</span></p>
+		<p class="noindent mono"><span class="line-number">540.</span> &#160;&#160;&#160;&#160;<span class="comment"># mapSurf will be the single Surface object that the tiles are drawn</span></p>
+		<p class="noindent mono"><span class="line-number">541.</span> &#160;&#160;&#160;&#160;<span class="comment"># on, so that it is easy to position the entire map on the DISPLAYSURF</span></p>
+		<p class="noindent mono"><span class="line-number">542.</span> &#160;&#160;&#160;&#160;<span class="comment"># Surface object. First, the width and height must be calculated.</span></p>
+		<p class="noindent mono"><span class="line-number">543.</span> &#160;&#160;&#160;&#160;mapSurfWidth = len(mapObj) * TILEWIDTH</p>
+		<p class="noindent mono"><span class="line-number">544.</span> &#160;&#160;&#160;&#160;mapSurfHeight = (len(mapObj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT</p>
+		<p class="noindent mono"><span class="line-number">545.</span> &#160;&#160;&#160;&#160;mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight))</p>
+		<p class="noindent mono"><span class="line-number">546.</span> &#160;&#160;&#160;&#160;mapSurf.fill(BGCOLOR) <span class="comment"># start with a blank color on the surface.</span></p>
+		<p class="noindent mono"><span class="line-number">547.</span></p>
+		<p class="noindent mono"><span class="line-number">548.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draw the tile sprites onto this surface.</span></p>
+		<p class="noindent mono"><span class="line-number">549.</span> &#160;&#160;&#160;&#160;for x in range(len(mapObj)):</p>
+		<p class="noindent mono"><span class="line-number">550.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(len(mapObj[x])):</p>
+		<p class="noindent mono"><span class="line-number">551.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spaceRect = pygame.Rect((x * TILEWIDTH, y * (TILEHEIGHT - TILEFLOORHEIGHT), TILEWIDTH, TILEHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">552.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in TILEMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">553.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;baseTile = TILEMAPPING[mapObj[x][y]]</p>
+		<p class="noindent mono"><span class="line-number">554.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">555.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;baseTile = TILEMAPPING[' ']</p>
+		<p class="noindent mono"><span class="line-number">556.</span></p>
+		<p class="noindent mono"><span class="line-number">557.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># First draw the base ground/wall tile.</span></p>
+		<p class="noindent mono"><span class="line-number">558.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(baseTile, spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">559.</span></p>
+		<p class="noindent mono"><span class="line-number">560.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">561.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Draw any tree/rock decorations that are on this tile.</span></p>
+		<p class="noindent mono"><span class="line-number">562.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(OUTSIDEDECOMAPPING[mapObj[x][y]], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">563.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif (x, y) in gameStateObj['stars']:</p>
+		<p class="noindent mono"><span class="line-number">564.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if (x, y) in goals:</p>
+		<p class="noindent mono"><span class="line-number">565.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># A goal AND star are on this space, draw goal first.</span></p>
+		<p class="noindent mono"><span class="line-number">566.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(IMAGESDICT['covered goal'], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">567.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Then draw the star sprite.</span></p>
+		<p class="noindent mono"><span class="line-number">568.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(IMAGESDICT['star'], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">569.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif (x, y) in goals:</p>
+		<p class="noindent mono"><span class="line-number">570.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Draw a goal without a star on it.</span></p>
+		<p class="noindent mono"><span class="line-number">571.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(IMAGESDICT['uncovered goal'], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">572.</span></p>
+		<p class="noindent mono"><span class="line-number">573.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Last draw the player on the board.</span></p>
+		<p class="noindent mono"><span class="line-number">574.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if (x, y) == gameStateObj['player']:</p>
+		<p class="noindent mono"><span class="line-number">575.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Note: The value &quot;currentImage&quot; refers</span></p>
+		<p class="noindent mono"><span class="line-number">576.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># to a key in &quot;PLAYERIMAGES&quot; which has the</span></p>
+		<p class="noindent mono"><span class="line-number">577.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># specific player image we want to show.</span></p>
+		<p class="noindent mono"><span class="line-number">578.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(PLAYERIMAGES[currentImage], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">579.</span></p>
+		<p class="noindent mono"><span class="line-number">580.</span> &#160;&#160;&#160;&#160;return mapSurf</p>
 		<p class="noindent mono"><span class="line-number">581.</span></p>
-
 		<p class="noindent mono"><span class="line-number">582.</span></p>
-
-		<p class="noindent mono"><span class="line-number">583.</span> def
-isLevelFinished(levelObj, gameStateObj):</p>
-
-		<p class="noindent mono"><span class="line-number">584.</span> &#160;&#160;&#160;&#160;<span
-class="comment">&quot;&quot;&quot;Returns True if all the goals have
-stars in them.&quot;&quot;&quot;</span></p>
-
-		<p class="noindent mono"><span class="line-number">585.</span>     for
-goal in levelObj['goals']:</p>
-
-		<p class="noindent mono"><span class="line-number">586.</span>         if
-goal not in gameStateObj['stars']:</p>
-
-		<p class="noindent mono"><span class="line-number">587.</span>             <span
-class="comment"># Found a space with a goal but no star on it.</span></p>
-
-		<p class="noindent mono"><span class="line-number">588.</span>             return
-False</p>
-
-		<p class="noindent mono"><span class="line-number">589.</span>     return
-True</p>
-
+		<p class="noindent mono"><span class="line-number">583.</span> def isLevelFinished(levelObj, gameStateObj):</p>
+		<p class="noindent mono"><span class="line-number">584.</span> &#160;&#160;&#160;&#160;<span class="comment">&quot;&quot;&quot;Returns True if all the goals have stars in them.&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">585.</span> &#160;&#160;&#160;&#160;for goal in levelObj['goals']:</p>
+		<p class="noindent mono"><span class="line-number">586.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if goal not in gameStateObj['stars']:</p>
+		<p class="noindent mono"><span class="line-number">587.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Found a space with a goal but no star on it.</span></p>
+		<p class="noindent mono"><span class="line-number">588.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return False</p>
+		<p class="noindent mono"><span class="line-number">589.</span> &#160;&#160;&#160;&#160;return True</p>
 		<p class="noindent mono"><span class="line-number">590.</span></p>
-
 		<p class="noindent mono"><span class="line-number">591.</span></p>
-
-		<p class="noindent mono"><span class="line-number">592.</span> def
-terminate():</p>
-
-		<p class="noindent mono"><span class="line-number">593.</span>     pygame.quit()</p>
-
-		<p class="noindent mono"><span class="line-number">594.</span>     sys.exit()</p>
-
+		<p class="noindent mono"><span class="line-number">592.</span> def terminate():</p>
+		<p class="noindent mono"><span class="line-number">593.</span> &#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">594.</span> &#160;&#160;&#160;&#160;sys.exit()</p>
 		<p class="noindent mono"><span class="line-number">595.</span></p>
-
 		<p class="noindent mono"><span class="line-number">596.</span></p>
-
-		<p class="noindent mono"><span class="line-number">597.</span> if
-__name__ == '__main__':</p>
-
-		<p class="noindent mono"><span class="line-number">598.</span>     main()</p>
-
+		<p class="noindent mono"><span class="line-number">597.</span> if __name__ == '__main__':</p>
+		<p class="noindent mono"><span class="line-number">598.</span> &#160;&#160;&#160;&#160;main()</p>
 	</div>
 
 	<h1 class="subheading" id="">The Initial Setup</h1>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">1.</span> <span
-class="comment"># Star Pusher (a Sokoban clone)</span></p>
-
-		<p class="noindent mono"><span class="line-number">2.</span> <span
-class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
-
-		<p class="noindent mono"><span class="line-number">3.</span> <span
-class="comment"># http://inventwithpython.com/pygame</span></p>
-
-		<p class="noindent mono"><span class="line-number">4.</span> <span
-class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
-
-		<p class="noindent mono"><span class="line-number">5.</span></p>
-
-		<p class="noindent mono"><span class="line-number">6.</span> import
-random, sys, copy, os, pygame</p>
-
-		<p class="noindent mono"><span class="line-number">7.</span> from
-pygame.locals import *</p>
-
-		<p class="noindent mono"><span class="line-number">8.</span></p>
-
-		<p class="noindent mono"><span class="line-number">9.</span> FPS
-= 30 <span class="comment"># frames per second to update the screen</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;10.</span>  WINWIDTH
-= 800 <span class="comment"># width of the program's window, in pixels</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;11.</span>  WINHEIGHT
-= 600 <span class="comment"># height in pixels</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;12.</span>  HALF_WINWIDTH
-= int(WINWIDTH / 2)</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;13.</span>  HALF_WINHEIGHT
-= int(WINHEIGHT / 2)</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;14.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;15.</span>  <span
-class="comment"># The total width and height of each tile in pixels.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;16.</span>  TILEWIDTH
-= 50</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;17.</span>  TILEHEIGHT
-= 85</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;18.</span>  TILEFLOORHEIGHT
-= 45</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;19.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;20.</span>  CAM_MOVE_SPEED
-= 5 <span class="comment"># how many pixels per frame the camera moves</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;21.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;22.</span>  <span
-class="comment"># The percentage of outdoor tiles that have additional</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;23.</span>  <span
-class="comment"># decoration on them, such as a tree or rock.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;24.</span>  OUTSIDE_DECORATION_PCT
-= 20</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;25.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;26.</span>  BRIGHTBLUE
-= (  0, 170, 255)</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;27.</span>  WHITE
-= (255, 255, 255)</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;28.</span>  BGCOLOR
-= BRIGHTBLUE</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;29.</span>  TEXTCOLOR
-= WHITE</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;30.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;31.</span>  UP
-= 'up'</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;32.</span>  DOWN
-= 'down'</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;33.</span>  LEFT
-= 'left'</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;34.</span>  RIGHT
-= 'right'</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;&#160;1.</span> <span class="comment"># Star Pusher (a Sokoban clone)</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;2.</span> <span class="comment"># By Al Sweigart al@inventwithpython.com</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;3.</span> <span class="comment"># http://inventwithpython.com/pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;4.</span> <span class="comment"># Creative Commons BY-NC-SA 3.0 US</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;5.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;6.</span> import random, sys, copy, os, pygame</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;7.</span> from pygame.locals import *</p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;8.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;&#160;9.</span> FPS = 30 <span class="comment"># frames per second to update the screen</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;10.</span>  WINWIDTH = 800 <span class="comment"># width of the program's window, in pixels</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;11.</span>  WINHEIGHT = 600 <span class="comment"># height in pixels</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;12.</span>  HALF_WINWIDTH = int(WINWIDTH / 2)</p>
+		<p class="noindent mono"><span class="line-number">&#160;13.</span>  HALF_WINHEIGHT = int(WINHEIGHT / 2)</p>
+		<p class="noindent mono"><span class="line-number">&#160;14.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;15.</span>  <span class="comment"># The total width and height of each tile in pixels.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;16.</span>  TILEWIDTH = 50</p>
+		<p class="noindent mono"><span class="line-number">&#160;17.</span>  TILEHEIGHT = 85</p>
+		<p class="noindent mono"><span class="line-number">&#160;18.</span>  TILEFLOORHEIGHT = 45</p>
+		<p class="noindent mono"><span class="line-number">&#160;19.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;20.</span>  CAM_MOVE_SPEED = 5 <span class="comment"># how many pixels per frame the camera moves</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;21.</span> </p>
+		<p class="noindent mono"><span class="line-number">&#160;22.</span>  <span class="comment"># The percentage of outdoor tiles that have additional</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;23.</span>  <span class="comment"># decoration on them, such as a tree or rock.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;24.</span>  OUTSIDE_DECORATION_PCT = 20</p>
+		<p class="noindent mono"><span class="line-number">&#160;25.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;26.</span>  BRIGHTBLUE = (  0, 170, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;27.</span>  WHITE = (255, 255, 255)</p>
+		<p class="noindent mono"><span class="line-number">&#160;28.</span>  BGCOLOR = BRIGHTBLUE</p>
+		<p class="noindent mono"><span class="line-number">&#160;29.</span>  TEXTCOLOR = WHITE</p>
+		<p class="noindent mono"><span class="line-number">&#160;30.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;31.</span>  UP = 'up'</p>
+		<p class="noindent mono"><span class="line-number">&#160;32.</span>  DOWN = 'down'</p>
+		<p class="noindent mono"><span class="line-number">&#160;33.</span>  LEFT = 'left'</p>
+		<p class="noindent mono"><span class="line-number">&#160;34.</span>  RIGHT = 'right'</p>
 	</div>
 
-	<p>These constants are used in various parts of the program. The
-<span class="mono">TILEWIDTH</span> and <span class="mono">TILEHEIGHT</span>
-variables show that each of the tile images are 50 pixels wide and 85 pixels
-tall. However, these tiles overlap with each other when drawn on the screen.
-(This is explained later.) The <span class="mono">TILEFLOORHEIGHT</span>
-refers to the fact that the part of the tile that represents the floor is 45
-pixels tall. Here is a diagram of the plain floor image:</p>
-
-
-	<p>The grassy tiles outside of the level’s room will sometimes
-have extra decorations added to them (such as trees or rocks). The <span
-class="mono">OUTSIDE_DECORATION_PCT</span> constant shows what percentage of
-these tiles will randomly have these decorations.</p>
+	<p>These constants are used in various parts of the program. The <span class="mono">TILEWIDTH</span> and <span class="mono">TILEHEIGHT</span> variables show that each of the tile images are 50 pixels wide and 85 pixels tall. However, these tiles overlap with each other when drawn on the screen. (This is explained later.) The <span class="mono">TILEFLOORHEIGHT</span> refers to the fact that the part of the tile that represents the floor is 45 pixels tall. Here is a diagram of the plain floor image:</p>
+	<p>The grassy tiles outside of the level’s room will sometimes have extra decorations added to them (such as trees or rocks). The <span class="mono">OUTSIDE_DECORATION_PCT</span> constant shows what percentage of these tiles will randomly have these decorations.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">&#160;37.</span>  def
-main():</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;38.</span>      global
-FPSCLOCK, DISPLAYSURF, IMAGESDICT, TILEMAPPING, OUTSIDEDECOMAPPING, BASICFONT, PLAYERIMAGES,
-currentImage</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;39.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;40.</span>      <span
-class="comment"># Pygame initialization and basic set up of the global variables.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;41.</span>      pygame.init()</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;42.</span>      FPSCLOCK
-= pygame.time.Clock()</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;43.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;44.</span>      <span
-class="comment"># Because the Surface object stored in DISPLAYSURF was
-returned</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;45.</span>      <span
-class="comment"># from the pygame.display.set_mode() function, this is
-the</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;46.</span>      <span
-class="comment"># Surface object that is drawn to the actual computer
-screen</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;47.</span>      <span
-class="comment"># when pygame.display.update() is called.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;48.</span>      DISPLAYSURF
-= pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;49.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;50.</span>      pygame.display.set_caption('Star
-Pusher')</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;51.</span>      BASICFONT
-= pygame.font.Font('freesansbold.ttf', 18)</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;37.</span> def main():</p>
+		<p class="noindent mono"><span class="line-number">&#160;38.</span> &#160;&#160;&#160;&#160;global FPSCLOCK, DISPLAYSURF, IMAGESDICT, TILEMAPPING, OUTSIDEDECOMAPPING, BASICFONT, PLAYERIMAGES, currentImage</p>
+		<p class="noindent mono"><span class="line-number">&#160;39.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;40.</span> &#160;&#160;&#160;&#160;<span class="comment"># Pygame initialization and basic set up of the global variables.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;41.</span> &#160;&#160;&#160;&#160;pygame.init()</p>
+		<p class="noindent mono"><span class="line-number">&#160;42.</span> &#160;&#160;&#160;&#160;FPSCLOCK = pygame.time.Clock()</p>
+		<p class="noindent mono"><span class="line-number">&#160;43.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;44.</span> &#160;&#160;&#160;&#160;<span class="comment"># Because the Surface object stored in DISPLAYSURF was returned</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;45.</span> &#160;&#160;&#160;&#160;<span class="comment"># from the pygame.display.set_mode() function, this is the</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;46.</span> &#160;&#160;&#160;&#160;<span class="comment"># Surface object that is drawn to the actual computer screen</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;47.</span> &#160;&#160;&#160;&#160;<span class="comment"># when pygame.display.update() is called.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;48.</span> &#160;&#160;&#160;&#160;DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))</p>
+		<p class="noindent mono"><span class="line-number">&#160;49.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;50.</span> &#160;&#160;&#160;&#160;pygame.display.set_caption('Star Pusher')</p>
+		<p class="noindent mono"><span class="line-number">&#160;51.</span> &#160;&#160;&#160;&#160;BASICFONT = pygame.font.Font('freesansbold.ttf', 18)</p>
 	</div>
 
-	<p>This is the usual Pygame setup that happens at the beginning
-of the program.</p>
+	<p>This is the usual Pygame setup that happens at the beginning of the program.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number"> 53. </span>    <span
-class="comment"># A global dict value that will contain all the Pygame</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;54.</span>      <span
-class="comment"># Surface objects returned by pygame.image.load().</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;55.</span>      IMAGESDICT
-= {'uncovered goal': pygame.image.load('RedSelector.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;56.</span>                    'covered
-goal': pygame.image.load('Selector.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;57.</span>                    'star':
-pygame.image.load('Star.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;58.</span>                    'corner':
-pygame.image.load('Wall Block Tall.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;59.</span>                    'wall':
-pygame.image.load('Wood Block Tall.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;60.</span>                    'inside
-floor': pygame.image.load('Plain Block.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;61.</span>                    'outside
-floor': pygame.image.load('Grass Block.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;62.</span>                    'title':
-pygame.image.load('star_title.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;63.</span>                    'solved':
-pygame.image.load('star_solved.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;64.</span>                    'princess':
-pygame.image.load('princess.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;65.</span>                    'boy':
-pygame.image.load('boy.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;66.</span>                    'catgirl':
-pygame.image.load('catgirl.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;67.</span>                    'horngirl':
-pygame.image.load('horngirl.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;68.</span>                    'pinkgirl':
-pygame.image.load('pinkgirl.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;69.</span>                    'rock':
-pygame.image.load('Rock.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;70.</span>                    'short
-tree': pygame.image.load('Tree_Short.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;71.</span>                    'tall
-tree': pygame.image.load('Tree_Tall.png'),</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;72.</span>                    'ugly
-tree': pygame.image.load('Tree_Ugly.png')}</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;53.</span> &#160;&#160;&#160;&#160;<span class="comment"># A global dict value that will contain all the Pygame</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;54.</span> &#160;&#160;&#160;&#160;<span class="comment"># Surface objects returned by pygame.image.load().</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;55.</span> &#160;&#160;&#160;&#160;IMAGESDICT = {'uncovered goal': pygame.image.load('RedSelector.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;56.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'covered goal': pygame.image.load('Selector.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;57.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'star': pygame.image.load('Star.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;58.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'corner': pygame.image.load('Wall Block Tall.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;59.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'wall': pygame.image.load('Wood Block Tall.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;60.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'inside floor': pygame.image.load('Plain Block.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;61.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'outside floor': pygame.image.load('Grass Block.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;62.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'title': pygame.image.load('star_title.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;63.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'solved': pygame.image.load('star_solved.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;64.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'princess': pygame.image.load('princess.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;65.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'boy': pygame.image.load('boy.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;66.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'catgirl': pygame.image.load('catgirl.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;67.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'horngirl': pygame.image.load('horngirl.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;68.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'pinkgirl': pygame.image.load('pinkgirl.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;69.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'rock': pygame.image.load('Rock.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;70.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'short tree': pygame.image.load('Tree_Short.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;71.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'tall tree': pygame.image.load('Tree_Tall.png'),</p>
+		<p class="noindent mono"><span class="line-number">&#160;72.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'ugly tree': pygame.image.load('Tree_Ugly.png')}</p>
 	</div>
 
-	<p>The <span class="mono">IMAGESDICT</span> is a dictionary
-where all of the loaded images are stored. This makes it easier to use in other
-functions, since only the <span class="mono">IMAGESDICT</span> variable needs
-to be made global. If we stored each of these images in separate variables,
-then all 18 variables (for the 18 images used in this game) would need to be
-made global. A dictionary containing all of the Surface objects with the images
-is easier to handle.</p>
+	<p>The <span class="mono">IMAGESDICT</span> is a dictionary where all of the loaded images are stored. This makes it easier to use in other functions, since only the <span class="mono">IMAGESDICT</span> variable needs to be made global. If we stored each of these images in separate variables, then all 18 variables (for the 18 images used in this game) would need to be made global. A dictionary containing all of the Surface objects with the images is easier to handle.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">&#160;74.</span>      <span
-class="comment"># These dict values are global, and map the character
-that appears</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;75.</span>      <span
-class="comment"># in the level file to the Surface object it
-represents.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;76.</span>      TILEMAPPING
-= {'x': IMAGESDICT['corner'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;77.</span>                     '#':
-IMAGESDICT['wall'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;78.</span>                     'o':
-IMAGESDICT['inside floor'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;79.</span>                     '
-': IMAGESDICT['outside floor']}</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;74.</span> &#160;&#160;&#160;&#160;<span class="comment"># These dict values are global, and map the character that appears</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;75.</span> &#160;&#160;&#160;&#160;<span class="comment"># in the level file to the Surface object it represents.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;76.</span> &#160;&#160;&#160;&#160;TILEMAPPING = {'x': IMAGESDICT['corner'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;77.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'#': IMAGESDICT['wall'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;78.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'o': IMAGESDICT['inside floor'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;79.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' ': IMAGESDICT['outside floor']}</p>
 	</div>
 
-	<p>The data structure for the map is just a 2D list of single
-character strings. The <span class="mono">TILEMAPPING</span> dictionary links
-the characters used in this map data structure to the images that they
-represent. (This will become more clear in the <span class="mono">drawMap()</span>
-function’s explanation.)</p>
+	<p>The data structure for the map is just a 2D list of single character strings. The <span class="mono">TILEMAPPING</span> dictionary links the characters used in this map data structure to the images that they represent. (This will become more clear in the <span class="mono">drawMap()</span> function’s explanation.)</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">&#160;80.</span>      OUTSIDEDECOMAPPING
-= {'1': IMAGESDICT['rock'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;81.</span>                            '2':
-IMAGESDICT['short tree'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;82.</span>                            '3':
-IMAGESDICT['tall tree'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;83.</span>                            '4':
-IMAGESDICT['ugly tree']}</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;80.</span> &#160;&#160;&#160;&#160;OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;81.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'2': IMAGESDICT['short tree'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;82.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'3': IMAGESDICT['tall tree'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;83.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'4': IMAGESDICT['ugly tree']}</p>
 	</div>
 
-	<p>The <span class="mono">OUTSIDEDECOMAPPING</span> is also a
-dictionary that links the characters used in the map data structure to images
-that were loaded. The “outside decoration” images are drawn on top of the
-outdoor grassy tile.</p>
+	<p>The <span class="mono">OUTSIDEDECOMAPPING</span> is also a dictionary that links the characters used in the map data structure to images that were loaded. The “outside decoration” images are drawn on top of the outdoor grassy tile.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number"> 85. </span>    <span
-class="comment"># PLAYERIMAGES is a list of all possible characters the
-player can be.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;86.</span>      <span
-class="comment"># currentImage is the index of the player's current
-player image.</span></p>
-
-		<p class="noindent mono"><span class="line-number"> 87. </span>    currentImage
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;88.</span>      PLAYERIMAGES
-= [IMAGESDICT['princess'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;89.</span>                      IMAGESDICT['boy'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;90.</span>                      IMAGESDICT['catgirl'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;91.</span>                      IMAGESDICT['horngirl'],</p>
-
-		<p class="noindent mono"><span class="line-number">&#160;92.</span>                      IMAGESDICT['pinkgirl']]</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;85.</span> &#160;&#160;&#160;&#160;<span class="comment"># PLAYERIMAGES is a list of all possible characters the player can be.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;86.</span> &#160;&#160;&#160;&#160;<span class="comment"># currentImage is the index of the player's current player image.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;87.</span> &#160;&#160;&#160;&#160;currentImage = 0</p>
+		<p class="noindent mono"><span class="line-number">&#160;88.</span> &#160;&#160;&#160;&#160;PLAYERIMAGES = [IMAGESDICT['princess'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;89.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['boy'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;90.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['catgirl'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;91.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['horngirl'],</p>
+		<p class="noindent mono"><span class="line-number">&#160;92.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IMAGESDICT['pinkgirl']]</p>
 	</div>
 
-	<p>The <span class="mono">PLAYERIMAGES</span> list stores the
-images used for the player. The <span class="mono">currentImage</span>
-variable tracks the index of the currently selected player image. For example,
-when <span class="mono">currentImage</span> is set to <span class="mono">0</span>
-then <span class="mono">PLAYERIMAGES[0]</span>, which is the “princess” player
-image, is drawn to the screen.</p>
+	<p>The <span class="mono">PLAYERIMAGES</span> list stores the images used for the player. The <span class="mono">currentImage</span> variable tracks the index of the currently selected player image. For example, when <span class="mono">currentImage</span> is set to <span class="mono">0</span> then <span class="mono">PLAYERIMAGES[0]</span>, which is the “princess” player image, is drawn to the screen.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">&#160;94.</span>      startScreen()
-<span class="comment"># show the title screen until the user presses a
-key</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;95.</span>  </p>
-
-		<p class="noindent mono"><span class="line-number">&#160;96.</span>      <span
-class="comment"># Read in the levels from the text file. See the
-readLevelsFile() for</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;97.</span>      <span
-class="comment"># details on the format of this file and how to make
-your own levels.</span></p>
-
-		<p class="noindent mono"><span class="line-number">&#160;98.</span>      levels
-= readLevelsFile('starPusherLevels.txt')</p>
-
-		<p class="noindent mono"><span class="line-number"> 99. </span>    currentLevelIndex
-= 0</p>
-
+		<p class="noindent mono"><span class="line-number">&#160;94.</span> &#160;&#160;&#160;&#160;startScreen() <span class="comment"># show the title screen until the user presses a key</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;95.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;96.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Read in the levels from the text file. See the readLevelsFile() for</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;97.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># details on the format of this file and how to make your own levels.</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;98.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;levels = readLevelsFile('starPusherLevels.txt')</p>
+		<p class="noindent mono"><span class="line-number">&#160;99.</span> &#160;&#160;&#160;&#160;currentLevelIndex = 0</p>
 	</div>
 
-	<p>The <span class="mono">startScreen()</span> function will
-keep displaying the initial start screen (which also has the instructions for
-the game) until the player presses a key. When the player presses a key, the <span
-class="mono">startScreen()</span> function returns and then reads in the
-levels from the level file. The player starts off on the first level, which is
-the level object in the levels list at index <span class="mono">0</span>.</p>
+	<p>The <span class="mono">startScreen()</span> function will keep displaying the initial start screen (which also has the instructions for the game) until the player presses a key. When the player presses a key, the <span class="mono">startScreen()</span> function returns and then reads in the levels from the level file. The player starts off on the first level, which is the level object in the levels list at index <span class="mono">0</span>.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># The main game loop. This loop runs a single level,
-when the user</span></p>
-
-		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># finishes that level, the next/previous level is
-loaded.</span></p>
-
-		<p class="noindent mono"><span class="line-number">103.</span>     while
-True: <span class="comment"># main game loop</span></p>
-
-		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
-class="comment"># Run the level to actually start playing the game:</span></p>
-
-		<p class="noindent mono"><span class="line-number">105.</span>         result
-= runLevel(levels, currentLevelIndex)</p>
-
+		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;<span class="comment"># The main game loop. This loop runs a single level, when the user</span></p>
+		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;<span class="comment"># finishes that level, the next/previous level is loaded.</span></p>
+		<p class="noindent mono"><span class="line-number">103.</span> &#160;&#160;&#160;&#160;while True: <span class="comment"># main game loop</span></p>
+		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Run the level to actually start playing the game:</span></p>
+		<p class="noindent mono"><span class="line-number">105.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;result = runLevel(levels, currentLevelIndex)</p>
 	</div>
 
 	<p>The <span class="mono">runLevel()</span> function handles
@@ -3416,22 +3059,22 @@ len(goals), len(stars))</p>
 	<p>The set of nested <span class="mono">for</span> loops on line 549 and 550 will go through every possible XY coordinate on the map and draw the appropriate tile image at that location.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">552.</span>             if mapObj[x][y] in TILEMAPPING:</p>
-		<p class="noindent mono"><span class="line-number">553.</span>                 baseTile = TILEMAPPING[mapObj[x][y]]</p>
-		<p class="noindent mono"><span class="line-number">554.</span>             elif mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
-		<p class="noindent mono"><span class="line-number">555.</span>                 baseTile = TILEMAPPING[' ']</p>
+		<p class="noindent mono"><span class="line-number">552.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in TILEMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">553.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;baseTile = TILEMAPPING[mapObj[x][y]]</p>
+		<p class="noindent mono"><span class="line-number">554.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">555.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;baseTile = TILEMAPPING[' ']</p>
 		<p class="noindent mono"><span class="line-number">556.</span></p>
-		<p class="noindent mono"><span class="line-number">557.</span>             <span class="comment"># First draw the base ground/wall tile.</span></p>
-		<p class="noindent mono"><span class="line-number">558.</span>             mapSurf.blit(baseTile, spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">557.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># First draw the base ground/wall tile.</span></p>
+		<p class="noindent mono"><span class="line-number">558.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(baseTile, spaceRect)</p>
 		<p class="noindent mono"><span class="line-number">559.</span></p>
 	</div>
 
 	<p>The <span class="mono">baseTile</span> variable is set to the Surface object of the tile image to be drawn at the iteration’s current XY coordinate. If the single-character string is in the <span class="mono">OUTSIDEDECOMAPPING</span> dictionary, then <span class="mono">TILEMAPPING[' ']</span> (the single-character string for the basic outdoor floor tile) will be used.</p>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">560.</span>             if mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
-		<p class="noindent mono"><span class="line-number">561.</span>                 <span class="comment"># Draw any tree/rock decorations that are on this tile.</span></p>
-		<p class="noindent mono"><span class="line-number">562.</span>                 mapSurf.blit(OUTSIDEDECOMAPPING[mapObj[x][y]], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">560.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">561.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Draw any tree/rock decorations that are on this tile.</span></p>
+		<p class="noindent mono"><span class="line-number">562.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(OUTSIDEDECOMAPPING[mapObj[x][y]], spaceRect)</p>
 	</div>
 
 	<p>Additionally, if the tile was listed in the <span class="mono">OUTSIDEDECOMAPPING</span> dictionary, the corresponding tree or rock image should be drawn on top of the tile that was just drawn at that XY coordinate.</p>
