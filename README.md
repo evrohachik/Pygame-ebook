@@ -43,3 +43,5 @@ Book content such as text and images are licensed under the **Creative Commons A
 Book code such as the .xhtml, .css and .xml files are licensed under **Creative Commons Zero 1.0 Universal (CC0 1.0)**.
 
 The IDPF's `epubcheck-4.0.2` tool is licensed under **Apache License 2.0**, **Mozilla Publice License** and **BSD 3-clause License**.
+
+<img style="text-align: center;" width="300" height="450" src="https://github.com/inferno986return/Pygame-ebook/blob/master/e-book/OEBPS/images/cover.png" alt="Cover"/>
