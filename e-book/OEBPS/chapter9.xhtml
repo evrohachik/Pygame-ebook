@@ -3040,298 +3040,118 @@ displayed on the screen.</p>
 	</div>
 
 	<p>The <span class="mono">os.path.exists()</span> function will return <span class="mono">True</span> if the file specified by the string passed to the function exists. If it does not exist, <span class="mono">os.path.exists()</span> returns <span class="mono">False</span>.</p>
-<!--
+
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">428.</span>     mapFile = open(filename, 'r')</p>
+		<p class="noindent mono"><span class="line-number">428.</span> &#160;&#160;&#160;&#160;mapFile = open(filename, 'r')</p>
 		<p class="noindent mono"><span class="line-number">429.</span> &#160;&#160;&#160;&#160;<span class="comment"># Each level must end with a blank line</span></p>
-		<p class="noindent mono"><span class="line-number">430.</span>     content = mapFile.readlines() + ['\r\n']</p>
-		<p class="noindent mono"><span class="line-number">431.</span>     mapFile.close()</p>
+		<p class="noindent mono"><span class="line-number">430.</span> &#160;&#160;&#160;&#160;content = mapFile.readlines() + ['\r\n']</p>
+		<p class="noindent mono"><span class="line-number">431.</span> &#160;&#160;&#160;&#160;mapFile.close()</p>
 		<p class="noindent mono"><span class="line-number">432.</span></p>
-
-		<p class="noindent mono"><span class="line-number">433.</span>     levels
-= [] <span class="comment"># Will contain a list of level objects.</span></p>
-
-		<p class="noindent mono"><span class="line-number">434.</span>     levelNum
-= 0</p>
-
-		<p class="noindent mono"><span class="line-number">435.</span>     mapTextLines
-= [] <span class="comment"># contains the lines for a single level's
-map.</span></p>
-
-		<p class="noindent mono"><span class="line-number">436.</span>     mapObj
-= [] <span class="comment"># the map object made from the data in mapTextLines</span></p>
-
+		<p class="noindent mono"><span class="line-number">433.</span> &#160;&#160;&#160;&#160;levels = [] <span class="comment"># Will contain a list of level objects.</span></p>
+		<p class="noindent mono"><span class="line-number">434.</span> &#160;&#160;&#160;&#160;levelNum = 0</p>
+		<p class="noindent mono"><span class="line-number">435.</span> &#160;&#160;&#160;&#160;mapTextLines = [] <span class="comment"># contains the lines for a single level's map.</span></p>
+		<p class="noindent mono"><span class="line-number">436.</span> &#160;&#160;&#160;&#160;mapObj = [] <span class="comment"># the map object made from the data in mapTextLines</span></p>
 	</div>
 
-	<p>The file object for the level file that is opened for
-reading is stored in <span class="mono">mapFile</span>. All of the text from
-the level file is stored as a list of strings in the <span class="mono">content</span>
-variable, with a blank line added to the end. (The reason that this is done is
-explained later.)</p>
-
-	<p>After the level objects are created, they will be stored in
-the <span class="mono">levels</span> list. The <span class="mono">levelNum</span>
-variable will keep track of how many levels are found inside the level file. The
-<span class="mono">mapTextLines</span> list will be a list of strings from the
-<span class="mono">content</span> list for a single map (as opposed to how <span
-class="mono">content</span> stores the strings of all maps in the level file).
-The <span class="mono">mapObj</span> variable will be a 2D list.</p>
+	<p>The file object for the level file that is opened for reading is stored in <span class="mono">mapFile</span>. All of the text from the level file is stored as a list of strings in the <span class="mono">content</span> variable, with a blank line added to the end. (The reason that this is done is explained later.)</p>
+	<p>After the level objects are created, they will be stored in the <span class="mono">levels</span> list. The <span class="mono">levelNum</span> variable will keep track of how many levels are found inside the level file. The <span class="mono">mapTextLines</span> list will be a list of strings from the <span class="mono">content</span> list for a single map (as opposed to how <span class="mono">content</span> stores the strings of all maps in the level file). The <span class="mono">mapObj</span> variable will be a 2D list.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">437.</span>     for
-lineNum in range(len(content)):</p>
-
-		<p class="noindent mono"><span class="line-number">438.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
-class="comment"># Process each line that was in the level file.</span></p>
-
-		<p class="noindent mono"><span class="line-number">439.</span>         line
-= content[lineNum].rstrip('\r\n')</p>
-
+		<p class="noindent mono"><span class="line-number">437.</span> &#160;&#160;&#160;&#160;for lineNum in range(len(content)):</p>
+		<p class="noindent mono"><span class="line-number">438.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Process each line that was in the level file.</span></p>
+		<p class="noindent mono"><span class="line-number">439.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;line = content[lineNum].rstrip('\r\n')</p>
 	</div>
 
-	<p>The <span class="mono">for</span> loop on line 437 will go
-through each line that was read from the level file one line at a time. The
-line number will be stored in <span class="mono">lineNum</span> and the string
-of text for the line will be stored in line. Any newline characters at the end
-of the string will be stripped off.</p>
+	<p>The <span class="mono">for</span> loop on line 437 will go through each line that was read from the level file one line at a time. The line number will be stored in <span class="mono">lineNum</span> and the string of text for the line will be stored in line. Any newline characters at the end of the string will be stripped off.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">441.</span>         if
-';' in line:</p>
-
-		<p class="noindent mono"><span class="line-number">442.</span>             <span
-class="comment"># Ignore the ; lines, they're comments in the level
-file.</span></p>
-
-		<p class="noindent mono"><span class="line-number">443.</span>             line
-= line[:line.find(';')]</p>
-
+		<p class="noindent mono"><span class="line-number">441.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if ';' in line:</p>
+		<p class="noindent mono"><span class="line-number">442.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Ignore the ; lines, they're comments in the level file.</span></p>
+		<p class="noindent mono"><span class="line-number">443.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;line = line[:line.find(';')]</p>
 	</div>
 
-	<p>Any text that exists after a semicolon in the map file is
-treated like a comment and is ignored. This is just like the <span
-class="mono">#</span> sign for Python comments. To make sure that our code
-does not accidentally think the comment is part of the map, the <span
-class="mono">line</span> variable is modified so that it only consists of the
-text up to (but not including) the semicolon character. (Remember that this is
-only changing the string in the <span class="mono">content</span> list. It is
-not changing the level file on the hard drive.)</p>
+	<p>Any text that exists after a semicolon in the map file is treated like a comment and is ignored. This is just like the <span class="mono">#</span> sign for Python comments. To make sure that our code does not accidentally think the comment is part of the map, the <span class="mono">line</span> variable is modified so that it only consists of the text up to (but not including) the semicolon character. (Remember that this is only changing the string in the <span class="mono">content</span> list. It is not changing the level file on the hard drive.)</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">445.</span>         if
-line != '':</p>
-
-		<p class="noindent mono"><span class="line-number">446.</span>             <span
-class="comment"># This line is part of the map.</span></p>
-
-		<p class="noindent mono"><span class="line-number">447.</span>             mapTextLines.append(line)</p>
-
+		<p class="noindent mono"><span class="line-number">445.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if line != '':</p>
+		<p class="noindent mono"><span class="line-number">446.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># This line is part of the map.</span></p>
+		<p class="noindent mono"><span class="line-number">447.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapTextLines.append(line)</p>
 	</div>
 
-	<p>There can be maps for multiple levels in the map file. The <span
-class="mono">mapTextLines</span> list will contain the lines of text from the
-map file for the current level being loaded. As long as the current line is not
-blank, the line will be appended to the end of <span class="mono">mapTextLines</span>.</p>
+	<p>There can be maps for multiple levels in the map file. The <span class="mono">mapTextLines</span> list will contain the lines of text from the map file for the current level being loaded. As long as the current line is not blank, the line will be appended to the end of <span class="mono">mapTextLines</span>.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">448.</span>         elif
-line == '' and len(mapTextLines) &gt; 0:</p>
-
-		<p class="noindent mono"><span class="line-number">449.</span>             <span
-class="comment"># A blank line indicates the end of a level's map in
-the file.</span></p>
-
-		<p class="noindent mono"><span class="line-number">450.</span>             <span
-class="comment"># Convert the text in mapTextLines into a level object.</span></p>
-
+		<p class="noindent mono"><span class="line-number">448.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif line == '' and len(mapTextLines) &gt; 0:</p>
+		<p class="noindent mono"><span class="line-number">449.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># A blank line indicates the end of a level's map in the file.</span></p>
+		<p class="noindent mono"><span class="line-number">450.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Convert the text in mapTextLines into a level object.</span></p>
 	</div>
 
-	<p>When there is a blank line in the map file, that indicates
-that the map for the current level has ended. And future lines of text will be
-for the later levels. Note however, that there must at least be one line in <span
-class="mono">mapTextLines</span> so that multiple blank lines together are not
-counted as the start and stop to multiple levels.</p>
+	<p>When there is a blank line in the map file, that indicates that the map for the current level has ended. And future lines of text will be for the later levels. Note however, that there must at least be one line in <span class="mono">mapTextLines</span> so that multiple blank lines together are not counted as the start and stop to multiple levels.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">452.</span>             <span
-class="comment"># Find the longest row in the map.</span></p>
-
-		<p class="noindent mono"><span class="line-number">453.</span>             maxWidth
-= -1</p>
-
-		<p class="noindent mono"><span class="line-number">454.</span>             for
-i in range(len(mapTextLines)):</p>
-
-		<p class="noindent mono"><span class="line-number">455.</span>                 if
-len(mapTextLines[i]) &gt; maxWidth:</p>
-
-		<p class="noindent mono"><span class="line-number">456.</span>                     maxWidth
-= len(mapTextLines[i])</p>
-
+		<p class="noindent mono"><span class="line-number">452.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Find the longest row in the map.</span></p>
+		<p class="noindent mono"><span class="line-number">453.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;maxWidth = -1</p>
+		<p class="noindent mono"><span class="line-number">454.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for i in range(len(mapTextLines)):</p>
+		<p class="noindent mono"><span class="line-number">455.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if len(mapTextLines[i]) &gt; maxWidth:</p>
+		<p class="noindent mono"><span class="line-number">456.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;maxWidth = len(mapTextLines[i])</p>
 	</div>
 
-	<p>All of the strings in <span class="mono">mapTextLines</span>
-need to be the same length (so that they form a rectangle), so they should be
-padded with extra blank spaces until they are all as long as the longest string.
-The <span class="mono">for</span> loop goes through each of the strings in <span
-class="mono">mapTextLines</span> and updates <span class="mono">maxWidth</span>
-when it finds a new longest string. After this loop finishes executing, the <span
-class="mono">maxWidth</span> variable will be set to the length of the longest
-string in <span class="mono">mapTextLines</span>.</p>
+	<p>All of the strings in <span class="mono">mapTextLines</span> need to be the same length (so that they form a rectangle), so they should be padded with extra blank spaces until they are all as long as the longest string. The <span class="mono">for</span> loop goes through each of the strings in <span class="mono">mapTextLines</span> and updates <span class="mono">maxWidth</span> when it finds a new longest string. After this loop finishes executing, the <span class="mono">maxWidth</span> variable will be set to the length of the longest string in <span class="mono">mapTextLines</span>.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">457.</span>             <span
-class="comment"># Add spaces to the ends of the shorter rows. This</span></p>
-
-		<p class="noindent mono"><span class="line-number">458.</span>             <span
-class="comment"># ensures the map will be rectangular.</span></p>
-
-		<p class="noindent mono"><span class="line-number">459.</span>             for
-i in range(len(mapTextLines)):</p>
-
-		<p class="noindent mono"><span class="line-number">460.</span>                 mapTextLines[i]
-+= ' ' * (maxWidth - len(mapTextLines[i]))</p>
-
+		<p class="noindent mono"><span class="line-number">457.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Add spaces to the ends of the shorter rows. This</span></p>
+		<p class="noindent mono"><span class="line-number">458.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># ensures the map will be rectangular.</span></p>
+		<p class="noindent mono"><span class="line-number">459.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for i in range(len(mapTextLines)):</p>
+		<p class="noindent mono"><span class="line-number">460.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapTextLines[i] += ' ' * (maxWidth - len(mapTextLines[i]))</p>
 	</div>
 
-	<p>The <span class="mono">for</span> loop on line 459 goes
-through the strings in <span class="mono">mapTextLines</span> again, this time
-to add enough space characters to pad each to be as long as <span
-class="mono">maxWidth</span>.</p>
+	<p>The <span class="mono">for</span> loop on line 459 goes through the strings in <span class="mono">mapTextLines</span> again, this time to add enough space characters to pad each to be as long as <span class="mono">maxWidth</span>.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">462.</span>             <span
-class="comment"># Convert mapTextLines to a map object.</span></p>
-
-		<p class="noindent mono"><span class="line-number">463.</span>             for
-x in range(len(mapTextLines[0])):</p>
-
-		<p class="noindent mono"><span class="line-number">464.</span>                 mapObj.append([])</p>
-
-		<p class="noindent mono"><span class="line-number">465.</span>             for
-y in range(len(mapTextLines)):</p>
-
-		<p class="noindent mono"><span class="line-number">466.</span>                 for
-x in range(maxWidth):</p>
-
-		<p class="noindent mono"><span class="line-number">467.</span>                     mapObj[x].append(mapTextLines[y][x])</p>
-
+		<p class="noindent mono"><span class="line-number">462.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Convert mapTextLines to a map object.</span></p>
+		<p class="noindent mono"><span class="line-number">463.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for x in range(len(mapTextLines[0])):</p>
+		<p class="noindent mono"><span class="line-number">464.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapObj.append([])</p>
+		<p class="noindent mono"><span class="line-number">465.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(len(mapTextLines)):</p>
+		<p class="noindent mono"><span class="line-number">466.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for x in range(maxWidth):</p>
+		<p class="noindent mono"><span class="line-number">467.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapObj[x].append(mapTextLines[y][x])</p>
 	</div>
 
-	<p>The <span class="mono">mapTextLines</span> variable just
-stores a list of strings. (Each string in the list represents a row, and each
-character in the string represents a character at a different column. This is
-why line 467 has the Y and X indexes reversed, just like the <span
-class="mono">SHAPES</span> data structure in the Tetromino game.) But the map
-object will have to be a list of list of single-character strings such that <span
-class="mono">mapObj[x][y]</span> refers to the tile at the XY coordinates. The
-<span class="mono">for</span> loop on line 463 adds an empty list to <span
-class="mono">mapObj</span> for each column in <span class="mono">mapTextLines</span>.</p>
-
-	<p>The nested <span class="mono">for</span> loops on line 465
-and 466 will fill these lists with single-character strings to represent each
-tile on the map. This creates the map object that Star Pusher uses.</p>
+	<p>The <span class="mono">mapTextLines</span> variable just stores a list of strings. (Each string in the list represents a row, and each character in the string represents a character at a different column. This is why line 467 has the Y and X indexes reversed, just like the <span class="mono">SHAPES</span> data structure in the Tetromino game.) But the map object will have to be a list of list of single-character strings such that <span class="mono">mapObj[x][y]</span> refers to the tile at the XY coordinates. The <span class="mono">for</span> loop on line 463 adds an empty list to <span class="mono">mapObj</span> for each column in <span class="mono">mapTextLines</span>.</p>
+	<p>The nested <span class="mono">for</span> loops on line 465 and 466 will fill these lists with single-character strings to represent each tile on the map. This creates the map object that Star Pusher uses.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">469.</span>             <span
-class="comment"># Loop through the spaces in the map and find the @, .,
-and $</span></p>
-
-		<p class="noindent mono"><span class="line-number">470.</span>             <span
-class="comment"># characters for the starting game state.</span></p>
-
-		<p class="noindent mono"><span class="line-number">471.</span>             startx
-= None <span class="comment"># The x and y for the player's starting
-position</span></p>
-
-		<p class="noindent mono"><span class="line-number">472.</span>             starty
-= None</p>
-
-		<p class="noindent mono"><span class="line-number">473.</span>             goals
-= [] <span class="comment"># list of (x, y) tuples for each goal.</span></p>
-
-		<p class="noindent mono"><span class="line-number">474.</span>             stars
-= [] <span class="comment"># list of (x, y) for each star's starting
-position.</span></p>
-
-		<p class="noindent mono"><span class="line-number">475.</span>             for
-x in range(maxWidth):</p>
-
-		<p class="noindent mono"><span class="line-number">476.</span>                 for
-y in range(len(mapObj[x])):</p>
-
-		<p class="noindent mono"><span class="line-number">477.</span>                     if
-mapObj[x][y] in ('@', '+'):</p>
-
-		<p class="noindent mono"><span class="line-number">478.</span>                         <span
-class="comment"># '@' is player, '+' is player &amp; goal</span></p>
-
-		<p class="noindent mono"><span class="line-number">479.</span>                         startx
-= x</p>
-
-		<p class="noindent mono"><span class="line-number">480.</span>                         starty
-= y</p>
-
-		<p class="noindent mono"><span class="line-number">481.</span>                     if
-mapObj[x][y] in ('.', '+', '*'):</p>
-
-		<p class="noindent mono"><span class="line-number">482.</span>                         <span
-class="comment"># '.' is goal, '*' is star &amp; goal</span></p>
-
-		<p class="noindent mono"><span class="line-number">483.</span>                         goals.append((x,
-y))</p>
-
-		<p class="noindent mono"><span class="line-number">484.</span>                     if
-mapObj[x][y] in ('$', '*'):</p>
-
-		<p class="noindent mono"><span class="line-number">485.</span>                         <span
-class="comment"># '$' is star</span></p>
-
-		<p class="noindent mono"><span class="line-number">486.</span>                         stars.append((x,
-y))</p>
-
+		<p class="noindent mono"><span class="line-number">469.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Loop through the spaces in the map and find the @, ., and $</span></p>
+		<p class="noindent mono"><span class="line-number">470.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># characters for the starting game state.</span></p>
+		<p class="noindent mono"><span class="line-number">471.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;startx = None <span class="comment"># The x and y for the player's starting position</span></p>
+		<p class="noindent mono"><span class="line-number">472.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;starty = None</p>
+		<p class="noindent mono"><span class="line-number">473.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;goals = [] <span class="comment"># list of (x, y) tuples for each goal.</span></p>
+		<p class="noindent mono"><span class="line-number">474.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;stars = [] <span class="comment"># list of (x, y) for each star's starting position.</span></p>
+		<p class="noindent mono"><span class="line-number">475.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for x in range(maxWidth):</p>
+		<p class="noindent mono"><span class="line-number">476.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(len(mapObj[x])):</p>
+		<p class="noindent mono"><span class="line-number">477.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in ('@', '+'):</p>
+		<p class="noindent mono"><span class="line-number">478.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># '@' is player, '+' is player &amp; goal</span></p>
+		<p class="noindent mono"><span class="line-number">479.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;startx = x</p>
+		<p class="noindent mono"><span class="line-number">480.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;starty = y</p>
+		<p class="noindent mono"><span class="line-number">481.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in ('.', '+', '*'):</p>
+		<p class="noindent mono"><span class="line-number">482.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># '.' is goal, '*' is star &amp; goal</span></p>
+		<p class="noindent mono"><span class="line-number">483.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;goals.append((x, y))</p>
+		<p class="noindent mono"><span class="line-number">484.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if mapObj[x][y] in ('$', '*'):</p>
+		<p class="noindent mono"><span class="line-number">485.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># '$' is star</span></p>
+		<p class="noindent mono"><span class="line-number">486.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;stars.append((x, y))</p>
 	</div>
 
-	<p>After creating the map object, the nested <span
-class="mono">for</span> loops on lines 475 and 476 will go through each space
-to find the XY coordinates three things:</p>
+	<p>After creating the map object, the nested <span class="mono">for</span> loops on lines 475 and 476 will go through each space to find the XY coordinates three things:</p>
 
-		<li>1.<span
-style='font:7.0pt "Times New Roman"'> </span>The
-player’s starting position. This will be stored in the <span class="mono">startx</span>
-and <span class="mono">starty</span> variables, which will then be stored in
-the game state object later on line 494.</p>
+	<ol>
+		<li>The player’s starting position. This will be stored in the <span class="mono">startx</span> and <span class="mono">starty</span> variables, which will then be stored in the game state object later on line 494.</li>
+		<li>The starting position of all the stars These will be stored in the <span class="mono">stars</span> list, which is later stored in the game state object on line 496.</li>
+		<li>The position of all the goals. These will be stored in the <span class="mono">goals</span> list, which is later stored in the level object on line 500.</li>
+  </ol>
 
-		<li>2.<span
-style='font:7.0pt "Times New Roman"'> </span>The
-starting position of all the stars These will be stored in the <span
-class="mono">stars</span> list, which is later stored in the game state object
-on line 496.</p>
-
-		<li>3.<span
-style='font:7.0pt "Times New Roman"'> </span>The
-position of all the goals. These will be stored in the <span class="mono">goals</span>
-list, which is later stored in the level object on line 500.</p>
-
-	<p>Remember, the game state object contains all the things that
-can change. This is why the player’s position is stored in it (because the
-player can move around) and why the stars are stored in it (because the stars
-can be pushed around by the player). But the goals are stored in the level
-object, since they will never move around.</p>
+	<p>Remember, the game state object contains all the things that can change. This is why the player’s position is stored in it (because the player can move around) and why the stars are stored in it (because the stars can be pushed around by the player). But the goals are stored in the level object, since they will never move around.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">488.</span>             <span
-class="comment"># Basic level design sanity checks:</span></p>
-
+		<p class="noindent mono"><span class="line-number">488.</span>             <span class="comment"># Basic level design sanity checks:</span></p>
 		<p class="noindent mono"><span class="line-number">489.</span>             assert
 startx != None and starty != None, 'Level %s (around line %s) in %s is missing
 a &quot;@&quot; or &quot;+&quot; to mark the start point.' % (levelNum+1,
@@ -3348,403 +3168,174 @@ len(goals), len(stars))</p>
 
 	</div>
 
-	<p>At this point, the level has been read in and processed. To
-be sure that this level will work properly, a few assertions must pass. If any
-of the conditions for these assertions are <span class="mono">False</span>,
-then Python will produce an error (using the string from the <span
-class="mono">assert</span> statement) saying what is wrong with the level
-file.</p>
-
-	<p>The first assertion on line 489 checks to make sure that
-there is a player starting point listed somewhere on the map. The second
-assertion on line 490 checks to make sure there is at least one goal (or more)
-somewhere on the map. And the third assertion on line 491 checks to make sure
-that there is at least one star for each goal (but having more stars than goals
-is allowed).</p>
+	<p>At this point, the level has been read in and processed. To be sure that this level will work properly, a few assertions must pass. If any of the conditions for these assertions are <span class="mono">False</span>, then Python will produce an error (using the string from the <span class="mono">assert</span> statement) saying what is wrong with the level file.</p>
+	<p>The first assertion on line 489 checks to make sure that there is a player starting point listed somewhere on the map. The second assertion on line 490 checks to make sure there is at least one goal (or more) somewhere on the map. And the third assertion on line 491 checks to make sure that there is at least one star for each goal (but having more stars than goals is allowed).</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">493.</span>             <span
-class="comment"># Create level object and starting game state object.</span></p>
-
-		<p class="noindent mono"><span class="line-number">494.</span>             gameStateObj
-= {'player': (startx, starty),</p>
-
-		<p class="noindent mono"><span class="line-number">495.</span>                             'stepCounter':
-0,</p>
-
-		<p class="noindent mono"><span class="line-number">496.</span>                             'stars':
-stars}</p>
-
-		<p class="noindent mono"><span class="line-number">497.</span>             levelObj
-= {'width': maxWidth,</p>
-
-		<p class="noindent mono"><span class="line-number">498.</span>                         'height':
-len(mapObj),</p>
-
-		<p class="noindent mono"><span class="line-number">499.</span>                         'mapObj':
-mapObj,</p>
-
-		<p class="noindent mono"><span class="line-number">500.</span>                         'goals':
-goals,</p>
-
-		<p class="noindent mono"><span class="line-number">501.</span>                         'startState':
-gameStateObj}</p>
-
+		<p class="noindent mono"><span class="line-number">493.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Create level object and starting game state object.</span></p>
+		<p class="noindent mono"><span class="line-number">494.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;gameStateObj = {'player': (startx, starty),</p>
+		<p class="noindent mono"><span class="line-number">495.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'stepCounter': 0,</p>
+		<p class="noindent mono"><span class="line-number">496.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'stars': stars}</p>
+		<p class="noindent mono"><span class="line-number">497.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;levelObj = {'width': maxWidth,</p>
+		<p class="noindent mono"><span class="line-number">498.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'height': len(mapObj),</p>
+		<p class="noindent mono"><span class="line-number">499.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'mapObj': mapObj,</p>
+		<p class="noindent mono"><span class="line-number">500.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'goals': goals,</p>
+		<p class="noindent mono"><span class="line-number">501.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'startState': gameStateObj}</p>
 		<p class="noindent mono"><span class="line-number">502.</span></p>
-
-		<p class="noindent mono"><span class="line-number">503.</span>             levels.append(levelObj)</p>
-
+		<p class="noindent mono"><span class="line-number">503.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;levels.append(levelObj)</p>
 	</div>
 
-	<p>Finally, these objects are stored in the game state object,
-which itself is stored in the level object. The level object is added to a list
-of level objects on line 503. It is this <span class="mono">levels</span> list
-that will be returned by the <span class="mono">readLevelsFile()</span>
-function when all of the maps have been processed.</p>
+	<p>Finally, these objects are stored in the game state object, which itself is stored in the level object. The level object is added to a list of level objects on line 503. It is this <span class="mono">levels</span> list that will be returned by the <span class="mono">readLevelsFile()</span> function when all of the maps have been processed.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">505.</span>             <span
-class="comment"># Reset the variables for reading the next map.</span></p>
-
-		<p class="noindent mono"><span class="line-number">506.</span>             mapTextLines
-= []</p>
-
-		<p class="noindent mono"><span class="line-number">507.</span>             mapObj
-= []</p>
-
-		<p class="noindent mono"><span class="line-number">508.</span>             gameStateObj
-= {}</p>
-
-		<p class="noindent mono"><span class="line-number">509.</span>             levelNum
-+= 1</p>
-
-		<p class="noindent mono"><span class="line-number">510.</span>     return
-levels</p>
-
+		<p class="noindent mono"><span class="line-number">505.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Reset the variables for reading the next map.</span></p>
+		<p class="noindent mono"><span class="line-number">506.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapTextLines = []</p>
+		<p class="noindent mono"><span class="line-number">507.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapObj = []</p>
+		<p class="noindent mono"><span class="line-number">508.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;gameStateObj = {}</p>
+		<p class="noindent mono"><span class="line-number">509.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;levelNum += 1</p>
+		<p class="noindent mono"><span class="line-number">510.</span> &#160;&#160;&#160;&#160;return levels</p>
 	</div>
 
-	<p>Now that this level is done processing, the variables for <span
-class="mono">mapTextLines</span>, <span class="mono">mapObj</span>, and <span
-class="mono">gameStateObj</span> should be reset to blank values for the next
-level that will be read in from the level file. The <span class="mono">levelNum</span>
-variable is also incremented by <span class="mono">1</span> for the next
-level’s level number.</p>
+	<p>Now that this level is done processing, the variables for <span class="mono">mapTextLines</span>, <span class="mono">mapObj</span>, and <span class="mono">gameStateObj</span> should be reset to blank values for the next level that will be read in from the level file. The <span class="mono">levelNum</span> variable is also incremented by <span class="mono">1</span> for the next level’s level number.</p>
 
 	<h1 class="subheading" id="">Recursive Functions</h1>
+	<p class="noindent">Before you can learn how the <span class="mono">floodFill()</span> function works, you need to learn about recursion. Recursion is a simple concept: A <a href="glossary.xhtml#recursive-function"><b>recursive function</b></a> is just a function that calls itself, like the one in the following program: (don’t type the letters at the beginning of each line though)</p>
 
-	<p>Before you can learn how the <span class="mono">floodFill()</span>
-function works, you need to learn about recursion. Recursion is a simple
-concept: A <span ><a href="glossary.xhtml#recursive function<b>recursive function</b></a> is just a function
-that calls itself, like the one in the following program: (don’t type the
-letters at the beginning of each line though)</p>
-
-<div class="python-shell">
-
-<p class="noindent mono"><span
-class="comment">A.</span> def passFortyTwoWhenYouCallThisFunction(param):</p>
-
-<p class="noindent mono"><span
-class="comment">B.</span>     print('Start of function.')</p>
-
-<p class="noindent mono"><span
-class="comment">C.</span>     if param != 42:</p>
-
-<p class="noindent mono"><span
-class="comment">D.</span>         print('You did not pass 42 when you
-called this function.')</p>
-
-<p class="noindent mono"><span
-class="comment">E.</span>         print('Fine. I will do it myself.')</p>
-
-<p class="noindent mono"><span
-class="comment">F.</span>         passFortyTwoWhenYouCallThisFunction(42)
-<span class="comment"># this is the recursive call</span></p>
-
-<p class="noindent mono"><span
-class="comment">G.</span>     if param == 42:</p>
-
-<p class="noindent mono"><span
-class="comment">H.</span>         print('Thank you for passing 42 when
-you called this function.')</p>
-
-<p class="noindent mono"><span
-class="comment">I.</span>     print('End of function.')</p>
-
-<p class="noindent mono"><span
-class="line-number">J. </span></p>
-
-<p class="noindent mono"><span
-class="line-number">K.</span> passFortyTwoWhenYouCallThisFunction(41)</p>
-
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">A.</span> def passFortyTwoWhenYouCallThisFunction(param):</p>
+		<p class="noindent mono"><span class="line-number">B.</span> &#160;&#160;&#160;&#160;print('Start of function.')</p>
+		<p class="noindent mono"><span class="line-number">C.</span> &#160;&#160;&#160;&#160;if param != 42:</p>
+		<p class="noindent mono"><span class="line-number">D.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print('You did not pass 42 when you called this function.')</p>
+		<p class="noindent mono"><span class="line-number">E.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print('Fine. I will do it myself.')</p>
+		<p class="noindent mono"><span class="line-number">F.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;passFortyTwoWhenYouCallThisFunction(42) <span class="comment"># this is the recursive call</span></p>
+		<p class="noindent mono"><span class="line-number">G.</span> &#160;&#160;&#160;&#160;if param == 42:</p>
+		<p class="noindent mono"><span class="line-number">H.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print('Thank you for passing 42 when you called this function.')</p>
+		<p class="noindent mono"><span class="line-number">I.</span> &#160;&#160;&#160;&#160;print('End of function.')</p>
+		<p class="noindent mono"><span class="line-number">J.</span></p>
+		<p class="noindent mono"><span class="line-number">K.</span> passFortyTwoWhenYouCallThisFunction(41)</p>
 	</div>
 
-	<p>(In your own programs, don’t make functions have names as
-long as <span class="mono">passFortyTwoWhenYouCallThisFunction()</span>. I’m
-just being stupid and silly. Stupilly.)</p>
-
-	<p>When you run this program, the function gets defined when
-the <span class="mono">def</span> statement on line A executes. The next line
-of code that is executed is line K, which calls <span class="mono">passFortyTwoWhenYouCallThisFunction()</span>
-and passes (gasp!) <span class="mono">41</span>. As a result, the function
-calls itself on line F and passes 42. We call this call the <span
-class=Definition>recursive call</span>.</p>
-
+	<p>(In your own programs, don’t make functions have names as long as <span class="mono">passFortyTwoWhenYouCallThisFunction()</span>. I’m just being stupid and silly. Stupilly.)</p>
+	<p>When you run this program, the function gets defined when the <span class="mono">def</span> statement on line A executes. The next line of code that is executed is line K, which calls <span class="mono">passFortyTwoWhenYouCallThisFunction()</span> and passes (gasp!) <span class="mono">41</span>. As a result, the function calls itself on line F and passes 42. We call this call the <a href="glossary.xhtml#recursive-call"><b>recursive call</b></a>.</p>
 	<p>This is what our program outputs:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:6.0pt 4.0pt 6.0pt 4.0pt'>
-
-<p class=SampleRunCxSpFirst>Start of function.</p>
-
-<p class=SampleRunCxSpMiddle>You did not pass 42 when you called this function.</p>
-
-<p class=SampleRunCxSpMiddle>Fine. I will do it myself.</p>
-
-<p class=SampleRunCxSpMiddle>Start of function.</p>
-
-<p class=SampleRunCxSpMiddle>Thank you for passing 42 when you called this
-function.</p>
-
-<p class=SampleRunCxSpMiddle>End of function.</p>
-
-<p class=SampleRunCxSpLast>End of function.</p>
-
+	<div class="python-shell">
+		<p class="sample-code">Start of function.</p>
+		<p class="sample-code">You did not pass 42 when you called this function.</p>
+		<p class="sample-code">Fine. I will do it myself.</p>
+		<p class="sample-code">Start of function.</p>
+		<p class="sample-code">Thank you for passing 42 when you called this function.</p>
+		<p class="sample-code">End of function.</p>
+		<p class="sample-code">End of function.</p>
 	</div>
 
-	<p>Notice that the “Start of function.” and “End of function.”
-text appears twice. Let’s figure out what exactly happens and what order it
-happens in.</p>
-
-	<p>On line K, the function is called and 41 is passed for the
-param parameter. Line B prints out “Start of function.”. The condition on line
-C will be <span class="mono">True</span> (since <span class="mono">41 != 42</span>)
-so Line C and D will print out their messages. Line F will then make a call,
-recursively, to the function and passes <span class="mono">42</span> for the
-param parameter. So execution starts on line B again and prints out “Start of
-function.”. Line C’s condition this time is <span class="mono">False</span>,
-so it skips to line G and finds that condition to be <span class="mono">True</span>.
-This causes line H to be called and displays “Thank you…” on the screen. Then
-the last line of the function, line I, will execute to print out “End of
-function.” and the function returns to the line that called it.</p>
-
-	<p>But remember, the line of code that called the function was
-line F. And in this original call, param was set to <span class="mono">41</span>.
-The code goes down to line G and checks the condition, which is <span
-class="mono">False</span> (since <span class="mono">41 == 42</span> is <span
-class="mono">False</span>) so it skips the <span class="mono">print()</span>
-call on line H. Instead, it runs the <span class="mono">print()</span> call on
-line I which makes “End of function.” display for a second time.</p>
-
-	<p>Since it has reached the end of the function, it returns to
-the line of code that called this function call, which was line K. There are no
-more lines of code after line K, so the program terminates. </p>
-
-	<p>Note that local variables are not just local to the
-function, but to a specific call of the function.</p>
+	<p>Notice that the “Start of function.” and “End of function.” text appears twice. Let’s figure out what exactly happens and what order it happens in.</p>
+	<p>On line K, the function is called and 41 is passed for the param parameter. Line B prints out “Start of function.”. The condition on line C will be <span class="mono">True</span> (since <span class="mono">41 != 42</span>) so Line C and D will print out their messages. Line F will then make a call, recursively, to the function and passes <span class="mono">42</span> for the param parameter. So execution starts on line B again and prints out “Start of function.”. Line C’s condition this time is <span class="mono">False</span>, so it skips to line G and finds that condition to be <span class="mono">True</span>. This causes line H to be called and displays “Thank you…” on the screen. Then the last line of the function, line I, will execute to print out “End of function.” and the function returns to the line that called it.</p>
+	<p>But remember, the line of code that called the function was line F. And in this original call, param was set to <span class="mono">41</span>. The code goes down to line G and checks the condition, which is <span class="mono">False</span> (since <span class="mono">41 == 42</span> is <span class="mono">False</span>) so it skips the <span class="mono">print()</span> call on line H. Instead, it runs the <span class="mono">print()</span> call on line I which makes “End of function.” display for a second time.</p>
+	<p>Since it has reached the end of the function, it returns to the line of code that called this function call, which was line K. There are no more lines of code after line K, so the program terminates. </p>
+	<p>Note that local variables are not just local to the function, but to a specific call of the function.</p>
 
 	<h1 class="subheading" id="">Stack Overflows</h1>
+	<p class="noindent">Each time a function is called, the Python interpreter remembers which line of code made the call. That way when the function returns Python knows where to resume the execution. Remembering this takes up a tiny bit of memory. This isn’t normally a big deal, but take a look at this code:</p>
 
-	<p>Each time a function is called, the Python interpreter
-remembers which line of code made the call. That way when the function returns
-Python knows where to resume the execution. Remembering this takes up a tiny
-bit of memory. This isn’t normally a big deal, but take a look at this code:</p>
+	<div class="python-shell">
+		<p class="noindent mono">def funky():</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;funky()</p>
+		<p class="noindent mono">&#160;</p>
+		<p class="noindent mono">funky()</p>
+	</div>
 
-<div class="python-shell">
+	<p>If you run this program, you’ll get a large amount of output which looks like this:</p>
 
-<p class="noindent mono">def funky():</p>
-
-<p class="noindent mono">    funky()</p>
-
-<p class="noindent mono"></p>
-
-<p class="noindent mono">funky()</p>
+	<div class="python-shell">
+		<p class="sample-code">...</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in funky</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;funky()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in funky</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;funky()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in funky</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;funky()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in funky</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;funky()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in funky</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;funky()</p>
+		<p class="sample-code">RuntimeError: maximum recursion depth exceeded</p>
 
 	</div>
 
-	<p>If you run this program, you’ll get a large amount of output
-which looks like this:</p>
+	<p>The <span class="mono">funky()</span> function does nothing but call itself. And then in that call, the function calls itself again. Then it calls itself again, and again, and again. Each time it calls itself, Python has to remember what line of code made that call so that when the function returns it can resume the execution there. But the <span class="mono">funky()</span> function never returns, it just keeps making calls to itself.</p>
+	<p>This is just like the infinite loop bug, where the program keeps going and never stops. To prevent itself from running out of memory, Python will cause an error after you are a 1000 calls deep and crash the program. This type of bug is called a <a href="glossary.xhtml#stack-overflow"><b>stack overflow</b></a>.</p>
+	<p>This code also causes a stack overflow, even though there are no recursive functions:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:6.0pt 4.0pt 6.0pt 4.0pt'>
-
-<p class=SampleRunCxSpFirst>...</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in funky</p>
-
-<p class=SampleRunCxSpMiddle>    funky()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in funky</p>
-
-<p class=SampleRunCxSpMiddle>    funky()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in funky</p>
-
-<p class=SampleRunCxSpMiddle>    funky()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in funky</p>
-
-<p class=SampleRunCxSpMiddle>    funky()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in funky</p>
-
-<p class=SampleRunCxSpMiddle>    funky()</p>
-
-<p class=SampleRunCxSpLast>RuntimeError: maximum recursion depth exceeded</p>
-
+	<div class="python-shell">
+		<p class="noindent mono">def spam():</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;eggs()</p>
+		<p class="noindent mono">&#160;</p>
+		<p class="noindent mono">def eggs():</p>
+		<p class="noindent mono">&#160;&#160;&#160;&#160;spam()</p>
+		<p class="noindent mono">&#160;</p>
+		<p class="noindent mono">spam()</p>
 	</div>
 
-	<p>The <span class="mono">funky()</span> function does nothing
-but call itself. And then in that call, the function calls itself again. Then
-it calls itself again, and again, and again. Each time it calls itself, Python
-has to remember what line of code made that call so that when the function
-returns it can resume the execution there. But the <span class="mono">funky()</span>
-function never returns, it just keeps making calls to itself.</p>
+	<p>When you run this program, it causes an error that looks like this:</p>
 
-	<p>This is just like the infinite loop bug, where the program
-keeps going and never stops. To prevent itself from running out of memory,
-Python will cause an error after you are a 1000 calls deep and crash the
-program. This type of bug is called a <span class=Definition>stack overflow</span>.</p>
-
-	<p>This code also causes a stack overflow, even though there
-are no recursive functions:</p>
-
-<div class="python-shell">
-
-<p class="noindent mono">def spam():</p>
-
-<p class="noindent mono">    eggs()</p>
-
-<p class="noindent mono"></p>
-
-<p class="noindent mono">def eggs():</p>
-
-<p class="noindent mono">    spam()</p>
-
-<p class="noindent mono"></p>
-
-<p class="noindent mono">spam()</p>
-
-	</div>
-
-	<p>When you run this program, it causes an error that looks
-like this:</p>
-
-<div style='border:solid windowtext 1.0pt;padding:6.0pt 4.0pt 6.0pt 4.0pt'>
-
-<p class=SampleRunCxSpFirst>...</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in spam</p>
-
-<p class=SampleRunCxSpMiddle>    eggs()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 5, in eggs</p>
-
-<p class=SampleRunCxSpMiddle>    spam()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in spam</p>
-
-<p class=SampleRunCxSpMiddle>    eggs()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 5, in eggs</p>
-
-<p class=SampleRunCxSpMiddle>    spam()</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\test67.py&quot;, line 2, in spam</p>
-
-<p class=SampleRunCxSpMiddle>    eggs()</p>
-
-<p class=SampleRunCxSpLast>RuntimeError: maximum recursion depth exceeded</p>
-
+	<div class="python-shell">
+		<p class="sample-code">...</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in spam</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;eggs()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 5, in eggs</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;spam()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in spam</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;eggs()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 5, in eggs</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;spam()</p>
+		<p class="sample-code"> &#160;&#160;File &quot;C:\test67.py&quot;, line 2, in spam</p>
+		<p class="sample-code"> &#160;&#160;&#160;&#160;eggs()</p>
+		<p class="sample-code">RuntimeError: maximum recursion depth exceeded</p>
 	</div>
 
 	<h1 class="subheading" id="">Preventing Stack Overflows with a Base Case</h1>
+	<p class="noindent">In order to prevent stack overflow bugs, you must have a <a href="glossary.xhtml#base-case"><b>base case</b></a> where the function stops make new recursive calls. If there is no base case then the function calls will never stop and eventually a stack overflow will occur. Here is an example of a recursive function with a base case. The base case is when the param parameter equals 2.</p>
 
-	<p>In order to prevent stack overflow bugs, you must have a <span
-class=Definition>base case</span> where the function stops make new recursive
-calls. If there is no base case then the function calls will never stop and
-eventually a stack overflow will occur. Here is an example of a recursive
-function with a base case. The base case is when the param parameter equals 2.</p>
-
-<div class="python-shell">
-
-<p class="noindent mono">def fizz(param):</p>
-
-<p class="noindent mono">    print(param)</p>
-
-<p class="noindent mono">    if param ==
-2:</p>
-
-<p class="noindent mono">        return</p>
-
-<p class="noindent mono">    fizz(param -
-1)</p>
-
-<p class="noindent mono"></p>
-
-<p class="noindent mono">fizz(5)</p>
-
+	<div class="python-shell">
+		<p class="noindent mono"> def fizz(param):</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;print(param)</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;if param == 2:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;fizz(param - 1)</p>
+		<p class="noindent mono"> &#160;</p>
+		<p class="noindent mono"> fizz(5)</p>
 	</div>
 
 	<p>When you run this program, the output will look like this:</p>
 
-<div style='border:solid windowtext 1.0pt;padding:6.0pt 4.0pt 6.0pt 4.0pt'>
-
-<p class=SampleRunCxSpFirst>5</p>
-
-<p class=SampleRunCxSpMiddle>4</p>
-
-<p class=SampleRunCxSpMiddle>3</p>
-
-<p class=SampleRunCxSpLast>2</p>
-
+	<div class="python-shell">
+		<p class="sample-code">5</p>
+		<p class="sample-code">4</p>
+		<p class="sample-code">3</p>
+		<p class="sample-code">2</p>
 	</div>
 
-	<p>This program does not have a stack overflow error because
-once the param parameter is set to <span class="mono">2</span>, the <span
-class="mono">if</span> statement’s condition will be <span class="mono">True</span>
-and the function will return, and then the rest of the calls will also return
-in turn.</p>
+	<p>This program does not have a stack overflow error because once the param parameter is set to <span class="mono">2</span>, the <span class="mono">if</span> statement’s condition will be <span class="mono">True</span> and the function will return, and then the rest of the calls will also return in turn.</p>
+	<p>Though if your code never reaches the base case, then this will cause a stack overflow. If we changed the <span class="mono">fizz(5)</span> call to <span class="mono">fizz(0)</span>, then the program’s output would look like this:</p>
 
-	<p>Though if your code never reaches the base case, then this
-will cause a stack overflow. If we changed the <span class="mono">fizz(5)</span>
-call to <span class="mono">fizz(0)</span>, then the program’s output would
-look like this:</p>
-
-<div style='border:solid windowtext 1.0pt;padding:6.0pt 4.0pt 6.0pt 4.0pt'>
-
-<p class=SampleRunCxSpFirst>  File &quot;C:\rectest.py&quot;, line 5, in fizz</p>
-
-<p class=SampleRunCxSpMiddle>    fizz(param - 1)</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\rectest.py&quot;, line 5, in fizz</p>
-
-<p class=SampleRunCxSpMiddle>    fizz(param - 1)</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\rectest.py&quot;, line 5, in fizz</p>
-
-<p class=SampleRunCxSpMiddle>    fizz(param - 1)</p>
-
-<p class=SampleRunCxSpMiddle>  File &quot;C:\rectest.py&quot;, line 2, in fizz</p>
-
-<p class=SampleRunCxSpMiddle>    print(param)</p>
-
-<p class=SampleRunCxSpLast>RuntimeError: maximum recursion depth exceeded</p>
-
+	<div class="python-shell">
+		<p class="sample-code">  File &quot;C:\rectest.py&quot;, line 5, in fizz</p>
+		<p class="sample-code">    fizz(param - 1)</p>
+		<p class="sample-code">  File &quot;C:\rectest.py&quot;, line 5, in fizz</p>
+		<p class="sample-code">    fizz(param - 1)</p>
+		<p class="sample-code">  File &quot;C:\rectest.py&quot;, line 5, in fizz</p>
+		<p class="sample-code">    fizz(param - 1)</p>
+		<p class="sample-code">  File &quot;C:\rectest.py&quot;, line 2, in fizz</p>
+		<p class="sample-code">    print(param)</p>
+		<p class="sample-code">RuntimeError: maximum recursion depth exceeded</p>
 	</div>
 
-	<p>Recursive calls and base cases will be used to perform the
-flood fill algorithm, which is described next.</p>
+	<p>Recursive calls and base cases will be used to perform the flood fill algorithm, which is described next.</p>
 
 	<h1 class="subheading" id="">The Flood Fill Algorithm</h1>
-
-	<p>The flood fill algorithm is used in Star Pusher to change
-all of the floor tiles inside the walls of the level to use the “inside floor”
-tile image instead of the “outside floor” tile (which all the tiles on the map
-are by default). The original <span class="mono">floodFill()</span> call is on
-line 295. It will convert any tiles represented with the <span class="mono">'
-'</span> string (which represents an outdoor floor) to a <span class="mono">'o'</span>
-string (which represents an indoor floor).</p>
-
+	<p class="noindent">The flood fill algorithm is used in Star Pusher to change all of the floor tiles inside the walls of the level to use the “inside floor” tile image instead of the “outside floor” tile (which all the tiles on the map are by default). The original <span class="mono">floodFill()</span> call is on line 295. It will convert any tiles represented with the <span class="mono">' '</span> string (which represents an outdoor floor) to a <span class="mono">'o'</span> string (which represents an indoor floor).</p>
+<!--
 	<div class="python-shell">
 
 		<p class="noindent mono"><span class="line-number">513.</span> def

@@ -461,6 +461,12 @@ div.book
 	display: inline-block;
 }
 
+span.sample-code, .sample-code
+{
+	font-family: monospace;
+	color: #0047AB;
+}
+
 span.line-number
 {
 	font-family: monospace;
