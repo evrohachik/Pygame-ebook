@@ -3335,452 +3335,175 @@ len(goals), len(stars))</p>
 
 	<h1 class="subheading" id="">The Flood Fill Algorithm</h1>
 	<p class="noindent">The flood fill algorithm is used in Star Pusher to change all of the floor tiles inside the walls of the level to use the “inside floor” tile image instead of the “outside floor” tile (which all the tiles on the map are by default). The original <span class="mono">floodFill()</span> call is on line 295. It will convert any tiles represented with the <span class="mono">' '</span> string (which represents an outdoor floor) to a <span class="mono">'o'</span> string (which represents an indoor floor).</p>
-<!--
-	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">513.</span> def
-floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
-
-		<p class="noindent mono"><span class="line-number">514.</span> &#160;&#160;&#160;&#160;<span
-class="comment">&quot;&quot;&quot;Changes any values matching
-oldCharacter on the map object to</span></p>
-
-		<p class="noindent mono"><span class="line-number">515.</span> &#160;&#160;&#160;&#160;<span
-class="comment">newCharacter at the (x, y) position, and does the same
-for the</span></p>
-
-		<p class="noindent mono"><span class="line-number">516.</span> &#160;&#160;&#160;&#160;<span
-class="comment">positions to the left, right, down, and up of (x, y),
-recursively.&quot;&quot;&quot;</span></p>
-
-		<p class="noindent mono"><span class="line-number">517.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">518.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># In this game, the flood fill algorithm creates the
-inside/outside</span></p>
-
-		<p class="noindent mono"><span class="line-number">519.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># floor distinction. This is a &quot;recursive&quot;
-function.</span></p>
-
-		<p class="noindent mono"><span class="line-number">520.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># For more info on the Flood Fill algorithm, see:</span></p>
-
-		<p class="noindent mono"><span class="line-number">521.</span> &#160;&#160;&#160;&#160;<span
-class="comment">#   http://en.wikipedia.org/wiki/Flood_fill</span></p>
-
-		<p class="noindent mono"><span class="line-number">522.</span>     if
-mapObj[x][y] == oldCharacter:</p>
-
-		<p class="noindent mono"><span class="line-number">523.</span>         mapObj[x][y]
-= newCharacter</p>
-
-	</div>
-
-	<p>Line 522 and 523 converts the tile at the XY coordinate
-passed to <span class="mono">floodFill()</span> to the <span class="mono">newCharacter</span>
-string if it originally was the same as the <span class="mono">oldCharacter</span>
-string.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">525.</span>     if
-x &lt; len(mapObj) - 1 and mapObj[x+1][y] == oldCharacter:</p>
-
-		<p class="noindent mono"><span class="line-number">526.</span>         floodFill(mapObj,
-x+1, y, oldCharacter, newCharacter) <span class="comment"># call right</span></p>
-
-		<p class="noindent mono"><span class="line-number">527.</span>     if
-x &gt; 0 and mapObj[x-1][y] == oldCharacter:</p>
-
-		<p class="noindent mono"><span class="line-number">528.</span>         floodFill(mapObj,
-x-1, y, oldCharacter, newCharacter) <span class="comment"># call left</span></p>
-
-		<p class="noindent mono"><span class="line-number">529.</span>     if
-y &lt; len(mapObj[x]) - 1 and mapObj[x][y+1] == oldCharacter:</p>
-
-		<p class="noindent mono"><span class="line-number">530.</span>         floodFill(mapObj,
-x, y+1, oldCharacter, newCharacter) <span class="comment"># call down</span></p>
-
-		<p class="noindent mono"><span class="line-number">531.</span>     if
-y &gt; 0 and mapObj[x][y-1] == oldCharacter:</p>
-
-		<p class="noindent mono"><span class="line-number">532.</span>         floodFill(mapObj,
-x, y-1, oldCharacter, newCharacter) <span class="comment"># call up</span></p>
-
+		<p class="noindent mono"><span class="line-number">513.</span> def floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
+		<p class="noindent mono"><span class="line-number">514.</span> &#160;&#160;&#160;&#160;<span class="comment">&quot;&quot;&quot;Changes any values matching oldCharacter on the map object to</span></p>
+		<p class="noindent mono"><span class="line-number">515.</span> &#160;&#160;&#160;&#160;<span class="comment">newCharacter at the (x, y) position, and does the same for the</span></p>
+		<p class="noindent mono"><span class="line-number">516.</span> &#160;&#160;&#160;&#160;<span class="comment">positions to the left, right, down, and up of (x, y), recursively.&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">517.</span></p>
+		<p class="noindent mono"><span class="line-number">518.</span> &#160;&#160;&#160;&#160;<span class="comment"># In this game, the flood fill algorithm creates the inside/outside</span></p>
+		<p class="noindent mono"><span class="line-number">519.</span> &#160;&#160;&#160;&#160;<span class="comment"># floor distinction. This is a &quot;recursive&quot; function.</span></p>
+		<p class="noindent mono"><span class="line-number">520.</span> &#160;&#160;&#160;&#160;<span class="comment"># For more info on the Flood Fill algorithm, see:</span></p>
+		<p class="noindent mono"><span class="line-number">521.</span> &#160;&#160;&#160;&#160;<span class="comment">#   http://en.wikipedia.org/wiki/Flood_fill</span></p>
+		<p class="noindent mono"><span class="line-number">522.</span> &#160;&#160;&#160;&#160;if mapObj[x][y] == oldCharacter:</p>
+		<p class="noindent mono"><span class="line-number">523.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapObj[x][y] = newCharacter</p>
 	</div>
 
-	<p>These four <span class="mono">if</span> statements check if
-the tile to the right, left, down, and up of the XY coordinate are the same as <span
-class="mono">oldCharacter</span>, and if so, a recursive call is made to <span
-class="mono">floodFill()</span> with those coordinates.</p>
+	<p>Line 522 and 523 converts the tile at the XY coordinate passed to <span class="mono">floodFill()</span> to the <span class="mono">newCharacter</span> string if it originally was the same as the <span class="mono">oldCharacter</span> string.</p>
 
-	<p>To better understand how the <span class="mono">floodFill()</span>
-function works, here is a version that does not use recursive calls, but
-instead uses a list of XY coordinates to keep track of which spaces on the map
-should be checked and possibly changed to <span class="mono">newCharacter</span>.</p>
-
-<div class="python-shell">
-
-<p class="noindent mono">def
-floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
-
-<p class="noindent mono">
-spacesToCheck = []</p>
-
-<p class="noindent mono">    if
-mapObj[x][y] == oldCharacter:</p>
-
-<p class="noindent mono">
-spacesToCheck.append((x, y))</p>
-
-<p class="noindent mono">    while
-spacesToCheck != []:</p>
-
-<p class="noindent mono">        x, y =
-spacesToCheck.pop()</p>
-
-<p class="noindent mono">
-mapObj[x][y] = newCharacter</p>
-
-<p class="noindent mono"></p>
-
-<p class="noindent mono">        if x
-&lt; len(mapObj) - 1 and mapObj[x+1][y] == oldCharacter:</p>
-
-<p class="noindent mono">
-spacesToCheck.append((x+1, y)) <span class="comment"># check right</span></p>
-
-<p class="noindent mono">        if x
-&gt; 0 and mapObj[x-1][y] == oldCharacter:</p>
-
-<p class="noindent mono">
-spacesToCheck.append((x-1, y)) <span class="comment"># check left</span></p>
-
-<p class="noindent mono">        if y
-&lt; len(mapObj[x]) - 1 and mapObj[x][y+1] == oldCharacter:</p>
-
-<p class="noindent mono">
-spacesToCheck.append((x, y+1)) <span class="comment"># check down</span></p>
-
-<p class="noindent mono">        if y
-&gt; 0 and mapObj[x][y-1] == oldCharacter:</p>
-
-<p class="noindent mono">
-spacesToCheck.append((x, y-1)) <span class="comment"># check up</span></p>
-
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">525.</span> &#160;&#160;&#160;&#160;if x &lt; len(mapObj) - 1 and mapObj[x+1][y] == oldCharacter:</p>
+		<p class="noindent mono"><span class="line-number">526.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;floodFill(mapObj, x+1, y, oldCharacter, newCharacter) <span class="comment"># call right</span></p>
+		<p class="noindent mono"><span class="line-number">527.</span> &#160;&#160;&#160;&#160;if x &gt; 0 and mapObj[x-1][y] == oldCharacter:</p>
+		<p class="noindent mono"><span class="line-number">528.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;floodFill(mapObj, x-1, y, oldCharacter, newCharacter) <span class="comment"># call left</span></p>
+		<p class="noindent mono"><span class="line-number">529.</span> &#160;&#160;&#160;&#160;if y &lt; len(mapObj[x]) - 1 and mapObj[x][y+1] == oldCharacter:</p>
+		<p class="noindent mono"><span class="line-number">530.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;floodFill(mapObj, x, y+1, oldCharacter, newCharacter) <span class="comment"># call down</span></p>
+		<p class="noindent mono"><span class="line-number">531.</span> &#160;&#160;&#160;&#160;if y &gt; 0 and mapObj[x][y-1] == oldCharacter:</p>
+		<p class="noindent mono"><span class="line-number">532.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;floodFill(mapObj, x, y-1, oldCharacter, newCharacter) <span class="comment"># call up</span></p>
 	</div>
 
-	<p>If you would like to read a more detailed tutorial on
-recursion that uses cats and zombies for an example, go to <a href="http://invpy.com/recursivezombies">http://invpy.com/recursivezombies</a>.</p>
+	<p>These four <span class="mono">if</span> statements check if the tile to the right, left, down, and up of the XY coordinate are the same as <span class="mono">oldCharacter</span>, and if so, a recursive call is made to <span class="mono">floodFill()</span> with those coordinates.</p>
+	<p>To better understand how the <span class="mono">floodFill()</span> function works, here is a version that does not use recursive calls, but instead uses a list of XY coordinates to keep track of which spaces on the map should be checked and possibly changed to <span class="mono">newCharacter</span>.</p>
+
+	<div class="python-shell">
+		<p class="noindent mono"> def floodFill(mapObj, x, y, oldCharacter, newCharacter):</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;spacesToCheck = []</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;if mapObj[x][y] == oldCharacter:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spacesToCheck.append((x, y))</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;while spacesToCheck != []:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;x, y = spacesToCheck.pop()</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapObj[x][y] = newCharacter</p>
+		<p class="noindent mono">&#160;</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if x &lt; len(mapObj) - 1 and mapObj[x+1][y] == oldCharacter:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spacesToCheck.append((x+1, y)) <span class="comment"># check right</span></p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if x &gt; 0 and mapObj[x-1][y] == oldCharacter:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spacesToCheck.append((x-1, y)) <span class="comment"># check left</span></p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if y &lt; len(mapObj[x]) - 1 and mapObj[x][y+1] == oldCharacter:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spacesToCheck.append((x, y+1)) <span class="comment"># check down</span></p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if y &gt; 0 and mapObj[x][y-1] == oldCharacter:</p>
+		<p class="noindent mono"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spacesToCheck.append((x, y-1)) <span class="comment"># check up</span></p>
+	</div>
+
+	<p>If you would like to read a more detailed tutorial on recursion that uses cats and zombies for an example, go to <a href="https://invpy.com/recursivezombies">https://invpy.com/recursivezombies</a>.</p>
 
 	<h1 class="subheading" id="">Drawing the Map</h1>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">535.</span> def
-drawMap(mapObj, gameStateObj, goals):</p>
-
-		<p class="noindent mono"><span class="line-number">536.</span> &#160;&#160;&#160;&#160;<span
-class="comment">&quot;&quot;&quot;Draws the map to a Surface object,
-including the player and</span></p>
-
-		<p class="noindent mono"><span class="line-number">537.</span> &#160;&#160;&#160;&#160;<span
-class="comment">stars. This function does not call pygame.display.update(),
-nor</span></p>
-
-		<p class="noindent mono"><span class="line-number">538.</span> &#160;&#160;&#160;&#160;<span
-class="comment">does it draw the &quot;Level&quot; and
-&quot;Steps&quot; text in the corner.&quot;&quot;&quot;</span></p>
-
-		<p class="noindent mono"><span class="line-number">539.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">540.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># mapSurf will be the single Surface object that the
-tiles are drawn</span></p>
-
-		<p class="noindent mono"><span class="line-number">541.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># on, so that it is easy to position the entire map on
-the DISPLAYSURF</span></p>
-
-		<p class="noindent mono"><span class="line-number">542.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># Surface object. First, the width and height must be
-calculated.</span></p>
-
-		<p class="noindent mono"><span class="line-number">543.</span>     mapSurfWidth
-= len(mapObj) * TILEWIDTH</p>
-
-		<p class="noindent mono"><span class="line-number">544.</span>     mapSurfHeight
-= (len(mapObj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT</p>
-
-		<p class="noindent mono"><span class="line-number">545.</span>     mapSurf
-= pygame.Surface((mapSurfWidth, mapSurfHeight))</p>
-
-		<p class="noindent mono"><span class="line-number">546.</span>     mapSurf.fill(BGCOLOR)
-<span class="comment"># start with a blank color on the surface.</span></p>
-
+		<p class="noindent mono"><span class="line-number">535.</span> def drawMap(mapObj, gameStateObj, goals):</p>
+		<p class="noindent mono"><span class="line-number">536.</span> &#160;&#160;&#160;&#160;<span class="comment">&quot;&quot;&quot;Draws the map to a Surface object, including the player and</span></p>
+		<p class="noindent mono"><span class="line-number">537.</span> &#160;&#160;&#160;&#160;<span class="comment">stars. This function does not call pygame.display.update(), or</span></p>
+		<p class="noindent mono"><span class="line-number">538.</span> &#160;&#160;&#160;&#160;<span class="comment">does it draw the &quot;Level&quot; and &quot;Steps&quot; text in the corner.&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">539.</span></p>
+		<p class="noindent mono"><span class="line-number">540.</span> &#160;&#160;&#160;&#160;<span class="comment"># mapSurf will be the single Surface object that the tiles are drawn</span></p>
+		<p class="noindent mono"><span class="line-number">541.</span> &#160;&#160;&#160;&#160;<span class="comment"># on, so that it is easy to position the entire map on the DISPLAYSURF</span></p>
+		<p class="noindent mono"><span class="line-number">542.</span> &#160;&#160;&#160;&#160;<span class="comment"># Surface object. First, the width and height must be calculated.</span></p>
+		<p class="noindent mono"><span class="line-number">543.</span> &#160;&#160;&#160;&#160;mapSurfWidth = len(mapObj) * TILEWIDTH</p>
+		<p class="noindent mono"><span class="line-number">544.</span> &#160;&#160;&#160;&#160;mapSurfHeight = (len(mapObj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT</p>
+		<p class="noindent mono"><span class="line-number">545.</span> &#160;&#160;&#160;&#160;mapSurf = pygame.Surface((mapSurfWidth, mapSurfHeight))</p>
+		<p class="noindent mono"><span class="line-number">546.</span> &#160;&#160;&#160;&#160;mapSurf.fill(BGCOLOR) <span class="comment"># start with a blank color on the surface.</span></p>
 	</div>
 
-	<p>The <span class="mono">drawMap()</span> function will
-return a Surface object with the entire map (and the player and stars) drawn on
-it. The width and height needed for this Surface have to be calculated from <span
-class="mono">mapObj</span> (which is done on line 543 and 544). The Surface
-object that everything will be drawn on is created on line 545. To begin with,
-the entire Surface object is painted to the background color on line 546.</p>
+	<p>The <span class="mono">drawMap()</span> function will return a Surface object with the entire map (and the player and stars) drawn on it. The width and height needed for this Surface have to be calculated from <span class="mono">mapObj</span> (which is done on line 543 and 544). The Surface object that everything will be drawn on is created on line 545. To begin with, the entire Surface object is painted to the background color on line 546.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">548.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># Draw the tile sprites onto this surface.</span></p>
-
-		<p class="noindent mono"><span class="line-number">549.</span>     for
-x in range(len(mapObj)):</p>
-
-		<p class="noindent mono"><span class="line-number">550.</span>         for
-y in range(len(mapObj[x])):</p>
-
-		<p class="noindent mono"><span class="line-number">551.</span>             spaceRect
-= pygame.Rect((x * TILEWIDTH, y * (TILEHEIGHT - TILEFLOORHEIGHT), TILEWIDTH,
-TILEHEIGHT))</p>
-
+		<p class="noindent mono"><span class="line-number">548.</span> &#160;&#160;&#160;&#160;<span class="comment"># Draw the tile sprites onto this surface.</span></p>
+		<p class="noindent mono"><span class="line-number">549.</span> &#160;&#160;&#160;&#160;for x in range(len(mapObj)):</p>
+		<p class="noindent mono"><span class="line-number">550.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(len(mapObj[x])):</p>
+		<p class="noindent mono"><span class="line-number">551.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;spaceRect = pygame.Rect((x * TILEWIDTH, y * (TILEHEIGHT - TILEFLOORHEIGHT), TILEWIDTH, TILEHEIGHT))</p>
 	</div>
 
-	<p>The set of nested <span class="mono">for</span> loops on
-line 549 and 550 will go through every possible XY coordinate on the map and
-draw the appropriate tile image at that location.</p>
+	<p>The set of nested <span class="mono">for</span> loops on line 549 and 550 will go through every possible XY coordinate on the map and draw the appropriate tile image at that location.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">552.</span>             if
-mapObj[x][y] in TILEMAPPING:</p>
-
-		<p class="noindent mono"><span class="line-number">553.</span>                 baseTile
-= TILEMAPPING[mapObj[x][y]]</p>
-
-		<p class="noindent mono"><span class="line-number">554.</span>             elif
-mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
-
-		<p class="noindent mono"><span class="line-number">555.</span>                 baseTile
-= TILEMAPPING[' ']</p>
-
-		<p class="noindent mono"><span class="line-number">556.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">557.</span>             <span
-class="comment"># First draw the base ground/wall tile.</span></p>
-
-		<p class="noindent mono"><span class="line-number">558.</span>             mapSurf.blit(baseTile,
-spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">559.</span> </p>
-
+		<p class="noindent mono"><span class="line-number">552.</span>             if mapObj[x][y] in TILEMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">553.</span>                 baseTile = TILEMAPPING[mapObj[x][y]]</p>
+		<p class="noindent mono"><span class="line-number">554.</span>             elif mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">555.</span>                 baseTile = TILEMAPPING[' ']</p>
+		<p class="noindent mono"><span class="line-number">556.</span></p>
+		<p class="noindent mono"><span class="line-number">557.</span>             <span class="comment"># First draw the base ground/wall tile.</span></p>
+		<p class="noindent mono"><span class="line-number">558.</span>             mapSurf.blit(baseTile, spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">559.</span></p>
 	</div>
 
-	<p>The <span class="mono">baseTile</span> variable is set to
-the Surface object of the tile image to be drawn at the iteration’s current XY
-coordinate. If the single-character string is in the <span class="mono">OUTSIDEDECOMAPPING</span>
-dictionary, then <span class="mono">TILEMAPPING[' ']</span> (the
-single-character string for the basic outdoor floor tile) will be used.</p>
+	<p>The <span class="mono">baseTile</span> variable is set to the Surface object of the tile image to be drawn at the iteration’s current XY coordinate. If the single-character string is in the <span class="mono">OUTSIDEDECOMAPPING</span> dictionary, then <span class="mono">TILEMAPPING[' ']</span> (the single-character string for the basic outdoor floor tile) will be used.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">560.</span>             if
-mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
-
-		<p class="noindent mono"><span class="line-number">561.</span>                 <span
-class="comment"># Draw any tree/rock decorations that are on this tile.</span></p>
-
-		<p class="noindent mono"><span class="line-number">562.</span>                 mapSurf.blit(OUTSIDEDECOMAPPING[mapObj[x][y]],
-spaceRect)</p>
-
+		<p class="noindent mono"><span class="line-number">560.</span>             if mapObj[x][y] in OUTSIDEDECOMAPPING:</p>
+		<p class="noindent mono"><span class="line-number">561.</span>                 <span class="comment"># Draw any tree/rock decorations that are on this tile.</span></p>
+		<p class="noindent mono"><span class="line-number">562.</span>                 mapSurf.blit(OUTSIDEDECOMAPPING[mapObj[x][y]], spaceRect)</p>
 	</div>
 
-	<p>Additionally, if the tile was listed in the <span
-class="mono">OUTSIDEDECOMAPPING</span> dictionary, the corresponding tree or
-rock image should be drawn on top of the tile that was just drawn at that XY
-coordinate.</p>
+	<p>Additionally, if the tile was listed in the <span class="mono">OUTSIDEDECOMAPPING</span> dictionary, the corresponding tree or rock image should be drawn on top of the tile that was just drawn at that XY coordinate.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">563.</span>             elif
-(x, y) in gameStateObj['stars']:</p>
-
-		<p class="noindent mono"><span class="line-number">564.</span>                 if
-(x, y) in goals:</p>
-
-		<p class="noindent mono"><span class="line-number">565.</span>                     <span
-class="comment"># A goal AND star are on this space, draw goal first.</span></p>
-
-		<p class="noindent mono"><span class="line-number">566.</span>                     mapSurf.blit(IMAGESDICT['covered
-goal'], spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">567.</span>                 <span
-class="comment"># Then draw the star sprite.</span></p>
-
-		<p class="noindent mono"><span class="line-number">568.</span>                 mapSurf.blit(IMAGESDICT['star'],
-spaceRect)</p>
-
+		<p class="noindent mono"><span class="line-number">563.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif (x, y) in gameStateObj['stars']:</p>
+		<p class="noindent mono"><span class="line-number">564.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if (x, y) in goals:</p>
+		<p class="noindent mono"><span class="line-number">565.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># A goal AND star are on this space, draw goal first.</span></p>
+		<p class="noindent mono"><span class="line-number">566.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(IMAGESDICT['covered goal'], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">567.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Then draw the star sprite.</span></p>
+		<p class="noindent mono"><span class="line-number">568.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(IMAGESDICT['star'], spaceRect)</p>
 	</div>
 
-	<p>If there is a star located at this XY coordinate on the map
-(which can be found out by checking for <span class="mono">(x, y)</span> in
-the list at <span class="mono">gameStateObj['stars']</span>), then a star
-should be drawn at this XY coordinate (which is done on line 568). Before the
-star is drawn, the code should first check if there is also a goal at this
-location, in which case, the “covered goal” tile should be drawn first.</p>
+	<p>If there is a star located at this XY coordinate on the map (which can be found out by checking for <span class="mono">(x, y)</span> in the list at <span class="mono">gameStateObj['stars']</span>), then a star should be drawn at this XY coordinate (which is done on line 568). Before the star is drawn, the code should first check if there is also a goal at this location, in which case, the “covered goal” tile should be drawn first.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">569.</span>             elif
-(x, y) in goals:</p>
-
-		<p class="noindent mono"><span class="line-number">570.</span>                 <span
-class="comment"># Draw a goal without a star on it.</span></p>
-
-		<p class="noindent mono"><span class="line-number">571.</span>                 mapSurf.blit(IMAGESDICT['uncovered
-goal'], spaceRect)</p>
-
+		<p class="noindent mono"><span class="line-number">569.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif (x, y) in goals:</p>
+		<p class="noindent mono"><span class="line-number">570.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Draw a goal without a star on it.</span></p>
+		<p class="noindent mono"><span class="line-number">571.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(IMAGESDICT['uncovered goal'], spaceRect)</p>
 	</div>
 
-	<p>If there is a goal at this XY coordinate on the map, then
-the “uncovered goal” should be drawn on top of the tile. The uncovered goal is
-drawn because if execution has reached the <span class="mono">elif</span>
-statement on line 569, we know that the <span class="mono">elif</span>
-statement’s condition on line 563 was <span class="mono">False</span> and
-there is no star that is also at this XY coordinate.</p>
+	<p>If there is a goal at this XY coordinate on the map, then the “uncovered goal” should be drawn on top of the tile. The uncovered goal is drawn because if execution has reached the <span class="mono">elif</span> statement on line 569, we know that the <span class="mono">elif</span> statement’s condition on line 563 was <span class="mono">False</span> and there is no star that is also at this XY coordinate.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">573.</span>             <span
-class="comment"># Last draw the player on the board.</span></p>
-
-		<p class="noindent mono"><span class="line-number">574.</span>             if
-(x, y) == gameStateObj['player']:</p>
-
-		<p class="noindent mono"><span class="line-number">575.</span>                 <span
-class="comment"># Note: The value &quot;currentImage&quot; refers</span></p>
-
-		<p class="noindent mono"><span class="line-number">576.</span>                 <span
-class="comment"># to a key in &quot;PLAYERIMAGES&quot; which has the</span></p>
-
-		<p class="noindent mono"><span class="line-number">577.</span>                 <span
-class="comment"># specific player image we want to show.</span></p>
-
-		<p class="noindent mono"><span class="line-number">578.</span>                 mapSurf.blit(PLAYERIMAGES[currentImage],
-spaceRect)</p>
-
-		<p class="noindent mono"><span class="line-number">579.</span> </p>
-
-		<p class="noindent mono"><span class="line-number">580.</span>     return
-mapSurf</p>
-
+		<p class="noindent mono"><span class="line-number">573.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Last draw the player on the board.</span></p>
+		<p class="noindent mono"><span class="line-number">574.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if (x, y) == gameStateObj['player']:</p>
+		<p class="noindent mono"><span class="line-number">575.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Note: The value &quot;currentImage&quot; refers</span></p>
+		<p class="noindent mono"><span class="line-number">576.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># to a key in &quot;PLAYERIMAGES&quot; which has the</span></p>
+		<p class="noindent mono"><span class="line-number">577.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># specific player image we want to show.</span></p>
+		<p class="noindent mono"><span class="line-number">578.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mapSurf.blit(PLAYERIMAGES[currentImage], spaceRect)</p>
+		<p class="noindent mono"><span class="line-number">579.</span></p>
+		<p class="noindent mono"><span class="line-number">580.</span> &#160;&#160;&#160;&#160;return mapSurf</p>
 	</div>
 
-	<p>Finally, the <span class="mono">drawMap()</span> function
-checks if the player is located at this XY coordinate, and if so, the player’s
-image is drawn over the tile. Line 580 is outside of the nested <span
-class="mono">for</span> loops that began on line 549 and 550, so by the time
-the Surface object is returned, the entire map has been drawn on it.</p>
+	<p>Finally, the <span class="mono">drawMap()</span> function checks if the player is located at this XY coordinate, and if so, the player’s image is drawn over the tile. Line 580 is outside of the nested <span class="mono">for</span> loops that began on line 549 and 550, so by the time the Surface object is returned, the entire map has been drawn on it.</p>
 
 	<h1 class="subheading" id="">Checking if the Level is Finished</h1>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">583.</span> def
-isLevelFinished(levelObj, gameStateObj):</p>
-
-		<p class="noindent mono"><span class="line-number">584.</span> &#160;&#160;&#160;&#160;<span
-class="comment">&quot;&quot;&quot;Returns True if all the goals have
-stars in them.&quot;&quot;&quot;</span></p>
-
-		<p class="noindent mono"><span class="line-number">585.</span>     for
-goal in levelObj['goals']:</p>
-
-		<p class="noindent mono"><span class="line-number">586.</span>         if
-goal not in gameStateObj['stars']:</p>
-
-		<p class="noindent mono"><span class="line-number">587.</span>             <span
-class="comment"># Found a space with a goal but no star on it.</span></p>
-
-		<p class="noindent mono"><span class="line-number">588.</span>             return
-False</p>
-
-		<p class="noindent mono"><span class="line-number">589.</span>     return
-True</p>
-
+		<p class="noindent mono"><span class="line-number">583.</span> def isLevelFinished(levelObj, gameStateObj):</p>
+		<p class="noindent mono"><span class="line-number">584.</span> &#160;&#160;&#160;&#160;<span class="comment">&quot;&quot;&quot;Returns True if all the goals have stars in them.&quot;&quot;&quot;</span></p>
+		<p class="noindent mono"><span class="line-number">585.</span> &#160;&#160;&#160;&#160;for goal in levelObj['goals']:</p>
+		<p class="noindent mono"><span class="line-number">586.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if goal not in gameStateObj['stars']:</p>
+		<p class="noindent mono"><span class="line-number">587.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># Found a space with a goal but no star on it.</span></p>
+		<p class="noindent mono"><span class="line-number">588.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return False</p>
+		<p class="noindent mono"><span class="line-number">589.</span> &#160;&#160;&#160;&#160;return True</p>
 	</div>
 
-	<p>The <span class="mono">isLevelFinished()</span> function
-returns <span class="mono">True</span> if all the goals are covered stars. Some
-levels could have more stars than goals, so it’s important to check that all
-the goals are covered by stars, rather than checking if all the stars are over
-goals.</p>
-
-	<p>The <span class="mono">for</span> loop on line 585 goes
-through the goals in <span class="mono">levelObj['goals']</span> (which is a
-list of tuples of XY coordinates for each goal) and checks if there is a star
-in the <span class="mono">gameStateObj['stars']</span> list that has those
-same XY coordinates (the <span class="mono">not in</span> operators work here
-because <span class="mono">gameStateObj['stars']</span> is a list of those
-same tuples of XY coordinates). The first time the code finds a goal with no
-star at the same position, the function returns <span class="mono">False</span>.</p>
-
-	<p>If it gets through all of the goals and finds a star on each
-of them, <span class="mono">isLevelFinished()</span> returns <span
-class="mono">True</span>.</p>
+	<p>The <span class="mono">isLevelFinished()</span> function returns <span class="mono">True</span> if all the goals are covered stars. Some levels could have more stars than goals, so it’s important to check that all the goals are covered by stars, rather than checking if all the stars are over goals.</p>
+	<p>The <span class="mono">for</span> loop on line 585 goes through the goals in <span class="mono">levelObj['goals']</span> (which is a list of tuples of XY coordinates for each goal) and checks if there is a star in the <span class="mono">gameStateObj['stars']</span> list that has those same XY coordinates (the <span class="mono">not in</span> operators work here because <span class="mono">gameStateObj['stars']</span> is a list of those same tuples of XY coordinates). The first time the code finds a goal with no star at the same position, the function returns <span class="mono">False</span>.</p>
+	<p>If it gets through all of the goals and finds a star on each of them, <span class="mono">isLevelFinished()</span> returns <span class="mono">True</span>.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">592.</span> def
-terminate():</p>
-
-		<p class="noindent mono"><span class="line-number">593.</span>     pygame.quit()</p>
-
-		<p class="noindent mono"><span class="line-number">594.</span>     sys.exit()</p>
-
+		<p class="noindent mono"><span class="line-number">592.</span> def terminate():</p>
+		<p class="noindent mono"><span class="line-number">593.</span> &#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">594.</span> &#160;&#160;&#160;&#160;sys.exit()</p>
 	</div>
 
-	<p>This <span class="mono">terminate()</span> function is the
-same as in all the previous programs.</p>
+	<p>This <span class="mono">terminate()</span> function is the same as in all the previous programs.</p>
 
 	<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">597.</span> if
-__name__ == '__main__':</p>
-
-		<p class="noindent mono"><span class="line-number">598.</span>     main()</p>
-
+		<p class="noindent mono"><span class="line-number">597.</span> if __name__ == '__main__':</p>
+		<p class="noindent mono"><span class="line-number">598.</span> &#160;&#160;&#160;&#160;main()</p>
 	</div>
 
-	<p>After all the functions have been defined, the <span
-class="mono">main()</span> function is called on line 602 to begin the game.</p>
+	<p>After all the functions have been defined, the <span class="mono">main()</span> function is called on line 602 to begin the game.</p>
 
 	<h1 class="subheading" id="">Summary</h1>
-
-	<p>In the Squirrel Eat Squirrel game, the game world was pretty
-simple: just an infinite green plain with grass images randomly scattered
-around it. The Star Pusher game introduced something new: having uniquely
-designed levels with tile graphics. In order to store these levels in a format
-that the computer can read, they are typed out into a text file and code in the
-program reads those files and creates the data structures for the level.</p>
-
-	<p>Really, rather than just make a simple game with a single
-map, the Star Pusher program is more of a system for loading custom maps based
-on the level file. Just by modifying the level file, we can change where walls,
-stars, and goals appear in the game world. The Star Pusher program can handle
-any configuration that the level file is set to (as long as it passes the <span
-class="mono">assert</span> statements that ensure the map makes sense).</p>
-
-	<p>You won’t even have to know how to program Python to make
-your own levels. A text editor program that modifies the <i>starPusherLevels.txt</i>
-file is all that anyone needs to have their own level editor for the Star
-Pusher game.</p>
-
-	<p>For additional programming practice, you can download buggy
-versions of Star Pusher from <a href="http://invpy.com/buggy/starpusher">http://invpy.com/buggy/starpusher</a>
-and try to figure out how to fix the bugs.</p>
-
--->
-
+	<p class="noindent">In the Squirrel Eat Squirrel game, the game world was pretty simple: just an infinite green plain with grass images randomly scattered around it. The Star Pusher game introduced something new: having uniquely designed levels with tile graphics. In order to store these levels in a format that the computer can read, they are typed out into a text file and code in the program reads those files and creates the data structures for the level.</p>
+	<p>Really, rather than just make a simple game with a single map, the Star Pusher program is more of a system for loading custom maps based the level file. Just by modifying the level file, we can change where walls, stars, and goals appear in the game world. The Star Pusher program can handle any configuration that the level file is set to (as long as it passes the <span class="mono">assert</span> statements that ensure the map makes sense).</p>
+	<p>You won’t even have to know how to program Python to make your own levels. A text editor program that modifies the <i>starPusherLevels.txt</i> file is all that anyone needs to have their own level editor for the Star Pusher game.</p>
+	<p>For additional programming practice, you can download buggy versions of Star Pusher from <a href="https://invpy.com/buggy/starpusher">https://invpy.com/buggy/starpusher</a> and try to figure out how to fix the bugs.</p>
 
 </body>
 </html>
