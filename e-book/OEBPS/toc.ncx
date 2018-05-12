@@ -831,80 +831,194 @@
 			<text>Chapter 9 - Star Pusher</text>
 		</navLabel>
 		<content src="chapter9.xhtml" />
+		<navPoint id="navpoint-138" playOrder="138">
+				<navLabel>
+					<text>How to Play Star Pusher</text>
+				</navLabel>
+				<content src="chapter9.xhtml#how-to-play" />
+		</navPoint>
+		<navPoint id="navpoint-139" playOrder="139">
+				<navLabel>
+					<text>Source Code to Star Pusher</text>
+				</navLabel>
+				<content src="chapter9.xhtml#source-code" />
+		</navPoint>
+		<navPoint id="navpoint-140" playOrder="140">
+				<navLabel>
+					<text>The Initial Setup</text>
+				</navLabel>
+				<content src="chapter9.xhtml#initial-setup" />
+		</navPoint>
+		<navPoint id="navpoint-141" playOrder="141">
+				<navLabel>
+					<text>Data Structures in Star Pusher</text>
+				</navLabel>
+				<content src="chapter9.xhtml#data-structure" />
+		</navPoint>
+		<navPoint id="navpoint-142" playOrder="142">
+				<navLabel>
+					<text>The Game State Data Structure</text>
+				</navLabel>
+				<content src="chapter9.xhtml#game-structure" />
+		</navPoint>
+		<navPoint id="navpoint-143" playOrder="143">
+				<navLabel>
+					<text>The Map Data Structure</text>
+				</navLabel>
+				<content src="chapter9.xhtml#map-structure" />
+		</navPoint>
+		<navPoint id="navpoint-144" playOrder="144">
+				<navLabel>
+					<text>The Levels Data Structure</text>
+				</navLabel>
+				<content src="chapter9.xhtml#level-structure" />
+		</navPoint>
+		<navPoint id="navpoint-145" playOrder="145">
+				<navLabel>
+					<text>Reading and Writing Text Files</text>
+				</navLabel>
+				<content src="chapter9.xhtml#reading-writing" />
+		</navPoint>
+		<navPoint id="navpoint-146" playOrder="146">
+				<navLabel>
+					<text>Text Files and Binary Files</text>
+				</navLabel>
+				<content src="chapter9.xhtml#text-binary" />
+		</navPoint>
+		<navPoint id="navpoint-147" playOrder="147">
+				<navLabel>
+					<text>Writing to Files</text>
+				</navLabel>
+				<content src="chapter9.xhtml#writing-files" />
+		</navPoint>
+		<navPoint id="navpoint-148" playOrder="148">
+				<navLabel>
+					<text>Reading from Files</text>
+				</navLabel>
+				<content src="chapter9.xhtml#reading-files" />
+		</navPoint>
+		<navPoint id="navpoint-149" playOrder="149">
+				<navLabel>
+					<text>About the Star Pusher Map File Format</text>
+				</navLabel>
+				<content src="chapter9.xhtml#star-map-files" />
+		</navPoint>
+		<navPoint id="navpoint-150" playOrder="150">
+				<navLabel>
+					<text>Recursive Functions</text>
+				</navLabel>
+				<content src="chapter9.xhtml#recursive-functions" />
+		</navPoint>
+		<navPoint id="navpoint-151" playOrder="151">
+				<navLabel>
+					<text>Stack Overflows</text>
+				</navLabel>
+				<content src="chapter9.xhtml#stack-overflows" />
+		</navPoint>
+		<navPoint id="navpoint-152" playOrder="152">
+				<navLabel>
+					<text>Preventing Stack Overflows with a Base Case</text>
+				</navLabel>
+				<content src="chapter9.xhtml#prevent-stack-overflows" />
+		</navPoint>
+		<navPoint id="navpoint-153" playOrder="153">
+				<navLabel>
+					<text>The Flood Fill Algorithm</text>
+				</navLabel>
+				<content src="chapter9.xhtml#flood-fill-algorithm" />
+		</navPoint>
+		<navPoint id="navpoint-154" playOrder="154">
+				<navLabel>
+					<text>Drawing the Map</text>
+				</navLabel>
+				<content src="chapter9.xhtml#drawing-map" />
+		</navPoint>
+		<navPoint id="navpoint-155" playOrder="155">
+				<navLabel>
+					<text>Checking if the Level is Finished</text>
+				</navLabel>
+				<content src="chapter9.xhtml#level-finished" />
+		</navPoint>
+		<navPoint id="navpoint-156" playOrder="156">
+				<navLabel>
+					<text>Summary</text>
+				</navLabel>
+				<content src="chapter9.xhtml#summary" />
+		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-138" playOrder="138">
+	<navPoint id="navpoint-157" playOrder="157">
 		<navLabel>
 			<text>Chapter 10 - Four Extra Games</text>
 		</navLabel>
 		<content src="chapter10.xhtml" />
-		<navPoint id="navpoint-139" playOrder="139">
+		<navPoint id="navpoint-158" playOrder="158">
 				<navLabel>
 					<text>Flippy, an Othello Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy" />
 		</navPoint>
-		<navPoint id="navpoint-140" playOrder="140">
+		<navPoint id="navpoint-159" playOrder="159">
 				<navLabel>
 					<text>Source Code for Flippy</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy-source" />
 		</navPoint>
-		<navPoint id="navpoint-141" playOrder="141">
+		<navPoint id="navpoint-160" playOrder="160">
 				<navLabel>
 					<text>Ink Spill, a Flood It Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill" />
 		</navPoint>
-		<navPoint id="navpoint-142" playOrder="142">
+		<navPoint id="navpoint-161" playOrder="161">
 				<navLabel>
 					<text>Source Code for Ink Spill</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill-source" />
 		</navPoint>
-		<navPoint id="navpoint-143" playOrder="143">
+		<navPoint id="navpoint-162" playOrder="162">
 				<navLabel>
 					<text>Four-In-A-Row, a Connect Four Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four" />
 		</navPoint>
-		<navPoint id="navpoint-144" playOrder="144">
+		<navPoint id="navpoint-163" playOrder="163">
 				<navLabel>
 					<text>Source Code for Four-In-A-Row</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four-source" />
 		</navPoint>
-		<navPoint id="navpoint-145" playOrder="145">
+		<navPoint id="navpoint-164" playOrder="164">
 				<navLabel>
 					<text>Gemgem, a Bejeweled Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem" />
 		</navPoint>
-		<navPoint id="navpoint-146" playOrder="146">
+		<navPoint id="navpoint-165" playOrder="165">
 				<navLabel>
 					<text>Source Code for Gemgem</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem-source" />
 		</navPoint>
-		<navPoint id="navpoint-147" playOrder="147">
+		<navPoint id="navpoint-166" playOrder="166">
 				<navLabel>
 					<text>Summary</text>
 				</navLabel>
 				<content src="chapter10.xhtml#summary" />
 		</navPoint>
 	</navPoint>
-	<navPoint id="navpoint-148" playOrder="148">
+	<navPoint id="navpoint-167" playOrder="167">
 		<navLabel>
 			<text>Glossary</text>
 		</navLabel>
 		<content src="glossary.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-149" playOrder="149">
+	<navPoint id="navpoint-168" playOrder="168">
 		<navLabel>
 			<text>About the Author</text>
 		</navLabel>
 		<content src="abouttheauthor.xhtml" />
 	</navPoint>
-	<navPoint id="navpoint-150" playOrder="150">
+	<navPoint id="navpoint-169" playOrder="169">
 		<navLabel>
 			<text>Other Titles</text>
 		</navLabel>
