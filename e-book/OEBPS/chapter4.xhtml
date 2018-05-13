@@ -590,9 +590,9 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">131.</span> def getStartingBoard():</p>
-		<p class="noindent mono"><span class="line-number">132.</span>     <span class="comment"># Return a board data structure with tiles in the solved state.</span></p>
-		<p class="noindent mono"><span class="line-number">133.</span>     <span class="comment"># For example, if BOARDWIDTH and BOARDHEIGHT are both 3, this function</span></p>
-		<p class="noindent mono"><span class="line-number">134.</span>     <span class="comment"># returns [[1, 4, 7], [2, 5, 8], [3, 6, None]]</span></p>
+		<p class="noindent mono"><span class="line-number">132.</span> &#160;&#160;&#160;&#160;<span class="comment"># Return a board data structure with tiles in the solved state.</span></p>
+		<p class="noindent mono"><span class="line-number">133.</span> &#160;&#160;&#160;&#160;<span class="comment"># For example, if BOARDWIDTH and BOARDHEIGHT are both 3, this function</span></p>
+		<p class="noindent mono"><span class="line-number">134.</span> &#160;&#160;&#160;&#160;<span class="comment"># returns [[1, 4, 7], [2, 5, 8], [3, 6, None]]</span></p>
 		<p class="noindent mono"><span class="line-number">135.</span>     counter = 1</p>
 		<p class="noindent mono"><span class="line-number">136.</span>     board = []</p>
 		<p class="noindent mono"><span class="line-number">137.</span>     for x in range(BOARDWIDTH):</p>
@@ -614,7 +614,7 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">149.</span> def getBlankPosition(board):</p>
-		<p class="noindent mono"><span class="line-number">150.</span>     <span class="comment"># Return the x and y of board coordinates of the blank space.</span></p>
+		<p class="noindent mono"><span class="line-number">150.</span> &#160;&#160;&#160;&#160;<span class="comment"># Return the x and y of board coordinates of the blank space.</span></p>
 		<p class="noindent mono"><span class="line-number">151.</span>     for x in range(BOARDWIDTH):</p>
 		<p class="noindent mono"><span class="line-number">152.</span>         for y in range(BOARDHEIGHT):</p>
 		<p class="noindent mono"><span class="line-number">153.</span>             if board[x][y] == None:</p>
@@ -627,7 +627,7 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">157.</span> def makeMove(board, move):</p>
-		<p class="noindent mono"><span class="line-number">158.</span>     <span class="comment"># This function does not check if the move is valid.</span></p>
+		<p class="noindent mono"><span class="line-number">158.</span> &#160;&#160;&#160;&#160;<span class="comment"># This function does not check if the move is valid.</span></p>
 		<p class="noindent mono"><span class="line-number">159.</span>     blankx, blanky = getBlankPosition(board)</p>
 		<p class="noindent mono"><span class="line-number">160.</span></p>
 		<p class="noindent mono"><span class="line-number">161.</span>     if move == UP:</p>
@@ -662,10 +662,10 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">179.</span> def getRandomMove(board, lastMove=None):</p>
-		<p class="noindent mono"><span class="line-number">180.</span>     <span class="comment"># start with a full list of all four moves</span></p>
+		<p class="noindent mono"><span class="line-number">180.</span> &#160;&#160;&#160;&#160;<span class="comment"># start with a full list of all four moves</span></p>
 		<p class="noindent mono"><span class="line-number">181.</span>     validMoves = [UP, DOWN, LEFT, RIGHT]</p>
 		<p class="noindent mono"><span class="line-number">182.</span></p>
-		<p class="noindent mono"><span class="line-number">183.</span>     <span class="comment"># remove moves from the list as they are disqualified</span></p>
+		<p class="noindent mono"><span class="line-number">183.</span> &#160;&#160;&#160;&#160;<span class="comment"># remove moves from the list as they are disqualified</span></p>
 		<p class="noindent mono"><span class="line-number">184.</span>     if lastMove == UP or not isValidMove(board, DOWN):</p>
 		<p class="noindent mono"><span class="line-number">185.</span>         validMoves.remove(DOWN)</p>
 		<p class="noindent mono"><span class="line-number">186.</span>     if lastMove == DOWN or not isValidMove(board, UP):</p>
@@ -675,7 +675,7 @@
 		<p class="noindent mono"><span class="line-number">190.</span>     if lastMove == RIGHT or not isValidMove(board, LEFT):</p>
 		<p class="noindent mono"><span class="line-number">191.</span>         validMoves.remove(LEFT)</p>
 		<p class="noindent mono"><span class="line-number">192.</span></p>
-		<p class="noindent mono"><span class="line-number">193.</span>     <span class="comment"># return a random move from the list of remaining moves</span></p>
+		<p class="noindent mono"><span class="line-number">193.</span> &#160;&#160;&#160;&#160;<span class="comment"># return a random move from the list of remaining moves</span></p>
 		<p class="noindent mono"><span class="line-number">194.</span>     return random.choice(validMoves)</p>
 	</div>
 
@@ -699,7 +699,7 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">203.</span> def getSpotClicked(board, x, y):</p>
-		<p class="noindent mono"><span class="line-number">204.</span>     <span class="comment"># from the x &amp; y pixel coordinates, get the x &amp; y board coordinates</span></p>
+		<p class="noindent mono"><span class="line-number">204.</span> &#160;&#160;&#160;&#160;<span class="comment"># from the x &amp; y pixel coordinates, get the x &amp; y board coordinates</span></p>
 		<p class="noindent mono"><span class="line-number">205.</span>     for tileX in range(len(board)):</p>
 		<p class="noindent mono"><span class="line-number">206.</span>         for tileY in range(len(board[0])):</p>
 		<p class="noindent mono"><span class="line-number">207.</span>             left, top = getLeftTopOfTile(tileX, tileY)</p>
@@ -717,8 +717,8 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">214.</span> def drawTile(tilex, tiley, number, adjx=0, adjy=0):</p>
-		<p class="noindent mono"><span class="line-number">215.</span>     <span class="comment"># draw a tile at board coordinates tilex and tiley, optionally a few</span></p>
-		<p class="noindent mono"><span class="line-number">216.</span>     <span class="comment"># pixels over (determined by adjx and adjy)</span></p>
+		<p class="noindent mono"><span class="line-number">215.</span> &#160;&#160;&#160;&#160;<span class="comment"># draw a tile at board coordinates tilex and tiley, optionally a few</span></p>
+		<p class="noindent mono"><span class="line-number">216.</span> &#160;&#160;&#160;&#160;<span class="comment"># pixels over (determined by adjx and adjy)</span></p>
 		<p class="noindent mono"><span class="line-number">217.</span>     left, top = getLeftTopOfTile(tilex, tiley)</p>
 		<p class="noindent mono"><span class="line-number">218.</span>     pygame.draw.rect(DISPLAYSURF, TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))</p>
 		<p class="noindent mono"><span class="line-number">219.</span>     textSurf = BASICFONT.render(str(number), True, TEXTCOLOR)</p>
@@ -771,7 +771,7 @@ appear on the screen.</p>
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">225.</span> def
 makeText(text, color, bgcolor, top, left):</p>
-		<p class="noindent mono"><span class="line-number">226.</span>     <span
+		<p class="noindent mono"><span class="line-number">226.</span> &#160;&#160;&#160;&#160;<span
 class="comment"># create the Surface and Rect objects for some text.</span></p>
 		<p class="noindent mono"><span class="line-number">227.</span>     textSurf
 = BASICFONT.render(text, True, color, bgcolor)</p>
@@ -854,7 +854,7 @@ is <span class="mono">False</span> and lines 236 and 237 are skipped.</p>
 	<p>Lines 244 to 247 draw a border around the tiles. The top left corner of the boarder will be 5 pixels to the left and 5 pixels above the top left corner of the tile at board coordinates (0, 0). The width and height of the border are calculated from the number of tiles wide and high the board is (stored in the <span class="mono">BOARDWIDTH</span> and <span class="mono">BOARDHEIGHT</span> constants) multiplied by the size of the tiles (stored in the <span class="mono">TILESIZE</span> constant).</p>
 	<p>The rectangle we draw on line 247 will have a thickness of 4 pixels, so we will move the boarder 5 pixels to the left and above where the <span class="mono">top</span> and <span class="mono">left</span> variables point so the thickness of the line won’t overlap the tiles. We will also add <span class="mono">11</span> to the width and length (5 of those 11 pixels are to compensate for moving the rectangle to the left and up).</p>
 
-	<h1 class="subheading" id="">Drawing the Buttons</h1>
+	<h1 class="subheading" id="drawing-the-buttons">Drawing the Buttons</h1>
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">249.</span>     DISPLAYSURF.blit(RESET_SURF, RESET_RECT)</p>
@@ -864,41 +864,25 @@ is <span class="mono">False</span> and lines 236 and 237 are skipped.</p>
 
 	<p>Finally, we draw the buttons off to the slide of the screen. The text and position of these buttons never changes, which is why they were stored in constant variables at the beginning of the <span class="mono">main()</span> function.</p>
 
-	<h1 class="subheading" id="">Animating the Tile Slides</h1>
+	<h1 class="subheading" id="animating-tile-slides">Animating the Tile Slides</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">254.</span> def
-slideAnimation(board, direction, message, animationSpeed):</p>
-		<p class="noindent mono"><span class="line-number">255.</span>     <span
-class="comment"># Note: This function does not check if the move is
-valid.</span></p>
+		<p class="noindent mono"><span class="line-number">254.</span> def slideAnimation(board, direction, message, animationSpeed):</p>
+		<p class="noindent mono"><span class="line-number">255.</span> &#160;&#160;&#160;&#160;<span class="comment"># Note: This function does not check if the move is valid.</span></p>
 		<p class="noindent mono"><span class="line-number">256.</span></p>
-		<p class="noindent mono"><span class="line-number">257.</span>     blankx,
-blanky = getBlankPosition(board)</p>
-		<p class="noindent mono"><span class="line-number">258.</span>     if
-direction == UP:</p>
-		<p class="noindent mono"><span class="line-number">259.</span>         movex
-= blankx</p>
-		<p class="noindent mono"><span class="line-number">260.</span>         movey
-= blanky + 1</p>
-		<p class="noindent mono"><span class="line-number">261.</span>     elif
-direction == DOWN:</p>
-		<p class="noindent mono"><span class="line-number">262.</span>         movex
-= blankx</p>
-		<p class="noindent mono"><span class="line-number">263.</span>         movey
-= blanky - 1</p>
-		<p class="noindent mono"><span class="line-number">264.</span>     elif
-direction == LEFT:</p>
-		<p class="noindent mono"><span class="line-number">265.</span>         movex
-= blankx + 1</p>
-		<p class="noindent mono"><span class="line-number">266.</span>         movey
-= blanky</p>
-		<p class="noindent mono"><span class="line-number">267.</span>     elif
-direction == RIGHT:</p>
-		<p class="noindent mono"><span class="line-number">268.</span>         movex
-= blankx - 1</p>
-		<p class="noindent mono"><span class="line-number">269.</span>         movey
-= blanky</p>
+		<p class="noindent mono"><span class="line-number">257.</span> &#160;&#160;&#160;&#160;blankx, blanky = getBlankPosition(board)</p>
+		<p class="noindent mono"><span class="line-number">258.</span> &#160;&#160;&#160;&#160;if direction == UP:</p>
+		<p class="noindent mono"><span class="line-number">259.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movex = blankx</p>
+		<p class="noindent mono"><span class="line-number">260.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movey = blanky + 1</p>
+		<p class="noindent mono"><span class="line-number">261.</span> &#160;&#160;&#160;&#160;elif direction == DOWN:</p>
+		<p class="noindent mono"><span class="line-number">262.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movex = blankx</p>
+		<p class="noindent mono"><span class="line-number">263.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movey = blanky - 1</p>
+		<p class="noindent mono"><span class="line-number">264.</span> &#160;&#160;&#160;&#160;elif direction == LEFT:</p>
+		<p class="noindent mono"><span class="line-number">265.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movex = blankx + 1</p>
+		<p class="noindent mono"><span class="line-number">266.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movey = blanky</p>
+		<p class="noindent mono"><span class="line-number">267.</span> &#160;&#160;&#160;&#160;elif direction == RIGHT:</p>
+		<p class="noindent mono"><span class="line-number">268.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movex = blankx - 1</p>
+		<p class="noindent mono"><span class="line-number">269.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movey = blanky</p>
 	</div>
 
 	<p>The first thing our tile sliding animation code needs to calculate is where the blank space is and where the moving tile is. The comment on line 255 reminds us that the code that calls <span class="mono">slideAnimation()</span> should make sure that the slide it passes for the direction parameter is a valid move to make.</p>
@@ -907,250 +891,92 @@ direction == RIGHT:</p>
 	<h1 class="subheading" id="copy-surface-method">The <span class="mono">copy()</span> Surface Method</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">271.</span>     <span class="comment"># prepare the base surface</span></p>
-		<p class="noindent mono"><span class="line-number">272.</span>     drawBoard(board, message)</p>
-		<p class="noindent mono"><span class="line-number">273.</span>     baseSurf = DISPLAYSURF.copy()</p>
-		<p class="noindent mono"><span class="line-number">274.</span>     <span class="comment"># draw a blank space over the moving tile on the baseSurf Surface.</span></p>
-		<p class="noindent mono"><span class="line-number">275.</span>     moveLeft, moveTop = getLeftTopOfTile(movex, movey)</p>
-		<p class="noindent mono"><span class="line-number">276.</span>     pygame.draw.rect(baseSurf, BGCOLOR, (moveLeft, moveTop, TILESIZE, TILESIZE))</p>
+		<p class="noindent mono"><span class="line-number">271.</span> &#160;&#160;&#160;&#160;<span class="comment"># prepare the base surface</span></p>
+		<p class="noindent mono"><span class="line-number">272.</span> &#160;&#160;&#160;&#160;drawBoard(board, message)</p>
+		<p class="noindent mono"><span class="line-number">273.</span> &#160;&#160;&#160;&#160;baseSurf = DISPLAYSURF.copy()</p>
+		<p class="noindent mono"><span class="line-number">274.</span> &#160;&#160;&#160;&#160;<span class="comment"># draw a blank space over the moving tile on the baseSurf Surface.</span></p>
+		<p class="noindent mono"><span class="line-number">275.</span> &#160;&#160;&#160;&#160;moveLeft, moveTop = getLeftTopOfTile(movex, movey)</p>
+		<p class="noindent mono"><span class="line-number">276.</span> &#160;&#160;&#160;&#160;pygame.draw.rect(baseSurf, BGCOLOR, (moveLeft, moveTop, TILESIZE, TILESIZE))</p>
 	</div>
 
-<p>The <span class="mono">copy()</span> method of Surface
-objects will return a new Surface object that has the same image drawn to it.
-But they are two separate Surface objects. After calling the <span
-class="mono">copy()</span> method, if we draw on one Surface object using <span
-class="mono">blit()</span> or the Pygame drawing functions, it will not change
-the image on the other Surface object. We store this copy in the <span
-class="mono">baseSurf</span> variable on line 273.</p>
-
-<p>Next, we paint another blank space over the tile that will
-slide. This is because when we draw each frame of the sliding animation, we
-will draw the sliding tile over different parts of the <span class="mono">baseSurf</span>
-Surface object. If we didn’t blank out the moving tile on the <span
-class="mono">baseSurf</span> Surface, then it would still be there as we draw
-the sliding tile. In that case, here is what the <span class="mono">baseSurf</span>
-Surface would look like:</p>
-<p>And then what it would look like when we draw the “9” tile sliding
-upwards on top of it:</p>
-<p>You can see this for yourself by commenting out line 276 and
-running the program.</p>
+<p>The <span class="mono">copy()</span> method of Surface objects will return a new Surface object that has the same image drawn to it. But they are two separate Surface objects. After calling the <span class="mono">copy()</span> method, if we draw on one Surface object using <span class="mono">blit()</span> or the Pygame drawing functions, it will not change the image on the other Surface object. We store this copy in the <span class="mono">baseSurf</span> variable on line 273.</p>
+<p>Next, we paint another blank space over the tile that will slide. This is because when we draw each frame of the sliding animation, we will draw the sliding tile over different parts of the <span class="mono">baseSurf</span> Surface object. If we didn’t blank out the moving tile on the <span class="mono">baseSurf</span> Surface, then it would still be there as we draw the sliding tile. In that case, here is what the <span class="mono">baseSurf</span> Surface would look like:</p>
+<p>And then what it would look like when we draw the “9” tile sliding upwards on top of it:</p>
+<p>You can see this for yourself by commenting out line 276 and running the program.</p>
 
 <div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">278.</span>     for
-i in range(0, TILESIZE, animationSpeed):</p>
-
-		<p class="noindent mono"><span class="line-number">279.</span>         <span
-class="comment"># animate the tile sliding over</span></p>
-
-		<p class="noindent mono"><span class="line-number">280.</span>         checkForQuit()</p>
-
-		<p class="noindent mono"><span class="line-number">281.</span>         DISPLAYSURF.blit(baseSurf,
-(0, 0))</p>
-
-		<p class="noindent mono"><span class="line-number">282.</span>         if
-direction == UP:</p>
-
-		<p class="noindent mono"><span class="line-number">283.</span>             drawTile(movex,
-movey, board[movex][movey], 0, -i)</p>
-
-		<p class="noindent mono"><span class="line-number">284.</span>         if
-direction == DOWN:</p>
-
-		<p class="noindent mono"><span class="line-number">285.</span>             drawTile(movex,
-movey, board[movex][movey], 0, i)</p>
-
-		<p class="noindent mono"><span class="line-number">286.</span>         if
-direction == LEFT:</p>
-
-		<p class="noindent mono"><span class="line-number">287.</span>             drawTile(movex,
-movey, board[movex][movey], -i, 0)</p>
-
-		<p class="noindent mono"><span class="line-number">288.</span>         if
-direction == RIGHT:</p>
-
-		<p class="noindent mono"><span class="line-number">289.</span>             drawTile(movex,
-movey, board[movex][movey], i, 0)</p>
-
+		<p class="noindent mono"><span class="line-number">278.</span> &#160;&#160;&#160;&#160;for i in range(0, TILESIZE, animationSpeed):</p>
+		<p class="noindent mono"><span class="line-number">279.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># animate the tile sliding over</span></p>
+		<p class="noindent mono"><span class="line-number">280.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;checkForQuit()</p>
+		<p class="noindent mono"><span class="line-number">281.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;DISPLAYSURF.blit(baseSurf, (0, 0))</p>
+		<p class="noindent mono"><span class="line-number">282.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if direction == UP:</p>
+		<p class="noindent mono"><span class="line-number">283.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawTile(movex, movey, board[movex][movey], 0, -i)</p>
+		<p class="noindent mono"><span class="line-number">284.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if direction == DOWN:</p>
+		<p class="noindent mono"><span class="line-number">285.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawTile(movex, movey, board[movex][movey], 0, i)</p>
+		<p class="noindent mono"><span class="line-number">286.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if direction == LEFT:</p>
+		<p class="noindent mono"><span class="line-number">287.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawTile(movex, movey, board[movex][movey], -i, 0)</p>
+		<p class="noindent mono"><span class="line-number">288.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if direction == RIGHT:</p>
+		<p class="noindent mono"><span class="line-number">289.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawTile(movex, movey, board[movex][movey], i, 0)</p>
 		<p class="noindent mono"><span class="line-number">290.</span></p>
+		<p class="noindent mono"><span class="line-number">291.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">292.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">291.</span>         pygame.display.update()</p>
-
-		<p class="noindent mono"><span class="line-number">292.</span>         FPSCLOCK.tick(FPS)</p>
-
-</div>
-
-<p>In order to draw the frames of the sliding animation, we
-must draw the <span class="mono">baseSurf</span> surface on the display
-Surface, then on each frame of the animation draw the sliding tile closer and
-closer to its final position where the original blank space was. The space
-between two adjacent tiles is the same size as a single tile, which we have
-stored in <span class="mono">TILESIZE</span>. The code uses a <span
-class="mono">for</span> loop to go from <span class="mono">0</span> to <span
-class="mono">TILESIZE</span>. </p>
-
-<p>Normally this would mean that we would draw the tile 0
-pixels over, then on the next frame draw the tile 1 pixel over, then 2 pixels,
-then 3, and so on. Each of these frames would take 1/30<sup>th</sup> of a
-second. If you have <span class="mono">TILESIZE</span> set to <span
-class="mono">80</span> (as the program in this book does on line 12) then
-sliding a tile would take over two and a half seconds, which is actually kind
-of slow.</p>
-
-<p>So instead we will have the <span class="mono">for</span>
-loop iterate from <span class="mono">0</span> to <span class="mono">TILESIZE</span>
-by several pixels each frame. The number of pixels it jumps over is stored in <span
-class="mono">animationSpeed</span>, which is passed in when <span
-class="mono">slideAnimation()</span> is called. For example, if <span
-class="mono">animationSpeed</span> was set to <span class="mono">8</span> and
-the constant <span class="mono">TILESIZE</span> was set to <span
-class="mono">80</span>, then the <span class="mono">for</span> loop and <span
-class="mono">range(0, TILESIZE, animationSpeed)</span> would set the <span
-class="mono">i</span> variable to the values <span class="mono">0</span>, <span
-class="mono">8</span>, <span class="mono">16</span>, <span class="mono">24</span>,
-<span class="mono">32</span>, <span class="mono">40</span>, <span
-class="mono">48</span>, <span class="mono">56</span>, <span class="mono">64</span>,
-<span class="mono">72</span>. (It does not include <span class="mono">80</span>
-because the <span class="mono">range()</span> function goes up to, but not
-including, the second argument.) This means the entire sliding animation would
-be done in 10 frames, which would mean it is done in 10/30<sup>th</sup> of a
-second (a third of a second) since the game runs at 30 FPS.</p>
-
-<p>Lines 282 to 289 makes sure that we draw the tile sliding in
-the correct direction (based on what value the <span class="mono">direction</span>
-variable has). After the animation is done, then the function returns. Notice
-that while the animation is happening, any events being created by the user are
-not being handled. Those events will be handled the next time execution reaches
-line 70 in the <span class="mono">main()</span> function or the code in the <span
-class="mono">checkForQuit()</span> function.</p>
+	<p>In order to draw the frames of the sliding animation, we must draw the <span class="mono">baseSurf</span> surface on the display Surface, then on each frame of the animation draw the sliding tile closer and closer to its final position where the original blank space was. The space between two adjacent tiles is the same size as a single tile, which we have stored in <span class="mono">TILESIZE</span>. The code uses a <span class="mono">for</span> loop to go from <span class="mono">0</span> to <span class="mono">TILESIZE</span>.</p>
+	<p>Normally this would mean that we would draw the tile 0 pixels over, then on the next frame draw the tile 1 pixel over, then 2 pixels, then 3, and so on. Each of these frames would take 1/30<sup>th</sup> of a second. If you have <span class="mono">TILESIZE</span> set to <span class="mono">80</span> (as the program in this book does on line 12) then sliding a tile would take over two and a half seconds, which is actually kind of slow.</p>
+	<p>So instead we will have the <span class="mono">for</span> loop iterate from <span class="mono">0</span> to <span class="mono">TILESIZE</span> by several pixels each frame. The number of pixels it jumps over is stored in <span class="mono">animationSpeed</span>, which is passed in when <span class="mono">slideAnimation()</span> is called. For example, if <span class="mono">animationSpeed</span> was set to <span class="mono">8</span> and the constant <span class="mono">TILESIZE</span> was set to <span class="mono">80</span>, then the <span class="mono">for</span> loop and <span class="mono">range(0, TILESIZE, animationSpeed)</span> would set the <span class="mono">i</span> variable to the values <span class="mono">0</span>, <span class="mono">8</span>, <span class="mono">16</span>, <span class="mono">24</span>, <span class="mono">32</span>, <span class="mono">40</span>, <span class="mono">48</span>, <span class="mono">56</span>, <span class="mono">64</span>, <span class="mono">72</span>. (It does not include <span class="mono">80</span> because the <span class="mono">range()</span> function goes up to, but not including, the second argument.) This means the entire sliding animation would be done in 10 frames, which would mean it is done in 10/30<sup>th</sup> of a second (a third of a second) since the game runs at 30 FPS.</p>
+	<p>Lines 282 to 289 makes sure that we draw the tile sliding in the correct direction (based on what value the <span class="mono">direction</span> variable has). After the animation is done, then the function returns. Notice that while the animation is happening, any events being created by the user are not being handled. Those events will be handled the next time execution reaches line 70 in the <span class="mono">main()</span> function or the code in the <span class="mono">checkForQuit()</span> function.</p>
 
 	<h1 class="subheading" id="create-new-puzzle">Creating a New Puzzle</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">295.</span> def
-generateNewPuzzle(numSlides):</p>
-		<p class="noindent mono"><span class="line-number">296.</span>     <span
-class="comment"># From a starting configuration, make numSlides number
-of moves (and</span></p>
-		<p class="noindent mono"><span class="line-number">297.</span>     <span
-class="comment"># animate these moves).</span></p>
-		<p class="noindent mono"><span class="line-number">298.</span>     sequence
-= []</p>
-		<p class="noindent mono"><span class="line-number">299.</span>     board
-= getStartingBoard()</p>
-		<p class="noindent mono"><span class="line-number">300.</span>     drawBoard(board,
-'')</p>
-		<p class="noindent mono"><span class="line-number">301.</span>     pygame.display.update()</p>
-		<p class="noindent mono"><span class="line-number">302.</span>     pygame.time.wait(500)
-<span class="comment"># pause 500 milliseconds for effect</span></p>
+		<p class="noindent mono"><span class="line-number">295.</span> def generateNewPuzzle(numSlides):</p>
+		<p class="noindent mono"><span class="line-number">296.</span> &#160;&#160;&#160;&#160;<span class="comment"># From a starting configuration, make numSlides number of moves (and</span></p>
+		<p class="noindent mono"><span class="line-number">297.</span> &#160;&#160;&#160;&#160;<span class="comment"># animate these moves).</span></p>
+		<p class="noindent mono"><span class="line-number">298.</span> &#160;&#160;&#160;&#160;sequence = []</p>
+		<p class="noindent mono"><span class="line-number">299.</span> &#160;&#160;&#160;&#160;board = getStartingBoard()</p>
+		<p class="noindent mono"><span class="line-number">300.</span> &#160;&#160;&#160;&#160;drawBoard(board, '')</p>
+		<p class="noindent mono"><span class="line-number">301.</span> &#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">302.</span> &#160;&#160;&#160;&#160;pygame.time.wait(500) <span class="comment"># pause 500 milliseconds for effect</span></p>
 	</div>
 
-<p>The <span class="mono">generateNewPuzzle()</span> function
-will be called at the start of each new game. It will create a new board data
-structure by calling <span class="mono">getStartingBoard()</span> and then
-randomly scramble it. The first few lines of <span class="mono">generateNewPuzzle()</span>
-get the board and then draw it to the screen (freezing for half a second to let
-the player see the fresh board for a moment).</p>
+	<p>The <span class="mono">generateNewPuzzle()</span> function will be called at the start of each new game. It will create a new board data structure by calling <span class="mono">getStartingBoard()</span> and then randomly scramble it. The first few lines of <span class="mono">generateNewPuzzle()</span> get the board and then draw it to the screen (freezing for half a second to let the player see the fresh board for a moment).</p>
 
-<div class="python-shell">
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">303.</span> &#160;&#160;&#160;&#160;lastMove = None</p>
+		<p class="noindent mono"><span class="line-number">304.</span> &#160;&#160;&#160;&#160;for i in range(numSlides):</p>
+		<p class="noindent mono"><span class="line-number">305.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;move = getRandomMove(board, lastMove)</p>
+		<p class="noindent mono"><span class="line-number">306.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideAnimation(board, move, 'Generating new puzzle...', int(TILESIZE / 3))</p>
+		<p class="noindent mono"><span class="line-number">307.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;makeMove(board, move)</p>
+		<p class="noindent mono"><span class="line-number">308.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sequence.append(move)</p>
+		<p class="noindent mono"><span class="line-number">309.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;lastMove = move</p>
+		<p class="noindent mono"><span class="line-number">310.</span> &#160;&#160;&#160;&#160;return (board, sequence)</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">303.</span>     lastMove
-= None</p>
-
-		<p class="noindent mono"><span class="line-number">304.</span>     for
-i in range(numSlides):</p>
-
-		<p class="noindent mono"><span class="line-number">305.</span>         move
-= getRandomMove(board, lastMove)</p>
-
-		<p class="noindent mono"><span class="line-number">306.</span>         slideAnimation(board,
-move, 'Generating new puzzle...', int(TILESIZE / 3))</p>
-
-		<p class="noindent mono"><span class="line-number">307.</span>         makeMove(board,
-move)</p>
-
-		<p class="noindent mono"><span class="line-number">308.</span>         sequence.append(move)</p>
-
-		<p class="noindent mono"><span class="line-number">309.</span>         lastMove
-= move</p>
-
-		<p class="noindent mono"><span class="line-number">310.</span>     return
-(board, sequence)</p>
-
-</div>
-
-<p>The <span class="mono">numSlides</span> parameter will show
-tell the function how many of these random moves to make. The code for doing a
-random move is the <span class="mono">getRandomMove()</span> call on line 305 to
-get the move itself, then call <span class="mono">slideAnimation()</span> to
-perform the animation on the screen. Because doing the slide animation does not
-actually update the board data structure, we update the board by calling <span
-class="mono">makeMove()</span> on line 307.</p>
-
-<p>We need to keep track of each of the random moves that was
-made so that the player can click the “Solve” button later and have the program
-undo all these random moves. (The “Being Smart By Using Stupid Code” section
-talks about why and how we do this.) So the move is appended to the list of
-moves in <span class="mono">sequence</span> on line 308.</p>
-
-<p>Then we store the random move in a variable called <span
-class="mono">lastMove</span> which will be passed to <span class="mono">getRandomMove()</span>
-on the next iteration. This prevents the next random move from undoing the
-random move we just performed.</p>
-
-<p>All of this needs to happen <span class="mono">numSlides</span>
-number of times, so we put lines 305 to 309 inside a <span class="mono">for</span>
-loop. When the board is done being scrambled, then we return the board data
-structure and also the list of the random moves made on it.</p>
+	<p>The <span class="mono">numSlides</span> parameter will show tell the function how many of these random moves to make. The code for doing a random move is the <span class="mono">getRandomMove()</span> call on line 305 to get the move itself, then call <span class="mono">slideAnimation()</span> to perform the animation on the screen. Because doing the slide animation does not actually update the board data structure, we update the board by calling <span class="mono">makeMove()</span> on line 307.</p>
+	<p>We need to keep track of each of the random moves that was made so that the player can click the “Solve” button later and have the program undo all these random moves. (The “<a href="chapter4.xhtml#stupid-code">Being Smart By Using Stupid Code</a>” section talks about why and how we do this.) So the move is appended to the list of moves in <span class="mono">sequence</span> on line 308.</p>
+	<p>Then we store the random move in a variable called <span class="mono">lastMove</span> which will be passed to <span class="mono">getRandomMove()</span> on the next iteration. This prevents the next random move from undoing the random move we just performed.</p>
+	<p>All of this needs to happen <span class="mono">numSlides</span> number of times, so we put lines 305 to 309 inside a <span class="mono">for</span> loop. When the board is done being scrambled, then we return the board data structure and also the list of the random moves made on it.</p>
 
 	<h1 class="subheading" id="animating-board-reset">Animating the Board Reset</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">313.</span> def
-resetAnimation(board, allMoves):</p>
-
-		<p class="noindent mono"><span class="line-number">314.</span>     <span
-class="comment"># make all of the moves in allMoves in reverse.</span></p>
-
-		<p class="noindent mono"><span class="line-number">315.</span>     revAllMoves
-= allMoves[:] <span class="comment"># gets a copy of the list</span></p>
-
-		<p class="noindent mono"><span class="line-number">316.</span>     revAllMoves.reverse()</p>
-
+		<p class="noindent mono"><span class="line-number">313.</span> def resetAnimation(board, allMoves):</p>
+		<p class="noindent mono"><span class="line-number">314.</span> &#160;&#160;&#160;&#160;<span class="comment"># make all of the moves in allMoves in reverse.</span></p>
+		<p class="noindent mono"><span class="line-number">315.</span> &#160;&#160;&#160;&#160;revAllMoves = allMoves[:] <span class="comment"># gets a copy of the list</span></p>
+		<p class="noindent mono"><span class="line-number">316.</span> &#160;&#160;&#160;&#160;revAllMoves.reverse()</p>
 		<p class="noindent mono"><span class="line-number">317.</span></p>
-
-		<p class="noindent mono"><span class="line-number">318.</span>     for
-move in revAllMoves:</p>
-
-		<p class="noindent mono"><span class="line-number">319.</span>         if
-move == UP:</p>
-
-		<p class="noindent mono"><span class="line-number">320.</span>             oppositeMove
-= DOWN</p>
-
-		<p class="noindent mono"><span class="line-number">321.</span>         elif
-move == DOWN:</p>
-
-		<p class="noindent mono"><span class="line-number">322.</span>             oppositeMove
-= UP</p>
-
-		<p class="noindent mono"><span class="line-number">323.</span>         elif
-move == RIGHT:</p>
-
-		<p class="noindent mono"><span class="line-number">324.</span>             oppositeMove
-= LEFT</p>
-
-		<p class="noindent mono"><span class="line-number">325.</span>         elif
-move == LEFT:</p>
-
-		<p class="noindent mono"><span class="line-number">326.</span>             oppositeMove
-= RIGHT</p>
-
-		<p class="noindent mono"><span class="line-number">327.</span>         slideAnimation(board,
-oppositeMove, '', int(TILESIZE / 2))</p>
-
-		<p class="noindent mono"><span class="line-number">328.</span>         makeMove(board,
-oppositeMove)</p>
+		<p class="noindent mono"><span class="line-number">318.</span> &#160;&#160;&#160;&#160;for move in revAllMoves:</p>
+		<p class="noindent mono"><span class="line-number">319.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if move == UP:</p>
+		<p class="noindent mono"><span class="line-number">320.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oppositeMove = DOWN</p>
+		<p class="noindent mono"><span class="line-number">321.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif move == DOWN:</p>
+		<p class="noindent mono"><span class="line-number">322.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oppositeMove = UP</p>
+		<p class="noindent mono"><span class="line-number">323.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif move == RIGHT:</p>
+		<p class="noindent mono"><span class="line-number">324.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oppositeMove = LEFT</p>
+		<p class="noindent mono"><span class="line-number">325.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif move == LEFT:</p>
+		<p class="noindent mono"><span class="line-number">326.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oppositeMove = RIGHT</p>
+		<p class="noindent mono"><span class="line-number">327.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideAnimation(board, oppositeMove, '', int(TILESIZE / 2))</p>
+		<p class="noindent mono"><span class="line-number">328.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;makeMove(board, oppositeMove)</p>
 	</div>
 
 	<p>When the player clicks on “Reset” or “Solve”, the Slide Puzzle game program needs to undo all of the moves that were made to the board. The list of directional values for the slides will be passed as the argument for the <span class="mono">allMoves</span> parameter.</p>
