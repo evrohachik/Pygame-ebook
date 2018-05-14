@@ -485,18 +485,18 @@
 	<h1 class="subheading" id="sliding-tiles-mouse">Sliding Tiles with the Mouse</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">&#160;85.</span>                 else:</p>
-		<p class="noindent mono"><span class="line-number">&#160;86.</span>                     <span class="comment"># check if the clicked tile was next to the blank spot</span></p>
+		<p class="noindent mono"><span class="line-number">&#160;85.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</p>
+		<p class="noindent mono"><span class="line-number">&#160;86.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># check if the clicked tile was next to the blank spot</span></p>
 		<p class="noindent mono"><span class="line-number">&#160;87.</span></p>
-		<p class="noindent mono"><span class="line-number">&#160;88.</span>                     blankx, blanky = getBlankPosition(mainBoard)</p>
-		<p class="noindent mono"><span class="line-number">&#160;89.</span>                     if spotx == blankx + 1 and spoty == blanky:</p>
-		<p class="noindent mono"><span class="line-number">&#160;90.</span>                         slideTo = LEFT</p>
-		<p class="noindent mono"><span class="line-number">&#160;91.</span>                     elif spotx == blankx - 1 and spoty == blanky:</p>
-		<p class="noindent mono"><span class="line-number">&#160;92.</span>                         slideTo = RIGHT</p>
-		<p class="noindent mono"><span class="line-number">&#160;93.</span>                     elif spotx == blankx and spoty == blanky + 1:</p>
-		<p class="noindent mono"><span class="line-number">&#160;94.</span>                         slideTo = UP</p>
-		<p class="noindent mono"><span class="line-number">&#160;95.</span>                     elif spotx == blankx and spoty == blanky - 1:</p>
-		<p class="noindent mono"><span class="line-number">&#160;96.</span>                         slideTo = DOWN</p>
+		<p class="noindent mono"><span class="line-number">&#160;88.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;blankx, blanky = getBlankPosition(mainBoard)</p>
+		<p class="noindent mono"><span class="line-number">&#160;89.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if spotx == blankx + 1 and spoty == blanky:</p>
+		<p class="noindent mono"><span class="line-number">&#160;90.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = LEFT</p>
+		<p class="noindent mono"><span class="line-number">&#160;91.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif spotx == blankx - 1 and spoty == blanky:</p>
+		<p class="noindent mono"><span class="line-number">&#160;92.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = RIGHT</p>
+		<p class="noindent mono"><span class="line-number">&#160;93.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif spotx == blankx and spoty == blanky + 1:</p>
+		<p class="noindent mono"><span class="line-number">&#160;94.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = UP</p>
+		<p class="noindent mono"><span class="line-number">&#160;95.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif spotx == blankx and spoty == blanky - 1:</p>
+		<p class="noindent mono"><span class="line-number">&#160;96.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = DOWN</p>
 	</div>
 
 	<p>If <span class="mono">getSpotClicked()</span> did not return <span class="mono">(None, None)</span>, then it will have returned a tuple of two integer values that represent the X and Y coordinate of the spot on the board that was clicked. Then the <span class="mono">if</span> and <span class="mono">elif</span> statements on lines 89 to 96 check if the spot that was clicked is a tile that is next to the blank spot (otherwise the tile will have no place to slide).</p>
@@ -505,16 +505,16 @@
 	<h1 class="subheading" id="sliding-tiles-keyboard">Sliding Tiles with the Keyboard</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">&#160;98.</span>             elif event.type == KEYUP:</p>
-		<p class="noindent mono"><span class="line-number">&#160;99.</span>                 <span class="comment"># check if the user pressed a key to slide a tile</span></p>
-		<p class="noindent mono"><span class="line-number">100.</span>                 if event.key in (K_LEFT, K_a) and isValidMove(mainBoard, LEFT):</p>
-		<p class="noindent mono"><span class="line-number">101.</span>                     slideTo = LEFT</p>
-		<p class="noindent mono"><span class="line-number">102.</span>                 elif event.key in (K_RIGHT, K_d) and isValidMove(mainBoard, RIGHT):</p>
-		<p class="noindent mono"><span class="line-number">103.</span>                     slideTo = RIGHT</p>
-		<p class="noindent mono"><span class="line-number">104.</span>                 elif event.key in (K_UP, K_w) and isValidMove(mainBoard, UP):</p>
-		<p class="noindent mono"><span class="line-number">105.</span>                     slideTo = UP</p>
-		<p class="noindent mono"><span class="line-number">106.</span>                 elif event.key in (K_DOWN, K_s) and isValidMove(mainBoard, DOWN):</p>
-		<p class="noindent mono"><span class="line-number">107.</span>                     slideTo = DOWN</p>
+		<p class="noindent mono"><span class="line-number">&#160;98.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.type == KEYUP:</p>
+		<p class="noindent mono"><span class="line-number">&#160;99.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="comment"># check if the user pressed a key to slide a tile</span></p>
+		<p class="noindent mono"><span class="line-number">100.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.key in (K_LEFT, K_a) and isValidMove(mainBoard, LEFT):</p>
+		<p class="noindent mono"><span class="line-number">101.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = LEFT</p>
+		<p class="noindent mono"><span class="line-number">102.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key in (K_RIGHT, K_d) and isValidMove(mainBoard, RIGHT):</p>
+		<p class="noindent mono"><span class="line-number">103.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = RIGHT</p>
+		<p class="noindent mono"><span class="line-number">104.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key in (K_UP, K_w) and isValidMove(mainBoard, UP):</p>
+		<p class="noindent mono"><span class="line-number">105.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = UP</p>
+		<p class="noindent mono"><span class="line-number">106.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elif event.key in (K_DOWN, K_s) and isValidMove(mainBoard, DOWN):</p>
+		<p class="noindent mono"><span class="line-number">107.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideTo = DOWN</p>
 	</div>
 
 	<p>We can also let the user slide tiles by pressing keyboard keys. The <span class="mono">if</span> and <span class="mono">elif</span> statements on lines 100 to 107 let the user set the <span class="mono">slideTo</span> variable by either pressing the arrow keys or the WASD keys (explained later). Each <span class="mono">if</span> and <span class="mono">elif</span> statement also has a call to <span class="mono">isValidMove()</span> to make sure that the tile can slide in that direction. (We didn’t have to make this call with the mouse clicks because the checks for the neighboring blank space did the same thing.)</p>
@@ -524,7 +524,7 @@
 
 	<div class="python-shell">
 		<p class="noindent mono">event.key in (K_LEFT, K_a)</p>
-		<p class="noindent mono"></p>
+		<p class="noindent mono">&#160;</p>
 		<p class="noindent mono">event.key == K_LEFT or event.key == K_a</p>
 	</div>
 
@@ -532,7 +532,7 @@
 
 	<div class="python-shell">
 		<p class="noindent mono">spam == 'dog' or spam == 'cat' or spam == 'mouse' or spam == 'horse' or spam == 42 or spam == 'dingo'</p>
-		<p class="noindent mono"></p>
+		<p class="noindent mono">&#160;</p>
 		<p class="noindent mono">spam in ('dog', 'cat', 'mouse', 'horse', 42, 'dingo')</p>
 	</div>
 
@@ -546,12 +546,12 @@
 	<h1 class="subheading" id="performing-tile-slide">Actually Performing the Tile Slide</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">109.</span>         if slideTo:</p>
-		<p class="noindent mono"><span class="line-number">110.</span>             slideAnimation(mainBoard, slideTo, 'Click tile or press arrow keys to slide.', 8) <span class="comment"># show slide on screen</span></p>
-		<p class="noindent mono"><span class="line-number">111.</span>             makeMove(mainBoard, slideTo)</p>
-		<p class="noindent mono"><span class="line-number">112.</span>             allMoves.append(slideTo) <span class="comment"># record the slide</span></p>
-		<p class="noindent mono"><span class="line-number">113.</span>         pygame.display.update()</p>
-		<p class="noindent mono"><span class="line-number">114.</span>         FPSCLOCK.tick(FPS)</p>
+		<p class="noindent mono"><span class="line-number">109.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if slideTo:</p>
+		<p class="noindent mono"><span class="line-number">110.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slideAnimation(mainBoard, slideTo, 'Click tile or press arrow keys to slide.', 8) <span class="comment"># show slide on screen</span></p>
+		<p class="noindent mono"><span class="line-number">111.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;makeMove(mainBoard, slideTo)</p>
+		<p class="noindent mono"><span class="line-number">112.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;allMoves.append(slideTo) <span class="comment"># record the slide</span></p>
+		<p class="noindent mono"><span class="line-number">113.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pygame.display.update()</p>
+		<p class="noindent mono"><span class="line-number">114.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FPSCLOCK.tick(FPS)</p>
 	</div>
 
 	<p>Now that the events have all been handled, we should update the variables of the game state and display the new state on the screen. If <span class="mono">slideTo</span> has been set (either by the mouse event or keyboard event handling code) then we can call <span class="mono">slideAnimation()</span> to perform the sliding animation. The parameters are the board data structure, the direction of the slide, a message to display while sliding the tile, and the speed of the sliding.</p>
@@ -561,8 +561,8 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">117.</span> def terminate():</p>
-		<p class="noindent mono"><span class="line-number">118.</span>     pygame.quit()</p>
-		<p class="noindent mono"><span class="line-number">119.</span>     sys.exit()</p>
+		<p class="noindent mono"><span class="line-number">118.</span> &#160;&#160;&#160;&#160;&#160;pygame.quit()</p>
+		<p class="noindent mono"><span class="line-number">119.</span> &#160;&#160;&#160;&#160;&#160;sys.exit()</p>
 	</div>
 
 	<p>This is a function that we can call that calls both the <span class="mono">pygame.quit()</span> and <span class="mono">sys.exit()</span> functions. This is a bit of syntactic sugar, so that instead of remembering to make both of these calls, there is just a single function we can call instead.</p>
@@ -571,12 +571,12 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">122.</span> def checkForQuit():</p>
-		<p class="noindent mono"><span class="line-number">123.</span>     for event in pygame.event.get(QUIT): <span class="comment"># get all the QUIT events</span></p>
-		<p class="noindent mono"><span class="line-number">124.</span>         terminate() <span class="comment"># terminate if any QUIT events are present</span></p>
-		<p class="noindent mono"><span class="line-number">125.</span>     for event in pygame.event.get(KEYUP): <span class="comment"># get all the KEYUP events</span></p>
-		<p class="noindent mono"><span class="line-number">126.</span>         if event.key == K_ESCAPE:</p>
-		<p class="noindent mono"><span class="line-number">127.</span>             terminate() <span class="comment"># terminate if the KEYUP event was for the Esc key</span></p>
-		<p class="noindent mono"><span class="line-number">128.</span>         pygame.event.post(event) <span class="comment"># put the other KEYUP event objects back</span></p>
+		<p class="noindent mono"><span class="line-number">123.</span> &#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(QUIT): <span class="comment"># get all the QUIT events</span></p>
+		<p class="noindent mono"><span class="line-number">124.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;terminate() <span class="comment"># terminate if any QUIT events are present</span></p>
+		<p class="noindent mono"><span class="line-number">125.</span> &#160;&#160;&#160;&#160;&#160;for event in pygame.event.get(KEYUP): <span class="comment"># get all the KEYUP events</span></p>
+		<p class="noindent mono"><span class="line-number">126.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if event.key == K_ESCAPE:</p>
+		<p class="noindent mono"><span class="line-number">127.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;terminate() <span class="comment"># terminate if the KEYUP event was for the Esc key</span></p>
+		<p class="noindent mono"><span class="line-number">128.</span> &#160;&#160;&#160;&#160;&#160;pygame.event.post(event) <span class="comment"># put the other KEYUP event objects back</span></p>
 	</div>
 
 	<p>The <span class="mono">checkForQuit()</span> function will check for <span class="mono">QUIT</span> events (or if the user has pressed the Esc key) and then call the <span class="mono">terminate()</span> function. But this is a bit tricky and requires some explanation.</p>
@@ -593,18 +593,18 @@
 		<p class="noindent mono"><span class="line-number">132.</span> &#160;&#160;&#160;&#160;<span class="comment"># Return a board data structure with tiles in the solved state.</span></p>
 		<p class="noindent mono"><span class="line-number">133.</span> &#160;&#160;&#160;&#160;<span class="comment"># For example, if BOARDWIDTH and BOARDHEIGHT are both 3, this function</span></p>
 		<p class="noindent mono"><span class="line-number">134.</span> &#160;&#160;&#160;&#160;<span class="comment"># returns [[1, 4, 7], [2, 5, 8], [3, 6, None]]</span></p>
-		<p class="noindent mono"><span class="line-number">135.</span>     counter = 1</p>
-		<p class="noindent mono"><span class="line-number">136.</span>     board = []</p>
-		<p class="noindent mono"><span class="line-number">137.</span>     for x in range(BOARDWIDTH):</p>
-		<p class="noindent mono"><span class="line-number">138.</span>         column = []</p>
-		<p class="noindent mono"><span class="line-number">139.</span>         for y in range(BOARDHEIGHT):</p>
-		<p class="noindent mono"><span class="line-number">140.</span>             column.append(counter)</p>
-		<p class="noindent mono"><span class="line-number">141.</span>             counter += BOARDWIDTH</p>
-		<p class="noindent mono"><span class="line-number">142.</span>         board.append(column)</p>
-		<p class="noindent mono"><span class="line-number">143.</span>         counter -= BOARDWIDTH * (BOARDHEIGHT - 1) + BOARDWIDTH - 1</p>
+		<p class="noindent mono"><span class="line-number">135.</span> &#160;&#160;&#160;&#160;&#160;counter = 1</p>
+		<p class="noindent mono"><span class="line-number">136.</span> &#160;&#160;&#160;&#160;&#160;board = []</p>
+		<p class="noindent mono"><span class="line-number">137.</span> &#160;&#160;&#160;&#160;&#160;for x in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">138.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column = []</p>
+		<p class="noindent mono"><span class="line-number">139.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(BOARDHEIGHT):</p>
+		<p class="noindent mono"><span class="line-number">140.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;column.append(counter)</p>
+		<p class="noindent mono"><span class="line-number">141.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;counter += BOARDWIDTH</p>
+		<p class="noindent mono"><span class="line-number">142.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;board.append(column)</p>
+		<p class="noindent mono"><span class="line-number">143.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;counter -= BOARDWIDTH * (BOARDHEIGHT - 1) + BOARDWIDTH - 1</p>
 		<p class="noindent mono"><span class="line-number">144.</span></p>
-		<p class="noindent mono"><span class="line-number">145.</span>     board[BOARDWIDTH-1][BOARDHEIGHT-1] = None</p>
-		<p class="noindent mono"><span class="line-number">146.</span>     return board</p>
+		<p class="noindent mono"><span class="line-number">145.</span> &#160;&#160;&#160;&#160;&#160;board[BOARDWIDTH-1][BOARDHEIGHT-1] = None</p>
+		<p class="noindent mono"><span class="line-number">146.</span> &#160;&#160;&#160;&#160;&#160;return board</p>
 	</div>
 
 	<p>The <span class="mono">getStartingBoard()</span> data structure will create and return a data structure that represents a “solved” board, where all the numbered tiles are in order and the blank tile is in the lower right corner. This is done with nested <span class="mono">for</span> loops, just like the board data structure in the Memory Puzzle game was made.</p>
@@ -615,10 +615,10 @@
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">149.</span> def getBlankPosition(board):</p>
 		<p class="noindent mono"><span class="line-number">150.</span> &#160;&#160;&#160;&#160;<span class="comment"># Return the x and y of board coordinates of the blank space.</span></p>
-		<p class="noindent mono"><span class="line-number">151.</span>     for x in range(BOARDWIDTH):</p>
-		<p class="noindent mono"><span class="line-number">152.</span>         for y in range(BOARDHEIGHT):</p>
-		<p class="noindent mono"><span class="line-number">153.</span>             if board[x][y] == None:</p>
-		<p class="noindent mono"><span class="line-number">154.</span>                 return (x, y)</p>
+		<p class="noindent mono"><span class="line-number">151.</span> &#160;&#160;&#160;&#160;for x in range(BOARDWIDTH):</p>
+		<p class="noindent mono"><span class="line-number">152.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for y in range(BOARDHEIGHT):</p>
+		<p class="noindent mono"><span class="line-number">153.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if board[x][y] == None:</p>
+		<p class="noindent mono"><span class="line-number">154.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return (x, y)</p>
 	</div>
 
 	<p>Whenever our code needs to find the XY coordinates of the blank space, instead of keeping track of where the blank space is after each slide, we can just create a function that goes through the entire board and finds the blank space coordinates. The <span class="mono">None</span> value is used in the board data structure to represent the blank space. The code in <span class="mono">getBlankPosition()</span> simply uses nested <span class="mono">for</span> loops to find which space on the board is the blank space.</p>
@@ -628,16 +628,16 @@
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">157.</span> def makeMove(board, move):</p>
 		<p class="noindent mono"><span class="line-number">158.</span> &#160;&#160;&#160;&#160;<span class="comment"># This function does not check if the move is valid.</span></p>
-		<p class="noindent mono"><span class="line-number">159.</span>     blankx, blanky = getBlankPosition(board)</p>
+		<p class="noindent mono"><span class="line-number">159.</span> &#160;&#160;&#160;&#160;blankx, blanky = getBlankPosition(board)</p>
 		<p class="noindent mono"><span class="line-number">160.</span></p>
-		<p class="noindent mono"><span class="line-number">161.</span>     if move == UP:</p>
-		<p class="noindent mono"><span class="line-number">162.</span>         board[blankx][blanky], board[blankx][blanky + 1] = board[blankx][blanky + 1], board[blankx][blanky]</p>
-		<p class="noindent mono"><span class="line-number">163.</span>     elif move == DOWN:</p>
-		<p class="noindent mono"><span class="line-number">164.</span>         board[blankx][blanky], board[blankx][blanky - 1] = board[blankx][blanky - 1], board[blankx][blanky]</p>
-		<p class="noindent mono"><span class="line-number">165.</span>     elif move == LEFT:</p>
-		<p class="noindent mono"><span class="line-number">166.</span>         board[blankx][blanky], board[blankx + 1][blanky] = board[blankx + 1][blanky], board[blankx][blanky]</p>
-		<p class="noindent mono"><span class="line-number">167.</span>     elif move == RIGHT:</p>
-		<p class="noindent mono"><span class="line-number">168.</span>         board[blankx][blanky], board[blankx - 1][blanky] = board[blankx - 1][blanky], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">161.</span> &#160;&#160;&#160;&#160;if move == UP:</p>
+		<p class="noindent mono"><span class="line-number">162.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;board[blankx][blanky], board[blankx][blanky + 1] = board[blankx][blanky + 1], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">163.</span> &#160;&#160;&#160;&#160;elif move == DOWN:</p>
+		<p class="noindent mono"><span class="line-number">164.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;board[blankx][blanky], board[blankx][blanky - 1] = board[blankx][blanky - 1], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">165.</span> &#160;&#160;&#160;&#160;elif move == LEFT:</p>
+		<p class="noindent mono"><span class="line-number">166.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;board[blankx][blanky], board[blankx + 1][blanky] = board[blankx + 1][blanky], board[blankx][blanky]</p>
+		<p class="noindent mono"><span class="line-number">167.</span> &#160;&#160;&#160;&#160;elif move == RIGHT:</p>
+		<p class="noindent mono"><span class="line-number">168.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;board[blankx][blanky], board[blankx - 1][blanky] = board[blankx - 1][blanky], board[blankx][blanky]</p>
 	</div>
 
 	<p>The data structure in the board parameter is a 2D list that represents where all the tiles are. Whenever the player makes a move, the program needs to update this data structure. What happens is that the value for the tile is swapped with the value for the blank space.</p>
@@ -647,11 +647,11 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">171.</span> def isValidMove(board, move):</p>
-		<p class="noindent mono"><span class="line-number">172.</span>     blankx, blanky = getBlankPosition(board)</p>
-		<p class="noindent mono"><span class="line-number">173.</span>     return (move == UP and blanky != len(board[0]) - 1) or \</p>
-		<p class="noindent mono"><span class="line-number">174.</span>            (move == DOWN and blanky != 0) or \</p>
-		<p class="noindent mono"><span class="line-number">175.</span>            (move == LEFT and blankx != len(board) - 1) or \</p>
-		<p class="noindent mono"><span class="line-number">176.</span>            (move == RIGHT and blankx != 0)</p>
+		<p class="noindent mono"><span class="line-number">172.</span> &#160;&#160;&#160;&#160;blankx, blanky = getBlankPosition(board)</p>
+		<p class="noindent mono"><span class="line-number">173.</span> &#160;&#160;&#160;&#160;return (move == UP and blanky != len(board[0]) - 1) or \</p>
+		<p class="noindent mono"><span class="line-number">174.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(move == DOWN and blanky != 0) or \</p>
+		<p class="noindent mono"><span class="line-number">175.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(move == LEFT and blankx != len(board) - 1) or \</p>
+		<p class="noindent mono"><span class="line-number">176.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(move == RIGHT and blankx != 0)</p>
 	</div>
 
 	<p>The <span class="mono">isValidMove()</span> function is passed a board data structure and a move the player would want to make. The return value is <span class="mono">True</span> if this move is possible and <span class="mono">False</span> if it is not. For example, you cannot slide a tile to the left one hundred times in a row, because eventually the blank space will be at the edge and there are no more tiles to slide to the left.</p>
@@ -663,20 +663,20 @@
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">179.</span> def getRandomMove(board, lastMove=None):</p>
 		<p class="noindent mono"><span class="line-number">180.</span> &#160;&#160;&#160;&#160;<span class="comment"># start with a full list of all four moves</span></p>
-		<p class="noindent mono"><span class="line-number">181.</span>     validMoves = [UP, DOWN, LEFT, RIGHT]</p>
+		<p class="noindent mono"><span class="line-number">181.</span> &#160;&#160;&#160;&#160;validMoves = [UP, DOWN, LEFT, RIGHT]</p>
 		<p class="noindent mono"><span class="line-number">182.</span></p>
 		<p class="noindent mono"><span class="line-number">183.</span> &#160;&#160;&#160;&#160;<span class="comment"># remove moves from the list as they are disqualified</span></p>
-		<p class="noindent mono"><span class="line-number">184.</span>     if lastMove == UP or not isValidMove(board, DOWN):</p>
-		<p class="noindent mono"><span class="line-number">185.</span>         validMoves.remove(DOWN)</p>
-		<p class="noindent mono"><span class="line-number">186.</span>     if lastMove == DOWN or not isValidMove(board, UP):</p>
-		<p class="noindent mono"><span class="line-number">187.</span>         validMoves.remove(UP)</p>
-		<p class="noindent mono"><span class="line-number">188.</span>     if lastMove == LEFT or not isValidMove(board, RIGHT):</p>
-		<p class="noindent mono"><span class="line-number">189.</span>         validMoves.remove(RIGHT)</p>
-		<p class="noindent mono"><span class="line-number">190.</span>     if lastMove == RIGHT or not isValidMove(board, LEFT):</p>
-		<p class="noindent mono"><span class="line-number">191.</span>         validMoves.remove(LEFT)</p>
+		<p class="noindent mono"><span class="line-number">184.</span> &#160;&#160;&#160;&#160;if lastMove == UP or not isValidMove(board, DOWN):</p>
+		<p class="noindent mono"><span class="line-number">185.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;validMoves.remove(DOWN)</p>
+		<p class="noindent mono"><span class="line-number">186.</span> &#160;&#160;&#160;&#160;if lastMove == DOWN or not isValidMove(board, UP):</p>
+		<p class="noindent mono"><span class="line-number">187.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;validMoves.remove(UP)</p>
+		<p class="noindent mono"><span class="line-number">188.</span> &#160;&#160;&#160;&#160;if lastMove == LEFT or not isValidMove(board, RIGHT):</p>
+		<p class="noindent mono"><span class="line-number">189.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;validMoves.remove(RIGHT)</p>
+		<p class="noindent mono"><span class="line-number">190.</span> &#160;&#160;&#160;&#160;if lastMove == RIGHT or not isValidMove(board, LEFT):</p>
+		<p class="noindent mono"><span class="line-number">191.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;validMoves.remove(LEFT)</p>
 		<p class="noindent mono"><span class="line-number">192.</span></p>
 		<p class="noindent mono"><span class="line-number">193.</span> &#160;&#160;&#160;&#160;<span class="comment"># return a random move from the list of remaining moves</span></p>
-		<p class="noindent mono"><span class="line-number">194.</span>     return random.choice(validMoves)</p>
+		<p class="noindent mono"><span class="line-number">194.</span> &#160;&#160;&#160;&#160;return random.choice(validMoves)</p>
 	</div>
 
 	<p>At the beginning of the game, we start with the board data structure in the solved, ordered state and create the puzzle by randomly sliding around tiles. To decide which of the four directions we should slide, we’ll call our <span class="mono">getRandomMove()</span> function. Normally we could just use the <span class="mono">random.choice()</span> function and pass it a tuple <span class="mono">(UP, DOWN, LEFT, RIGHT)</span> to have Python simply randomly choose a direction value for us. But the Sliding Puzzle game has a small restriction that prevents us from choosing a purely random number.</p>
@@ -688,9 +688,9 @@
 
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">197.</span> def getLeftTopOfTile(tileX, tileY):</p>
-		<p class="noindent mono"><span class="line-number">198.</span>     left = XMARGIN + (tileX * TILESIZE) + (tileX - 1)</p>
-		<p class="noindent mono"><span class="line-number">199.</span>     top = YMARGIN + (tileY * TILESIZE) + (tileY - 1)</p>
-		<p class="noindent mono"><span class="line-number">200.</span>     return (left, top)</p>
+		<p class="noindent mono"><span class="line-number">198.</span> &#160;&#160;&#160;&#160;left = XMARGIN + (tileX * TILESIZE) + (tileX - 1)</p>
+		<p class="noindent mono"><span class="line-number">199.</span> &#160;&#160;&#160;&#160;top = YMARGIN + (tileY * TILESIZE) + (tileY - 1)</p>
+		<p class="noindent mono"><span class="line-number">200.</span> &#160;&#160;&#160;&#160;return (left, top)</p>
 	</div>
 
 	<p>The <span class="mono">getLeftTopOfTile()</span> function converts board coordinates to pixel coordinates. For the board XY coordinates that are passed in, the function calculates and returns the pixel XY coordinates of the pixel at the top left of that board space.</p>
@@ -700,13 +700,13 @@
 	<div class="python-shell">
 		<p class="noindent mono"><span class="line-number">203.</span> def getSpotClicked(board, x, y):</p>
 		<p class="noindent mono"><span class="line-number">204.</span> &#160;&#160;&#160;&#160;<span class="comment"># from the x &amp; y pixel coordinates, get the x &amp; y board coordinates</span></p>
-		<p class="noindent mono"><span class="line-number">205.</span>     for tileX in range(len(board)):</p>
-		<p class="noindent mono"><span class="line-number">206.</span>         for tileY in range(len(board[0])):</p>
-		<p class="noindent mono"><span class="line-number">207.</span>             left, top = getLeftTopOfTile(tileX, tileY)</p>
-		<p class="noindent mono"><span class="line-number">208.</span>             tileRect = pygame.Rect(left, top, TILESIZE, TILESIZE)</p>
-		<p class="noindent mono"><span class="line-number">209.</span>             if tileRect.collidepoint(x, y):</p>
-		<p class="noindent mono"><span class="line-number">210.</span>                 return (tileX, tileY)</p>
-		<p class="noindent mono"><span class="line-number">211.</span>     return (None, None)</p>
+		<p class="noindent mono"><span class="line-number">205.</span> &#160;&#160;&#160;&#160;for tileX in range(len(board)):</p>
+		<p class="noindent mono"><span class="line-number">206.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for tileY in range(len(board[0])):</p>
+		<p class="noindent mono"><span class="line-number">207.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;left, top = getLeftTopOfTile(tileX, tileY)</p>
+		<p class="noindent mono"><span class="line-number">208.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tileRect = pygame.Rect(left, top, TILESIZE, TILESIZE)</p>
+		<p class="noindent mono"><span class="line-number">209.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if tileRect.collidepoint(x, y):</p>
+		<p class="noindent mono"><span class="line-number">210.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;return (tileX, tileY)</p>
+		<p class="noindent mono"><span class="line-number">211.</span> &#160;&#160;&#160;&#160;return (None, None)</p>
 	</div>
 
 	<p>The <span class="mono">getSpotClicked()</span> function does the opposite of <span class="mono">getLeftTopOfTile()</span> and converts from pixel coordinates to board coordinates. The nested loops on lines 205 and 206 go through every possible XY board coordinate, and if the pixel coordinates that were passed in are within that space on the board, it returns those board coordinates. Since all of the tiles have a width and height that is set in the <span class="mono">TILESIZE</span> constant, we can create a Rect object that represents the space on the board by getting the pixel coordinates of the top left corner of the board space, and then use the <span class="mono">collidepoint()</span> Rect method to see if the pixel coordinates are inside that Rect object’s area.</p>
@@ -719,127 +719,49 @@
 		<p class="noindent mono"><span class="line-number">214.</span> def drawTile(tilex, tiley, number, adjx=0, adjy=0):</p>
 		<p class="noindent mono"><span class="line-number">215.</span> &#160;&#160;&#160;&#160;<span class="comment"># draw a tile at board coordinates tilex and tiley, optionally a few</span></p>
 		<p class="noindent mono"><span class="line-number">216.</span> &#160;&#160;&#160;&#160;<span class="comment"># pixels over (determined by adjx and adjy)</span></p>
-		<p class="noindent mono"><span class="line-number">217.</span>     left, top = getLeftTopOfTile(tilex, tiley)</p>
-		<p class="noindent mono"><span class="line-number">218.</span>     pygame.draw.rect(DISPLAYSURF, TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))</p>
-		<p class="noindent mono"><span class="line-number">219.</span>     textSurf = BASICFONT.render(str(number), True, TEXTCOLOR)</p>
-		<p class="noindent mono"><span class="line-number">220.</span>     textRect = textSurf.get_rect()</p>
-		<p class="noindent mono"><span class="line-number">221.</span>     textRect.center = left + int(TILESIZE / 2) + adjx, top + int(TILESIZE / 2) + adjy</p>
-		<p class="noindent mono"><span class="line-number">222.</span>     DISPLAYSURF.blit(textSurf, textRect)</p>
+		<p class="noindent mono"><span class="line-number">217.</span> &#160;&#160;&#160;&#160;left, top = getLeftTopOfTile(tilex, tiley)</p>
+		<p class="noindent mono"><span class="line-number">218.</span> &#160;&#160;&#160;&#160;pygame.draw.rect(DISPLAYSURF, TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))</p>
+		<p class="noindent mono"><span class="line-number">219.</span> &#160;&#160;&#160;&#160;textSurf = BASICFONT.render(str(number), True, TEXTCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">220.</span> &#160;&#160;&#160;&#160;textRect = textSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">221.</span> &#160;&#160;&#160;&#160;textRect.center = left + int(TILESIZE / 2) + adjx, top + int(TILESIZE / 2) + adjy</p>
+		<p class="noindent mono"><span class="line-number">222.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.blit(textSurf, textRect)</p>
 	</div>
 
-<p>The <span class="mono">drawTile()</span> function will draw
-a single numbered tile on the board. The <span class="mono">tilex</span> and <span
-class="mono">tiley</span> parameters are the board coordinates of the tile.
-The number parameter is a string of the tile’s number (like <span
-class="mono">'3'</span> or <span class="mono">'12'</span>). The <span
-class="mono">adjx</span> and <span class="mono">adjy</span> keyword
-parameters are for making minor adjustments to the position of the tile. For
-example, passing <span class="mono">5</span> for <span class="mono">adjx</span>
-would make the tile appear 5 pixels to the right of the <span class="mono">tilex</span>
-and <span class="mono">tiley</span> space on the board. Passing <span
-class="mono">-10</span> for <span class="mono">adjx</span> would make the
-tile appear 10 pixels to the left of the space. </p>
-
-<p>These adjustment values will be handy when we need to draw
-the tile in the middle of sliding. If no values are passed for these arguments
-when <span class="mono">drawTile()</span> is called, then by default they are
-set to <span class="mono">0</span>. This means they will be exactly on the
-board space given by <span class="mono">tilex</span> and <span class="mono">tiley</span>.
-</p>
-
-<p>The Pygame drawing functions only use pixel coordinates, so
-first line 217 converts the board coordinates in <span class="mono">tilex</span>
-and <span class="mono">tiley</span> to pixel coordinates, which we will store
-in variables <span class="mono">left</span> and <span class="mono">top</span>
-(since <span class="mono">getLeftTopOfTile()</span> returns the top left
-corner’s coordinates). We draw the background square of the tile with a call to
-<span class="mono">pygame.draw.rect()</span> while adding the <span
-class="mono">adjx</span> and <span class="mono">adjy</span> values to <span
-class="mono">left</span> and <span class="mono">top</span> in case the code
-needs to adjust the position of the tile.</p>
-
-<p>Lines 219 to 222 then create the Surface object that has the
-number text drawn on it. A Rect object for the Surface object is positioned,
-and then used to blit the Surface object to the display Surface. The <span
-class="mono">drawTile()</span> function doesn’t call <span class="mono">pygame.display.update()</span>
-function, since the caller of <span class="mono">drawTile()</span> probably
-will want to draw more tiles for the rest of the board before making them
-appear on the screen.</p>
+	<p>The <span class="mono">drawTile()</span> function will draw a single numbered tile on the board. The <span class="mono">tilex</span> and <span class="mono">tiley</span> parameters are the board coordinates of the tile. The number parameter is a string of the tile’s number (like <span class="mono">'3'</span> or <span class="mono">'12'</span>). The <span class="mono">adjx</span> and <span class="mono">adjy</span> keyword parameters are for making minor adjustments to the position of the tile. For example, passing <span class="mono">5</span> for <span class="mono">adjx</span> would make the tile appear 5 pixels to the right of the <span class="mono">tilex</span> and <span class="mono">tiley</span> space on the board. Passing <span class="mono">-10</span> for <span class="mono">adjx</span> would make the tile appear 10 pixels to the left of the space. </p>
+	<p>These adjustment values will be handy when we need to draw the tile in the middle of sliding. If no values are passed for these arguments when <span class="mono">drawTile()</span> is called, then by default they are set to <span class="mono">0</span>. This means they will be exactly on the board space given by <span class="mono">tilex</span> and <span class="mono">tiley</span>.</p>
+	<p>The Pygame drawing functions only use pixel coordinates, so first line 217 converts the board coordinates in <span class="mono">tilex</span> and <span class="mono">tiley</span> to pixel coordinates, which we will store in variables <span class="mono">left</span> and <span class="mono">top</span> (since <span class="mono">getLeftTopOfTile()</span> returns the top left corner’s coordinates). We draw the background square of the tile with a call to <span class="mono">pygame.draw.rect()</span> while adding the <span class="mono">adjx</span> and <span class="mono">adjy</span> values to <span class="mono">left</span> and <span class="mono">top</span> in case the code needs to adjust the position of the tile.</p>
+	<p>Lines 219 to 222 then create the Surface object that has the number text drawn on it. A Rect object for the Surface object is positioned, and then used to blit the Surface object to the display Surface. The <span class="mono">drawTile()</span> function doesn’t call <span class="mono">pygame.display.update()</span> function, since the caller of <span class="mono">drawTile()</span> probably will want to draw more tiles for the rest of the board before making them appear on the screen.</p>
 
 	<h1 class="subheading" id="making-text-appear">The Making Text Appear on the Screen</h1>
 
 	<div class="python-shell">
-		<p class="noindent mono"><span class="line-number">225.</span> def
-makeText(text, color, bgcolor, top, left):</p>
-		<p class="noindent mono"><span class="line-number">226.</span> &#160;&#160;&#160;&#160;<span
-class="comment"># create the Surface and Rect objects for some text.</span></p>
-		<p class="noindent mono"><span class="line-number">227.</span>     textSurf
-= BASICFONT.render(text, True, color, bgcolor)</p>
-		<p class="noindent mono"><span class="line-number">228.</span>     textRect
-= textSurf.get_rect()</p>
-		<p class="noindent mono"><span class="line-number">229.</span>     textRect.topleft
-= (top, left)</p>
-		<p class="noindent mono"><span class="line-number">230.</span>     return
-(textSurf, textRect)</p>
+		<p class="noindent mono"><span class="line-number">225.</span> def makeText(text, color, bgcolor, top, left):</p>
+		<p class="noindent mono"><span class="line-number">226.</span> &#160;&#160;&#160;&#160;<span class="comment"># create the Surface and Rect objects for some text.</span></p>
+		<p class="noindent mono"><span class="line-number">227.</span> &#160;&#160;&#160;&#160;textSurf = BASICFONT.render(text, True, color, bgcolor)</p>
+		<p class="noindent mono"><span class="line-number">228.</span> &#160;&#160;&#160;&#160;textRect = textSurf.get_rect()</p>
+		<p class="noindent mono"><span class="line-number">229.</span> &#160;&#160;&#160;&#160;textRect.topleft = (top, left)</p>
+		<p class="noindent mono"><span class="line-number">230.</span> &#160;&#160;&#160;&#160;return (textSurf, textRect)</p>
 	</div>
 
-<p>The <span class="mono">makeText()</span> function handles
-creating the Surface and Rect objects for positioning text on the screen.
-Instead of doing all these calls each time we want to make text on the screen,
-we can just call <span class="mono">makeText()</span> instead. This saves us
-on the amount of typing we have to do for our program. (Though <span
-class="mono">drawTile()</span> makes the calls to <span class="mono">render()</span>
-and <span class="mono">get_rect()</span> itself because it positions the text
-Surface object by the center point rather than the topleft point and uses a
-transparent background color.)</p>
+	<p>The <span class="mono">makeText()</span> function handles creating the Surface and Rect objects for positioning text on the screen. Instead of doing all these calls each time we want to make text on the screen, we can just call <span class="mono">makeText()</span> instead. This saves us on the amount of typing we have to do for our program. (Though <span class="mono">drawTile()</span> makes the calls to <span class="mono">render()</span> and <span class="mono">get_rect()</span> itself because it positions the text Surface object by the center point rather than the topleft point and uses a transparent background color.)</p>
 
-<h1 class="subheading" id="drawing-the-board">Drawing the Board</h1>
+	<h1 class="subheading" id="drawing-the-board">Drawing the Board</h1>
 
-<div class="python-shell">
-
-		<p class="noindent mono"><span class="line-number">233.</span> def
-drawBoard(board, message):</p>
-
-		<p class="noindent mono"><span class="line-number">234.</span>     DISPLAYSURF.fill(BGCOLOR)</p>
-
-		<p class="noindent mono"><span class="line-number">235.</span>     if
-message:</p>
-
-		<p class="noindent mono"><span class="line-number">236.</span>         textSurf,
-textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)</p>
-
-		<p class="noindent mono"><span class="line-number">237.</span>         DISPLAYSURF.blit(textSurf,
-textRect)</p>
-
+	<div class="python-shell">
+		<p class="noindent mono"><span class="line-number">233.</span> def drawBoard(board, message):</p>
+		<p class="noindent mono"><span class="line-number">234.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.fill(BGCOLOR)</p>
+		<p class="noindent mono"><span class="line-number">235.</span> &#160;&#160;&#160;&#160;if message:</p>
+		<p class="noindent mono"><span class="line-number">236.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;textSurf, textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)</p>
+		<p class="noindent mono"><span class="line-number">237.</span> &#160;&#160;&#160;&#160;DISPLAYSURF.blit(textSurf, textRect)</p>
 		<p class="noindent mono"><span class="line-number">238.</span></p>
+		<p class="noindent mono"><span class="line-number">239.</span> &#160;&#160;&#160;&#160;for tilex in range(len(board)):</p>
+		<p class="noindent mono"><span class="line-number">240.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;for tiley in range(len(board[0])):</p>
+		<p class="noindent mono"><span class="line-number">241.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if board[tilex][tiley]:</p>
+		<p class="noindent mono"><span class="line-number">242.</span> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;drawTile(tilex, tiley, board[tilex][tiley])</p>
+	</div>
 
-		<p class="noindent mono"><span class="line-number">239.</span>     for
-tilex in range(len(board)):</p>
-
-		<p class="noindent mono"><span class="line-number">240.</span>         for
-tiley in range(len(board[0])):</p>
-
-		<p class="noindent mono"><span class="line-number">241.</span>             if
-board[tilex][tiley]:</p>
-
-		<p class="noindent mono"><span class="line-number">242.</span>                 drawTile(tilex,
-tiley, board[tilex][tiley])</p>
-
-</div>
-
-<p>This function handles drawing the entire board and all of
-its tiles to the <span class="mono">DISPLAYSURF</span> display Surface object.
-The <span class="mono">fill()</span> method on line 234 completely paints over
-anything that used to be drawn on the display Surface object before so that we
-start from scratch.</p>
-
-<p>Line 235 to 237 handles drawing the message at the top of
-the window. We use this for the “Generating new puzzle…” and other text we want
-to display at the top of the window. Remember that <span class="mono">if</span>
-statement conditions consider the blank string to be a <span class="mono">False</span>
-value, so if message is set to <span class="mono">''</span> then the condition
-is <span class="mono">False</span> and lines 236 and 237 are skipped.</p>
-
+	<p>This function handles drawing the entire board and all of its tiles to the <span class="mono">DISPLAYSURF</span> display Surface object. The <span class="mono">fill()</span> method on line 234 completely paints over anything that used to be drawn on the display Surface object before so that we start from scratch.</p>
+	<p>Line 235 to 237 handles drawing the message at the top of the window. We use this for the “Generating new puzzle…” and other text we want to display at the top of the window. Remember that <span class="mono">if</span> statement conditions consider the blank string to be a <span class="mono">False</span> value, so if message is set to <span class="mono">''</span> then the condition is <span class="mono">False</span> and lines 236 and 237 are skipped.</p>
 	<p>Next, nested <span class="mono">for</span> loops are used to draw each tile to the display Surface object by calling the <span class="mono">drawTile()</span> function.</p>
 
 	<h1 class="subheading" id="drawing-border-board">Drawing the Border of the Board</h1>
