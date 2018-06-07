@@ -431,7 +431,7 @@
 		</navPoint>
 		<navPoint id="navpoint-71" playOrder="71">
 				<navLabel>
-					<text>The Start Game Animation</text>
+					<text>The &#8220;Start Game&#8221; Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#event-handling-loop" />
 		</navPoint>
@@ -557,7 +557,7 @@
 		</navPoint>
 		<navPoint id="navpoint-92" playOrder="92">
 				<navLabel>
-					<text>The Start Game Animation</text>
+					<text>The &#8220;Start Game&#8221; Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#reveal-cover-boxes" />
 		</navPoint>
@@ -569,7 +569,7 @@
 		</navPoint>
 		<navPoint id="navpoint-94" playOrder="94">
 				<navLabel>
-					<text>The Game Won Animation</text>
+					<text>The &#8220;Game Won&#8221; Animation</text>
 				</navLabel>
 				<content src="chapter3.xhtml#telling-player-won" />
 		</navPoint>
@@ -653,7 +653,7 @@
 		</navPoint>
 		<navPoint id="navpoint-108" playOrder="108">
 				<navLabel>
-					<text>Equal to One Of Trick within the in Operator</text>
+					<text>&#8220;Equal to One Of&#8221; Trick within the in Operator</text>
 				</navLabel>
 				<content src="chapter4.xhtml#equal-to-one" />
 		</navPoint>
@@ -857,19 +857,19 @@
 		</navPoint>
 		<navPoint id="navpoint-142" playOrder="142">
 				<navLabel>
-					<text>The Game State Data Structure</text>
+					<text>The &#8220;Game State&#8221; Data Structure</text>
 				</navLabel>
 				<content src="chapter9.xhtml#game-structure" />
 		</navPoint>
 		<navPoint id="navpoint-143" playOrder="143">
 				<navLabel>
-					<text>The Map Data Structure</text>
+					<text>The &#8220;Map&#8221; Data Structure</text>
 				</navLabel>
 				<content src="chapter9.xhtml#map-structure" />
 		</navPoint>
 		<navPoint id="navpoint-144" playOrder="144">
 				<navLabel>
-					<text>The Levels Data Structure</text>
+					<text>The &#8220;Levels&#8221; Data Structure</text>
 				</navLabel>
 				<content src="chapter9.xhtml#level-structure" />
 		</navPoint>
@@ -953,7 +953,7 @@
 		<content src="chapter10.xhtml" />
 		<navPoint id="navpoint-158" playOrder="158">
 				<navLabel>
-					<text>Flippy, an Othello Clone</text>
+					<text>Flippy, an &#8220;Othello&#8221; Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#flippy" />
 		</navPoint>
@@ -965,7 +965,7 @@
 		</navPoint>
 		<navPoint id="navpoint-160" playOrder="160">
 				<navLabel>
-					<text>Ink Spill, a Flood It Clone</text>
+					<text>Ink Spill, a &#8220;Flood It&#8221; Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#ink-spill" />
 		</navPoint>
@@ -977,7 +977,7 @@
 		</navPoint>
 		<navPoint id="navpoint-162" playOrder="162">
 				<navLabel>
-					<text>Four-In-A-Row, a Connect Four Clone</text>
+					<text>Four-In-A-Row, a &#8220;Connect Four&#8221; Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#four" />
 		</navPoint>
@@ -989,7 +989,7 @@
 		</navPoint>
 		<navPoint id="navpoint-164" playOrder="164">
 				<navLabel>
-					<text>Gemgem, a Bejeweled Clone</text>
+					<text>Gemgem, a &#8220;Bejeweled&#8221; Clone</text>
 				</navLabel>
 				<content src="chapter10.xhtml#gemgem" />
 		</navPoint>

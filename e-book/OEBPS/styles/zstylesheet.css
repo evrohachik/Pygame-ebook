@@ -370,6 +370,20 @@ td, th
 	/*border: solid 2px; Useful for debugging.*/
 }
 
+.book-image-center
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+	display: inline-block;
+}
+
+.book
+{
+	margin-top: 1em;
+	text-align: center;
+	display: block;
+}
+
 .image-left
 {
 	margin-top: 1em;
@@ -417,12 +431,6 @@ td, th
 	width: 100%;
 }
 
-.book
-{
-	display: block;
-	margin: auto;
-}
-
 .figure-caption
 {
 	margin-bottom: 1em;
@@ -453,12 +461,6 @@ div.bookshelf
 	margin-top: 1em;
 	margin-bottom: 1em;
 	border: solid red 1px;
-}
-
-div.book
-{
-	border: solid black 1px;
-	display: inline-block;
 }
 
 span.sample-code, .sample-code
